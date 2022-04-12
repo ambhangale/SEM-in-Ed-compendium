@@ -1,0 +1,64 @@
+---
+title: 'Compendium Structural Equation Modeling in Educational Research'
+author: "Suzanne Jak and Terrence D. Jorgensen"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Preface {-}
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+<!--chapter:end:index.Rmd-->
+
+
+# Installing `lavaan`
+
+Placeholder
+
+
+## Raw Data
+## Summary Statistics from Raw Data
+### Summary Statistics for Multiple Groups
+## Importing Summary Data
+### Full Covariance Matrix
+#### Rescaling a Correlation Matrix
+### Upper/Lower Triangle of a Covariance Matrix
+#### Upper/Lower Triangle of a Correlation Matrix
+## Linear Regression Models
+## Matrix Notation
+## Interpreting and Estimating Coefficients
+## Syntax Examples with Raw Data
+## Categorical Predictors
+### Regression with a Baseline Group
+### Regression with Group-Specific Intercepts
+### Baseline Comparison vs. Group-Specific Intercepts
+### $t$ vs. $F$ Tests
+## Constant vs. Varying Slopes
+## Reimport Data
+## Raw Data vs. Summary Statistics
+## What Is Covariance?
+## Interpreting Covariance
+## Covariance Matrix
+## OLS with Summary Statistics: $\beta = (\mathbf{X}^{'} \mathbf{X})^{-1} \mathbf{X}^{'} \mathbf{y}$
+## Intercepts and Means
+## Intercepts and Means
+## What Are Mean and Covariance *Structures*?
+
+<!--chapter:end:01-ReviewRegression.Rmd-->
+
