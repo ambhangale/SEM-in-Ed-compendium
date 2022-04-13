@@ -1,17 +1,3 @@
----
-title: 'Compendium Structural Equation Modeling in Educational Research'
-subtitle: 'Chapter 2: Using `lavaan` to Run Regression and ANOVA as a SEM'
-author: "Suzanne Jak and Terrence D. Jorgensen"
-output: 
-  pdf_document:
-    number_sections: true
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-
 # Prepare Data and Workspace
 
 <!-- TODO: 
