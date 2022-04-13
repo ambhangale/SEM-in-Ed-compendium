@@ -1,11 +1,13 @@
-# Prepare Data and Workspace
+#Using `lavaan` to Run Regression and ANOVA as a SEM
+
+## Prepare Data and Workspace
 
 <!-- TODO: 
 Frame the need to talk about MG-SEM because it allows for thinking more about CSA v. reproducing raw data 
 -->
 
 
-## Import Example Data
+### Import Example Data
 
 We will use data from a tutorial published on the [\textcolor{blue}{Social Change Lab's web site}](http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf).
 
@@ -38,7 +40,7 @@ gN <- table(dat$mood.f)
 ```
 
 
-## Load `lavaan` into Workspace
+### Load `lavaan` into Workspace
 
 ```{r load lavaan, message=FALSE}
 library(lavaan)
@@ -46,9 +48,9 @@ library(lavaan)
 
 
 
-# Multiple Regression in SEM
+## Multiple Regression in SEM
 
-## `lavaan` Syntax
+### `lavaan` Syntax
 
 The standard syntax for regression is a formula object.  To regress `ATT`itude on `MOOD` condition, `N`eed `F`or `C`ognition, and `POS`itive thoughts:
 
@@ -70,7 +72,7 @@ So `lavaan` requires collecting these *simultaneous equations* in a `character` 
 
 
 
-### OLS Regression
+#### OLS Regression
 
 Using the familiar `lm()` function to obtain OLS estimates of a regression model:
 
@@ -80,7 +82,7 @@ summary(ols)
 ```
 
 
-### MLE in `lavaan` with Raw or Summary Data
+#### MLE in `lavaan` with Raw or Summary Data
 
 When data are complete, maximum likelihood estimation (MLE) provides equivalent results using either raw or summary data.  There are multiple model-fitting functions in `lavaan`:
 
@@ -107,7 +109,7 @@ sigma(ols)^2 # compare to residual variance from OLS
 ```
 
 
-### Compare/Contrast Estimates
+#### Compare/Contrast Estimates
 
 `lavaan`'s point estimates match OLS, except residual variance ($\sigma^2_\varepsilon$)
 
@@ -125,7 +127,7 @@ coef(mle)[["ATT~~ATT"]] # matches lavaan
 - *Note*: The double-tilde (`~~`) operator signifies a two-headed arrow, in contrast to the one-headed arrow (`~`) of a directed effect
 
 
-### Compare/Contrast $SE$s
+#### Compare/Contrast $SE$s
 
 The estimated $SE$s are smaller from `lavaan` because SEM is an asymptotic method
 
@@ -145,11 +147,11 @@ Also note that raw `data=` are required to
 
 
 
-# Caveats with SEM
+## Caveats with SEM
 
 
 
-## Model Comparison with OLS
+### Model Comparison with OLS
 
 To test the $H_0$ that the experimental manipulation (`MOOD`) explains $R^2=0$\% of variance in `POS`itive thoughts, compare models that represent the $H_0$ and $H_A$
 
@@ -162,7 +164,7 @@ anova(ols0, ols1)
 This result matches the $F$ test at the bottom of `summary(ols1)`
 
 
-## Model Comparison with `lavaan`
+### Model Comparison with `lavaan`
 
 Omitting variables from an SEM means they are removed from $\bar{y}$ and $S$, returning a warning 
 
@@ -185,7 +187,7 @@ anova(mle0, mle1)
 ```
 
 
-## Moderation Caveats
+### Moderation Caveats
 
 When evaluating moderation using a product term, that product term is a new variable in $\bar{y}$ and $S$
 
@@ -203,7 +205,7 @@ POS ~ 1 + MOOD + NFC + MOOD:NFC
 `MOOD:NFC` is now an additional variable in $\bar{y}$ and $S$, so comparison to any model without that interaction term requires including the product term but fixing its effect to zero
 
 
-### Estimate and Test an Interaction with OLS
+#### Estimate and Test an Interaction with OLS
 
 ```{r OLS int}
 ols.hom <- lm(POS ~ MOOD + NFC, data = dat)
@@ -216,7 +218,7 @@ Using ML estimation, model comparison would analogously yield an analysis of *de
 - a.k.a. likelihood ratio test (LRT)
 
 
-### Estimate and Test an Interaction with `lavaan`
+#### Estimate and Test an Interaction with `lavaan`
 
 ```{r SEM int}
 mle.hom <- sem('POS ~ 1 + MOOD + NFC + 0*MOOD:NFC', data = dat)
@@ -227,7 +229,7 @@ anova(mle.hom, mle.het)
 We can reject $H_0$ of homogeneous `NFC` slopes across `MOOD` groups
 
 
-### Compare Adjusted Means
+#### Compare Adjusted Means
 
 Suppose we had failed to reject the $H_0$ of homogeneity of slopes, and we wanted a single comparison of (adjusted) group means, controlling for NFC. 
 `MOOD` is effect coded, so its slope (which is identical using OLS regression or SEM) is interpreted as
@@ -244,7 +246,7 @@ summary(mle.hom)
 But the `MOOD` slope could also be fixed to zero (or dropped) to obtain a LRT from SEM (or $F$ test from ANOVA).
 
 
-## Summary of Caveats
+### Summary of Caveats
 
 SEMs are only comparable when they are fitted to the same data
 
@@ -259,9 +261,9 @@ Interaction terms are additional variables, added to $\bar{y}$ and $S$
 
 
 
-# Multigroup SEM
+## Multigroup SEM
 
-## Group-Specific Intercepts in OLS
+### Group-Specific Intercepts in OLS
 
 Recall that omitting the intercepts allows each group to have a dummy code in the model
 
@@ -278,7 +280,7 @@ car::deltaMethod(slope0, "b2 - b1", rhs = 0,
 ```
 
 
-## Group-Specific Intercepts in SEM?
+### Group-Specific Intercepts in SEM?
 
 `lavaan` automatically uses the delta method when 
 
@@ -301,7 +303,7 @@ fit1 <- sem(mod1, data = dat) # lavaan ERROR:
 ```
 
 
-## Multiple Groups in SEM
+### Multiple Groups in SEM
 
 Rather than including `MOOD` as variable(s) in the model, we can fit the remainder of the model (`POS ~ 1 + NFC`) separately in each group
 
@@ -335,7 +337,7 @@ Note that the point **and** *SE* estimates from this delta-method result (using 
 
 
 
-### Summary Statistics for Multigroup SEM
+#### Summary Statistics for Multigroup SEM
 
 `lavaan` calculates summary statistics from the raw `data=` separately in each group, but lists can be passed directly
 
@@ -348,7 +350,7 @@ fit2 <- sem(mod2, sample.nobs = gN, # "group=" is implied by lists
 ```
 
 
-### Advantages of Multigroup SEM
+#### Advantages of Multigroup SEM
 
 - Less restrictive assumptions
     - parameters differ by default
