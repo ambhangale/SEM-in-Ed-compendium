@@ -1,8 +1,9 @@
 ---
-title: 'Compendium Structural Equation Modeling in Educational Research'
+title: "Compendium Structural Equation Modeling in Educational Research"
 author: "Suzanne Jak and Terrence D. Jorgensen"
-site: bookdown::bookdown_site
-output: bookdown::gitbook
+site: "bookdown::bookdown_site"
+output: 
+  bookdown::html_book
 documentclass: book
 bibliography: [SEM-Compendium.bib, packages.bib]
 biblio-style: apalike
