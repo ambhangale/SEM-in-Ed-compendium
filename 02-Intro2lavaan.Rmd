@@ -37,7 +37,7 @@ gN <- table(dat$mood.f)
 
 ### Load `lavaan` into Workspace
 
-```{r load lavaan, message=FALSE}
+```{r load lavaan-a, message=FALSE}
 library(lavaan)
 ```
 
@@ -262,7 +262,7 @@ Interaction terms are additional variables, added to $\bar{y}$ and $S$
 
 Recall that omitting the intercepts allows each group to have a dummy code in the model
 
-```{r slope w/o int}
+```{r slope w/o int-b}
 slope0 <- lm(POS ~ -1 + mood.f + NFC, data = dat)
 summary(slope0)
 ```

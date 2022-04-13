@@ -48,7 +48,7 @@ as.data.frame(read_excel("data.xlsx"))	# requires the package readxl
 
 This chapter uses data from a tutorial published on the [\textcolor{blue}{Social Change Lab's web site}](http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf).
 
-```{r import data, message=FALSE}
+```{r import data-1, message=FALSE}
 dat <- foreign::read.spss("MODMED.sav", to.data.frame = TRUE)[c(2, 3, 5, 7)]
 head(dat)
 ```
@@ -456,7 +456,7 @@ Suppose we are investigating the possibility that this grouping variable *modera
 - See [this primer](http://quantpsy.org/interact/interactions.htm) for a review.
 
 To represent the $H_0$ that NFC has a constant effect on positive thoughts across groups, we can add it as a predictor to the model without an intercept. In this case, rather than group-specific means, the dummy codes are *group-specific intercepts*.
-```{r slope w/o int}
+```{r slope w/o int-a}
 slope0 <- lm(POS ~ -1 + mood.f + NFC, data = dat)
 summary(slope0)
 ```

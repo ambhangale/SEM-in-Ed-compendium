@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Using lavaan to Run Regression and ANOVA as a SEM | Compendium Structural Equation Modeling in Educational Research</title>
+  <meta name="description" content="2 Using lavaan to Run Regression and ANOVA as a SEM | Compendium Structural Equation Modeling in Educational Research" />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Using lavaan to Run Regression and ANOVA as a SEM | Compendium Structural Equation Modeling in Educational Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="LJGroot/SEM-Compendium" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Using lavaan to Run Regression and ANOVA as a SEM | Compendium Structural Equation Modeling in Educational Research" />
+  
+  
+  
+
+<meta name="author" content="Suzanne Jak and Terrence D. Jorgensen" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="regression-as-mean--and-covariance-structure-analysis.html"/>
+<link rel="next" href="path-analysis-with-categorical-outcomes.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html#preface">Preface<span></span></a></li>
+<li class="chapter" data-level="1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html"><i class="fa fa-check"></i><b>1</b> Regression as Mean- and Covariance-Structure Analysis<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#installing-lavaan"><i class="fa fa-check"></i><b>1.1</b> Installing <code>lavaan</code><span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#types-of-data-used-in-sem"><i class="fa fa-check"></i><b>1.2</b> Types of Data Used in SEM<span></span></a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#raw-data"><i class="fa fa-check"></i><b>1.2.1</b> Raw Data<span></span></a></li>
+<li class="chapter" data-level="1.2.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#summary-statistics-from-raw-data"><i class="fa fa-check"></i><b>1.2.2</b> Summary Statistics from Raw Data<span></span></a></li>
+<li class="chapter" data-level="1.2.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#importing-summary-data"><i class="fa fa-check"></i><b>1.2.3</b> Importing Summary Data<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#regression-review"><i class="fa fa-check"></i><b>1.3</b> Regression Review<span></span></a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#linear-regression-models"><i class="fa fa-check"></i><b>1.3.1</b> Linear Regression Models<span></span></a></li>
+<li class="chapter" data-level="1.3.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#matrix-notation"><i class="fa fa-check"></i><b>1.3.2</b> Matrix Notation<span></span></a></li>
+<li class="chapter" data-level="1.3.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#interpreting-and-estimating-coefficients"><i class="fa fa-check"></i><b>1.3.3</b> Interpreting and Estimating Coefficients<span></span></a></li>
+<li class="chapter" data-level="1.3.4" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#syntax-examples-with-raw-data"><i class="fa fa-check"></i><b>1.3.4</b> Syntax Examples with Raw Data<span></span></a></li>
+<li class="chapter" data-level="1.3.5" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#categorical-predictors"><i class="fa fa-check"></i><b>1.3.5</b> Categorical Predictors<span></span></a></li>
+<li class="chapter" data-level="1.3.6" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#constant-vs.-varying-slopes"><i class="fa fa-check"></i><b>1.3.6</b> Constant vs. Varying Slopes<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#summary-statistics"><i class="fa fa-check"></i><b>1.4</b> Summary Statistics<span></span></a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#reimport-data"><i class="fa fa-check"></i><b>1.4.1</b> Reimport Data<span></span></a></li>
+<li class="chapter" data-level="1.4.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#raw-data-vs.-summary-statistics"><i class="fa fa-check"></i><b>1.4.2</b> Raw Data vs. Summary Statistics<span></span></a></li>
+<li class="chapter" data-level="1.4.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#what-is-covariance"><i class="fa fa-check"></i><b>1.4.3</b> What Is Covariance?<span></span></a></li>
+<li class="chapter" data-level="1.4.4" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#interpreting-covariance"><i class="fa fa-check"></i><b>1.4.4</b> Interpreting Covariance<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#covariance-matrix"><i class="fa fa-check"></i><b>1.5</b> Covariance Matrix<span></span></a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#ols-with-summary-statistics-beta-mathbfx-mathbfx-1-mathbfx-mathbfy"><i class="fa fa-check"></i><b>1.5.1</b> OLS with Summary Statistics: <span class="math inline">\(\beta = (\mathbf{X}^{&#39;} \mathbf{X})^{-1} \mathbf{X}^{&#39;} \mathbf{y}\)</span><span></span></a></li>
+<li class="chapter" data-level="1.5.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#intercepts-and-means"><i class="fa fa-check"></i><b>1.5.2</b> Intercepts and Means<span></span></a></li>
+<li class="chapter" data-level="1.5.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#intercepts-and-means-1"><i class="fa fa-check"></i><b>1.5.3</b> Intercepts and Means<span></span></a></li>
+<li class="chapter" data-level="1.5.4" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#what-are-mean-and-covariance-structures"><i class="fa fa-check"></i><b>1.5.4</b> What Are Mean and Covariance <em>Structures</em>?<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#references"><i class="fa fa-check"></i><b>1.6</b> References<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><i class="fa fa-check"></i><b>2</b> Using <code>lavaan</code> to Run Regression and ANOVA as a SEM<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#prepare-data-and-workspace"><i class="fa fa-check"></i><b>2.1</b> Prepare Data and Workspace<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#import-example-data"><i class="fa fa-check"></i><b>2.1.1</b> Import Example Data<span></span></a></li>
+<li class="chapter" data-level="2.1.2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#load-lavaan-into-workspace"><i class="fa fa-check"></i><b>2.1.2</b> Load <code>lavaan</code> into Workspace<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#multiple-regression-in-sem"><i class="fa fa-check"></i><b>2.2</b> Multiple Regression in SEM<span></span></a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#lavaan-syntax"><i class="fa fa-check"></i><b>2.2.1</b> <code>lavaan</code> Syntax<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#caveats-with-sem"><i class="fa fa-check"></i><b>2.3</b> Caveats with SEM<span></span></a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#model-comparison-with-ols"><i class="fa fa-check"></i><b>2.3.1</b> Model Comparison with OLS<span></span></a></li>
+<li class="chapter" data-level="2.3.2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#model-comparison-with-lavaan"><i class="fa fa-check"></i><b>2.3.2</b> Model Comparison with <code>lavaan</code><span></span></a></li>
+<li class="chapter" data-level="2.3.3" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#moderation-caveats"><i class="fa fa-check"></i><b>2.3.3</b> Moderation Caveats<span></span></a></li>
+<li class="chapter" data-level="2.3.4" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#summary-of-caveats"><i class="fa fa-check"></i><b>2.3.4</b> Summary of Caveats<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#multigroup-sem"><i class="fa fa-check"></i><b>2.4</b> Multigroup SEM<span></span></a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#group-specific-intercepts-in-ols"><i class="fa fa-check"></i><b>2.4.1</b> Group-Specific Intercepts in OLS<span></span></a></li>
+<li class="chapter" data-level="2.4.2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#group-specific-intercepts-in-sem"><i class="fa fa-check"></i><b>2.4.2</b> Group-Specific Intercepts in SEM?<span></span></a></li>
+<li class="chapter" data-level="2.4.3" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#multiple-groups-in-sem"><i class="fa fa-check"></i><b>2.4.3</b> Multiple Groups in SEM<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html"><i class="fa fa-check"></i><b>3</b> Path Analysis with Categorical Outcomes<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#prepare-data-and-workspace-1"><i class="fa fa-check"></i><b>3.1</b> Prepare Data and Workspace<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#import-example-data-1"><i class="fa fa-check"></i><b>3.1.1</b> Import Example Data<span></span></a></li>
+<li class="chapter" data-level="3.1.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#summarize-data"><i class="fa fa-check"></i><b>3.1.2</b> Summarize Data<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#regression-models-for-binary-variables"><i class="fa fa-check"></i><b>3.2</b> Regression Models for Binary Variables<span></span></a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#fit-a-logistic-regression-model"><i class="fa fa-check"></i><b>3.2.1</b> Fit a Logistic Regression Model<span></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#fit-a-probit-regression-model"><i class="fa fa-check"></i><b>3.2.2</b> Fit a Probit Regression Model<span></span></a></li>
+<li class="chapter" data-level="3.2.3" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#compare-models"><i class="fa fa-check"></i><b>3.2.3</b> Compare Models<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#latent-response-variable"><i class="fa fa-check"></i><b>3.3</b> Latent Response Variable<span></span></a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#ordinal-outcomes"><i class="fa fa-check"></i><b>3.3.1</b> Ordinal Outcomes<span></span></a></li>
+<li class="chapter" data-level="3.3.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#estimating-thresholds"><i class="fa fa-check"></i><b>3.3.2</b> Estimating Thresholds<span></span></a></li>
+<li class="chapter" data-level="3.3.3" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#estimating-polychoric-correlations"><i class="fa fa-check"></i><b>3.3.3</b> Estimating Polychoric Correlations<span></span></a></li>
+<li class="chapter" data-level="3.3.4" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#estimating-an-sem-with-estimated-input"><i class="fa fa-check"></i><b>3.3.4</b> Estimating an SEM with Estimated Input<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#mediation-model-with-categorical-outcomes"><i class="fa fa-check"></i><b>3.4</b> Mediation Model with Categorical Outcomes<span></span></a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#estimate-mediation-models"><i class="fa fa-check"></i><b>3.4.1</b> Estimate Mediation Models<span></span></a></li>
+<li class="chapter" data-level="3.4.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#interpreting-coefficients"><i class="fa fa-check"></i><b>3.4.2</b> Interpreting Coefficients<span></span></a></li>
+<li class="chapter" data-level="3.4.3" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#delta-vs.-theta-parameterizations"><i class="fa fa-check"></i><b>3.4.3</b> Delta vs. Theta Parameterizations<span></span></a></li>
+<li class="chapter" data-level="3.4.4" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#decomposing-total-effects"><i class="fa fa-check"></i><b>3.4.4</b> Decomposing Total Effects<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#references-1"><i class="fa fa-check"></i><b>3.5</b> References<span></span></a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Compendium Structural Equation Modeling in Educational Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="using-lavaan-to-run-regression-and-anova-as-a-sem" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Using <code>lavaan</code> to Run Regression and ANOVA as a SEM<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#using-lavaan-to-run-regression-and-anova-as-a-sem" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="prepare-data-and-workspace" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Prepare Data and Workspace<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#prepare-data-and-workspace" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="import-example-data" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Import Example Data<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#import-example-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We will use data from a tutorial published on the <a href="http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf"></a>.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb97-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> foreign<span class="sc">::</span><span class="fu">read.spss</span>(<span class="st">&quot;MODMED.sav&quot;</span>, <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>)[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)]</span>
+<span id="cb97-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Save summary statistics</span></span>
+<span id="cb97-3"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb97-3" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(dat)</span>
+<span id="cb97-4"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb97-4" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">cov</span>(dat)</span>
+<span id="cb97-5"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb97-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dat)</span></code></pre></div>
+<p>Recall from Chapter 1 that:</p>
+<ul>
+<li>SEM can equivalently be fitted to summary statistics rather than raw data</li>
+<li>It is possible to fit a “multigroup SEM” to obtain parameter estimates separately per group</li>
+</ul>
+<p>This chapter will show how to fit a multigroup SEM to raw data as well as to summary statistics. For the latter, we require group-specific summary statistics, which Chapter 1 discussed how to obtain:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create factor from effects-coded conditions</span></span>
+<span id="cb98-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb98-2" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>mood.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>MOOD, <span class="at">levels =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb98-3"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb98-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;neutral&quot;</span>,<span class="st">&quot;positive&quot;</span>))</span>
+<span id="cb98-4"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Save lists of group-specific summary statistics</span></span>
+<span id="cb98-5"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb98-5" aria-hidden="true" tabindex="-1"></a>CC <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATT&quot;</span>,<span class="st">&quot;NFC&quot;</span>,<span class="st">&quot;POS&quot;</span>)   <span class="co"># when group = &quot;mood.f&quot;</span></span>
+<span id="cb98-6"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb98-6" aria-hidden="true" tabindex="-1"></a>gM <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">&quot;neutral&quot;</span>,<span class="st">&quot;positive&quot;</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb98-7"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb98-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">FUN =</span> <span class="cf">function</span>(g) <span class="fu">colMeans</span>(dat[dat<span class="sc">$</span>mood.f <span class="sc">==</span> g, CC]) )</span>
+<span id="cb98-8"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb98-8" aria-hidden="true" tabindex="-1"></a>gS <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">&quot;neutral&quot;</span>,<span class="st">&quot;positive&quot;</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb98-9"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb98-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">FUN =</span> <span class="cf">function</span>(g) <span class="fu">cov</span>(dat[dat<span class="sc">$</span>mood.f <span class="sc">==</span> g, CC]) )</span>
+<span id="cb98-10"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb98-10" aria-hidden="true" tabindex="-1"></a>gN <span class="ot">&lt;-</span> <span class="fu">table</span>(dat<span class="sc">$</span>mood.f)</span></code></pre></div>
+</div>
+<div id="load-lavaan-into-workspace" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Load <code>lavaan</code> into Workspace<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#load-lavaan-into-workspace" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span></code></pre></div>
+</div>
+</div>
+<div id="multiple-regression-in-sem" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Multiple Regression in SEM<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#multiple-regression-in-sem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="lavaan-syntax" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> <code>lavaan</code> Syntax<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#lavaan-syntax" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The standard syntax for regression is a formula object. To regress <code>ATT</code>itude on <code>MOOD</code> condition, <code>N</code>eed <code>F</code>or <code>C</code>ognition, and <code>POS</code>itive thoughts:</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb100-1" aria-hidden="true" tabindex="-1"></a>ATT <span class="sc">~</span> MOOD <span class="sc">+</span> NFC <span class="sc">+</span> POS</span></code></pre></div>
+<p>SEM is a multivariate modeling framework</p>
+<ul>
+<li>There can be many outcome variables, each with its own formula</li>
+<li>Outcomes can also predict other outcomes</li>
+<li>There can be unobserved (latent) variables</li>
+</ul>
+<p>So <code>lavaan</code> requires collecting these <em>simultaneous equations</em> in a <code>character</code> vector, even when there is only one outcome</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39; ATT ~ MOOD + NFC + POS &#39;</span></span></code></pre></div>
+<div id="ols-regression" class="section level4 hasAnchor" number="2.2.1.1">
+<h4><span class="header-section-number">2.2.1.1</span> OLS Regression<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#ols-regression" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Using the familiar <code>lm()</code> function to obtain OLS estimates of a regression model:</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb102-1" aria-hidden="true" tabindex="-1"></a>ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(ATT <span class="sc">~</span> MOOD <span class="sc">+</span> NFC <span class="sc">+</span> POS, <span class="at">data =</span> dat)</span>
+<span id="cb102-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = ATT ~ MOOD + NFC + POS, data = dat)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -40.061  -8.440  -0.417   8.718  28.010 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   1.9807     1.3107   1.511    0.134    
+## MOOD          1.8839     1.5388   1.224    0.224    
+## NFC           0.8884     0.9422   0.943    0.348    
+## POS           1.1406     0.1862   6.126 1.98e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 13.11 on 96 degrees of freedom
+## Multiple R-squared:  0.4094, Adjusted R-squared:  0.3909 
+## F-statistic: 22.18 on 3 and 96 DF,  p-value: 5.382e-11</code></pre>
+</div>
+<div id="mle-in-lavaan-with-raw-or-summary-data" class="section level4 hasAnchor" number="2.2.1.2">
+<h4><span class="header-section-number">2.2.1.2</span> MLE in <code>lavaan</code> with Raw or Summary Data<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#mle-in-lavaan-with-raw-or-summary-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>When data are complete, maximum likelihood estimation (MLE) provides equivalent results using either raw or summary data. There are multiple model-fitting functions in <code>lavaan</code>:</p>
+<ul>
+<li><code>lavaan()</code> is the main “engine,” but expects that models are fully specified in complete detail</li>
+<li><code>sem()</code> is a “wrapper” that calls <code>lavaan()</code> with some sensible defaults that apply to most SEMs (e.g., automatically estimating residual variances, automatically estimating covariances among predictors)</li>
+<li><code>cfa()</code> is meant for fitting confirmatory factor analysis (CFA) models, discussed in a later chapter. <code>cfa()</code> and <code>sem()</code> actually behave identically (i.e., they call <code>lavaan()</code> with the same defaults)</li>
+<li><code>growth()</code> is meant for very simple latent growth curve models, also discussed in a later chapter</li>
+</ul>
+<p>For now, we will use the <code>sem()</code> function similar to the way we use the <code>lm()</code> function, including how we obtain results from <code>summary()</code>.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Raw Data</span></span>
+<span id="cb104-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb104-2" aria-hidden="true" tabindex="-1"></a>mle <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;ATT ~ MOOD + NFC + POS&#39;</span>, <span class="at">data =</span> dat,</span>
+<span id="cb104-3"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb104-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">meanstructure =</span> <span class="cn">TRUE</span>) <span class="co"># explicitly request intercept</span></span>
+<span id="cb104-4"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb104-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Summary Data</span></span>
+<span id="cb104-5"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb104-5" aria-hidden="true" tabindex="-1"></a>mle <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;ATT ~ MOOD + NFC + POS&#39;</span>, <span class="at">sample.nobs =</span> N,</span>
+<span id="cb104-6"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb104-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">sample.cov =</span> S, <span class="at">sample.mean =</span> M)</span></code></pre></div>
+<p>Now inspect the output. Identify each parameter estimate, and compare it to the corresponding OLS estimate in the <code>lm()</code> results.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mle, <span class="at">rsquare =</span> <span class="cn">TRUE</span>, <span class="at">header =</span> <span class="cn">FALSE</span>, <span class="at">nd =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## 
+## Parameter Estimates:
+## 
+##   Standard errors                                 Standard
+##   Information                                     Expected
+##   Information saturated (h1) model              Structured
+## 
+## Regressions:
+##                     Estimate   Std.Err   z-value   P(&gt;|z|)
+##   ATT ~                                                   
+##     MOOD              1.8839    1.5077    1.2495    0.2115
+##     NFC               0.8884    0.9232    0.9623    0.3359
+##     POS               1.1406    0.1824    6.2519    0.0000
+## 
+## Intercepts:
+##                     Estimate   Std.Err   z-value   P(&gt;|z|)
+##    .ATT               1.9807    1.2842    1.5424    0.1230
+## 
+## Variances:
+##                     Estimate   Std.Err   z-value   P(&gt;|z|)
+##    .ATT             164.9191   23.3231    7.0711    0.0000
+## 
+## R-Square:
+##                     Estimate
+##     ATT               0.4094</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(ols)<span class="sc">^</span><span class="dv">2</span> <span class="co"># compare to residual variance from OLS</span></span></code></pre></div>
+<pre><code>## [1] 171.7908</code></pre>
+</div>
+<div id="comparecontrast-estimates" class="section level4 hasAnchor" number="2.2.1.3">
+<h4><span class="header-section-number">2.2.1.3</span> Compare/Contrast Estimates<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#comparecontrast-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><code>lavaan</code>’s point estimates match OLS, except residual variance (<span class="math inline">\(\sigma^2_\varepsilon\)</span>)</p>
+<ul>
+<li>OLS estimates <span class="math inline">\(\sigma^2_\varepsilon\)</span> by dividing the residual <span class="math inline">\(SS\)</span> by the residual <span class="math inline">\(df\)</span></li>
+<li>SEM estimators choose estimates that reproduce <span class="math inline">\(\bar{y}\)</span> and <span class="math inline">\(S\)</span></li>
+</ul>
+<p>If we calculate variance of the residuals (<span class="math inline">\(y_i - \hat{y}\)</span>) using the “population formula” (dividing by <span class="math inline">\(N\)</span>), we obtain <code>lavaan</code>’s result</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(ols)<span class="sc">^</span><span class="dv">2</span> <span class="co"># residual variance from OLS</span></span></code></pre></div>
+<pre><code>## [1] 171.7908</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">resid</span>(ols)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> N <span class="co"># manually calculated using POPULATION formula</span></span></code></pre></div>
+<pre><code>## [1] 164.9191</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mle)[[<span class="st">&quot;ATT~~ATT&quot;</span>]] <span class="co"># matches lavaan</span></span></code></pre></div>
+<pre><code>## [1] 164.9191</code></pre>
+<ul>
+<li><em>Note</em>: The double-tilde (<code>~~</code>) operator signifies a two-headed arrow, in contrast to the one-headed arrow (<code>~</code>) of a directed effect</li>
+</ul>
+</div>
+<div id="comparecontrast-ses" class="section level4 hasAnchor" number="2.2.1.4">
+<h4><span class="header-section-number">2.2.1.4</span> Compare/Contrast <span class="math inline">\(SE\)</span>s<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#comparecontrast-ses" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The estimated <span class="math inline">\(SE\)</span>s are smaller from <code>lavaan</code> because SEM is an asymptotic method</p>
+<ul>
+<li>estimator assumes <span class="math inline">\(N\)</span> is sufficiently large that <span class="math inline">\(S \approx \Sigma\)</span></li>
+<li>Wald <span class="math inline">\(z\)</span> statistics replace OLS’s <span class="math inline">\(t\)</span> statistics</li>
+<li>Model comparison results in a <span class="math inline">\(\chi^2\)</span> rather than <span class="math inline">\(F\)</span> statistic</li>
+</ul>
+<p>The asymptotic assumption yields more power, but inflated Type I error rates when sample size is low (relative to number of estimated parameters).</p>
+<p>Note that <code>lavaan</code> simply calculates <code>sample.cov=</code> and <code>sample.mean=</code> from <code>data=</code>, but they can be passed directly.</p>
+<p>Also note that raw <code>data=</code> are required to</p>
+<ul>
+<li>analyze incomplete data (using full information MLE rather than listwise deletion),</li>
+<li>obtain robust statistics (e.g., to account for nonnormality of continuous outcomes), or</li>
+<li>model discrete (binary or ordinal) outcomes (which require a <em>threshold model</em>, explained later in a chapter about categorical data)</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="caveats-with-sem" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Caveats with SEM<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#caveats-with-sem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="model-comparison-with-ols" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Model Comparison with OLS<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#model-comparison-with-ols" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To test the <span class="math inline">\(H_0\)</span> that the experimental manipulation (<code>MOOD</code>) explains <span class="math inline">\(R^2=0\)</span>% of variance in <code>POS</code>itive thoughts, compare models that represent the <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span></p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb115-1" aria-hidden="true" tabindex="-1"></a>ols0 <span class="ot">&lt;-</span>  <span class="fu">lm</span>(POS <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> dat)</span>
+<span id="cb115-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb115-2" aria-hidden="true" tabindex="-1"></a>ols1 <span class="ot">&lt;-</span>  <span class="fu">lm</span>(POS <span class="sc">~</span> MOOD, <span class="at">data =</span> dat)</span>
+<span id="cb115-3"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ols0, ols1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: POS ~ 1
+## Model 2: POS ~ MOOD
+##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1     99 6857.0                                  
+## 2     98 4998.5  1    1858.6 36.439 2.819e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>This result matches the <span class="math inline">\(F\)</span> test at the bottom of <code>summary(ols1)</code></p>
+</div>
+<div id="model-comparison-with-lavaan" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Model Comparison with <code>lavaan</code><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#model-comparison-with-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Omitting variables from an SEM means they are removed from <span class="math inline">\(\bar{y}\)</span> and <span class="math inline">\(S\)</span>, returning a warning</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb117-1" aria-hidden="true" tabindex="-1"></a>mle0 <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1&#39;</span>, <span class="at">data =</span> dat)</span>
+<span id="cb117-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb117-2" aria-hidden="true" tabindex="-1"></a>mle1 <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1 + MOOD&#39;</span>, <span class="at">data =</span> dat)</span>
+<span id="cb117-3"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb117-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mle0, mle1)</span></code></pre></div>
+<pre><code>## ... models are based on a different set of observed variables</code></pre>
+<p>Instead, <strong>keep predictor(s) in the model</strong>, but fix the slope(s) to zero</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb119-1" aria-hidden="true" tabindex="-1"></a>mle0 <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1 + 0*MOOD&#39;</span>, <span class="at">data =</span> dat)</span>
+<span id="cb119-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mle0, mle1)</span></code></pre></div>
+<pre><code>## Chi-Squared Difference Test
+## 
+##      Df    AIC    BIC  Chisq Chisq diff Df diff Pr(&gt;Chisq)    
+## mle1  0 680.96 688.78  0.000                                  
+## mle0  1 710.57 715.78 31.614     31.614       1   1.88e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="moderation-caveats" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Moderation Caveats<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#moderation-caveats" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When evaluating moderation using a product term, that product term is a new variable in <span class="math inline">\(\bar{y}\)</span> and <span class="math inline">\(S\)</span></p>
+<ul>
+<li>e.g., we want to test <code>MOOD</code>’s effect, controlling for <code>NFC</code></li>
+<li>before comparing adjusted group means, we should evaluate the homogeneity-of-slopes assumption</li>
+</ul>
+<p>As in <code>formula</code> objects, <code>lavaan</code> syntax recognizes the colon (<code>:</code>) operator</p>
+<ul>
+<li>but the asterisk (<code>*</code>) is reserved for assigning labels or values to parameters</li>
+</ul>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb121-1" aria-hidden="true" tabindex="-1"></a>POS <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> MOOD <span class="sc">+</span> NFC <span class="sc">+</span> MOOD<span class="sc">:</span>NFC</span></code></pre></div>
+<p><code>MOOD:NFC</code> is now an additional variable in <span class="math inline">\(\bar{y}\)</span> and <span class="math inline">\(S\)</span>, so comparison to any model without that interaction term requires including the product term but fixing its effect to zero</p>
+<div id="estimate-and-test-an-interaction-with-ols" class="section level4 hasAnchor" number="2.3.3.1">
+<h4><span class="header-section-number">2.3.3.1</span> Estimate and Test an Interaction with OLS<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#estimate-and-test-an-interaction-with-ols" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb122-1" aria-hidden="true" tabindex="-1"></a>ols.hom <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> MOOD <span class="sc">+</span> NFC, <span class="at">data =</span> dat)</span>
+<span id="cb122-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb122-2" aria-hidden="true" tabindex="-1"></a>ols.het <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> MOOD <span class="sc">+</span> NFC <span class="sc">+</span> MOOD<span class="sc">:</span>NFC, <span class="at">data =</span> dat)</span>
+<span id="cb122-3"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ols.hom, ols.het)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: POS ~ MOOD + NFC
+## Model 2: POS ~ MOOD + NFC + MOOD:NFC
+##   Res.Df    RSS Df Sum of Sq      F  Pr(&gt;F)  
+## 1     97 4954.6                              
+## 2     96 4663.1  1    291.47 6.0005 0.01611 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Using ML estimation, model comparison would analogously yield an analysis of <em>deviance</em></p>
+<ul>
+<li>a.k.a. likelihood ratio test (LRT)</li>
+</ul>
+</div>
+<div id="estimate-and-test-an-interaction-with-lavaan" class="section level4 hasAnchor" number="2.3.3.2">
+<h4><span class="header-section-number">2.3.3.2</span> Estimate and Test an Interaction with <code>lavaan</code><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#estimate-and-test-an-interaction-with-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb124-1" aria-hidden="true" tabindex="-1"></a>mle.hom <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1 + MOOD + NFC + 0*MOOD:NFC&#39;</span>, <span class="at">data =</span> dat)</span>
+<span id="cb124-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb124-2" aria-hidden="true" tabindex="-1"></a>mle.het <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1 + MOOD + NFC +   MOOD:NFC&#39;</span>, <span class="at">data =</span> dat)</span>
+<span id="cb124-3"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb124-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mle.hom, mle.het)</span></code></pre></div>
+<pre><code>## Chi-Squared Difference Test
+## 
+##         Df    AIC    BIC  Chisq Chisq diff Df diff Pr(&gt;Chisq)  
+## mle.het  0 678.01 691.04 0.0000                                
+## mle.hom  1 682.08 692.50 6.0629     6.0629       1     0.0138 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>We can reject <span class="math inline">\(H_0\)</span> of homogeneous <code>NFC</code> slopes across <code>MOOD</code> groups</p>
+</div>
+<div id="compare-adjusted-means" class="section level4 hasAnchor" number="2.3.3.3">
+<h4><span class="header-section-number">2.3.3.3</span> Compare Adjusted Means<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#compare-adjusted-means" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Suppose we had failed to reject the <span class="math inline">\(H_0\)</span> of homogeneity of slopes, and we wanted a single comparison of (adjusted) group means, controlling for NFC.
+<code>MOOD</code> is effect coded, so its slope (which is identical using OLS regression or SEM) is interpreted as</p>
+<ul>
+<li>the difference between a group’s mean and the grand mean</li>
+<li>half the group mean difference</li>
+</ul>
+<p>The <span class="math inline">\(t\)</span> test (OLS) or Wald <span class="math inline">\(z\)</span> test (SEM) is sufficient to test the <span class="math inline">\(H_0: \widehat{y}_\text{Treatment}|x = \widehat{y}_\text{Control}|x\)</span></p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mle.hom)</span></code></pre></div>
+<pre><code>## lavaan 0.6-11 ended normally after 13 iterations
+## 
+##   Estimator                                         ML
+##   Optimization method                           NLMINB
+##   Number of model parameters                         4
+##                                                       
+##   Number of observations                           100
+##                                                       
+## Model Test User Model:
+##                                                       
+##   Test statistic                                 6.063
+##   Degrees of freedom                                 1
+##   P-value (Chi-square)                           0.014
+## 
+## Parameter Estimates:
+## 
+##   Standard errors                             Standard
+##   Information                                 Expected
+##   Information saturated (h1) model          Structured
+## 
+## Regressions:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##   POS ~                                               
+##     MOOD              4.326    0.704    6.145    0.000
+##     NFC               0.474    0.504    0.941    0.346
+##     MOOD:NFC          0.000                           
+## 
+## Intercepts:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##    .POS               0.000    0.704    0.000    1.000
+## 
+## Variances:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##    .POS              49.546    7.007    7.071    0.000</code></pre>
+<p>But the <code>MOOD</code> slope could also be fixed to zero (or dropped) to obtain a LRT from SEM (or <span class="math inline">\(F\)</span> test from ANOVA).</p>
+</div>
+</div>
+<div id="summary-of-caveats" class="section level3 hasAnchor" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> Summary of Caveats<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#summary-of-caveats" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>SEMs are only comparable when they are fitted to the same data</p>
+<ul>
+<li>same observations (rows) <strong>and</strong> same variables (columns)</li>
+<li>Instead of removing predictors, fix slopes to zero</li>
+</ul>
+<p>Interaction terms are additional variables, added to <span class="math inline">\(\bar{y}\)</span> and <span class="math inline">\(S\)</span></p>
+<ul>
+<li>only compare models with same variables</li>
+<li>products of variables can be saved in the <code>data.frame</code> or specified using the colon (<code>:</code>) operator (e.g., <code>x1:x2</code>), <strong>not the asterisk</strong> (<code>*</code>)</li>
+<li><em>standardized solution is incorrect</em> because it treats product terms as separate variables (e.g., if they were independently transformed to <span class="math inline">\(z\)</span> scores rather than <em>products</em> of <span class="math inline">\(z\)</span> scores)</li>
+</ul>
+</div>
+</div>
+<div id="multigroup-sem" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Multigroup SEM<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#multigroup-sem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="group-specific-intercepts-in-ols" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Group-Specific Intercepts in OLS<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#group-specific-intercepts-in-ols" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Recall that omitting the intercepts allows each group to have a dummy code in the model</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb128-1" aria-hidden="true" tabindex="-1"></a>slope0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> mood.f <span class="sc">+</span> NFC, <span class="at">data =</span> dat)</span>
+<span id="cb128-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(slope0)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = POS ~ -1 + mood.f + NFC, data = dat)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -13.1713  -5.4855  -0.2585   4.5490  16.9279 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## mood.fneutral   -4.3263     1.0109  -4.280 4.39e-05 ***
+## mood.fpositive   4.3263     1.0109   4.280 4.39e-05 ***
+## NFC              0.4743     0.5115   0.927    0.356    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.147 on 97 degrees of freedom
+## Multiple R-squared:  0.2774, Adjusted R-squared:  0.2551 
+## F-statistic: 12.42 on 3 and 97 DF,  p-value: 6.115e-07</code></pre>
+<p>This still assumes homoskedasticity of residuals, and comparing intercepts (or adjusted means) requires the <a href="https://en.wikipedia.org/wiki/Delta_method"></a>, which is a way to estimate the <em>SE</em> of a function of parameters (e.g., difference between 2 slopes) from the <em>SE</em>s of the original parameter estimates.</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb130-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">deltaMethod</span>(slope0, <span class="st">&quot;b2 - b1&quot;</span>, <span class="at">rhs =</span> <span class="dv">0</span>,</span>
+<span id="cb130-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb130-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">parameterNames =</span> <span class="fu">paste0</span>(<span class="st">&quot;b&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span></code></pre></div>
+<pre><code>##         Estimate      SE   2.5 %  97.5 % Hypothesis z value  Pr(&gt;|z|)    
+## b2 - b1   8.6527  1.4298  5.8504 11.4549     0.0000  6.0519 1.432e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="group-specific-intercepts-in-sem" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Group-Specific Intercepts in SEM?<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#group-specific-intercepts-in-sem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>lavaan</code> automatically uses the delta method when</p>
+<ul>
+<li>parameters are labeled in the model syntax (before <code>*</code> operator)</li>
+<li>model syntax includes user-defined parameters (<code>:=</code> operator)</li>
+</ul>
+<p>However, SEM cannot fit group-specific intercepts because they are linearly dependent (recall (multi)collinearity among predictors from a previously read regression text). That is, the positive-mood dummy code is simply 1 minus the neutral-mood dummy code, so they are perfectly (negatively) correlated. Therefore, <span class="math inline">\(S\)</span> would not be <a href="https://en.wikipedia.org/wiki/Definite_matrix"></a>, which is a term that indicates some redundancy among variables. This means that fitting a single-group SEM with group-specific intercepts is not possible:</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb132-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>treat   <span class="ot">&lt;-</span> dat<span class="sc">$</span>mood.f <span class="sc">==</span> <span class="st">&quot;positive&quot;</span></span>
+<span id="cb132-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb132-2" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>control <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> dat<span class="sc">$</span>treat <span class="co"># linear dependency</span></span>
+<span id="cb132-3"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb132-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-4"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb132-4" aria-hidden="true" tabindex="-1"></a><span class="do">## label slopes &quot;b1&quot; for neutral group, &quot;b2&quot; for positive group</span></span>
+<span id="cb132-5"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb132-5" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="st">&#39; POS ~ b1*mood.fneutral + b2*mood.fpositive + NFC</span></span>
+<span id="cb132-6"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb132-6" aria-hidden="true" tabindex="-1"></a><span class="st">  ## user-defined parameter</span></span>
+<span id="cb132-7"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb132-7" aria-hidden="true" tabindex="-1"></a><span class="st">    adj_mean_diff := b2 - b1</span></span>
+<span id="cb132-8"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb132-8" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb132-9"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb132-9" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod1, <span class="at">data =</span> dat) <span class="co"># lavaan ERROR: </span></span>
+<span id="cb132-10"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb132-10" aria-hidden="true" tabindex="-1"></a><span class="do">## sample covariance matrix is not positive-definite</span></span></code></pre></div>
+</div>
+<div id="multiple-groups-in-sem" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Multiple Groups in SEM<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#multiple-groups-in-sem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Rather than including <code>MOOD</code> as variable(s) in the model, we can fit the remainder of the model (<code>POS ~ 1 + NFC</code>) separately in each group</p>
+<ul>
+<li>each group gets unique parameter estimates</li>
+<li>constraints across groups can be added
+<ul>
+<li>homoskedasticity of residuals</li>
+<li>homogeneous slopes</li>
+</ul></li>
+</ul>
+<p><code>MOOD</code>’s effect is how group-specific intercepts differ</p>
+<ul>
+<li>each group gets unique parameter labels, in a vector
+<ul>
+<li>below: <code>POS ~ c(b1, b2)*1</code></li>
+</ul></li>
+<li>use the same label for homogeneous slopes
+<ul>
+<li>below: <code>POS ~ c(b3, b3)*NFC</code></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb133-1" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="st">&#39; POS ~ c(b1, b2)*1 + c(b3, b3)*NFC</span></span>
+<span id="cb133-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="st">  ## user-defined parameter</span></span>
+<span id="cb133-3"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb133-3" aria-hidden="true" tabindex="-1"></a><span class="st">    adj_M_diff := b2 - b1</span></span>
+<span id="cb133-4"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb133-4" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb133-5"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb133-5" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod2, <span class="at">data =</span> dat, <span class="at">group =</span> <span class="st">&quot;mood.f&quot;</span>)</span>
+<span id="cb133-6"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb133-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code></pre></div>
+<pre><code>## lavaan 0.6-11 ended normally after 19 iterations
+## 
+##   Estimator                                         ML
+##   Optimization method                           NLMINB
+##   Number of model parameters                         6
+##   Number of equality constraints                     1
+##                                                       
+##   Number of observations per group:                   
+##     neutral                                         50
+##     positive                                        50
+##                                                       
+## Model Test User Model:
+##                                                       
+##   Test statistic                                 6.037
+##   Degrees of freedom                                 1
+##   P-value (Chi-square)                           0.014
+##   Test statistic for each group:
+##     neutral                                      2.217
+##     positive                                     3.820
+## 
+## Parameter Estimates:
+## 
+##   Standard errors                             Standard
+##   Information                                 Expected
+##   Information saturated (h1) model          Structured
+## 
+## 
+## Group 1 [neutral]:
+## 
+## Regressions:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##   POS ~                                               
+##     NFC       (b3)    0.443    0.502    0.882    0.378
+## 
+## Intercepts:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##    .POS       (b1)   -4.325    0.982   -4.404    0.000
+## 
+## Variances:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##    .POS              48.225    9.645    5.000    0.000
+## 
+## 
+## Group 2 [positive]:
+## 
+## Regressions:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##   POS ~                                               
+##     NFC       (b3)    0.443    0.502    0.882    0.378
+## 
+## Intercepts:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##    .POS       (b2)    4.325    1.009    4.288    0.000
+## 
+## Variances:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##    .POS              50.870   10.174    5.000    0.000
+## 
+## Defined Parameters:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##     adj_M_diff        8.651    1.408    6.143    0.000</code></pre>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="do">## compare to OLS, which assumes homoskedasticity</span></span>
+<span id="cb135-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(slope0)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = POS ~ -1 + mood.f + NFC, data = dat)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -13.1713  -5.4855  -0.2585   4.5490  16.9279 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## mood.fneutral   -4.3263     1.0109  -4.280 4.39e-05 ***
+## mood.fpositive   4.3263     1.0109   4.280 4.39e-05 ***
+## NFC              0.4743     0.5115   0.927    0.356    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.147 on 97 degrees of freedom
+## Multiple R-squared:  0.2774, Adjusted R-squared:  0.2551 
+## F-statistic: 12.42 on 3 and 97 DF,  p-value: 6.115e-07</code></pre>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="do">## delta method to test adj_M_diff</span></span>
+<span id="cb137-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb137-2" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">deltaMethod</span>(slope0, <span class="st">&quot;b2 - b1&quot;</span>, <span class="at">rhs =</span> <span class="dv">0</span>,</span>
+<span id="cb137-3"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb137-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">parameterNames =</span> <span class="fu">paste0</span>(<span class="st">&quot;b&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span></code></pre></div>
+<pre><code>##         Estimate      SE   2.5 %  97.5 % Hypothesis z value  Pr(&gt;|z|)    
+## b2 - b1   8.6527  1.4298  5.8504 11.4549     0.0000  6.0519 1.432e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Note that the point <strong>and</strong> <em>SE</em> estimates from this delta-method result (using OLS) can differ from the corresponding results using SEM. Because SEM does not assume residual homoskedasticity, it may be more robust, but there is a trade-off because OLS is not biased by small samples the way that SEM is.</p>
+<div id="summary-statistics-for-multigroup-sem" class="section level4 hasAnchor" number="2.4.3.1">
+<h4><span class="header-section-number">2.4.3.1</span> Summary Statistics for Multigroup SEM<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#summary-statistics-for-multigroup-sem" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><code>lavaan</code> calculates summary statistics from the raw <code>data=</code> separately in each group, but lists can be passed directly</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb139-1" aria-hidden="true" tabindex="-1"></a>gN <span class="co"># vector of sample sizes</span></span></code></pre></div>
+<pre><code>## 
+##  neutral positive 
+##       50       50</code></pre>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb141-1" aria-hidden="true" tabindex="-1"></a>gM <span class="co"># mean vectors</span></span></code></pre></div>
+<pre><code>## $neutral
+##        ATT        NFC        POS 
+## -4.7920520  0.0321142 -4.3110960 
+## 
+## $positive
+##        ATT        NFC        POS 
+##  8.7534980 -0.0321146  4.3111040</code></pre>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb143-1" aria-hidden="true" tabindex="-1"></a>gS <span class="co"># list of covariance matrices</span></span></code></pre></div>
+<pre><code>## $neutral
+##            ATT       NFC       POS
+## ATT 245.020884  4.812796 61.799307
+## NFC   4.812796  2.456274 -1.201971
+## POS  61.799307 -1.201971 47.663230
+## 
+## $positive
+##             ATT       NFC       POS
+## ATT 231.2417228 0.8817017 56.235120
+## NFC   0.8817017 1.5276643  3.091531
+## POS  56.2351197 3.0915313 54.346483</code></pre>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb145-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod2, <span class="at">sample.nobs =</span> gN, <span class="co"># &quot;group=&quot; is implied by lists</span></span>
+<span id="cb145-2"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#cb145-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">sample.mean =</span> gM, <span class="at">sample.cov =</span> gS)</span></code></pre></div>
+</div>
+<div id="advantages-of-multigroup-sem" class="section level4 hasAnchor" number="2.4.3.2">
+<h4><span class="header-section-number">2.4.3.2</span> Advantages of Multigroup SEM<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#advantages-of-multigroup-sem" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>Less restrictive assumptions
+<ul>
+<li>parameters differ by default</li>
+</ul></li>
+<li>More interpretable parameters
+<ul>
+<li>each group has their own intercept and slopes</li>
+</ul></li>
+<li>Intuitive to specify <span class="math inline">\(H_0\)</span> as user-defined parameter
+<ul>
+<li>e.g., the difference between the intercepts in the treatment group (<code>b2</code>) and control group (<code>b1</code>) is zero</li>
+</ul></li>
+<li>Intuitive to represent assumptions about equality constraints by using the same labels across groups
+<ul>
+<li>e.g., the same <code>NFC</code> effect (<code>b3</code>)</li>
+<li>testable by comparing models with(out) constraints</li>
+</ul></li>
+<li>Can easily test <span class="math inline">\(H_0\)</span> about parameters other than means
+<ul>
+<li>Are variances or correlations equal across groups?</li>
+</ul></li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>asymptotic assumption (large <span class="math inline">\(N\)</span>) applies to each group</li>
+<li>single-group regression better in small samples</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regression-as-mean--and-covariance-structure-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="path-analysis-with-categorical-outcomes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

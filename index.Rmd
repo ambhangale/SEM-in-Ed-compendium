@@ -8,6 +8,7 @@ bibliography: [SEM-Compendium.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: LJGroot/SEM-Compendium
+delete_merged_file: yes
 ---
 
 # Preface {-}
