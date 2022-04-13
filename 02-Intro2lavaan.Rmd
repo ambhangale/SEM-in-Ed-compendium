@@ -1,0 +1,386 @@
+---
+title: 'Compendium Structural Equation Modeling in Educational Research'
+subtitle: 'Chapter 2: Using `lavaan` to Run Regression and ANOVA as a SEM'
+author: "Suzanne Jak and Terrence D. Jorgensen"
+output: 
+  pdf_document:
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Prepare Data and Workspace
+
+<!-- TODO: 
+Frame the need to talk about MG-SEM because it allows for thinking more about CSA v. reproducing raw data 
+-->
+
+
+## Import Example Data
+
+We will use data from a tutorial published on the [\textcolor{blue}{Social Change Lab's web site}](http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf).
+
+```{r import raw data, message=FALSE}
+dat <- foreign::read.spss("MODMED.sav", to.data.frame = TRUE)[c(2, 3, 5, 7)]
+## Save summary statistics
+M <- colMeans(dat)
+S <- cov(dat)
+N <- nrow(dat)
+```
+
+Recall from Chapter 1 that:
+
+- SEM can equivalently be fitted to summary statistics rather than raw data
+- It is possible to fit a "multigroup SEM" to obtain parameter estimates separately per group
+
+This chapter will show how to fit a multigroup SEM to raw data as well as to summary statistics.  For the latter, we require group-specific summary statistics, which Chapter 1 discussed how to obtain:
+
+```{r import summary data}
+## Create factor from effects-coded conditions
+dat$mood.f <- factor(dat$MOOD, levels = c(-1, 1),
+                     labels = c("neutral","positive"))
+## Save lists of group-specific summary statistics
+CC <- c("ATT","NFC","POS")   # when group = "mood.f"
+gM <- sapply(c("neutral","positive"), simplify = FALSE, 
+             FUN = function(g) colMeans(dat[dat$mood.f == g, CC]) )
+gS <- sapply(c("neutral","positive"), simplify = FALSE,
+             FUN = function(g) cov(dat[dat$mood.f == g, CC]) )
+gN <- table(dat$mood.f)
+```
+
+
+## Load `lavaan` into Workspace
+
+```{r load lavaan, message=FALSE}
+library(lavaan)
+```
+
+
+
+# Multiple Regression in SEM
+
+## `lavaan` Syntax
+
+The standard syntax for regression is a formula object.  To regress `ATT`itude on `MOOD` condition, `N`eed `F`or `C`ognition, and `POS`itive thoughts:
+
+```{r formula, eval=FALSE}
+ATT ~ MOOD + NFC + POS
+```
+
+SEM is a multivariate modeling framework
+
+- There can be many outcome variables, each with its own formula
+- Outcomes can also predict other outcomes
+- There can be unobserved (latent) variables
+
+So `lavaan` requires collecting these *simultaneous equations* in a `character` vector, even when there is only one outcome
+
+```{r character, eval=FALSE}
+' ATT ~ MOOD + NFC + POS '
+```
+
+
+
+### OLS Regression
+
+Using the familiar `lm()` function to obtain OLS estimates of a regression model:
+
+```{r OLS}
+ols <- lm(ATT ~ MOOD + NFC + POS, data = dat)
+summary(ols)
+```
+
+
+### MLE in `lavaan` with Raw or Summary Data
+
+When data are complete, maximum likelihood estimation (MLE) provides equivalent results using either raw or summary data.  There are multiple model-fitting functions in `lavaan`:
+
+- `lavaan()` is the main "engine", but expects that models are fully specified in complete detail
+- `sem()` is a "wrapper" that calls `lavaan()` with some sensible defaults that apply to most SEMs (e.g., automatically estimating residual variances, automatically estimating covariances among predictors)
+- `cfa()` is meant for fitting confirmatory factor analysis (CFA) models, discussed in a later chapter.  `cfa()` and `sem()` actually behave identically (i.e., they call `lavaan()` with the same defaults)
+- `growth()` is meant for very simple latent growth curve models, also discussed in a later chapter
+
+For now, we will use the `sem()` function similar to the way we use the `lm()` function, including how we obtain results from `summary()`.
+
+```{r SEM}
+## Raw Data
+mle <- sem('ATT ~ MOOD + NFC + POS', data = dat,
+           meanstructure = TRUE) # explicitly request intercept
+## Summary Data
+mle <- sem('ATT ~ MOOD + NFC + POS', sample.nobs = N,
+           sample.cov = S, sample.mean = M)
+```
+
+Now inspect the output.  Identify each parameter estimate, and compare it to the corresponding OLS estimate in the `lm()` results.
+```{r SEM summary}
+summary(mle, rsquare = TRUE, header = FALSE, nd = 4)
+sigma(ols)^2 # compare to residual variance from OLS
+```
+
+
+### Compare/Contrast Estimates
+
+`lavaan`'s point estimates match OLS, except residual variance ($\sigma^2_\varepsilon$)
+
+- OLS estimates $\sigma^2_\varepsilon$ by dividing the residual $SS$ by the residual $df$
+- SEM estimators choose estimates that reproduce $\bar{y}$ and $S$ 
+
+If we calculate variance of the residuals ($y_i - \hat{y}$) using the "population formula" (dividing by $N$), we obtain `lavaan`'s result
+
+```{r compare res var}
+sigma(ols)^2 # residual variance from OLS
+sum(resid(ols)^2) / N # manually calculated using POPULATION formula
+coef(mle)[["ATT~~ATT"]] # matches lavaan
+```
+
+- *Note*: The double-tilde (`~~`) operator signifies a two-headed arrow, in contrast to the one-headed arrow (`~`) of a directed effect
+
+
+### Compare/Contrast $SE$s
+
+The estimated $SE$s are smaller from `lavaan` because SEM is an asymptotic method
+
+- estimator assumes $N$ is sufficiently large that $S \approx \Sigma$
+- Wald $z$ statistics replace OLS's $t$ statistics
+- Model comparison results in a $\chi^2$ rather than $F$ statistic
+
+The asymptotic assumption yields more power, but inflated Type I error rates when sample size is low (relative to number of estimated parameters).
+
+Note that `lavaan` simply calculates `sample.cov=` and `sample.mean=` from `data=`, but they can be passed directly.
+
+Also note that raw `data=` are required to 
+
+- analyze incomplete data (using full information MLE rather than listwise deletion),
+- obtain robust statistics (e.g., to account for nonnormality of continuous outcomes), or 
+- model discrete (binary or ordinal) outcomes (which require a *threshold model*, explained later in a chapter about categorical data)
+
+
+
+# Caveats with SEM
+
+
+
+## Model Comparison with OLS
+
+To test the $H_0$ that the experimental manipulation (`MOOD`) explains $R^2=0$\% of variance in `POS`itive thoughts, compare models that represent the $H_0$ and $H_A$
+
+```{r OLS compare}
+ols0 <-  lm(POS ~ 1, data = dat)
+ols1 <-  lm(POS ~ MOOD, data = dat)
+anova(ols0, ols1)
+```
+
+This result matches the $F$ test at the bottom of `summary(ols1)`
+
+
+## Model Comparison with `lavaan`
+
+Omitting variables from an SEM means they are removed from $\bar{y}$ and $S$, returning a warning 
+
+```{r syntax compare, eval=FALSE}
+mle0 <- sem('POS ~ 1', data = dat)
+mle1 <- sem('POS ~ 1 + MOOD', data = dat)
+anova(mle0, mle1)
+```
+
+```{r printWarn, echo=FALSE}
+mle1 <- sem('POS ~ 1 + MOOD', data = dat)
+cat('... models are based on a different set of observed variables')
+```
+
+Instead, **keep predictor(s) in the model**, but fix the slope(s) to zero
+
+```{r SEM compare}
+mle0 <- sem('POS ~ 1 + 0*MOOD', data = dat)
+anova(mle0, mle1)
+```
+
+
+## Moderation Caveats
+
+When evaluating moderation using a product term, that product term is a new variable in $\bar{y}$ and $S$
+
+- e.g., we want to test `MOOD`'s effect, controlling for `NFC`
+- before comparing adjusted group means, we should evaluate the homogeneity-of-slopes assumption
+
+As in `formula` objects, `lavaan` syntax recognizes the colon (`:`) operator
+
+- but the asterisk (`*`) is reserved for assigning labels or values to parameters
+
+```{r modform, eval=FALSE}
+POS ~ 1 + MOOD + NFC + MOOD:NFC
+```
+
+`MOOD:NFC` is now an additional variable in $\bar{y}$ and $S$, so comparison to any model without that interaction term requires including the product term but fixing its effect to zero
+
+
+### Estimate and Test an Interaction with OLS
+
+```{r OLS int}
+ols.hom <- lm(POS ~ MOOD + NFC, data = dat)
+ols.het <- lm(POS ~ MOOD + NFC + MOOD:NFC, data = dat)
+anova(ols.hom, ols.het)
+```
+
+Using ML estimation, model comparison would analogously yield an analysis of *deviance*
+
+- a.k.a. likelihood ratio test (LRT)
+
+
+### Estimate and Test an Interaction with `lavaan`
+
+```{r SEM int}
+mle.hom <- sem('POS ~ 1 + MOOD + NFC + 0*MOOD:NFC', data = dat)
+mle.het <- sem('POS ~ 1 + MOOD + NFC +   MOOD:NFC', data = dat)
+anova(mle.hom, mle.het)
+```
+
+We can reject $H_0$ of homogeneous `NFC` slopes across `MOOD` groups
+
+
+### Compare Adjusted Means
+
+Suppose we had failed to reject the $H_0$ of homogeneity of slopes, and we wanted a single comparison of (adjusted) group means, controlling for NFC. 
+`MOOD` is effect coded, so its slope (which is identical using OLS regression or SEM) is interpreted as
+
+- the difference between a group's mean and the grand mean
+- half the group mean difference
+
+The $t$ test (OLS) or Wald $z$ test (SEM) is sufficient to test the $H_0: \widehat{y}_\text{Treatment}|x = \widehat{y}_\text{Control}|x$
+
+```{r print M_adj}
+summary(mle.hom)
+```
+
+But the `MOOD` slope could also be fixed to zero (or dropped) to obtain a LRT from SEM (or $F$ test from ANOVA).
+
+
+## Summary of Caveats
+
+SEMs are only comparable when they are fitted to the same data
+
+- same observations (rows) **and** same variables (columns)
+- Instead of removing predictors, fix slopes to zero
+
+Interaction terms are additional variables, added to $\bar{y}$ and $S$
+
+- only compare models with same variables
+- products of variables can be saved in the `data.frame` or specified using the colon (`:`) operator (e.g., `x1:x2`), **not the asterisk** (`*`)
+- *standardized solution is incorrect* because it treats product terms as separate variables (e.g., if they were independently transformed to $z$ scores rather than *products* of $z$ scores)
+
+
+
+# Multigroup SEM
+
+## Group-Specific Intercepts in OLS
+
+Recall that omitting the intercepts allows each group to have a dummy code in the model
+
+```{r slope w/o int}
+slope0 <- lm(POS ~ -1 + mood.f + NFC, data = dat)
+summary(slope0)
+```
+
+This still assumes homoskedasticity of residuals, and comparing intercepts (or adjusted means) requires the [\textcolor{blue}{delta method}](https://en.wikipedia.org/wiki/Delta_method), which is a way to estimate the *SE* of a function of parameters (e.g., difference between 2 slopes) from the *SE*s of the original parameter estimates.
+
+```{r deltaMethod}
+car::deltaMethod(slope0, "b2 - b1", rhs = 0,
+                 parameterNames = paste0("b", 1:3))
+```
+
+
+## Group-Specific Intercepts in SEM?
+
+`lavaan` automatically uses the delta method when 
+
+- parameters are labeled in the model syntax (before `*` operator)
+- model syntax includes user-defined parameters (`:=` operator)
+
+However, SEM cannot fit group-specific intercepts because they are linearly dependent (recall (multi)collinearity among predictors from a previously read regression text). That is, the positive-mood dummy code is simply 1 minus the neutral-mood dummy code, so they are perfectly (negatively) correlated.  Therefore, $S$ would not be [\textcolor{blue}{positive definite}](https://en.wikipedia.org/wiki/Definite_matrix), which is a term that indicates some redundancy among variables.  This means that fitting a single-group SEM with group-specific intercepts is not possible:
+
+```{r NPD, eval = FALSE}
+dat$treat   <- dat$mood.f == "positive"
+dat$control <- 1 - dat$treat # linear dependency
+
+## label slopes "b1" for neutral group, "b2" for positive group
+mod1 <- ' POS ~ b1*mood.fneutral + b2*mood.fpositive + NFC
+  ## user-defined parameter
+    adj_mean_diff := b2 - b1
+'
+fit1 <- sem(mod1, data = dat) # lavaan ERROR: 
+## sample covariance matrix is not positive-definite
+```
+
+
+## Multiple Groups in SEM
+
+Rather than including `MOOD` as variable(s) in the model, we can fit the remainder of the model (`POS ~ 1 + NFC`) separately in each group
+
+- each group gets unique parameter estimates
+- constraints across groups can be added
+    - homoskedasticity of residuals
+    - homogeneous slopes
+
+`MOOD`'s effect is how group-specific intercepts differ
+
+- each group gets unique parameter labels, in a vector
+    - below: `POS ~ c(b1, b2)*1`
+- use the same label for homogeneous slopes
+    - below: `POS ~ c(b3, b3)*NFC`
+
+```{r MG-SEM}
+mod2 <- ' POS ~ c(b1, b2)*1 + c(b3, b3)*NFC
+  ## user-defined parameter
+    adj_M_diff := b2 - b1
+'
+fit2 <- sem(mod2, data = dat, group = "mood.f")
+summary(fit2)
+## compare to OLS, which assumes homoskedasticity
+summary(slope0)
+## delta method to test adj_M_diff
+car::deltaMethod(slope0, "b2 - b1", rhs = 0,
+                 parameterNames = paste0("b", 1:3))
+```
+
+Note that the point **and** *SE* estimates from this delta-method result (using OLS) can differ from the corresponding results using SEM.  Because SEM does not assume residual homoskedasticity, it may be more robust, but there is a trade-off because OLS is not biased by small samples the way that SEM is.
+
+
+
+### Summary Statistics for Multigroup SEM
+
+`lavaan` calculates summary statistics from the raw `data=` separately in each group, but lists can be passed directly
+
+```{r MG-SEM summary stats}
+gN # vector of sample sizes
+gM # mean vectors
+gS # list of covariance matrices
+fit2 <- sem(mod2, sample.nobs = gN, # "group=" is implied by lists
+            sample.mean = gM, sample.cov = gS)
+```
+
+
+### Advantages of Multigroup SEM
+
+- Less restrictive assumptions
+    - parameters differ by default
+- More interpretable parameters
+    - each group has their own intercept and slopes
+- Intuitive to specify $H_0$ as user-defined parameter
+    - e.g., the difference between the intercepts in the treatment group (`b2`) and control group (`b1`) is zero
+- Intuitive to represent assumptions about equality constraints by using the same labels across groups
+    - e.g., the same `NFC` effect (`b3`)
+    - testable by comparing models with(out) constraints 
+- Can easily test $H_0$ about parameters other than means
+    - Are variances or correlations equal across groups?
+
+Disadvantages:
+
+- asymptotic assumption (large $N$) applies to each group
+- single-group regression better in small samples
+
+
+
+
