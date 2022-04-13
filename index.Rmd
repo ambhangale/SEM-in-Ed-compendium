@@ -4,7 +4,7 @@ author: "Suzanne Jak and Terrence D. Jorgensen"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
-bibliography: [book.bib, packages.bib]
+bibliography: [SEM-Compendium.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: rstudio/bookdown-demo

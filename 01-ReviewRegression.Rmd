@@ -16,11 +16,11 @@ knitr::opts_chunk$set(echo = TRUE)
 Chap.nr <- 1 # chapter number to insert below
 ```
 
-
+# Regression as Mean- and Covariance-Structure Analysis
 
 This chapter prepares the reader to learn about structural equation modeling (SEM) by reviewing the fundamentals of ordinary least-squares (OLS) regression. Different types of data are discussed, and some review of matrix algebra will be incorporated into the regression review.
 
-# Installing `lavaan`
+## Installing `lavaan`
 
 The SEM software that we will use is an open-source R package called [\textcolor{blue}{lavaan}](https://lavaan.ugent.be/) [\textcolor{blue}{(Rosseel, 2012)}](http://dx.doi.org/10.18637/jss.v048.i02).  To install the `lavaan` package you can type the following command in the R console:
 
@@ -43,7 +43,7 @@ install.packages("lavaan", repos = "https://www.da.ugent.be", type = "source")
 
 
 
-# Types of Data Used in SEM
+## Types of Data Used in SEM
 
 SEM can be seen as a generalization of the general(ized) linear model (GLM) for multivariate data. But rather than merely allowing multiple predictors and multiple outcomes, any variable can operate **both** as a predictor and an outcome in the same model.  This allows us to model complex relationships among variables, including chains of causation (i.e., mediation). 
 
@@ -52,7 +52,7 @@ Estimation of a GLM involves minimizing discrepancies (differences) between obse
 Summary statistics can be calculated from observed raw data, so raw data can be provided directly to SEM software for analysis.  But if data are complete and come from a multivariate normal distribution, summary statistics can also be passed directly to the SEM software, which has advantages.  Unlike raw data, summary statistics do not compromise the privacy of the research participants, so summary statistics can be reported in published empirical research. That allows readers (and students like you!) to have access to the same summary statistics to replicate the results or to fit a different model (e.g., that represents a competing theory). Thus, this chapter will show how to import both raw and summary data, as well as how to calculate summary statistics from raw data so that they can be reported along with results.
 
 
-## Raw Data
+### Raw Data
 
 Typically, data are already stored in an external file with a predefined format, such as SPSS (\*.sav) or Excel (\*.xlsx), and there are some pre-specified functions in R that can read in data from such type of formats, although they require the installation of specific packages.  As an alternative, you can store the data in a plain text (with .txt or .csv extensions), where each line represents the observed responses of one individual. Spaces, commas, semicolons or tabs can be used to separate the individual responses. Some programs (like SPSS) can also export data to these types of file formats. 
 
@@ -79,7 +79,7 @@ head(dat)
 `NFC` = need for cognition, `POS` = positive thoughts, and `ATT` = attitude
 
 
-## Summary Statistics from Raw Data
+### Summary Statistics from Raw Data
 
 To report summary statistics of your modeled variables, they can be calculated using the `colMeans()` function for means, the `cov()` function for a covariance matrix, and the `nrow()` function for the sample size
 
@@ -107,7 +107,7 @@ printS # not symmetric, correlations in upper triangle
 ```
 
 
-### Summary Statistics for Multiple Groups
+#### Summary Statistics for Multiple Groups
 
 In SEM, it is common to estimate model parameters simultaneously in multiple groups (i.e., multigroup SEM or MG-SEM).  In our example data, the `MOOD` variable is a 2-group variable, so we could create a `factor` from the numeric codes:
 ```{r factor}
@@ -133,9 +133,9 @@ gN
 ```
 
 
-## Importing Summary Data
+### Importing Summary Data
 
-### Full Covariance Matrix
+#### Full Covariance Matrix
 
 If we are importing summary data (e.g., from an article that reported them), we can type our data directly to our R script.  Suppose the values above from `S` were rounded to 3 decimal places:
 ```{r type S values}
@@ -172,7 +172,7 @@ colnames(newS) <- obsnames
 ```
 
 
-#### Rescaling a Correlation Matrix
+##### Rescaling a Correlation Matrix
 
 If the imported matrix is instead a full correlation matrix (i.e., assuming all variables have $SD=1$), then it can be transformed back into a covariance matrix using the $SD$s, so variables will be in their original units.  This is important because an SEM fitted to a correlation matrix will have biased $SE$s and inflated Type I error rates unless complex constraints are imposed.
 
@@ -212,7 +212,7 @@ Note that rescaling the correlation matrix to be a covariance matrix required pr
 To review basic matrix algebra, consult a linear algebra text or an appendix of some SEM textbooks (e.g., Bollen, 1989; Schumacker & Lomax, 2016).
 
 
-### Upper/Lower Triangle of a Covariance Matrix
+#### Upper/Lower Triangle of a Covariance Matrix
 
 As a covariance matrix is a symmetric matrix, we do not need to provide the complete matrix. Instead, we can import only the nonredundant information from only the lower (or upper) triangle of the covariance matrix, then use the `lavaan` function `getCov()` to create the full matrix.  By default, `getCov()` expects the values from the lower triangle, and it will read values row-by-row (i.e., left-to-right, top-to-bottom), including the diagonal elements (`diagonal = TRUE` is the default argument).
 
@@ -254,7 +254,7 @@ getCov(x = upperS, names = obsnames, lower = FALSE)
 ```
 
 
-#### Upper/Lower Triangle of a Correlation Matrix
+##### Upper/Lower Triangle of a Correlation Matrix
 
 Quite frequently, in published papers the covariance matrix is not provided, but instead a correlation matrix and $SD$s are given separately. The `getCov()` argument `sds=` can be used  to automatically rescale the correlation matrix. Because the diagonal of a correlation matrix is always 1, it is not necessary to include the diagonal values.
 
@@ -285,10 +285,10 @@ isSymmetric(S)
 
 
 
-# Regression Review
+## Regression Review
 
 
-## Linear Regression Models
+### Linear Regression Models
 
 An outcome $y$ is a linear combination (weighted sum) of predictors
 
@@ -304,7 +304,7 @@ y_i &= \textcolor{blue}{\beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip}} &+& 
 
 
 
-## Matrix Notation
+### Matrix Notation
 
 For subjects $i = 1, \dots, N$ in rows and predictors $j = 1, \dots, p$ in columns:
 
@@ -344,7 +344,7 @@ The **generalized linear model** (GLM) extends basic linear models by incorporat
 - distributional assumptions about the outcome('s errors)
 
 
-## Interpreting and Estimating Coefficients
+### Interpreting and Estimating Coefficients
 
 Regression models provide predictions of the outcome for any level(s) of the predictor(s)
 
@@ -361,7 +361,7 @@ $$\beta = (\mathbf{X}^{'} \mathbf{X})^{-1} \mathbf{X}^{'} \mathbf{y}$$
 - $R$ = Cor($y, \hat{y}$) 
 
 
-## Syntax Examples with Raw Data
+### Syntax Examples with Raw Data
 
 Using matrix algebra to estimate the coefficients:
 
@@ -380,7 +380,7 @@ coef(mod)
 ```
 
 
-## Categorical Predictors
+### Categorical Predictors
 
 Groups $g = 1, \ldots, G$ can be represented using numeric codes
 
@@ -397,7 +397,7 @@ table(dat$MOOD)
 ```
 
 
-### Regression with a Baseline Group
+#### Regression with a Baseline Group
 
 When we are interested in comparing scores on a variable across groups, we are typically interested in the differences between the group means.  Recall that an intercept-only model estimates a single mean for everyone
 ```{r intercept only}
@@ -422,7 +422,7 @@ diff(aggregate(POS ~ mood.f, dat, mean)$POS)
 ```
 
 
-### Regression with Group-Specific Intercepts
+#### Regression with Group-Specific Intercepts
 
 Rather than choosing a baseline group, we can omit the intercept from the model, in which case `lm()` will include all $G$ dummy codes (not $G-1$)
 
@@ -438,7 +438,7 @@ aggregate(POS ~ mood.f, data = dat, FUN = mean)
 Later in this course, you will learn about *multigroup SEM*, which is when the same SEM is fitted separately (but simultaneously) to 2 or more groups.  Multigroup SEM is analogously advantageous, but (unlike in the GLM) variances can also differ across groups, so we do not need to assume homoskedasticity when using multigroup SEM.
 
 
-### Baseline Comparison vs. Group-Specific Intercepts
+#### Baseline Comparison vs. Group-Specific Intercepts
 
 To test the $H_0$ that the group means are equivalent, we can compare the model that represents $H_0$ (i.e., the intercept-only model, which estimates a single mean for all groups) to the model that represents the alternative hypothesis ($H_A$) that group means may differ.  
 
@@ -452,7 +452,7 @@ anova(mod0, mod2)
 That is, both `mod1` and `mod2` say that we need 2 parameters to make good predictors (i.e., separate means for 2 groups), whereas the intercept-only model says that estimating 1 parameter provides similar predictions.
 
 
-### $t$ vs. $F$ Tests
+#### $t$ vs. $F$ Tests
 
 The group mean difference can also be tested if it is an estimated parameter, as it is in the baseline-group approach
 ```{r print t tests, echo=FALSE}
@@ -467,7 +467,7 @@ But group-specific intercepts (and slopes) can also be advantageous
 
 
 
-## Constant vs. Varying Slopes
+### Constant vs. Varying Slopes
 
 Suppose we are investigating the possibility that this grouping variable *moderates* the effect of another (focal) predictor: *Need for cognition* (NFC).  
 
@@ -499,9 +499,9 @@ summary(slope2)
 
 
 
-# Summary Statistics
+## Summary Statistics
 
-## Reimport Data
+### Reimport Data
 
 The next section is easier if all the variables in the `data.frame` are `numeric`, so let's just use the given effects-coded `MOOD`
 
@@ -512,7 +512,7 @@ dat <- foreign::read.spss("MODMED.sav",
 
 
 
-## Raw Data vs. Summary Statistics
+### Raw Data vs. Summary Statistics
 
 Regression models include both mean-structure parameters (intercepts) and covariance-structure parameters (slopes, residual variance).
 
@@ -531,7 +531,7 @@ Much of SEM involves the analysis of mean and covariance structures (MACS).
 Rather than raw data in $\mathbf{X}$ and $\mathbf{y}$, we can obtain the same estimates using summary statistics alone
 
 
-## What Is Covariance?
+### What Is Covariance?
 
 Variance ($\sigma^2_y$) quantifies how individual scores vary
 
@@ -561,7 +561,7 @@ $$\Sigma = (\mathbf{Y} - \bar{\mathbf{Y}})^{'} (\mathbf{Y} - \bar{\mathbf{Y}})$$
 Variances are on the diagonal of $\Sigma$, and each off-diagonal cell contains the covariance between the row-variable and the column-variable.
 
 
-## Interpreting Covariance
+### Interpreting Covariance
 
 We can scale the covariance to provide familiar interpretations.
 
@@ -595,7 +595,7 @@ cov(dat)
 ```
 
 
-## OLS with Summary Statistics: $\beta = (\mathbf{X}^{'} \mathbf{X})^{-1} \mathbf{X}^{'} \mathbf{y}$
+### OLS with Summary Statistics: $\beta = (\mathbf{X}^{'} \mathbf{X})^{-1} \mathbf{X}^{'} \mathbf{y}$
 
 In simple regression (1 predictor), the slope is simply the covariance scaled by  the predictor's variance: $\beta_1 = \frac{\text{Cov}(x,y)}{\text{Var}(x)}$
 
@@ -611,7 +611,7 @@ coef(lm(ATT ~ POS, data = dat))[["POS"]]
 ```
 
 
-## Intercepts and Means
+### Intercepts and Means
 
 With uncentered data, $X$ can include a constant (all 1s) in the first column, which effectively "partials out" the mean. 
 
@@ -631,7 +631,7 @@ OLS simplifies to the arithmetic mean formula: $\bar{y} = \frac{\Sigma y}{N}$
 - $\mathbf{X}^{'} \mathbf{y} = \sum y$
 
 
-## Intercepts and Means
+### Intercepts and Means
 
 ```{r mean from OLS}
 ## using matrix algebra
@@ -644,7 +644,7 @@ mean(y)
 ```
 
 
-## What Are Mean and Covariance *Structures*?
+### What Are Mean and Covariance *Structures*?
 
 Regression models already illustrate how means are structured
 
@@ -667,7 +667,7 @@ The decomposition of covariances will be explained after introducing path analys
 
 
 
-# References
+## References
 
 Bollen, K. A. (1989). *Structural equations with latent variables*. Wiley. <http://dx.doi.org/10.1002/9781118619179>
 
