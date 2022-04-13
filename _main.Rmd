@@ -1,3 +1,1619 @@
+---
+title: "Compendium Structural Equation Modeling in Educational Research"
+author: "Suzanne Jak and Terrence D. Jorgensen"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [SEM-Compendium.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: LJGroot/SEM-Compendium
+delete_merged_file: yes
+new_session: yes
+---
+
+# Preface {-}
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tinytex'
+), 'packages.bib')
+```
+
+<!--chapter:end:index.Rmd-->
+
+# Regression as Mean- and Covariance-Structure Analysis
+
+This chapter prepares the reader to learn about structural equation modeling (SEM) by reviewing the fundamentals of ordinary least-squares (OLS) regression. Different types of data are discussed, and some review of matrix algebra will be incorporated into the regression review.
+
+## Installing `lavaan`
+
+The SEM software that we will use is an open-source R package called [\textcolor{blue}{lavaan}](https://lavaan.ugent.be/) [\textcolor{blue}{(Rosseel, 2012)}](http://dx.doi.org/10.18637/jss.v048.i02).  To install the `lavaan` package you can type the following command in the R console:
+
+```{r install, eval=FALSE}
+install.packages("lavaan", dependencies = TRUE)
+```
+
+Depending on your [\textcolor{blue}{R}](https://www.r-project.org/)([\textcolor{blue}{Studio}](https://www.rstudio.com/)) settings, this might open a window where you have to select a [\textcolor{blue}{CRAN}](https://cran.r-project.org/) mirror (select "[your country], [closest city]") prior to installing the package, including all additional packages that it depends on.  You only need to install the package once (on a specific computer), but you must also "load" the library to access its functionality (similar to first installing an app, then opening the app to use it):
+
+```{r load, message=FALSE}
+library(lavaan)
+```
+
+Every time you start R you need to use this command to activate the lavaan package into the current R workspace. Therefore, it is advisable to start every script with this command.
+
+Sometimes, it will be necessary to install the *development version* of `lavaan` before the next version is made available on CRAN.  For example, if the developer has fixed a bug or introduced a new feature, the development version can be installed using this syntax:
+```{r install dev, eval=FALSE}
+install.packages("lavaan", repos = "https://www.da.ugent.be", type = "source")
+```
+
+
+
+## Types of Data Used in SEM
+
+SEM can be seen as a generalization of the general(ized) linear model (GLM) for multivariate data. But rather than merely allowing multiple predictors and multiple outcomes, any variable can operate **both** as a predictor and an outcome in the same model.  This allows us to model complex relationships among variables, including chains of causation (i.e., mediation). 
+
+Estimation of a GLM involves minimizing discrepancies (differences) between observed ($y$) and expected ($\hat{y}$) *casewise* values (i.e., an individual subject's score on an outcome variable $y$).  In contrast, estimation of a SEM involves minimizing discrepancies between observed and expected *summary statistics* (i.e., the modeled variables' means and covariance matrix).  This is why another (older) name for an SEM is *covariance structure analysis* (when only trying to explain why variables are related to each other), or mean and covariance structure (MACS) analysis when means are also modeled.
+
+Summary statistics can be calculated from observed raw data, so raw data can be provided directly to SEM software for analysis.  But if data are complete and come from a multivariate normal distribution, summary statistics can also be passed directly to the SEM software, which has advantages.  Unlike raw data, summary statistics do not compromise the privacy of the research participants, so summary statistics can be reported in published empirical research. That allows readers (and students like you!) to have access to the same summary statistics to replicate the results or to fit a different model (e.g., that represents a competing theory). Thus, this chapter will show how to import both raw and summary data, as well as how to calculate summary statistics from raw data so that they can be reported along with results.
+
+
+### Raw Data
+
+Typically, data are already stored in an external file with a predefined format, such as SPSS (\*.sav) or Excel (\*.xlsx), and there are some pre-specified functions in R that can read in data from such type of formats, although they require the installation of specific packages.  As an alternative, you can store the data in a plain text (with .txt or .csv extensions), where each line represents the observed responses of one individual. Spaces, commas, semicolons or tabs can be used to separate the individual responses. Some programs (like SPSS) can also export data to these types of file formats. 
+
+```{r eval=FALSE}
+read.table("data.txt", header = TRUE)
+read.spss("data.sav", to.data.frame = TRUE)	# requires the package foreign
+read.xls("data.xls")	# requires the package gdata
+as.data.frame(read_excel("data.xlsx"))	# requires the package readxl
+```
+
+
+This chapter uses data from a tutorial published on the [\textcolor{blue}{Social Change Lab's web site}](http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf).
+
+```{r import data-01, message=FALSE}
+dat <- foreign::read.spss("MODMED.sav", to.data.frame = TRUE)[c(2, 3, 5, 7)]
+head(dat)
+```
+
+`MOOD` indicates experimental conditions
+
+- $+1$ = positive mood induction
+- $-1$ = neutral mood (control condition)
+
+`NFC` = need for cognition, `POS` = positive thoughts, and `ATT` = attitude
+
+
+### Summary Statistics from Raw Data
+
+To report summary statistics of your modeled variables, they can be calculated using the `colMeans()` function for means, the `cov()` function for a covariance matrix, and the `nrow()` function for the sample size
+
+- *Note*: Counting the number of rows **assumes you have complete data**
+
+```{r summaries}
+(M <- colMeans(dat)) # mean vector
+(S <- cov(dat)) # covariance matrix
+(N <- nrow(dat)) # complete-data sample size
+```
+
+Covariances are explained in more detail in a later section, but it is sufficient here to understand that the covariance between variables $x$ and $y$ (i.e., $\sigma_{xy}$) is their unstandardized correlation coefficient ($r_{xy}$).  That is, a correlation is a covariance between $z$ scores.  Because correlations are easier to interpret than covariances, it is common to report the means, *SD*s, and correlations.  Using the *SD*s, readers can rescale correlations to covariances in the orignal units of measurement (i.e., $\sigma_{xy} = \sigma_x \times \sigma_y \times r_{xy}$).  The `cov2cor()` function can standardize a covariance matrix, or you can use the `cor()` function directly.
+```{r SD+cor}
+(SD <- sapply(dat, sd))
+sqrt(diag(S)) # SDs == square-roots of variances 
+cov2cor(S) # standardize the covariance matrix, or use cor()
+(R <- cor(dat))
+```
+
+Because covariance and correlation matrices are symmetric (and diagonal elements of a correlation matrix are 1 by definition), both could be reported in a single table.  For example, the upper triangle could be correlations, and the lower triangle (including the diagonal) could be (co)variances.
+```{r cov+cor}
+printS <- S
+printS[upper.tri(R)] <- R[upper.tri(R)]
+printS # not symmetric, correlations in upper triangle
+```
+
+
+#### Summary Statistics for Multiple Groups
+
+In SEM, it is common to estimate model parameters simultaneously in multiple groups (i.e., multigroup SEM or MG-SEM).  In our example data, the `MOOD` variable is a 2-group variable, so we could create a `factor` from the numeric codes:
+```{r factor}
+dat$mood.f <- factor(dat$MOOD, levels = c(-1, 1),
+                     labels = c("neutral","positive"))
+```
+
+Then we can calculate the summary statistics separately within each group.
+```{r group summaries}
+modVars <- c("ATT","NFC","POS")   # modeled variables
+gM <- sapply(c("neutral","positive"), simplify = FALSE, 
+             FUN = function(g) colMeans(dat[dat$mood.f == g, modVars]) )
+gS <- sapply(c("neutral","positive"), simplify = FALSE,
+             FUN = function(g) cov(dat[dat$mood.f == g, modVars]) )
+gN <- table(dat$mood.f)
+```
+
+To fit a MG-SEM in `lavaan`, the summary statistics must be a list with one (mean vector or covariance matrix) per group, as well as a vector of group sample sizes.
+```{r print summaries}
+gM
+gS
+gN
+```
+
+
+### Importing Summary Data
+
+#### Full Covariance Matrix
+
+If we are importing summary data (e.g., from an article that reported them), we can type our data directly to our R script.  Suppose the values above from `S` were rounded to 3 decimal places:
+```{r type S values}
+covVals <- c( 1.010, -0.032,  4.355,   6.841, 
+             -0.032,  1.973,  0.795,   2.599, 
+              4.355,  0.795, 69.263,  87.914,
+              6.841,  2.599, 87.914, 282.060)
+covVals
+```
+
+If these values were saved as plain text, we could also read the data from a file using the `scan()` function, which returns a vector that contains the stored values in the file "values.txt". 
+```{r read S values, eval=FALSE}
+covVals <- scan("values.txt")
+```
+
+Either way, we can place these values from the full covariance matrix into a matrix using the `matrix()` function, specifying how many rows and columns there are:
+
+```{r store S values}
+(newS <- matrix(data = covVals, nrow = 4, ncol = 4))
+```
+
+We can give names to the variables in the covariance matrix by using the `dimnames=` argument of the `matrix()` function, or by using the `dimnames()` function after creating the matrix.  Let's save the variable names in an object `obsnames`, then use them to assign names. 
+
+```{r dimnames}
+obsnames <- c("MOOD", "NFC", "POS", "ATT")
+## providing names when creating matrix
+newS <- matrix(covVals, nrow = 4, ncol = 4,
+               dimnames = list(obsnames, obsnames))
+## or assign afterward, all at once
+dimnames(newS) <- list(obsnames, obsnames)
+## or one dimension at a time (useful for asymmetric matrix)
+rownames(newS) <- obsnames
+colnames(newS) <- obsnames
+```
+
+
+##### Rescaling a Correlation Matrix
+
+If the imported matrix is instead a full correlation matrix (i.e., assuming all variables have $SD=1$), then it can be transformed back into a covariance matrix using the $SD$s, so variables will be in their original units.  This is important because an SEM fitted to a correlation matrix will have biased $SE$s and inflated Type I error rates unless complex constraints are imposed.
+
+```{r type R values}
+## store values from correlation matrix
+corVals <- c(  1,    -0.023, 0.521, 0.405,
+              -0.023, 1,     0.068, 0.110,
+               0.521, 0.068, 1,     0.629, 
+               0.405, 0.110, 0.629, 1)
+newR <- matrix(data = corVals, nrow = 4, ncol = 4,
+               dimnames = list(obsnames, obsnames))
+newR
+## store SDs as a diagonal matrix
+(SDs <- diag(SD))
+## transform correlations to covariances
+scaled.S <- SDs %*% newR %*% SDs
+round(scaled.S, 3)
+## matches covariance matrix (within rounding error)
+newS
+```
+
+
+Note that rescaling the correlation matrix to be a covariance matrix required pre- and postmultipication of the (diagnal matrix of) $SD$s.  The operator for matrix multiplication is `%*%` (the normal scalar multiplication operator `*` would simply multiply each cell of one matrix with the corresponding cell of another matrix).  The table below gives an overview of commonly used functions in matrix algebra in R. 
+
+
+| **Symbol** | **Function**                       | **Example in R**  |
+|------------|------------------------------------|-------------------|
+|   $A+B$    | Addition                           |     `A + B`       |
+|   $A-B$    | Subtraction                        |     `A - B`       |
+|  (none)    | Elementwise Multiplication (in R)  |     `A * B`       |
+|  (none)    | Elementwise Division (in R)        |     `A / B `      |
+|  $AB$      | Matrix Multiplication              |     `A %*% B`     |
+|  $A^{-1}$  | Inverse (enables "division")       |     `solve(A)`    |
+|  $A^{'}$   | Transpose (rows become columns)    |     `t(A)`        |
+|  $|A|$     | Determinant (generalized variance) |     `det(A)`      |
+
+To review basic matrix algebra, consult a linear algebra text or an appendix of some SEM textbooks (e.g., Bollen, 1989; Schumacker & Lomax, 2016).
+
+
+#### Upper/Lower Triangle of a Covariance Matrix
+
+As a covariance matrix is a symmetric matrix, we do not need to provide the complete matrix. Instead, we can import only the nonredundant information from only the lower (or upper) triangle of the covariance matrix, then use the `lavaan` function `getCov()` to create the full matrix.  By default, `getCov()` expects the values from the lower triangle, and it will read values row-by-row (i.e., left-to-right, top-to-bottom), including the diagonal elements (`diagonal = TRUE` is the default argument).
+
+$$
+\begin{bmatrix} 
+ 1.010 & & & \\ 
+-0.032 & 1.973 & & \\
+ 4.355 & 0.795 & 69.263 & \\
+ 6.841 & 2.599 & 87.914 & 282.060
+\end{bmatrix}
+$$
+
+This is equivalent to reading the upper triangle column-by-column (i.e., top-to-bottom, left-to-right).  One can also add a vector with the `names=` of the observed variables. It returns the complete covariance matrix, including row and column names. The following code can be used to create a full matrix that is equal to `S` and `newS` above, using only the values from the lower triangle of the matrix.
+
+```{r lower S}
+lowerS <- c( 1.010,
+            -0.032, 1.973, 
+             4.355, 0.795, 69.263, 
+             6.841, 2.599, 87.914, 282.060)
+getCov(x = lowerS, names = obsnames)
+``` 
+
+Sometimes you will find the upper triangle reported in a published paper instead of the lower triangle. Because `getCov()` **only reads values row-by-row** (i.e., left-to-right, top-to-bottom), reading an upper-triangle requires changing the argument to `lower = FALSE`. 
+
+$$
+\begin{bmatrix} 
+1.010 & -0.032 &  4.355 &   6.841  \\
+      &  1.973 &  0.795 &   2.599  \\
+      &        & 69.263 &  87.914  \\
+      &        &        & 282.060  
+\end{bmatrix}
+$$
+```{r upper S}
+upperS <- c(1.010, -0.032, 4.355,  6.841, 
+                    1.973, 0.795,  2.599, 
+                          69.263, 87.914,
+                                 282.060)
+getCov(x = upperS, names = obsnames, lower = FALSE)
+```
+
+
+##### Upper/Lower Triangle of a Correlation Matrix
+
+Quite frequently, in published papers the covariance matrix is not provided, but instead a correlation matrix and $SD$s are given separately. The `getCov()` argument `sds=` can be used  to automatically rescale the correlation matrix. Because the diagonal of a correlation matrix is always 1, it is not necessary to include the diagonal values.
+
+$$
+\begin{bmatrix} 
+ 1 & & & \\ 
+-0.023 & 1 & & \\
+ 0.521 & 0.068 & 1 & \\
+ 0.405 & 0.110 & 0.629 & 1
+\end{bmatrix}
+$$
+
+In this case, tell `lavaan` that the diagonal entries are omitted using the `diagonal=FALSE` argument. The following syntax creates the complete covariance matrix that was used in the previous examples from the correlations and $SD$s.
+
+```{r lower R}
+getCov(x = c(-0.023, 0.521, 0.068, 0.405, 0.110, 0.629),
+       diagonal = FALSE, sds = SD, names = obsnames)
+```
+
+If you are wondering whether the correlations appear in the correct order in the matrix, you can first leave the $SD$s out and check that the cells of the correlation matrix are in the correct order.  If everything looks correct, then you can add the $SD$s.  Covariance/correlation matrices are also symmetric, so it is also important to check that the lower triangle is a reflection of the upper triangle (i.e., Row-$x$ Column-$y$ of the matrix should contain the same value as Row-$y$ Column-$x$).  The R function `isSymmetric()` can perform this check for you:
+```{r isSymmetric}
+isSymmetric(S)
+```
+
+
+
+
+
+
+
+## Regression Review
+
+
+### Linear Regression Models
+
+An outcome $y$ is a linear combination (weighted sum) of predictors
+
+- Like a recipe for the outcome: How much of $x_1$ and $x_2$ do you need to recreate $y$?
+
+\begin{align*}
+y_i &= \textcolor{blue}{\beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip}} &+& \textcolor{darkred}{\varepsilon_i} & \\
+    &= \textcolor{blue}{\beta_0 + \sum_{j=1}^p \beta_j x_{ij}} &+& \textcolor{darkred}{\varepsilon_i} &\sim \textcolor{darkred}{\mathcal{N}(0, \sigma)}
+\end{align*}
+
+- The \textcolor{blue}{deterministic component} of $y$ can be predicted or explained by $X$
+- The \textcolor{darkred}{stochastic component} of $y$ includes all other unmodeled effects (omitted variables) and sources of error
+
+
+
+### Matrix Notation
+
+For subjects $i = 1, \dots, N$ in rows and predictors $j = 1, \dots, p$ in columns:
+
+\begin{equation*}
+  \begin{bmatrix}
+    y_1 \\
+    y_2 \\
+    \vdots \\
+    y_N
+  \end{bmatrix} =
+  \begin{bmatrix}
+      1 & x_{1,1} & x_{1,2} & \dots  & x_{1,p} \\
+      1 & x_{2,1} & x_{2,2} & \dots  & x_{2,p} \\
+ \vdots & \vdots  & \vdots  & \ddots & \vdots  \\
+      1 & x_{N,1} & x_{N,2} & \dots  & x_{N,p}
+  \end{bmatrix}
+  \begin{bmatrix}
+    \beta_0 \\
+    \beta_1 \\
+    \beta_2 \\
+    \vdots \\
+    \beta_p
+  \end{bmatrix} +
+  \begin{bmatrix}
+    \varepsilon_1 \\
+    \varepsilon_2 \\
+    \vdots \\
+    \varepsilon_N
+  \end{bmatrix} 
+\end{equation*}
+
+- Shorthand:  $\mathbf{y} = \mathbf{X} \mathbf{\beta} + \mathbf{\varepsilon}$
+
+The **generalized linear model** (GLM) extends basic linear models by incorporating different 
+
+- functions that link the outcome to its linear predictor
+- distributional assumptions about the outcome('s errors)
+
+
+### Interpreting and Estimating Coefficients
+
+Regression models provide predictions of the outcome for any level(s) of the predictor(s)
+
+- **Only the intercept** ($\beta_0$) is interpreted as a mean:
+    - The **expected value** ($\hat{y}$) when each predictor $x=0$
+- Each slope ($\beta_j$) is interpreted as the **change** in $\hat{y}$ as $x_j$ increases 
+    - i.e., How does $y$ **covary** with $x_j$, given other $x$s?
+
+Ordinary Least Squares (OLS) estimator of coefficients minimizes overall discrepancies between observations and predictions ($y - \hat{y}$):
+
+$$\beta = (\mathbf{X}^{'} \mathbf{X})^{-1} \mathbf{X}^{'} \mathbf{y}$$
+
+- Minimizing residual variance = maximizing $R^2$ 
+- $R$ = Cor($y, \hat{y}$) 
+
+
+### Syntax Examples with Raw Data
+
+Using matrix algebra to estimate the coefficients:
+
+```{r XtXiXtY}
+y <- dat$ATT
+X <- cbind(`(Intercept)` = 1, # first column is constant
+           as.matrix(dat[c("MOOD","NFC","POS")]))
+solve(t(X) %*% X) %*% t(X) %*% y # beta
+```
+
+
+Matches results from linear-modeling function:
+```{r multiple reg}
+mod <- lm(ATT ~ MOOD + NFC + POS, data = dat)
+coef(mod)
+```
+
+
+### Categorical Predictors
+
+Groups $g = 1, \ldots, G$ can be represented using numeric codes
+
+- dummy code for Group $g$ indicates whether someone belongs to Group $g$ (1) or not (0)
+- effects codes and orthogonal contrast codes are alternatives
+
+`MOOD` is an effects-coded to indicate experimental conditions
+
+- $+1$ = positive mood induction
+- $-1$ = neutral mood (control condition)
+
+```{r MOOD table}
+table(dat$MOOD)
+```
+
+
+#### Regression with a Baseline Group
+
+When we are interested in comparing scores on a variable across groups, we are typically interested in the differences between the group means.  Recall that an intercept-only model estimates a single mean for everyone
+```{r intercept only}
+mod0 <- lm(POS ~ 1, data = dat)
+```
+
+When we add a predictor to the model, the intercept becomes a conditional mean (i.e., the expected value when each predictor = 0), and the slope represents how the means differ between groups.
+
+By default, `lm()` will create dummy codes for all levels of a `factor` variable, except for the first group (the baseline for comparison)
+
+```{r MOOD factor}
+dat$mood.f <- factor(dat$MOOD, levels = c(-1, 1),
+                     labels = c("neutral","positive"))
+coef(mod1 <- lm(POS ~ mood.f, data = dat))
+```
+
+**Practice interpreting** the intercept and slope:
+
+```{r group means+diff}
+aggregate(POS ~ mood.f, data = dat, FUN = mean)
+diff(aggregate(POS ~ mood.f, dat, mean)$POS)
+```
+
+
+#### Regression with Group-Specific Intercepts
+
+Rather than choosing a baseline group, we can omit the intercept from the model, in which case `lm()` will include all $G$ dummy codes (not $G-1$)
+
+```{r no intercept}
+coef(mod2 <- lm(POS ~ -1 + mood.f, data = dat))
+```
+
+Essentially, this model gives each group its own intercept, which is also the group-mean when there are no other predictors in the model
+```{r group means}
+aggregate(POS ~ mood.f, data = dat, FUN = mean)
+```
+
+Later in this course, you will learn about *multigroup SEM*, which is when the same SEM is fitted separately (but simultaneously) to 2 or more groups.  Multigroup SEM is analogously advantageous, but (unlike in the GLM) variances can also differ across groups, so we do not need to assume homoskedasticity when using multigroup SEM.
+
+
+#### Baseline Comparison vs. Group-Specific Intercepts
+
+To test the $H_0$ that the group means are equivalent, we can compare the model that represents $H_0$ (i.e., the intercept-only model, which estimates a single mean for all groups) to the model that represents the alternative hypothesis ($H_A$) that group means may differ.  
+
+Because the models `mod1` (intercept + 1 slope) and `mod2` (2 slopes that are group-specific intercepts) are statistically equivalent (i.e., they make identical predictions), the ANOVA results are identical:
+
+```{r ANOVAs}
+anova(mod0, mod1)
+anova(mod0, mod2)
+```
+
+That is, both `mod1` and `mod2` say that we need 2 parameters to make good predictors (i.e., separate means for 2 groups), whereas the intercept-only model says that estimating 1 parameter provides similar predictions.
+
+
+#### $t$ vs. $F$ Tests
+
+The group mean difference can also be tested if it is an estimated parameter, as it is in the baseline-group approach
+```{r print t tests, echo=FALSE}
+summary(mod1)
+```
+
+- Same $p$ value, $t^2 = F$ from ANOVA
+
+But group-specific intercepts (and slopes) can also be advantageous
+
+- Each group's intercept and slopes are model parameters, rather than functions of parameters when using a baseline group
+
+
+
+### Constant vs. Varying Slopes
+
+Suppose we are investigating the possibility that this grouping variable *moderates* the effect of another (focal) predictor: *Need for cognition* (NFC).  
+
+- See [this primer](http://quantpsy.org/interact/interactions.htm) for a review.
+
+To represent the $H_0$ that NFC has a constant effect on positive thoughts across groups, we can add it as a predictor to the model without an intercept. In this case, rather than group-specific means, the dummy codes are *group-specific intercepts*.
+```{r slope w/o int-a}
+slope0 <- lm(POS ~ -1 + mood.f + NFC, data = dat)
+summary(slope0)
+```
+
+An interaction implies that slopes differ across groups
+
+- With a *baseline group*, the reference-group's slope is estimated, along with how much each of $G-1$ group's slopes differ from it
+
+```{r slope baseline}
+## or        POS ~ mood.f * NFC
+slope1 <- lm(POS ~ mood.f + NFC + mood.f:NFC, data = dat)
+summary(slope1)
+```
+
+- With *group-specific parameters*, each group's own intercept **and** slope are estimated, but multiplying each group's dummy code against the moderator
+
+```{r group slopes}
+## no "main effect" of NFC without a reference group
+slope2 <- lm(POS ~ -1 + mood.f + mood.f:NFC, data = dat)
+summary(slope2)
+```
+
+
+
+## Summary Statistics
+
+### Reimport Data
+
+The next section is easier if all the variables in the `data.frame` are `numeric`, so let's just use the given effects-coded `MOOD`
+
+```{r import again, message=FALSE}
+dat <- foreign::read.spss("MODMED.sav",
+                          to.data.frame = TRUE)[c(2, 3, 5, 7)]
+```
+
+
+
+### Raw Data vs. Summary Statistics
+
+Regression models include both mean-structure parameters (intercepts) and covariance-structure parameters (slopes, residual variance).
+
+Much of SEM involves the analysis of mean and covariance structures (MACS).
+
+- OLS regression minimizes discrepancies between observed and predicted **casewise observations** of $y$
+    - $y - \hat{y}$
+- LS and ML estimators in SEM minimize discrepancies between observed and predicted **summary statistics**
+    - mean vector: $\bar{y} - \widehat{\mu}$
+        - $\bar{y}$ = observed sample means
+        - $\widehat{\mu}$ = expected/predicted/model-implied population means
+    - covariance matrix: $\mathbf{S} - \widehat{\Sigma}$
+        - $\mathbf{S}$ = observed sample (co)variances
+        - $\widehat{\Sigma}$ = expected/predicted/model-implied population (co)variances
+
+Rather than raw data in $\mathbf{X}$ and $\mathbf{y}$, we can obtain the same estimates using summary statistics alone
+
+
+### What Is Covariance?
+
+Variance ($\sigma^2_y$) quantifies how individual scores vary
+
+- the mean of squared deviations from $\bar{y}$
+
+$$\text{Var}(y) = \frac{\sum_{i=1}^N (y_i - \bar{y})^2}{N-1} = \frac{\sum_{i=1}^N (y_i - \bar{y})(y_i - \bar{y})}{N-1}$$
+
+Covariance ($\sigma_{xy}$) quantifies how $x$ and $y$ are linearly related 
+
+- *co*vary = vary together
+
+$$\text{Cov}(x,y) = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
+
+Difficult to interpret its absolute value
+
+- bound by $\pm \sigma_x \sigma_y$
+- so, dividing $\sigma_{xy}$ by $\sigma_x \sigma_y$ limits the range to $\pm 1$
+
+For $>2$ variables in a data set $\mathbf{Y}$, we can simultaneously calculate all (co)variances using matrix algebra:
+
+1. Mean-center the data-matrix
+    - $\mathbf{Y} - \bar{\mathbf{Y}}$
+2. "Square" it by (pre)multiplying it by its transpose
+
+$$\Sigma = (\mathbf{Y} - \bar{\mathbf{Y}})^{'} (\mathbf{Y} - \bar{\mathbf{Y}})$$
+
+Variances are on the diagonal of $\Sigma$, and each off-diagonal cell contains the covariance between the row-variable and the column-variable.
+
+
+### Interpreting Covariance
+
+We can scale the covariance to provide familiar interpretations.
+
+**Slopes** are change in $y$ (or $x$) per unit $x$ (or $y$)
+
+- divide by variance: $\beta_{yx} = \frac{\sigma_{xy}}{\sigma^2_x} = \frac{\sigma_{xy}}{\sigma_x \sigma_x}$ (or $\frac{\sigma_{xy}}{\sigma^2_y} = \frac{\sigma_{xy}}{\sigma_y \sigma_y}$)
+
+**Correlations** are standardized covariances (bound by $\pm 1$)
+
+- divide by both $SD$s: $\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}$
+
+This is how slopes can be standardized ($\beta^*$), which is a correlation when there is only 1 predictor
+
+\begin{align*}
+\beta^*_{yx} &= \beta_{yx} \times \frac{\sigma_x}{\sigma_y} \\
+&= \frac{\sigma_{xy}}{\mathcolorbox{orange}{\sigma_x} \sigma_x} \times \frac{\mathcolorbox{orange}{\sigma_x}}{\sigma_y} \text{ (\colorbox{orange}{these} cancel out)} \\
+&= \frac{\sigma_{xy}}{\sigma_x \sigma_y} (= \rho_{xy})
+\end{align*}
+
+
+## Covariance Matrix
+
+With mean-centered predictors, $(\mathbf{X}^{'} \mathbf{X})^{-1}$ is their covariance matrix and $\mathbf{X}^{'} \mathbf{y}$ captures their covariances with the outcome
+
+```{r cov matrix}
+n <- nrow(dat) - 1L
+Xc <- scale(dat[c("MOOD","NFC","POS")],
+            center = TRUE, scale = FALSE)
+cbind(t(Xc) %*% Xc   ,   t(Xc) %*% y)  / n
+cov(dat)
+```
+
+
+### OLS with Summary Statistics: $\beta = (\mathbf{X}^{'} \mathbf{X})^{-1} \mathbf{X}^{'} \mathbf{y}$
+
+In simple regression (1 predictor), the slope is simply the covariance scaled by  the predictor's variance: $\beta_1 = \frac{\text{Cov}(x,y)}{\text{Var}(x)}$
+
+- $\mathbf{X}^{'} \mathbf{X} = \text{Var}(x)$, so $(\mathbf{X}^{'} \mathbf{X})^{-1} = \frac{1}{\text{Var}(x)}$
+    - matrix-multiplication by inverse $\approx$ division
+- $\mathbf{X}^{'} \mathbf{y} = \text{Cov}(x,y)$
+
+In multiple regression, the same formulas additionally account for covariances of $x$ and $y$ with covariates
+
+```{r slope from cov}
+cov(dat)["POS","ATT"] / var(dat$POS)
+coef(lm(ATT ~ POS, data = dat))[["POS"]]
+```
+
+
+### Intercepts and Means
+
+With uncentered data, $X$ can include a constant (all 1s) in the first column, which effectively "partials out" the mean. 
+
+With no other predictors (an intercept-only model):
+
+\begin{align*}
+y_i &= \beta_0 (1) + \varepsilon_i \\
+    &= \bar{y} + (y_i - \bar{y})
+\end{align*}
+
+- the intercept is the mean
+- residuals are mean-centered $y$ (same variance)
+
+OLS simplifies to the arithmetic mean formula: $\bar{y} = \frac{\Sigma y}{N}$
+
+- $(\mathbf{X}^{'} \mathbf{X})^{-1} = \frac{1}{N}$
+- $\mathbf{X}^{'} \mathbf{y} = \sum y$
+
+
+### Intercepts and Means
+
+```{r mean from OLS}
+## using matrix algebra
+ONE <- X[ , "(Intercept)"]
+solve(t(ONE) %*% ONE) %*% t(ONE) %*% y
+## fitted linear model with only an intercept
+coef(lm(y ~ 1))
+## calculate the mean
+mean(y)
+```
+
+
+### What Are Mean and Covariance *Structures*?
+
+Regression models already illustrate how means are structured
+
+- A mean ($\bar{y}$) is an expected value under a particular condition ($\beta_0$ when $X=0$) plus predictors' means times their slopes: $\bar{y} = \beta_0 + \sum \beta_j \bar{x}_j$
+
+Recall how often statistical procedures involve partitioning variance into components
+
+- Regression: explained ($R^2$) vs. unexplained (residual) variance
+- ANOVA: variance between vs. within groups
+- Multilevel modeling: Level-1 v. -2 variance
+    - and (un)explained at each level
+- Between vs. within multiple imputations of missing data 
+
+Covariance can also be partitioned into components
+
+- Variance is merely a variable covarying with itself
+- We can account for multiple reasons why 2 variables are related
+
+The decomposition of covariances will be explained after introducing path analysis.
+
+
+
+## References
+
+Bollen, K. A. (1989). *Structural equations with latent variables*. Wiley. <http://dx.doi.org/10.1002/9781118619179>
+
+Rosseel, Y. (2012). `lavaan`: An R package for structural equation modeling. *Journal of Statistical Software, 48*(2), 1--36. <http://dx.doi.org/10.18637/jss.v048.i02>
+
+Schumacker, R. E., & Lomax, R. G. (2016). *A beginner's guide to structural equation modeling* (4th ed.). Lawrence Erlbaum. 
+
+
+
+
+<!--chapter:end:01-ReviewRegression.Rmd-->
+
+# Using `lavaan` to Run Regression and ANOVA as a SEM
+
+## Prepare Data and Workspace
+
+### Import Example Data
+
+We will use data from a tutorial published on the [\textcolor{blue}{Social Change Lab's web site}](http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf).
+
+```{r import raw data, message=FALSE}
+dat <- foreign::read.spss("MODMED.sav", to.data.frame = TRUE)[c(2, 3, 5, 7)]
+## Save summary statistics
+M <- colMeans(dat)
+S <- cov(dat)
+N <- nrow(dat)
+```
+
+Recall from Chapter 1 that:
+
+- SEM can equivalently be fitted to summary statistics rather than raw data
+- It is possible to fit a "multigroup SEM" to obtain parameter estimates separately per group
+
+This chapter will show how to fit a multigroup SEM to raw data as well as to summary statistics.  For the latter, we require group-specific summary statistics, which Chapter 1 discussed how to obtain:
+
+```{r import summary data}
+## Create factor from effects-coded conditions
+dat$mood.f <- factor(dat$MOOD, levels = c(-1, 1),
+                     labels = c("neutral","positive"))
+## Save lists of group-specific summary statistics
+CC <- c("ATT","NFC","POS")   # when group = "mood.f"
+gM <- sapply(c("neutral","positive"), simplify = FALSE, 
+             FUN = function(g) colMeans(dat[dat$mood.f == g, CC]) )
+gS <- sapply(c("neutral","positive"), simplify = FALSE,
+             FUN = function(g) cov(dat[dat$mood.f == g, CC]) )
+gN <- table(dat$mood.f)
+```
+
+
+### Load `lavaan` into Workspace
+
+```{r load lavaan-02, message=FALSE}
+library(lavaan)
+```
+
+
+
+## Multiple Regression in SEM
+
+### `lavaan` Syntax
+
+The standard syntax for regression is a formula object.  To regress `ATT`itude on `MOOD` condition, `N`eed `F`or `C`ognition, and `POS`itive thoughts:
+
+```{r formula, eval=FALSE}
+ATT ~ MOOD + NFC + POS
+```
+
+SEM is a multivariate modeling framework
+
+- There can be many outcome variables, each with its own formula
+- Outcomes can also predict other outcomes
+- There can be unobserved (latent) variables
+
+So `lavaan` requires collecting these *simultaneous equations* in a `character` vector, even when there is only one outcome
+
+```{r character, eval=FALSE}
+' ATT ~ MOOD + NFC + POS '
+```
+
+
+
+#### OLS Regression
+
+Using the familiar `lm()` function to obtain OLS estimates of a regression model:
+
+```{r OLS}
+ols <- lm(ATT ~ MOOD + NFC + POS, data = dat)
+summary(ols)
+```
+
+
+#### MLE in `lavaan` with Raw or Summary Data
+
+When data are complete, maximum likelihood estimation (MLE) provides equivalent results using either raw or summary data.  There are multiple model-fitting functions in `lavaan`:
+
+- `lavaan()` is the main "engine", but expects that models are fully specified in complete detail
+- `sem()` is a "wrapper" that calls `lavaan()` with some sensible defaults that apply to most SEMs (e.g., automatically estimating residual variances, automatically estimating covariances among predictors)
+- `cfa()` is meant for fitting confirmatory factor analysis (CFA) models, discussed in a later chapter.  `cfa()` and `sem()` actually behave identically (i.e., they call `lavaan()` with the same defaults)
+- `growth()` is meant for very simple latent growth curve models, also discussed in a later chapter
+
+For now, we will use the `sem()` function similar to the way we use the `lm()` function, including how we obtain results from `summary()`.
+
+```{r SEM}
+## Raw Data
+mle <- sem('ATT ~ MOOD + NFC + POS', data = dat,
+           meanstructure = TRUE) # explicitly request intercept
+## Summary Data
+mle <- sem('ATT ~ MOOD + NFC + POS', sample.nobs = N,
+           sample.cov = S, sample.mean = M)
+```
+
+Now inspect the output.  Identify each parameter estimate, and compare it to the corresponding OLS estimate in the `lm()` results.
+```{r SEM summary}
+summary(mle, rsquare = TRUE, header = FALSE, nd = 4)
+sigma(ols)^2 # compare to residual variance from OLS
+```
+
+
+#### Compare/Contrast Estimates
+
+`lavaan`'s point estimates match OLS, except residual variance ($\sigma^2_\varepsilon$)
+
+- OLS estimates $\sigma^2_\varepsilon$ by dividing the residual $SS$ by the residual $df$
+- SEM estimators choose estimates that reproduce $\bar{y}$ and $S$ 
+
+If we calculate variance of the residuals ($y_i - \hat{y}$) using the "population formula" (dividing by $N$), we obtain `lavaan`'s result
+
+```{r compare res var}
+sigma(ols)^2 # residual variance from OLS
+sum(resid(ols)^2) / N # manually calculated using POPULATION formula
+coef(mle)[["ATT~~ATT"]] # matches lavaan
+```
+
+- *Note*: The double-tilde (`~~`) operator signifies a two-headed arrow, in contrast to the one-headed arrow (`~`) of a directed effect
+
+
+#### Compare/Contrast $SE$s
+
+The estimated $SE$s are smaller from `lavaan` because SEM is an asymptotic method
+
+- estimator assumes $N$ is sufficiently large that $S \approx \Sigma$
+- Wald $z$ statistics replace OLS's $t$ statistics
+- Model comparison results in a $\chi^2$ rather than $F$ statistic
+
+The asymptotic assumption yields more power, but inflated Type I error rates when sample size is low (relative to number of estimated parameters).
+
+Note that `lavaan` simply calculates `sample.cov=` and `sample.mean=` from `data=`, but they can be passed directly.
+
+Also note that raw `data=` are required to 
+
+- analyze incomplete data (using full information MLE rather than listwise deletion),
+- obtain robust statistics (e.g., to account for nonnormality of continuous outcomes), or 
+- model discrete (binary or ordinal) outcomes (which require a *threshold model*, explained later in a chapter about categorical data)
+
+
+
+## Caveats with SEM
+
+
+
+### Model Comparison with OLS
+
+To test the $H_0$ that the experimental manipulation (`MOOD`) explains $R^2=0$\% of variance in `POS`itive thoughts, compare models that represent the $H_0$ and $H_A$
+
+```{r OLS compare}
+ols0 <-  lm(POS ~ 1, data = dat)
+ols1 <-  lm(POS ~ MOOD, data = dat)
+anova(ols0, ols1)
+```
+
+This result matches the $F$ test at the bottom of `summary(ols1)`
+
+
+### Model Comparison with `lavaan`
+
+Omitting variables from an SEM means they are removed from $\bar{y}$ and $S$, returning a warning 
+
+```{r syntax compare, eval=FALSE}
+mle0 <- sem('POS ~ 1', data = dat)
+mle1 <- sem('POS ~ 1 + MOOD', data = dat)
+anova(mle0, mle1)
+```
+
+```{r printWarn, echo=FALSE}
+mle1 <- sem('POS ~ 1 + MOOD', data = dat)
+cat('... models are based on a different set of observed variables')
+```
+
+Instead, **keep predictor(s) in the model**, but fix the slope(s) to zero
+
+```{r SEM compare}
+mle0 <- sem('POS ~ 1 + 0*MOOD', data = dat)
+anova(mle0, mle1)
+```
+
+
+### Moderation Caveats
+
+When evaluating moderation using a product term, that product term is a new variable in $\bar{y}$ and $S$
+
+- e.g., we want to test `MOOD`'s effect, controlling for `NFC`
+- before comparing adjusted group means, we should evaluate the homogeneity-of-slopes assumption
+
+As in `formula` objects, `lavaan` syntax recognizes the colon (`:`) operator
+
+- but the asterisk (`*`) is reserved for assigning labels or values to parameters
+
+```{r modform, eval=FALSE}
+POS ~ 1 + MOOD + NFC + MOOD:NFC
+```
+
+`MOOD:NFC` is now an additional variable in $\bar{y}$ and $S$, so comparison to any model without that interaction term requires including the product term but fixing its effect to zero
+
+
+#### Estimate and Test an Interaction with OLS
+
+```{r OLS int}
+ols.hom <- lm(POS ~ MOOD + NFC, data = dat)
+ols.het <- lm(POS ~ MOOD + NFC + MOOD:NFC, data = dat)
+anova(ols.hom, ols.het)
+```
+
+Using ML estimation, model comparison would analogously yield an analysis of *deviance*
+
+- a.k.a. likelihood ratio test (LRT)
+
+
+#### Estimate and Test an Interaction with `lavaan`
+
+```{r SEM int}
+mle.hom <- sem('POS ~ 1 + MOOD + NFC + 0*MOOD:NFC', data = dat)
+mle.het <- sem('POS ~ 1 + MOOD + NFC +   MOOD:NFC', data = dat)
+anova(mle.hom, mle.het)
+```
+
+We can reject $H_0$ of homogeneous `NFC` slopes across `MOOD` groups
+
+
+#### Compare Adjusted Means
+
+Suppose we had failed to reject the $H_0$ of homogeneity of slopes, and we wanted a single comparison of (adjusted) group means, controlling for NFC. 
+`MOOD` is effect coded, so its slope (which is identical using OLS regression or SEM) is interpreted as
+
+- the difference between a group's mean and the grand mean
+- half the group mean difference
+
+The $t$ test (OLS) or Wald $z$ test (SEM) is sufficient to test the $H_0: \widehat{y}_\text{Treatment}|x = \widehat{y}_\text{Control}|x$
+
+```{r print M_adj}
+summary(mle.hom)
+```
+
+But the `MOOD` slope could also be fixed to zero (or dropped) to obtain a LRT from SEM (or $F$ test from ANOVA).
+
+
+### Summary of Caveats
+
+SEMs are only comparable when they are fitted to the same data
+
+- same observations (rows) **and** same variables (columns)
+- Instead of removing predictors, fix slopes to zero
+
+Interaction terms are additional variables, added to $\bar{y}$ and $S$
+
+- only compare models with same variables
+- products of variables can be saved in the `data.frame` or specified using the colon (`:`) operator (e.g., `x1:x2`), **not the asterisk** (`*`)
+- *standardized solution is incorrect* because it treats product terms as separate variables (e.g., if they were independently transformed to $z$ scores rather than *products* of $z$ scores)
+
+
+
+## Multigroup SEM
+
+### Group-Specific Intercepts in OLS
+
+Recall that omitting the intercepts allows each group to have a dummy code in the model
+
+```{r slope w/o int-b}
+slope0 <- lm(POS ~ -1 + mood.f + NFC, data = dat)
+summary(slope0)
+```
+
+This still assumes homoskedasticity of residuals, and comparing intercepts (or adjusted means) requires the [\textcolor{blue}{delta method}](https://en.wikipedia.org/wiki/Delta_method), which is a way to estimate the *SE* of a function of parameters (e.g., difference between 2 slopes) from the *SE*s of the original parameter estimates.
+
+```{r deltaMethod}
+car::deltaMethod(slope0, "b2 - b1", rhs = 0,
+                 parameterNames = paste0("b", 1:3))
+```
+
+
+### Group-Specific Intercepts in SEM?
+
+`lavaan` automatically uses the delta method when 
+
+- parameters are labeled in the model syntax (before `*` operator)
+- model syntax includes user-defined parameters (`:=` operator)
+
+However, SEM cannot fit group-specific intercepts because they are linearly dependent (recall (multi)collinearity among predictors from a previously read regression text). That is, the positive-mood dummy code is simply 1 minus the neutral-mood dummy code, so they are perfectly (negatively) correlated.  Therefore, $S$ would not be [\textcolor{blue}{positive definite}](https://en.wikipedia.org/wiki/Definite_matrix), which is a term that indicates some redundancy among variables.  This means that fitting a single-group SEM with group-specific intercepts is not possible:
+
+```{r NPD, eval = FALSE}
+dat$treat   <- dat$mood.f == "positive"
+dat$control <- 1 - dat$treat # linear dependency
+
+## label slopes "b1" for neutral group, "b2" for positive group
+mod1 <- ' POS ~ b1*mood.fneutral + b2*mood.fpositive + NFC
+  ## user-defined parameter
+    adj_mean_diff := b2 - b1
+'
+fit1 <- sem(mod1, data = dat) # lavaan ERROR: 
+## sample covariance matrix is not positive-definite
+```
+
+
+### Multiple Groups in SEM
+
+Rather than including `MOOD` as variable(s) in the model, we can fit the remainder of the model (`POS ~ 1 + NFC`) separately in each group
+
+- each group gets unique parameter estimates
+- constraints across groups can be added
+    - homoskedasticity of residuals
+    - homogeneous slopes
+
+`MOOD`'s effect is how group-specific intercepts differ
+
+- each group gets unique parameter labels, in a vector
+    - below: `POS ~ c(b1, b2)*1`
+- use the same label for homogeneous slopes
+    - below: `POS ~ c(b3, b3)*NFC`
+
+```{r MG-SEM}
+mod2 <- ' POS ~ c(b1, b2)*1 + c(b3, b3)*NFC
+  ## user-defined parameter
+    adj_M_diff := b2 - b1
+'
+fit2 <- sem(mod2, data = dat, group = "mood.f")
+summary(fit2)
+## compare to OLS, which assumes homoskedasticity
+summary(slope0)
+## delta method to test adj_M_diff
+car::deltaMethod(slope0, "b2 - b1", rhs = 0,
+                 parameterNames = paste0("b", 1:3))
+```
+
+Note that the point **and** *SE* estimates from this delta-method result (using OLS) can differ from the corresponding results using SEM.  Because SEM does not assume residual homoskedasticity, it may be more robust, but there is a trade-off because OLS is not biased by small samples the way that SEM is.
+
+
+
+#### Summary Statistics for Multigroup SEM
+
+`lavaan` calculates summary statistics from the raw `data=` separately in each group, but lists can be passed directly
+
+```{r MG-SEM summary stats}
+gN # vector of sample sizes
+gM # mean vectors
+gS # list of covariance matrices
+fit2 <- sem(mod2, sample.nobs = gN, # "group=" is implied by lists
+            sample.mean = gM, sample.cov = gS)
+```
+
+
+#### Advantages of Multigroup SEM
+
+- Less restrictive assumptions
+    - parameters differ by default
+- More interpretable parameters
+    - each group has their own intercept and slopes
+- Intuitive to specify $H_0$ as user-defined parameter
+    - e.g., the difference between the intercepts in the treatment group (`b2`) and control group (`b1`) is zero
+- Intuitive to represent assumptions about equality constraints by using the same labels across groups
+    - e.g., the same `NFC` effect (`b3`)
+    - testable by comparing models with(out) constraints 
+- Can easily test $H_0$ about parameters other than means
+    - Are variances or correlations equal across groups?
+
+Disadvantages:
+
+- asymptotic assumption (large $N$) applies to each group
+- single-group regression better in small samples
+
+
+
+
+
+<!--chapter:end:02-Intro2lavaan.Rmd-->
+
+# Path Analysis with Categorical Outcomes
+
+Structural equation modeling is a technique designed for continuous variables. In practice, variables are often not continuous but categorical, such as variables scored on *discrete* Likert scales (i.e., ordinal data) or correct/incorrect responses on test items (i.e., binary data).  If endogenous variables in a path model (or in any SEM) are categorical, the SEM-method to deal with the categorical variables is to assume that there exists a latent (unobserved) continuous variable that underlies the observed categorical variable. The underlying variable is called a *latent response variable* (LRV). Categorical SEM fits the model to the LRVs instead of to the categorical variables. The observed categorical scores can be linked to the LRV using so-called *thresholds* that represent the value on the LRV beyond which individuals who score higher would get an observed categorical score in the higher category. For example, for a test item that asks 'How many degrees of freedom does this path model have?', the students could give the incorrect (scored 0) or the correct (scored 1) answer. The LRV here represents the *ability* (LRV) to calculate $df$ for this path model on a continuous scale. Students whose ability is high enough would give the correct response; otherwise, the response would be incorrect.  The threshold would reflect the minimum required ability to indicate the correct response. Fitting path models to categorical data thus involves linking the LRV to the observed categorical variables.  
+
+In this chapter we first import example data, then we show how one can use probit and logit link functions in a generalized linear model (GLM). Next, we discuss the concept of the LRV for one ordinal variable, for multiple ordinal variables, and then we illustrate fitting a path model to ordinal variables.  
+
+
+## Prepare Data and Workspace
+
+```{r load lavaan-12, message=FALSE}
+library(lavaan)
+```
+
+
+### Import Example Data
+
+We will use example data provided on the [\textcolor{blue}{M\textit{plus} website}](http://www.statmodel.com) for a technical report (Muthén, 2011, p. 24).  The example data can be downloaded onto your computer from the report's [\textcolor{blue}{supplementary materials}](http://www.statmodel.com/examples/penn.shtml#extendSEM), or you can provide the URL directly to `read.table(file=)`, as shown below.  Note that the data are in summary format (i.e., a table with frequencies for each combination of categories for the 3 variables).  The `read.table()` output is therefore transformed into a standard `data.frame` with 1 row per subject.
+
+```{r import data-12}
+dd <- read.table(file = "http://www.statmodel.com/examples/shortform/4cat%20m.dat",
+                 col.names = c("intention", "intervention", "ciguse", "w"))
+dd$intention <- dd$intention - 1L # make the lowest category 0, not 1
+## transform frequency table to casewise data
+myData <- do.call(rbind, lapply(1:nrow(dd), function(RR) {
+    data.frame(rep(1, dd$w[RR]) %*% as.matrix(dd[RR, 1:3]))
+}))
+```
+
+- **Predictor**: `intervention` (1 = treatment, 0 = control)
+- **Mediator**: `intention` to smoke in the following 2 months (measured 6 months after intervention)
+    - 0 = No, 1 = I don't think so, 2 = Probably, 3 = Yes
+- **Outcome**: `ciguse` in previous month (1 = smoked, 0 = not), measured a 1-year follow-up
+
+
+### Summarize Data
+
+The resulting `data.frame` looks like this:
+```{r head data, echo=FALSE}
+myData[sample(nrow(myData), size = 5), ]
+```
+
+
+The marginal frequencies for each variable are:
+```{r marginal tables}
+## table for each variable
+lapply(myData, table)
+```
+
+Let's begin with a frequency table to estimate the proportion of subjects who smoke cigarettes (i.e., the estimated probability of smoking: $\widehat{\pi}$) in each combination of categories for the predictors.
+```{r prob table}
+tab3way <- table(myData)
+probs <- prop.table(tab3way, 1:2)[,,2]
+addmargins(probs, FUN = mean)
+```
+
+The treatment group (`intervention == 1`) smokes less, both on average and within each `intention` group.  Smoking also increases with intent to smoke (both on average and within treatment/control groups).  Treatment appears least effective among those who were certain they would continue smoking (row 4).
+
+
+## Regression Models for Binary Variables
+
+Suppose we used a linear model to predict the probability of smoking, treating intention as a continuous predictor to estimate only its linear effect.
+```{r linear prob}
+mod.lin <- lm(ciguse ~ intervention + intention, data = myData)
+coef(mod.lin)
+```
+
+The estimated intercept indicates the predicted probability of smoking when predictors are zero (i.e., those in the control group with no intent to smoke).  The estimated slopes reflect what we saw in the table: treatment reduces the probability of smoking (given the intent to smoke), and intent to smoke is associated with more smoking (given treatment).  
+
+- *Note*: No interaction is included here, but you can test for yourself that it was not significant.
+
+It would be problematic if the model predicted any probabilities outside the natural 0--1 range.  We do not observed that problem in this specific sample:
+```{r linear pred}
+summary(fitted(mod.lin))
+```
+
+This limitation of linear probability models is resolved with a *link function* in a GLM that allows for predicted values along the entire real-number line.  Two such transformations are in frequent use:
+
+- The *probit* (**prob**ability un**it**) transformation dates back to Bliss (1934). A probability can be transformed to a corresponding quantile in a cumulative distribution function (CDF), such as the standard-normal distribution.  In other words, any probability `p` between 0--1 has a corresponding *z* score, such as can be requested from `qnorm(p)`.  Likewise, any predicted value on the probit scale can be transformed back into a probability using `pnorm(probit)`.  The GLM takes the form below, where $\Phi()$ is the standard-normal CDF, $\Phi^{-1}()$ is its inverse, and $\mathbf{XB}$ is the linear predictor ($\widehat{y}$):
+
+$$\text{Probit}(y=1) = \Phi(\pi) = z = \mathbf{XB}$$
+
+$$\text{Pr}(y=1) = \pi = \Phi^{-1}(z)$$
+
+- The *logit* (**log**istic un**it**) transformation is often favored because its coefficients can be interpreted on the (natural-)log-odds scale.  Recall the *odds* of an outcome is a ratio of its probability ($\pi$) to its complement ($1-\pi$), so its range is 0 to $+\infty$ (i.e., it is merely bound to nonnegative numbers).  The natural (i.e., base-$e$) log of a nonnegative number can take any real number.  The formulas below show how probabilities, odds, and logits are related.
+
+$$\text{Logit}(\pi) = \ln(\text{odds}) = \ln \Bigg(\frac{\pi}{1 - \pi} \Bigg) = \mathbf{XB}$$
+
+$$\text{odds} = \frac{\pi}{1 - \pi} = e^{\text{Logit}(\pi)} \text{ , where } \; \; e = `r exp(1)`$$
+
+$$\pi = \frac{\text{odds}}{1 + \text{odds}} = \frac{e^\text{Logit}}{1 + e^\text{Logit}}$$
+
+There is a `logit()` function in the `psych` package, but it is simple enough to calculate the transformation (and its inverse):
+```{r logit example, eval=FALSE}
+logit <- log( p / (1-p) )           # odds <- p / (1-p)
+p <- exp(logit) / (1 + exp(logit))  # odds <- exp(logit)
+```
+
+
+Both probit and logistic regression models can be estimated using the `glm()` function, demonstrated below.
+
+
+### Fit a Logistic Regression Model
+
+In order to compare the results of fitting the logistic and the probit regression models, we first fit the GLM with the logit link. We continue to treat the ordinal mediator `intention` as continuous for now.
+
+```{r logit model}
+mod.logit <- glm(ciguse ~ intervention + intention, data = myData,
+                 family = binomial("logit"))
+coef(mod.logit)
+```
+
+
+### Fit a Probit Regression Model
+
+```{r probit model}
+mod.probit <- glm(ciguse ~ intervention + intention, data = myData,
+                  family = binomial("probit"))
+coef(mod.probit)
+```
+
+
+### Compare Models
+
+The GLMs make very similar predictions.  We can compare all 3 models' (linear, logit and probit) predictions to the observed probabilities in each group.
+```{r predicted probabilities, echo=FALSE}
+predProbs <- dd[dd$ciguse == 1, 1:2]
+predProbs$p.obs <- mapply(function(RR, CC) {
+  probs[rownames(probs) == RR, colnames(probs) == CC] }, 
+  RR = predProbs$intention, CC = predProbs$intervention)
+predProbs$p.linear <- predict(mod.lin, newdata = predProbs)
+predProbs$p.logit  <- predict(mod.logit, newdata = predProbs, type = "response")
+predProbs$p.probit <- predict(mod.probit, newdata = predProbs, type = "response")
+predProbs
+```
+
+Notice how similar the predicted probabilities are across models, and how close they are to the observed proportions in each group.
+
+Each of these models estimates the same number of parameters, but their functional form differs (identity, logit, and probit link functions, with different models for error).  So we can only compare the fit of each model to the data descriptively.  Here are two examples: (1) sum the squared differences between each model's predicted probabilities and the observed probabilities, summarized by Pearson's $\chi^2$ statistic (lower fits better):
+```{r compare pearson chisq, echo=FALSE}
+## calculate Pearson's chi-squared (lowest wins)
+sapply(c("p.linear","p.logit","p.probit"), function(expected) {
+ sum( (predProbs$p.obs - predProbs[[expected]])^2 / predProbs[[expected]] )
+})
+```
+
+Or compare their Tjur's pseudo-$R^2$ values (higher fits better):
+```{r compare tjur, echo=FALSE}
+sapply(list(linear = mod.lin, logit = mod.logit, probit = mod.probit),
+       function(mod) {
+       dat <- myData
+       dat$probs <- fitted(mod)
+       diff(aggregate(probs ~ ciguse, data = dat, FUN = mean)$probs)
+})
+```
+
+In both cases, the logit model performs slightly better than probit, both of which perform better than the linear model.  But the discrepancies are small.
+
+
+
+## Latent Response Variable
+
+In SEM, the probit model is often preferred because predicted values are *z* scores that can be transformed into probabilities.  This lends itself easily to a latent-response interpretation, which can be stated as follows for the cigarette-use example.  
+
+- Each subject has a latent propensity to smoke.  This propensity is a continuous, normally distributed trait. Subjects whose propensity exceeds a threshold succumb to smoking, whereas those whose propensity does not exceed the threshold refrain from smoking.
+
+The probit model above can therefore be reframed in terms of this LRV, $y^*$.
+
+$$y^* = \mathbf{XB} + \varepsilon ,$$
+where $\varepsilon \sim \mathcal{N}(0, \sigma)$ and the observed binary response $y$ is linked to the LRV by a *threshold model*:
+
+$$y = I(y^* > \tau),$$
+where the indicator function $I()$ assigns 1 when its argument is `TRUE` and 0 when it is `FALSE`.  Because the LRV is unobserved (i.e., *latent*), its distributional parameters cannot be estimated from the data. GLM software like the `glm()` function typically identify the model by fixing the residual variance $\sigma=1$ and the threshold $\tau=0$.  For simplicity, consider an intercept-only model for cigarette use.
+```{r intercept-only glm}
+mod0 <- glm(ciguse ~ 1, data = myData, family = binomial("probit"))
+coef(mod0)
+```
+
+In `lavaan` the default is instead to fix the *intercept* to 0 and estimate the threshold.  The model syntax below shows how thresholds are specified with the "pipe" (vertical bar: `|`) followed by `t1` indicating the first threshold.
+```{r intercept-only sem}
+mod0.ciguse <- 'ciguse | t1' # specify first (and only) threshold
+fit0.ciguse <- sem(mod0.ciguse, data = myData)
+summary(fit0.ciguse, header = FALSE, nd = 7)
+```
+
+Binary variables have only 1 threshold that splits a normal distribution into 2 categories.  Notice that it is arbitrary whether the intercept (mean) or threshold is fixed to 0.  
+
+- In the output of `glm()` the threshold was fixed at zero and intercept was estimated to be $-0.913$. 
+- In the output of `lavaan` the intercept is fixed at zero and the threshold was estimated to be $+0.913$.  
+
+In either case, the threshold is the same distance from the LRV's mean, as depicted in the figure below.
+
+```{r plot binary, echo=FALSE}
+opar <- par(mfrow = 1:2, mar = c(4, 1, 1, 1))
+
+## Fixed intercept, estimated threshold
+curve(dnorm(x, mean = 0, sd = 1), xlim = c(-4, 4), ylim = c(0, .5), lwd = 2,
+      xlab = "Propensity to Smoke", yaxt = 'n')
+xx <- c(-4, seq(-4, coef(fit0.ciguse), by = .01), coef(fit0.ciguse))
+polygon(x = xx, y = c(0, dnorm(xx[-c(1, length(xx))], mean = 0, sd = 1), 0),
+        col = "grey77")
+abline(v = coef(fit0.ciguse), lwd = 2)
+abline(v = 0, lwd = 2, col = "blue", lty = "dotted")
+legtext <- c("Latent M = 0", paste("Threshold =", round(coef(fit0.ciguse), 3)))
+legend("topleft", legend = legtext, col = c("blue","black"),
+       lty = c("dotted","solid"), lwd = 2, cex = 1.2, bg = "white")
+
+## Fixed threshold, estimated intercept
+curve(dnorm(x, mean = coef(mod0), sd = 1), xlim = c(-4, 4) + coef(mod0),
+      ylim = c(0, .5), lwd = 2, xlab = "Propensity to Smoke", yaxt = 'n')
+xx <- c(-4 + coef(mod0), seq(-4 + coef(mod0), 0, by = .01), 0)
+polygon(x = xx, y = c(0, dnorm(xx[-c(1, length(xx))],
+                               mean = coef(mod0), sd = 1), 0),
+        col = "grey77")
+abline(v = 0, lwd = 2)
+abline(v = coef(mod0), lwd = 2, col = "blue", lty = "dotted")
+legtext <- c(paste0("Latent M = ", round(coef(mod0), 3)), "Threshold = 0")
+legend("topleft", legend = legtext, col = c("blue","black"),
+       lty = c("dotted","solid"), lwd = 2, cex = 1.2, bg = "white")
+
+par(opar)
+```
+
+Notice that the distributions are identical.  Only the $x$-axis differs, reflecting the change in (arbitrary) identification constraint.
+
+
+### Ordinal Outcomes
+
+The LRV interpretation is easily extended to polytomous ordinal variables, such as intent to smoke.  This is called the *cumulative probit* model (and link function).  Any ordinal variable with categories $c=0, \ldots, C$ can be interpreted as a crude discretization of an underlying LRV, whose $C$ thresholds divide the latent distribution into $C+1$ categories.
+
+$$y=c \ \ \ \text{ if } \ \ \ \tau_c < y^* \le \tau_{c+1} $$
+
+Because the normal distribution is unbounded, the first category "starts" at $\tau_0 = -\infty$, and the last category "ends" at $\tau_{C+1} = +\infty$.  For example, intent to smoke has 4 categories, so there are $C=3$ thresholds.  We do not have to specify thresholds in `lavaan` model syntax if we tell `lavaan` which variables are ordinal using the argument `ordered=`.  When **all** modeled variables are ordinal, one can use `TRUE` as a shortcut.
+```{r bivar sem}
+fit2 <- sem('ciguse ~~ intention', data = myData, ordered = TRUE)
+summary(fit2, header = FALSE, standardized = TRUE)
+```
+
+Notice that intent has 3 thresholds, labeled with sequential integers following the letter `t`.  This is how they would be specified in `lavaan` model syntax, e.g.,
+```{r syntax thresh-12, eval=FALSE}
+' intention | NA*t1 + NA*t2 + NA*t3 '
+```
+
+Alternatively, set the argument `auto.th=TRUE` to automatically estimate all thresholds.
+
+The LRV for `intention` can be interpreted as the degree to which someone intends to smoke---similar to the observed variable, but the degree increases continuously rather than in discrete increments.  
+
+0. Subjects in Category 0 do not have a latent intent to smoke that exceeds the first threshold ($\hat\tau_1$), so they do not indicate that they intend to smoke.
+1. Subjects will only respond that they "don't know" when their latent intent exceeds $\hat\tau_1=$ `r round(coef(fit2)[3], 3)` $SD$s above the mean of that distribution.
+2. Subjects must exceed $\hat\tau_2=$ `r round(coef(fit2)[4], 3)` $SD$ above the mean before they begin indicating "probably".
+3. Only those whose latent intent exceeds $\hat\tau_3=$ `r round(coef(fit2)[5], 3)` $SD$s above the mean do they respond firmly "yes".
+
+The plot below visualizes the "classification rules" above.
+
+```{r plot poly, echo=FALSE}
+opar <- par(mfrow = c(1,1), mar = c(4, 1, 1, 1))
+
+## Fixed intercept, estimated threshold
+curve(dnorm(x, mean = 0, sd = 1), xlim = c(-4, 4), ylim = c(0, .5), lwd = 2,
+      xlab = "(Latent) Intent to Smoke", yaxt = 'n')
+x1 <- c(coef(fit2)[3], seq(coef(fit2)[3], coef(fit2)[4], by = .01), coef(fit2)[4])
+x2 <- c(coef(fit2)[4], seq(coef(fit2)[4], coef(fit2)[5], by = .01), coef(fit2)[5])
+x3 <- c(coef(fit2)[5], seq(coef(fit2)[5], 4, by = .01), 4)
+polygon(x = x1, y = c(0, dnorm(x1[-c(1, length(x1))]), 0), col = "grey88")
+polygon(x = x2, y = c(0, dnorm(x2[-c(1, length(x2))]), 0), col = "grey69")
+polygon(x = x3, y = c(0, dnorm(x3[-c(1, length(x3))]), 0), col = "grey42")
+abline(v = coef(fit2)[3:5], lwd = 2, lty = "dotted")
+text(x = c(coef(fit2)[3], coef(fit2)[3], coef(fit2)[5], coef(fit2)[5]),
+     y = .45, pos = c(2, 4, 2, 4), #cex = 2,
+     labels = 0:3)
+
+par(opar)
+```
+
+
+
+### Estimating Thresholds
+
+Thresholds are **univariate** statistics (like means).  Threshold estimates are based on the frequency distribution of a categorical variable.  Recall that the probit function merely transforms a (predicted) probability ($\pi$) into a corresponding *z* score.  The (standardized) thresholds are these *z* scores.  We can estimate them by plugging into `qnorm()` the cumulative proportions ($\widehat\pi_c$) up to each category $c$.  For example, here are the (cumulative) proportions in each category of `intention`.
+```{r intent probs}
+p.intent <- prop.table(table(myData$intention)) # proportions per category
+cumsum(p.intent) # cumulative proportions (up to and including each category)
+```
+
+By definition, 100\% of the sample was observed in any of the categories up to (and including) the highest category, so the final cumulative proportion is 1. Likewise, no one in the sample was observed in a category lower than the lowest category (by definition), so we can append a zero as the first number in this vector of cumulative proportions.  Then we can find the corresponding *z* scores in a normal distribution, which are the thresholds between categories:
+```{r intent thresh}
+qnorm(c(0, cumsum(p.intent)))
+```
+
+The upper and lower thresholds are $+/-\infty$ by definition, corresponding to 0 and 100\%.  Those never need to be estimated because they are fixed by design.  The remaining 3 thresholds are actual borders between observed categories, showing how far above/below the mean a subject must be in order to indicate a particular response category. 
+
+
+### Estimating Polychoric Correlations
+
+With multiple ordinal variables, we can estimate the correlations between their associated LRVs by relying on the assumption that the LRVs are normally distributed (Olsson, 1979, 1982). These correlations are called *polychoric correlations* (Olsson, 1979), which are **bivariate** statistics (like the covariance matrix).  If the model also includes a continuous variable, its correlation with an ordinal variable's LRV is called the *polyserial correlation* (Olsson, 1982).  Special names for 2-category variables are *tetrachoric correlation* (between 2 binary variables) or *biserial correlation* (between a binary and continuous variable).  For example, the estimated covariance between cigarette use and intent to smoke in the model above is a polychoric correlation because each LRV's $SD$ was fixed to 1 in that unrestricted (saturated) model.
+
+The reason that the probit model is so popular in SEM is that the standard SEM matrices and interpretations still apply to normal data, except those normal variables are latent.  All we need to do is append the SEM with a threshold model in order to link these normal LRVs to their observed discrete counterparts.  The default saturated model in *lavaan* estimates all thresholds and polychoric (and polyserial, if applicable) correlations, along with means and (co)variances among any continuous variables.  This is used as input data when fitting any hypothesized model (even when fitting a regression model with $df=0$).  We can see the *estimated* sample statistics for the model above:
+```{r sampstat}
+lavInspect(fit2, "sampstat")
+```
+
+Notice that the means are 0 and variances are 1, consistent with the correlation metric and the assumption that the underlying LRV is a *z* score. These values are actually fixed to *identify* the saturated model.  We will discuss *scaling constraints* and identification of latent variables more when we introduce the common-factor model.
+
+
+### Estimating an SEM with Estimated Input
+
+The problem with treating thresholds and polychoric correlations as observed data is that they were not observed. They are estimates of population parameters, based on the data.  They each have an associated *SE* and 95\% CI.  In order to trust the *SE*s, 95\% CIs, and test statistics in our hypothesized model, we need to take the uncertainty of the "data" into account.  This is often accomplished using weighted least-squares estimation, where the weight matrix $\mathbf{W}$ is the sampling covariance matrix of the estimated thresholds and polychoric correlations. 
+
+- *Note*: Do not confuse the sampling covariance matrix of *estimated parameters* with the covariance matrix of *variables*.  The latter is used as input data, and it is what we want our SEM to explain.  The sampling covariance of parameter estimates is how we quantify their uncertainty: its diagonal contains sampling variances, the square-roots of which are the $SE$s that we use to calculate Wald *z* tests and CIs.
+
+The more variables (and categories) there are, the larger $\mathbf{W}$ becomes: there is one row/column for every estimated threshold and correlation.  Even in samples as large as 1000, this makes estimation unstable.  An alternative is to simply ignore the sampling **co**variances during estimation, so $\text{diag}(\mathbf{W})$ is the weight matrix to obtain point estimates of parameters.  This is called diagonally weighted least squares (`estimator = "DWLS"`), which is the default in `lavaan`.  Even with DWLS, the full weight matrix is still needed to calculate *SE*s and the $\chi^2$ statistic.  The $\chi^2$ statistic needs to be robust against the uncertainty of the input data, so it is adjusted by scaling it (a *mean-adjusted* statistic) and optionally shifting it (a *mean- and variance-adjusted* statistic).  The default is both: `estimator = "WLSMV"` is a shortcut that implies
+
+- `lavaan(..., estimator = "DWLS", se = "robust.sem", test = "scaled.shifted")`
+
+Another alternative is unweighted/ordinary least squares (ULS), where $\mathbf{W}$ is an identity matrix.  This often yields good point estimates, but Type I error rates can differ from the $\alpha$ level, so it is still recommended to request a scaled/shifted $\chi^2$ statistic (e.g., `estimator = "ULSMV"`).
+
+There are also likelihood-based estimators.  One option is marginal maximum likelihood (`estimator = "MML"`), which is *currently* disabled in `lavaan` because it was too computationally intensive and the developer is exploring better routines.  A less computationally intensive alternative is pairwise maximum likelihood (`estimator = "PML"`), which maximizes only the (sum of) uni- and bivariate (log-)likelihoods.  This is a quite robust procedure even in small samples, and because it is likelihood-based, information criteria (AIC and BIC) are available.
+
+*Note*: The "robust" statistics are only corrected for the two-stage estimation procedure (thresholds+pollychorics, followed by SEM parameters using DWLS or ULS) or for combining pairwise log-likelihoods (using PML).  The LRV interpretation for categorical outcomes **assumes a normal distribution** for latent responses.  Because LRVs are (by definition) unobserved, there is no way to estimate their degree of nonnormality, which would be necessary to correct for it.
+
+
+#### Counting Degrees of Freedom
+
+For SEM with only continuous variables, the number of observed summary statistics $p^*$ is a simply function of the number of variables $p$:
+
+$$p^* = \frac{p(p+3)}{2} \text{ (with mean structure) or } \frac{p(p+1)}{2} \text{ (without means)}$$
+
+- $p$ means
+- $p$ variances
+- $\frac{p(p-1)}{2}$ covariances
+
+The number of "observed" covariances does not differ between continuous and categorical variables, but some covariances are replaced by:
+
+- polychoric correlations among LRVs
+- (scaled) polyserial correlations between LRVs and observed variables
+
+But the number of univariate statistics can differ. Whereas continuous variables each contribute an observed mean and variance, categorical variables do not contribute either (i.e., those values are fixed to 0 and 1, respectively, to estimate thresholds and polychoric correlations).  Instead, each categorical variable contributes $C$ "observed" standardized thresholds for its $C+1$ categories.  So each binary variable contributes $C=1$ threshold, each "ternary" (3-category) variable contributes $C=2$ thresholds, and so on.  Thus, the number summary statistics is a function of the number of observed continuous and discrete variables.  Suppose we denote:
+
+- $p_c$ the number of continuous variables 
+- $p_d$ the number of discrete variables
+- so the total number of observed variables remains $p = p_c + p_d$
+- the number of thresholds for discrete variables $d = 1, \dots, D$ is $C_d$
+- the total number of thresholds is $K = \sum_{d=1}^D C_d$
+
+Then the number summary statistics is $\frac{p(p-1)}{2} + 2p_c + K$.  That is, both continuous and discrete variables contribute covariances/correlations (first term), only continuous variables contribute a mean and variance (second term), and only discrete variables contribute thresholds (third term).
+
+This has implications for determining the expected $df$, which is an important part of verifying that you fit the model you intended to fit.  Just as mean structures are typically saturated (e.g., for every observed mean, an intercept is estimated), each "observed" standardized threshold has a corresponding estimated threshold (not necessarily standardized, but is by default in `lavaan`).  Likewise, intercepts and (residual or marginal) variances typically remain fixed for LRVs in hypothesized models, as they do in the default saturated model.  Thresholds might be constrained (contributing $df$) in models for multiple groups or occasions---as might LRV intercepts or (residual or marginal) variances---which we discuss in later chapters.
+
+
+#### Missing Data
+
+When multivariate-normal data are incomplete, all available information can be used to estimate parameters by setting `missing = "FIML"` (full-information ML estimation) to override the default `listwise` deletion method.  Actually, FIML applies to nonnormal continuous data as well, since a robust correction for nonnormality is available with FIML results (`estimator = "MLR"`).  FIML is also available for categorical outcome(s), but only when using (marginal) ML estimation.  Until `estimator = "MML"` becomes available in `lavaan`, the FIML option is unfortunately unavailable.
+
+When at least 1 endogenous variable is binary/ordinal, `missing = "pairwise"` deletion retains as much information as possible, so it is still preferred over the default `missing = "listwise"` deletion.  However, both deletion methods make the restrictive assumption that data are missing **completely** at random (MCAR).  The reason pairwise deletion assumes MCAR data is that *for each pair of variables*, it estimates their covariance (or polychoric/polyserial correlation) using all jointly observed complete data for that pair of variables.  So no information from other observed variables can be used to estimate the covariance/correlation.
+
+In contrast, FIML estimates parameters using each person's entire vector of observed data, so missing data on Variable A can be compensated by observed data on Variable B.  Thus, FIML makes the less restrictive assumption that data are missing at random (MAR)---that is, the missingness is still random **conditional on the observed data** (see Little et al., 2014, for more detailed conceptual explanations).
+
+Pairwise deletion is available with any (diagonally or un)weighted least-squares estimators, as well as with (P)ML. But with PML for categorical outcomes, a `missing = "doubly.robust"` estimation method is available that only requires assuming data are MAR (Katsikatsou et al., in press).  It is computationally intensive, but it may be worth it if the MAR assumption is not feasible.
+
+
+## Mediation Model with Categorical Outcomes
+
+Consider the mediation model depicted below.  The dashed line is the direct effect of treatment on smoking behavior, given the intent to smoke.
+
+
+\begin{tikzpicture}[
+latent/.style={draw, circle, thick, minimum size=5mm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
+manifest/.style={draw, rectangle, thick, minimum size=1cm, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
+mean/.style={regular polygon, regular polygon sides=3, draw, thick, inner sep=0.4mm},
+>=stealth,
+]
+
+\node[manifest] (x) at (0,0) {$y_1$\\$\text{T}_\text{x}$};
+\node[manifest] (m) at (2,2) {$y_2$\\Intent};
+\node[manifest] (y) at (4,0) {$y_3$\\Smoked};
+
+\draw[->, thick] (x) to node [above, xshift=-2mm] {$\beta_{21}$} (m.225);
+\draw[->, thick] (m) to node [above, xshift=2mm] {$\beta_{32}$} (y.135);
+\draw[->, thick, dashed] (x) to node [above] {$\beta_{31}$} (y);
+
+\end{tikzpicture}
+
+
+Because SEM treats an exogenous binary predictor as numeric (like dummy-coded predictors in standard OLS regression models), these $p=3$ variables include $p_c=1$ "continuous" predictor (`intervention`) and $p_d=2$ discrete outcomes.  These contribute $p^* = \frac{p(p-1)}{2} = 3$ "observed" covariances:
+
+- The polyserial correlations of `intervention` with `ciguse` and `intention`
+- The polychoric correlation between `ciguse` and `intention`
+
+The predictor also contributes $2p_c=2$ observed values: a mean and a variance.  The endogenous binary variable `ciguse` contributes 1 threshold, and the endogenous ordinal variable `intention` contributes 3 thresholds, so $K=4$.  Thus, there are 3 + 2 + 4 = 9 summary statistics in this 3-variable system.
+
+There are 3 possible conclusions:
+
+- **No mediation**: the indirect effect $\beta_{21} \times \beta_{32}=0$ because either $\beta_{21}=0$ or $\beta_{32}=0$
+- **Partial mediation**: the indirect effect $\beta_{21} \times \beta_{32} \ne 0$ *and* the direct effect $\beta_{31} \ne 0$ 
+- **Full mediation**: the indirect effect $\beta_{21} \times \beta_{32} \ne 0$ but the direct effect $\beta_{31} = 0$ 
+
+Omitting the dashed line (by fixing $\beta_{31}=0$$) would imply full mediation. A full-mediation model would estimate 8 parameters:
+
+- 2 regression slopes ($\beta_{21}$ and $\beta_{32}$)
+- 1 mean and 1 variance for the exogenous dummy coded `intervention`
+- 3 thresholds for the mediator `intention`
+- 1 threshold for the outcome `ciguse`
+
+Thus, the full-mediation model will have $df=1$.  The partial-mediation model would estimate the dashed line, reducing $df=0$.  No mediation could be represented by a model that estimates the dashed line but fixes either $\beta_{21}=0$ (a multiple-regression model for `ciguse`) or $\beta_{32}=0$ (a multivariate regression model for `intention` and `ciguse`).  We will only fit the full and partial mediation models in the next section.
+
+
+### Estimate Mediation Models
+
+Begin by fitting the partial-mediation model to the data, to test $H_0: \beta_{21} \times \beta_{32}=0$ (no mediation).  We will only specify the regression slopes and user-defined parameters because the residual variances are not estimated.  The identification constraints require more explanation (see the following section).
+
+```{r fit part-med}
+mod.part <- ' ## regression paths
+    intention ~ b21*intervention
+    ciguse ~ b31*intervention + b32*intention
+  ## define indirect and total effects
+    ind := b21*b32
+    tot := ind + b31
+'
+fit.part <- sem(mod.part, data = myData, ordered = TRUE)
+summary(fit.part, standardized = TRUE, rsquare = TRUE)
+```
+
+```{r PT part-med, echo=FALSE}
+PT1 <- parameterEstimates(fit.part, standardized = TRUE)
+ind <- PT1[PT1$label == "ind",]
+direct <- PT1[PT1$label == "b31",]
+```
+
+Using the standard criterion $\alpha=5\%$, the Wald *z* tests allow us to reject the $H_0$ of no mediation: indirect effect *b* = $`r round(ind$est, 3)`$, $z = `r round(ind$z, 3)`$, *p* = `r round(ind$pvalue, 3)`, $\beta = `r round(ind$std.all, 3)`$.  We fail to reject the $H_0$ of full mediation: direct effect *b* = $`r round(direct$est, 3)`$, $z = `r round(direct$z, 3)`$, *p* = `r round(direct$pvalue, 3)`, $\beta = `r round(direct$std.all, 3)`$.
+
+Because the scales of the LRVs are arbitrary, it is safer to 
+
+- interpret the standardized slopes
+- test a $H_0$ using a $\Delta \chi^2$ test
+
+We can fit a full-mediation model to the data to obtain the LRT.
+```{r fit full-med}
+mod.full <- ' ## regression paths
+    intention ~ b21*intervention
+    ciguse ~ b32*intention
+  ## define indirect and total effects
+    ind := b21*b32
+'
+fit.full <- sem(mod.full, data = myData, ordered = TRUE)
+lavTestLRT(fit.full, fit.part) # or anova(), which then calls lavTestLRT()
+```
+
+Notice that `lavTestLRT()` automatically detects the robust estimator and test statistic requested when fitting the models, so it appropriately uses the same robust correction (mean- and variance-adjustment) for the $\Delta \chi^2$ statistic.  This is why the `Chisq Diff` column **does not match** the difference between (uncorrected) $\chi^2$ values in the `Chisq` column. The *p* value is very close to the Wald test's *p* value (also calculated using a robust *SE*), which is expected when *N* is large.
+
+
+### Interpreting Coefficients
+
+Notice that the `glm()` estimates from the probit regression for `ciguse` do not match those from the `sem()` function.  There are noteworthy differences in parameterization:
+
+- The GLM approach fixes the threshold to 0 and estimates the intercept.  The SEM approach fixes the intercept to 0 and estimates the threshold.  As shown in the figure above, this distinction is arbitrary because the LRV has no "location" that we can identify from the data.  The intercept and threshold can only be said to be a certain distance apart, which is why they take the same absolute value.  For example, we can free the `ciguse` intercept in `lavaan` syntax and fix its threshold instead:
+
+```{r fix thresh est int}
+## fixed intercept
+coef(fit.part, type = "all")[c("ciguse|t1","ciguse~1")]
+## fixed threshold
+mod.trade <- ' ciguse | 0*t1 # fix threshold
+               ciguse ~ NA*1 # estimate intercept '
+coef(sem(c(mod.part, mod.trade), data = myData, ordered = TRUE),
+     type = "all")[c("ciguse|t1","ciguse~1")]
+```
+
+
+- The GLM approach treats all predictors as fixed, and predictors are distinct from outcomes. Intent to smoke was treated as continuous.  Although we could have used polynomial contrast codes to estimate linear, quadratic, and cubic effects, we still would have to take the observed category weights (0--3) as given.
+- The SEM approach allows outcomes to predict other outcomes.  So the LRV underlying intent to smoke was used as a predictor of smoking propensity (LRV underlying `ciguse`).  This allows us to extrapolate from our results what we would expect if we had measured intent as a continuous variable (and it happened to be normally distributed).
+
+A final distinction has to do with the identification constraint on the LRV scale.
+
+
+### Delta vs. Theta Parameterizations
+
+The SEM approach in `lavaan` (by default) fixes the *marginal* (i.e., total) variance of the LRV to 1.  This is called the "delta parameterization" in the SEM literature. The GLM approach fixes the residual/conditional variance to 1.  This is called the "theta parameterization" in the SEM literature.
+
+Under the delta parameterization, the residual variance is fixed such that it equals 1 minus the explained variance ($1-R^2$).  Under the theta parameterization, the LRV's total variance is the sum of explained and unexplained variance (1 + explained variance).  The total variances is not an explicit SEM parameter; instead, the *scaling factors* (`Scales y*` in the output) are the reciprocal of the total $SD$ (i.e., $\frac{1}{SD}$).
+
+Use the argument `parameterization = "theta"` to override the default delta parameterization, if there is a reason to do so (i.e., if you want to model residual variances).  This will be discussed further in the chapter about item factor analysis (i.e., common-factor models for categorical indicators).
+
+This arbitrary distinction can have important consequences for the interpretation and decomposition of mediated effects.  For example, the indirect effects would not be comparable between full- and partial-mediation models when fixing residual variances to 1, because doing so would change the scale of the LRV across the two models.  That is, the **relative amount of residual variance would be different** for the full- and partial mediation models.  The partial-mediation model explains less variance (lower $R^2$, so its residual variance should be larger) than the full-mediation model, but residual variances are fixed to 1 in both cases, making the total variance *appear smaller* in the partial-mediation model.  This change of scales changes the meaning of 'one unit increase' across the models. 
+
+Luckily, **when using the delta parameterization in single-group models**, the outcome's LRV scale (and any categorical mediator's LRV scale) is already held constant by fixing the marginal variance to 1 (Breene et al., 2013).  However, this good news would not apply in more complex situations that affect LRV scales, such as multigroup models. So when using path analysis with categorical outcomes, it is best to exercise caution. Use the delta parameterization, and do not use a multigroup models to compare paths across groups (i.e., moderated mediation) unless you understand how to equate the LRV scales across groups.
+
+
+### Decomposing Total Effects
+
+Furthermore, a common method of quantifying the size of an indirect effect is the proportion of the total effect: $\frac{\beta_{21} \times \beta_{32}}{(\beta_{21} \times \beta_{32}) + \beta_{31}}$.  This is already problematic when the direct and indirect effects have opposite signs (called *inconsistent mediation*).  But when the scale of a LRV varies between models with(out) a mediator, then the sum of estimated direct and indirect effects would no longer match the total effect.
+
+For example, fit separate probit models for the mediator and outcome, as would be necessary using the GLM approach.  For simplicity, only treat `ciguse` as categorical.
+```{r fit series}
+## simple regression to obtain the total effect
+(total <- coef(sem('ciguse ~ total*intervention', data = myData,
+                   ordered = 'ciguse', parameterization = "theta"))["total"])
+## model for mediator
+(b21 <- coef(sem('intention ~ b21*intervention', data = myData))["b21"])
+## model for outcome
+(b3 <- coef(sem('ciguse ~ b31*intervention + b32*intention', data = myData,
+                ordered = 'ciguse', parameterization = "theta"))[c("b31","b32")])
+## estimate total effect from decomposition
+b3[[1]] + b21*b3[[2]]
+```
+
+
+This does not match the total effect from the simple probit regression because the LRV scales differ.  That is, the simple regression has more residual variance (less explained variance without `intention` in the model), yet the residual variance is still fixed to 1.  Imai et al. (2010) proposed a general solution to this problem, using the causal-modeling framework, implemented in the [\textcolor{blue}{`mediation` package}](https://cran.r-project.org/package=mediation) (see their [\textcolor{blue}{`vignette}](https://cran.r-project.org/web/packages/mediation/vignettes/mediation.pdf) for examples).  It is quite complicated, but here is how it would apply to our current example (see also Muthén, 2011, for corresponding M*plus* syntax):
+```{r}
+mod.Imai <- '
+    ciguse ~ c*intervention + b*intention
+    intention ~ a*intervention
+# label threshold for ciguse
+    ciguse | b0*t1
+# biased SEs
+    naive.indirect := a*b
+    naive.direct := c
+# correct
+    probit11 := (-b0+c+b*a)/sqrt(b^2+1)
+    probit10 := (-b0+c )/sqrt(b^2+1)
+    probit00 := (-b0 )/sqrt(b^2+1)
+    indirect := pnorm(probit11) - pnorm(probit10)
+    direct := pnorm(probit10) - pnorm(probit00)
+'
+fit <- sem(mod.Imai, data = myData, ordered = c("ciguse","intention"))
+summary(fit, std = TRUE)
+```
+
+
+However, Breen et al. (2013) proposed a simpler, less restrictive solution that holds the LRV scale consistent so that the decomposition holds.  Their method is meant for researchers fitting separate regression models, and performed quite well in simulations (and similar to Imai et al.'s method).  Luckily, **when using the delta parameterization in single-group models**, their method is unnecessary when simultaneously estimating the full/partial-mediation model as a path analysis.  This is because the outcome's LRV scale (and any categorical mediator's LRV scale) is already held constant by fixing the marginal variance to 1.  However, this good news would not apply in more complex situations that affect LRV scales, such as multigroup models.
+
+So when using path analysis with categorical outcomes, it is best to exercise caution.  Use the delta parameterization, and do not use a multigroup models to compare paths across groups (i.e., moderated mediation) unless you understand how to equate the LRV scales across groups.
+
+
+
+## References
+
+Bliss, C. I. (1934). The method of probits. *Science, 79*(2037), 38--39. <https://doi.org/10.1126/science.79.2037.38>
+
+Breen, R., Karlson, K. B., & Holm, A. (2013). Total, direct, and indirect effects in logit and probit models. *Sociological Methods & Research, 42*(2), 164--191. <https://doi.org/10.1177/0049124113494572>
+
+<!-- Imai, K., Keele, L., & Tingley, D. (2010). A general approach to causal mediation analysis. *Psychological Methods, 15*(4), 309--334. <https://doi.org/10.1037/a0020761> -->
+
+Katsikatsou, M., Moustaki, I., & Jamil, H. (in press). Pairwise likelihood estimation for confirmatory factor analysis models with categorical variables and data that are missing at random. *British Journal of Mathematical and Statistical Psychology*. <https://doi.org/10.1111/bmsp.12243>
+
+Little, T. D., Jorgensen, T. D., Lang, K. M., & Moore, E. W. G. (2014). On the joys of missing data. *Journal of Pediatric Psychology, 39*(2), 151--162. <https://doi.org/10.1093/jpepsy/jst048>
+
+Muthén, B. (2011). *Applications of causally defined direct and indirect effects in mediation analysis using SEM in Mplus* [Technical report]. Retrieved from <http://www.statmodel.com/download/causalmediation.pdf>
+
+Olsson, U. (1979). Maximum likelihood estimation of the polychoric correlation coefficient. *Psychometrika, 44*(4), 443--460. <https://doi.org/10.1007/BF02296207>
+
+Olsson, U., Drasgow, F., & Dorans, N. J. (1982). The polyserial correlation coefficient. *Psychometrika, 47*(3), 337--347. <https://doi.org/10.1007/BF02294164>
+
+
+
+<!--chapter:end:12-IntroCategorical.Rmd-->
+
 # Latent Growth Curve Models
 
 In structural equation modeling (SEM), multiple indicators of a construct can be modeled using exploratory/confirmatory factor analysis (E/CFA).  A latent common factor (or common cause) is posited as being the source of shared variance among the observed indicators, and the measurement models for multiple common factors can be embedded within a larger SEM.
@@ -1281,4 +2897,7 @@ Wu, W., & Lang, K. M. (2016). Proportionality assumption in latent basis curve m
 
 
 
+
+
+<!--chapter:end:26-LatentCurves.Rmd-->
 
