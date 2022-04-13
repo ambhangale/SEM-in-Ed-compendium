@@ -1,5 +1,9 @@
 # Latent Growth Curve Models
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+FigNumber <- 1L # initialize Figure number for automatic ordering
+```
 In structural equation modeling (SEM), multiple indicators of a construct can be modeled using exploratory/confirmatory factor analysis (E/CFA).  A latent common factor (or common cause) is posited as being the source of shared variance among the observed indicators, and the measurement models for multiple common factors can be embedded within a larger SEM.
 
 This chapter introduces another type of common factor, often called a **growth factor**.  Rather than repeatedly measuring a construct with *different* indicators of that construct (e.g., "I feel ...": happy, glad, cheerful, joyous), growth factors are measured by the *same* indicator on multiple occasions.  Growth factors are interpreted as patterns of change in the indicators' expected values, where the type of pattern is defined by the factor loadings. 
@@ -108,6 +112,7 @@ $$\mathbf{\eta}_i=\beta_{0,i} \ \ , \ \ \alpha=\gamma_0 \ \ , \ \ \zeta_i=u_i   
 Note that the factor-loading matrix is merely a vector of ones, filling the role of the constant in a regression model.  That is, a vector of ones is treated as a predictor, and its "slope" is the regression model's intercept.  The role of factor loadings in a LGCM is counter-intuitive because in most SEMs, we think of them as slopes.  Instead, the loadings of a growth factor instead map onto observed variables in a multilevel regression, and random coefficients ($\beta_{0,i}$) are represented by the latent variables (growth factors: $\mathbf{\eta}_i$).  
 
 
+```{r, engine='tikz',fig.ext='svg', echo=FALSE}
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
 error/.style={draw, circle, thick, minimum size=1cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -115,6 +120,7 @@ manifest/.style={draw, rectangle, thick, minimum size=1cm, align=center, execute
 mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 >=stealth,
 ]
+\usetikzlibrary{shapes}
 
 \node[latent] (f1) at (3,5) {Intercept \\ ($\eta_1$)};
 
@@ -149,7 +155,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 \draw[<->, thick] (f1.170) to [out=145, in=215, distance=7mm] (f1.190) node[left, xshift=-4mm] {$\psi_{1,1}$};
 
 \end{tikzpicture}
-
+```
 
 *Figure* $`r FigNumber`$. Random intercept model for alcohol-use data from Duncan and Duncan (1996).
 ```{r echo=FALSE}
@@ -242,7 +248,7 @@ $$\mathbf{X}_i \Longleftrightarrow \mathbf{\Lambda} = \begin{bmatrix} 1 & -3 \\ 
 
 Using this alternative coding scheme, the mean rate-of-change would remain the same, but the mean of the latent intercept would instead be interpreted as the average status at the *end* of the study (*final* status, rather than *initial* status).  However, we will proceed by coding 0 for the first occasion so that the latent intercept represents initial status.
 
-
+```{r, engine='tikz',fig.ext='svg', echo=FALSE}
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
 error/.style={draw, circle, thick, minimum size=1cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -250,6 +256,8 @@ manifest/.style={draw, rectangle, thick, minimum size=1cm, align=center, execute
 mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 >=stealth,
 ]
+
+\usetikzlibrary{shapes}
 
 \node[latent] (f1) at (1,5) {Initial\\Status \\ ($\eta_1$)};
 \node[latent] (f2) at (5,5) {Rate of\\Change \\ ($\eta_2$)};
@@ -295,6 +303,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 \draw[<->, thick] (f1.30) to [out=45, distance=7mm] (f2.150) node[xshift=-1cm] {$\psi_{2,1}$};
 
 \end{tikzpicture}
+```
 
 *Figure* $`r FigNumber`$. Linear growth model for alcohol-use data from Duncan and Duncan (1996).
 ```{r echo=FALSE}
@@ -392,7 +401,7 @@ There are a couple of options for exploratory LGCMs, described below.
 
 The most popular is the *latent basis curve*, which resembles the linear model but only fixes 2 loadings for the rate-of-change factor, freeing the others to capture non-specific change patterns.  For example, fixing the first 2 loadings to 0 and 1, respectively, sets the (average) amount of change between the first 2 occasions as a baseline.  This is depicted in the path diagram below (left panel).
 
-
+```{r, engine='tikz',fig.ext='svg', echo=FALSE}
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
 error/.style={draw, circle, thick, minimum size=1cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -400,6 +409,8 @@ manifest/.style={draw, rectangle, thick, minimum size=1cm, align=center, execute
 mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 >=stealth,
 ]
+
+\usetikzlibrary{shapes}
 
 \node[latent] (f1) at (1,5) {Initial\\Status \\ ($\eta_1$)};
 \node[latent] (f2) at (5,5) {Referent\\Change \\ ($\eta_2$)};
@@ -492,6 +503,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 \draw[<->, thick] (f3.30) to [out=45, distance=7mm] (f4.150) node[xshift=-1cm] {$\psi_{2,1}$};
 
 \end{tikzpicture}
+```
 
 *Figure* $`r FigNumber`$. Latent basis models for alcohol-use data from Duncan and Duncan (1996).
 ```{r echo=FALSE}
@@ -569,7 +581,7 @@ Rather than fixing loadings of the latent intercept to 1, we can specify a "**ce
 
 Finally, because there is a growth factor for each occasion, the entire covariance structure can be reproduced in the latent space (factor (co)variances).  Thus, we must fix indicators' residual variances to zero, as depicted in Figure 4.
 
-
+```{r, engine='tikz',fig.ext='svg', echo=FALSE}
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
 error/.style={draw, circle, thick, minimum size=1cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -577,6 +589,8 @@ manifest/.style={draw, rectangle, thick, minimum size=1cm, align=center, execute
 mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 >=stealth,
 ]
+
+\usetikzlibrary{shapes}
 
 \node[manifest] (y1) at ( 0,0) {$y_1$};
 \node[manifest] (y2) at ( 4,0) {$y_2$};
@@ -645,6 +659,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 
  
 \end{tikzpicture}
+```
 
 *Figure* $`r FigNumber`$. Saturated growth model for alcohol-use data from Duncan and Duncan (1996).
 ```{r echo=FALSE}
@@ -763,6 +778,7 @@ Level-2 predictors vary between subjects, so they can explain between-subject di
 
 The path diagram below depicts age and peer influence as observed variables that predict growth factors, conforming to how `?lavaan::model.syntax` works.  In the background, `lavaan` internally represents observed predictors as single-indicator factors.  Thus, age and peer influence are assigned $\eta_3$ and $\eta_4$, respectively, in the path diagram below. 
 
+```{r, engine='tikz',fig.ext='svg', echo=FALSE}
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
 error/.style={draw, circle, thick, minimum size=1cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -770,6 +786,8 @@ manifest/.style={draw, rectangle, thick, minimum size=1cm, align=center, execute
 mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 >=stealth,
 ]
+
+\usetikzlibrary{shapes}
 
 \node[latent] (f1) at (1,5) {Initial\\Status \\ ($\eta_1$)};
 \node[latent] (f2) at (5,5) {Rate of\\Change \\ ($\eta_2$)};
@@ -812,6 +830,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 \draw[<->, thick] (f1.30) to [out=45, distance=7mm] (f2.150) node[xshift=-1cm] {$\psi_{2,1}$};
 
 \end{tikzpicture}
+```
 
 *Figure* $`r FigNumber`$. Linear growth model for alcohol-use data from Duncan and Duncan (1996) with subject-level predictors of growth factors.
 ```{r echo=FALSE}
@@ -873,7 +892,7 @@ Notice that Eq. \ref{eq:L1pred} only includes a fixed (not random) effect of cig
 
 The path diagram below depicts both alcohol and cigarette use as observed variables, with the latter predicting the former.  However, `lavaan`'s internal LISREL representation does not have a parameter matrix for regressions among observed variables (M*plus* does, and the RAM representation used by the `OpenMx` package only has a single matrix with all slopes among observed and latent variables). So internally, `lavaan` "promotes" alcohol and cigarette use variables to latent variables corresponding to their single indicators.  However, to keep the path diagram readable, this is overlooked and the slopes are labeled simply as $\beta$s.
 
-
+```{r, engine='tikz',fig.ext='svg', echo=FALSE}
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
 error/.style={draw, circle, thick, minimum size=1cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -881,6 +900,8 @@ manifest/.style={draw, rectangle, thick, minimum size=1cm, align=center, execute
 mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 >=stealth,
 ]
+
+\usetikzlibrary{shapes}
 
 \node[latent] (f1) at (2,5) {Initial\\Status \\ ($\eta_1$)};
 \node[latent] (f2) at (7,5) {Rate of\\Change \\ ($\eta_2$)};
@@ -926,6 +947,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 \draw[<->, thick] (f1.30) to [out=45, distance=7mm] (f2.150) node[xshift=-1.5cm] {$\psi_{2,1}$};
 
 \end{tikzpicture}
+```
 
 *Figure* $`r FigNumber`$. Linear growth model for alcohol-use data from Duncan and Duncan (1996), controlling for cigarette-use data.
 ```{r echo=FALSE}
@@ -1033,7 +1055,7 @@ The path diagram in Figure 7 illustrates a "curve of factors" model, in which gr
 
 In practice, measurement invariance should be tested first, as shown in Chapter 25. Although some authors have advocated testing longitudinal invariance with the LGCM in place (), we recommend using a CFA to test invariance because it places no restrictions on the latent mean or covariance structures.  Any misfit due to invalid structural constraints (e.g., linear growth when true growth is nonlinear) would inflate Type I error rates for tests of invariance.  Note also that if one identifies common factors by fixing a reference (or average) indicator's loading to 1 and intercept to 0, common-factor means and variances would be freely estimated even without invariance constraints in place.  However, the LGCM would not truly model change in a common factor, but rather change in the reference indicator.  Measurement invariance is a prerequisite to drawing valid inferences about structural differences/changes in a construct.
 
-
+```{r, engine='tikz',fig.ext='svg', echo=FALSE}
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
 error/.style={draw, circle, thick, minimum size=1cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -1041,6 +1063,8 @@ manifest/.style={draw, rectangle, thick, minimum size=1cm, align=center, execute
 mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 >=stealth,
 ]
+
+\usetikzlibrary{shapes,fit}
 
 \node[latent] (f1) at (1,5) {Substance\\Use ($\eta_{1, 2, 3, \text{ or } 4}$)};
 
@@ -1116,6 +1140,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 \draw[double, ->, thick, gray, dashed] (f1) to (box.west);
 
 \end{tikzpicture}
+```
 
 *Figure $`r FigNumber`$*. Curve-of-factors model for substance-use data from Duncan and Duncan (1996).
 ```{r echo=FALSE}
