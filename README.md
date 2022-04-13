@@ -1,5 +1,5 @@
 # SEM-Compendium
-## Compendium to the course "Structural Equation Modeling in Educational Research".
+## Compendium of the course "Structural Equation Modeling in Educational Research".
 
 ### Authors: T.D. Jorgensen* & S. Jak*.
 
