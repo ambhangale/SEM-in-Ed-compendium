@@ -37,7 +37,7 @@ gN <- table(dat$mood.f)
 
 ### Load `lavaan` into Workspace
 
-```{r load lavaan-a, message=FALSE}
+```{r load lavaan, message=FALSE}
 library(lavaan)
 ```
 

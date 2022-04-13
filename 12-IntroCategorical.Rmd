@@ -7,7 +7,7 @@ In this chapter we first import example data, then we show how one can use probi
 
 ## Prepare Data and Workspace
 
-```{r load lavaan-b, message=FALSE}
+```{r load lavaan, message=FALSE}
 library(lavaan)
 ```
 
@@ -16,7 +16,7 @@ library(lavaan)
 
 We will use example data provided on the [\textcolor{blue}{M\textit{plus} website}](http://www.statmodel.com) for a technical report (Muthén, 2011, p. 24).  The example data can be downloaded onto your computer from the report's [\textcolor{blue}{supplementary materials}](http://www.statmodel.com/examples/penn.shtml#extendSEM), or you can provide the URL directly to `read.table(file=)`, as shown below.  Note that the data are in summary format (i.e., a table with frequencies for each combination of categories for the 3 variables).  The `read.table()` output is therefore transformed into a standard `data.frame` with 1 row per subject.
 
-```{r import data-12}
+```{r import data}
 dd <- read.table(file = "http://www.statmodel.com/examples/shortform/4cat%20m.dat",
                  col.names = c("intention", "intervention", "ciguse", "w"))
 dd$intention <- dd$intention - 1L # make the lowest category 0, not 1

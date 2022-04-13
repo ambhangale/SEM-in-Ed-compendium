@@ -9,6 +9,7 @@ biblio-style: apalike
 link-citations: yes
 github-repo: LJGroot/SEM-Compendium
 delete_merged_file: yes
+new_session: yes
 ---
 
 # Preface {-}
