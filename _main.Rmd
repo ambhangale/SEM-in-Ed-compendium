@@ -1,3 +1,42 @@
+---
+title: 'Compendium Structural Equation Modeling in Educational Research'
+author: "Suzanne Jak and Terrence D. Jorgensen"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [SEM-Compendium.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: LJGroot/SEM-Compendium
+---
+---
+title: 'Compendium Structural Equation Modeling in Educational Research'
+author: "Suzanne Jak and Terrence D. Jorgensen"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [SEM-Compendium.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: LJGroot/SEM-Compendium
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Preface {-}
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tinytex'
+), 'packages.bib')
+```
+
+<!--chapter:end:index.Rmd-->
+
 # Regression as Mean- and Covariance-Structure Analysis
 
 This chapter prepares the reader to learn about structural equation modeling (SEM) by reviewing the fundamentals of ordinary least-squares (OLS) regression. Different types of data are discussed, and some review of matrix algebra will be incorporated into the regression review.
@@ -658,4 +697,7 @@ Rosseel, Y. (2012). `lavaan`: An R package for structural equation modeling. *Jo
 Schumacker, R. E., & Lomax, R. G. (2016). *A beginner's guide to structural equation modeling* (4th ed.). Lawrence Erlbaum. 
 
 
+
+
+<!--chapter:end:01-ReviewRegression.Rmd-->
 
