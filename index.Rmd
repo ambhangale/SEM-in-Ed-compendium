@@ -7,7 +7,7 @@ documentclass: book
 bibliography: [SEM-Compendium.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: rstudio/bookdown-demo
+github-repo: LJGroot/SEM-Compendium
 ---
 
 ```{r setup, include=FALSE}
@@ -20,6 +20,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tinytex'
 ), 'packages.bib')
 ```

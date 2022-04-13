@@ -2,9 +2,8 @@
 title: 'Compendium Structural Equation Modeling in Educational Research'
 subtitle: 'Chapter 1: Regression as Mean- and Covariance-Structure Analysis'
 author: "Suzanne Jak and Terrence D. Jorgensen"
-output: 
-  pdf_document:
-    number_sections: true
+output: bookdown::gitbook
+number_sections: true
 header-includes: 
   - \definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
   - \usepackage{soul}
