@@ -1,11 +1,6 @@
-#Using `lavaan` to Run Regression and ANOVA as a SEM
+# Using `lavaan` to Run Regression and ANOVA as a SEM
 
 ## Prepare Data and Workspace
-
-<!-- TODO: 
-Frame the need to talk about MG-SEM because it allows for thinking more about CSA v. reproducing raw data 
--->
-
 
 ### Import Example Data
 
