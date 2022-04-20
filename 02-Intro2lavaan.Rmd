@@ -14,12 +14,12 @@ S <- cov(dat)
 N <- nrow(dat)
 ```
 
-Recall from Chapter 1 that:
+Recall from [Chapter 1](regression-as-mean--and-covariance-structure-analysis) that:
 
 - SEM can equivalently be fitted to summary statistics rather than raw data
 - It is possible to fit a "multigroup SEM" to obtain parameter estimates separately per group
 
-This chapter will show how to fit a multigroup SEM to raw data as well as to summary statistics.  For the latter, we require group-specific summary statistics, which Chapter 1 discussed how to obtain:
+This chapter will show how to fit a multigroup SEM to raw data as well as to summary statistics.  For the latter, we require group-specific summary statistics, which [Chapter 1](regression-as-mean--and-covariance-structure-analysis) discussed how to obtain:
 
 ```{r import summary data}
 ## Create factor from effects-coded conditions
