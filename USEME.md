@@ -4,7 +4,7 @@ This file contains some notes on how to work with bookdown and how to edit/contr
 
 ## What this repo contains.
 
-This repository contains Rmarkdown scripts that contain learning materials for the graduate level course 'Structural Equation Modeling in Education', 
+This repository holds, among other things, Rmarkdown scripts that contain learning materials for the graduate level course 'Structural Equation Modeling in Education', 
 as a part of the Research Master programme of the Research Institute of Child Devlopment and Education.
 
 This content can be rendered into a 'gitbook' interactive book using the RStudio IDE. 
