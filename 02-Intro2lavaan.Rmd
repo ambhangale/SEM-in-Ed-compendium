@@ -359,7 +359,7 @@ fit2 <- sem(mod2, sample.nobs = gN, # "group=" is implied by lists
 - Can easily test $H_0$ about parameters other than means
     - Are variances or correlations equal across groups?
 
-Disadvantages:
+#### Disadvantages:
 
 - asymptotic assumption (large $N$) applies to each group
 - single-group regression better in small samples
