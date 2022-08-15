@@ -11,7 +11,7 @@ Of course, it is impossible to draw all possible samples and observe the samplin
 For example, the parameter estimates with SEs for the anxiety example are given in Table 1.
 
 | **Parameter** | **Estimate** | ***SE*** | ***z*** | ***p*** **(\<\|z\|)** |
-|--------------:|-------------:|---------:|--------:|----------------------:|
+|---------------|-------------:|---------:|--------:|----------------------:|
 |         b~11~ |        0.187 |    0.140 |   1.341 |                  .180 |
 |         b~32~ |        0.210 |    0.096 |   2.194 |                  .028 |
 |         b~43~ |        0.072 |    0.026 |   2.741 |                  .006 |

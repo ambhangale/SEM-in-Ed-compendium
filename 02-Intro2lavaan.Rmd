@@ -4,7 +4,7 @@
 
 ### Import Example Data
 
-We will use data from a tutorial published on the [\textcolor{blue}{Social Change Lab's web site}](http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf).
+We will use data from a tutorial published on the [Social Change Lab's web site](http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf).
 
 ```{r import raw data, message=FALSE}
 dat <- foreign::read.spss("MODMED.sav", to.data.frame = TRUE)[c(2, 3, 5, 7)]

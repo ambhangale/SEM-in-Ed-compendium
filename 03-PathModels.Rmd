@@ -211,12 +211,12 @@ Here, we can see that the equations for variables $\mathrm{y}_1$, $\mathrm{y}_2$
 The path model as described by Equation 3.07 is used to describe the relationships between the observed variables. In order to find the model for the variances and covariances of the observed variables, we have to re-write Equation \@ref(eq:3-05) as a function of model parameters:
 
 $$\mathrm{y} = \mathbf{B} \mathrm{y} + \zeta \Leftrightarrow$$
-begin{equation}
+\begin{equation}
 \mathrm{y} = (\mathbf{I} - \mathbf{B})^{-1} \zeta
 (\#eq:3-08)
 \end{equation}
 
-where $\mathbf{I}$ is an identity matrix that needs to be introduced to come to the end result, and $(\mathbf{I} - \mathbf{B})^{-1}$ denotes the inverse of the matrix $(\mathbf{I} - \mathbf{B})$. Derivations of Equation \@ref(eq:3-08) are given in Appendix 1.
+where $\mathbf{I}$ is an identity matrix that needs to be introduced to come to the end result, and $(\mathbf{I} - \mathbf{B})^{-1}$ denotes the inverse of the matrix $(\mathbf{I} - \mathbf{B})$. Derivations of Equation \@ref(eq:3-08) are given in [Appendix 1](#appendix-3).
 
 We now have an expression for the scores on the variables. However, in standard SEM, we do not model the observed scores directly, but the variances and covariance of the observed scores. Therefore, we need to find an expression for the model implied covariance matrix. Using Equation 3.08 and some covariance algebra, we obtain the expression for the variances and covariances of $\mathrm{y}$, called $\mathbf{\Sigma}_{model}$ = COV$(\mathbf{y},\mathbf{y})$:
 
@@ -225,7 +225,7 @@ We now have an expression for the scores on the variables. However, in standard 
 (\#eq:3-09)
 \end{equation}
 
-where $\boldsymbol{\Psi}$ is written for COV($\boldsymbol\zeta$,$\boldsymbol\zeta$), and $(\mathbf{I} - \mathbf{B})^{-1\mathrm{T}}$ denotes the transpose of the matrix $(\mathbf{I} - \mathbf{B})^{-1}$. Derivations of Equation \@ref(eq:3-09) are given in Appendix 1.
+where $\boldsymbol{\Psi}$ is written for COV($\boldsymbol\zeta$,$\boldsymbol\zeta$), and $(\mathbf{I} - \mathbf{B})^{-1\mathrm{T}}$ denotes the transpose of the matrix $(\mathbf{I} - \mathbf{B})^{-1}$. Derivations of Equation \@ref(eq:3-09) are given in [Appendix 1](#appendix-3).
 
 The symmetric matrix $\boldsymbol{\Psi}$ contains the variances and the covariances of the residual factors $\boldsymbol\zeta$. For the model given in Equation \@ref(eq:3-07), matrix $\boldsymbol{\Psi}$ is
 
@@ -270,7 +270,8 @@ $$
 \beta_{31} & \beta_{32} & 1 & 0 \\
 \beta_{31}\beta_{43} & \beta_{32}\beta_{43} & \beta_{43} & 1 
 \end{bmatrix}, 
-$$ $$
+$$
+$$
 \boldsymbol{\Psi} = 
 \begin{bmatrix}
 \psi_{11} & \psi_{21} & 0 & 0 \\
@@ -306,6 +307,7 @@ $$
 \end{bmatrix}. 
 $$
 
+
 Which yields:
 
 ```{r echo = FALSE, out.width = "100%", fig.align = "left" }
@@ -314,11 +316,36 @@ knitr::include_graphics("images/Equation.Week2.Ch3.jpg")
 
 ```
 
-(Equation 3.10)
+\begin{equation}
+\Sigma_{model} = 
+\begin{bmatrix} 
+\\
+\psi_{11} & & & \\
+
+\\
+\psi_{21} & \psi_{22} & & \\ 
+
+\\
+\beta_{31} \psi_{11} +  & \beta_{31} \psi_{21} +  & (\beta_{31}\psi_{11}+\beta_{32}\psi_{31}) \beta_{31} +  & \\
+\beta_{32} \psi_{21}&\beta_{32} \psi_{22}&(\beta_{31}\psi_{21}+\beta_{32}\psi_{22}) \beta_{32}\psi_{33}&
+\\
+\\
+
+\beta_{31}\beta_{43}\psi_{11} +  & \beta_{31}\beta_{43}\psi_{21} +  & (\beta_{31}\beta_{43}\psi_{11} + \beta_{32}\beta_{43}\psi_{21}) \beta_{31} + & (\beta_{31}\beta_{43}\psi_{11} + \beta_{32}\beta_{43}\psi_{21})\beta_{31}\beta_{43} +  \\
+
+\beta_{32}\beta_{43}\psi_{21} & \beta_{32}\beta_{43}\psi_{22} & (\beta_{31}\beta_{43}\psi_{21} + \beta_{32}\beta_{43}\psi_{22}) \beta_{32} + & (\beta_{31}\beta_{43}\psi_{21} + \beta_{32}\beta_{43} \psi_{22})\beta_{32}\beta_{43} + \\
+&&\beta_{43}\psi_{33} & {\beta_{32}}^2 \psi_{33} + \psi_{44} \\
+&&&\\
+\end{bmatrix}
+(\#eq:3-10)
+\end{equation}
+
 
 Now that we have found the expression of $\mathbf{\Sigma}_{model}$ as a function of model parameters, this enables the estimation of the model parameters, by choosing the values for each model parameter in such a way, that the resulting model implied variances and covariances of $\mathbf{\hat\Sigma}_{model}$ are as close as possible to the sample variances and covariances, $\mathbf{\hat\Sigma}_{population}$. A discrepancy function can be used to obtain parameter estimates, where an iterative procedure yields model parameters that keep the discrepancy between $\mathbf{\hat\Sigma}_{population}$ and $\mathbf{\hat\Sigma}_{model}$ to a minimum. In general, smaller values of discrepancy functions indicate better fit of the model to the data, and a value of zero indicates the fit is perfect, i.e., if the parameter estimates can perfectly reproduce the sample covariance matrix. Several discrepancy functions exist, but maximum likelihood estimation is most commonly applied. The resulting discrepancy value can be used for the assessment of overall goodness-of-fit using the so-called chi-square test of exact fit, where a significant chi-square value indicates a significant deviation between model and data (i.e., implying that $\mathbf{\hat\Sigma}_{population} \ne \mathbf{\Sigma}_{model}$). See also Chapters 10 and 11, where the topics of Estimation and Evaluation of Model Fit are explained in more detail.
 
-In our illustrative example of child anxiety, maximum likelihood estimation leads to the following model parameter estimates: $$
+In our illustrative example of child anxiety, maximum likelihood estimation leads to the following model parameter estimates: 
+
+$$
 \hat{\mathbf{B}}
 = 
 \begin{bmatrix}
@@ -422,23 +449,23 @@ AWmodelOut <- lavaan( model = AWmodel,
                        likelihood = "wishart", fixed.x = FALSE)
 ```
 
-We start by defining the observed covariance matrix and the names of the associated observed variables. It is required to provide these names with the input matrix. First we created the object *obsnames* that contains the names of the variables. Note that the order of the variables corresponds to the labels $\mathrm{y}_1$ to $\mathrm{y}_4$ in Figure 3.2.
+We start by defining the observed covariance matrix and the names of the associated observed variables. It is required to provide these names with the input matrix. First we created the object `obsnames` that contains the names of the variables. Note that the order of the variables corresponds to the labels $\mathrm{y}_1$ to $\mathrm{y}_4$ in Figure 3.2.
 
 ```{r eval = FALSE}
 obsnames <- c("parent_anx", "perfect", "overcontrol", "child_anx") 
 ```
 
-The names are given as a list with two elements, one vector of row names and one vector of column names. As a covariance matrix is a symmetric matrix, row and column names are the same, and we can use the command *list(obsnames, obsnames)* to provide the labels for the observed covariance matrix.
+The names are given as a list with two elements, one vector of row names and one vector of column names. As a covariance matrix is a symmetric matrix, row and column names are the same, and we can use the command `list(obsnames, obsnames)` to provide the labels for the observed covariance matrix.
 
-The observed covariance matrix is stored in the object *AWcov*, by creating a matrix with the values of the elements, number of rows, number of columns, and the name vectors of the two dimensions.
+The observed covariance matrix is stored in the object `AWcov`, by creating a matrix with the values of the elements, number of rows, number of columns, and the name vectors of the two dimensions.
 
 ```{r eval = FALSE}
 AWcov = matrix(...)
 ```
 
-To check whether you successfully specified the observed covariance matrix, check the results by typing *AWcov* in the R console. And check, for example, whether the matrix is indeed symmetrical by typing *AWcov == t(AWcov)* or *isSymmetric(AWcov)*.
+To check whether you successfully specified the observed covariance matrix, check the results by typing `AWcov` in the R console. And check, for example, whether the matrix is indeed symmetrical by typing `AWcov == t(AWcov)` or `isSymmetric(AWcov)`.
 
-The next step is to specify the model that has to be fitted to the observed data. We create the object *AWmodel* where the model specifications are given, encapsulated by single quotes. We need to specify all free parameters that need to be estimated: regression coefficients and (residual) variances and covariances. The structural part of the model is specified using regression equations:
+The next step is to specify the model that has to be fitted to the observed data. We create the object `AWmodel` where the model specifications are given, encapsulated by single quotes. We need to specify all free parameters that need to be estimated: regression coefficients and (residual) variances and covariances. The structural part of the model is specified using regression equations:
 
 ```{r eval = FALSE}
 AWmodel <- '
@@ -447,11 +474,11 @@ AWmodel <- '
             child_anx ~ b43*overcontrol 
 ```
 
-The tilde sign, "\~", is the regression operator. On the left hand of this operator we have the dependent variable, and on the right hand side of this operator we have the independent variables, separated by the "+" operator. The regression coefficients are named after their position in the $\mathbf{B}$ matrix. For example, the regression of overcontrol on parent anxiety is labeled with "*b31*", which corresponds to the position of the estimate of the regression coefficient ($\beta_{31}$) in the $\mathbf{B}$ matrix. As such, the names "*b31*", "*b32*", "*b43*" are chosen to represent $\beta_{31}$, $\beta_{32}$, and$\beta_{43}$.
+The tilde sign, "\~", is the regression operator. On the left hand of this operator we have the dependent variable, and on the right hand side of this operator we have the independent variables, separated by the "+" operator. The regression coefficients are named after their position in the $\mathbf{B}$ matrix. For example, the regression of overcontrol on parent anxiety is labeled with "`b31`", which corresponds to the position of the estimate of the regression coefficient ($\beta_{31}$) in the $\mathbf{B}$ matrix. As such, the names "`b31`", "`b32`", "`b43`" are chosen to represent $\beta_{31}$, $\beta_{32}$, and$\beta_{43}$.
 
 The residual terms are not explicitly included in the formulas. These formulas therefore only specify the structural part of the model.
 
-The (residual) variances are specified using double tilde's ("$\sim \sim$"), where the same variable name is given both left and right of this operator. Covariances are specified similarly. The estimates of the (co)variances can be named by providing a label before the variable name that is to the right from the "$\sim \sim$" operator. Here, we used the names "*p11*" to "*p44*" and "*p21*" to refer to the position of the parameter estimates in the $\boldsymbol{\Psi}$ matrix.
+The (residual) variances are specified using double tilde's ("$\sim \sim$"), where the same variable name is given both left and right of this operator. Covariances are specified similarly. The estimates of the (co)variances can be named by providing a label before the variable name that is to the right from the "$\sim \sim$" operator. Here, we used the names "`p11`" to "`p44`" and "`p21`" to refer to the position of the parameter estimates in the $\boldsymbol{\Psi}$ matrix.
 
 ```{r eval = FALSE}
             # (residual) variance
@@ -464,7 +491,7 @@ The (residual) variances are specified using double tilde's ("$\sim \sim$"), whe
             '
 ```
 
-When all separate elements of the model are created, we can fit ("run") the model using the *lavaan()* function and storing the output in *AWmodelOut*:
+When all separate elements of the model are created, we can fit ("run") the model using the `lavaan()` function and storing the output in `AWmodelOut`:
 
 ```{r eval = FALSE}
 AWmodelOut <- lavaan( model = AWmodel, 
@@ -472,9 +499,9 @@ AWmodelOut <- lavaan( model = AWmodel,
                       likelihood = "wishart", fixed.x = FALSE)
 ```
 
-The *lavaan()* function takes as arguments the specified model (*model = AWmodel*), the specified covariance matrix (*sample.cov = AWcov*), and the total number of observations (*sample.nobs = 77*). The final two arguments are used to turn off two default settings of lavaan. That is, we use Wishart likelihood (*likelihood = "wishart"*) because we are only analyzing covariance structure (when we add mean structure later in the semester, we will use "*normal*" likelihood). We also specify that we want to freely estimate (*fixed.x = FALSE*) rather than fix the (co)variances of the exogenous variables to their sample values.
+The `lavaan()` function takes as arguments the specified model (`model = AWmodel`), the specified covariance matrix (`sample.cov = AWcov`), and the total number of observations (`sample.nobs = 77`). The final two arguments are used to turn off two default settings of lavaan. That is, we use Wishart likelihood (`likelihood = "wishart"`) because we are only analyzing covariance structure (when we add mean structure later in the semester, we will use "`normal`" likelihood). We also specify that we want to freely estimate (`fixed.x = FALSE`) rather than fix the (co)variances of the exogenous variables to their sample values.
 
-The output is stored in *AWmodelOut*, and we can inspect the result using the *summary()* function:
+The output is stored in `AWmodelOut`, and we can inspect the result using the `summary()` function:
 
 ```{r eval = FALSE}
 summary(AWmodelOut)
@@ -546,7 +573,7 @@ summary(AWmodelOut, rsquare = TRUE)
 
 ### Syntax shortcuts
 
-Script 3.1 specifies every single nonzero parameter depicted in the path model of Figure 3.2. In larger models, this can become quite cumbersome, increase the chance of making an error, and make the model syntax more difficult to read (e.g., to find mistakes). Some parameters can be specified automatically in the *lavaan()* call. For example, setting the option *auto.var = TRUE* will tell lavaan to freely estimate all (residual) variances of variables included in the model syntax, and the option *fixed.x = FALSE* already tells lavaan to freely estimate covariances among exogenous variables. Thus, adding these options to the *lavaan()* call means that the model syntax requires only the specification of regression parameters, which is quite easy to read:
+Script 3.1 specifies every single nonzero parameter depicted in the path model of Figure 3.2. In larger models, this can become quite cumbersome, increase the chance of making an error, and make the model syntax more difficult to read (e.g., to find mistakes). Some parameters can be specified automatically in the `lavaan()` call. For example, setting the option `auto.var = TRUE` will tell lavaan to freely estimate all (residual) variances of variables included in the model syntax, and the option `fixed.x = FALSE` already tells lavaan to freely estimate covariances among exogenous variables. Thus, adding these options to the `lavaan()` call means that the model syntax requires only the specification of regression parameters, which is quite easy to read:
 
 ```{r, eval = FALSE}
 
@@ -562,7 +589,7 @@ AWmodelOut <- lavaan( model = AWmodel, auto.var = TRUE,
                       likelihood = "wishart", fixed.x = FALSE)
 ```
 
-In fact, the *auto.var = TRUE* option is set by default in lavaan's shortcut function, *sem()*, which sets several other default options that are typically desired in a path analysis (or structural regression among latent variables, which you will learn about later).
+In fact, the `auto.var = TRUE` option is set by default in lavaan's shortcut function, `sem()`, which sets several other default options that are typically desired in a path analysis (or structural regression among latent variables, which you will learn about later).
 
 ```{r, eval = FALSE}
 AWmodelOut <- sem( model = AWmodel,
@@ -572,9 +599,9 @@ AWmodelOut <- sem( model = AWmodel,
 
 ### Extracting results from lavaan output in matrix form
 
-To be able to inspect the parameter estimates of a path model in matrix form (namely the $\mathbf{B}$ and $\boldsymbol{\Psi}$ matrices), you can use the *lavInspect()* function, which can be used to extract many kinds of information about the fitted lavaan model (see a complete list on the help page: *?lavInspect*).
+To be able to inspect the parameter estimates of a path model in matrix form (namely the $\mathbf{B}$ and $\boldsymbol{\Psi}$ matrices), you can use the `lavInspect()` function, which can be used to extract many kinds of information about the fitted lavaan model (see a complete list on the help page: `?lavInspect`).
 
-The *lavInspect()* function takes two arguments: (1) the lavaan "object" (in this case, *AWmodelOut*) and (2) a character string naming what specific information you want to inspect (in this case, the estimated coefficients: "*coef*"). SEM involves more than just the $\mathbf{B}$ and $\boldsymbol{\Psi}$ matrices, and the output will always include them even if they are empty (e.g., full of zeros, or an identity matrix). The following code can be used to store the $\mathbf{B}$ and $\boldsymbol{\Psi}$ matrices in the objects "*BETA*" and "*PSI*" to control what is displayed.
+The `lavInspect()` function takes two arguments: (1) the lavaan "object" (in this case, `AWmodelOut`) and (2) a character string naming what specific information you want to inspect (in this case, the estimated coefficients: "`coef`"). SEM involves more than just the $\mathbf{B}$ and $\boldsymbol{\Psi}$ matrices, and the output will always include them even if they are empty (e.g., full of zeros, or an identity matrix). The following code can be used to store the $\mathbf{B}$ and $\boldsymbol{\Psi}$ matrices in the objects "`BETA`" and "`PSI`" to control what is displayed.
 
 ```{r, eval = FALSE}
 Estimates <- lavInspect(AWmodelOut, "est")
@@ -582,7 +609,7 @@ BETA <- Estimates$beta[obsnames, obsnames]
 PSI <- Estimates$psi[obsnames, obsnames] 
 ```
 
-The resulting *BETA* and *PSI* matrices are shown below. Because lavaan ignores the order of the variables in the input covariance matrix, its matrices correspond to variables in the order that they appeared in the model syntax. The order is arbitrary, but to make them easier to read (e.g., to compare this output to the matrices described in the previous sections of this chapter), the above syntax used the square-bracket operators to specify that the order of [rows, columns] should be the same order as our input matrix.
+The resulting `BETA` and `PSI` matrices are shown below. Because lavaan ignores the order of the variables in the input covariance matrix, its matrices correspond to variables in the order that they appeared in the model syntax. The order is arbitrary, but to make them easier to read (e.g., to compare this output to the matrices described in the previous sections of this chapter), the above syntax used the square-bracket operators to specify that the order of [rows, columns] should be the same order as our input matrix.
 
 ```{r, echo = FALSE}
 Estimates <- lavInspect(AWmodelOut, "est")
@@ -608,7 +635,7 @@ Here, we can see that the variance of the residual factor of parent anxiety ($\p
 
 Rosseel, Y. (2012). lavaan: An R package for structural equation modeling. *Journal of Statistical Software, 48*(2), 1-36.
 
-## Appendix I. Derivations of equation 3.08 and 3.09
+## Appendix I. Derivations of equation 3.08 and 3.09 ## {#appendix-3}
 
 **Derivation of Equation 3.08**
 

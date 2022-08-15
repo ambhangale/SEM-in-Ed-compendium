@@ -1,0 +1,78 @@
+# Estimation
+
+In the chapter on identification we saw that model parameters can be written as a function of elements from $\Sigma_{population}$. Subsequently, we can use these equations to estimate model parameters derived from the sample variances and covariances ($\Sigma_{sample}$). For just-identified models, the number of known elements in $\Sigma_{sample}$ equals the number of unknown model parameters, and one can derive parameter estimates by solving the equations that satisfy $\widehat\Sigma_{model}$ = $\Sigma_{sample}$. For models that are over identified (i.e., that have positive $df$) the estimation of model parameters is more complicated. In our illustrative example of child anxiety, we can derive three different equations in terms of population variances and covariances (i.e., by rewriting the equations of $\sigma_{41}$, $\sigma_{42}$ and $\sigma_{43}$) for the expression of the single model parameter $\beta_{43}$. When we subsequently want to use these equations to estimate the model parameter $\widehat\beta_{43}$ we can never derive an estimate so that all three elements $\widehat\sigma_{41}$, $\widehat\sigma_{42}$ and $\widehat\sigma_{43}$ of $\widehat\Sigma_{model}$ are equal to the corresponding elements of $\Sigma_{sample}$. Therefore, for over-identified models there will always be a certain amount of discrepancy between $\widehat\Sigma_{model}$ and $\Sigma_{sample}$. In such cases, the estimation of model parameters requires an iterative procedure to minimize the discrepancy between $\Sigma_{sample}$ and $\widehat\Sigma_{model}$ (i.e., What value of $\widehat\beta_{43}$will lead to expressions of $\widehat\sigma_{41}$, $\widehat\sigma_{42}$ and $\widehat\sigma_{43}$ that are as close as possible to the corresponding elements in $\Sigma_{sample}$?).
+
+The estimation procedures are iterative because the initial solution (i.e., the first attempt to estimate model parameters and evaluate the discrepancy between $\Sigma_{sample}$ and $\widehat\Sigma_{model}$) is improved through subsequent cycles of calculations until the improvement in model fit falls below a predefined minimum value (i.e., the decrease in discrepancy between $\Sigma_{sample}$ and $\widehat\Sigma_{model}$ is very small). When this happens, the estimation process has converged. Convergence may be achieved more quickly when the initial solution, or the initial estimates of the parameters (i.e., start values) are reasonably accurate. If these initial estimates are completely inaccurate, then iterative estimation may even fail to converge. Most computer programs automatically generate reasonable start values and will give a warning if a solution has not converged. However, sometimes it may be necessary to provide user-specified start values in order for the solution to converge, especially for more complex models.
+
+Several discrepancy functions exist that can be used for the estimation of model parameters. Three desirable qualities of a good estimation procedure are *unbiasedness*, *consistency* and *efficiency.* Suppose we repeat the estimation procedure for a given model an infinite number of times on an infinite number of datasets. The estimator is unbiased when the expected parameter values (i.e., means of the sampling distributions of parameter estimates) are equal to the population values, i.e., they are not systematically biased upwards or downwards. The estimator is consistent when parameter estimates are closer to the population parameters with increased sample size, i.e., the larger the sample size, the closer the estimated values are to the population values (given that the sample is representative of the population). Efficiency refers to the variance of the sampling distribution of parameter estimates, where the most efficient estimator has a sampling distribution with the smallest variance (and thus the smallest $SE$s).
+
+The most intuitive method that could be used to minimize the discrepancies between $\Sigma_{sample}$ and $\widehat\Sigma_{model}$ is to simply calculate the difference between the two matrices and try to minimize the values within the resulting residual covariance matrix. This is what is commonly referred to as the unweighted least squares (ULS) discrepancy function:
+
+```{=tex}
+\begin{equation}
+F_{ULS}(\Sigma_{sample},\widehat\Sigma_{model}) = ½ trace ((\Sigma_{sample} - \widehat\Sigma_{model})^2),
+(\#eq:10-01)
+\end{equation}
+```
+
+!missing footnote!
+
+which minimizes the squared deviations between the observed sample variances and covariances and the corresponding elements predicted by the model. If the deviations are zero (i.e., observed and model-implied matrices are identical), then FULS is zero, indicating perfect fit.  Any nonzero discrepancies yield a positive FULS.  Minimizing FULS yields unweighted least squares (ULS) estimates of all the model parameters given by Equations 3.09 and 3.10, under the assumption that the model is valid and identified. It leads to unbiased and consistent estimates of model parameters, and does not require that the observed variables have a particular distribution. However, it is not the most efficient estimator.
+
+A particularly attractive discrepancy function is given by:
+```{=tex}
+\begin{equation}
+F_{ML}(\Sigma_{sample},\widehat\Sigma_{model}) = log|\widehat\Sigma_{model}|-log|\Sigma_{sample}|+trace(\Sigma_{sample}\widehat\Sigma^{-1}_{model})-p,
+(\#eq:10-02)
+\end{equation}
+```
+
+which gives so-called maximum likelihood (ML) estimates of all model parameters, assuming that the distribution of the scores of the observed variables ($p$) is multivariate normal and that the model is valid and identified. It is the most widely used fitting function for general structural equation models, and the estimator is unbiased, consistent and more efficient than ULS. Although it is a more complex nonlinear function, it has additional important properties. First, it allows for tests of statistical significance of parameter estimates as the estimators are asymptotically normally distributed. Second, unlike FULS, FML is scale invariant and scale free. These properties refer to the dependency of the fitting function on the units of measurement of the observed variables. When the fitting function is scale invariant, the value of the fit function is independent of the measurement scales of the variables, i.e., the value of the fit function will be the same for different scales of measurement. In addition, scale freeness refers to the property that when the scales of the observed variables are linearly transformed (i.e., multiplied by and/or added to a constant), the relationship between the parameter estimates of the transformed and untransformed solution can be derived too (i.e., they are linearly transformed in a similar fashion). 
+
+In general, smaller values of discrepancy functions indicate better fit of the model to the data. A value of zero indicates the fit is perfect, i.e., the parameter estimates can perfectly reproduce the sample covariance matrix ($\widehat\Sigma_{model}=\Sigma_{sample}$).
+
+Using Equation 10.02 to arrive at ML estimates of model parameter of the path model from our illustrative example, yields: 
+
+$$
+\widehat\Sigma_{model} =
+\begin{bmatrix}
+91.58 & \\
+53.36 & 194.32 \\
+28.39 & 50.90 & 130.19 \\
+2.05 & 3.68 & 9.41 & 7.56
+\end{bmatrix}
+$$
+whereas the observed variances and covariances of the sample are given by:
+$$
+\Sigma_{sample} =
+\begin{bmatrix}
+91.58 & \\
+53.36 & 194.32 \\
+28.39 & 50.90 & 130.19 \\
+9.21 & 4.98 & 9.41 & 7.56
+\end{bmatrix}
+$$
+
+When we compare $\widehat\Sigma_{model}$ and $\Sigma_{sample}$ from our illustrative example, we can see that there are some discrepancies between the two matrices. Specifically, the elements $\widehat\sigma_{41}$ and $\widehat\sigma_{42}$  of $\widehat\Sigma_{model}$ are different from the corresponding sample covariance. These two elements featured in the equations for the over-identified model parameter $\widehat\beta_{43}$. As can be seen, the model parameter was estimated so that the element $\widehat\beta_{43}$ of $\widehat\Sigma_{model}$ equals the corresponding element of the sample covariance matrix, which thus leads to a misfit for the elements $\widehat\sigma_{41}$ and $\widehat\sigma_{42}$. The residual covariance matrix (i.e., $\Sigma_{sample} - \widehat\Sigma_{model}$) is:
+
+$$
+\Sigma_{residual} =
+\begin{bmatrix}
+0\\
+0&0\\
+0&0&0\\
+7.2 & 1.3 & 0 & 0 
+\end{bmatrix}
+$$
+
+This shows that the covariance between variable 4 (child anxiety) and variables 1 and 2 (parent anxiety and parent perfectionism) are underestimated by the model. When the residual values would be negative, this would indicate that the covariances are overestimated by the model. Model fit evaluation (which is the topic of Chapter 11) is used to evaluate whether the amount of misfit in these elements is substantial enough to reject the model, i.e., concluding that the specified model is not an adequate representation of the developmental process of child anxiety.
+
+It is important to note that models should only be fit to covariance matrices.  Fitting a model to a correlation matrix without additional constraints yields incorrect $SE$s (Cudeck, 1989), so Wald $z$ tests do not have nominal Type I error rates.
+
+## Improper Solutions
+Even when the estimation procedure has reached convergence, a researcher should always be aware of inadmissible solutions and so-called Heywood cases. Heywood cases refer to parameter estimates with an illogical value, like for example negative variance estimates, or estimated correlations with absolute values larger than 1.0.  These kind of estimates have no plausible interpretations, and therefore such solutions are inadmissible. Sometimes the associated SEs of parameter estimates are very large (e.g., 999,999.99), which usually indicates that there is a problem with the model solution. Inadmissible solutions may be caused by several factors, including underidentification, misspecification, or bad starting values. Some computer programs give warnings that parameter estimates take on illogical values, but it is important to always carefully inspect all parameter estimates, unstandardized and standardized, to ensure that the solution is indeed admissible. Chen, Bollen, Paxton, Curran and Kirby (2001) describe the possible causes of, consequences of, and possible strategies to handle improper solutions in more detail.  
+
+For instance, a Heywood case could result from either (a) model misspecification or (b) sampling error.  So before trying to “fix” a Heywood case, one should first test the null hypothesis that the parameter is an admissible solution.  For example, if the 95% CI for a residual variance includes positive values, then you cannot reject the null hypothesis (using α = .05) that the true population value is indeed positive; in this case, if the model fits well and there are no other signs of misspecification, you could conclude that the true parameter is simply close enough to zero that sampling error occasionally yields a negative estimate.  
+
+## Specifying starting values in lavaan
+Methods for choosing default start values are quite excellent in recent software such as M*plus* and `lavaan`, so it is rarely necessary for a user to provide start values manually.  However, it may be useful to know how to do so, particularly when having difficulty converging on a proper (or any) solution.  There are three ways to provide non-default starting values in `lavaan`.  The first two involve specifying them in the `lavaan` model syntax, either using the `start()` modifier:

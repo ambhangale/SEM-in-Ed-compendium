@@ -50,7 +50,7 @@ Table 1. *Direct, total indirect and total effects on Child Anxiety with standar
 
 In our example there are only two indirect effects, but there may be more complex indirect effects. Consider for example the model that was hypothesized by Affrunti and Woodruff-Borden (2014) in Figure 5.3.
 
-In the model of Figure 5.3, there are two indirect effects from PA on CA. One path goes from PA to PO and then from PO to CA, and is equal to $β_{31} * β_{43}$. The other indirect effect goes from PA to PP, from PP to PO, and from PO to CA, and is calculated by $β_{21} * β_{32} * β_{43}$. Because this effect is build up of three direct effects, this is called a third order effect. The sum of all specific indirect effects is the total indirect effect. The total effect of PA on CA equals the sum of all indirect effects plus the direct effect ($β_{41}$). This model also contains an indirect effect of PA on PO, which equals $β_{21} * β_{32}$.
+In the model of Figure 5.3, there are two indirect effects from PA on CA. One path goes from PA to PO and then from PO to CA, and is equal to $β_{31} \times β_{43}$. The other indirect effect goes from PA to PP, from PP to PO, and from PO to CA, and is calculated by $β_{21} \times β_{32} \times β_{43}$. Because this effect is build up of three direct effects, this is called a third order effect. The sum of all specific indirect effects is the total indirect effect. The total effect of PA on CA equals the sum of all indirect effects plus the direct effect ($β_{41}$). This model also contains an indirect effect of PA on PO, which equals $β_{21} \times β_{32}$.
 
 ```{r echo = FALSE, out.width = "80%", fig.align = "center" }
 
@@ -60,7 +60,7 @@ knitr::include_graphics("images/CH5_Hypothesized_Model_Affrunti.png")
 
 *Figure 5.3.* The hypothesized model of Affrunti and Woodruff-Borden (2014)
 
-Judging the significance of higher order indirect effects can also be done using the delta-method and Sobel test described earlier, but the calculations quickly become more difficult. For example, the standard error of indirect effect abc can be calculated using $SE_{abc} = SE_{ab} * SE_{c}$ using Equation \@ref(eq:5-01). `lavaan` will provide standard errors based on the delta-method for all requested functions of parameters.
+Judging the significance of higher order indirect effects can also be done using the delta-method and Sobel test described earlier, but the calculations quickly become more difficult. For example, the standard error of indirect effect abc can be calculated using $SE_{abc} = SE_{ab} \times SE_{c}$ using Equation \@ref(eq:5-01). `lavaan` will provide standard errors based on the delta-method for all requested functions of parameters.
 
 Table 2 shows a decomposition of effects of PA on PO and of PA on CA. As can be seen in Table 2, none of the individual indirect effects, or the total indirect effects in the model are significantly larger than zero. The unstandardized total effect of PA on CA is estimated to be .101, and is statistically significant at $α$ = .05. As can be seen, the total effect can be attributed to the direct effect of PA on CA. The total effect of PA on PO is also statistically significant, although both the direct and the total indirect effects are not significant individually. Their combined effect leads to a total effect that is large enough to lead to statistical significance.
 

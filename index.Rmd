@@ -4,6 +4,7 @@ author: "Suzanne Jak and Terrence D. Jorgensen"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
+    css: styles.css
     config:
       toc:
         collapse: section
