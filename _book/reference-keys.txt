@@ -40,6 +40,7 @@ eq:10-03
 eq:10-04
 eq:10-05
 eq:10-06
+eq:11-01
 eq:int
 eq:L1
 eq:L2
@@ -133,7 +134,7 @@ calculating-standardized-coefficients-in-r-using-lavaan-results
 request-standardized-output-with-lavaan
 standardizing-indirect-and-total-effects
 identification
-assessment-of-identification-using-the-elements-of-σ_population-and-sigma_model
+assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel
 assessing-identification-through-heuristics-rules-of-thumb
 the-recursive-rule
 the-order-condition
@@ -166,6 +167,8 @@ requesting-alternative-and-robust-estimators-in-lavaan
 alternative-calculation-of-the-ml-discrepancy-function-when-analysing-raw-data
 using-fiml-to-analyse-raw-data-with-missing-values-in-lavaan
 references-5
+measures-of-model-fit
+the-chi-squared-test-of-exact-fit
 path-analysis-with-categorical-outcomes
 prepare-data-and-workspace-1
 import-example-data-1

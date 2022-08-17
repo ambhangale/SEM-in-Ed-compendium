@@ -124,10 +124,10 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 
 \node[latent] (f1) at (3,5) {Intercept \\ ($\eta_1$)};
 
-\node[manifest] (y1) at (0,2) {$y_1$};
-\node[manifest] (y2) at (2,2) {$y_2$};
-\node[manifest] (y3) at (4,2) {$y_3$};
-\node[manifest] (y4) at (6,2) {$y_4$};
+\node[manifest] (y1) at (0,2) {$\mathrm{y}_1$};
+\node[manifest] (y2) at (2,2) {$\mathrm{y}_2$};
+\node[manifest] (y3) at (4,2) {$\mathrm{y}_3$};
+\node[manifest] (y4) at (6,2) {$\mathrm{y}_4$};
 
 \node[error] (e1) at (0,0) {$\varepsilon_1$};
 \node[error] (e2) at (2,0) {$\varepsilon_2$};
@@ -163,7 +163,7 @@ FigNumber <- FigNumber + 1L
 ```
 
 
-The path diagram above illuminates the differences between a growth factor (here, a random intercept) and a common factor.  First, factor loadings in a CFA are freely estimated, and they indicate how strongly an indicator is related to the common factor.  In a LGCM, **factor loadings are fixed to specify how the growth factor is interpreted**.  A random intercept's loadings are all 1 because every occasion's $y_i$ is weighted equally to calculate the Subject $i$'s overall mean.
+The path diagram above illuminates the differences between a growth factor (here, a random intercept) and a common factor.  First, factor loadings in a CFA are freely estimated, and they indicate how strongly an indicator is related to the common factor.  In a LGCM, **factor loadings are fixed to specify how the growth factor is interpreted**.  A random intercept's loadings are all 1 because every occasion's $\mathrm{y}_i$ is weighted equally to calculate the Subject $i$'s overall mean.
 
 Second, indicator intercepts in a CFA are freely estimated, and are the indicators' expected values when the common factor = 0.  Because the common-factor mean is typically constrained to zero for identification, indicator intercepts are often simply the indicator means.  In a LGCM, indicator intercepts are fixed to zero, but the growth-factor mean is freely estimated.  Thus, the only reason that an indicator's model-implied mean differs from zero is if the latent intercept's mean differs from zero.  This is a primary feature of an LGCM: **the mean structure of the indicators is captured entirely by the mean structure of the growth factors**.  Thus, this random-intercept model reflects the hypothesis that the mean ($\alpha_1$: here, average alcohol use) is equal across occasions, although the means can still vary across subjects ($\psi_{1,1}$).  
 
@@ -262,10 +262,10 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 \node[latent] (f1) at (1,5) {Initial\\Status \\ ($\eta_1$)};
 \node[latent] (f2) at (5,5) {Rate of\\Change \\ ($\eta_2$)};
 
-\node[manifest] (y1) at (0,2) {$y_1$};
-\node[manifest] (y2) at (2,2) {$y_2$};
-\node[manifest] (y3) at (4,2) {$y_3$};
-\node[manifest] (y4) at (6,2) {$y_4$};
+\node[manifest] (y1) at (0,2) {$\mathrm{y}_1$};
+\node[manifest] (y2) at (2,2) {$\mathrm{y}_2$};
+\node[manifest] (y3) at (4,2) {$\mathrm{y}_3$};
+\node[manifest] (y4) at (6,2) {$\mathrm{y}_4$};
 
 \node[error] (e1) at (0,0) {$\varepsilon_1$};
 \node[error] (e2) at (2,0) {$\varepsilon_2$};
@@ -415,10 +415,10 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 \node[latent] (f1) at (1,5) {Initial\\Status \\ ($\eta_1$)};
 \node[latent] (f2) at (5,5) {Referent\\Change \\ ($\eta_2$)};
 
-\node[manifest] (y1) at (0,2) {$y_1$};
-\node[manifest] (y2) at (2,2) {$y_2$};
-\node[manifest] (y3) at (4,2) {$y_3$};
-\node[manifest] (y4) at (6,2) {$y_4$};
+\node[manifest] (y1) at (0,2) {$\mathrm{y}_1$};
+\node[manifest] (y2) at (2,2) {$\mathrm{y}_2$};
+\node[manifest] (y3) at (4,2) {$\mathrm{y}_3$};
+\node[manifest] (y4) at (6,2) {$\mathrm{y}_4$};
 
 \node[error] (e1) at (0,0) {$\varepsilon_1$};
 \node[error] (e2) at (2,0) {$\varepsilon_2$};
@@ -462,10 +462,10 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 \node[latent] (f3) at (10,5) {Initial\\Status \\ ($\eta_1$)};
 \node[latent] (f4) at (14,5) {Referent\\Change \\ ($\eta_2$)};
 
-\node[manifest] (y5) at ( 9,2) {$y_1$};
-\node[manifest] (y6) at (11,2) {$y_2$};
-\node[manifest] (y7) at (13,2) {$y_3$};
-\node[manifest] (y8) at (15,2) {$y_4$};
+\node[manifest] (y5) at ( 9,2) {$\mathrm{y}_1$};
+\node[manifest] (y6) at (11,2) {$\mathrm{y}_2$};
+\node[manifest] (y7) at (13,2) {$\mathrm{y}_3$};
+\node[manifest] (y8) at (15,2) {$\mathrm{y}_4$};
 
 \node[error] (e5) at ( 9,0) {$\varepsilon_1$};
 \node[error] (e6) at (11,0) {$\varepsilon_2$};
@@ -592,10 +592,10 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 
 \usetikzlibrary{shapes}
 
-\node[manifest] (y1) at ( 0,0) {$y_1$};
-\node[manifest] (y2) at ( 4,0) {$y_2$};
-\node[manifest] (y3) at ( 8,0) {$y_3$};
-\node[manifest] (y4) at (12,0) {$y_4$};
+\node[manifest] (y1) at ( 0,0) {$\mathrm{y}_1$};
+\node[manifest] (y2) at ( 4,0) {$\mathrm{y}_2$};
+\node[manifest] (y3) at ( 8,0) {$\mathrm{y}_3$};
+\node[manifest] (y4) at (12,0) {$\mathrm{y}_4$};
 
 \draw[<->, thick] (y1.170) to [out=145, in=215, distance=7mm] (y1.190) node[left, xshift=-4mm] {$0^*$};
 \draw[<->, thick] (y2.170) to [out=145, in=215, distance=7mm] (y2.190) node[left, xshift=-4mm] {$0^*$};
@@ -801,10 +801,10 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 \node[latent] (f1) at (1,5) {Initial\\Status \\ ($\eta_1$)};
 \node[latent] (f2) at (5,5) {Rate of\\Change \\ ($\eta_2$)};
 
-\node[manifest] (y1) at (0,2) {$y_1$};
-\node[manifest] (y2) at (2,2) {$y_2$};
-\node[manifest] (y3) at (4,2) {$y_3$};
-\node[manifest] (y4) at (6,2) {$y_4$};
+\node[manifest] (y1) at (0,2) {$\mathrm{y}_1$};
+\node[manifest] (y2) at (2,2) {$\mathrm{y}_2$};
+\node[manifest] (y3) at (4,2) {$\mathrm{y}_3$};
+\node[manifest] (y4) at (6,2) {$\mathrm{y}_4$};
 
 \draw[->, thick] (f1) to node [above, fill=white, text opacity=1,fill opacity=.9] {$1^* \dots$} (y1);
 \draw[->, thick] (f1) to (y2);
@@ -1221,8 +1221,8 @@ Latent growth can be modeled for LRVs underlying discrete data, which means that
 
 #### Binary Indicators
 
-As discussed in Chapter 12, binary outcomes have a single threshold ($\tau$) to discretize a continuous/normal LRV ($y^*$) into 2 categories:
-$$y = I(y^* > \tau),$$
+As discussed in Chapter 12, binary outcomes have a single threshold ($\tau$) to discretize a continuous/normal LRV ($\mathrm{y}^*$) into 2 categories:
+$$\mathrm{y} = I(y^* > \tau),$$
 where the indicator function $I()$ assigns 1 when its argument is `TRUE` and 0 when it is `FALSE`.  The default behavior in `lavaan` is to identify the model by fixing each LRV's intercept and variance to 0 and 1, respectively, enabling all thresholds to be estimated.  However, it is statistically equivalent to fix a binary item's threshold to zero and estimate its intercept.  In fact, they will have the same absolute value but opposite sign.  
 
 Because indicator means are fixed to zero anyway (so they can be reproduced by growth factors via factor loadings), one could *hypothetically* fix thresholds for binary indicators to zero in `lavaan` syntax in order to fit a a LGCM to it (Newsom, 2015, p. 185).  For example, if we had raw example data whose substance-use indicators were binary, we could update *any* of the scripts above by adding something like this to the model syntax:
@@ -1242,7 +1242,7 @@ Either parameterization implies equality of variance across occasions, neither o
 
 With more than 2 categories, we can trade 2 *df* (e.g., by fixing the first threshold to 0 and second threshold to 1) to estimate both the LRV intercept and variance.  Recall from Chapter 12 that any ordinal variable with categories $c=0, \ldots, C$ can be interpreted as a crude discretization of an underlying LRV, whose $C$ thresholds divide the latent distribution into $C+1$ categories.
 
-$$y=c \ \ \ \text{ if } \ \ \ \tau_c < y^* \le \tau_{c+1}$$
+$$\mathrm{y}=c \ \ \ \text{ if } \ \ \ \tau_c < y^* \le \tau_{c+1}$$
 
 Because the normal distribution is unbounded, the first category "starts" at $\tau_0 = -\infty$, and the last category "ends" at $\tau_{C+1} = +\infty$.  
 
@@ -1255,7 +1255,7 @@ With only 3 categories, there is only enough information to trade the $C=2$ thre
   alc4 | a*t1 + b*t2 + c*t3 + d*t4 '
 ```
 
-Intercepts remain constrained to zero (the default setting) so that the LRV means can be modeled by the growth-factor means and loadings.  However, we must free the variances in the model syntax as well.  Similar to invariance with common factors, the first occasion's variance remains fixed to 1.  Using the default `parameterization = "delta"`, we must free the marginal variances on subsequent occasions, which is controlled by the "latent scale" parameters, whose operator resembles how we specify a (co)variance that includes an asterisk to indicate it refers to the LRV $y^*$.
+Intercepts remain constrained to zero (the default setting) so that the LRV means can be modeled by the growth-factor means and loadings.  However, we must free the variances in the model syntax as well.  Similar to invariance with common factors, the first occasion's variance remains fixed to 1.  Using the default `parameterization = "delta"`, we must free the marginal variances on subsequent occasions, which is controlled by the "latent scale" parameters, whose operator resembles how we specify a (co)variance that includes an asterisk to indicate it refers to the LRV $\mathrm{y}^*$.
 
 ```{r syntax scales, eval=FALSE}
 ' alc2 ~*~ NA*alc2

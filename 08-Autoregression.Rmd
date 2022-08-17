@@ -58,11 +58,11 @@ duncanmodelOut <- lavaan(duncanmodel, sample.cov=duncancov,
 summary(duncanmodelOut, fit = TRUE)
 ```
 
-The autoregression model is actually a simple path model. For the covariance structure we define the direct effects between the observed variables (matrix $B$) and the (residual) variances (matrix $\Psi$). 
+The autoregression model is actually a simple path model. For the covariance structure we define the direct effects between the observed variables (matrix $\mathbf{B}$) and the (residual) variances (matrix $\mathbf{\Psi}$). 
 
 If an autoregressive model doesn’t explain the correlations between measurements well enough, one could add ‘second order autoregressive effects’. In Figure 1 this would be a direct effect of Year 1 on Year 3, and a direct effect of Year 2 on Year 4.
 
-A common practice in autoregression models is to constrain the autoregression effects (i.e., the direct effects between the measurements) to be equal. This is done by providing equal labels for these effects in the $B$ matrix:
+A common practice in autoregression models is to constrain the autoregression effects (i.e., the direct effects between the measurements) to be equal. This is done by providing equal labels for these effects in the $\mathbf{B}$ matrix:
 
 ```
 			# regression equations
@@ -124,7 +124,7 @@ summary(duncanmodelOut, fit = TRUE)
 If the fit of a model where only the first measurement is regressed on the predictors is not satisfactory, one might consider adding direct effects of the predictors on later measurements as well. The conceptual difference between those two models would be their theoretical interpretation.  In the example above, the predictors only affect later outcomes indirectly, so this model represents the hypothesis that any sex or family differences that existed at Time 1 do not change over time. A model with additional direct effects of predictors on later outcomes would represent the hypothesis that group differences change over time. The $\Delta\chi^2$ statistic allows you test the null hypothesis of no change in sex or family differences over time by comparing nested models with and without those additional effects.
 
 ## Cross-lagged panel models
-If more than one variable are measured at several time points, one could also evaluate so called ‘cross-lagged effects’ in a cross-lagged panel model. These are the effects of one variable on the other at a later time point. Suppose that in the earlier example the researchers did not only have measures of alcohol consumption ($x$) across four years, but also of depression ($y$). The model in Figure 2 can be used to evaluate the effect of alcohol consumption in year 1 on depression in year 2, controlled for depression in year 1 (and the effect of depression in year 2 on alcohol consumption in year 3, controlled for alcohol use in year 2, and so on for later time points). The residual factors ($ζ$) of different variables at the same time point are often correlated, representing that the same unobserved variables may affect the responses on the two variables. For more information on cross-lagged panel models see Biesanz (2012).
+If more than one variable are measured at several time points, one could also evaluate so called ‘cross-lagged effects’ in a cross-lagged panel model. These are the effects of one variable on the other at a later time point. Suppose that in the earlier example the researchers did not only have measures of alcohol consumption ($x$) across four years, but also of depression ($\mathrm{y}$). The model in Figure 2 can be used to evaluate the effect of alcohol consumption in year 1 on depression in year 2, controlled for depression in year 1 (and the effect of depression in year 2 on alcohol consumption in year 3, controlled for alcohol use in year 2, and so on for later time points). The residual factors ($ζ$) of different variables at the same time point are often correlated, representing that the same unobserved variables may affect the responses on the two variables. For more information on cross-lagged panel models see Biesanz (2012).
 
 ```{r echo = FALSE, out.width = "80%", fig.align = "center" }
 knitr::include_graphics("images/Ch8_Cross_lagged_panels.png")

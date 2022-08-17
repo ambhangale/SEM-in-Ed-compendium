@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Compendium Structural Equation Modeling in Educational Research</title>
-  <meta name="description" content="Compendium Structural Equation Modeling in Educational Research" />
+  <title>11 Measures of Model Fit | Compendium Structural Equation Modeling in Educational Research</title>
+  <meta name="description" content="11 Measures of Model Fit | Compendium Structural Equation Modeling in Educational Research" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Compendium Structural Equation Modeling in Educational Research" />
+  <meta property="og:title" content="11 Measures of Model Fit | Compendium Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="LJGroot/SEM-Compendium" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Compendium Structural Equation Modeling in Educational Research" />
+  <meta name="twitter:title" content="11 Measures of Model Fit | Compendium Structural Equation Modeling in Educational Research" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="regression-as-mean--and-covariance-structure-analysis.html"/>
+<link rel="prev" href="estimation.html"/>
+<link rel="next" href="path-analysis-with-categorical-outcomes.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -372,21 +372,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Compendium Structural Equation Modeling in Educational Research</h1>
-<p class="author"><em>Suzanne Jak and Terrence D. Jorgensen</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered hasAnchor">
-<h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="measures-of-model-fit" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">11</span> Measures of Model Fit<a href="measures-of-model-fit.html#measures-of-model-fit" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>When the model is identified, then <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span> can be used to derive parameter estimates that yield a covariance matrix (<span class="math inline">\(\hat{\mathbf{\Sigma}}_{\text{model}}\)</span>) that is as close as possible to the observed sample covariance matrix. In general, when the discrepancies between <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span> and <span class="math inline">\(\hat{\mathbf{\Sigma}}_{\text{model}}\)</span> are large, this indicates that the specified model cannot give a good description of the data and therefore one might question whether the model is true in the population, i.e., whether the model is misspecified. For just-identified models, the model parameters can usually be estimated so that <span class="math inline">\(\hat{\mathbf{\Sigma}}_{\text{model}}\)</span> equals <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span>. Evaluation of model fit is therefore uninformative. The model that is specified might not necessarily be the ‘true’ model, but there is not enough information to evaluate possible misspecification of the model as a whole. For models that are over identified (i.e., that have positive degrees of freedom) the evaluation of model fit may be informative as it can give an indication as to what extent the discrepancies between <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span> and <span class="math inline">\(\hat{\mathbf{\Sigma}}_{\text{model}}\)</span> can be attributed to misspecification of the model. Below we first discuss the <span class="math inline">\(χ^2\)</span> test of ‘exact fit’, then we explain the evaluation of ‘approximate fit’, and give a short overview of other descriptive measures of model fit. We also discuss the evaluation of differences in model fit, and finally show how to obtain all these measures of model fit in <code>lavaan</code>.</p>
+<div id="the-chi-squared-test-of-exact-fit" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> The chi-squared test of exact fit<a href="measures-of-model-fit.html#the-chi-squared-test-of-exact-fit" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <span class="math inline">\(χ^2\)</span> test of exact fit is the basic statistical evaluation of overall model fit for over-identified SEMs. It is used to evaluate the following hypothesis:</p>
+<span class="math display" id="eq:11-01">\[\begin{equation}
+\mathbf{\Sigma}_{\text{population}} = \mathbf{\Sigma}_{\text{model}},
+\tag{11.1}
+\end{equation}\]</span>
+<p>where <span class="math inline">\(\Sigma_{population}\)</span> refers to the matrix of population variances and covariances of the observed variables, and <span class="math inline">\(\Sigma_{model}\)</span> refers to the population matrix of variances and covariances as implied by the path model. <span class="math inline">\(\Sigma_{model}\)</span> is a function of model parameters (following Equations 3.09 and 3.10). If the model gives a true description of reality then model is equal to the population variances and covariances population. However, these population matrices cannot be directly observed and therefore their values are unknown. Instead, the matrix of observed covariances sample is taken as an estimate of the population covariance matrix, and  ̂model is the covariance matrix as implied by model parameters derived from the sample estimates. Because the sample covariance matrix and estimated model-implied covariance matrix are only estimates of their corresponding population covariance matrices, it is possible that  ̂population ≠  ̂model, even if population = model. Figure 11.1 gives a graphical representation of the population covariance matrices (population and model) and the sample covariance matrices (sample and  ̂model), and the different types of discrepancies that play a role in model fit evaluation. The term ‘sample discrepancy’ refers to the observed differences between the sample covariance matrix and the model-implied covariance matrix as derived from model parameter estimates. The term ‘population discrepancy’ refers to the differences between the population covariance matrix and the population model-implied covariance matrix.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="regression-as-mean--and-covariance-structure-analysis.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estimation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="path-analysis-with-categorical-outcomes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
