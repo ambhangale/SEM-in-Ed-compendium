@@ -26,14 +26,14 @@ One solution is to correct the $SE$s and fit statistics for the dependency in th
 
 
 ## Two-level path models
-If a research question involves variables at Level 2 as well as at Level 1, one would conduct two-level path analysis. When fitting two-level models in `lavaan`, each observed variable is decomposed into a within component and a between-component. For example, Given the multivariate response vector $y_{ij}$, with scores from subject i in cluster j, the scores are decomposed into means ($\mu_j$), and individual deviations from the cluster means ($\eta_{ij}$):
+If a research question involves variables at Level 2 as well as at Level 1, one would conduct two-level path analysis. When fitting two-level models in `lavaan`, each observed variable is decomposed into a within component and a between-component. For example, Given the multivariate response vector $\mathrm{y}_{ij}$, with scores from subject i in cluster j, the scores are decomposed into means ($\mu_j$), and individual deviations from the cluster means ($\eta_{ij}$):
 
 \begin{equation} \begin{split}
-y_{ij} &= \mu_j + (y_{ij} - \mu_j) \\
+\mathrm{y}_{ij} &= \mu_j + (\mathrm{y}_{ij} - \mu_j) \\
  &= \mu_j + \eta_{ij} 
 \end{split} \end{equation}
 
-where $\mu_j$ and $\eta_{ij}$ are independent. The overall covariances of $y_{ij}$ ($\Sigma_{total}$) can be written as the sum of the covariances of these two components:
+where $\mu_j$ and $\eta_{ij}$ are independent. The overall covariances of $\mathrm{y}_{ij}$ ($\Sigma_{total}$) can be written as the sum of the covariances of these two components:
 
 \begin{equation} \begin{split}
 \Sigma_{total} &= COV(\mu_j, \mu_j) + COV(\eta_{ij}, \eta_{ij})	\\
@@ -163,15 +163,15 @@ In the output, `lavaan` reports an overall test statistic, and several fit measu
 
 The output for the parameter estimates is provided first for the within-level part of the model, and then for the between-level part. Interpretations depend on the level of analysis.  For example:
 
-- The effect of `galo` on `advice` is estimated to be .089 at the within-level. This means that when `galo` scores increase by 1 point among individuals *from the same school* (i.e., $\eta_{ij} = y_{ij} - \mu_j$), individuals are expected to receive 0.089 points higher advice on average. 
+- The effect of `galo` on `advice` is estimated to be .089 at the within-level. This means that when `galo` scores increase by 1 point among individuals *from the same school* (i.e., $\eta_{ij} = \mathrm{y}_{ij} - \mu_j$), individuals are expected to receive 0.089 points higher advice on average. 
 - The effect of `galo` on `advice` at the between-level is estimated to be .104. This means that when a school's average `galo` score (i.e., $\mu_j$) increases by 1 point, the school is expected to receive 0.104 points higher advice on average. 
 
-The difference between a variable's between- and within-level effect ($\beta_\text{B} - \beta_\text{W}$) is called the *contextual effect* (see Marsh et al., 2012). In our example, this is the effect on received advice of being in a school with 1-unit higher average `galo` scores ($\mu_j$), given an individual's own `galo` score ($y_{ij}$). 
+The difference between a variable's between- and within-level effect ($\beta_\text{B} - \beta_\text{W}$) is called the *contextual effect* (see Marsh et al., 2012). In our example, this is the effect on received advice of being in a school with 1-unit higher average `galo` scores ($\mu_j$), given an individual's own `galo` score ($\mathrm{y}_{ij}$). 
 
 \begin{equation} \begin{split}
-  \text{advice} &= \beta_\text{W} (y_{ij} - \mu_j) + \beta_\text{B} \mu_j \\
-  &= \beta_\text{W} y_{ij} - \beta_\text{W} \mu_j + \beta_\text{B} \mu_j \\
-  &= \beta_\text{W} y_{ij} + (\beta_\text{B} - \beta_\text{W}) \mu_j
+  \text{advice} &= \beta_\text{W} (\mathrm{y}_{ij} - \mu_j) + \beta_\text{B} \mu_j \\
+  &= \beta_\text{W} \mathrm{y}_{ij} - \beta_\text{W} \mu_j + \beta_\text{B} \mu_j \\
+  &= \beta_\text{W} \mathrm{y}_{ij} + (\beta_\text{B} - \beta_\text{W}) \mu_j
 \end{split} \end{equation}
 
 The equivalence of within- and between-level effects can be tested by comparing a model in which the effects are constrained to be equal to a model in which they are estimated freely. Alternatively, one could define the contextual effect as a new parameter by subtracting the two effects of interest, similar to how one defines specific indirect effects. 

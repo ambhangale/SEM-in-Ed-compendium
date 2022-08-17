@@ -1,6 +1,6 @@
 # Direct, Indirect, and Total Effects
 
-In the path model from our illustrative example (see Figure 1), there is no arrow pointing from Parental Anxiety (PA) to Child anxiety (CA). This does not mean that the model implies that there is no effect of PA on CA. The effect runs through Parental Overcontrol (PO). PA has a direct effect on PO, which in turn has a direct effect on CA. PA thus has an indirect effect on CA, reflecting that the effect of PA on CA is mediated by PO. The size of the indirect effect equals the product of the direct effects that constitute the indirect effect. So, in this example, the indirect effect of PA on CA through PO is equal to .187 ($β_{31}$) times .072 ($β_{43}$) = .013. Note that it makes sense that the indirect effect equals the product of the direct effects. Holding PP constant, if PA increases with one point, PO is expected to increase with .187 point. If PO increases with 1 point, CA is expected to increase with .072 point. So if PO increases with .187 points instead of 1 point, CA is expected to increase with .187 \* .072 = .013 points. Similarly, the indirect effect of Parental Perfectionism (PP) on CA is .210 \* .072 = .015, indicating that 1 point increase in PP is expected to result in .015 point increase of CA.
+In the path model from our illustrative example (see Figure 1), there is no arrow pointing from Parental Anxiety (PA) to Child anxiety (CA). This does not mean that the model implies that there is no effect of PA on CA. The effect runs through Parental Overcontrol (PO). PA has a direct effect on PO, which in turn has a direct effect on CA. PA thus has an indirect effect on CA, reflecting that the effect of PA on CA is mediated by PO. The size of the indirect effect equals the product of the direct effects that constitute the indirect effect. So, in this example, the indirect effect of PA on CA through PO is equal to .187 ($β_{31}$) times .072 ($β_{43}$) = .013. Note that it makes sense that the indirect effect equals the product of the direct effects. Holding PP constant, if PA increases with one point, PO is expected to increase with .187 point. If PO increases with 1 point, CA is expected to increase with .072 point. So if PO increases with .187 points instead of 1 point, CA is expected to increase with $.187 \times .072 = .013$ points. Similarly, the indirect effect of Parental Perfectionism (PP) on CA is $.210 \times .072 = .015$, indicating that 1 point increase in PP is expected to result in .015 point increase of CA.
 
 ```{r echo = FALSE, out.width = "80%", fig.align = "center" }
 
@@ -12,7 +12,7 @@ knitr::include_graphics("images/CH5_Full_Mediation_Model.png")
 
 If an effect of one variable on the other is only indirect, this reflects full mediation. Very often, there is also a direct effect next to the indirect effect, reflecting that the effect is not fully mediated, but partially mediated. Figure 5.2 shows the path model example of the partial mediation model (i.e., with direct effects of PA and PP on CA) and the associated parameter estimates.
 
-The direct effect of PA on CA is .091. This is the part of the total effect that is not mediated by PO. The total effect of PA on CA is the sum of the indirect effect(s) and the direct effect: .091 + .187 \* .058 = .102. Total effects thus are the sum of all indirect and direct effects of one variable on another. This is an example of consistent mediation, i.e., the direct effect and the indirect have the same sign (they are both positive in this case). It could also be that there is inconsistent mediation, where the direct effect and indirect have opposite signs. In our example, there is inconsistent mediation of the effect of PP on CA as the direct effect is negative while the indirect effect is positive. Inconsistent mediation could therefore lead to the situation in which the direct effect and indirect effect cancel each other out.
+The direct effect of PA on CA is .091. This is the part of the total effect that is not mediated by PO. The total effect of PA on CA is the sum of the indirect effect(s) and the direct effect: $.091 + .187 \times .058 = .102$. Total effects thus are the sum of all indirect and direct effects of one variable on another. This is an example of consistent mediation, i.e., the direct effect and the indirect have the same sign (they are both positive in this case). It could also be that there is inconsistent mediation, where the direct effect and indirect have opposite signs. In our example, there is inconsistent mediation of the effect of PP on CA as the direct effect is negative while the indirect effect is positive. Inconsistent mediation could therefore lead to the situation in which the direct effect and indirect effect cancel each other out.
 
 ```{r echo = FALSE, out.width = "80%", fig.align = "center" }
 
@@ -85,19 +85,19 @@ After fitting a model, the estimated direct effects can be used to calculate the
 
 ## Using matrix algebra to calculate total, total indirect and specific indirect effects
 
-Instead of calculating all total effects by hand, one can use the model matrix $B$ to calculate the total effects. In recursive models, the total effects in matrix $T$ are given by:
+Instead of calculating all total effects by hand, one can use the model matrix $\mathbf{B}$ to calculate the total effects. In recursive models, the total effects in matrix $\mathbf{T}$ are given by:
 
 \begin{equation}
-T=\sum _{k=1}^{p-1}{B}^{k}
+\mathbf{T}=\sum _{k=1}^{p-1}{\mathbf{B}}^{k}
 (\#eq:5-02)
 \end{equation}
 
-where p is the number of variables. Thus, the total effects are calculated using the sum of powers of the matrix with regression coefficients ($B$), where the highest number of powers ($k$) is equal to the number of variables minus one ($p - 1$). For example, with four variables the total effects can be calculated using: $T = B^1 + B^2 + B^3$. As $B^1 = B$, the total effects can be decomposed into matrix B that contains all direct effects, and the sum of the powers of the $B$ matrix that contain all indirect effects. Thus, the matrix with all indirect effects can be calculated by $T - B$.
+where $p$ is the number of variables. Thus, the total effects are calculated using the sum of powers of the matrix with regression coefficients ($\mathbf{B}$), where the highest number of powers ($k$) is equal to the number of variables minus one ($p - 1$). For example, with four variables the total effects can be calculated using: $\mathbf{T} = \mathbf{B}^1 + \mathbf{B}^2 + \mathbf{B}^3$. As $\mathbf{B}^1 = \mathbf{B}$, the total effects can be decomposed into matrix B that contains all direct effects, and the sum of the powers of the $\mathbf{B}$ matrix that contain all indirect effects. Thus, the matrix with all indirect effects can be calculated by $\mathbf{T} - \mathbf{B}$.
 
-In the anxiety example path model with higher order indirect effects the $B$ matrix is:
+In the anxiety example path model with higher order indirect effects the $\mathbf{B}$ matrix is:
 
 $$
-\mathbf{B^1} =
+\mathbf{B}^1 =
 \begin{bmatrix}
 0  &0 &0&0 \\ 
 \beta_{21} & 0 & 0&0\\
@@ -106,10 +106,10 @@ $$
 \end{bmatrix}.
 $$
 
-which contains all direct effects (i.e., first-order effects). Multiplying matrix $B$ with itself gives $B^2$, which contains all second-order indirect effects:
+which contains all direct effects (i.e., first-order effects). Multiplying matrix $\mathbf{B}$ with itself gives $\mathbf{B}^2$, which contains all second-order indirect effects:
 
 $$
-\mathbf{B^2} =
+\mathbf{B}^2 =
 \begin{bmatrix}
 0  &0 &0&0 \\ 
 0 & 0 & 0&0\\
@@ -118,10 +118,10 @@ $$
 \end{bmatrix}.
 $$
 
-Multiplying matrix $B$ with itself three times gives the third-order indirect effects:
+Multiplying matrix $\mathbf{B}$ with itself three times gives the third-order indirect effects:
 
 $$
-\mathbf{B^3} =
+\mathbf{B}^3 =
 \begin{bmatrix}
 0  &0 &0&0 \\ 
 0 & 0 & 0&0\\
@@ -130,15 +130,15 @@ $$
 \end{bmatrix}.
 $$
 
-If we would continue and calculate $B^4$ we will see that it contains only zeros (indicating that there cannot exist fourth-order indirect effects in the model with four variables). Similarly, if we would calculate the matrices of indirect effects for the example in Figure 2, matrix $B^3$ would already be zero, because there are no third or higher order effects in this model. The sum of the direct effects and the indirect effects is equal to the total effects.
+If we would continue and calculate $\mathbf{B}^4$ we will see that it contains only zeros (indicating that there cannot exist fourth-order indirect effects in the model with four variables). Similarly, if we would calculate the matrices of indirect effects for the example in Figure 2, matrix $\mathbf{B}^3$ would already be zero, because there are no third or higher order effects in this model. The sum of the direct effects and the indirect effects is equal to the total effects.
 
-For nonrecursive models (discussed in a later chapter), Equation \@ref(eq:5-02) can often still be used to calculate total effects, but it is not necessarily adequate. That is, the number of times that the power of the matrix with regression coefficients has to be calculated (and summed) is not defined. The total effects are only defined when the power of the matrix with regression coefficients ($B^k$) converges to zero.
+For nonrecursive models (discussed in a later chapter), Equation \@ref(eq:5-02) can often still be used to calculate total effects, but it is not necessarily adequate. That is, the number of times that the power of the matrix with regression coefficients has to be calculated (and summed) is not defined. The total effects are only defined when the power of the matrix with regression coefficients ($\mathbf{B}^k$) converges to zero.
 
 ## Calculating total, total indirect and specific indirect effects using lavaan output
 
-We will use the output of the anxiety model to compute a matrix that contains the total effects ($T$), a matrix that contains the total indirect effects ($U$) and illustrate the calculation of a specific indirect effects ("I1").
+We will use the output of the anxiety model to compute a matrix that contains the total effects ($\mathbf{T}$), a matrix that contains the total indirect effects ($\mathbf{U}$) and illustrate the calculation of a specific indirect effects ("I1").
 
-In recursive models, matrix $T$ is calculated by addition of matrix B with multiplications of matrix $B$, as often as the number of variables minus one. So, if there are 4 observed variables, the expression for $T$ stops after $B$ is multiplied with itself 3 times. $T$ contains the total effects.
+In recursive models, matrix $\mathbf{T}$ is calculated by addition of matrix B with multiplications of matrix $\mathbf{B}$, as often as the number of variables minus one. So, if there are 4 observed variables, the expression for $\mathbf{T}$ stops after $\mathbf{B}$ is multiplied with itself 3 times. $\mathbf{T}$ contains the total effects.
 
 ```{r echo=TRUE, eval=TRUE}
 Estimates <- lavInspect(AWmodelOut, "est")
@@ -146,13 +146,13 @@ B <- Estimates$beta[obsnames, obsnames]
 Tot <- B + B %*% B + B %*% B %*% B
 ```
 
-Matrix $U$ is calculated as the matrix with total effects, minus the matrix with direct effects. The result is a matrix with the total indirect effects. Please notice that if there are multiple indirect effects between two variables, matrix $U$ has the sum of the indirect effects.
+Matrix $\mathbf{U}$ is calculated as the matrix with total effects, minus the matrix with direct effects. The result is a matrix with the total indirect effects. Please notice that if there are multiple indirect effects between two variables, matrix $\mathbf{U}$ has the sum of the indirect effects.
 
 ```{r}
 U <- Tot - B
 ```
 
-A single indirect effect is calculated by multiplying specific elements from matrix $B$. For example, `B[3,1]` selects the element in row 3, column 1 from the $B$ matrix, and this element is multiplied with element `B[4,3]`. This is the indirect effect of Parental anxiety on Child anxiety via Overcontrol (see Figure 1). We gave this effect the name `I1`, because you may want to calculate more indirect effects, which could then be named `I2`, `I3`, `I4` etc.
+A single indirect effect is calculated by multiplying specific elements from matrix $\mathbf{B}$. For example, `B[3,1]` selects the element in row 3, column 1 from the $\mathbf{B}$ matrix, and this element is multiplied with element `B[4,3]`. This is the indirect effect of Parental anxiety on Child anxiety via Overcontrol (see Figure 1). We gave this effect the name `I1`, because you may want to calculate more indirect effects, which could then be named `I2`, `I3`, `I4` etc.
 
 ```{r}
 I1 <- B[3,1] * B[4,3]

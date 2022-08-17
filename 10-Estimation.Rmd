@@ -1,16 +1,16 @@
 # Estimation
 
-In the chapter on identification we saw that model parameters can be written as a function of elements from $\Sigma_{population}$. Subsequently, we can use these equations to estimate model parameters derived from the sample variances and covariances ($\Sigma_{sample}$). For just-identified models, the number of known elements in $\Sigma_{sample}$ equals the number of unknown model parameters, and one can derive parameter estimates by solving the equations that satisfy $\widehat\Sigma_{model}$ = $\Sigma_{sample}$. For models that are over identified (i.e., that have positive $df$) the estimation of model parameters is more complicated. In our illustrative example of child anxiety, we can derive three different equations in terms of population variances and covariances (i.e., by rewriting the equations of $\sigma_{41}$, $\sigma_{42}$ and $\sigma_{43}$) for the expression of the single model parameter $\beta_{43}$. When we subsequently want to use these equations to estimate the model parameter $\widehat\beta_{43}$ we can never derive an estimate so that all three elements $\widehat\sigma_{41}$, $\widehat\sigma_{42}$ and $\widehat\sigma_{43}$ of $\widehat\Sigma_{model}$ are equal to the corresponding elements of $\Sigma_{sample}$. Therefore, for over-identified models there will always be a certain amount of discrepancy between $\widehat\Sigma_{model}$ and $\Sigma_{sample}$. In such cases, the estimation of model parameters requires an iterative procedure to minimize the discrepancy between $\Sigma_{sample}$ and $\widehat\Sigma_{model}$ (i.e., What value of $\widehat\beta_{43}$will lead to expressions of $\widehat\sigma_{41}$, $\widehat\sigma_{42}$ and $\widehat\sigma_{43}$ that are as close as possible to the corresponding elements in $\Sigma_{sample}$?).
-
-The estimation procedures are iterative because the initial solution (i.e., the first attempt to estimate model parameters and evaluate the discrepancy between $\Sigma_{sample}$ and $\widehat\Sigma_{model}$) is improved through subsequent cycles of calculations until the improvement in model fit falls below a predefined minimum value (i.e., the decrease in discrepancy between $\Sigma_{sample}$ and $\widehat\Sigma_{model}$ is very small). When this happens, the estimation process has converged. Convergence may be achieved more quickly when the initial solution, or the initial estimates of the parameters (i.e., start values) are reasonably accurate. If these initial estimates are completely inaccurate, then iterative estimation may even fail to converge. Most computer programs automatically generate reasonable start values and will give a warning if a solution has not converged. However, sometimes it may be necessary to provide user-specified start values in order for the solution to converge, especially for more complex models.
+In the chapter on identification we saw that model parameters can be written as a function of elements from $\mathbf{\Sigma}_\text{population}$. Subsequently, we can use these equations to estimate model parameters derived from the sample variances and covariances ($\mathbf{\Sigma}_\text{sample}$). For just-identified models, the number of known elements in $\mathbf{\Sigma}_\text{sample}$ equals the number of unknown model parameters, and one can derive parameter estimates by solving the equations that satisfy $\hat{\mathbf{\Sigma}}_\text{model}$ = $\mathbf{\Sigma}_\text{sample}$. For models that are over identified (i.e., that have positive $df$) the estimation of model parameters is more complicated. In our illustrative example of child anxiety, we can derive three different equations in terms of population variances and covariances (i.e., by rewriting the equations of $\sigma_{41}$, $\sigma_{42}$ and $\sigma_{43}$) for the expression of the single model parameter $\beta_{43}$. When we subsequently want to use these equations to estimate the model parameter $\hat\beta_{43}$ we can never derive an estimate so that all three elements $\hat\sigma_{41}$, $\hat\sigma_{42}$ and $\hat\sigma_{43}$ of $\hat{\mathbf{\Sigma}}_\text{model}$ are equal to the corresponding elements of $\mathbf{\Sigma}_\text{sample}$. Therefore, for over-identified models there will always be a certain amount of discrepancy between $\hat{\mathbf{\Sigma}}_\text{model}$ and $\mathbf{\Sigma}_\text{sample}$. In such cases, the estimation of model parameters requires an iterative procedure to minimize the discrepancy between $\mathbf{\Sigma}_\text{sample}$ and $\hat{\mathbf{\Sigma}}_\text{model}$ (i.e., What value of $\hat\beta_{43}$will lead to expressions of $\hat\sigma_{41}$, $\hat\sigma_{42}$ and $\hat\sigma_{43}$ that are as close as possible to the corresponding elements in $\mathbf{\Sigma}_\text{sample}$?).
+$\mathbf{\Sigma}_\text{population}$
+The estimation procedures are iterative because the initial solution (i.e., the first attempt to estimate model parameters and evaluate the discrepancy between $\mathbf{\Sigma}_\text{sample}$ and $\hat{\mathbf{\Sigma}}_\text{model}$) is improved through subsequent cycles of calculations until the improvement in model fit falls below a predefined minimum value (i.e., the decrease in discrepancy between $\mathbf{\Sigma}_\text{sample}$ and $\hat{\mathbf{\Sigma}}_\text{model}$ is very small). When this happens, the estimation process has converged. Convergence may be achieved more quickly when the initial solution, or the initial estimates of the parameters (i.e., start values) are reasonably accurate. If these initial estimates are completely inaccurate, then iterative estimation may even fail to converge. Most computer programs automatically generate reasonable start values and will give a warning if a solution has not converged. However, sometimes it may be necessary to provide user-specified start values in order for the solution to converge, especially for more complex models.
 
 Several discrepancy functions exist that can be used for the estimation of model parameters. Three desirable qualities of a good estimation procedure are *unbiasedness*, *consistency* and *efficiency.* Suppose we repeat the estimation procedure for a given model an infinite number of times on an infinite number of datasets. The estimator is unbiased when the expected parameter values (i.e., means of the sampling distributions of parameter estimates) are equal to the population values, i.e., they are not systematically biased upwards or downwards. The estimator is consistent when parameter estimates are closer to the population parameters with increased sample size, i.e., the larger the sample size, the closer the estimated values are to the population values (given that the sample is representative of the population). Efficiency refers to the variance of the sampling distribution of parameter estimates, where the most efficient estimator has a sampling distribution with the smallest variance (and thus the smallest $SE$s).
 
-The most intuitive method that could be used to minimize the discrepancies between $\Sigma_{sample}$ and $\widehat\Sigma_{model}$ is to simply calculate the difference between the two matrices and try to minimize the values within the resulting residual covariance matrix. This is what is commonly referred to as the unweighted least squares (ULS) discrepancy function:
+The most intuitive method that could be used to minimize the discrepancies between $\mathbf{\Sigma}_\text{sample}$ and $\hat{\mathbf{\Sigma}}_\text{model}$ is to simply calculate the difference between the two matrices and try to minimize the values within the resulting residual covariance matrix. This is what is commonly referred to as the unweighted least squares (ULS) discrepancy function:
 
 ```{=tex}
 \begin{equation}
-F_{ULS}(\Sigma_{sample},\widehat\Sigma_{model}) = ½ trace ((\Sigma_{sample} - \widehat\Sigma_{model})^2),
+F_{ULS}(\mathbf{\Sigma}_\text{sample},\hat\mathbf{\Sigma}_\text{model}) = ½ trace ((\mathbf{\Sigma}_\text{sample} - \hat\mathbf{\Sigma}_\text{model})^2),
 (\#eq:10-01)
 \end{equation}
 ```
@@ -23,19 +23,19 @@ A particularly attractive discrepancy function is given by:
 
 ```{=tex}
 \begin{equation}
-F_{ML}(\Sigma_{sample},\widehat\Sigma_{model}) = log|\widehat\Sigma_{model}|-log|\Sigma_{sample}|+trace(\Sigma_{sample}\widehat\Sigma^{-1}_{model})-p,
+F_{ML}(\mathbf{\Sigma}_\text{sample},\hat\mathbf{\Sigma}_\text{model}) = log|\hat\mathbf{\Sigma}_\text{model}|-log|\mathbf{\Sigma}_\text{sample}|+trace(\mathbf{\Sigma}_\text{sample}\hat\mathbf{\Sigma}^{-1}_\text{model})-p,
 (\#eq:10-02)
 \end{equation}
 ```
 
 which gives so-called maximum likelihood (ML) estimates of all model parameters, assuming that the distribution of the scores of the observed variables ($p$) is multivariate normal and that the model is valid and identified. It is the most widely used fitting function for general structural equation models, and the estimator is unbiased, consistent and more efficient than ULS. Although it is a more complex nonlinear function, it has additional important properties. First, it allows for tests of statistical significance of parameter estimates as the estimators are asymptotically normally distributed. Second, unlike FULS, FML is scale invariant and scale free. These properties refer to the dependency of the fitting function on the units of measurement of the observed variables. When the fitting function is scale invariant, the value of the fit function is independent of the measurement scales of the variables, i.e., the value of the fit function will be the same for different scales of measurement. In addition, scale freeness refers to the property that when the scales of the observed variables are linearly transformed (i.e., multiplied by and/or added to a constant), the relationship between the parameter estimates of the transformed and untransformed solution can be derived too (i.e., they are linearly transformed in a similar fashion). 
 
-In general, smaller values of discrepancy functions indicate better fit of the model to the data. A value of zero indicates the fit is perfect, i.e., the parameter estimates can perfectly reproduce the sample covariance matrix ($\widehat\Sigma_{model}=\Sigma_{sample}$).
+In general, smaller values of discrepancy functions indicate better fit of the model to the data. A value of zero indicates the fit is perfect, i.e., the parameter estimates can perfectly reproduce the sample covariance matrix ($\hat\mathbf{\Sigma}_\text{model}=\mathbf{\Sigma}_\text{sample}$).
 
 Using Equation 10.02 to arrive at ML estimates of model parameter of the path model from our illustrative example, yields: 
 
 $$
-\widehat\Sigma_{model} =
+\hat\mathbf{\Sigma}_\text{model} =
 \begin{bmatrix}
 91.58 & \\
 53.36 & 194.32 \\
@@ -45,7 +45,7 @@ $$
 $$
 whereas the observed variances and covariances of the sample are given by:
 $$
-\Sigma_{sample} =
+\mathbf{\Sigma}_\text{sample} =
 \begin{bmatrix}
 91.58 & \\
 53.36 & 194.32 \\
@@ -54,10 +54,10 @@ $$
 \end{bmatrix}
 $$
 
-When we compare $\widehat\Sigma_{model}$ and $\Sigma_{sample}$ from our illustrative example, we can see that there are some discrepancies between the two matrices. Specifically, the elements $\widehat\sigma_{41}$ and $\widehat\sigma_{42}$  of $\widehat\Sigma_{model}$ are different from the corresponding sample covariance. These two elements featured in the equations for the over-identified model parameter $\widehat\beta_{43}$. As can be seen, the model parameter was estimated so that the element $\widehat\beta_{43}$ of $\widehat\Sigma_{model}$ equals the corresponding element of the sample covariance matrix, which thus leads to a misfit for the elements $\widehat\sigma_{41}$ and $\widehat\sigma_{42}$. The residual covariance matrix (i.e., $\Sigma_{sample} - \widehat\Sigma_{model}$) is:
+When we compare $\hat{\mathbf{\Sigma}}_\text{model}$ and $\mathbf{\Sigma}_\text{sample}$ from our illustrative example, we can see that there are some discrepancies between the two matrices. Specifically, the elements $\hat\sigma_{41}$ and $\hat\sigma_{42}$  of $\hat{\mathbf{\Sigma}}_\text{model}$ are different from the corresponding sample covariance. These two elements featured in the equations for the over-identified model parameter $\hat\beta_{43}$. As can be seen, the model parameter was estimated so that the element $\hat\beta_{43}$ of $\hat{\mathbf{\Sigma}}_\text{model}$ equals the corresponding element of the sample covariance matrix, which thus leads to a misfit for the elements $\hat\sigma_{41}$ and $\hat\sigma_{42}$. The residual covariance matrix (i.e., $\Sigma_\text{sample} - \hat\Sigma_\text{model}$) is:
 
 $$
-\Sigma_{residual} =
+\mathbf{\Sigma}_{residual} =
 \begin{bmatrix}
 0\\
 0&0\\
@@ -99,12 +99,12 @@ Additional estimators are available, but are less often used with continuous dat
 
 ```{=tex}
 \begin{equation}
-F_{WLS}(\Sigma_{sample},\widehat\Sigma_{model}) = vech(\Sigma_{sample} - \widehat\Sigma_{model})^{T} \hspace{1mm} W^{-1} \hspace{1mm} vech(\Sigma_{sample} - \widehat\Sigma_{model}),
+F_{WLS}(\mathbf{\Sigma}_\text{sample},\hat\mathbf{\Sigma}_\text{model}) = vech(\mathbf{\Sigma}_\text{sample} - \hat\mathbf{\Sigma}_\text{model})^{T} \hspace{1mm} W^{-1} \hspace{1mm} vech(\mathbf{\Sigma}_\text{sample} - \hat\mathbf{\Sigma}_\text{model}),
 (\#eq:10-03)
 \end{equation}
 ```
 
-where `vech()` vectorizes the unique elements of its argument. The WLS fit function  essentially incorporates higher-order information beyond the covariance matrix (specifically, kurtosis) into a weight matrix (the $W$ matrix in Equation 10.03). It is usually chosen to be the sampling covariance matrix of the elements in $\Sigma_{sample}$. Equation 10.03 is a very general fit function, because in principle, any weight matrix can be used. If an identity matrix is used as the weight matrix, this yields the ULS estimator.  The ML fit function (using Wishart likelihood for analyses of covariance structure only) can actually be conceived of as WLS where the weight matrix is derived from $\widehat\Sigma_{model}$.  Likewise, there is also a “generalized” least-squares estimator (GLS), which can be conceived as WLS if the weight matrix would be derived from $\Sigma_{sample}$. GLS also requires multivariate normality, but it is not as efficient as MLE, so there is no advantage in using GLS.
+where `vech()` vectorizes the unique elements of its argument. The WLS fit function  essentially incorporates higher-order information beyond the covariance matrix (specifically, kurtosis) into a weight matrix (the $W$ matrix in Equation 10.03). It is usually chosen to be the sampling covariance matrix of the elements in $\mathbf{\Sigma}_\text{sample}$. Equation 10.03 is a very general fit function, because in principle, any weight matrix can be used. If an identity matrix is used as the weight matrix, this yields the ULS estimator.  The ML fit function (using Wishart likelihood for analyses of covariance structure only) can actually be conceived of as WLS where the weight matrix is derived from $\hat{\mathbf{\Sigma}}_\text{model}$.  Likewise, there is also a “generalized” least-squares estimator (GLS), which can be conceived as WLS if the weight matrix would be derived from $\mathbf{\Sigma}_\text{sample}$. GLS also requires multivariate normality, but it is not as efficient as MLE, so there is no advantage in using GLS.
 
 Computers did not always have such great hardware (processing and memory) and software (optimization techniques to find ML solutions) that we are used to today.  Therefore, GLS was popular 20 years ago when it was more common that SEM programs would fail to converge on a ML solution.  Nowadays, most of the above estimators (ULS, GLS, ADF) are rarely, if ever, used. Not only is the ML estimator the most efficient (i.e., the smallest SEs), but being based on likelihoods comes with other advantages, such as being able to calculate likelihood-based information criteria (e.g., AIC and BIC) to compare models.  Also, ADF requires extremely large sample sizes to be stable (i.e., $N$ > 2000 or 5000).  Although MLE is based on asymptotic (“large-sample”) theory, sample sizes in the hundreds are often sufficient for stable solutions (or even ~120 for smaller models).  
 
@@ -133,28 +133,28 @@ If you are analyzing raw data instead of summary statistics, robust $SE$s and fi
 Because the popular SEM software M*plus* uses a single shortcut to specify the choice of estimator, $SE$s, and fit statistic, many of those shortcuts are being used by applied researchers as though they are the names of the estimator itself (e.g., “MLR” for robust ML).  Even if robust $SE$s and fit statistic are used, ML is still the estimation method use to obtain point estimates of parameters (i.e., assuming normality—only the $SE$s and fit statistic are adjusted after parameters are estimated).  Still, `lavaan` allows some of these shortcuts, which you can read about on the `?lavaan` help page, in the description of the estimator argument.  Likewise, the help page describes all other available estimators (e.g., marginal maximum likelihood [MML] for IRT estimation), $SE$s (e.g., based on first-order derivatives), and test statistics (e.g., scaled and shifted, or mean- and variance-adjusted).
 
 ## Alternative calculation of the ML discrepancy function when analysing raw data 
-Equation 10.02 shows how to calculate FML from summary statistics (i.e., observed ($\Sigma_{sample}$) and model-implied ($\widehat\Sigma_{model}$) covariance matrices).  This equation only applies when analysing complete data. In practice, data are often partially observed. When some data are missing, it is still possible to use full-information maximum likelihood (FIML) estimation, where the likelihood of each individual is calculated using only the parameters relevant to the variables on which they have observed data.  Individual $i$’s likelihood is calculated by plugging their vector of observed values ($y_i$) into the multivariate normal probability density function:
+Equation 10.02 shows how to calculate FML from summary statistics (i.e., observed ($\mathbf{\Sigma}_\text{sample}$) and model-implied ($\hat{\mathbf{\Sigma}}_\text{model}$) covariance matrices).  This equation only applies when analysing complete data. In practice, data are often partially observed. When some data are missing, it is still possible to use full-information maximum likelihood (FIML) estimation, where the likelihood of each individual is calculated using only the parameters relevant to the variables on which they have observed data.  Individual $i$’s likelihood is calculated by plugging their vector of observed values ($\mathrm{y}_i$) into the multivariate normal probability density function:
 
 ```{=tex}
 \begin{equation}
-likelihood(\textbf{y}_i) = \frac{1}{(2\pi)^{p/2|\Sigma|1/2}}\mathrm{e}^{-\frac{1}{2}(y_i-\mu)'\Sigma^{-1}(y_i-\mu)}
+\text{likelihood}(\textbf{y}_i) = \frac{1}{(2\pi)^{p/2|\mathbf{\Sigma}|1/2}}\mathrm{e}^{-\frac{1}{2}(y_i-\mu)'\mathbf{\Sigma}^{-1}(y_i-\mu)}
 (\#eq:10-04)
 \end{equation}
 ```
 
-using the model-implied mean vector  as μ and the model-implied covariance matrix as $Σ$, where $p$ is the number of variables in $y_i$.  After calculating the likelihood for each row of data, the joint likelihood of observing the entire sample is the product  of all the individual likelihoods.  Because likelihoods are bound between 0 and 1, the joint likelihood becomes very small—too small even for computers to calculate with enough precision .  It is easier to work with log-likelihoods because the log of numbers ranging from 0 to 1 will range from $−∞$ to 0 (so not as much precision is needed).  Because the log of a product is equal to the sum of the individual logs — $\log(a × b) = \log(a) + \log(b)$ — we can simply add together all the individual log-likelihoods to calculate the log-likelihood of the sample.  The log of equation 10.04 is:
+using the model-implied mean vector  as μ and the model-implied covariance matrix as $Σ$, where $p$ is the number of variables in $\mathrm{y}_i$.  After calculating the likelihood for each row of data, the joint likelihood of observing the entire sample is the product  of all the individual likelihoods.  Because likelihoods are bound between 0 and 1, the joint likelihood becomes very small—too small even for computers to calculate with enough precision .  It is easier to work with log-likelihoods because the log of numbers ranging from 0 to 1 will range from $−∞$ to 0 (so not as much precision is needed).  Because the log of a product is equal to the sum of the individual logs — $\log(a × b) = \log(a) + \log(b)$ — we can simply add together all the individual log-likelihoods to calculate the log-likelihood of the sample.  The log of equation 10.04 is:
 
 ```{=tex}
 \begin{equation}
-\ell_i = \frac{p}{2}\log(2\pi) - \log(|\Sigma|) - \frac{1}{2}(y_i-\mu)'\Sigma^{-1}(y_i-\mu)
+\ell_i = \frac{p}{2}\log(2\pi) - \log(|\mathbf{\Sigma}|) - \frac{1}{2}(y_i-\mu)'\mathbf{\Sigma}^{-1}(y_i-\mu)
 (\#eq:10-05)
 \end{equation}
 ```
 
-In a model with 5 variables, person $i$’s vector $y_i$ would have 5 observed values in it, the model-implied mean vector  μ would have 5 means in it, and the model-implied covariance matrix Σ would have 5 rows and 5 columns.  If person $i$ has complete data, all this information would be included in the calculation of equation 10.05:
+In a model with 5 variables, person $i$’s vector $\mathrm{y}_i$ would have 5 observed values in it, the model-implied mean vector  μ would have 5 means in it, and the model-implied covariance matrix Σ would have 5 rows and 5 columns.  If person $i$ has complete data, all this information would be included in the calculation of equation 10.05:
 
 $$
-y_i = \begin{bmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \\ y_5 \end{bmatrix} \mu_i = \begin{bmatrix} \mu_1 \\ \mu_2\\ \mu_3\\ \mu_4\\ \mu_5 \end{bmatrix} \Sigma_i = \begin{bmatrix} 
+y_i = \begin{bmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \\ y_5 \end{bmatrix} \mu_i = \begin{bmatrix} \mu_1 \\ \mu_2\\ \mu_3\\ \mu_4\\ \mu_5 \end{bmatrix} \mathbf{\Sigma}_i = \begin{bmatrix} 
 \sigma^2_1 & \sigma_{12} & \sigma_{13} & \sigma_{14} & \sigma_{15} \\
 \sigma_{21} & \sigma^2_2 & \sigma_{23} & \sigma_{24} & \sigma_{25} \\
 \sigma_{31} & \sigma_{32} & \sigma^2_3 & \sigma_{34} & \sigma_{35} \\
@@ -162,11 +162,11 @@ y_i = \begin{bmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \\ y_5 \end{bmatrix} \mu_i = \beg
 \sigma_{51} & \sigma_{52} & \sigma_{53} & \sigma_{54} & \sigma^2_5 \end{bmatrix}
 $$
 
-However, if person $i$ was only observed on $y_1$, $y_2$, and $y_5$:
+However, if person $i$ was only observed on $\mathrm{y}_1$, $\mathrm{y}_2$, and $\mathrm{y}_5$:
 
 $$
 y_i = \begin{bmatrix} y_1 \\ y_2 \\. \\ . \\ y_5 \end{bmatrix} \mu_i = \begin{bmatrix} \mu_1 \\ \mu_2\\ \color{lightgrey}{\mu_3} \\ \color{lightgrey}{\mu_4}\\ \mu_5 \end{bmatrix} 
-\Sigma_i = \begin{bmatrix} 
+\mathbf{\Sigma}_i = \begin{bmatrix} 
 \sigma^2_1 & \sigma_{12} & \color{lightgrey}{\sigma_{13}} & \color{lightgrey}{\sigma_{14}} & \sigma_{15} \\
 \sigma_{21} & \sigma^2_2 & \color{lightgrey}{\sigma_{23}} & \color{lightgrey}{\sigma_{24}} & \sigma_{25} \\
 \color{lightgrey}{\sigma_{31}} & \color{lightgrey}{\sigma_{32}} & \color{lightgrey}{\sigma^2_3} & \color{lightgrey}{\sigma_{34}} & \color{lightgrey}{\sigma_{35}} \\
@@ -180,7 +180,7 @@ Only use parameters involving those variables to calculate her/his $\ell_i$:
 $$
 y_i = \begin{bmatrix} y_1 \\ y_2 \\ y_5 \end{bmatrix} 
 \mu_i = \begin{bmatrix} \mu_1 \\ \mu_2\\  \mu_5 \end{bmatrix} 
-\Sigma_i = \begin{bmatrix} 
+\mathbf{\Sigma}_i = \begin{bmatrix} 
 \sigma^2_1 & \sigma_{12} & \sigma_{15} \\
 \sigma_{21} & \sigma^2_2 & \sigma_{25} \\
 \sigma_{51} & \sigma_{52} & \sigma^2_5 
@@ -189,7 +189,7 @@ $$
 
 Thus, an individual’s likelihood is calculated using all available information. The log-likelihood $\ell$ for a sample is the sum of all the individual log-likelihoods ($ℓ = Σℓ_i$), so FIML estimation utilizes each person’s available information when choosing the best parameter estimates that maximize the likelihood of the entire sample.
 
-We discuss tests statistics for model fit and model comparison in Chapter 11.  However, in order to understand how $\ell$ is related to FML, we must first introduce the likelihood-ratio test (LRT).  The ratio of two likelihoods tells you how much more (or less) likely you are to observe the sample data if the model in the numerator (A) is true than if the model in the denominator (B) is true: $\frac{likelihood \hspace{1mm}under\hspace{1mm} Model \hspace{1mm}A}{likelihood \hspace{1mm}under \hspace{1mm}Model \hspace{1mm}B}$.  Recall that we work with log-likelihoods for greater precision.  Furthermore, we multiply $ℓ$ by −2 so that the resulting statistics are distributed as $χ^2$ random variables (see Chapter 11 for details).  Because the log of a ratio is equal to the difference in each log - i.e., $log(a / b) = log(a) − log(b)$ — we can calculate the log of the likelihood-ratio as a difference between the log-likelihoods $ℓ$:
+We discuss tests statistics for model fit and model comparison in Chapter 11.  However, in order to understand how $\ell$ is related to FML, we must first introduce the likelihood-ratio test (LRT).  The ratio of two likelihoods tells you how much more (or less) likely you are to observe the sample data if the model in the numerator (A) is true than if the model in the denominator (B) is true: $\frac{\text{likelihood under model A}}{\text{likelihood under model B}}$.  Recall that we work with log-likelihoods for greater precision.  Furthermore, we multiply $ℓ$ by −2 so that the resulting statistics are distributed as $χ^2$ random variables (see Chapter 11 for details).  Because the log of a ratio is equal to the difference in each log - i.e., $log(a / b) = log(a) − log(b)$ — we can calculate the log of the likelihood-ratio as a difference between the log-likelihoods $ℓ$:
 
 ```{=tex}
 \begin{equation}
@@ -198,12 +198,12 @@ LRT = -2\ell_A - (-2\ell_B) = -2 \times (\ell_A - \ell_B)
 \end{equation}
 ```
 
-Suppose we label our hypothesized (target) model as Model A, and we compare it to a perfectly fitting saturated model (labelled Model B) whose estimates are therefore identical to the observed sample statistics ($\Sigma_{sample}$).  If the hypothesized model is the true data-generating model, then there should be little or no difference between $ℓ_{Target}$ and $ℓ_{Saturated}$, so the LRT should be small (close to zero).  You might notice how equation 10.02 incorporates this concept into the calculation of FML, by taking the difference between the $\log$s (of the determinants) of the target-model-implied $\Sigma$ (i.e., $\widehat\Sigma_{model}$) and the saturated-model-implied $\Sigma$ (i.e., $\Sigma_{sample}$), which would be Models A and B in equation 10.06.
+Suppose we label our hypothesized (target) model as Model A, and we compare it to a perfectly fitting saturated model (labelled Model B) whose estimates are therefore identical to the observed sample statistics ($\mathbf{\Sigma}_\text{sample}$).  If the hypothesized model is the true data-generating model, then there should be little or no difference between $ℓ_{Target}$ and $ℓ_{Saturated}$, so the LRT should be small (close to zero).  You might notice how equation 10.02 incorporates this concept into the calculation of FML, by taking the difference between the $\log$s (of the determinants) of the target-model-implied $\Sigma$ (i.e., $\hat{\mathbf{\Sigma}}_\text{model}$) and the saturated-model-implied $\Sigma$ (i.e., $\mathbf{\Sigma}_\text{sample}$), which would be Models A and B in equation 10.06.
 
 Having established the concept of a LRT, we can show how to calculate the same FML from equation 10.02 using $ℓ$.  Notice that a mean ($\overline{X}$) is simply a sum of values divided by the number of values: $\overline{X} = \frac{1}{N} Σ x_i = \frac{Σ x_i}{N}$.  If we calculate equation 10.06 using the average log-likelihood ($\overline{\ell} = \frac{1}{N} Σ\ell_i = \frac{\ell}{N}$) instead of the sum $ℓ$, then the result would be $\frac{LRT}{N} = F_{ML}$.  So $F_{ML}$ can be interpreted as the average person’s log-likelihood-ratio in the sample.  As you will see in Chapter 11, the $χ^2$ statistic is used to test whether the model fits the entire sample, so we simply convert the mean (FML) back to a sum (LRT, or $χ^2$) by multiplying the mean by the sample size  ($N × F_{ML}$).
 
 ## Using FIML to analyse raw data with missing values in lavaan
-In `lavaan`, the default way to handle missing values is to apply listwise deletion. FIML estimation will be invoked by adding the argument  `missing = "ML"` to the model. The missing values in the raw data (here stored in the object `AWdata`) should be specified as `NA`. Since using FIML requires the analysis of the means of the variables, one should also include the model for the means in the model syntax. To specify an unrestricted mean structure one would freely estimate an intercept for each observed variable. The `lavaan` syntax to specify the intercept for a variable involves regressing the variable on the constant 1. For example, the intercept of variable $y_1$ would be estimated by including the syntax: `y1 ~ 1`. 
+In `lavaan`, the default way to handle missing values is to apply listwise deletion. FIML estimation will be invoked by adding the argument  `missing = "ML"` to the model. The missing values in the raw data (here stored in the object `AWdata`) should be specified as `NA`. Since using FIML requires the analysis of the means of the variables, one should also include the model for the means in the model syntax. To specify an unrestricted mean structure one would freely estimate an intercept for each observed variable. The `lavaan` syntax to specify the intercept for a variable involves regressing the variable on the constant 1. For example, the intercept of variable $\mathrm{y}_1$ would be estimated by including the syntax: `y1 ~ 1`. 
 
 ```
 AWmodelOut <- lavaan(model = AWmodel, 

@@ -2,39 +2,39 @@
 
 ## Standardized regression coefficients
 
-The $B$ matrix from the path analysis model in [Chapter 3](path-models.html) contains unstandardized parameter estimates. Unstandardized parameters are dependent on the units in which the variables are scaled. When predictor variables are measured on the same scale, comparison of unstandardized coefficients can provide information on their relative influence on the outcome. For example, when we would estimate the effect of the anxiety of the father and the anxiety of the mother on the anxiety of the child, the unstandardized effects can be directly compared to give an indication of the relative influence of mother's and father's anxiety. However, comparison of effects is complicated when variables are measured on different scales. In our illustrative example, a meaningful comparison of the effects of parent anxiety and parent perfectionism on parental over-control is complicated by the fact that the interpretation of units on the scales of these variables are not equivalent (e.g., how does one unit on parent anxiety relate to one unit on parent perfectionism?). In such a case, it would be helpful to obtain standardized parameter estimates that are independent on the units in which the variables are scaled.
+The $\mathbf{B}$ matrix from the path analysis model in [Chapter 3](path-models.html) contains unstandardized parameter estimates. Unstandardized parameters are dependent on the units in which the variables are scaled. When predictor variables are measured on the same scale, comparison of unstandardized coefficients can provide information on their relative influence on the outcome. For example, when we would estimate the effect of the anxiety of the father and the anxiety of the mother on the anxiety of the child, the unstandardized effects can be directly compared to give an indication of the relative influence of mother's and father's anxiety. However, comparison of effects is complicated when variables are measured on different scales. In our illustrative example, a meaningful comparison of the effects of parent anxiety and parent perfectionism on parental over-control is complicated by the fact that the interpretation of units on the scales of these variables are not equivalent (e.g., how does one unit on parent anxiety relate to one unit on parent perfectionism?). In such a case, it would be helpful to obtain standardized parameter estimates that are independent on the units in which the variables are scaled.
 
-The standardized $β$ is the regression coefficient that is scaled with respect to the $SD$ of each variable. For example, $\widehat{\beta}_{21}$ is the estimated regression coefficient representing the direct effect of variable 1 on variable 2. The standardized version of $\widehat{\beta}_{21}$, $\widehat{\beta}^*_{21}$, is given as:
+The standardized $β$ is the regression coefficient that is scaled with respect to the $SD$ of each variable. For example, $\hat{\beta}_{21}$ is the estimated regression coefficient representing the direct effect of variable 1 on variable 2. The standardized version of $\hat{\beta}_{21}$, $\hat{\beta}^*_{21}$, is given as:
 
 ```{=tex}
 \begin{equation}
-\widehat{\beta}^*_{21} = \widehat{\beta}_{21} \times \frac{\widehat{\sigma}_1}{\widehat{\sigma}_2},
+\hat{\beta}^*_{21} = \hat{\beta}_{21} \times \frac{\hat{\sigma}_1}{\hat{\sigma}_2},
 (\#eq:6-01)
 \end{equation}
 ```
 
-where $\widehat{\sigma}_1$ and $\widehat{\sigma}_2$ are the estimated $SD$s of variable 1 and variable 2 as predicted by the model.The standardized parameter can be interpreted in terms of standardized units, where a single SD increase in the predictor variable (variable 1) would result in a change of $\widehat{\beta}^*_{21}$ $SD$s in the outcome variable (variable 2). 
+where $\hat{\sigma}_1$ and $\hat{\sigma}_2$ are the estimated $SD$s of variable 1 and variable 2 as predicted by the model.The standardized parameter can be interpreted in terms of standardized units, where a single SD increase in the predictor variable (variable 1) would result in a change of $\hat{\beta}^*_{21}$ $SD$s in the outcome variable (variable 2). 
 
-Substituting the parameter estimate $\widehat{\beta}_{31}$ and model-implied $SD$s ${\widehat{\sigma}_1}$ and ${\widehat{\sigma}_3}$ from our illustrative example yields:
+Substituting the parameter estimate $\hat{\beta}_{31}$ and model-implied $SD$s ${\hat{\sigma}_1}$ and ${\hat{\sigma}_3}$ from our illustrative example yields:
 
 $$
-\widehat{\beta}^*_{31} = 0.19 \times \frac{\sqrt{91.58}}{\sqrt{130.19}} = .16 .
+\hat{\beta}^*_{31} = 0.19 \times \frac{\sqrt{91.58}}{\sqrt{130.19}} = .16 .
 $$
 Thus, controlling for the other variables in the model, a 1-SD increase in parent anxiety is expected to result in parental over-control increasing 0.16 SDs. In comparison, the standardized regression coefficient for the regression of parental over-control on parent perfectionism is:
 
 $$
-\widehat{\beta}^*_{32} = \widehat{\beta}_{32} \times \frac{\widehat{\sigma}_2}{\widehat{\sigma}_3} = 0.21 \times \frac{\sqrt{194.32}}{\sqrt{130.19}} = .26 .
+\hat{\beta}^*_{32} = \hat{\beta}_{32} \times \frac{\hat{\sigma}_2}{\hat{\sigma}_3} = 0.21 \times \frac{\sqrt{194.32}}{\sqrt{130.19}} = .26 .
 $$
 
 The relative influence of parent perfectionism on parental over-control is thus larger than the influence of parent anxiety. 
 
 In addition, standardized regression coefficients can be used to interpret the size of the effect (in terms of effect size $r$), where values between .10–.30 indicate small effects, values between .30–.50 indicate intermediate effect, and values larger than .50 indicate strong effects (Bollen, 1988). In our example both effects can be considered small.
 
-The calculation of standardized regression coefficients can be done for the complete matrix of estimated regression coefficients that are represented in matrix $\widehat{B}$. The matrix expression for the standardized $\widehat{B}$ matrix, $\widehat{B}^*$, is the following: 
+The calculation of standardized regression coefficients can be done for the complete matrix of estimated regression coefficients that are represented in matrix $\hat{\mathbf{B}}$. The matrix expression for the standardized $\hat{\mathbf{B}}$ matrix, $\hat{\mathbf{B}}^*$, is the following: 
 
 ```{=tex}
 \begin{equation}
-\widehat{B}^* = diag(\widehat{\Sigma})^{-\frac{1}{2}} \widehat{B} \hspace{1mm} diag(\widehat{\Sigma})^\frac{1}{2}
+\hat{\mathbf{B}}^* = diag(\hat{\Sigma})^{-\frac{1}{2}} \hat{\mathbf{B}} \hspace{1mm} diag(\hat{\Sigma})^\frac{1}{2}
 (\#eq:6-02)
 \end{equation}
 ```
@@ -44,12 +44,12 @@ In this expression, Σ ̂model is the matrix containing the model-implied varian
 In our example, the matrix of standardized regression coefficients is:
 
 $$
-\widehat{B}^* = 
+\hat{\mathbf{B}}^* = 
 \begin{bmatrix}
 0&0&0&0\\
 0&0&0&0\\
-\widehat{\beta}_{31}^* & \widehat{\beta}_{32}^* &0&0\\
-0&0&\widehat{\beta}_{43}^* &0\\
+\hat{\beta}_{31}^* & \hat{\beta}_{32}^* &0&0\\
+0&0&\hat{\beta}_{43}^* &0\\
 \end{bmatrix} =
 \begin{bmatrix}
 0&0&0&0\\
@@ -67,7 +67,7 @@ Similarly, the matrix of residual factor variances and covariances can be standa
 
 ```{=tex}
 \begin{equation}
-COR_{21} = \frac{COV_{21}}{\widehat{\sigma}_1 \widehat{\sigma}_2} 
+COR_{21} = \frac{COV_{21}}{\hat{\sigma}_1 \hat{\sigma}_2} 
 (\#eq:6-03)
 \end{equation}
 ```
@@ -75,16 +75,16 @@ COR_{21} = \frac{COV_{21}}{\widehat{\sigma}_1 \widehat{\sigma}_2}
 For example, the correlation between the variables parent anxiety and parent perfectionism is:
 
 $$
-COR_{21} = \frac{COV_{21}}{\widehat{\sigma}_1 \widehat{\sigma}_2} = \frac{53.36}{\sqrt{91.58 \times 194.32}} = .40.
+COR_{21} = \frac{COV_{21}}{\hat{\sigma}_1 \hat{\sigma}_2} = \frac{53.36}{\sqrt{91.58 \times 194.32}} = .40.
 $$
 
 Like standardized regression slopes, correlation coefficients can be interpreted as effect size $r$ (Bollen, 1988). Thus, in our illustrative example there is an intermediate correlation between the two exogenous variables.
  
-The matrix expression for standardized variances and covariances in the $\widehat{Ψ}$ matrix is:
+The matrix expression for standardized variances and covariances in the $\hat{Ψ}$ matrix is:
 
 ```{=tex}
 \begin{equation}
-\widehat{Ψ}^* = diag(\widehat{\Sigma}_{model})^{-\frac{1}{2}} \widehat{Ψ} \hspace{1mm} diag(\widehat{\Sigma}_{model})^\frac{1}{2}
+\hat{\mathbf\Psi}^* = diag(\hat{\Sigma}_{model})^{-\frac{1}{2}} \hat{Ψ} \hspace{1mm} diag(\hat{\Sigma}_{model})^\frac{1}{2}
 (\#eq:6-04)
 \end{equation}
 ```
@@ -92,12 +92,12 @@ The matrix expression for standardized variances and covariances in the $\wideha
 In our example, the matrix of standardized residual variances and covariances is:
 
 $$
-\widehat{\Psi}^* = 
+\hat{\mathbf\Psi}^* = 
 \begin{bmatrix}
-\widehat{\psi}_{11}^* & \widehat{\psi}_{21}^*&0&0\\
-\widehat{\psi}_{12}^* & \widehat{\psi}_{22}^*&0&0\\
-0&0 &\widehat{\psi}_{33}^*&0\\
-0&0&0 &\widehat{\psi}_{44}^*\\
+\hat{\psi}_{11}^* & \hat{\psi}_{21}^*&0&0\\
+\hat{\psi}_{12}^* & \hat{\psi}_{22}^*&0&0\\
+0&0 &\hat{\psi}_{33}^*&0\\
+0&0&0 &\hat{\psi}_{44}^*\\
 \end{bmatrix} =
 \begin{bmatrix}
 1 &0.40 & 0 & 0\\
@@ -111,9 +111,9 @@ The standardized variances of the residual factors can be interpreted as the pro
 
 ## Calculating standardized coefficients in R using lavaan results
 
-There are several ways to obtain standardized parameter estimates from a path model. Here, we will show how to manually calculate standardized parameter estimates from the estimated ($\widehat{B}$ $\widehat{\Psi}$) and model-implied ($\widehat{\Sigma}$) matrices. 
+There are several ways to obtain standardized parameter estimates from a path model. Here, we will show how to manually calculate standardized parameter estimates from the estimated ($\hat{\mathbf{B}}$ $\hat{\mathbf\Psi}$) and model-implied ($\hat{\Sigma}$) matrices. 
 
-Script 6.1 shows the syntax that standardizes the $\widehat{B}$ and $\widehat{\Psi}$matrices ($\widehat{B}^*$ and $\widehat{\Psi}^*$) from the output of the Affrunti & Woodruff-Borden model that was saved in the object `AWmodelOut`.
+Script 6.1 shows the syntax that standardizes the $\hat{\mathbf{B}}$ and $\hat{\mathbf{\Psi}}$matrices ($\hat{\mathbf{B}}^*$ and $\hat{\mathbf{\Psi}}^*$) from the output of the Affrunti & Woodruff-Borden model that was saved in the object `AWmodelOut`.
 
 ```{r label='script6-1'}
 # parameter estimates from the model
@@ -141,7 +141,7 @@ BETA <- Estimates$beta[obsnames, obsnames]
 PSI <- Estimates$psi[obsnames, obsnames]
 ```
 
-We also need the model-implied covariance matrix, $\widehatΣ$ model, which we can calculate with the parameter estimates, using $\widehat{\Sigma}_{model} = (I-\widehat{B})^{-1} \widehat{\Psi}[(I-\widehat{B})^{-1}]^T$. We already extracted the parameter estimates for the $\widehat{B}$ and $\widehat{\Psi}$ matrices (into the objects `BETA` and `PSI`), so now we create an identity matrix `IDEN` with dimensions 4 × 4 and then calculate $\widehatΣ_{model}$ using:
+We also need the model-implied covariance matrix, $\hatΣ$ model, which we can calculate with the parameter estimates, using $\hat{\mathbf\Sigma}_{\text{model}} = (\mathbf{I}-\hat{\mathbf{B}})^{-1} \hat{\mathbf\Psi}[(\mathbf{I}-\hat{\mathbf{B}})^{-1}]^\mathbf{T}$. We already extracted the parameter estimates for the $\hat{\mathbf{B}}$ and $\hat{\mathbf{\Psi}}$ matrices (into the objects `BETA` and `PSI`), so now we create an identity matrix `IDEN` with dimensions 4 × 4 and then calculate $\hatΣ_{model}$ using:
 
 ```{r}
 SIGMA <- solve(IDEN - BETA) %*% PSI %*% t(solve(IDEN - BETA))
@@ -159,13 +159,13 @@ For our calculations we only need the $SD$s, which we obtain by extracting the d
 SD <- diag(sqrt(diag(SIGMA)))
 ```
 
-The $\widehat{B}$ matrix is standardized by pre-multiplying $\widehat{B}$ with a diagonal matrix with the inverse of the $SD$s, and post-multiplying it with a diagonal matrix with the $SD$s: 
+The $\hat{\mathbf{B}}$ matrix is standardized by pre-multiplying $\hat{\mathbf{B}}$ with a diagonal matrix with the inverse of the $SD$s, and post-multiplying it with a diagonal matrix with the $SD$s: 
 
 ```{r}
 BETAstar <- solve(SD) %*% BETA %*% SD
 ```
 
-The matrix $\widehat{\Sigma}$ is standardized by pre- and post-multiplying $\widehat{\Sigma}$ with a diagonal matrix with the inverse of the standard deviations. 
+The matrix $\hat{\Sigma}$ is standardized by pre- and post-multiplying $\hat{\Sigma}$ with a diagonal matrix with the inverse of the standard deviations. 
 
 ```{r}
 PSIstar <- solve(SD) %*% PSI %*% solve(SD)
@@ -180,7 +180,7 @@ dimnames(BETAstar) <- list(obsnames, obsnames)
 dimnames(PSIstar) <- list(obsnames, obsnames)
 ```
 
-To view the standardized $\widehat{B}^*$  and $\widehat{\Sigma}^*$ matrices, type: 
+To view the standardized $\hat{\mathbf{B}}^*$  and $\hat{\Sigma}^*$ matrices, type: 
 
 ```{r}
 BETAstar

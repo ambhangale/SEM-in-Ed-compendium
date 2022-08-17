@@ -17,10 +17,10 @@ There are different approaches to further assess whether a model is identified. 
 
 Some conditions related to identification are sufficient, which means that if the condition holds, the model is surely identified (at least theoretically), but there may be other identified models for which the condition does not hold. Other conditions are necessary, which means that if the condition holds, the model might be identified. If a necessary condition doesn’t hold, the model is surely not identified.
 
-## Assessment of identification using the elements of $Σ_{population}$ and $\Sigma_{model}$
-A model is identified only when all unknown parameters of the model are identified. Identification of model parameters can be demonstrated by showing that the unknown parameters are functions of known parameters, i.e., that we can give a description of the free parameters in the model in terms of population variances and covariances ($Σ_{population}$). The population variances and covariances are known-to-be-identified (i.e., known information) because the observed sample variances and covariances ($Σ_{sample}$) are direct estimates of $Σ_{population}$. Therefore, if an unknown parameter can be written as a function of one or more elements of $Σ_{population}$, then that parameter is identified. 
+## Assessment of identification using the elements of $\mathbf\Sigma_{\text{population}}$ and $\mathbf\Sigma_{\text{model}}$
+A model is identified only when all unknown parameters of the model are identified. Identification of model parameters can be demonstrated by showing that the unknown parameters are functions of known parameters, i.e., that we can give a description of the free parameters in the model in terms of population variances and covariances ($\mathbf\Sigma_{\text{population}}$). The population variances and covariances are known-to-be-identified (i.e., known information) because the observed sample variances and covariances ($\mathbf\Sigma_{\text{sample}}$) are direct estimates of $\mathbf\Sigma_{\text{population}}$. Therefore, if an unknown parameter can be written as a function of one or more elements of $\mathbf\Sigma_{\text{population}}$, then that parameter is identified. 
 
-As an example, we take $Σ_{model}$ from Equation \@ref(eq:3-10). Here, the elements of the covariance matrix are written as a function of model parameters. In order to evaluate the identification status of a parameter, we need to write the equation the other way around, so that the model parameter is a function of population variances and covariances. If each unknown model parameter can be written as a function of known parameters, then the model of Equation \@ref(eq:3-10) is identified. For example, the first three elements of the model implied covariance matrix are a function of single model parameters $ψ_{11}$, $ψ_{22}$, and $ψ_{21}$. These parameters can therefore be represented by the population variances $\sigma_{11}$, $\sigma_{22}$, and covariance $\sigma_{21}$:
+As an example, we take $\mathbf\Sigma_{\text{model}}$ from Equation \@ref(eq:3-10). Here, the elements of the covariance matrix are written as a function of model parameters. In order to evaluate the identification status of a parameter, we need to write the equation the other way around, so that the model parameter is a function of population variances and covariances. If each unknown model parameter can be written as a function of known parameters, then the model of Equation \@ref(eq:3-10) is identified. For example, the first three elements of the model implied covariance matrix are a function of single model parameters $ψ_{11}$, $ψ_{22}$, and $ψ_{21}$. These parameters can therefore be represented by the population variances $\sigma_{11}$, $\sigma_{22}$, and covariance $\sigma_{21}$:
 
 \begin{equation}
 \psi_{11} = \sigma_{11}
@@ -161,7 +161,7 @@ Step 2: Fit the model to the model implied covariance matrix from Step 1.
 
 If the parameter estimates you obtain in Step 2 are identical to the parameter values you chose in Step 1, the model may be identified. If you obtain different parameter estimates in Step 2, your model is surely not identified. 
 
-Below, we will show two examples of the empirical check. In Script 7.1 we will check identification of the path model depicted in Figure 1. First we will check identification if we add a covariance between the residual factors of $y_3$ and $y_4$ (Model 1), and subsequently we will check identification when we additionally add a reciprocal effect from $y_4$ to $y_3$ (Model 2). 
+Below, we will show two examples of the empirical check. In Script 7.1 we will check identification of the path model depicted in Figure 1. First we will check identification if we add a covariance between the residual factors of $\mathrm{y}_3$ and $\mathrm{y}_4$ (Model 1), and subsequently we will check identification when we additionally add a reciprocal effect from $\mathrm{y}_4$ to $\mathrm{y}_3$ (Model 2). 
 
 ```{r label='script7-1'}
 ### Script 7.1 ### 
@@ -225,7 +225,7 @@ summary(EmpiricalCheckOut)
 
 When you run the script for Model 1, you will notice that the parameter estimates are exactly equal to our chosen values from Step 1. Thus, this indicates that the model may be identified. As this empirical check is a necessary requirement for identification, but not sufficient, we are not completely sure that the model is truly identified.
 
-In the next script we show the empirical check of Model 2, where we also add the effect from $y_4$ to $y_3$. 
+In the next script we show the empirical check of Model 2, where we also add the effect from $\mathrm{y}_4$ to $\mathrm{y}_3$. 
 
 ```{r label='script7-2'}
 ### Script 7.2 ### 

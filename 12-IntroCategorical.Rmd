@@ -82,11 +82,17 @@ $$\text{Pr}(y=1) = \pi = \Phi^{-1}(z)$$
 
 - The *logit* (**log**istic un**it**) transformation is often favored because its coefficients can be interpreted on the (natural-)log-odds scale.  Recall the *odds* of an outcome is a ratio of its probability ($\pi$) to its complement ($1-\pi$), so its range is 0 to $+\infty$ (i.e., it is merely bound to nonnegative numbers).  The natural (i.e., base-$e$) log of a nonnegative number can take any real number.  The formulas below show how probabilities, odds, and logits are related.
 
-$$\text{Logit}(\pi) = \ln(\text{odds}) = \ln \Bigg(\frac{\pi}{1 - \pi} \Bigg) = \mathbf{XB}$$
+$$
+\text{Logit}(\pi) = \ln(\text{odds}) = \ln \Bigg(\frac{\pi}{1 - \pi} \Bigg) = \mathbf{XB}
+$$
 
-$$\text{odds} = \frac{\pi}{1 - \pi} = e^{\text{Logit}(\pi)} \text{ , where } \; \; e = `r exp(1)`$$
+$$
+\text{odds} = \frac{\pi}{1 - \pi} = \mathrm{e}^{\text{Logit}(\pi)} \text{ , where } \; \; \mathrm{e} = `r exp(1)`
+$$
 
-$$\pi = \frac{\text{odds}}{1 + \text{odds}} = \frac{e^\text{Logit}}{1 + e^\text{Logit}}$$
+$$
+\pi = \frac{\text{odds}}{1 + \text{odds}} = \frac{\mathrm{e}^\text{Logit}}{1 + \mathrm{e}^\text{Logit}}
+$$
 
 There is a `logit()` function in the `psych` package, but it is simple enough to calculate the transformation (and its inverse):
 ```{r logit example, eval=FALSE}
@@ -161,12 +167,12 @@ In SEM, the probit model is often preferred because predicted values are $z$ sco
 
 - Each subject has a latent propensity to smoke.  This propensity is a continuous, normally distributed trait. Subjects whose propensity exceeds a threshold succumb to smoking, whereas those whose propensity does not exceed the threshold refrain from smoking.
 
-The probit model above can therefore be reframed in terms of this LRV, $y^*$.
+The probit model above can therefore be reframed in terms of this LRV, $\mathrm{y}^*$.
 
-$$y^* = \mathbf{XB} + \varepsilon ,$$
-where $\varepsilon \sim \mathcal{N}(0, \sigma)$ and the observed binary response $y$ is linked to the LRV by a *threshold model*:
+$$\mathrm{y}^* = \mathbf{XB} + \varepsilon ,$$
+where $\varepsilon \sim \mathcal{N}(0, \sigma)$ and the observed binary response $\mathrm{y}$ is linked to the LRV by a *threshold model*:
 
-$$y = I(y^* > \tau),$$
+$$\mathrm{y} = I(y^* > \tau),$$
 where the indicator function $I()$ assigns 1 when its argument is `TRUE` and 0 when it is `FALSE`.  Because the LRV is unobserved (i.e., *latent*), its distributional parameters cannot be estimated from the data. GLM software like the `glm()` function typically identify the model by fixing the residual variance $\sigma=1$ and the threshold $\tau=0$.  For simplicity, consider an intercept-only model for cigarette use.
 ```{r intercept-only glm}
 mod0 <- glm(ciguse ~ 1, data = myData, family = binomial("probit"))
@@ -225,7 +231,7 @@ Notice that the distributions are identical.  Only the $x$-axis differs, reflect
 
 The LRV interpretation is easily extended to polytomous ordinal variables, such as intent to smoke.  This is called the *cumulative probit* model (and link function).  Any ordinal variable with categories $c=0, \ldots, C$ can be interpreted as a crude discretization of an underlying LRV, whose $C$ thresholds divide the latent distribution into $C+1$ categories.
 
-$$y=c \ \ \ \text{ if } \ \ \ \tau_c < y^* \le \tau_{c+1} $$
+$$\mathrm{y}=c \ \ \ \text{ if } \ \ \ \tau_c < y^* \le \tau_{c+1} $$
 
 Because the normal distribution is unbounded, the first category "starts" at $\tau_0 = -\infty$, and the last category "ends" at $\tau_{C+1} = +\infty$.  For example, intent to smoke has 4 categories, so there are $C=3$ thresholds.  We do not have to specify thresholds in `lavaan` model syntax if we tell `lavaan` which variables are ordinal using the argument `ordered=`.  When **all** modeled variables are ordinal, one can use `TRUE` as a shortcut.
 ```{r bivar sem}
@@ -268,8 +274,6 @@ text(x = c(coef(fit2)[3], coef(fit2)[3], coef(fit2)[5], coef(fit2)[5]),
 
 par(opar)
 ```
-
-
 
 ### Estimating Thresholds
 
@@ -367,9 +371,9 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick, inner sep=0.
 >=stealth,
 ]
 
-\node[manifest] (x) at (0,0) {$y_1$\\$\text{T}_\text{x}$};
-\node[manifest] (m) at (2,2) {$y_2$\\Intent};
-\node[manifest] (y) at (4,0) {$y_3$\\Smoked};
+\node[manifest] (x) at (0,0) {$\mathrm{y}_1$\\$\text{T}_\text{x}$};
+\node[manifest] (m) at (2,2) {$\mathrm{y}_2$\\Intent};
+\node[manifest] (y) at (4,0) {$\mathrm{y}_3$\\Smoked};
 
 \draw[->, thick] (x) to node [above, xshift=-2mm] {$\beta_{21}$} (m.225);
 \draw[->, thick] (m) to node [above, xshift=2mm] {$\beta_{32}$} (y.135);
@@ -391,7 +395,7 @@ There are 3 possible conclusions:
 - **Partial mediation**: the indirect effect $\beta_{21} \times \beta_{32} \ne 0$ *and* the direct effect $\beta_{31} \ne 0$ 
 - **Full mediation**: the indirect effect $\beta_{21} \times \beta_{32} \ne 0$ but the direct effect $\beta_{31} = 0$ 
 
-Omitting the dashed line (by fixing $\beta_{31}=0$$) would imply full mediation. A full-mediation model would estimate 8 parameters:
+Omitting the dashed line (by fixing $\beta_{31}=0$) would imply full mediation. A full-mediation model would estimate 8 parameters:
 
 - 2 regression slopes ($\beta_{21}$ and $\beta_{32}$)
 - 1 mean and 1 variance for the exogenous dummy coded `intervention`
