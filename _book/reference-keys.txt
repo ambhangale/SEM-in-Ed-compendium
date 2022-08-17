@@ -36,6 +36,10 @@ eq:7-19
 eq:7-20
 eq:10-01
 eq:10-02
+eq:10-03
+eq:10-04
+eq:10-05
+eq:10-06
 eq:int
 eq:L1
 eq:L2
@@ -156,6 +160,12 @@ references-4
 estimation
 improper-solutions
 specifying-starting-values-in-lavaan
+alternative-estimators
+robust-estimators
+requesting-alternative-and-robust-estimators-in-lavaan
+alternative-calculation-of-the-ml-discrepancy-function-when-analysing-raw-data
+using-fiml-to-analyse-raw-data-with-missing-values-in-lavaan
+references-5
 path-analysis-with-categorical-outcomes
 prepare-data-and-workspace-1
 import-example-data-1
@@ -176,14 +186,14 @@ estimate-mediation-models
 interpreting-coefficients
 delta-vs.-theta-parameterizations
 decomposing-total-effects
-references-5
+references-6
 fitting-path-models-with-multilevel-data
 intraclass-correlation
 multilevel-structure-as-a-nuisance-correcting-for-the-dependency
 two-level-path-models
 obtaining-iccs-and-estimates-of-sigma_textw-and-sigma_textb
 fitting-a-two-level-path-model
-references-6
+references-7
 latent-growth-curve-models
 prepare-data-and-workspace-2
 random-intercept-model
@@ -209,4 +219,4 @@ discrete-indicators
 binary-indicators
 ordinal-indicators
 multigroup-growth-models
-references-7
+references-8

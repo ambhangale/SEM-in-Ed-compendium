@@ -20,6 +20,7 @@ F_{ULS}(\Sigma_{sample},\widehat\Sigma_{model}) = ½ trace ((\Sigma_{sample} - \
 which minimizes the squared deviations between the observed sample variances and covariances and the corresponding elements predicted by the model. If the deviations are zero (i.e., observed and model-implied matrices are identical), then FULS is zero, indicating perfect fit.  Any nonzero discrepancies yield a positive FULS.  Minimizing FULS yields unweighted least squares (ULS) estimates of all the model parameters given by Equations 3.09 and 3.10, under the assumption that the model is valid and identified. It leads to unbiased and consistent estimates of model parameters, and does not require that the observed variables have a particular distribution. However, it is not the most efficient estimator.
 
 A particularly attractive discrepancy function is given by:
+
 ```{=tex}
 \begin{equation}
 F_{ML}(\Sigma_{sample},\widehat\Sigma_{model}) = log|\widehat\Sigma_{model}|-log|\Sigma_{sample}|+trace(\Sigma_{sample}\widehat\Sigma^{-1}_{model})-p,
@@ -76,3 +77,156 @@ For instance, a Heywood case could result from either (a) model misspecification
 
 ## Specifying starting values in lavaan
 Methods for choosing default start values are quite excellent in recent software such as M*plus* and `lavaan`, so it is rarely necessary for a user to provide start values manually.  However, it may be useful to know how to do so, particularly when having difficulty converging on a proper (or any) solution.  There are three ways to provide non-default starting values in `lavaan`.  The first two involve specifying them in the `lavaan` model syntax, either using the `start()` modifier:
+
+```
+AWmodel <- ' child_anx ~ start(0.666)*overcontrol '
+```
+
+Or you may use the ? operator:
+
+```
+AWmodel <- ' child_anx ~ 0.666?overcontrol '
+```
+
+Note that if you want to provide both a starting value and use other modifiers/operators (e.g., to fix a parameter or label it) on the same parameter, then you have to specify that parameter twice on the same line of syntax:
+
+```
+AWmodel <- ' child_anx ~ b43*overcontrol + start(0.666)*overcontrol '
+```
+
+## Alternative estimators
+Additional estimators are available, but are less often used with continuous data.  For categorical data, however, covariance structure analysis is not appropriate, so some version of the weighted least-squares (WLS) estimator is typically used.  WLS estimation is available for continuous data as well, although this special case of WLS is referred to in the SEM literature as the asymptotical distribution-free (ADF; Browne, 1984) estimator.  The WLS fit function is:
+
+```{=tex}
+\begin{equation}
+F_{WLS}(\Sigma_{sample},\widehat\Sigma_{model}) = vech(\Sigma_{sample} - \widehat\Sigma_{model})^{T} \hspace{1mm} W^{-1} \hspace{1mm} vech(\Sigma_{sample} - \widehat\Sigma_{model}),
+(\#eq:10-03)
+\end{equation}
+```
+
+where `vech()` vectorizes the unique elements of its argument. The WLS fit function  essentially incorporates higher-order information beyond the covariance matrix (specifically, kurtosis) into a weight matrix (the $W$ matrix in Equation 10.03). It is usually chosen to be the sampling covariance matrix of the elements in $\Sigma_{sample}$. Equation 10.03 is a very general fit function, because in principle, any weight matrix can be used. If an identity matrix is used as the weight matrix, this yields the ULS estimator.  The ML fit function (using Wishart likelihood for analyses of covariance structure only) can actually be conceived of as WLS where the weight matrix is derived from $\widehat\Sigma_{model}$.  Likewise, there is also a “generalized” least-squares estimator (GLS), which can be conceived as WLS if the weight matrix would be derived from $\Sigma_{sample}$. GLS also requires multivariate normality, but it is not as efficient as MLE, so there is no advantage in using GLS.
+
+Computers did not always have such great hardware (processing and memory) and software (optimization techniques to find ML solutions) that we are used to today.  Therefore, GLS was popular 20 years ago when it was more common that SEM programs would fail to converge on a ML solution.  Nowadays, most of the above estimators (ULS, GLS, ADF) are rarely, if ever, used. Not only is the ML estimator the most efficient (i.e., the smallest SEs), but being based on likelihoods comes with other advantages, such as being able to calculate likelihood-based information criteria (e.g., AIC and BIC) to compare models.  Also, ADF requires extremely large sample sizes to be stable (i.e., $N$ > 2000 or 5000).  Although MLE is based on asymptotic (“large-sample”) theory, sample sizes in the hundreds are often sufficient for stable solutions (or even ~120 for smaller models).  
+
+
+## Robust estimators
+If data are not drawn from a multivariate normal population, then ML estimates are still consistent (and effectively unbiased, as sample size increases).  However, the $SE$s tend to be underestimated and fit statistic inflated, both leading to inflated Type I error rates.  If you have a sample size in the thousands, you could just use ADF.  However, such large samples are rare for practicing behavioral researchers. A more practical solution is to “correct” the SEs and fit statistic so that they do yield nominal Type I error rates. 
+
+The most often used correction for $SE$s is to use a “sandwich-type” estimator.  The asymptotic covariance matrix of model parameters, $A$, estimates how much model parameters would (co)vary from sample to sample.  $SE$s are the square-roots of the diagonal elements of $A$ (i.e., the sampling variances).  If the normality assumption does not hold, then $A$ is incorrect, but it can be corrected using a weight matrix, $W$, calculated from the observed kurtosis.  Without getting into the technical details, the term “sandwich” refers to the basic form of the matrix-algebra equation, in which $A$ is the outer “break” and $W$ is the “meat” (see Savalei, 2014, for more information).
+
+Several robust corrections for the fit statistic have been proposed.  The Satorra–Bentler (2001) scaled test statistic is the most popular, but it requires complete data, whereas the Yuan–Bentler (2000) scaled test statistic (T2\*) can be used with partially observed data (i.e., using full-information maximum likelihood)—they are asymptotically equivalent to each other (i.e., in large samples).  These methods “scale” the actual distribution of the test statistic to have a mean that equals the df, which is the actual mean of the $χ^2$ distribution.  Satterthwaite-type methods also adjust the variance of the test statistic, so that its variance is approximately equal to the $χ^2$ distribution’s (i.e., $2 × df$).  Scaling and shifting the observed statistic will yield Type I error rates that are closer to the nominal $α$ level.  These scaled–shifted statistics are sometimes referred to as mean- and variance-adjusted statistics (e.g., in M*plus*). Because the unadjusted $χ^2$ fit statistic will have inflated Type I errors when the normality assumption is not met, a scaled test statistic usually indicates better fit.
+
+## Requesting alternative and robust estimators in lavaan
+The `lavaan()` function (and the `cfa()` and `sem()` wrappers) accept arguments to specify the desired estimator, type of test statistic, and method for calculating $SE$s.  In the examples up until now, we have been using the defaults for normally distributed data.  Below, we explicitly request those default arguments:
+
+```{r}
+AWmodelOut <- lavaan(model = AWmodel, 
+                     sample.cov = AWcov, sample.nobs = 77, 
+                     likelihood = "wishart", fixed.x = FALSE,
+                     estimator = "ML", se = "standard", test = "standard")
+```
+
+Alternative estimators can be requested easily; for example, to request GLS, simply use the argument `estimator = "GLS"`.  When analyzing categorical outcomes (see Chapter 23), the default will be switched to `estimator = "DWLS"` (diagonally weighted least squares).
+
+If you are analyzing raw data instead of summary statistics, robust $SE$s and fit statistics can be requested just as easily.  For example, to request sandwich-type $SE$s, use the argument `se = "robust.sem"` with complete data or `se = "robust.huber.white"` with missing data (in combination with `missing = "FIML"`).  To request a scaled test statistic, use the argument `test = "Satorra.Bentler"` with complete data or `test = "Yuan.Bentler"` with missing data (in combination with missing = "FIML"; see the following section for more information).  Bootstrapping can be used to calculate $SE$s and the $p$ value for the fit statistic by requesting both `se = "boot"` and `test = "boot"` (in addition to setting the number of bootstrap samples to use in the `boot` argument); bootstrapping the fit statistics is currently only available with complete data, although the `semTools` package includes a function (`bsBootMiss()`) to bootstrap fit with missing data.
+
+Because the popular SEM software M*plus* uses a single shortcut to specify the choice of estimator, $SE$s, and fit statistic, many of those shortcuts are being used by applied researchers as though they are the names of the estimator itself (e.g., “MLR” for robust ML).  Even if robust $SE$s and fit statistic are used, ML is still the estimation method use to obtain point estimates of parameters (i.e., assuming normality—only the $SE$s and fit statistic are adjusted after parameters are estimated).  Still, `lavaan` allows some of these shortcuts, which you can read about on the `?lavaan` help page, in the description of the estimator argument.  Likewise, the help page describes all other available estimators (e.g., marginal maximum likelihood [MML] for IRT estimation), $SE$s (e.g., based on first-order derivatives), and test statistics (e.g., scaled and shifted, or mean- and variance-adjusted).
+
+## Alternative calculation of the ML discrepancy function when analysing raw data 
+Equation 10.02 shows how to calculate FML from summary statistics (i.e., observed ($\Sigma_{sample}$) and model-implied ($\widehat\Sigma_{model}$) covariance matrices).  This equation only applies when analysing complete data. In practice, data are often partially observed. When some data are missing, it is still possible to use full-information maximum likelihood (FIML) estimation, where the likelihood of each individual is calculated using only the parameters relevant to the variables on which they have observed data.  Individual $i$’s likelihood is calculated by plugging their vector of observed values ($y_i$) into the multivariate normal probability density function:
+
+```{=tex}
+\begin{equation}
+likelihood(\textbf{y}_i) = \frac{1}{(2\pi)^{p/2|\Sigma|1/2}}\mathrm{e}^{-\frac{1}{2}(y_i-\mu)'\Sigma^{-1}(y_i-\mu)}
+(\#eq:10-04)
+\end{equation}
+```
+
+using the model-implied mean vector  as μ and the model-implied covariance matrix as $Σ$, where $p$ is the number of variables in $y_i$.  After calculating the likelihood for each row of data, the joint likelihood of observing the entire sample is the product  of all the individual likelihoods.  Because likelihoods are bound between 0 and 1, the joint likelihood becomes very small—too small even for computers to calculate with enough precision .  It is easier to work with log-likelihoods because the log of numbers ranging from 0 to 1 will range from $−∞$ to 0 (so not as much precision is needed).  Because the log of a product is equal to the sum of the individual logs — $\log(a × b) = \log(a) + \log(b)$ — we can simply add together all the individual log-likelihoods to calculate the log-likelihood of the sample.  The log of equation 10.04 is:
+
+```{=tex}
+\begin{equation}
+\ell_i = \frac{p}{2}\log(2\pi) - \log(|\Sigma|) - \frac{1}{2}(y_i-\mu)'\Sigma^{-1}(y_i-\mu)
+(\#eq:10-05)
+\end{equation}
+```
+
+In a model with 5 variables, person $i$’s vector $y_i$ would have 5 observed values in it, the model-implied mean vector  μ would have 5 means in it, and the model-implied covariance matrix Σ would have 5 rows and 5 columns.  If person $i$ has complete data, all this information would be included in the calculation of equation 10.05:
+
+$$
+y_i = \begin{bmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \\ y_5 \end{bmatrix} \mu_i = \begin{bmatrix} \mu_1 \\ \mu_2\\ \mu_3\\ \mu_4\\ \mu_5 \end{bmatrix} \Sigma_i = \begin{bmatrix} 
+\sigma^2_1 & \sigma_{12} & \sigma_{13} & \sigma_{14} & \sigma_{15} \\
+\sigma_{21} & \sigma^2_2 & \sigma_{23} & \sigma_{24} & \sigma_{25} \\
+\sigma_{31} & \sigma_{32} & \sigma^2_3 & \sigma_{34} & \sigma_{35} \\
+\sigma_{41} & \sigma_{42} & \sigma_{43} & \sigma^2_4 & \sigma_{45} \\
+\sigma_{51} & \sigma_{52} & \sigma_{53} & \sigma_{54} & \sigma^2_5 \end{bmatrix}
+$$
+
+However, if person $i$ was only observed on $y_1$, $y_2$, and $y_5$:
+
+$$
+y_i = \begin{bmatrix} y_1 \\ y_2 \\. \\ . \\ y_5 \end{bmatrix} \mu_i = \begin{bmatrix} \mu_1 \\ \mu_2\\ \color{lightgrey}{\mu_3} \\ \color{lightgrey}{\mu_4}\\ \mu_5 \end{bmatrix} 
+\Sigma_i = \begin{bmatrix} 
+\sigma^2_1 & \sigma_{12} & \color{lightgrey}{\sigma_{13}} & \color{lightgrey}{\sigma_{14}} & \sigma_{15} \\
+\sigma_{21} & \sigma^2_2 & \color{lightgrey}{\sigma_{23}} & \color{lightgrey}{\sigma_{24}} & \sigma_{25} \\
+\color{lightgrey}{\sigma_{31}} & \color{lightgrey}{\sigma_{32}} & \color{lightgrey}{\sigma^2_3} & \color{lightgrey}{\sigma_{34}} & \color{lightgrey}{\sigma_{35}} \\
+\color{lightgrey}{\sigma_{41}} & \color{lightgrey}{\sigma_{42}} & \color{lightgrey}{\sigma_{43}} & \color{lightgrey}{\sigma^2_4} & \color{lightgrey}{\sigma_{45}} \\
+\sigma_{51} & \sigma_{52} & \color{lightgrey}{\sigma_{53}} & \color{lightgrey}{\sigma_{54}} & \sigma^2_5 
+\end{bmatrix}
+$$
+
+Only use parameters involving those variables to calculate her/his $\ell_i$:
+
+$$
+y_i = \begin{bmatrix} y_1 \\ y_2 \\ y_5 \end{bmatrix} 
+\mu_i = \begin{bmatrix} \mu_1 \\ \mu_2\\  \mu_5 \end{bmatrix} 
+\Sigma_i = \begin{bmatrix} 
+\sigma^2_1 & \sigma_{12} & \sigma_{15} \\
+\sigma_{21} & \sigma^2_2 & \sigma_{25} \\
+\sigma_{51} & \sigma_{52} & \sigma^2_5 
+\end{bmatrix}
+$$
+
+Thus, an individual’s likelihood is calculated using all available information. The log-likelihood $\ell$ for a sample is the sum of all the individual log-likelihoods ($ℓ = Σℓ_i$), so FIML estimation utilizes each person’s available information when choosing the best parameter estimates that maximize the likelihood of the entire sample.
+
+We discuss tests statistics for model fit and model comparison in Chapter 11.  However, in order to understand how $\ell$ is related to FML, we must first introduce the likelihood-ratio test (LRT).  The ratio of two likelihoods tells you how much more (or less) likely you are to observe the sample data if the model in the numerator (A) is true than if the model in the denominator (B) is true: $\frac{likelihood \hspace{1mm}under\hspace{1mm} Model \hspace{1mm}A}{likelihood \hspace{1mm}under \hspace{1mm}Model \hspace{1mm}B}$.  Recall that we work with log-likelihoods for greater precision.  Furthermore, we multiply $ℓ$ by −2 so that the resulting statistics are distributed as $χ^2$ random variables (see Chapter 11 for details).  Because the log of a ratio is equal to the difference in each log - i.e., $log(a / b) = log(a) − log(b)$ — we can calculate the log of the likelihood-ratio as a difference between the log-likelihoods $ℓ$:
+
+```{=tex}
+\begin{equation}
+LRT = -2\ell_A - (-2\ell_B) = -2 \times (\ell_A - \ell_B)
+(\#eq:10-06)
+\end{equation}
+```
+
+Suppose we label our hypothesized (target) model as Model A, and we compare it to a perfectly fitting saturated model (labelled Model B) whose estimates are therefore identical to the observed sample statistics ($\Sigma_{sample}$).  If the hypothesized model is the true data-generating model, then there should be little or no difference between $ℓ_{Target}$ and $ℓ_{Saturated}$, so the LRT should be small (close to zero).  You might notice how equation 10.02 incorporates this concept into the calculation of FML, by taking the difference between the $\log$s (of the determinants) of the target-model-implied $\Sigma$ (i.e., $\widehat\Sigma_{model}$) and the saturated-model-implied $\Sigma$ (i.e., $\Sigma_{sample}$), which would be Models A and B in equation 10.06.
+
+Having established the concept of a LRT, we can show how to calculate the same FML from equation 10.02 using $ℓ$.  Notice that a mean ($\overline{X}$) is simply a sum of values divided by the number of values: $\overline{X} = \frac{1}{N} Σ x_i = \frac{Σ x_i}{N}$.  If we calculate equation 10.06 using the average log-likelihood ($\overline{\ell} = \frac{1}{N} Σ\ell_i = \frac{\ell}{N}$) instead of the sum $ℓ$, then the result would be $\frac{LRT}{N} = F_{ML}$.  So $F_{ML}$ can be interpreted as the average person’s log-likelihood-ratio in the sample.  As you will see in Chapter 11, the $χ^2$ statistic is used to test whether the model fits the entire sample, so we simply convert the mean (FML) back to a sum (LRT, or $χ^2$) by multiplying the mean by the sample size  ($N × F_{ML}$).
+
+## Using FIML to analyse raw data with missing values in lavaan
+In `lavaan`, the default way to handle missing values is to apply listwise deletion. FIML estimation will be invoked by adding the argument  `missing = "ML"` to the model. The missing values in the raw data (here stored in the object `AWdata`) should be specified as `NA`. Since using FIML requires the analysis of the means of the variables, one should also include the model for the means in the model syntax. To specify an unrestricted mean structure one would freely estimate an intercept for each observed variable. The `lavaan` syntax to specify the intercept for a variable involves regressing the variable on the constant 1. For example, the intercept of variable $y_1$ would be estimated by including the syntax: `y1 ~ 1`. 
+
+```
+AWmodelOut <- lavaan(model = AWmodel, 
+                     data = AWdata, 
+                     missing = "ML")
+```
+
+## References
+Browne, M. W. (1984). Asymptotic distribution free methods in the analysis of covariance structures. *British Journal of Mathematical and Statistical Psychology, 37*, 62–83. doi:10.1111/j.2044-8317.1984.tb00789.x
+
+Chen, F., Bollen, K. A., Paxton, P., Curran, P. J., & Kirby, J. B. (2001). Improper solutions in structural equation models. *Sociological Methods & Research, 29*, 468–508. doi:10.1177/0049124101029004003
+
+Cudeck, R. (1989). Analysis of correlation matrices using covariance structure models. *Psychological Bulletin, 105*(2), 317–327. doi:10.1037/0033-2909.105.2.317
+
+Heywood, H. B. (1931). On finite sequences of real numbers. *Proceedings of the Royal Society of London, 134*, 486–501.
+
+Jöreskog, K. G. (1973). A general method for estimating a linear structural equation system. In A. S. Goldberger & O. D. Duncan (Eds.). *Structural equation models in the social sciences* (pp. 85–112). New York, NY: Academic Press.
+
+Myung, J. (2003). Tutorial on maximum likelihood estimation. *Journal of Mathematical Psychology, 47*, 90–100. doi:10.1016/S0022-2496(02)00028-7
+
+Satorra, A., & Bentler, P. M. (2001). A scaled difference chi-square test statistic for moment structure analysis. *Psychometrika, 66*(4), 507–514. doi:10.1007/BF02296192
+
+Savalei, V. (2014). Understanding robust corrections in structural equation modeling. *Structural Equation Modeling, 21*(1), 149–160. doi:10.1080/10705511.2013.824793
+
+Yuan, K.-H., & Bentler, P. M. (2000). Three likelihood-based methods for mean and covariance structure analysis with nonnormal missing data. *Sociological Methodology, 30*(1),  165–200. doi:10.1111/0081-1750.00078
+
