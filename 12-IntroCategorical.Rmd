@@ -14,7 +14,7 @@ library(lavaan)
 
 ### Import Example Data
 
-We will use example data provided on the [\textcolor{blue}{M\textit{plus} website}](http://www.statmodel.com) for a technical report (Muthén, 2011, p. 24).  The example data can be downloaded onto your computer from the report's [\textcolor{blue}{supplementary materials}](http://www.statmodel.com/examples/penn.shtml#extendSEM), or you can provide the URL directly to `read.table(file=)`, as shown below.  Note that the data are in summary format (i.e., a table with frequencies for each combination of categories for the 3 variables).  The `read.table()` output is therefore transformed into a standard `data.frame` with 1 row per subject.
+We will use example data provided on the [M\textit{plus} website}](http://www.statmodel.com) for a technical report (Muthén, 2011, p. 24).  The example data can be downloaded onto your computer from the report's [supplementary materials](http://www.statmodel.com/examples/penn.shtml#extendSEM), or you can provide the URL directly to `read.table(file=)`, as shown below.  Note that the data are in summary format (i.e., a table with frequencies for each combination of categories for the 3 variables).  The `read.table()` output is therefore transformed into a standard `data.frame` with 1 row per subject.
 
 ```{r import data-12}
 dd <- read.table(file = "http://www.statmodel.com/examples/shortform/4cat%20m.dat",
@@ -55,7 +55,6 @@ addmargins(probs, FUN = mean)
 
 The treatment group (`intervention == 1`) smokes less, both on average and within each `intention` group.  Smoking also increases with intent to smoke (both on average and within treatment/control groups).  Treatment appears least effective among those who were certain they would continue smoking (row 4).
 
-
 ## Regression Models for Binary Variables
 
 Suppose we used a linear model to predict the probability of smoking, treating intention as a continuous predictor to estimate only its linear effect.
@@ -75,7 +74,7 @@ summary(fitted(mod.lin))
 
 This limitation of linear probability models is resolved with a *link function* in a GLM that allows for predicted values along the entire real-number line.  Two such transformations are in frequent use:
 
-- The *probit* (**prob**ability un**it**) transformation dates back to Bliss (1934). A probability can be transformed to a corresponding quantile in a cumulative distribution function (CDF), such as the standard-normal distribution.  In other words, any probability `p` between 0--1 has a corresponding *z* score, such as can be requested from `qnorm(p)`.  Likewise, any predicted value on the probit scale can be transformed back into a probability using `pnorm(probit)`.  The GLM takes the form below, where $\Phi()$ is the standard-normal CDF, $\Phi^{-1}()$ is its inverse, and $\mathbf{XB}$ is the linear predictor ($\widehat{y}$):
+- The *probit* (**prob**ability un**it**) transformation dates back to Bliss (1934). A probability can be transformed to a corresponding quantile in a cumulative distribution function (CDF), such as the standard-normal distribution.  In other words, any probability $p$ between 0--1 has a corresponding $z$ score, such as can be requested from `qnorm(p)`.  Likewise, any predicted value on the probit scale can be transformed back into a probability using `pnorm(probit)`.  The GLM takes the form below, where $\Phi()$ is the standard-normal CDF, $\Phi^{-1}()$ is its inverse, and $\mathbf{XB}$ is the linear predictor ($\widehat{y}$):
 
 $$\text{Probit}(y=1) = \Phi(\pi) = z = \mathbf{XB}$$
 
@@ -94,7 +93,6 @@ There is a `logit()` function in the `psych` package, but it is simple enough to
 logit <- log( p / (1-p) )           # odds <- p / (1-p)
 p <- exp(logit) / (1 + exp(logit))  # odds <- exp(logit)
 ```
-
 
 Both probit and logistic regression models can be estimated using the `glm()` function, demonstrated below.
 
@@ -159,7 +157,7 @@ In both cases, the logit model performs slightly better than probit, both of whi
 
 ## Latent Response Variable
 
-In SEM, the probit model is often preferred because predicted values are *z* scores that can be transformed into probabilities.  This lends itself easily to a latent-response interpretation, which can be stated as follows for the cigarette-use example.  
+In SEM, the probit model is often preferred because predicted values are $z$ scores that can be transformed into probabilities.  This lends itself easily to a latent-response interpretation, which can be stated as follows for the cigarette-use example.  
 
 - Each subject has a latent propensity to smoke.  This propensity is a continuous, normally distributed trait. Subjects whose propensity exceeds a threshold succumb to smoking, whereas those whose propensity does not exceed the threshold refrain from smoking.
 
@@ -275,13 +273,13 @@ par(opar)
 
 ### Estimating Thresholds
 
-Thresholds are **univariate** statistics (like means).  Threshold estimates are based on the frequency distribution of a categorical variable.  Recall that the probit function merely transforms a (predicted) probability ($\pi$) into a corresponding *z* score.  The (standardized) thresholds are these *z* scores.  We can estimate them by plugging into `qnorm()` the cumulative proportions ($\widehat\pi_c$) up to each category $c$.  For example, here are the (cumulative) proportions in each category of `intention`.
+Thresholds are **univariate** statistics (like means).  Threshold estimates are based on the frequency distribution of a categorical variable.  Recall that the probit function merely transforms a (predicted) probability ($\pi$) into a corresponding $z$ score.  The (standardized) thresholds are these $z$ scores.  We can estimate them by plugging into `qnorm()` the cumulative proportions ($\widehat\pi_c$) up to each category $c$.  For example, here are the (cumulative) proportions in each category of `intention`.
 ```{r intent probs}
 p.intent <- prop.table(table(myData$intention)) # proportions per category
 cumsum(p.intent) # cumulative proportions (up to and including each category)
 ```
 
-By definition, 100\% of the sample was observed in any of the categories up to (and including) the highest category, so the final cumulative proportion is 1. Likewise, no one in the sample was observed in a category lower than the lowest category (by definition), so we can append a zero as the first number in this vector of cumulative proportions.  Then we can find the corresponding *z* scores in a normal distribution, which are the thresholds between categories:
+By definition, 100\% of the sample was observed in any of the categories up to (and including) the highest category, so the final cumulative proportion is 1. Likewise, no one in the sample was observed in a category lower than the lowest category (by definition), so we can append a zero as the first number in this vector of cumulative proportions.  Then we can find the corresponding $z$ scores in a normal distribution, which are the thresholds between categories:
 ```{r intent thresh}
 qnorm(c(0, cumsum(p.intent)))
 ```
@@ -298,16 +296,16 @@ The reason that the probit model is so popular in SEM is that the standard SEM m
 lavInspect(fit2, "sampstat")
 ```
 
-Notice that the means are 0 and variances are 1, consistent with the correlation metric and the assumption that the underlying LRV is a *z* score. These values are actually fixed to *identify* the saturated model.  We will discuss *scaling constraints* and identification of latent variables more when we introduce the common-factor model.
+Notice that the means are 0 and variances are 1, consistent with the correlation metric and the assumption that the underlying LRV is a $z$ score. These values are actually fixed to *identify* the saturated model.  We will discuss *scaling constraints* and identification of latent variables more when we introduce the common-factor model.
 
 
 ### Estimating an SEM with Estimated Input
 
-The problem with treating thresholds and polychoric correlations as observed data is that they were not observed. They are estimates of population parameters, based on the data.  They each have an associated *SE* and 95\% CI.  In order to trust the *SE*s, 95\% CIs, and test statistics in our hypothesized model, we need to take the uncertainty of the "data" into account.  This is often accomplished using weighted least-squares estimation, where the weight matrix $\mathbf{W}$ is the sampling covariance matrix of the estimated thresholds and polychoric correlations. 
+The problem with treating thresholds and polychoric correlations as observed data is that they were not observed. They are estimates of population parameters, based on the data.  They each have an associated $SE$ and 95\% CI.  In order to trust the $SE$s, 95\% CIs, and test statistics in our hypothesized model, we need to take the uncertainty of the "data" into account.  This is often accomplished using weighted least-squares estimation, where the weight matrix $\mathbf{W}$ is the sampling covariance matrix of the estimated thresholds and polychoric correlations. 
 
-- *Note*: Do not confuse the sampling covariance matrix of *estimated parameters* with the covariance matrix of *variables*.  The latter is used as input data, and it is what we want our SEM to explain.  The sampling covariance of parameter estimates is how we quantify their uncertainty: its diagonal contains sampling variances, the square-roots of which are the $SE$s that we use to calculate Wald *z* tests and CIs.
+- *Note*: Do not confuse the sampling covariance matrix of *estimated parameters* with the covariance matrix of *variables*.  The latter is used as input data, and it is what we want our SEM to explain.  The sampling covariance of parameter estimates is how we quantify their uncertainty: its diagonal contains sampling variances, the square-roots of which are the $SE$s that we use to calculate Wald $z$ tests and CIs.
 
-The more variables (and categories) there are, the larger $\mathbf{W}$ becomes: there is one row/column for every estimated threshold and correlation.  Even in samples as large as 1000, this makes estimation unstable.  An alternative is to simply ignore the sampling **co**variances during estimation, so $\text{diag}(\mathbf{W})$ is the weight matrix to obtain point estimates of parameters.  This is called diagonally weighted least squares (`estimator = "DWLS"`), which is the default in `lavaan`.  Even with DWLS, the full weight matrix is still needed to calculate *SE*s and the $\chi^2$ statistic.  The $\chi^2$ statistic needs to be robust against the uncertainty of the input data, so it is adjusted by scaling it (a *mean-adjusted* statistic) and optionally shifting it (a *mean- and variance-adjusted* statistic).  The default is both: `estimator = "WLSMV"` is a shortcut that implies
+The more variables (and categories) there are, the larger $\mathbf{W}$ becomes: there is one row/column for every estimated threshold and correlation.  Even in samples as large as 1000, this makes estimation unstable.  An alternative is to simply ignore the sampling **co**variances during estimation, so $\text{diag}(\mathbf{W})$ is the weight matrix to obtain point estimates of parameters.  This is called diagonally weighted least squares (`estimator = "DWLS"`), which is the default in `lavaan`.  Even with DWLS, the full weight matrix is still needed to calculate $SE$s and the $\chi^2$ statistic.  The $\chi^2$ statistic needs to be robust against the uncertainty of the input data, so it is adjusted by scaling it (a *mean-adjusted* statistic) and optionally shifting it (a *mean- and variance-adjusted* statistic).  The default is both: `estimator = "WLSMV"` is a shortcut that implies
 
 - `lavaan(..., estimator = "DWLS", se = "robust.sem", test = "scaled.shifted")`
 
@@ -425,7 +423,7 @@ ind <- PT1[PT1$label == "ind",]
 direct <- PT1[PT1$label == "b31",]
 ```
 
-Using the standard criterion $\alpha=5\%$, the Wald *z* tests allow us to reject the $H_0$ of no mediation: indirect effect *b* = $`r round(ind$est, 3)`$, $z = `r round(ind$z, 3)`$, *p* = `r round(ind$pvalue, 3)`, $\beta = `r round(ind$std.all, 3)`$.  We fail to reject the $H_0$ of full mediation: direct effect *b* = $`r round(direct$est, 3)`$, $z = `r round(direct$z, 3)`$, *p* = `r round(direct$pvalue, 3)`, $\beta = `r round(direct$std.all, 3)`$.
+Using the standard criterion $\alpha=5\%$, the Wald $z$ tests allow us to reject the $H_0$ of no mediation: indirect effect $b$ = $`r round(ind$est, 3)`$, $z = `r round(ind$z, 3)`$, *p* = `r round(ind$pvalue, 3)`, $\beta = `r round(ind$std.all, 3)`$.  We fail to reject the $H_0$ of full mediation: direct effect *b* = $`r round(direct$est, 3)`$, $z = `r round(direct$z, 3)`$, *p* = `r round(direct$pvalue, 3)`, $\beta = `r round(direct$std.all, 3)`$.
 
 Because the scales of the LRVs are arbitrary, it is safer to 
 
@@ -444,7 +442,7 @@ fit.full <- sem(mod.full, data = myData, ordered = TRUE)
 lavTestLRT(fit.full, fit.part) # or anova(), which then calls lavTestLRT()
 ```
 
-Notice that `lavTestLRT()` automatically detects the robust estimator and test statistic requested when fitting the models, so it appropriately uses the same robust correction (mean- and variance-adjustment) for the $\Delta \chi^2$ statistic.  This is why the `Chisq Diff` column **does not match** the difference between (uncorrected) $\chi^2$ values in the `Chisq` column. The *p* value is very close to the Wald test's *p* value (also calculated using a robust *SE*), which is expected when *N* is large.
+Notice that `lavTestLRT()` automatically detects the robust estimator and test statistic requested when fitting the models, so it appropriately uses the same robust correction (mean- and variance-adjustment) for the $\Delta \chi^2$ statistic.  This is why the `Chisq Diff` column **does not match** the difference between (uncorrected) $\chi^2$ values in the `Chisq` column. The $p$ value is very close to the Wald test's $p$ value (also calculated using a robust $SE$), which is expected when $N$ is large.
 
 
 ### Interpreting Coefficients
@@ -502,7 +500,7 @@ b3[[1]] + b21*b3[[2]]
 ```
 
 
-This does not match the total effect from the simple probit regression because the LRV scales differ.  That is, the simple regression has more residual variance (less explained variance without `intention` in the model), yet the residual variance is still fixed to 1.  Imai et al. (2010) proposed a general solution to this problem, using the causal-modeling framework, implemented in the [\textcolor{blue}{`mediation` package}](https://cran.r-project.org/package=mediation) (see their [\textcolor{blue}{`vignette}](https://cran.r-project.org/web/packages/mediation/vignettes/mediation.pdf) for examples).  It is quite complicated, but here is how it would apply to our current example (see also Muthén, 2011, for corresponding M*plus* syntax):
+This does not match the total effect from the simple probit regression because the LRV scales differ.  That is, the simple regression has more residual variance (less explained variance without `intention` in the model), yet the residual variance is still fixed to 1.  Imai et al. (2010) proposed a general solution to this problem, using the causal-modeling framework, implemented in the [`mediation`](https://cran.r-project.org/package=mediation) (see their [`vignette](https://cran.r-project.org/web/packages/mediation/vignettes/mediation.pdf) for examples).  It is quite complicated, but here is how it would apply to our current example (see also Muthén, 2011, for corresponding M*plus* syntax):
 ```{r}
 mod.Imai <- '
     ciguse ~ c*intervention + b*intention

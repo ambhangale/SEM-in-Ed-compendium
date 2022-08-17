@@ -1,0 +1,211 @@
+# Calculating Standardized Parameter Estimates
+
+## Standardized regression coefficients
+
+The $B$ matrix from the path analysis model in [Chapter 3](path-models.html) contains unstandardized parameter estimates. Unstandardized parameters are dependent on the units in which the variables are scaled. When predictor variables are measured on the same scale, comparison of unstandardized coefficients can provide information on their relative influence on the outcome. For example, when we would estimate the effect of the anxiety of the father and the anxiety of the mother on the anxiety of the child, the unstandardized effects can be directly compared to give an indication of the relative influence of mother's and father's anxiety. However, comparison of effects is complicated when variables are measured on different scales. In our illustrative example, a meaningful comparison of the effects of parent anxiety and parent perfectionism on parental over-control is complicated by the fact that the interpretation of units on the scales of these variables are not equivalent (e.g., how does one unit on parent anxiety relate to one unit on parent perfectionism?). In such a case, it would be helpful to obtain standardized parameter estimates that are independent on the units in which the variables are scaled.
+
+The standardized $β$ is the regression coefficient that is scaled with respect to the $SD$ of each variable. For example, $\widehat{\beta}_{21}$ is the estimated regression coefficient representing the direct effect of variable 1 on variable 2. The standardized version of $\widehat{\beta}_{21}$, $\widehat{\beta}^*_{21}$, is given as:
+
+```{=tex}
+\begin{equation}
+\widehat{\beta}^*_{21} = \widehat{\beta}_{21} \times \frac{\widehat{\sigma}_1}{\widehat{\sigma}_2},
+(\#eq:6-01)
+\end{equation}
+```
+
+where $\widehat{\sigma}_1$ and $\widehat{\sigma}_2$ are the estimated $SD$s of variable 1 and variable 2 as predicted by the model.The standardized parameter can be interpreted in terms of standardized units, where a single SD increase in the predictor variable (variable 1) would result in a change of $\widehat{\beta}^*_{21}$ $SD$s in the outcome variable (variable 2). 
+
+Substituting the parameter estimate $\widehat{\beta}_{31}$ and model-implied $SD$s ${\widehat{\sigma}_1}$ and ${\widehat{\sigma}_3}$ from our illustrative example yields:
+
+$$
+\widehat{\beta}^*_{31} = 0.19 \times \frac{\sqrt{91.58}}{\sqrt{130.19}} = .16 .
+$$
+Thus, controlling for the other variables in the model, a 1-SD increase in parent anxiety is expected to result in parental over-control increasing 0.16 SDs. In comparison, the standardized regression coefficient for the regression of parental over-control on parent perfectionism is:
+
+$$
+\widehat{\beta}^*_{32} = \widehat{\beta}_{32} \times \frac{\widehat{\sigma}_2}{\widehat{\sigma}_3} = 0.21 \times \frac{\sqrt{194.32}}{\sqrt{130.19}} = .26 .
+$$
+
+The relative influence of parent perfectionism on parental over-control is thus larger than the influence of parent anxiety. 
+
+In addition, standardized regression coefficients can be used to interpret the size of the effect (in terms of effect size $r$), where values between .10–.30 indicate small effects, values between .30–.50 indicate intermediate effect, and values larger than .50 indicate strong effects (Bollen, 1988). In our example both effects can be considered small.
+
+The calculation of standardized regression coefficients can be done for the complete matrix of estimated regression coefficients that are represented in matrix $\widehat{B}$. The matrix expression for the standardized $\widehat{B}$ matrix, $\widehat{B}^*$, is the following: 
+
+```{=tex}
+\begin{equation}
+\widehat{B}^* = diag(\widehat{\Sigma})^{-\frac{1}{2}} \widehat{B} \hspace{1mm} diag(\widehat{\Sigma})^\frac{1}{2}
+(\#eq:6-02)
+\end{equation}
+```
+
+In this expression, Σ ̂model is the matrix containing the model-implied variances and covariances. As an alternative, the sample matrix of (co)variances could be used. Often, the sample variances and the model-implied variances are equal. However, in some situations the constraints imposed on the model can cause differences between the model-implied and sample variances. For reasons of consistency, we will always use the variances as implied by the model.
+
+In our example, the matrix of standardized regression coefficients is:
+
+$$
+\widehat{B}^* = 
+\begin{bmatrix}
+0&0&0&0\\
+0&0&0&0\\
+\widehat{\beta}_{31}^* & \widehat{\beta}_{32}^* &0&0\\
+0&0&\widehat{\beta}_{43}^* &0\\
+\end{bmatrix} =
+\begin{bmatrix}
+0&0&0&0\\
+0&0&0&0\\
+0.16 & 0.26 &0&0\\
+0&0& 0.30 &0\\
+\end{bmatrix},
+$$
+
+where it can be seen that the standardized coefficient of the regression of over-control on parental anxiety is relatively small compared to the other coefficients.
+
+## Standardized residual factor variances and covariances
+
+Similarly, the matrix of residual factor variances and covariances can be standardized to obtain parameter estimates that are independent on the units in which the variables are measured. A standardized covariance is a correlation. If $COV_{21}$ is the covariance between variable 2 and variable 1, the correlation $COR_{21}$ is calculated as: 
+
+```{=tex}
+\begin{equation}
+COR_{21} = \frac{COV_{21}}{\widehat{\sigma}_1 \widehat{\sigma}_2} 
+(\#eq:6-03)
+\end{equation}
+```
+
+For example, the correlation between the variables parent anxiety and parent perfectionism is:
+
+$$
+COR_{21} = \frac{COV_{21}}{\widehat{\sigma}_1 \widehat{\sigma}_2} = \frac{53.36}{\sqrt{91.58 \times 194.32}} = .40.
+$$
+
+Like standardized regression slopes, correlation coefficients can be interpreted as effect size $r$ (Bollen, 1988). Thus, in our illustrative example there is an intermediate correlation between the two exogenous variables.
+ 
+The matrix expression for standardized variances and covariances in the $\widehat{Ψ}$ matrix is:
+
+```{=tex}
+\begin{equation}
+\widehat{Ψ}^* = diag(\widehat{\Sigma}_{model})^{-\frac{1}{2}} \widehat{Ψ} \hspace{1mm} diag(\widehat{\Sigma}_{model})^\frac{1}{2}
+(\#eq:6-04)
+\end{equation}
+```
+
+In our example, the matrix of standardized residual variances and covariances is:
+
+$$
+\widehat{\Psi}^* = 
+\begin{bmatrix}
+\widehat{\psi}_{11}^* & \widehat{\psi}_{21}^*&0&0\\
+\widehat{\psi}_{12}^* & \widehat{\psi}_{22}^*&0&0\\
+0&0 &\widehat{\psi}_{33}^*&0\\
+0&0&0 &\widehat{\psi}_{44}^*\\
+\end{bmatrix} =
+\begin{bmatrix}
+1 &0.40 & 0 & 0\\
+0.40 & 1 & 0 & 0\\
+0 & 0 & 0.88 & 0\\
+0 & 0 & 0 & 0.91\\
+\end{bmatrix}.
+$$
+
+The standardized variances of the residual factors can be interpreted as the proportion of unexplained variance. As the variances of the residual factors of exogenous variables are equal to the variances of the observed variables, their standardized value is 1, i.e., 100% of the variance of exogenous variables is unexplained by the model. For endogenous variables, the residual factor contains only that part of the variance of the observed variable that is not explained by the model. In our example, the proportion of unexplained variance of child anxiety is .91. This indicates that 91% of the variance of child anxiety cannot be explained by the specified model. Or, in other words, the model explains only 9% of the variance of child anxiety. Other variables, not included in the model, determine the remaining variance of child anxiety.  
+
+## Calculating standardized coefficients in R using lavaan results
+
+There are several ways to obtain standardized parameter estimates from a path model. Here, we will show how to manually calculate standardized parameter estimates from the estimated ($\widehat{B}$ $\widehat{\Psi}$) and model-implied ($\widehat{\Sigma}$) matrices. 
+
+Script 6.1 shows the syntax that standardizes the $\widehat{B}$ and $\widehat{\Psi}$matrices ($\widehat{B}^*$ and $\widehat{\Psi}^*$) from the output of the Affrunti & Woodruff-Borden model that was saved in the object `AWmodelOut`.
+
+```{r label='script6-1'}
+# parameter estimates from the model
+Estimates <- lavInspect(AWmodelOut, "est")
+BETA <- Estimates$beta[obsnames, obsnames]
+PSI <- Estimates$psi[obsnames, obsnames]
+# calculate model-implied covariance matrix
+IDEN <- diag(1, nrow = 4)
+SIGMA <- solve(IDEN - BETA) %*% PSI %*% t(solve(IDEN - BETA)) 
+# calculate standard deviations of model-implied variances
+SD <- diag(sqrt(diag(SIGMA)))
+# calculate standardized parameter estimates
+BETAstar <- solve(SD) %*% BETA %*% SD
+PSIstar <- solve(SD) %*% PSI %*% solve(SD)
+# give labels to the new matrices
+dimnames(BETAstar) <- list(obsnames, obsnames)
+dimnames(PSIstar) <- list(obsnames, obsnames)
+```
+
+First, the unstandardized estimates for the $β$ and $ψ$ parameters are collected in the objects `BETA` and `PSI`, respectively, with the commands:
+
+```{r}
+Estimates <- lavInspect(AWmodelOut, "est")
+BETA <- Estimates$beta[obsnames, obsnames]
+PSI <- Estimates$psi[obsnames, obsnames]
+```
+
+We also need the model-implied covariance matrix, $\widehatΣ$ model, which we can calculate with the parameter estimates, using $\widehat{\Sigma}_{model} = (I-\widehat{B})^{-1} \widehat{\Psi}[(I-\widehat{B})^{-1}]^T$. We already extracted the parameter estimates for the $\widehat{B}$ and $\widehat{\Psi}$ matrices (into the objects `BETA` and `PSI`), so now we create an identity matrix `IDEN` with dimensions 4 × 4 and then calculate $\widehatΣ_{model}$ using:
+
+```{r}
+SIGMA <- solve(IDEN - BETA) %*% PSI %*% t(solve(IDEN - BETA))
+```
+
+Note, however, that  you can also request the model-implied covariance matrix directly from `lavaan`:
+
+```{r}
+SIGMA <- lavInspect(AWmodelOut, "cov.ov")[obsnames, obsnames]
+```
+
+For our calculations we only need the $SD$s, which we obtain by extracting the diagonal of `SIGMA` using the `diag()` function, then take the square-root of each element using `diag()`. Notice that the `diag()` function can also create a diagonal matrix, such as when we used it to create an identity matrix `IDEN`, in which case it needs the value to put on the diagonal and the number of rows (or columns).  In the case of $SD$, `sqrt(diag(SIGMA))` is a vector with 4 elements, so `diag()` creates a matrix of 4 rows and columns with `sqrt(diag(SIGMA))` on its diagonal. 
+
+```{r}
+SD <- diag(sqrt(diag(SIGMA)))
+```
+
+The $\widehat{B}$ matrix is standardized by pre-multiplying $\widehat{B}$ with a diagonal matrix with the inverse of the $SD$s, and post-multiplying it with a diagonal matrix with the $SD$s: 
+
+```{r}
+BETAstar <- solve(SD) %*% BETA %*% SD
+```
+
+The matrix $\widehat{\Sigma}$ is standardized by pre- and post-multiplying $\widehat{\Sigma}$ with a diagonal matrix with the inverse of the standard deviations. 
+
+```{r}
+PSIstar <- solve(SD) %*% PSI %*% solve(SD)
+```
+
+The standardized variances and covariances (correlations) are collected in the object `PSIstar.` The standardized direct effects are in the object `BETAstar.` 
+
+The same labels that were given to the matrices with unstandardized estimates, can also be used for the standardized parameter estimates:
+
+```{r}
+dimnames(BETAstar) <- list(obsnames, obsnames)
+dimnames(PSIstar) <- list(obsnames, obsnames)
+```
+
+To view the standardized $\widehat{B}^*$  and $\widehat{\Sigma}^*$ matrices, type: 
+
+```{r}
+BETAstar
+PSIstar
+```
+
+## Request standardized output with lavaan 
+
+The same standardized matrices can be extracted using `lavaan`’s build-in functions: 
+
+```{r}
+lavInspect(AWmodelOut, "std.all")
+```
+
+You can also request standardized estimates when you use the `summary()` or `parameterEstimates()` functions with the argument `standardized = TRUE`:
+
+```{r}
+summary(AWmodelOut, standardized = TRUE)
+parameterEstimates(AWmodelOut, standardized = TRUE)
+```
+
+This will add two columns to the output, the column `std.lv` gives standardized parameters when only the exogenous variables are standardized, and the column `std.all` gives standardized parameters when both exogenous and endogenous variables are standardized. The latter one will give equivalent output as calculated above.
+
+You can also request standardized estimates using the `standardizedSolution()` function, which also provides $SE$s for the standardized estimates themselves.  However, we recommend only testing the unstandardized estimates for making inferences about population parameters (e.g., null-hypothesis significance tests), and using standardized estimates only as a standardized measure of effect size.
+
+## Standardizing indirect and total effects
+
+Standardized indirect effects are obtained by multiplying the standardized direct effects instead of the unstandardized direct effects. Alternatively, one can standardize an indirect effect using formulas \@ref(eq:6-01) and \@ref(eq:6-02) replacing the estimated regression coefficient with the calculated indirect or total effect of interest. Note that the standard deviations of the mediating variables do not play a role in standardizing indirect or total effects. 

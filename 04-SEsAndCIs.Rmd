@@ -1,0 +1,63 @@
+# Standard Errors and Confidence Intervals
+
+## Standard Errors
+
+When the estimates of the parameter in a path model are obtained, and one assumes that the model is correct, researchers usually want to know whether the model parameters are statistically significantly different from zero. One way to judge the significance of a parameter estimate is to look at the associated standard error ($SE$). For example, we found that the effect of over-control on child anxiety was 0.072, with associated $SE$ of 0.026. Although the interpretation of $SE$s and using them for judging statistical significance in structural equation modelling is no different than in any other statistical procedures (e.g., testing the difference between means in a $t$-test, or testing the significance of a regression coefficient in regression analysis), we shortly explain the procedure here.
+
+The $SE$ reflects the standard deviation ($SD$) of the sampling distribution of the estimate. We obtained the parameter estimate of 0.072 based on a sample of 77 child--parent dyads. These 77 child--parent dyads are assumed to be a random sample from the much larger population of child--parent dyads. If we would have drawn another randomly selected sample of $N$ = 77 from the same population, we would have probably obtained a slightly different estimate of the same effect. Imagine that we would draw all possible random samples of $N$ = 77 from the population, fit the path model to each sample, and collect the estimated effect of interest. The obtained estimates would follow a normal distribution, called the sampling distribution. The mean of this distribution is assumed to be equal to the population value. The smaller the $SD$, the smaller the range of the estimates from the sampling distribution and the closer a sample estimate is expected to be to the population value (i.e., the estimate is more precise). With larger samples, the estimates are assumed to vary less across samples, and the $SD$ of the sampling distribution will be smaller.
+
+Of course, it is impossible to draw all possible samples and observe the sampling distribution directly. Instead, we rely on estimates of the sampling distribution. The $SE$ of an estimated direct effect in one sample, is an estimate of the $SD$ of the sampling distribution of that direct effect. The $SE$s are often given in the output of SEM programs by default.
+
+For example, the parameter estimates with SEs for the anxiety example are given in Table 1.
+
+| **Parameter** | **Estimate** | ***SE*** | ***z*** | ***p*** **(\<\|z\|)** |
+|---------------|-------------:|---------:|--------:|----------------------:|
+|         b~11~ |        0.187 |    0.140 |   1.341 |                  .180 |
+|         b~32~ |        0.210 |    0.096 |   2.194 |                  .028 |
+|         b~43~ |        0.072 |    0.026 |   2.741 |                  .006 |
+|         p~21~ |       53.360 |   16.481 |   3.238 |                  .001 |
+|         p~11~ |       91.580 |   14.856 |   6.164 |               \< .001 |
+|         p~22~ |      194.320 |   31.523 |   6.164 |               \< .001 |
+|         p~33~ |      114.157 |   18.519 |   6.164 |               \< .001 |
+|         p~44~ |        6.880 |    1.116 |   6.164 |               \< .001 |
+
+$SE$s can be used to judge the statistical significance of parameter estimates. This is done by taking the ratio of the parameter estimate over its estimated $SE$, which asymptotically follows a standard normal ($z$) distribution (with small samples a t distribution, but we assume sufficiently large samples). The z values can be tested against critical values associated with a given $α$ level. For example, to test them against an $α$ level of .05 two-sided, you would compare them to the critical value of 1.96. If the ratio is larger than 1.96 or smaller than -1.96, the parameter estimate is significantly different from zero, at an $α$ level of .05. The last column of Table 1 gives the associated probability of finding the $z$ value or larger, under the null-hypothesis that the parameter is zero. Using an $α$ level of .05, the effect of Parental Anxiety on over-control is not significantly larger than zero, but the effects of Perfectionism on over-control, and the effect of over-control on child anxiety are significantly larger than zero. Also, the association between parental anxiety and perfectionism is statistically significant.
+
+## Confidence Intervals
+
+The $SE$s can be used to calculate confidence intervals (CIs), which can also be used to judge significance of the unstandardized parameter estimates. The lower and upper bound of a CI around some parameter estimate is given by $Est$ ± $Z_{crit}$ × $SE$, where $Est$ is the parameter estimate, $Z_{crit}$ is the critical z value given the desired significance level, and SE is the standard error of the parameter estimate.
+
+If the CI around a parameter estimate does not include 0, we can conclude that this parameter differs significantly from 0. When 0 is included in the interval, the parameter is not significantly different from 0. Suppose you want to calculate 95% CIs for the effect of over-control on child anxiety. The lower confidence limit is given by 0.072 − 1.96 × 0.026 = 0.021, and the upper confidence limit is given by 0.072 + 1.96 × 0.026 = 0.123. As zero is not in between 0.021 and 0.123, the parameter is considered statistically significant. Using CIs in this way to judge the statistical significance of parameters leads to the same conclusion as evaluating the p value against the $α$ level. However, CIs are more informative than $p$ values, and are recommended over $p$ values (Cumming, 2013). Specifically, the size of the CI gives more descriptive information of the effect, as it can be gives an indication of the precision of the estimated effect. The interpretation of a 95% CI is that if you would calculate the CI for all random samples from the sampling distribution, 95% of those intervals will contain the population value. So, given a CI obtained from one sample, there is a 95% chance that it includes the population value, and a 5% chance that it doesn't include the population value. Although the semantic difference seems subtle, it would be incorrect to say that the probability of the population value lying within a given confidence interval is 95%, because the population value is a fixed value, so we should not speak of the probability of a population value (unless speaking about posterior probabilities in Bayesian analyses). Rather, it is the method of calculating the CI that has a 95% probability of capturing a parameter.
+
+### Likelihood-based confidence intervals
+
+Likelihood-based CIs are another type of CI. They do not rely on the SEs, but are obtained through the likelihood of the model. After parameter estimates are obtained, for each parameter separately, the parameter is moved up (all other parameters held fixed) until the $χ^2$ statistic is increased to exactly the critical $χ^2$ value associated with the chosen α level (e.g., 3.84 with $α$ = .05). This value is the upper confidence limit. Next, the parameter is moved in the negative direction until the $χ^2$ is increased with the same critical value. This is, the lower confidence limit. Two large benefits of likelihood-based CIs are that they do not necessarily have to be symmetrical around the parameter estimate (which SE-based confidence intervals are), and that they can be obtained from functions of transformed parameters or functions of parameters as well (Neale & Miller, 1997). Likelihood-based confidence are available in `OpenMx` but not in `lavaan`.
+
+### Bootstrapped confidence intervals
+
+Another type of CI can be obtained using bootstrapping. In our path model example, the sample size is 77. Bootstrapping involves resampling (with replacement) samples of size 77 from the original sample. This treats the observed data as though they are an infinite population, so each original observation can be included multiple times in a resampled sample (i.e., bootstrapping mimics the process of repeatedly drawing samples from the same population). By fitting the path model to each bootstrapped sample, and saving the parameter estimate of interest from each sample, one obtains a sampling distribution of the parameter estimate, which can be used for statistical inference. Bootstrap CIs are particularly useful in situations where obtaining the correct $SE$s analytically is difficult, such as with small samples or when the sampling distribution of a parameter is unknown, or known to be nonnormal. Bootstrapping is only possible when analyzing the raw data instead of the covariance matrix.
+
+## Obtaining standard errors and confidence intervals in `lavaan`
+
+In the standard summary output of `lavaan`, the $SE$s of parameter estimates are given in the column after the parameter estimates, and the ratios of the parameter estimates over their SE's (Wald $z$ value) is given in the next column. To request confidence intervals from the summary, use the argument `ci = TRUE`. The regression parameter output look like this:
+
+```{r eval=FALSE, echo=TRUE}
+summary(AWmodelOut, ci = TRUE)
+```
+
+```{r echo=FALSE}
+PE <- parameterEstimates(AWmodelOut, output = "text") # ci=TRUE by default
+PE[PE$op == "~", ]
+```
+
+One can also obtain this information from the `parameterEstimates()` function, which provides more flexibility. For example, we can ask for any width of the interval (although 99%, 95% and 90% are most common), and we can specify particular types of bootstrap CIs. The format is similar to the `summary()` output, but it is a data.frame, so the parameters are indicated by the left-hand side (`lhs`), operator (`op`), and right-hand side (`rhs`) of the equation used to specify a parameter in `lavaan` model syntax. For example, to calculate a 90% CI:
+
+```{r}
+parameterEstimates(AWmodelOut, level = .90)
+```
+
+## **References**
+
+Cumming, G. (2013). *Understanding the new statistics: Effect sizes, confidence intervals, and meta-analysis*. New York, NY: Routledge.
+
+Neale, M. C., & Miller, M. B. (1997). The use of likelihood based confidence intervals in genetic models. *Behavior Genetics, 27*, 113--120.

@@ -1,6 +1,6 @@
 # Latent Growth Curve Models
 
-```{r setup, include=FALSE}
+```{r setup-26, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 FigNumber <- 1L # initialize Figure number for automatic ordering
 ```
@@ -751,14 +751,16 @@ Either type of predictor introduces moderation of (or by) time, which is not as 
 Y_i &= \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i1} X_{i2} + \varepsilon_i \\
     &= (\beta_0 + \beta_1 X_{i1}) + (\beta_2 + \beta_3 X_{i1}) \times X_{i2} + \varepsilon_i \\
     &= \vartheta_0 + \vartheta_1 X_{i2} + \varepsilon_i
-\end{split} \end{equation}
+\end{split} 
+(\#eq:int)
+\end{equation}
 
-By grouping the terms in the second row of Eq. \ref{eq:int}, we can reinterpret it as a simple regression of $Y$ on $X_2$ (the third row of Eq. \ref{eq:int}).  But the intercept and slope are themselves variables because they depend on (are functions of) $X_1$.
+By grouping the terms in the second row of Eq. \@ref{eq:int}, we can reinterpret it as a simple regression of $Y$ on $X_2$ (the third row of Eq. \@ref{eq:int}).  But the intercept and slope are themselves variables because they depend on (are functions of) $X_1$.
 
 - Simple intercepts: $\vartheta_0 = \beta_0 + \beta_1 X_{i1}$
 - Simple slopes: $\vartheta_1 = \beta_2 + \beta_3 X_{i1}$
 
-Recall the moderation is symmetric, so the terms in Eq. \ref{eq:int} could also be grouped such that the effect of $X_1$ depends on $X_2$.  Moderation can also be interpreted in both directions in a LGCM, but it is not as obvious how because time is not an explicit variable in the model, as other predictors are.
+Recall the moderation is symmetric, so the terms in Eq. \@ref{eq:int} could also be grouped such that the effect of $X_1$ depends on $X_2$.  Moderation can also be interpreted in both directions in a LGCM, but it is not as obvious how because time is not an explicit variable in the model, as other predictors are.
 
 Before proceeding, consider that growth factors are variables in a SEM.  They can therefore be predictors as well as outcomes, even in the same model.  Growth factors have already been treated as predictors of occasion-specific indicators in the sections above, but they could also predict subject-level outcome variables (e.g., to investigate whether the rate of increased alcohol consumption predictors a student's academic performance).  The following sections only elaborate on predictors of growth factors and correlations among latent trajectories, but bear in mind that more complex models are possible.
 
@@ -767,14 +769,21 @@ Before proceeding, consider that growth factors are variables in a SEM.  They ca
 
 Level-2 predictors vary between subjects, so they can explain between-subject differences in trajectories, which are represented by growth factors.  Although Duncan and Duncan (1996) had several such covariates, our example data include the following two subject-level predictors: `age` at the beginning of the study and `peer` encouragement to consume illicit substances.  Consider the MLM for growth, which extends Eq. \ref{eq:ri} by adding time as a predictor.  Below, we intersperse some equivalent SEM symbols \textcolor{blue}{in blue} as reminders of how the MLM and SEM frameworks map onto each other (Bauer, 2003; Curran, 2003; Singer & Willett, 2003, ch. 8).
 
-\begin{align}
-\text{Level 1: } y_{i,t} &= \beta_{i,0} + \beta_{i,1} \text{Time}_{i,t} + \varepsilon_{i,t} = \textcolor{blue}{\Lambda \mathbf{\eta}_i + \varepsilon_i} \label{eq:L1} \\
+\begin{equation}
+\text{Level 1: } y_{i,t} &= \beta_{i,0} + \beta_{i,1} \text{Time}_{i,t} + \varepsilon_{i,t} = \textcolor{blue}{\Lambda \mathbf{\eta}_i + \varepsilon_i} 
+(\#eq:L1)
+\end{equation}
+\begin{equation}
   \text{Level 2: } \beta_{i,0} &= \textcolor{blue}{(\eta_0=)} \gamma_{0,0} + \gamma_{0,1} \text{Age}_i + \gamma_{0,2} \text{Peer-Influence}_i + u_{0,i} \label{eq:L2int+pred} \\
-  \beta_{i,1} &= \textcolor{blue}{(\eta_1=)} \gamma_{1,0} + \gamma_{1,1} \text{Age}_i + \gamma_{1,2} \text{Peer-Influence}_i + u_{1,i} \label{eq:L2slope+pred} \\
-  \text{Combined: } y_{i,t} &= \gamma_{0,0} + \gamma_{0,1} \text{Age}_i + \gamma_{0,2} \text{Peer-Influence}_i + \gamma_{1,0} \text{Time}_{i,t} \label{eq:L2main} \\
+  \beta_{i,1} &= \textcolor{blue}{(\eta_1=)} \gamma_{1,0} + \gamma_{1,1} \text{Age}_i + \gamma_{1,2} \text{Peer-Influence}_i + u_{1,i} 
+(\#eq:L2)
+\end{equation}
+\begin{equation}
+\text{Combined: } y_{i,t} &= \gamma_{0,0} + \gamma_{0,1} \text{Age}_i + \gamma_{0,2} \text{Peer-Influence}_i + \gamma_{1,0} \text{Time}_{i,t} \label{eq:L2main} \\
   &+ \gamma_{1,1} (\text{Age}_i \times \text{Time}_{i,t}) + \gamma_{1,2} (\text{Peer-Influence}_i \times \text{Time}_{i,t}) \label{eq:L2ints} \\
-  &+ u_{0,i} + u_{1,i} \text{Time}_{i,t} + \varepsilon_{i,t} \ \ \textcolor{gray}{\text{(joint residual)}} \label{eq:L2res}
-\end{align}
+  &+ u_{0,i} + u_{1,i} \text{Time}_{i,t} + \varepsilon_{i,t} \ \ \textcolor{gray}{\text{(joint residual)}} 
+(\#eq:Combined)
+\end{equation}
 
 The path diagram below depicts age and peer influence as observed variables that predict growth factors, conforming to how `?lavaan::model.syntax` works.  In the background, `lavaan` internally represents observed predictors as single-indicator factors.  Thus, age and peer influence are assigned $\eta_3$ and $\eta_4$, respectively, in the path diagram below. 
 
