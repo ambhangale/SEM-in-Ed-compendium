@@ -162,7 +162,7 @@ Step 2: Fit the model to the model implied covariance matrix from Step 1.
 
 If the parameter estimates you obtain in Step 2 are identical to the parameter values you chose in Step 1, the model may be identified. If you obtain different parameter estimates in Step 2, your model is surely not identified. 
 
-Below, we will show two examples of the empirical check. In Script 7.1 we will check identification of the path model depicted in Figure 1. First we will check identification if we add a covariance between the residual factors of $\mathrm{y}_3$ and $\mathrm{y}_4$ (Model 1), and subsequently we will check identification when we additionally add a reciprocal effect from $\mathrm{y}_4$ to $\mathrm{y}_3$ (Model 2). 
+Below, we will show two examples of the empirical check. In Script 7.1 we will check identification of the path model depicted in Figure \@ref(fig:fig7-1). First we will check identification if we add a covariance between the residual factors of $\mathrm{y}_3$ and $\mathrm{y}_4$ (Model 1), and subsequently we will check identification when we additionally add a reciprocal effect from $\mathrm{y}_4$ to $\mathrm{y}_3$ (Model 2). 
 
 ```{r label='script7-1'}
 ### Script 7.1 ### 
@@ -190,12 +190,10 @@ dimnames(SIGMA) <- list(obsnames,obsnames)
 
 ```
 
-```{r echo = FALSE, out.width = "100%", fig.align = "left" }
+```{r label="fig7-1", echo = FALSE, out.width = "100%", fig.align = "left", fig.cap="Path model for which identification is assessed in the situation when effects $ψ_{43}$ (Model 1) and both $ψ_{43}$ and $ß_{34}$ (Model 2) are added."}
 
 knitr::include_graphics("images/Ch7_Path_Model_Identification.png")
-
 ```
-*Figure 7.1*. Path model for which identification is assessed in the situation when effects $ψ_{43}$ (Model 1) and both $ψ_{43}$ and $\beta_{34}$ (Model 2) are added.
 
 ```{r}
 ## STEP 2: fit model to the covariance matrix from step 1

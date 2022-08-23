@@ -10,6 +10,8 @@ Of course, it is impossible to draw all possible samples and observe the samplin
 
 For example, the parameter estimates with SEs for the anxiety example are given in Table 1.
 
+Table 1. *Parameter estimates, $SE$s, Wald $z$ statistics, and $p$ values for the path model of our illustrative example.*
+
 | **Parameter** | **Estimate** | ***SE*** | ***z*** | ***p*** **(\<\|z\|)** |
 |---------------|-------------:|---------:|--------:|----------------------:|
 |         b~11~ |        0.187 |    0.140 |   1.341 |                  .180 |
@@ -31,7 +33,7 @@ If the CI around a parameter estimate does not include 0, we can conclude that t
 
 ### Likelihood-based confidence intervals
 
-Likelihood-based CIs are another type of CI. They do not rely on the SEs, but are obtained through the likelihood of the model. After parameter estimates are obtained, for each parameter separately, the parameter is moved up (all other parameters held fixed) until the $χ^2$ statistic is increased to exactly the critical $χ^2$ value associated with the chosen α level (e.g., 3.84 with $α$ = .05). This value is the upper confidence limit. Next, the parameter is moved in the negative direction until the $χ^2$ is increased with the same critical value. This is, the lower confidence limit. Two large benefits of likelihood-based CIs are that they do not necessarily have to be symmetrical around the parameter estimate (which SE-based confidence intervals are), and that they can be obtained from functions of transformed parameters or functions of parameters as well (Neale & Miller, 1997). Likelihood-based confidence are available in `OpenMx` but not in `lavaan`.
+Likelihood-based CIs are another type of CI. They do not rely on the $SE$s, but are obtained through the likelihood of the model. After parameter estimates are obtained, for each parameter separately, the parameter is moved up (all other parameters held fixed) until the $χ^2$ statistic is increased to exactly the critical $χ^2$ value associated with the chosen α level (e.g., 3.84 with $α$ = .05). This value is the upper confidence limit. Next, the parameter is moved in the negative direction until the $χ^2$ is increased with the same critical value. This is, the lower confidence limit. Two large benefits of likelihood-based CIs are that they do not necessarily have to be symmetrical around the parameter estimate (which $SE$-based confidence intervals are), and that they can be obtained from functions of transformed parameters or functions of parameters as well (Neale & Miller, 1997). Likelihood-based confidence are available in `OpenMx` but not in `lavaan`.
 
 ### Bootstrapped confidence intervals
 
@@ -39,7 +41,7 @@ Another type of CI can be obtained using bootstrapping. In our path model exampl
 
 ## Obtaining standard errors and confidence intervals in `lavaan`
 
-In the standard summary output of `lavaan`, the $SE$s of parameter estimates are given in the column after the parameter estimates, and the ratios of the parameter estimates over their SE's (Wald $z$ value) is given in the next column. To request confidence intervals from the summary, use the argument `ci = TRUE`. The regression parameter output look like this:
+In the standard summary output of `lavaan`, the $SE$s of parameter estimates are given in the column after the parameter estimates, and the ratios of the parameter estimates over their $SE$'s (Wald $z$ value) is given in the next column. To request confidence intervals from the summary, use the argument `ci = TRUE`. The regression parameter output look like this:
 
 ```{r eval=FALSE, echo=TRUE}
 summary(AWmodelOut, ci = TRUE)

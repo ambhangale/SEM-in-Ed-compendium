@@ -3,11 +3,10 @@
 ## From theory to model
 Structural equation modelling is a confirmatory technique, i.e., we specify a model that we believe to be true in the population and test whether the specified model fits the data that we have obtained. In principle, the hypothesized model that will be fitted to the data is formulated before the data are collected. Following the stages of the in the empirical cycle as formulated by A. D. de Groot (1961), one starts with observation (the researcher observes something that deserves investigation, for example, that perfectionistic parents often have anxious children), followed by induction (reflection on, or formulation of, theories that may explain the observed phenomena), followed by deduction (the formulation of testable research hypotheses that would be implied by theory, for example, that perfectionism of parents leads to over-controlling parenting behaviour, which in turn leads to anxiety in their children). The next stage is testing the hypothesis using data. This is the phase in which the structural model that represents the research hypotheses is tested against reality (i.e., data). The last phase is evaluation, which may possibly lead to new hypotheses or revision of the theory. 
 
-```{r echo = FALSE, out.width = "60%", fig.align = "center" }
+```{r label="fig9-1", echo = FALSE, out.width = "60%", fig.align = "center", fig.cap="Empirical Cycle." }
 
 knitr::include_graphics("images/Ch9_Empirical_cycle.png")
 ```
-*Figure 9.1.* Empirical Cycle.
 
 If there are competing theories, that each postulate a different model based on the same variables, researchers may use SEM to test the models corresponding to the different theories and select the model that fits the data best.
 

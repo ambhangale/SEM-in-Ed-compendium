@@ -1,26 +1,22 @@
 # Direct, Indirect, and Total Effects {#ch5}
 
-In the path model from our illustrative example (see Figure 1), there is no arrow pointing from Parental Anxiety (PA) to Child anxiety (CA). This does not mean that the model implies that there is no effect of PA on CA. The effect runs through Parental Overcontrol (PO). PA has a direct effect on PO, which in turn has a direct effect on CA. PA thus has an indirect effect on CA, reflecting that the effect of PA on CA is mediated by PO. The size of the indirect effect equals the product of the direct effects that constitute the indirect effect. So, in this example, the indirect effect of PA on CA through PO is equal to .187 ($β_{31}$) times .072 ($β_{43}$) = .013. Note that it makes sense that the indirect effect equals the product of the direct effects. Holding PP constant, if PA increases with one point, PO is expected to increase with .187 point. If PO increases with 1 point, CA is expected to increase with .072 point. So if PO increases with .187 points instead of 1 point, CA is expected to increase with $.187 \times .072 = .013$ points. Similarly, the indirect effect of Parental Perfectionism (PP) on CA is $.210 \times .072 = .015$, indicating that 1 point increase in PP is expected to result in .015 point increase of CA.
+In the path model from our illustrative example (see Figure \@ref(fig:fig5-1)), there is no arrow pointing from Parental Anxiety (PA) to Child anxiety (CA). This does not mean that the model implies that there is no effect of PA on CA. The effect runs through Parental Overcontrol (PO). PA has a direct effect on PO, which in turn has a direct effect on CA. PA thus has an indirect effect on CA, reflecting that the effect of PA on CA is mediated by PO. The size of the indirect effect equals the product of the direct effects that constitute the indirect effect. So, in this example, the indirect effect of PA on CA through PO is equal to .187 ($β_{31}$) times .072 ($β_{43}$) = .013. Note that it makes sense that the indirect effect equals the product of the direct effects. Holding PP constant, if PA increases with one point, PO is expected to increase with .187 point. If PO increases with 1 point, CA is expected to increase with .072 point. So if PO increases with .187 points instead of 1 point, CA is expected to increase with $.187 \times .072 = .013$ points. Similarly, the indirect effect of Parental Perfectionism (PP) on CA is $.210 \times .072 = .015$, indicating that 1 point increase in PP is expected to result in .015 point increase of CA.
 
-```{r echo = FALSE, out.width = "80%", fig.align = "center" }
+```{r label="fig5-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Full Mediation Model." }
 
 knitr::include_graphics("images/CH5_Full_Mediation_Model.png")
 
 ```
 
-*Figure 5.1.* Full Mediation Model
-
-If an effect of one variable on the other is only indirect, this reflects full mediation. Very often, there is also a direct effect next to the indirect effect, reflecting that the effect is not fully mediated, but partially mediated. Figure 5.2 shows the path model example of the partial mediation model (i.e., with direct effects of PA and PP on CA) and the associated parameter estimates.
+If an effect of one variable on the other is only indirect, this reflects full mediation. Very often, there is also a direct effect next to the indirect effect, reflecting that the effect is not fully mediated, but partially mediated. Figure \@ref(fig:fig5-2) shows the path model example of the partial mediation model (i.e., with direct effects of PA and PP on CA) and the associated parameter estimates.
 
 The direct effect of PA on CA is .091. This is the part of the total effect that is not mediated by PO. The total effect of PA on CA is the sum of the indirect effect(s) and the direct effect: $.091 + .187 \times .058 = .102$. Total effects thus are the sum of all indirect and direct effects of one variable on another. This is an example of consistent mediation, i.e., the direct effect and the indirect have the same sign (they are both positive in this case). It could also be that there is inconsistent mediation, where the direct effect and indirect have opposite signs. In our example, there is inconsistent mediation of the effect of PP on CA as the direct effect is negative while the indirect effect is positive. Inconsistent mediation could therefore lead to the situation in which the direct effect and indirect effect cancel each other out.
 
-```{r echo = FALSE, out.width = "80%", fig.align = "center" }
+```{r label="fig5-2", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Partial Mediation Model." }
 
 knitr::include_graphics("images/CH5_Partial_Mediation_Model.png")
 
 ```
-
-*Figure 5.2.* Partial Mediation Model
 
 ## Testing significance of indirect effects
 
@@ -48,17 +44,15 @@ Table 1. *Direct, total indirect and total effects on Child Anxiety with standar
 
 ## Higher order indirect effects
 
-In our example there are only two indirect effects, but there may be more complex indirect effects. Consider for example the model that was hypothesized by Affrunti and Woodruff-Borden (2014) in Figure 5.3.
+In our example there are only two indirect effects, but there may be more complex indirect effects. Consider for example the model that was hypothesized by Affrunti and Woodruff-Borden (2014) in Figure \@ref(fig:fig5-3).
 
-In the model of Figure 5.3, there are two indirect effects from PA on CA. One path goes from PA to PO and then from PO to CA, and is equal to $β_{31} \times β_{43}$. The other indirect effect goes from PA to PP, from PP to PO, and from PO to CA, and is calculated by $β_{21} \times β_{32} \times β_{43}$. Because this effect is build up of three direct effects, this is called a third order effect. The sum of all specific indirect effects is the total indirect effect. The total effect of PA on CA equals the sum of all indirect effects plus the direct effect ($β_{41}$). This model also contains an indirect effect of PA on PO, which equals $β_{21} \times β_{32}$.
+In the model of Figure \@ref(fig:fig5-3), there are two indirect effects from PA on CA. One path goes from PA to PO and then from PO to CA, and is equal to $β_{31} \times β_{43}$. The other indirect effect goes from PA to PP, from PP to PO, and from PO to CA, and is calculated by $β_{21} \times β_{32} \times β_{43}$. Because this effect is build up of three direct effects, this is called a third order effect. The sum of all specific indirect effects is the total indirect effect. The total effect of PA on CA equals the sum of all indirect effects plus the direct effect ($β_{41}$). This model also contains an indirect effect of PA on PO, which equals $β_{21} \times β_{32}$.
 
-```{r echo = FALSE, out.width = "80%", fig.align = "center" }
+```{r label="fig5-3", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="The hypothesized model of Affrunti and Woodruff-Borden (2014)." }
 
 knitr::include_graphics("images/CH5_Hypothesized_Model_Affrunti.png")
 
 ```
-
-*Figure 5.3.* The hypothesized model of Affrunti and Woodruff-Borden (2014)
 
 Judging the significance of higher order indirect effects can also be done using the delta-method and Sobel test described earlier, but the calculations quickly become more difficult. For example, the standard error of indirect effect abc can be calculated using $SE_{abc} = SE_{ab} \times SE_{c}$ using Equation \@ref(eq:5-01). `lavaan` will provide standard errors based on the delta-method for all requested functions of parameters.
 
@@ -130,7 +124,7 @@ $$
 \end{bmatrix}.
 $$
 
-If we would continue and calculate $\mathbf{B}^4$ we will see that it contains only zeros (indicating that there cannot exist fourth-order indirect effects in the model with four variables). Similarly, if we would calculate the matrices of indirect effects for the example in Figure 2, matrix $\mathbf{B}^3$ would already be zero, because there are no third or higher order effects in this model. The sum of the direct effects and the indirect effects is equal to the total effects.
+If we would continue and calculate $\mathbf{B}^4$ we will see that it contains only zeros (indicating that there cannot exist fourth-order indirect effects in the model with four variables). Similarly, if we would calculate the matrices of indirect effects for the example in Figure \@ref(fig:fig5-2), matrix $\mathbf{B}^3$ would already be zero, because there are no third or higher order effects in this model. The sum of the direct effects and the indirect effects is equal to the total effects.
 
 For nonrecursive models (discussed in a later chapter), Equation \@ref(eq:5-02) can often still be used to calculate total effects, but it is not necessarily adequate. That is, the number of times that the power of the matrix with regression coefficients has to be calculated (and summed) is not defined. The total effects are only defined when the power of the matrix with regression coefficients ($\mathbf{B}^k$) converges to zero.
 
@@ -152,7 +146,7 @@ Matrix $\mathbf{U}$ is calculated as the matrix with total effects, minus the ma
 U <- Tot - B
 ```
 
-A single indirect effect is calculated by multiplying specific elements from matrix $\mathbf{B}$. For example, `B[3,1]` selects the element in row 3, column 1 from the $\mathbf{B}$ matrix, and this element is multiplied with element `B[4,3]`. This is the indirect effect of Parental anxiety on Child anxiety via Overcontrol (see Figure 1). We gave this effect the name `I1`, because you may want to calculate more indirect effects, which could then be named `I2`, `I3`, `I4` etc.
+A single indirect effect is calculated by multiplying specific elements from matrix $\mathbf{B}$. For example, `B[3,1]` selects the element in row 3, column 1 from the $\mathbf{B}$ matrix, and this element is multiplied with element `B[4,3]`. This is the indirect effect of Parental anxiety on Child anxiety via Overcontrol (see Figure \@ref(fig:fig5-1)). We gave this effect the name `I1`, because you may want to calculate more indirect effects, which could then be named `I2`, `I3`, `I4` etc.
 
 ```{r}
 I1 <- B[3,1] * B[4,3]

@@ -8,23 +8,21 @@ To illustrate path analysis we will use data from a study by Affrunti and Woodru
 
 ## Conceptual explanation
 
-Figure 3.1 is a graphical display of the path diagram of the structural model for the development of child anxiety that serves our illustrative purposes. A path diagram is a graphical representation of the path model in which the directional relationships between observed variables are defined. The four squares represent the observed variables parental anxiety (PA), parental perfectionism (PP), parental overcontrol (PO) and child anxiety (CA). The effects between the observed variables are represented by one sided arrows (→).
+Figure \@ref(fig:fig3-1) is a graphical display of the path diagram of the structural model for the development of child anxiety that serves our illustrative purposes. A path diagram is a graphical representation of the path model in which the directional relationships between observed variables are defined. The four squares represent the observed variables parental anxiety (PA), parental perfectionism (PP), parental overcontrol (PO) and child anxiety (CA). The effects between the observed variables are represented by one sided arrows (→).
 
 In our example, the model consists of direct effects from parent anxiety and parent perfectionism on parental overcontrol, and a direct effect of parental overcontrol on child anxiety. Parent anxiety and parent perfectionism are so-called "exogenous" variables. The states or values of exogenous variables are not influenced by other variables in the model. They are sometimes also referred to as independent variables or predictor variables. Parental overcontrol and child anxiety are so-called "endogenous" variables, as they are assumed to be influenced by the states of the other variables in the model. An endogenous variable is sometimes referred to as a dependent variable. However, an endogenous variable can also have an effect on another endogenous variable in the model. In our example, parental overcontrol is influenced by parent anxiety and parent perfectionism (i.e., parental overcontrol is an endogenous variable). Parental overcontrol, in turn, also has a direct effect on child anxiety. This path model therefore represents a mediation model, where the effects of parent anxiety and parent perfectionism on child anxiety are fully mediated through parental overcontrol.
 
-```{r echo = FALSE, out.width = "80%", fig.align = "center" }
+```{r label="fig3-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="A simple path diagram of the development of child anxiety." }
 
 knitr::include_graphics("images/Fig1.Week2.Ch3.jpg")
 
 ```
 
-*Figure 3.1.* A simple path diagram of the development of child anxiety
-
-Figure 3.1 not only gives a graphical representation of the set of directional relations between the observed variables, but also includes the circles ${\zeta}_{PA}$, ${\zeta}_{PF}$, ${\zeta}_{PO}$, and ${\zeta}_{CA}$ that represent the so-called residual factors. Residual factors are unobserved, latent variables that represent all factors that fall outside the model but may influence the states of the corresponding observed variables. The directional effects from the residual factors to the corresponding observed variables are accompanied by the numeral '1'. This indicates that these effects are fixed to '1', which is a so-called scaling constant (which will be explained in more detail in [Chapter 12](#ch12)). Because these scaling constants for residual factors apply to almost all models, they are often not displayed in path diagrams.
+Figure \@ref(fig:fig3-1) not only gives a graphical representation of the set of directional relations between the observed variables, but also includes the circles ${\zeta}_{PA}$, ${\zeta}_{PF}$, ${\zeta}_{PO}$, and ${\zeta}_{CA}$ that represent the so-called residual factors. Residual factors are unobserved, latent variables that represent all factors that fall outside the model but may influence the states of the corresponding observed variables. The directional effects from the residual factors to the corresponding observed variables are accompanied by the numeral '1'. This indicates that these effects are fixed to '1', which is a so-called scaling constant (which will be explained in more detail in [Chapter 12](#ch12)). Because these scaling constants for residual factors apply to almost all models, they are often not displayed in path diagrams.
 
 For endogenous variables, the residual factor can be viewed as a kind of 'container' variable, that contains all variables that also affect the specific endogenous variable, but that were not included in the model. The residual factors therefore symbolize the probabilistic causality of path analysis, as they indicate that endogenous variables are not only influenced by other variables in the model but also by (unobserved) variables that are outside the model (i.e., unmeasured causes). For example, in the model for the development of child anxiety, it would be unrealistic to assume that the anxiety of a child is only determined by parents' behavior of overcontrol. It might be that there are also other factors, e.g. past experiences, contact with peers, or genetic predisposition, that have an effect on the anxiety of a child. To enable a model where child anxiety is only partially influenced by parental overcontrol, the unmeasured causes of child anxiety are incorporated in the model through the residual factor. The residual factors of endogenous variables are therefore sometimes also referred to as disturbance factors.
 
-The residual factors of exogenous variables can also be viewed as a container variable that contains all (unobserved) variables that are outside the model (i.e., unmeasured causes) that influence the corresponding exogenous variable. However, because exogenous variables are not influenced by other variables in the model, the residual factor of an exogenous variable represents the total variances of the corresponding variable. In addition, the residual factors of different exogenous variables covary. For example, in the path diagram of Figure 1 there is a covariance between the two residual factors of parent anxiety and parent perfectionism, as reflected by the double headed arrow (\<--\>). This reflects the assumption that the unmeasured causes of the corresponding exogenous variables may covary, although the model does not provide an explanation for this association (i.e., they are outside the model). For example, parental neuroticism may be a common cause of parental anxiety and parental perfectionism, leading to a covariance between the two variables. Because the common causes are not modelled, and we may not even know all possible sources of shared variance between exogenous variables, it is very unrealistic to assume that the exogenous variables would not be correlated.
+The residual factors of exogenous variables can also be viewed as a container variable that contains all (unobserved) variables that are outside the model (i.e., unmeasured causes) that influence the corresponding exogenous variable. However, because exogenous variables are not influenced by other variables in the model, the residual factor of an exogenous variable represents the total variances of the corresponding variable. In addition, the residual factors of different exogenous variables covary. For example, in the path diagram of Figure \@ref(fig:fig3-1) there is a covariance between the two residual factors of parent anxiety and parent perfectionism, as reflected by the double headed arrow (\<--\>). This reflects the assumption that the unmeasured causes of the corresponding exogenous variables may covary, although the model does not provide an explanation for this association (i.e., they are outside the model). For example, parental neuroticism may be a common cause of parental anxiety and parental perfectionism, leading to a covariance between the two variables. Because the common causes are not modelled, and we may not even know all possible sources of shared variance between exogenous variables, it is very unrealistic to assume that the exogenous variables would not be correlated.
 
 For both exogenous and endogenous variables, the residual factor also reflects measurement error. The variance of a residual factor therefore partly consists of variance of the corresponding variable due to random error fluctuations. Thus, one cannot distinguish residual variance due to measurement error (i.e., unsystematic variance) and residual variance due to unmeasured causes (i.e., systematic variance). When the measure of the observed variable is unreliable this will inflate the variance of the corresponding residual factor and can be confounded with variance due to unmeasured causes of the variable.
 
@@ -89,15 +87,13 @@ $\mathbf{\Sigma}_{\text{model}} \approx \mathbf{\hat\Sigma}_{\text{model}}$,
 
 where $\mathbf{\hat\Sigma}_{\text{model}}$ is a function of sample estimates of the unknown model parameters. Thus, to enable calculation of $\mathbf{\hat\Sigma}_{\text{model}}$ we first need to derive estimates of all model parameters that feature in the path model. Below, we will describe the relationships between the observed variables in terms of model parameters, and explain how they can be used to find expressions for the variances and covariances.
 
-Figure 3.2 shows the Greek symbols that represent the variables and parameters that feature in the path model. The observed variables parental anxiety, parental perfectionism, parental overcontrol and child anxiety are represented by the squares $\mathrm{y}_1$, $\mathrm{y}_2$, $\mathrm{y}_3$, and $\mathrm{y}_4$ respectively. The direct effects between the observed variables are denoted $\beta_{31}$, $\beta_{32}$, and $\beta_{43}$. These direct effects are also called path coefficients and can be interpreted as regression coefficients. In general, $\beta_{ij}$ is the regression of variable $\mathrm{y}_{i}$ on $\mathrm{y}_{j}$, or, equivalently, the effect of $\mathrm{y}_{j}$ on $\mathrm{y}_{i}$. In addition, the circles are residual factors $\zeta_{1}$, $\zeta_{2}$, $\zeta_{3}$, and $\zeta_{4}$ that represent all factors that fall outside the model, i.e., unmeasured causes.
+Figure \@ref(fig:fig3-2) shows the Greek symbols that represent the variables and parameters that feature in the path model. The observed variables parental anxiety, parental perfectionism, parental overcontrol and child anxiety are represented by the squares $\mathrm{y}_1$, $\mathrm{y}_2$, $\mathrm{y}_3$, and $\mathrm{y}_4$ respectively. The direct effects between the observed variables are denoted $\beta_{31}$, $\beta_{32}$, and $\beta_{43}$. These direct effects are also called path coefficients and can be interpreted as regression coefficients. In general, $\beta_{ij}$ is the regression of variable $\mathrm{y}_{i}$ on $\mathrm{y}_{j}$, or, equivalently, the effect of $\mathrm{y}_{j}$ on $\mathrm{y}_{i}$. In addition, the circles are residual factors $\zeta_{1}$, $\zeta_{2}$, $\zeta_{3}$, and $\zeta_{4}$ that represent all factors that fall outside the model, i.e., unmeasured causes.
 
-```{r echo = FALSE, out.width = "80%", fig.align = "center" }
+```{r label="fig3-2", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Path diagram of the development of child anxiety including all path coefficients." }
 
 knitr::include_graphics("images/Fig2.Week2.Ch3.jpg")
 
 ```
-
-*Figure 3.2.* Path diagram of the development of child anxiety including all path coefficients
 
 Using the symbols described above, the relations between the variables can be represented by the following equations:
 
@@ -313,12 +309,7 @@ $$
 
 Which yields:
 
-```{r echo = FALSE, out.width = "100%", fig.align = "left" }
-
-knitr::include_graphics("images/Equation.Week2.Ch3.jpg")
-
-```
-
+```{=tex}
 \begin{equation}
 \Sigma_{\text{model}} = 
 \begin{bmatrix} 
@@ -342,7 +333,7 @@ knitr::include_graphics("images/Equation.Week2.Ch3.jpg")
 \end{bmatrix}
 (\#eq:3-10)
 \end{equation}
-
+```
 
 Now that we have found the expression of $\mathbf{\Sigma}_{\text{model}}$ as a function of model parameters, this enables the estimation of the model parameters, by choosing the values for each model parameter in such a way, that the resulting model implied variances and covariances of $\mathbf{\hat\Sigma}_{\text{model}}$ are as close as possible to the sample variances and covariances, $\mathbf{\hat\Sigma}_{\text{population}}$. A discrepancy function can be used to obtain parameter estimates, where an iterative procedure yields model parameters that keep the discrepancy between $\mathbf{\hat\Sigma}_{\text{population}}$ and $\mathbf{\hat\Sigma}_{\text{model}}$ to a minimum. In general, smaller values of discrepancy functions indicate better fit of the model to the data, and a value of zero indicates the fit is perfect, i.e., if the parameter estimates can perfectly reproduce the sample covariance matrix. Several discrepancy functions exist, but maximum likelihood estimation is most commonly applied. The resulting discrepancy value can be used for the assessment of overall goodness-of-fit using the so-called chi-square test of exact fit, where a significant chi-square value indicates a significant deviation between model and data (i.e., implying that $\mathbf{\hat\Sigma}_{\text{population}} \ne \mathbf{\Sigma}_{\text{model}}$). See also Chapters [10](#ch10) and [11](#ch11), where the topics of [Estimation](#ch10) and [Evaluation of Model Fit](#ch11) are explained in more detail.
 
@@ -415,7 +406,7 @@ Every time you start R you need to use this command to activate the `lavaan` pac
 
 ### Fitting a path model
 
-Script 3.1 fits the path model of Figure 3.2 to the covariance matrix that is given in Affrunti and Woodruff-Borden (2014). All commands will be explained below.
+Script 3.1 fits the path model of Figure \@ref(fig:fig3-2) to the covariance matrix that is given in Affrunti and Woodruff-Borden (2014). All commands will be explained below.
 
 ***Script 3.1***
 
@@ -452,7 +443,7 @@ AWmodelOut <- lavaan( model = AWmodel,
                        likelihood = "wishart", fixed.x = FALSE)
 ```
 
-We start by defining the observed covariance matrix and the names of the associated observed variables. It is required to provide these names with the input matrix. First we created the object `obsnames` that contains the names of the variables. Note that the order of the variables corresponds to the labels $\mathrm{y}_1$ to $\mathrm{y}_4$ in Figure 3.2.
+We start by defining the observed covariance matrix and the names of the associated observed variables. It is required to provide these names with the input matrix. First we created the object `obsnames` that contains the names of the variables. Note that the order of the variables corresponds to the labels $\mathrm{y}_1$ to $\mathrm{y}_4$ in Figure \@ref(fig:fig3-2).
 
 ```{r eval = FALSE}
 obsnames <- c("parent_anx", "perfect", "overcontrol", "child_anx") 
@@ -576,7 +567,7 @@ summary(AWmodelOut, rsquare = TRUE)
 
 ### Syntax shortcuts
 
-Script 3.1 specifies every single nonzero parameter depicted in the path model of Figure 3.2. In larger models, this can become quite cumbersome, increase the chance of making an error, and make the model syntax more difficult to read (e.g., to find mistakes). Some parameters can be specified automatically in the `lavaan()` call. For example, setting the option `auto.var = TRUE` will tell `lavaan` to freely estimate all (residual) variances of variables included in the model syntax, and the option `fixed.x = FALSE` already tells `lavaan` to freely estimate covariances among exogenous variables. Thus, adding these options to the `lavaan()` call means that the model syntax requires only the specification of regression parameters, which is quite easy to read:
+Script 3.1 specifies every single nonzero parameter depicted in the path model of Figure \@ref(fig:fig3-2). In larger models, this can become quite cumbersome, increase the chance of making an error, and make the model syntax more difficult to read (e.g., to find mistakes). Some parameters can be specified automatically in the `lavaan()` call. For example, setting the option `auto.var = TRUE` will tell `lavaan` to freely estimate all (residual) variances of variables included in the model syntax, and the option `fixed.x = FALSE` already tells `lavaan` to freely estimate covariances among exogenous variables. Thus, adding these options to the `lavaan()` call means that the model syntax requires only the specification of regression parameters, which is quite easy to read:
 
 ```{r, eval = FALSE}
 
