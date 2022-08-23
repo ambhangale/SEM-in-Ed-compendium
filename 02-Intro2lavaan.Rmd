@@ -1,4 +1,4 @@
-# Using `lavaan` to Run Regression and ANOVA as a SEM
+# Using `lavaan` to Run Regression and ANOVA as a SEM {#ch2}
 
 ## Prepare Data and Workspace
 
@@ -14,12 +14,12 @@ S <- cov(dat)
 N <- nrow(dat)
 ```
 
-Recall from [Chapter 1](regression-as-mean--and-covariance-structure-analysis) that:
+Recall from [Chapter 1](#ch1) that:
 
 - SEM can equivalently be fitted to summary statistics rather than raw data
 - It is possible to fit a "multigroup SEM" to obtain parameter estimates separately per group
 
-This chapter will show how to fit a multigroup SEM to raw data as well as to summary statistics.  For the latter, we require group-specific summary statistics, which [Chapter 1](regression-as-mean--and-covariance-structure-analysis) discussed how to obtain:
+This chapter will show how to fit a multigroup SEM to raw data as well as to summary statistics.  For the latter, we require group-specific summary statistics, which [Chapter 1](#ch1) discussed how to obtain:
 
 ```{r import summary data}
 ## Create factor from effects-coded conditions
@@ -84,7 +84,7 @@ When data are complete, maximum likelihood estimation (MLE) provides equivalent 
 - `lavaan()` is the main "engine", but expects that models are fully specified in complete detail
 - `sem()` is a "wrapper" that calls `lavaan()` with some sensible defaults that apply to most SEMs (e.g., automatically estimating residual variances, automatically estimating covariances among predictors)
 - `cfa()` is meant for fitting confirmatory factor analysis (CFA) models, discussed in a later chapter.  `cfa()` and `sem()` actually behave identically (i.e., they call `lavaan()` with the same defaults)
-- `growth()` is meant for very simple latent growth curve models, also discussed in a later chapter
+- `growth()` is meant for very simple latent growth curve models, also discussed in a later [chapter](#ch26)
 
 For now, we will use the `sem()` function similar to the way we use the `lm()` function, including how we obtain results from `summary()`.
 
@@ -109,9 +109,9 @@ sigma(ols)^2 # compare to residual variance from OLS
 `lavaan`'s point estimates match OLS, except residual variance ($\sigma^2_\varepsilon$)
 
 - OLS estimates $\sigma^2_\varepsilon$ by dividing the residual $SS$ by the residual $df$
-- SEM estimators choose estimates that reproduce $\bar{y}$ and $S$ 
+- SEM estimators choose estimates that reproduce $\bar{\mathrm{y}}$ and $S$ 
 
-If we calculate variance of the residuals ($y_i - \hat{y}$) using the "population formula" (dividing by $N$), we obtain `lavaan`'s result
+If we calculate variance of the residuals ($\mathrm{y}_i - \hat{\mathrm{y}}$) using the "population formula" (dividing by $N$), we obtain `lavaan`'s result
 
 ```{r compare res var}
 sigma(ols)^2 # residual variance from OLS
@@ -138,13 +138,9 @@ Also note that raw `data=` are required to
 
 - analyze incomplete data (using full information MLE rather than listwise deletion),
 - obtain robust statistics (e.g., to account for nonnormality of continuous outcomes), or 
-- model discrete (binary or ordinal) outcomes (which require a *threshold model*, explained later in a chapter about categorical data)
-
-
+- model discrete (binary or ordinal) outcomes (which require a *threshold model*, explained later in a [chapter about categorical data](#ch12))
 
 ## Caveats with SEM
-
-
 
 ### Model Comparison with OLS
 
@@ -161,7 +157,7 @@ This result matches the $F$ test at the bottom of `summary(ols1)`
 
 ### Model Comparison with `lavaan`
 
-Omitting variables from an SEM means they are removed from $\bar{y}$ and $S$, returning a warning 
+Omitting variables from an SEM means they are removed from $\bar{\mathrm{y}}$ and $S$, returning a warning 
 
 ```{r syntax compare, eval=FALSE}
 mle0 <- sem('POS ~ 1', data = dat)
@@ -184,7 +180,7 @@ anova(mle0, mle1)
 
 ### Moderation Caveats
 
-When evaluating moderation using a product term, that product term is a new variable in $\bar{y}$ and $S$
+When evaluating moderation using a product term, that product term is a new variable in $\bar{\mathrm{y}}$ and $S$
 
 - e.g., we want to test `MOOD`'s effect, controlling for `NFC`
 - before comparing adjusted group means, we should evaluate the homogeneity-of-slopes assumption
@@ -197,7 +193,7 @@ As in `formula` objects, `lavaan` syntax recognizes the colon (`:`) operator
 POS ~ 1 + MOOD + NFC + MOOD:NFC
 ```
 
-`MOOD:NFC` is now an additional variable in $\bar{y}$ and $S$, so comparison to any model without that interaction term requires including the product term but fixing its effect to zero
+`MOOD:NFC` is now an additional variable in $\bar{\mathrm{y}}$ and $S$, so comparison to any model without that interaction term requires including the product term but fixing its effect to zero
 
 
 #### Estimate and Test an Interaction with OLS
@@ -232,7 +228,7 @@ Suppose we had failed to reject the $H_0$ of homogeneity of slopes, and we wante
 - the difference between a group's mean and the grand mean
 - half the group mean difference
 
-The $t$ test (OLS) or Wald $z$ test (SEM) is sufficient to test the $H_0: \widehat{y}_\text{Treatment}|x = \widehat{y}_\text{Control}|x$
+The $t$ test (OLS) or Wald $z$ test (SEM) is sufficient to test the $H_0: \hat{\mathrm{y}}_\text{Treatment}|x = \hat{\mathrm{y}}_\text{Control}|x$
 
 ```{r print M_adj}
 summary(mle.hom)
@@ -248,7 +244,7 @@ SEMs are only comparable when they are fitted to the same data
 - same observations (rows) **and** same variables (columns)
 - Instead of removing predictors, fix slopes to zero
 
-Interaction terms are additional variables, added to $\bar{y}$ and $S$
+Interaction terms are additional variables, added to $\bar{\mathrm{y}}$ and $S$
 
 - only compare models with same variables
 - products of variables can be saved in the `data.frame` or specified using the colon (`:`) operator (e.g., `x1:x2`), **not the asterisk** (`*`)
@@ -267,7 +263,7 @@ slope0 <- lm(POS ~ -1 + mood.f + NFC, data = dat)
 summary(slope0)
 ```
 
-This still assumes homoskedasticity of residuals, and comparing intercepts (or adjusted means) requires the [\textcolor{blue}{delta method}](https://en.wikipedia.org/wiki/Delta_method), which is a way to estimate the *SE* of a function of parameters (e.g., difference between 2 slopes) from the *SE*s of the original parameter estimates.
+This still assumes homoskedasticity of residuals, and comparing intercepts (or adjusted means) requires the [delta method](https://en.wikipedia.org/wiki/Delta_method), which is a way to estimate the *SE* of a function of parameters (e.g., difference between 2 slopes) from the *SE*s of the original parameter estimates.
 
 ```{r deltaMethod}
 car::deltaMethod(slope0, "b2 - b1", rhs = 0,
@@ -282,7 +278,7 @@ car::deltaMethod(slope0, "b2 - b1", rhs = 0,
 - parameters are labeled in the model syntax (before `*` operator)
 - model syntax includes user-defined parameters (`:=` operator)
 
-However, SEM cannot fit group-specific intercepts because they are linearly dependent (recall (multi)collinearity among predictors from a previously read regression text). That is, the positive-mood dummy code is simply 1 minus the neutral-mood dummy code, so they are perfectly (negatively) correlated.  Therefore, $S$ would not be [\textcolor{blue}{positive definite}](https://en.wikipedia.org/wiki/Definite_matrix), which is a term that indicates some redundancy among variables.  This means that fitting a single-group SEM with group-specific intercepts is not possible:
+However, SEM cannot fit group-specific intercepts because they are linearly dependent (recall (multi)collinearity among predictors from a previously read regression text). That is, the positive-mood dummy code is simply 1 minus the neutral-mood dummy code, so they are perfectly (negatively) correlated.  Therefore, $S$ would not be [positive definite](https://en.wikipedia.org/wiki/Definite_matrix), which is a term that indicates some redundancy among variables.  This means that fitting a single-group SEM with group-specific intercepts is not possible:
 
 ```{r NPD, eval = FALSE}
 dat$treat   <- dat$mood.f == "positive"

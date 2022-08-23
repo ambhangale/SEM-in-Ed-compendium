@@ -1,4 +1,4 @@
-# Standard Errors and Confidence Intervals
+# Standard Errors and Confidence Intervals {#ch4}
 
 ## Standard Errors
 

@@ -1,4 +1,4 @@
-# Identification
+# Identification {#ch7}
 
 The problem of identification considers the issue of whether there is enough "known" information to obtain unique estimates of the model that is specified (i.e., the "unknown" information). In structural equation modeling, the known pieces of information are the sample variances and covariances of the observed variables, and the unknown pieces of information are the model parameters. When the model is "under identified", this means that there is not enough known information to yield unique parameter estimates. When there are just as many knowns as unknowns, the model is "just identified". However, usually we are interested in so called "over identified" models, where there are more knowns than unknowns. Identification is an important but rather difficult topic of structural equation modeling, and there are many different ways to evaluate the identification status of a model.
 
@@ -6,12 +6,12 @@ The first, and easiest way to evaluate whether a model might be identified is to
 
 ```{=tex}
 \begin{equation}
-q \le (p(p+1))^1/_2,
+q \le (p(p+1)) ½,
 (\#eq:7-01)
 \end{equation}
 ```
 
-where p is the number of observed variables, and $q$ is the number of free parameters in the model. This is a general rule that can be applied to all structural equation models. However, it is a ‘necessary but not sufficient’ condition for identification. This means that models that have a negative number of degrees of freedom are surely under identified. Models that have at least zero degrees of freedom might be identified. Evaluation of Equation \@ref(eq:7-01) for our illustrative example of child anxiety yields a total of 10 knowns (i.e., $p = 4$), and 8 unknowns (i.e., $\beta_{31}$, $\beta_{32}$, $\beta_{43}$, $\psi_{11}$, $\psi_{22}$, $\psi_{33}$, $\psi_{44}$ and $\psi_{21}$). The difference between the number or nonredundant elements in the covariance matrix and the number of free parameters in the model are the ‘degrees of freedom’. The model of our example thus has 2 degrees of freedom. 
+where $p$ is the number of observed variables, and $q$ is the number of free parameters in the model. This is a general rule that can be applied to all structural equation models. However, it is a ‘necessary but not sufficient’ condition for identification. This means that models that have a negative number of degrees of freedom are surely under identified. Models that have at least zero degrees of freedom might be identified. Evaluation of Equation \@ref(eq:7-01) for our illustrative example of child anxiety yields a total of 10 knowns (i.e., $p = 4$), and 8 unknowns (i.e., $\beta_{31}$, $\beta_{32}$, $\beta_{43}$, $\psi_{11}$, $\psi_{22}$, $\psi_{33}$, $\psi_{44}$ and $\psi_{21}$). The difference between the number or nonredundant elements in the covariance matrix and the number of free parameters in the model are the ‘degrees of freedom’. The model of our example thus has 2 degrees of freedom. 
 
 There are different approaches to further assess whether a model is identified. In this chapter we will first discuss the symbolic or theoretical identification of model parameters. In addition, we will explain some rules of thumb that can be applied in order to facilitate the evaluation of model identification. We only discuss identification of path models, identification of factor models will be discussed in a later chapter.
 
@@ -115,35 +115,35 @@ Because the symbolic assessment of identification quickly becomes very complex a
 The recursive rule is a ‘sufficient, but not necessary condition’ for model identification. The rule entails that all recursive models are identified. Recursive models contain only unidirectional causal effects and have uncorrelated residual factors of endogenous variables. This means that there are no feedback-loops in the model. Because the recursive rule is a sufficient rule, it is possible that the model is still identified even though not all causal effects are unidirectional or there exist correlations between the residual factors of the endogenous variables. 
 
 ### The order condition
-For identification of nonrecursive models we need additional rules. Where the previous rules apply the model as a whole, the order condition (and the rank condition) apply to the separate equations of the endogenous variables in the model (i.e., Equations \@ref(eq:3-03) and \@ref(eq:3-04) from our illustrative example). Each equation has to meet the condition for the model to be identified. One other difference with the previous conditions, is that for the order and rank conditions it is assumed that all residual covariances between the residual factors of endogenous variables are free to be estimated. The advantage of this assumption is that when all the equations of a model meet the rank and order conditions, than all the elements in $\Psi$ that correspond to the residual factors of endogenous variables are identified. However, usually we know that some of these elements of $\Psi$ are restricted to zero, and such restrictions may help in the identification of model parameters. This knowledge is not taken into account with the rank and order conditions.
+For identification of nonrecursive models we need additional rules. Where the previous rules apply the model as a whole, the order condition (and the rank condition) apply to the separate equations of the endogenous variables in the model (i.e., Equations \@ref(eq:3-03) and \@ref(eq:3-04) from our illustrative example). Each equation has to meet the condition for the model to be identified. One other difference with the previous conditions, is that for the order and rank conditions it is assumed that all residual covariances between the residual factors of endogenous variables are free to be estimated. The advantage of this assumption is that when all the equations of a model meet the rank and order conditions, than all the elements in $\mathbf\Psi$ that correspond to the residual factors of endogenous variables are identified. However, usually we know that some of these elements of $\mathbf\Psi$ are restricted to zero, and such restrictions may help in the identification of model parameters. This knowledge is not taken into account with the rank and order conditions.
 
-The order condition entails that for each equation of an endogenous variable, the number of endogenous variables excluded from the equation needs to be at least one less than the total number of endogenous variables ($g – 1$). The order condition is a necessary but not sufficient condition. In order to evaluate the order condition, one can calculate matrix $C$, which is $(I – B_g | -B_x)$. $B_g$ refers to the part of the $B$ matrix that contains the regression coefficients between the endogenous variables, and $B_x$ refers to the part of the $B$ matrix that contains the regression coefficient between the exogenous and endogenous variables. For example, the $C$ matrix for our illustrative example of the development of child anxiety is:
+The order condition entails that for each equation of an endogenous variable, the number of endogenous variables excluded from the equation needs to be at least one less than the total number of endogenous variables ($g – 1$). The order condition is a necessary but not sufficient condition. In order to evaluate the order condition, one can calculate matrix $\mathbf{C}$, which is $(\mathbf{I} – \mathbf{B}_g | -\mathbf{B}_x)$. $\mathbf{B}_g$ refers to the part of the $\mathbf{B}$ matrix that contains the regression coefficients between the endogenous variables, and $\mathbf{B}_x$ refers to the part of the $\mathbf{B}$ matrix that contains the regression coefficient between the exogenous and endogenous variables. For example, the $\mathbf{C}$ matrix for our illustrative example of the development of child anxiety is:
 
 $$
-C =
+\mathbf{C} =
 \begin{bmatrix}
 1&0& -\beta_{31} & -\beta_{32}\\
 -\beta_{43} & 1 & 0&0
 \end{bmatrix}
 $$
 
-In order to evaluate the order condition, we need to count the number of zero elements for each row. If a row has more zeros than $g – 1$, then the associated equation meets the order condition. In our example, the row corresponding to the equation for y3 (parental overcontrol) has one zero, and the row corresponding to the equation for variable y4 (child anxiety) has two zeros. Our model contains a total of two endogenous variables, i.e. $g  – 1 = 1$. Thus, the equations are identified. The order condition is a necessary but not sufficient condition, which means that even when each equation meets the condition it does not guarantee identification of the model.
+In order to evaluate the order condition, we need to count the number of zero elements for each row. If a row has more zeros than $g – 1$, then the associated equation meets the order condition. In our example, the row corresponding to the equation for $\mathrm{y}_3$ (parental overcontrol) has one zero, and the row corresponding to the equation for variable $\mathrm{y}_4$ (child anxiety) has two zeros. Our model contains a total of two endogenous variables, i.e. $g  – 1 = 1$. Thus, the equations are identified. The order condition is a necessary but not sufficient condition, which means that even when each equation meets the condition it does not guarantee identification of the model.
 
 ### The rank condition
-The rank condition is a necessary and sufficient condition, indicating that if each equation meets the criteria than the model is identified. If the equations do not meet the condition, than the model is surely not identified. To evaluate the rank condition we again look at the $C$ matrix, but now delete all columns of $C$ that do not have zeros in the row of the equation of interest. Using the remaining columns to form a new matrix, $C_i$, we know that equation $i$ is identified when the rank of $C_i$ equals $g – 1$. When we calculate the $C_3$ matrix for the equation that refers to the y3 variable from our illustrative example, we get: 
+The rank condition is a necessary and sufficient condition, indicating that if each equation meets the criteria than the model is identified. If the equations do not meet the condition, than the model is surely not identified. To evaluate the rank condition we again look at the $\mathbf{C}$ matrix, but now delete all columns of $\mathbf{C}$ that do not have zeros in the row of the equation of interest. Using the remaining columns to form a new matrix, $\mathbf{C}_i$, we know that equation $i$ is identified when the rank of $\mathbf{C}_i$ equals $g – 1$. When we calculate the $\mathbf{C}_3$ matrix for the equation that refers to the $\mathrm{y}_3$ variable from our illustrative example, we get: 
 
 $$
-C_3 =
+\mathbf{C}_3 =
 \begin{bmatrix}
 0\\
 1
 \end{bmatrix}.
 $$
 
-The rank of a matrix or vector is the number of independent rows (or columns). A row is independent when it contains nonzero elements, and is linearly independent from other rows in the matrix (e.g., when a row is the sum of two other rows of the same matrix, it is not linearly independent from the other rows). For C3 the rank is 1. Therefore, the equation for parental overcontrol is identified. The C4 matrix of our illustrative example is:
+The rank of a matrix or vector is the number of independent rows (or columns). A row is independent when it contains nonzero elements, and is linearly independent from other rows in the matrix (e.g., when a row is the sum of two other rows of the same matrix, it is not linearly independent from the other rows). For $\mathbf{C}_3$ the rank is 1. Therefore, the equation for parental overcontrol is identified. The $\mathbf{C}_4$ matrix of our illustrative example is:
 
 $$
-C_4 =
+\mathbf{C}_4 =
 \begin{bmatrix}
 -\beta_{31}&-\beta_{32}\\
 0&0
@@ -157,6 +157,7 @@ The methods for assessment of identification as described above are all methods 
 The empirical check has two steps. 
 
 Step 1: Calculate a model implied covariance matrix for the model of interest.
+
 Step 2: Fit the model to the model implied covariance matrix from Step 1. 
 
 If the parameter estimates you obtain in Step 2 are identical to the parameter values you chose in Step 1, the model may be identified. If you obtain different parameter estimates in Step 2, your model is surely not identified. 
@@ -281,7 +282,7 @@ The output for the empirical check of Model 2 does not lead to the same paramete
 
 ## Appendix I ## {#appendix-7}
 
-### Algebraic assessment of identification using elements of $\Sigma_{population}$ and $\Sigma_{model}$
+### Algebraic assessment of identification using elements of $\mathbf\Sigma_{\text{population}}$ and $\mathbf\Sigma_{\text{model}}$
 
 \begin{equation}
 \beta_{31} = \frac{\sigma_{31}-\frac{\sigma_{32}-\beta_{31}\psi_{21}}{\psi_{22}}\psi_{21}}{\psi_{11}}

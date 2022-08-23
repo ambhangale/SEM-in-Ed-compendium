@@ -1,4 +1,4 @@
-# Latent Growth Curve Models
+# Latent Growth Curve Models {#ch26}
 
 ```{r setup-26, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

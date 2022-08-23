@@ -1,15 +1,67 @@
-# Measures of Model Fit
+# Measures of Model Fit {#ch11}
 
 When the model is identified, then $\mathbf{\Sigma}_\text{sample}$ can be used to derive parameter estimates that yield a covariance matrix ($\hat{\mathbf{\Sigma}}_{\text{model}}$) that is as close as possible to the observed sample covariance matrix. In general, when the discrepancies between $\mathbf{\Sigma}_\text{sample}$ and $\hat{\mathbf{\Sigma}}_{\text{model}}$ are large, this indicates that the specified model cannot give a good description of the data and therefore one might question whether the model is true in the population, i.e., whether the model is misspecified. For just-identified models, the model parameters can usually be estimated so that $\hat{\mathbf{\Sigma}}_{\text{model}}$ equals $\mathbf{\Sigma}_\text{sample}$. Evaluation of model fit is therefore uninformative. The model that is specified might not necessarily be the ‘true’ model, but there is not enough information to evaluate possible misspecification of the model as a whole. For models that are over identified (i.e., that have positive degrees of freedom) the evaluation of model fit may be informative as it can give an indication as to what extent the discrepancies between $\mathbf{\Sigma}_\text{sample}$ and $\hat{\mathbf{\Sigma}}_{\text{model}}$ can be attributed to misspecification of the model. Below we first discuss the $χ^2$ test of ‘exact fit’, then we explain the evaluation of ‘approximate fit’, and give a short overview of other descriptive measures of model fit. We also discuss the evaluation of differences in model fit, and finally show how to obtain all these measures of model fit in `lavaan`.
 
 ## The chi-squared test of exact fit
 The $χ^2$ test of exact fit is the basic statistical evaluation of overall model fit for over-identified SEMs. It is used to evaluate the following hypothesis:
 
+$$
+\mathbf{\Sigma}_{\text{population}} = \mathbf{\Sigma}_{\text{model}}, \hspace{50mm} (\text{11.01})
+$$
+
+where $\mathbf\Sigma_{\text{population}}$ refers to the matrix of population variances and covariances of the observed variables, and $\mathbf\Sigma_{\text{model}}$ refers to the population matrix of variances and covariances as implied by the path model. $\mathbf\Sigma_{\text{model}}$ is a function of model parameters (following Equations \@ref(eq:3-09} and \@ref(eq:3-10). If the model gives a true description of reality then $\mathbf\Sigma_{\text{model}}$ is equal to the population variances and covariances $\mathbf\Sigma_{\text{population}}$. However, these population matrices cannot be directly observed and therefore their values are unknown. Instead, the matrix of observed covariances $\mathbf\Sigma_{\text{sample}}$ is taken as an estimate of the population covariance matrix, and $\hat{\mathbf\Sigma}_{\text{model}}$ is the covariance matrix as implied by model parameters derived from the sample estimates. Because the sample covariance matrix and estimated model-implied covariance matrix are only estimates of their corresponding population covariance matrices, it is possible that $\hat{\mathbf\Sigma}_{\text{population}} ≠ \hat{\mathbf\Sigma}_{\text{model}}$, even if $\mathbf\Sigma_{\text{population}} = \mathbf\Sigma_{\text{model}}$. Figure 11.1 gives a graphical representation of the population covariance matrices ($\mathbf\Sigma_{\text{population}}$ and $\mathbf\Sigma_{\text{model}}$) and the sample covariance matrices ($\mathbf\Sigma_{\text{sample}}$ and $\hat{\mathbf\Sigma}_{\text{model}}$), and the different types of discrepancies that play a role in model fit evaluation. The term ‘sample discrepancy’ refers to the observed differences between the sample covariance matrix and the model-implied covariance matrix as derived from model parameter estimates. The term ‘population discrepancy’ refers to the differences between the population covariance matrix and the population model-implied covariance matrix. 
+
+```{r echo = FALSE, out.width = "80%", fig.align = "center" }
+
+knitr::include_graphics("images/Ch11_discrepancy.png")
+```
+*Figure 11.1.* Population and sample covariance matrices that play a role in model fit evaluation.
+
+The $χ^2$ test of exact fit is based on the assumption that exact fit holds in the population, i.e., the population discrepancy is zero ($\mathbf{\Sigma}_{\text{population}} = \mathbf{\Sigma}_{\text{model}}$).  Under this null hypothesis, the $p$ value associated with the observed $χ^2$ fit statistic gives the probability of observing a sample discrepancy (i.e., the difference between $\hat{\mathbf\Sigma}_{\text{population}}$ and $\hat{\mathbf\Sigma}_{\text{model}}$) at least as large as the observed one, when any discrepancy is due solely to random sampling error. When this probability is very low (e.g., lower than $α$ = .05), then we reject the null hypothesis of exact fit and conclude that the model does not hold in the population. In other words, we conclude that the model is misspecified (i.e., the population discrepancy is not zero but contains discrepancy due to misspecification).
+
+The $χ^2$ test of exact fit is based on the maximum likelihood (ML) discrepancy function. When all assumptions are satisfied, $(N − 1) × \text{F}_{\text{ML}}$ has a central $χ^2$ distribution:
+
 ```{=tex}
 \begin{equation}
-\mathbf{\Sigma}_{\text{population}} = \mathbf{\Sigma}_{\text{model}},
+\chi^2 = (N-1) \times \text{F}_\text{ML}
 (\#eq:11-01)
 \end{equation}
 ```
 
-where $\Sigma_{population}$ refers to the matrix of population variances and covariances of the observed variables, and $\Sigma_{model}$ refers to the population matrix of variances and covariances as implied by the path model. $\Sigma_{model}$ is a function of model parameters (following Equations 3.09 and 3.10). If the model gives a true description of reality then model is equal to the population variances and covariances population. However, these population matrices cannot be directly observed and therefore their values are unknown. Instead, the matrix of observed covariances sample is taken as an estimate of the population covariance matrix, and  ̂model is the covariance matrix as implied by model parameters derived from the sample estimates. Because the sample covariance matrix and estimated model-implied covariance matrix are only estimates of their corresponding population covariance matrices, it is possible that  ̂population ≠  ̂model, even if population = model. Figure 11.1 gives a graphical representation of the population covariance matrices (population and model) and the sample covariance matrices (sample and  ̂model), and the different types of discrepancies that play a role in model fit evaluation. The term ‘sample discrepancy’ refers to the observed differences between the sample covariance matrix and the model-implied covariance matrix as derived from model parameter estimates. The term ‘population discrepancy’ refers to the differences between the population covariance matrix and the population model-implied covariance matrix. 
+with degrees of freedom equal to
+
+```{=tex}
+\begin{equation}
+df = ½ \hspace{1mm}(p \hspace{1mm} (p + 1)) - q
+(\#eq:11-02)
+\end{equation}
+```
+
+where $p$ is the number of observed variables and $q$ is the number of free model parameters to be estimated. If the $p$ value associated with the $χ^2$ value is smaller than the significance level $α$, the null hypothesis of exact fit (i.e., $\mathbf{\Sigma}_{\text{population}} = \mathbf{\Sigma}_{\text{model}}$) is rejected. Otherwise, the model is regarded as compatible with the population covariance matrix $\mathbf{\Sigma}_{\text{population}}$.  Note that when only the covariance structure is analysed, we use Wishart likelihood, so we multiply $\text{F}_{\text{ML}}$ by $N – 1$, but when both mean and covariance structure are analysed (e.g., when analysing raw data, or when using any robust correction), we use normal likelihood, so we multiply $\text{F}_{\text{ML}}$ by $N$.
+
+The full mediation model of child anxiety from our illustrative example yields the following $χ^2$ test result:
+
+$χ^2 = 7.429$, with $df = 2$, and associated $p$ value $= .024$.
+
+Thus, the $χ^2$ value is significant (at $α = .05$), so we reject the null hypothesis of exact fit. 
+
+### Alternative basis for calculating the test statistic when analysing raw data 
+Equation \@ref(eq:11-01) shows how to calculate $χ^2$ from summary statistics (i.e., observed and model-implied covariance matrices, and optionally mean vectors).  This equation only applies when analysing complete data. In practice, data are often partially observed. When some data are missing, you can use full-information maximum likelihood (FIML) estimation (review the last section of [Chapter 9](#ch9) for details).
+
+We use a the log-likelihood ($\ell$)^[Recall that the log-likelihood $\ell$ for a sample is the sum of all the individual log-likelihoods ($ℓ = Σℓ_i$).]  of the partially observed sample data, given the model parameters, to calculate the $χ^2$ test statistic for the model.  We can also use $\ell$ with complete data, in which case the $χ^2$ value is the same as it would be using equation \@ref(eq:11-01).  Although we discuss model comparison more thoroughly later in the chapter, calculating $χ^2$ using $\ell$ implicitly involves a model comparison via a likelihood-ratio test (LRT; review the last section of [Chapter 9](#ch9)for details):
+
+```{=tex}
+\begin{equation}
+\chi^2 = -2 \times (\ell_{\text{A}} - \ell_{\text{B}}) = -2 \ell_{\text{A}}(-2\ell_{\text{B}})
+(\#eq:11-03)
+\end{equation}
+```
+
+Notice that the $χ^2$ statistic in equation \@ref(eq:11-03) is the same quantity as the LRT in equation \@ref(eq:9-06) in the [earlier chapter](#ch9).  An individual model’s $χ^2$ statistic is calculated by considering the target model as Model A, and the perfectly fitting saturated model as Model B.  If the hypothesized model is the true data-generating model, then there should be little or no difference between $\ell_{\text{Target}}$ and $\ell_{\text{Saturated}}$, so the $χ^2$ statistic should be small (relative to its $df$).
+
+### Testing exact fit vs. describing the degree of approximate fit
+In general, a researcher usually specifies a model that he or she thinks is the ‘true’ model, and therefore is interested in obtaining a non-significant $χ^2$ value. However, is it realistic to assume that there is an exactly ‘true’ model that satisfies the assumption of exact fit, i.e., $\mathbf{\Sigma}_{\text{population}} = \mathbf{\Sigma}_{\text{model}}$? It has been argued that it is implausible that any model that we specify is anything more than an approximation to reality (Brown & Cudeck, 1992). When we assume that the models that we specify are only an approximation of a real data-generating process, then the null hypothesis that a model fits exactly in the population is known to be false *a priori*. Even if the discrepancy is small enough to be ignored in practice (i.e., because the model is approximately correct enough to be useful), small differences between $\mathbf\Sigma_{\text{sample}}$ and $\hat{\mathbf{Σ}}_{\text{model}}$ may become statistically significant in large samples (e.g., see Equation \@ref(eq:11-01)). It has been argued that models that approximate the population covariance matrix will almost certainly be rejected under the null hypothesis of exact fit if sample size is sufficiently large (see for example Marsh, Balla, & McDonald, 1988). 
+Therefore, rather than testing whether the model fits exactly in the population (when we already know the answer is no), it might be more sensible to assess the degree to which the model fits in the population. Numerous descriptive fit indices have been developed as an alternative to the $χ^2$ test of exact fit. These descriptive fit indices do not provide a statistical significance test to assess model fit, but rather provide a descriptive evaluation of fit. Such indices are based on the idea that models are simplifications of reality and will never exactly hold in the population. Some of these fit indices take into account sample size, model parsimony, or compare the fit of the model to a baseline model. Fit indices typically have unknown sampling distributions, so they cannot be used as actual test statistics because there is no analytical way to derive a critical value^[It is possible to use simulation-based methods to generate an empirical sampling distribution with which to derive critical values and p values (see, e.g., Millsap, 2007; Pornprasertmanit, Wu, & Little, 2013).] . However, this has not stopped some researchers from proposing ‘rules of thumb’ to delineate poor and good fit—these are typically treated as critical values by applied researchers, which is not how we recommend they be used.  Rather, we recommend viewing descriptive fit indices as complementing the exact fit test in a way that is analogous to any statistical test being accompanied by a measure of effect size.  In the case of statistically significant model misfit, fit indices can be used to assess whether the degree of misfit is of practical importance. Below we explain how a number of descriptive fit indices can be derived and interpreted. 
+
+11.2 Root Mean Square Error of Approximation (RMSEA)
+One of the earliest and most popular descriptive fit indices is the Root Mean Square Error of Approximation (RMSEA; Steiger & Lind, 1980). The rationale behind the RMSEA is that the null hypothesis of exact fit (i.e., Σpopulation = model) is invariably false in practical situations. Therefore, the hypothesis of exact fit is replaced by the hypothesis of approximate fit:

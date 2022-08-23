@@ -1,4 +1,4 @@
-# Direct, Indirect, and Total Effects
+# Direct, Indirect, and Total Effects {#ch5}
 
 In the path model from our illustrative example (see Figure 1), there is no arrow pointing from Parental Anxiety (PA) to Child anxiety (CA). This does not mean that the model implies that there is no effect of PA on CA. The effect runs through Parental Overcontrol (PO). PA has a direct effect on PO, which in turn has a direct effect on CA. PA thus has an indirect effect on CA, reflecting that the effect of PA on CA is mediated by PO. The size of the indirect effect equals the product of the direct effects that constitute the indirect effect. So, in this example, the indirect effect of PA on CA through PO is equal to .187 ($β_{31}$) times .072 ($β_{43}$) = .013. Note that it makes sense that the indirect effect equals the product of the direct effects. Holding PP constant, if PA increases with one point, PO is expected to increase with .187 point. If PO increases with 1 point, CA is expected to increase with .072 point. So if PO increases with .187 points instead of 1 point, CA is expected to increase with $.187 \times .072 = .013$ points. Similarly, the indirect effect of Parental Perfectionism (PP) on CA is $.210 \times .072 = .015$, indicating that 1 point increase in PP is expected to result in .015 point increase of CA.
 
@@ -216,7 +216,7 @@ total_PE := total_ind_PE + b42
 '
 ```
 
-We can define new variables that are a function of free parameter estimates by using the operator ":=". We name the indirect effect of PA on CA `I1_PA`. If there would have been more mediators than Overcontrol, we could name other indirect effects `I2_PA`, `I3_PA` etc. The total indirect effect is calculated by summing the specific indirect effects. In this example there is just one specific indirect effect, so the total indirect effect is equal to the specific indirect effect. We used similar code for the indirect, total indirect and total effect of PE on CA.
+We can define new variables that are a function of free parameter estimates by using the operator "`:=`". We name the indirect effect of PA on CA `I1_PA`. If there would have been more mediators than Overcontrol, we could name other indirect effects `I2_PA`, `I3_PA` etc. The total indirect effect is calculated by summing the specific indirect effects. In this example there is just one specific indirect effect, so the total indirect effect is equal to the specific indirect effect. We used similar code for the indirect, total indirect and total effect of PE on CA.
 
     I1_PA := b31*b43
     total_ind_PA := I1_PA

@@ -1,4 +1,4 @@
-# Regression as Mean- and Covariance-Structure Analysis
+# Regression as Mean- and Covariance-Structure Analysis {#ch1}
 
 This chapter prepares the reader to learn about structural equation modeling (SEM) by reviewing the fundamentals of ordinary least-squares (OLS) regression. Different types of data are discussed, and some review of matrix algebra will be incorporated into the regression review.
 
@@ -28,7 +28,7 @@ install.packages("lavaan", repos = "https://www.da.ugent.be", type = "source")
 
 SEM can be seen as a generalization of the general(ized) linear model (GLM) for multivariate data. But rather than merely allowing multiple predictors and multiple outcomes, any variable can operate **both** as a predictor and an outcome in the same model. This allows us to model complex relationships among variables, including chains of causation (i.e., mediation).
 
-Estimation of a GLM involves minimizing discrepancies (differences) between observed ($y$) and expected ($\hat{y}$) *casewise* values (i.e., an individual subject's score on an outcome variable $y$). In contrast, estimation of a SEM involves minimizing discrepancies between observed and expected *summary statistics* (i.e., the modeled variables' means and covariance matrix). This is why another (older) name for an SEM is *covariance structure analysis* (when only trying to explain why variables are related to each other), or mean and covariance structure (MACS) analysis when means are also modeled.
+Estimation of a GLM involves minimizing discrepancies (differences) between observed ($\mathrm{y}$) and expected ($\hat{\mathrm{y}}$) *casewise* values (i.e., an individual subject's score on an outcome variable $y$). In contrast, estimation of a SEM involves minimizing discrepancies between observed and expected *summary statistics* (i.e., the modeled variables' means and covariance matrix). This is why another (older) name for an SEM is *covariance structure analysis* (when only trying to explain why variables are related to each other), or mean and covariance structure (MACS) analysis when means are also modeled.
 
 Summary statistics can be calculated from observed raw data, so raw data can be provided directly to SEM software for analysis. But if data are complete and come from a multivariate normal distribution, summary statistics can also be passed directly to the SEM software, which has advantages. Unlike raw data, summary statistics do not compromise the privacy of the research participants, so summary statistics can be reported in published empirical research. That allows readers (and students like you!) to have access to the same summary statistics to replicate the results or to fit a different model (e.g., that represents a competing theory). Thus, this chapter will show how to import both raw and summary data, as well as how to calculate summary statistics from raw data so that they can be reported along with results.
 
@@ -69,7 +69,7 @@ To report summary statistics of your modeled variables, they can be calculated u
 (N <- nrow(dat)) # complete-data sample size
 ```
 
-Covariances are explained in more detail in a later section, but it is sufficient here to understand that the covariance between variables $x$ and $y$ (i.e., $\sigma_{xy}$) is their unstandardized correlation coefficient ($r_{xy}$). That is, a correlation is a covariance between $z$ scores. Because correlations are easier to interpret than covariances, it is common to report the means, *SD*s, and correlations. Using the *SD*s, readers can rescale correlations to covariances in the orignal units of measurement (i.e., $\sigma_{xy} = \sigma_x \times \sigma_y \times r_{xy}$). The `cov2cor()` function can standardize a covariance matrix, or you can use the `cor()` function directly.
+Covariances are explained in more detail in a later section, but it is sufficient here to understand that the covariance between variables $x$ and $\mathrm{y}$ (i.e., $\sigma_{xy}$) is their unstandardized correlation coefficient ($r_{xy}$). That is, a correlation is a covariance between $z$ scores. Because correlations are easier to interpret than covariances, it is common to report the means, *SD*s, and correlations. Using the *SD*s, readers can rescale correlations to covariances in the orignal units of measurement (i.e., $\sigma_{xy} = \sigma_x \times \sigma_y \times r_{xy}$). The `cov2cor()` function can standardize a covariance matrix, or you can use the `cor()` function directly.
 
 ```{r SD+cor}
 (SD <- sapply(dat, sd))
@@ -128,7 +128,7 @@ covVals <- c( 1.010, -0.032,  4.355,   6.841,
 covVals
 ```
 
-If these values were saved as plain text, we could also read the data from a file using the `scan()` function, which returns a vector that contains the stored values in the file "values.txt".
+If these values were saved as plain text, we could also read the data from a file using the `scan()` function, which returns a vector that contains the stored values in the file `"values.txt"`.
 
 ```{r read S values, eval=FALSE}
 covVals <- scan("values.txt")
@@ -253,7 +253,7 @@ getCov(x = c(-0.023, 0.521, 0.068, 0.405, 0.110, 0.629),
        diagonal = FALSE, sds = SD, names = obsnames)
 ```
 
-If you are wondering whether the correlations appear in the correct order in the matrix, you can first leave the $SD$s out and check that the cells of the correlation matrix are in the correct order. If everything looks correct, then you can add the $SD$s. Covariance/correlation matrices are also symmetric, so it is also important to check that the lower triangle is a reflection of the upper triangle (i.e., Row-$x$ Column-$y$ of the matrix should contain the same value as Row-$y$ Column-$x$). The R function `isSymmetric()` can perform this check for you:
+If you are wondering whether the correlations appear in the correct order in the matrix, you can first leave the $SD$s out and check that the cells of the correlation matrix are in the correct order. If everything looks correct, then you can add the $SD$s. Covariance/correlation matrices are also symmetric, so it is also important to check that the lower triangle is a reflection of the upper triangle (i.e., Row-$x$ Column-$\mathrm{y}$ of the matrix should contain the same value as Row-$\mathrm{y}$ Column-$x$). The R function `isSymmetric()` can perform this check for you:
 
 ```{r isSymmetric}
 isSymmetric(S)
@@ -263,18 +263,18 @@ isSymmetric(S)
 
 ### Linear Regression Models
 
-An outcome $y$ is a linear combination (weighted sum) of predictors
+An outcome $\mathrm{y}$ is a linear combination (weighted sum) of predictors
 
--   Like a recipe for the outcome: How much of $x_1$ and $x_2$ do you need to recreate $y$?
+-   Like a recipe for the outcome: How much of $x_1$ and $x_2$ do you need to recreate $\mathrm{y}$?
 
 ```{=tex}
 \begin{align*}
-y_i &= \textcolor{blue}{\beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip}} &+& \textcolor{darkred}{\varepsilon_i} & \\
-    &= \textcolor{blue}{\beta_0 + \sum_{j=1}^p \beta_j x_{ij}} &+& \textcolor{darkred}{\varepsilon_i} &\sim \textcolor{darkred}{\mathcal{N}(0, \sigma)}
+y_i &= \color{blue}{\beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip}} &+& \color{darkred}{\varepsilon_i} & \\
+    &= \color{blue}{\beta_0 + \sum_{j=1}^p \beta_j x_{ij}} &+& \color{darkred}{\varepsilon_i} &\sim \color{darkred}{\mathcal{N}(0, \sigma)}
 \end{align*}
 ```
--   The \textcolor{blue}{deterministic component} of $y$ can be predicted or explained by $X$
--   The \textcolor{darkred}{stochastic component} of $y$ includes all other unmodeled effects (omitted variables) and sources of error
+-   The \color{blue}{deterministic component} of $\mathrm{y}$ can be predicted or explained by $\mathbf{X}$
+-   The \color{darkred}{stochastic component} of $\mathrm{y}$ includes all other unmodeled effects (omitted variables) and sources of error
 
 ### Matrix Notation
 
@@ -283,10 +283,10 @@ For subjects $i = 1, \dots, N$ in rows and predictors $j = 1, \dots, p$ in colum
 ```{=tex}
 \begin{equation*}
   \begin{bmatrix}
-    y_1 \\
-    y_2 \\
+    \mathrm{y}_1 \\
+    \mathrm{y}_2 \\
     \vdots \\
-    y_N
+    \mathrm{y}_N
   \end{bmatrix} =
   \begin{bmatrix}
       1 & x_{1,1} & x_{1,2} & \dots  & x_{1,p} \\
@@ -309,7 +309,7 @@ For subjects $i = 1, \dots, N$ in rows and predictors $j = 1, \dots, p$ in colum
   \end{bmatrix} 
 \end{equation*}
 ```
--   Shorthand: $\mathbf{y} = \mathbf{X} \mathbf{\beta} + \mathbf{\varepsilon}$
+-   Shorthand: $\mathrm{y} = \mathbf{X} \mathbf{\beta} + \mathbf{\varepsilon}$
 
 The **generalized linear model** (GLM) extends basic linear models by incorporating different
 
@@ -321,16 +321,16 @@ The **generalized linear model** (GLM) extends basic linear models by incorporat
 Regression models provide predictions of the outcome for any level(s) of the predictor(s)
 
 -   **Only the intercept** ($\beta_0$) is interpreted as a mean:
-    -   The **expected value** ($\hat{y}$) when each predictor $x=0$
--   Each slope ($\beta_j$) is interpreted as the **change** in $\hat{y}$ as $x_j$ increases
-    -   i.e., How does $y$ **covary** with $x_j$, given other $x$s?
+    -   The **expected value** ($\hat{\mathrm{y}}$) when each predictor $x=0$
+-   Each slope ($\beta_j$) is interpreted as the **change** in $\hat{\mathrm{y}}$ as $x_j$ increases
+    -   i.e., How does $\mathrm{y}$ **covary** with $x_j$, given other $x$s?
 
-Ordinary Least Squares (OLS) estimator of coefficients minimizes overall discrepancies between observations and predictions ($y - \hat{y}$):
+Ordinary Least Squares (OLS) estimator of coefficients minimizes overall discrepancies between observations and predictions ($\mathrm{y} - \hat{\mathrm{y}}$):
 
 $$\beta = (\mathbf{X}^{'} \mathbf{X})^{-1} \mathbf{X}^{'} \mathbf{y}$$
 
 -   Minimizing residual variance = maximizing $R^2$
--   $R$ = Cor($y, \hat{y}$)
+-   $R$ = Cor($\mathrm{y}, \hat{\mathrm{y}}$)
 
 ### Syntax Examples with Raw Data
 
@@ -482,11 +482,11 @@ Regression models include both mean-structure parameters (intercepts) and covari
 
 Much of SEM involves the analysis of mean and covariance structures (MACS).
 
--   OLS regression minimizes discrepancies between observed and predicted **casewise observations** of $y$
-    -   $y - \hat{y}$
+-   OLS regression minimizes discrepancies between observed and predicted **casewise observations** of $\mathrm{y}$
+    -   $\mathrm{y} - \hat{\mathrm{y}}$
 -   LS and ML estimators in SEM minimize discrepancies between observed and predicted **summary statistics**
-    -   mean vector: $\bar{y} - \widehat{\mu}$
-        -   $\bar{y}$ = observed sample means
+    -   mean vector: $\bar{\mathrm{y}} - \widehat{\mu}$
+        -   $\bar{\mathrm{y}}$ = observed sample means
         -   $\widehat{\mu}$ = expected/predicted/model-implied population means
     -   covariance matrix: $\mathbf{S} - \widehat{\Sigma}$
         -   $\mathbf{S}$ = observed sample (co)variances
@@ -500,13 +500,13 @@ Variance ($\sigma^2_y$) quantifies how individual scores vary
 
 -   the mean of squared deviations from $\bar{y}$
 
-$$\text{Var}(y) = \frac{\sum_{i=1}^N (y_i - \bar{y})^2}{N-1} = \frac{\sum_{i=1}^N (y_i - \bar{y})(y_i - \bar{y})}{N-1}$$
+$$\text{Var}(\mathrm{y}) = \frac{\sum_{i=1}^N (\mathrm{y}_i - \bar{\mathrm{y}})^2}{N-1} = \frac{\sum_{i=1}^N (\mathrm{y}_i - \bar{\mathrm{y}})(\mathrm{y}_i - \bar{\mathrm{y}})}{N-1}$$
 
-Covariance ($\sigma_{xy}$) quantifies how $x$ and $y$ are linearly related
+Covariance ($\sigma_{xy}$) quantifies how $x$ and $\mathrm{y}$ are linearly related
 
 -   *co*vary = vary together
 
-$$\text{Cov}(x,y) = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
+$$\text{Cov}(x,y) = \frac{\sum_{i=1}^N (x_i - \bar{x})(\mathrm{y}_i - \bar{\mathrm{y}})}{N-1}$$
 
 Difficult to interpret its absolute value
 
@@ -519,7 +519,7 @@ For $>2$ variables in a data set $\mathbf{Y}$, we can simultaneously calculate a
     -   $\mathbf{Y} - \bar{\mathbf{Y}}$
 2.  "Square" it by (pre)multiplying it by its transpose
 
-$$\Sigma = (\mathbf{Y} - \bar{\mathbf{Y}})^{'} (\mathbf{Y} - \bar{\mathbf{Y}})$$
+$$\mathbf\Sigma = (\mathbf{Y} - \bar{\mathbf{Y}})^{'} (\mathbf{Y} - \bar{\mathbf{Y}})$$
 
 Variances are on the diagonal of $\Sigma$, and each off-diagonal cell contains the covariance between the row-variable and the column-variable.
 
@@ -527,7 +527,7 @@ Variances are on the diagonal of $\Sigma$, and each off-diagonal cell contains t
 
 We can scale the covariance to provide familiar interpretations.
 
-**Slopes** are change in $y$ (or $x$) per unit $x$ (or $y$)
+**Slopes** are change in $\mathrm{y}$ (or $x$) per unit $x$ (or $\mathrm{y}$)
 
 -   divide by variance: $\beta_{yx} = \frac{\sigma_{xy}}{\sigma^2_x} = \frac{\sigma_{xy}}{\sigma_x \sigma_x}$ (or $\frac{\sigma_{xy}}{\sigma^2_y} = \frac{\sigma_{xy}}{\sigma_y \sigma_y}$)
 
@@ -546,7 +546,7 @@ This is how slopes can be standardized ($\beta^*$), which is a correlation when 
 ```
 ## Covariance Matrix
 
-With mean-centered predictors, $(\mathbf{X}^{'} \mathbf{X})^{-1}$ is their covariance matrix and $\mathbf{X}^{'} \mathbf{y}$ captures their covariances with the outcome
+With mean-centered predictors, $(\mathbf{X}^{'} \mathbf{X})^{-1}$ is their covariance matrix and $\mathbf{X}^{'} \mathrm{y}$ captures their covariances with the outcome
 
 ```{r cov matrix}
 n <- nrow(dat) - 1L
@@ -564,7 +564,7 @@ In simple regression (1 predictor), the slope is simply the covariance scaled by
     -   matrix-multiplication by inverse $\approx$ division
 -   $\mathbf{X}^{'} \mathbf{y} = \text{Cov}(x,y)$
 
-In multiple regression, the same formulas additionally account for covariances of $x$ and $y$ with covariates
+In multiple regression, the same formulas additionally account for covariances of $x$ and $\mathrm{y}$ with covariates
 
 ```{r slope from cov}
 cov(dat)["POS","ATT"] / var(dat$POS)
@@ -579,17 +579,17 @@ With no other predictors (an intercept-only model):
 
 ```{=tex}
 \begin{align*}
-y_i &= \beta_0 (1) + \varepsilon_i \\
-    &= \bar{y} + (y_i - \bar{y})
+\mathrm{y}_i &= \beta_0 (1) + \varepsilon_i \\
+    &= \bar{\mathrm{y}} + (\mathrm{y}_i - \bar{\mathrm{y}})
 \end{align*}
 ```
 -   the intercept is the mean
--   residuals are mean-centered $y$ (same variance)
+-   residuals are mean-centered $\mathrm{y}$ (same variance)
 
-OLS simplifies to the arithmetic mean formula: $\bar{y} = \frac{\Sigma y}{N}$
+OLS simplifies to the arithmetic mean formula: $\bar{\mathrm{y}} = \frac{\Sigma_y}{N}$
 
 -   $(\mathbf{X}^{'} \mathbf{X})^{-1} = \frac{1}{N}$
--   $\mathbf{X}^{'} \mathbf{y} = \sum y$
+-   $\mathbf{X}^{'} \mathrm{y} = \sum y$
 
 ### Intercepts and Means
 
@@ -607,7 +607,7 @@ mean(y)
 
 Regression models already illustrate how means are structured
 
--   A mean ($\bar{y}$) is an expected value under a particular condition ($\beta_0$ when $X=0$) plus predictors' means times their slopes: $\bar{y} = \beta_0 + \sum \beta_j \bar{x}_j$
+-   A mean ($\bar{\mathrm{y}}$) is an expected value under a particular condition ($\beta_0$ when $X=0$) plus predictors' means times their slopes: $\bar{\mathrm{y}} = \beta_0 + \sum \beta_j \bar{x}_j$
 
 Recall how often statistical procedures involve partitioning variance into components
 
