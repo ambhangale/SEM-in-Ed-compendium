@@ -767,22 +767,24 @@ Before proceeding, consider that growth factors are variables in a SEM.  They ca
 
 ### Time-Invariant (Level-2) Predictors
 
-Level-2 predictors vary between subjects, so they can explain between-subject differences in trajectories, which are represented by growth factors.  Although Duncan and Duncan (1996) had several such covariates, our example data include the following two subject-level predictors: `age` at the beginning of the study and `peer` encouragement to consume illicit substances.  Consider the MLM for growth, which extends Eq. \ref{eq:ri} by adding time as a predictor.  Below, we intersperse some equivalent SEM symbols \textcolor{blue}{in blue} as reminders of how the MLM and SEM frameworks map onto each other (Bauer, 2003; Curran, 2003; Singer & Willett, 2003, ch. 8).
+Level-2 predictors vary between subjects, so they can explain between-subject differences in trajectories, which are represented by growth factors.  Although Duncan and Duncan (1996) had several such covariates, our example data include the following two subject-level predictors: `age` at the beginning of the study and `peer` encouragement to consume illicit substances.  Consider the MLM for growth, which extends Eq. \ref{eq:ri} by adding time as a predictor.  Below, we intersperse some equivalent SEM symbols \color{blue}{in blue} as reminders of how the MLM and SEM frameworks map onto each other (Bauer, 2003; Curran, 2003; Singer & Willett, 2003, ch. 8).
 
 \begin{equation}
-\text{Level 1: } y_{i,t} &= \beta_{i,0} + \beta_{i,1} \text{Time}_{i,t} + \varepsilon_{i,t} = \textcolor{blue}{\Lambda \mathbf{\eta}_i + \varepsilon_i} 
-(\#eq:L1)
+\text{Level 1: } y_{i,t} = \beta_{i,0} + \beta_{i,1} \text{Time}_{i,t} + \varepsilon_{i,t} = \color{blue}{\Lambda \mathbf{\eta}_i + \varepsilon_i} 
+(\#eq:15-2)
 \end{equation}
+
 \begin{equation}
-  \text{Level 2: } \beta_{i,0} &= \textcolor{blue}{(\eta_0=)} \gamma_{0,0} + \gamma_{0,1} \text{Age}_i + \gamma_{0,2} \text{Peer-Influence}_i + u_{0,i} \label{eq:L2int+pred} \\
-  \beta_{i,1} &= \textcolor{blue}{(\eta_1=)} \gamma_{1,0} + \gamma_{1,1} \text{Age}_i + \gamma_{1,2} \text{Peer-Influence}_i + u_{1,i} 
-(\#eq:L2)
+  \text{Level 2: } \beta_{i,0} = \color{blue}{(\eta_0=)} \gamma_{0,0} + \gamma_{0,1} \text{Age}_i + \gamma_{0,2} \text{Peer-Influence}_i + u_{0,i} \label{eq:L2int+pred} \\
+  \beta_{i,1} = \color{blue}{(\eta_1=)} \gamma_{1,0} + \gamma_{1,1} \text{Age}_i + \gamma_{1,2} \text{Peer-Influence}_i + u_{1,i} 
+(\#eq:15-3)
 \end{equation}
+
 \begin{equation}
-\text{Combined: } y_{i,t} &= \gamma_{0,0} + \gamma_{0,1} \text{Age}_i + \gamma_{0,2} \text{Peer-Influence}_i + \gamma_{1,0} \text{Time}_{i,t} \label{eq:L2main} \\
-  &+ \gamma_{1,1} (\text{Age}_i \times \text{Time}_{i,t}) + \gamma_{1,2} (\text{Peer-Influence}_i \times \text{Time}_{i,t}) \label{eq:L2ints} \\
-  &+ u_{0,i} + u_{1,i} \text{Time}_{i,t} + \varepsilon_{i,t} \ \ \textcolor{gray}{\text{(joint residual)}} 
-(\#eq:Combined)
+\text{Combined: } y_{i,t} = \gamma_{0,0} + \gamma_{0,1} \text{Age}_i + \gamma_{0,2} \text{Peer-Influence}_i + \gamma_{1,0} \text{Time}_{i,t} \label{eq:L2main} \\
+  \gamma_{1,1} (\text{Age}_i \times \text{Time}_{i,t}) + \gamma_{1,2} (\text{Peer-Influence}_i \times \text{Time}_{i,t}) \label{eq:L2ints} \\
+  u_{0,i} + u_{1,i} \text{Time}_{i,t} + \varepsilon_{i,t} \ \ \color{gray}{\text{(joint residual)}} 
+(\#eq:15-4)
 \end{equation}
 
 The path diagram below depicts age and peer influence as observed variables that predict growth factors, conforming to how `?lavaan::model.syntax` works.  In the background, `lavaan` internally represents observed predictors as single-indicator factors.  Thus, age and peer influence are assigned $\eta_3$ and $\eta_4$, respectively, in the path diagram below. 

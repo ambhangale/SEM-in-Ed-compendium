@@ -23,12 +23,6 @@ The circles $ε_{LO}$ through $ε_{SK}$ at the bottom of Figure \@ref(fig:fig14-
 
 ## Symbolic explanation of a factor model
 Figure 2 is again a graphical representation of the factor model of the SAQ, but now also includes the Greek symbols that are associated with the common factors (‘$ξ$’, or ‘ksi’) and the directional effects between the common factors and observed indicator variables (‘$λ$’, or ‘lambda’). Using these symbols, the relationships between the observed indicator variables and the underlying common factor as presented in Figure 2 can be given by the following equations:
-$$
-\mathrm{x}_1 = \lambda_{11}\xi_1+\varepsilon_1, (\#eq:14-1) \\
-\mathrm{x}_2 = \lambda_{21}\xi_1+\varepsilon_2, (\#eq:14-2) \\
-\mathrm{x}_3 = \lambda_{31}\xi_1+\varepsilon_3, (\#eq:14-3) 
-$$
-
 
 \begin{align}
 \mathrm{x}_1 = \lambda_{11}\xi_1+\varepsilon_1, (\#eq:14-1) \\
@@ -42,10 +36,182 @@ $$
 \mathrm{x}_9 = \lambda_{93}\xi_3+\varepsilon_9, (\#eq:14-9) 
 \end{align}
 
-where $\mathrm{x}_1$ through $\mathrm{x}_9$ are the nine observed indicator variables, $\xi_1$, $\xi_2$ and $\xi_13 are the common factors Motivation, Satisfaction, and Self-Confidence respectively, and 1 through 9 are the residual factors of the associated x1 through x9. Parameters 11 through 93 are factor loadings. Using the equations, we can again see that each of the  observed variables is only affected by one of the common factors. Note also that each of the observed variables is affected by its associated residual factor. 
-
+where $\mathrm{x}_1$ through $\mathrm{x}_9$ are the nine observed indicator variables, $\xi_1$, $\xi_2$ and $\xi_3$ are the common factors Motivation, Satisfaction, and Self-Confidence respectively, and $\varepsilon_1$ through $\varepsilon_9$ are the residual factors of the associated $\mathrm{x}_1$ through $\mathrm{x}_9$. Parameters $\lambda_{11}$ through $\lambda_{93}$ are factor loadings. Using the equations, we can again see that each of the  observed variables is only affected by one of the common factors. Note also that each of the observed variables is affected by its associated residual factor. 
 
 ```{r label="fig14-2", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Factor Model of the School Attitudes Quetsionnaire" }
 
 knitr::include_graphics("images/Ch14_factor_model_lambdas.png")
 ```
+
+Instead of writing down the equation for each observed variable, the equations for the observed variables x1 through x9 can also be written in matrix form:
+
+```{=tex}
+\begin{equation}
+\mathbf{x} = \mathbf\Lambda \mathbf\xi + \mathbf{\varepsilon},
+(\#eq:14-10)
+\end{equation}
+```
+
+where $\mathbf{x}$ is a vector of all observed variables, $\mathbf\xi$ is a vector of all common factors, $\mathbf\varepsilon$ is a vector of all residual factors, and $\mathbf\Lambda$ is a matrix of factor loadings.
+$$
+\mathbf{x}=
+\begin{bmatrix}
+x_1\\x_2\\x_3\\x_4\\x_5\\x_6\\x_7\\x_8\\x_9
+\end{bmatrix},
+\mathbf\xi =
+\begin{bmatrix}
+\xi_1\\\xi_2\\\xi_3
+\end{bmatrix}
+\mathbf\varepsilon =
+\begin{bmatrix}
+\varepsilon_1\\\varepsilon_2\\\varepsilon_3\\\varepsilon_4\\\varepsilon_5\\\varepsilon_6\\\varepsilon_7\\\varepsilon_8\\\varepsilon_9
+\end{bmatrix}
+\mathbf\Lambda =
+\begin{bmatrix}
+\lambda_{11}&0&0\\\lambda_{21}&0&0\\\lambda_{31}&0&0\\0&\lambda_{42}&0\\0&\lambda_{52}&0\\0&\lambda_{62}&0\\0&0&\lambda_{73}\\0&0&\lambda_{83}\\0&0&\lambda_{93}
+\end{bmatrix}.
+$$
+
+Matrix $\mathbf\Lambda$ contains nine nonzero elements: $\lambda_{11}$ through $\lambda_{93}$. Like the regression slopes in the Beta matrix ($\mathbf{B}$), rows represent the outcomes (here, indicators) and columns represent the predictors (here, common factors).  So the factor loading $\lambda_{ij}$ represents the regression of variable $i$ on common factor $j$. When the factor model is specified such that variable $i$ does not load on common factor $j$, then that specific element $\lambda_{ij}$ is fixed to zero. Specifically, the pattern of matrix $\mathbf\Lambda$ specifies the measurement structure of the factor model. In our example, $\mathbf\Lambda$ contains many elements that are fixed to zero because each indicator variable loads only on one of three common factors. Such a pattern of factor loadings is sometimes referred to as ‘simple structure’.
+
+Substituting these matrices into Equation \@ref(eq:14-10) gives:
+
+```{=tex}
+\begin{equation}
+
+(\#eq:14-11)
+\end{equation}
+```
+
+and evaluation gives:
+
+```{=tex}
+\begin{equation}
+\begin{bmatrix}
+x_1\\x_2\\x_3\\x_4\\x_5\\x_6\\x_7\\x_8\\x_9
+\end{bmatrix} =
+\begin{bmatrix}
+\lambda_{11}\xi_1+\varepsilon_1\\
+\lambda_{21}\xi_1+\varepsilon_2\\
+\lambda_{31}\xi_1+\varepsilon_3\\
+\lambda_{42}\xi_2+\varepsilon_4\\
+\lambda_{52}\xi_2+\varepsilon_5\\
+\lambda_{62}\xi_2+\varepsilon_6\\
+\lambda_{73}\xi_3+\varepsilon_7\\
+\lambda_{83}\xi_3+\varepsilon_8\\
+\lambda_{93}\xi_3+\varepsilon_9
+\end{bmatrix}.
+(\#eq:14-12)
+\end{equation}
+```
+
+Here, we can see that the equations for variables $\mathrm{x}_1$ through $\mathrm{x}_9$ are the same as separate Equations \@ref(eq:14-01) through \@ref(eq:14-09). 
+
+We now have an expression for the scores on the observed indicator variables. However, in standard SEM we do not model the observed scores directly, but rather the variances and covariances of the observed scores. Therefore, we need to find an expression for the model-implied covariance matrix. Using Equation \@ref(eq:14-10) and some covariance algebra, we obtain the expression for the variances and covariances of $\mathbf{x}$, called $\mathbf\Sigma_{\text{model}} = \text{COV}(\mathbf{x},\mathbf{x})$:
+
+```{=tex}
+\begin{equation}
+\mathbf\Sigma_{\text{model}} = \mathbf\Lambda \mathbf\Phi \mathbf\Lambda^\text{T} + \mathbf\Theta,
+(\#eq:14-13)
+\end{equation}
+```
+
+where the variances and covariances of the common factors are represented by $\text{COV}(\mathbf\xi,\mathbf\xi) = \mathbf\Phi$, and the variances and covariances of the residual factors represented by $\text{COV}(\mathbf\varepsilon,\mathbf\varepsilon) = \mathbf\Theta$. The matrix $\mathbf\Lambda$ contains the common factor loadings, and $\mathbf\Lambda^\text{T}$ denotes the transpose of the matrix $\mathbf\Lambda$. Derivations of Equation \@ref(eq:14-13) are given in [Appendix 1](#appendix14) at the end of this Chapter. 
+
+Matrix $\mathbf\Phi$ is a symmetric matrix and contains the variances and covariances of the common factors $\mathbfξ$. For the model given in Equation \@ref(eq:14-12), matrix $\mathbf\Phi$ is:
+
+```{=tex}
+\begin{equation}
+\mathbf\Phi = 
+\begin{bmatrix}
+\phi_{11}\\\phi_{21}&\phi_{22}\\\phi_{31}&\phi_{32}&\phi_{33}\\
+\end{bmatrix},
+(\#eq:14-14)
+\end{equation}
+```
+
+where the diagonal elements $φ_{11}$, $φ_{22}$, $φ_{33}$ represent the variances of common factors $ξ_1$, $ξ_2$, and $ξ_3$, respectively, and the off-diagonal elements represent the covariances between the common factors, e.g., the element $φ_{21}$ represents the covariance between common factors $ξ_1$ and $ξ_2$. 
+
+Matrix $\mathbf\Theta$ is a symmetric matrix and contains the variances and covariances of the residual factors. It is often assumed that the residual factors do not covary with each other, so that matrix $\mathbf\Theta$ is a diagonal matrix with residual variances only. However, in some applications covariances between (some) residual factors are allowed, which are then specified by nonzero off-diagonal elements of matrix $\mathbf\Theta$. The $\mathbf\Theta$ matrix for our illustrative example from the Figure \@ref(fig:fig14-2) model is:
+
+```{=tex}
+\begin{equation}
+\mathbf\Theta = 
+\begin{bmatrix}
+\theta_{11}\\
+0&\theta_{22}\\
+0&0&\theta_{33}\\
+0&0&0&\theta_{44}\\
+0&0&0&0&\theta_{55}\\
+0&0&0&0&0&\theta_{66}\\
+0&0&0&0&0&0&\theta_{77}\\
+0&0&0&0&0&0&0&\theta_{88}\\
+0&0&0&0&0&0&0&0&\theta_{99}
+\end{bmatrix},
+(\#eq:14-15)
+\end{equation}
+```
+
+where $θ_{11}$ through $θ_{99}$ represent the variances of the residual factors of $\mathrm{x}_1$ through $\mathrm{x}_9$. These residual variances represent the variance of the associated indicator variable that is not represented by the underlying common factors. They can be interpreted as variance that is unexplained by the model. 
+
+In Figure 3, the $\mathbf\Phi$ and $\mathbf\Theta$ parameters representing common factor variances and covariances and residual factor variances and covariances are added to the graphical display. 
+
+```{r label="fig14-3", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Factor model of the School Attitudes Questionnaire including common factor and residual factor (co)variance parameters" }
+
+knitr::include_graphics("images/Ch14_SAQ_3.png")
+```
+
+Now that we have found the general expression for the variances and covariances as a function of model parameters of a factor model, we can evaluate Equation \@ref(eq:14-13) of our illustrative example. Substitution of the , , and  of our example yields:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Appendix. Derivations of Equation 14.13 {#appendix14}
+
+$$
+\mathbf\Sigma = \text{COV}(\mathbf{x},\mathbf{x}) \Leftrightarrow
+$$
+(substitute Equation \@ref(eq:14-13)
+
+$$
+\mathbf\Sigma = \text{COV}(\mathbf\Lambda \mathbf\xi + \mathbf\varepsilon, \mathbf\Lambda \mathbf\xi + \mathbf\varepsilon) \Leftrightarrow
+$$
+
+(decompose)
+
+$$
+\mathbf\Sigma = \text{COV}(\mathbf\Lambda \mathbf\xi,\mathbf\Lambda \mathbf\xi) +
+\text{COV}(\mathbf\Lambda \mathbf\xi,\mathbf\varepsilon)+
+\text{COV}(\mathbf\varepsilon,\mathbf\Lambda \mathbf\xi)+
+\text{COV}(\mathbf\varepsilon,\mathbf\varepsilon) \Leftrightarrow
+$$
+
+(residual factors are assumed not to covary with the common factors, $COV(\mathbf\xi,\mathbf\varepsilon) = 0.$)
+
+$$
+\mathbf\Sigma = \text{COV}(\mathbf\Lambda \mathbf\xi,\mathbf\Lambda \mathbf\xi) + 0 + 0 + \text{COV}(\mathbf\varepsilon,\mathbf\varepsilon) \Leftrightarrow
+$$
+(place constants outside brackets).
+
+$$
+\mathbf\Sigma = \mathbf\Lambda \text{COV}(\mathbf\xi,\mathbf\xi)\mathbf\Lambda^{\text{T}} +\text{COV}(\mathbf\varepsilon,\mathbf\varepsilon)\Leftrightarrow
+$$
+
+ (variances and covariances of $\mathbf\xi$ and $\mathbf\varepsilon$ are denoted $\mathbf\Phi$ and $\mathbf\Theta$)
+
+$$
+\mathbf\Sigma = \mathbf\Lambda \mathbf\Phi \mathbf\Lambda^\text{T} + \mathbf\Theta
+$$
