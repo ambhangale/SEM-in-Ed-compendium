@@ -5,9 +5,11 @@ Factor analysis is the second family of statistical analyses within the structur
 ## Empirical example of a factor model
 The School Attitudes Questionnaire (SAQ) of Smits & Vorst (1982) is a Dutch questionnaire that measures three components of educational attitudes:  motivation for school tasks, satisfaction with school life, and self-confidence about ones scholastic capabilities. Each component is measured with three scales:
 
--Motivation (for school tasks) is measured by: learning orientation, concentration on school work, and homework attitude;
--Satisfaction (with school life) is measured by: fun at school, acceptance by classmates, and relationship with teacher;
--Self-confidence (about ones scholastic capabilities) is measured by: self-expression, self-efficacy, and social skills.
+-__Motivation__ (for school tasks) is measured by: learning orientation, concentration on school work, and homework attitude;
+
+-__Satisfaction__ (with school life) is measured by: fun at school, acceptance by classmates, and relationship with teacher;
+
+-__Self-confidence__ (about ones scholastic capabilities) is measured by: self-expression, self-efficacy, and social skills.
 
 ## Conceptual explanation of a factor model
 Figure \@ref(fig:fig14-1) is a graphical display of the factor model of the SAQ. The nine squares represent the nine observed scale scores of the questionnaire: learning orientation (LO), concentration on school work (CO), homework attitude (HM), fun at school (FU), acceptance by classmates (AC), relationship with teacher (TE), self-expression (SE), self-efficacy (SF), and social skills (SK). In the context of factor models the observed variables are often referred to as indicator variables. The circles at the top are the common factors Motivation, Satisfaction and Self-confidence. The common factors are represented by circles to reflect the fact that they are latent factors, i.e., they are not directly observed. The relationships between the latent factors and the observed variables are represented by one-sided arrows (→) and are called factor loadings. In our example, the common factors Motivation, Satisfaction, and Self-confidence are each measured by three observed indicators. For example, Motivation is measured by the observed indicators LO, CO, and HM, as represented by the direct effects of the common factor on these three variables. There are no arrows pointing from the common factor Motivation to the other observed indicator variables. The common factor Motivation therefore represent everything that the associated observed indicator variables LO, CO, and HM have in common. Likewise, the common factor Satisfaction represents everything that the variables FU, AC, and TE have in common. The model that is represented in Figure 1 defines the measurement structure of the model (i.e., the relationships between the common factors and indicator variables) and is therefore called a measurement model. The underlying common factors in the measurement model are allowed to correlate, which is reflected by the double headed arrows (↔) between the common factors. The factor model thus provides a description of the relationships between the observed indicator variables using a limited number of underlying common factors.
@@ -15,4 +17,35 @@ Figure \@ref(fig:fig14-1) is a graphical display of the factor model of the SAQ.
 ```{r label="fig14-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Factor model of the School Attitudes Questionnaire" }
 
 knitr::include_graphics("images/Ch14_factor_model.png")
+```
+
+The circles $ε_{LO}$ through $ε_{SK}$ at the bottom of Figure \@ref(fig:fig14-1) are so-called residual factors. Just as with path analysis, residual factors in factor analysis are unobserved, latent factors that represent all factors that fall outside the model but may influence the states of the corresponding observed indicator variables. In the context of factor analysis, these residual factors can be considered ‘container variables’ that represent everything that is specific to the associated observed indicator variable (as opposed to everything that the observed indicator variables have in common, as represented by the common factors). The residual factors also reflect measurement error. The variance of a residual factor therefore partly consists of variance due to random error fluctuations (i.e., measurement error; unsystematic variance) and partly of specific variable variance (i.e., due to unmeasured causes; systematic variance). The directional effects from the residual factors to the corresponding observed indicator variables are accompanied by the scaling constant ‘1’ for reasons of identification (which is explained in more detail in section 14.4).
+
+## Symbolic explanation of a factor model
+Figure 2 is again a graphical representation of the factor model of the SAQ, but now also includes the Greek symbols that are associated with the common factors (‘$ξ$’, or ‘ksi’) and the directional effects between the common factors and observed indicator variables (‘$λ$’, or ‘lambda’). Using these symbols, the relationships between the observed indicator variables and the underlying common factor as presented in Figure 2 can be given by the following equations:
+$$
+\mathrm{x}_1 = \lambda_{11}\xi_1+\varepsilon_1, (\#eq:14-1) \\
+\mathrm{x}_2 = \lambda_{21}\xi_1+\varepsilon_2, (\#eq:14-2) \\
+\mathrm{x}_3 = \lambda_{31}\xi_1+\varepsilon_3, (\#eq:14-3) 
+$$
+
+
+\begin{align}
+\mathrm{x}_1 = \lambda_{11}\xi_1+\varepsilon_1, (\#eq:14-1) \\
+\mathrm{x}_2 = \lambda_{21}\xi_1+\varepsilon_2, (\#eq:14-2) \\
+\mathrm{x}_3 = \lambda_{31}\xi_1+\varepsilon_3, (\#eq:14-3) \\
+\mathrm{x}_4 = \lambda_{42}\xi_2+\varepsilon_4, (\#eq:14-4) \\
+\mathrm{x}_5 = \lambda_{52}\xi_2+\varepsilon_5, (\#eq:14-5) \\
+\mathrm{x}_6 = \lambda_{62}\xi_2+\varepsilon_6, (\#eq:14-6) \\
+\mathrm{x}_7 = \lambda_{73}\xi_3+\varepsilon_7, (\#eq:14-7) \\
+\mathrm{x}_8 = \lambda_{83}\xi_3+\varepsilon_8, (\#eq:14-8) \\
+\mathrm{x}_9 = \lambda_{93}\xi_3+\varepsilon_9, (\#eq:14-9) 
+\end{align}
+
+where $\mathrm{x}_1$ through $\mathrm{x}_9$ are the nine observed indicator variables, $\xi_1$, $\xi_2$ and $\xi_13 are the common factors Motivation, Satisfaction, and Self-Confidence respectively, and 1 through 9 are the residual factors of the associated x1 through x9. Parameters 11 through 93 are factor loadings. Using the equations, we can again see that each of the  observed variables is only affected by one of the common factors. Note also that each of the observed variables is affected by its associated residual factor. 
+
+
+```{r label="fig14-2", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Factor Model of the School Attitudes Quetsionnaire" }
+
+knitr::include_graphics("images/Ch14_factor_model_lambdas.png")
 ```

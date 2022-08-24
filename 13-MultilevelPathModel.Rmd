@@ -59,6 +59,7 @@ knitr::include_graphics("figure_multilevelpathmodel.jpg")
 In script `r Chap.nr`.1, we fit saturated models to Level 1 and Level 2, by letting all variables covary with each other at both levels. The means of the variables will be estimated only at Level 2 because Level-1 means are zero by definition.  That is, Level-1 components of variables represent individual deviations from the cluster mean, and cluster-mean-centered variables have means of zero (both within clusters and across clusters). Fitting a saturated model will give us estimates of the within-level and between-level covariance matrices. The variance estimates from this model can be used to calculate ICCs. Fitting this model thus serves as a first step to obtain information about the variance distribution across levels.
 
 ```{r label='script13-1'}
+### Script 13.1 ###
 library(lavaan)
 data <- read.table("GaloComplete.dat", header = TRUE)
 head(data)
@@ -110,6 +111,7 @@ In script `r Chap.nr`.2, we fit the two-level path model as depicted in Figure `
 
 
 ```{r label='script13-2'}
+### Script 13.2 ###
 model2 <- '
          level: 1 
             advice ~ galo  
