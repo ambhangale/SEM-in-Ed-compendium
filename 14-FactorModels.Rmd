@@ -1,0 +1,18 @@
+# Factor Models {#Ch14}
+
+Factor analysis is the second family of statistical analyses within the structural equation modeling (SEM) framework. Factor analysis is used to describe the dependencies between a set of observed variables, by using a limited number of so-called underlying or common factors. These common factors are not directly observed (i.e., they are latent factors) and represent everything that the associated observed variables have in common. In this chapter we first introduce an empirical example that will be used to explain factor models in this and subsequent chapters, then we give a general explanation of the factor model—both conceptually and through symbols, and explain how to fit the factor model using `lavaan`.
+ 
+## Empirical example of a factor model
+The School Attitudes Questionnaire (SAQ) of Smits & Vorst (1982) is a Dutch questionnaire that measures three components of educational attitudes:  motivation for school tasks, satisfaction with school life, and self-confidence about ones scholastic capabilities. Each component is measured with three scales:
+
+-Motivation (for school tasks) is measured by: learning orientation, concentration on school work, and homework attitude;
+-Satisfaction (with school life) is measured by: fun at school, acceptance by classmates, and relationship with teacher;
+-Self-confidence (about ones scholastic capabilities) is measured by: self-expression, self-efficacy, and social skills.
+
+## Conceptual explanation of a factor model
+Figure \@ref(fig:fig14-1) is a graphical display of the factor model of the SAQ. The nine squares represent the nine observed scale scores of the questionnaire: learning orientation (LO), concentration on school work (CO), homework attitude (HM), fun at school (FU), acceptance by classmates (AC), relationship with teacher (TE), self-expression (SE), self-efficacy (SF), and social skills (SK). In the context of factor models the observed variables are often referred to as indicator variables. The circles at the top are the common factors Motivation, Satisfaction and Self-confidence. The common factors are represented by circles to reflect the fact that they are latent factors, i.e., they are not directly observed. The relationships between the latent factors and the observed variables are represented by one-sided arrows (→) and are called factor loadings. In our example, the common factors Motivation, Satisfaction, and Self-confidence are each measured by three observed indicators. For example, Motivation is measured by the observed indicators LO, CO, and HM, as represented by the direct effects of the common factor on these three variables. There are no arrows pointing from the common factor Motivation to the other observed indicator variables. The common factor Motivation therefore represent everything that the associated observed indicator variables LO, CO, and HM have in common. Likewise, the common factor Satisfaction represents everything that the variables FU, AC, and TE have in common. The model that is represented in Figure 1 defines the measurement structure of the model (i.e., the relationships between the common factors and indicator variables) and is therefore called a measurement model. The underlying common factors in the measurement model are allowed to correlate, which is reflected by the double headed arrows (↔) between the common factors. The factor model thus provides a description of the relationships between the observed indicator variables using a limited number of underlying common factors.
+
+```{r label="fig14-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Factor model of the School Attitudes Questionnaire" }
+
+knitr::include_graphics("images/Ch14_factor_model.png")
+```
