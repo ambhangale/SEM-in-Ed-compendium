@@ -45,9 +45,9 @@ $χ^2 = 7.429$, with $df = 2$, and associated $p$ value $= .024$.
 Thus, the $χ^2$ value is significant (at $α = .05$), so we reject the null hypothesis of exact fit. 
 
 ### Alternative basis for calculating the test statistic when analysing raw data 
-Equation \@ref(eq:11-01) shows how to calculate $χ^2$ from summary statistics (i.e., observed and model-implied covariance matrices, and optionally mean vectors).  This equation only applies when analysing complete data. In practice, data are often partially observed. When some data are missing, you can use full-information maximum likelihood (FIML) estimation (review the last section of [Chapter 9](#ch9) for details).
+Equation \@ref(eq:11-01) shows how to calculate $χ^2$ from summary statistics (i.e., observed and model-implied covariance matrices, and optionally mean vectors).  This equation only applies when analysing complete data. In practice, data are often partially observed. When some data are missing, you can use full-information maximum likelihood (FIML) estimation (review the last section of [Chapter 10](#ch10-7) for details).
 
-We use a the log-likelihood ($\ell$)^[Recall that the log-likelihood $\ell$ for a sample is the sum of all the individual log-likelihoods ($ℓ = Σℓ_i$).]  of the partially observed sample data, given the model parameters, to calculate the $χ^2$ test statistic for the model.  We can also use $\ell$ with complete data, in which case the $χ^2$ value is the same as it would be using equation \@ref(eq:11-01).  Although we discuss model comparison more thoroughly later in the chapter, calculating $χ^2$ using $\ell$ implicitly involves a model comparison via a likelihood-ratio test (LRT; review the last section of [Chapter 9](#ch9) for details):
+We use a the log-likelihood ($\ell$)^[Recall that the log-likelihood $\ell$ for a sample is the sum of all the individual log-likelihoods ($ℓ = Σℓ_i$).]  of the partially observed sample data, given the model parameters, to calculate the $χ^2$ test statistic for the model.  We can also use $\ell$ with complete data, in which case the $χ^2$ value is the same as it would be using equation \@ref(eq:11-01).  Although we discuss model comparison more thoroughly later in the chapter, calculating $χ^2$ using $\ell$ implicitly involves a model comparison via a likelihood-ratio test (LRT; review the last section of [Chapter 10](#ch10-6) for details):
 
 ```{=tex}
 \begin{equation}
@@ -416,7 +416,7 @@ DF <- AOV[["Df diff"]][2]
 Although the calculation of `cc` will not be affected by sample size or number of variables (because both models must be fit to the same sample people and variables), the number of factors $k$ may differ between nested models.  In this case, it is probably best to choose the larger $k$ between the two models, because the model with fewer factors is statistically equivalent to the model with more factors if the factor variances were constrained to equality and factor correlations were constrained to 1 (i.e., if the factors are the same variable).  This typically works in our favour because choosing the larger $k$ will also decrease the $χ^2$ more, so the model will appear to fit better.
 
 
-##References
+## References
 Akaike, H. (1987). Factor analysis and AIC. *Psychometrika, 52*, 317–332. doi:10.1007/BF02294359
 
 Barret, P. (2007). Structural equation modelling: Adjudging model fit. *Personality and Individual Differences, 42*(5), 815–824. doi:10.1016/j.paid.2006.09.018
