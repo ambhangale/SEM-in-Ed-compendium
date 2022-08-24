@@ -259,8 +259,230 @@ $$
 $$
 
 ### Δχ2 as a likelihood ratio test
-Recall from equation 11.03 that a model’s χ2 statistic is the LRT from equation 9.06, treating the target model as Model A and the saturated model as Model B.  The Δχ2 test is also a log-likelihood ratio, so equation 11.15 could equivalently be calculated using equation 11.03.  The reason the two equations yield the same result is that each model’s χ2 statistic is calculated using the same saturated model’s log-likelihood (ℓS), so they cancel out. Labelling the saturated model as Model S instead of B in equation 11.03, the LRT for two nested hypothetical Models A (in green) and B (in blue) could be calculated using each of their LRT statistics:
+Recall from equation 11.03 that a model’s χ2 statistic is the LRT from equation 9.06, treating the target model as Model A and the saturated model as Model B.  The Δχ2 test is also a log-likelihood ratio, so equation 11.15 could equivalently be calculated using equation 11.03.  The reason the two equations yield the same result is that each model’s χ2 statistic is calculated using the same saturated model’s log-likelihood (ℓS), so they cancel out. Labelling the saturated model as Model S instead of B in equation 11.03, the LRT for two nested hypothetical Models A (in \color{green}{green}) and B (in \color{blue}{blue}) could be calculated using each of their LRT statistics:
 
-\begin{align}
-\Delta\chi^2
-\end{align}
+\begin{align*}
+\Delta\chi^2 & =  \color{green}{[-2\ell_A-(-2\ell_S )]}-\color{blue}{[-2\ell_B-(-2\ell_S )]} \\
+& =\color{green}{-2\ell_A}+\color{red}{2\ell_S}+\color{blue}{2\ell_B}-\color{red}{2\ell_S} \\
+& =\color{green}{-2\ell_A}+\color{blue}{2\ell_B} \\
+& =\color{green}{-2\ell_A}-\color{blue}{(-2\ell_B )}
+\end{align*}
+
+### Describing differences in fit
+The $χ^2$ difference test applied to nested models has essentially the same strengths and weaknesses as the $χ^2$ test applied to any single model; namely, trivial differences can be detected as statistically significant in large samples.  Thus, a researcher may supplement the significance test for difference in fit by reporting a difference in a descriptive fit index.  In the case of RMSEA, equation \@ref(eq:11-08) can actually be applied to $Δχ^2$ and $Δdf$ instead of $χ^2$ and $df$.  This was proposed as the Root Deterioration per Restriction (RDR), but it never became popular because it behaved so erratically.  Recall that the RMSEA itself performs very poorly when either $N$ or $df$ are small, which explains why RDR performs so poorly: rarely will two models be compared that have a very large difference in $df$ ($Δdf$).
+
+Instead, $Δ\text{CFI}$ has become very popular, particularly when testing measurement equivalence across groups or occasions (we will discuss this later in the course).  However, these fit indices have unknown sampling distributions, they should not be used as test statistics^[Unless an empirical sampling distribution can be derived, for example, using bootstrapping, permutation, or Monte Carlo simulation.], but rather as a kind of effect size that would typically accompany a significance test.  Analogously, when using a t test to compare means, small differences might be statistically significant in large samples, so Cohen’s $d$ is used to indicate whether the observed difference is of practical importance.  Unfortunately, there are few guidelines for what would constitute a meaningful difference in CFIs between models, and the few proposed rules-of-thumb have been made for very specific situations (e.g., measurement invariance).
+
+Incremental fit indices in general have the advantage of being able to compare models regardless of whether they are nested (Bentler & Bonett, 1980).  This is because all possible competing models are nested within the same saturated model, by definition.  So as long as a single null model is specified *that is nested within each candidate model*^[The default independence model might not be nested within each competing model (Widamin & Thompson, 2003).],  calculating the CFI for each candidate models allows us to see where each competing model lies on the same continuum between poor and perfect fit.  Supposing we have three candidate models, the one with the largest CFI is the one furthest to the left in Figure \@ref(fig:fig11-3) (i.e., Target Model 3):
+
+```{r label="fig11-3", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Placing competing models on the same continuum." }
+
+knitr::include_graphics("images/Ch11_competing_models.png")
+```
+
+Because CFI and TLI implicitly account for model complexity by using the model’s $df$ to adjust the model’s fit (using the noncentrality parameter and the $χ^2$-to-$df$ ratio, respectively), the continuum in Figure \@ref(fig:fig11-3) represents complexity-adjusted fit.  
+
+The model with the lowest AIC (or BIC) could also be selected as the model that best balances fit and parsimony.  This model-selection procedure has typically been used in place of a $χ^2$ difference test when the models are not nested; however, this procedure does not take sampling variability into account, so it is not truly a test of (comparative) model fit.  Furthermore, simply choosing the lowest AIC suffers the same limitation as choosing the highest CFI—it is unclear what constitutes a meaningful difference in values between two models.
+
+### Testing differences in fit between non-nested models
+Test statistics have also been developed for non-nested models (Merkle, You, & Preacher, 2016).  If each individual log-likelihood $\ell_i$ is calculated under Model A and under Model B, then the difference between individual $i$’s log-likelihoods ($Δℓ_i$) reveals which model most likely “generated” this person’s observed data.  A weighted sum of these $Δℓ_i$ is an asymptotically normally distributed statistic, with a $μ = 0$ if the null hypothesis of equal fit is true, so it can be used to conduct a $z$ test.  A significant test indicates that Model A fits better than Model B (if the statistic is positive) or vice versa (if the statistic is negative); otherwise there is not enough evidence to prefer one model over another. This is called the Vuong test after its developer (Vuong, 1989, as cited in Merkle et al., 2016).
+
+We can also use the variability of $Δℓ_i$ to calculate a 95% CI (assuming $α = .05$) for the difference between two model’s AICs (or BICs).  This provides a test of fit that takes model parsimony into account. Assuming the null hypothesis of equal complexity-adjusted fit is true, $Δ\text{AIC}$ (or $Δ\text{BIC}$) is zero in the population.  Testing this null hypothesis is as simple as checking whether the 95% CI for $Δ\text{AIC}$ (or $Δ\text{BIC}$ includes zero.  If so, you cannot reject the null hypothesis.  Otherwise, the model with the lower AIC (or BIC) should be preferred.
+
+Because the Vuong test and CIs for information criteria area calculated from individual $Δℓ_i$, they can only be calculated when using MLE to fit the model to complete data that are multivariate normally distributed.  Furthermore, they cannot be used if you only have access to summary statistics (like most of our teaching examples), which is rarely a problem in practice.  Although it is theoretically possible to extend the Vuong test to least-squares estimators (e.g., WLS for categorical outcomes), this extension has yet to be developed (Merkle et al., 2016).  Because these tests have only recently begun being investigated in an SEM framework, more research is needed to see how robust they are when data deviate from multivariate normality (i.e., when $ℓ_i$ are calculated using equation \@ref(eq:9-05) even though data do not follow the distribution described by \@ref(eq:9-04)). 
+
+## Request fit measures in `lavaan`
+The `summary()` function has an argument to request information about model fit from the lavaan output:
+
+```
+summary(AWmodelOut, fit.measures = TRUE)
+```
+
+Notice that `lavaan` will print the $χ^2$ test for both the target model and the default baseline model (i.e., the independence model), as well as RMSEA (including a 90% CI), CFI and TLI, SRMR (and WRMR when outcomes are categorical), and information criteria when using MLE (specifically, AIC, BIC, and SABIC).  Several other fit indices are available from two different functions.  The first is `lavaan`’s function `fitMeasures()`.  The default is to print all available fit measures:
+
+```
+fitMeasures(AWmodelOut)
+```
+
+But there are too many to easily read.  It is better to request only the fit measures you want to see (e.g., when you want to calculate changes such as $Δ\text{CFI}$):
+
+```
+myFitIndices <- c("chisq","df","pvalue","cfi","aic")
+fitMeasures(AWmodelOut, fit.measures = myFitIndices)
+```
+
+The function `moreFitIndices()` is available in the `semTools` package, and it provides a few other options, such as AICc (labelled "`aic.smallN`"): 
+
+```
+library(semTools)
+moreFitIndices(AWmodelOut, fit.measures = "aic.smallN")
+```
+
+### Compare fit of lavaan models
+Consider the difference in fit between the original path model for the development of child anxiety from [Chapter 3](#Ch3) and the less constrained model with the additional direct effect from Parent Anxiety to Child Anxiety from [Chapter 8](#Ch8). You can use the `anova()` function, providing both models as arguments. The order of models does not matter because `lavaan` will sort them in order of increasing df automatically.
+
+```
+anova(AWmodelOut, AWmodel2Out) 
+```
+
+The function `lavTestLRT()` is used the same way as `anova()`, but it has some more options (mainly, what adjustment to use if data are not normally distributed).  In fact the anova() function merely calls `lavTestLRT()` with all its default arguments.  Using either function, the output would be:
+
+```
+Chi Square Difference Test
+            Df    AIC    BIC  Chisq Chisq diff Df diff Pr(>Chisq)   
+AWmodel2Out  1 2138.5 2159.6 0.3972                                 
+AWmodelOut   2 2143.5 2162.3 7.3327     6.9355       1    0.00845 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+```
+
+Notice that the actual $Δχ^2$ (6.9355) is very similar to the expected $Δχ^2$ indicated by the modification index for this additional parameter (6.716) in [Chapter 8](#Ch8), Table 2.  Also, the AIC and BIC for each model are displayed.  The `anova()` function is not suitable for comparing non-nested models, so if your models are not nested, you can simply use a function to request AIC or BIC:
+
+```
+AIC(AWmodelOut, AWmodel2Out) 
+BIC(AWmodelOut, AWmodel2Out) 
+```
+
+Note that these functions output a column labeled `df`, which is actually the number of free model parameters, not the model’s $df$.  In order to actually test differences in fit of non-nested models, use functions that are available in the R package `nonnest2`.  Suppose that in our examples, we had actually fit our models to raw data.  The following functions would allow us to run the Vuong test (analogous to $Δχ^2$ test for non-nested models):
+
+```
+library(nonnest2)
+vuongtest(AWmodelOut, AWmodel2Out)
+```
+
+Or we could test differences in parsimony-adjusted fit using CIs for $Δ\text{AIC}$ or $Δ\text{BIC}$:
+
+```
+icci(AWmodelOut, AWmodel2Out, conf.level = 0.95)
+```
+
+CIs for both $Δ\text{AIC}$ and $Δ\text{BIC}$ would be provided, but you should only use one or the other, based upon whether you can assume one of the models is “correct” (BIC) or whether you merely wish to find the most generalizable model (AIC).  Note, again, that these tests require analysing the raw data, not summary statistics.  
+
+### Fit measures in lavaan when adjusting for non-normal data
+When correcting for non-normality, `lavTestLRT()` and `anova()` automatically calculate the correct adjusted $Δχ^2$ test.  However, the default method (`"satorra.bentler.2001"`) can sometimes yield a negative test statistic, in which case it is impossible to compute a $p$ value.  If this happens, you can use a version of the test that will always yield a positive scaled test statistic:
+
+```
+lavTestLRT(AWmodelOut, AWmodel2Out, method = "satorra.bentler.2010") 
+```
+
+When correcting for non-normality, the `summary(..., fit.measures = TRUE)` output includes a second column labelled “`Robust`” that contains the scaled $χ^2$ test results, as well as robust versions of RMSEA, CFI, and TLI that incorporate the scaling factor to adjust for non-normality.  The other fit measures (AIC, BIC, and SRMR) are unaffected by the adjustment, so those values are identical in the two columns.  The left column of unadjusted measures can be ignored, but it is included for the sake of comparison.
+
+However, when you use the `fitMeasures()` function, you will see not only the unadjusted fit measures, but also two different copies of any measure based on the $χ^2$ statistic.  The first set are labelled with a suffix “`.scaled`”, which corresponds to the corrected $χ^2$ statistic. For RMSEA, TLI, and CFI (which are based on $χ^2$), “.scaled” indicates that they were calculated naïvely by simply plugging the scaled $χ^2$ statistic ("`chisq.scaled`") into equations \@ref(eq:11-08), \@ref(eq:11-09), and \@ref(eq:11-10), respectively.  However, using those formulas with simple substitutions would yield fit measures that do not, on average, equal their population-level counterparts (i.e., if models were fit to $\mathbfΣ_{\text{population}}$ and adjusted for non-normality using population information).  Instead, special formulas were developed by Brosseau-Liard and colleagues (2012, 2014) to yield consistent sample values of these three fit indices.  These are labelled with a suffix “`.robust`”, they are the ones displayed in the `summary()` output, and they are the ones you should request from `fitMeasures()`: 
+
+```
+myFitIndices <- c("chisq.scaled","df","pvalue.scaled","cfi.robust","aic")
+fitMeasures(AWmodelOut, fit.measures = myFitIndices)
+```
+
+Likewise, the output of `modificationindices()` will contain a column “`mi.scaled`”.  If you are comparing MIs to a critical value, this is the column you should pay attention to.
+
+### Test statistic adjusted for small sample size
+One last issue is that the $(Δ)χ^2$ statistic is only asymptotically (i.e., as $N \rightarrow ∞$) distributed as a $χ^2$ random variable.  In finite samples, it is approximately distributed as a $χ^2$ random variable, but in small samples the approximation is poor.  In this case, your p values will be incorrect because the $(Δ)χ^2$ statistic will be too big, suggesting that the model fits worse than it actually does.  It is simple to correct for this by multiplying the observed $(Δ)χ^2$ statistic by a correction factor $c$^[Replace the $N$ in the denominator with $N − 1$ when using Wishart likelihood for modelling covariance structure only.]:
+
+```{=tex}
+\begin{equation}
+c=1-\frac{2p+4k+5}{6N} ,
+(\#eq:11-18)
+\end{equation}
+```
+
+where $p$ is the number of observed variables, $k$ is the number of factors, and $N$ is the sample size (Nevitt & Hancock, 2004).  Note that in a path model, $k = 0$, reducing the numerator to $2p + 5$.  The multiplicative correction will typically be ≤ 1, so it will usually make $χ^2$ smaller, reducing the inflated Type I error rate in small samples.  This correction will be small whenever the denominator in \@ref(eq:11-18) ($N$) is large, although how large depends on the size of the model.  For example, models with more variables ($p$ and $k$) have a larger numerator, requiring larger $N$ to overcome the inflation of $χ^2$. 
+
+When data are normal, you simply multiply the $χ^2$ statistic by $c$ and calculate a $p$ value for the corrected statistic:
+
+```
+N <- lavInspect(fit, "ntotal") # subtract 1 if likelihood = "wishart"
+P <- length(lavNames(AWmodelOut, type = "ov")) # count observed variables
+K <- length(lavNames(AWmodelOut, type = "lv")) # count latent factors
+cc <- 1 - ((2*P + 4*K + 5) / (6*N)) # correction factor
+(chi <- fitMeasures(AWmodelOut, "chisq"))
+(DF <- fitMeasures(AWmodelOut, "df"))
+(pValue <- pchisq(chi*cc, DF, lower.tail = FALSE))
+```
+
+When adjusting for non-normality (in which case the model must be fit to raw data instead of summary statistics), you simply multiply the scaled $χ^2$ statistic by $c$ and calculate a $p$ value for the corrected statistic.
+
+```
+chi <- fitMeasures(AWmodelOut, "chisq.scaled") # nothing else changes
+```
+
+When correcting the $Δχ^2$ statistic for model comparison, you can extract the $Δχ^2$ statistic from the `anova()` output, which will already be the scaled $Δχ^2$ when adjusting for non-normality.  The $Δdf$ can also be extracted from the output.
+```
+AOV <- anova(AWmodelOut, AWmodel2Out)
+chi <- AOV[["Chisq diff"]][2]
+DF <- AOV[["Df diff"]][2]
+```
+
+Although the calculation of `cc` will not be affected by sample size or number of variables (because both models must be fit to the same sample people and variables), the number of factors $k$ may differ between nested models.  In this case, it is probably best to choose the larger $k$ between the two models, because the model with fewer factors is statistically equivalent to the model with more factors if the factor variances were constrained to equality and factor correlations were constrained to 1 (i.e., if the factors are the same variable).  This typically works in our favour because choosing the larger $k$ will also decrease the $χ^2$ more, so the model will appear to fit better.
+
+
+##References
+Akaike, H. (1987). Factor analysis and AIC. *Psychometrika, 52*, 317–332. doi:10.1007/BF02294359
+
+Barret, P. (2007). Structural equation modelling: Adjudging model fit. *Personality and Individual Differences, 42*(5), 815–824. doi:10.1016/j.paid.2006.09.018
+
+Bentler, P. M. (1990). Comparative fit indexes in structural models. *Psychological Bulletin, 107*(2), 238–246. doi:10.1037/0033-2909.107.2.238
+
+Bentler, P. M. (1995). *EQS structural equations program manual*. Encino, CA: Multivariate Software.
+
+Bentler, P. M., & Bonett, D. G. (1980). Significance tests and goodness of fit in the analysis of covariance structures. *Psychological Bulletin, 88*(3), 588–606. doi:10.1037/0033-2909.88.3.588
+
+Bollen, K. A. (1989). *Structural equations with latent variables.* Hoboken, NJ: Wiley
+
+Bollen, K. A. (1990). Overall fit in covariance structure models: two types of sample size effects. *Psychological Bulletin, 107*(2), 256–259. doi:10.1037/0033-2909.107.2.256
+
+Brosseau-Liard, P. E., Savalei, V., & Li, L. (2012). An investigation of the sample performance of two nonnormality corrections for RMSEA. *Multivariate Behavioral Research, 47*(6), 904–930. doi:10.1080/00273171.2012.715252
+
+Brosseau-Liard, P. E., & Savalei, V. (2014). Adjusting incremental fit indices for nonnormality. *Multivariate Behavioral Research, 49*(5), 460–470. doi:10.1080/00273171.2014.933697
+
+Browne, M. W., & Cudeck, R. (1989). Single sample cross-validation indices for covariance structures. *Multivariate Behavioral Research, 24*(4), 445–455. doi:10.1207/s15327906mbr2404_4
+
+Browne, M. W., & Cudeck, R. (1992). Alternative ways of assessing model fit. *Sociological Methods & Research, 21*, 230–258. doi:10.1177/0049124192021002005
+
+Burnham, K., & Anderson, D. (2003). *Model selection and multimodel inference: A practical-theoretic approach.* New York, NY: Springer-Verlag.
+
+Cudeck, R., & Henly, S. J. (1991). Model selection in covariance structures analysis and the "problem" of sample size: A clarification. *Psychological Bulletin, 109*(3), 512–519. doi:10.1037/0033-2909.109.3.512
+
+Hayduk, L., Cummings, G., Boada, K., Pazderka-Robinson, H., & Boulianne, S. (2007). Testing! testing! one, two, three—Testing the theory in structural equation models! *Personality and Individual Differences, 42*, 841–850. doi:10.1016/j.paid.2006.10.001
+
+Hu, L.-t., & Bentler, P. M. (1998). Fit indices in covariance structure modeling: Sensitivity to underparameterized model misspecification. *Psychological Methods, 3*(4), 424–453. doi:10.1037/1082-989X.3.4.424
+
+Hu, L.-t., & Bentler, P. M. (1999). Cutoff criteria for fit indexes in covariance structure analysis: Conventional criteria versus new alternatives. *Structural Equation Modeling, 6*(1), 1–55. doi:10.1080/10705519909540118
+
+Jöreskog, K. G., & Sörbom, D. (1981). *LISREL V: Analysis of linear structural relationships by maximum likelihood*. Chicago: National Educational Resources.
+
+Kenny, D. A., Kaniskan, B., & McCoach, D. B. (2015). The performance of RMSEA in models with small degrees of freedom. *Sociological Methods & Research, 44*(3), 486–507. doi:10.1177/0049124114543236
+
+MacCallum, R. C., Browne, M. W., & Sugawara, H. M. (1996). Power analysis and determination of sample size for covariance structure modeling. *Psychological Methods, 1*(2), 130–149. doi:10.1037//1082-989X.1.2.130
+
+Marsh, H. W., Balla, J. R., & McDonald, R. P. (1988). Goodness of fit indexes in confirmatory factor analysis: The effect of sample size. *Psychological Bulletin, 103*, 391–410. doi:10.1037/0033-2909.103.3.391
+
+Marsh, H. W., Hau, K.-T., & Wen, Z. (2004). In search of golden rules: Comment on hypothesis-testing approaches to setting cutoff values for fit indexes and dangers in overgeneralizing Hu & Bentlers’ (1999) findings. *Structural Equation Modeling, 11*, 320–341. doi:10.1207/s15328007sem1103_2
+
+Merkle, E. C., You, D., & Preacher, K. J. (2016). Testing nonnested structural equation models. *Psychological Methods, 21*(2), 151–163. Advance online publication. doi:10.1037/met0000038
+
+Millsap, R. E. (2007). Structural equation modeling made difficult. *Personality and Individual Differences, 42*(5), 875–881. doi:10.1016/j.paid.2006.09.021
+
+Nevitt, J., & Hancock, G. R. (2004). Evaluating small sample approaches for model test statistics in structural equation modelling. *Multivariate Behavioral Research, 39*(3) 439–478.  doi:10.1207/S15327906MBR3903_3
+
+Pornprasertmanit, S., Wu, W., & Little, T. D. (2013). A Monte Carlo approach for nested model comparisons in structural equation modeling. In R. E. Millsap, L. A. van der Ark, D. M. Bolt, & C. M. Woods (Eds.), *New developments in quantitative psychology* (Vol. 66, pp. 187–197). New York, NY: Springer. doi:10.1007/978-1-4614-9348-8_12
+
+Raftery, A. E. (1986). Choosing models for cross-classification. *American Sociological Review, 51*(1), 145–146.
+
+Raftery, A. E. (1995). Bayesian model selection in social research. *Sociological Methodology, 25*, 111–163.
+
+Schermelleh-Engel, K., Moosbrugger, H., & Müller, H. (2003). Evaluating the fit of structural equation models: Tests of significance and descriptive goodness-of-fit measures. *Methods of Psychological Research Online, 8*(2), 23–74.
+
+Sclove, S. L. (1987). Application of model-selection criteria to some problems in multivariate analysis. *Psychometrika, 52*, 333–343. doi:10.1007/BF02294360
+
+Steiger, J. H., & Lind, J. (1980). *Statistically based tests fort the number  of common factors*. Paper presented at the annual meeting of the Psychometric Society, Iowa City.
+
+Tucker, L. R., & Lewis, C. (1973). A reliability coefficient for maximum likelihood factor analysis. *Psychometrika, 38*, 1–10. doi:10.1007/BF02291170
+
+West, S. G., Taylor, A. B., & Wu, W. (2012). Model fit and model selection in structural equation modeling. In R. H. Hoyle (Ed.), *Handbook of structural equation modeling* (pp. 209–231). New York, NY: Guilford.
+
+Widaman, K. F., & Thompson, J. S. (2003). On specifying the null model for incremental fit indices in structural equation modeling. *Psychological Methods, 8*(1), 16–37. doi:10.1037/1082-989X.8.1.16
+
+
+
+
