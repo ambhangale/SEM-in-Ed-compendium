@@ -61,11 +61,11 @@ x_1\\x_2\\x_3\\x_4\\x_5\\x_6\\x_7\\x_8\\x_9
 \mathbf\xi =
 \begin{bmatrix}
 \xi_1\\\xi_2\\\xi_3
-\end{bmatrix}
+\end{bmatrix},
 \mathbf\varepsilon =
 \begin{bmatrix}
 \varepsilon_1\\\varepsilon_2\\\varepsilon_3\\\varepsilon_4\\\varepsilon_5\\\varepsilon_6\\\varepsilon_7\\\varepsilon_8\\\varepsilon_9
-\end{bmatrix}
+\end{bmatrix}, \text{and }
 \mathbf\Lambda =
 \begin{bmatrix}
 \lambda_{11}&0&0\\\lambda_{21}&0&0\\\lambda_{31}&0&0\\0&\lambda_{42}&0\\0&\lambda_{52}&0\\0&\lambda_{62}&0\\0&0&\lambda_{73}\\0&0&\lambda_{83}\\0&0&\lambda_{93}
@@ -78,7 +78,13 @@ Substituting these matrices into Equation \@ref(eq:14-10) gives:
 
 ```{=tex}
 \begin{equation}
-
+\begin{bmatrix}
+x_1\\x_2\\x_3\\x_4\\x_5\\x_6\\x_7\\x_8\\x_9
+\end{bmatrix}=\begin{bmatrix}
+\lambda_{11} & 0 & 0 \\ \lambda_{21} & 0 & 0 \\ \lambda_{31} & 0 & 0 \\ 0 & \lambda_{42} & 0 \\ 0 & \lambda_{52} & 0 \\ 0 & \lambda_{62} & 0 \\ 0 & 0 & \lambda_{73} \\ 0 & 0 & \lambda_{83} \\ 0 & 0 & \lambda_{93}  
+\end{bmatrix}\begin{bmatrix}\xi_1\\\xi_2\\\xi_3
+\end{bmatrix}+\begin{bmatrix}\varepsilon_1\\\varepsilon_2\\\varepsilon_3\\\varepsilon_4\\\varepsilon_5\\\varepsilon_6\\\varepsilon_7\\\varepsilon_8\\\varepsilon_9
+\end{bmatrix}
 (\#eq:14-11)
 \end{equation}
 ```

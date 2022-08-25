@@ -1,4 +1,4 @@
-# Fitting path models with multilevel data {#ch13}
+# Fitting Path Models with Multilevel Data {#ch13}
 
 ```{r echo = FALSE}
 
