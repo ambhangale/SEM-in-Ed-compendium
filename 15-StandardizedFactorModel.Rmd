@@ -3,4 +3,254 @@
 ## Standardized factor loadings
 The matrix $\mathbfΛ$ from our illustrative factor model example from [Chapter 14](#Ch14) contains unstandardized factor loadings. These unstandardized estimates of factor loading parameters are interpreted relative to the units of measurement of the latent and observed variables (i.e., a factor loading is a slope, representing the average number of units the indicator changes when the factor increases by one unit). Thus, higher loadings indicate stronger linear relationships between the factor and indicator. When the indicator variables of a common factor are measured on the same scale, comparison of unstandardized coefficients can indicate the relative magnitudes among indicators of the same common factor (i.e., the highest loading belongs to the indicator most strongly related to the construct). For example, when we would estimate the effect of Motivation for school tasks on learning orientation and concentration on school work—and these variables are measured on the same scale (e.g., a 7-point Likert scale)—the unstandardized effects can be directly compared to give an indication of the relative importance of learning orientation and concentration on school work for the measurement of Motivation. 
 
-However, a meaningful comparison of effects may be complicated when the interpretation of units on the scales of the variables are not equivalent (e.g., if one indicator is measured on a 5-point scale and the other on a 7-point scale, how does one unit on learning orientation relate to one unit on concentration on school work?). In addition, unstandardized factor covariances must also be interpreted in the (unobserved) measurement scale of the common factors. Therefore, it would be helpful to obtain standardized parameter estimates that are independent of the units in which both the common factor variables and the indicator variables are scaled. Standardized factor loadings are the factor loadings that would be obtained if both the common factor and observed indicator had variances equal to 1. Consequently, standardized factor loadings can be calculated as a function of unstandardized factor loadings and the variances of the observed variables and the common factors. For example, the estimated unstandardized factor loading of learning orientation on Motivation, λ ̂11, can be standardized through:
+However, a meaningful comparison of effects may be complicated when the interpretation of units on the scales of the variables are not equivalent (e.g., if one indicator is measured on a 5-point scale and the other on a 7-point scale, how does one unit on learning orientation relate to one unit on concentration on school work?). In addition, unstandardized factor covariances must also be interpreted in the (unobserved) measurement scale of the common factors. Therefore, it would be helpful to obtain standardized parameter estimates that are independent of the units in which both the common factor variables and the indicator variables are scaled. Standardized factor loadings are the factor loadings that would be obtained if both the common factor and observed indicator had variances equal to 1. Consequently, standardized factor loadings can be calculated as a function of unstandardized factor loadings and the variances of the observed variables and the common factors. For example, the estimated unstandardized factor loading of learning orientation on Motivation, $\hatλ_{11}$, can be standardized through:
+
+```{=tex}
+\begin{equation}
+\hat\lambda^*_{11} = \hat\lambda_{11} \sqrt{\frac{\hat\varphi_{11}}{\hat\sigma_{11}}},
+(\#eq:15-01)
+\end{equation}
+```
+
+where $\hatφ_{11}$ denotes the variance of the first factor (Motivation), $\hatσ_{11}$ denotes the model-implied variance of the first indicator (learning orientation), and $\hatλ_{11}$ denotes the unstandardized factor loading of the first indicator on the first factor. The standardized parameter can be interpreted in units of standard deviation, so a 1 $SD$ increase in the common factor is associated with a change of $\hatλ^*_{11}$ $SD$s in the observed indicator variable. Substituting the parameter estimate $\hatλ_{11}$, the factor variance $\hatφ_{11}$, and the model-implied variance $\hatσ_{11}$ from our illustrative example yields:
+
+$$
+\hatλ_{11}^* = 4.56 \sqrt{\frac{1}{30.63}}=0.82 . 
+$$
+
+Thus, a 1 $SD$ increase in Motivation is expected to result in a 0.82 $SD$ increase in learning orientation. In comparison, the standardized factor loading for the regression of concentration on school work on Motivation:
+
+$$
+\hatλ_{21}^* = 5.95\sqrt{\frac{1}{56.89}} = 0.79 . 
+$$
+
+Although the unstandardized factor loading of concentration on school work was larger than the factor loading of learning orientation, the size of the standardized factor loading of concentration on school work is slightly smaller (due to the fact that the variance of this indicator variable is larger). The indicators in our example each load on only one factor, so each indicator’s factor loading is a simple regression slope. Thus, the standardized factor loadings can be interpreted as Pearson correlation coefficients ($r$), using the following guidelines for the size of the effect: negligible < 0.1, ≤ small < 0.3 ≤ moderate < 0.5 ≤ large (Cohen, 1992). In our example, both effects can be considered strong. 
+
+In matrix notation, the standardized factor loadings are given by:
+
+```{=tex}
+\begin{equation}
+\hat{\mathbf{\Lambda}} = \mathbf{D}^{-1}_\mathbf\Sigma \hat{\mathbf\Lambda} \mathbf{D}_\mathbf\Phi,
+(\#eq:15-02)
+\end{equation}
+```
+
+where $\mathbf{D}_\mathbfΣ$ and $\mathbf{D}_\mathbfΦ$ are diagonal matrices with elements $\sqrt{\text{diag}(\hat{\mathbfΣ}_\text{model}})$ and $\sqrt{\text{diag}(\hat{\mathbfΦ})}$, respectively (i.e., the square roots of the diagonals of $\hat{\mathbf{Σ}}_{model}$ and $\hat{\mathbf{Φ}}$).
+
+## Standardized common-factor variances and covariances
+A standardized matrix of common factor variances and covariances is a matrix where all common factor variances are 1. If identification of the common factors has been achieved by fixing the common factor variances at 1 (UVI constraint), then the matrix of common factor variances and covariances is already standardized. If this is not the case, a standardized matrix of common factor variances and covariances, i.e., a matrix of common factor correlations, can be calculated by:
+
+```{=tex}
+\begin{equation}
+\hat{\mathbf\Phi}^* = \mathbf{D}^{-1}_{\mathbf\Phi} \hat{\mathbf\Phi} \mathbf{D}^{-1}_\mathbf\Phi.
+(\#eq:15-03)
+\end{equation}
+```
+
+In our illustrative example the matrix of common factor correlations is:
+
+$$
+\hat{\mathbf\Phi}^* = \begin{bmatrix}
+\hat\phi^*_{11}\\
+\hat\phi^*_{21}&\hat\phi^*_{22}\\
+\hat\phi^*_{31}&\hat\phi^*_{32}&\hat\phi^*_{33}
+\end{bmatrix} = \begin{bmatrix}
+1\\.73&1\\.58&.39&1
+\end{bmatrix}
+$$
+
+Using the criteria for interpreting $r$ listed above, the correlations between Motivation and Satisfaction ($\hat\phi^*_{21}$) and Motivation and Self-confidence ($\hat\phi^*_{31}$ are strong correlations, whereas the correlation between Motivation and Self-confidence ($\hat\phi^*_{32}$) is moderate.
+
+## Standardized unique-factor variances and covariances
+The unique-factor (i.e., residual) variances and covariances are standardized in separate steps, corresponding to how researchers typically want to interpret them.  We would  like to interpret the residual covariances as residual correlations (although our example has none), so we would standardize the $\hat{\mathbfΘ}$ matrix using the diagonal elements of $\hat{\mathbfΘ}$ itself.
+
+```{=tex}
+\begin{equation}
+\hat{\mathbf\Theta}^*_{ij} = \mathbf{D}^{-1}_{\mathbf\Theta} \hat{\mathbf\Theta} \mathbf{D}^{-1}_\mathbf\Theta,
+(\#eq:15-04)
+\end{equation}
+```
+
+where $\mathbf{D}_\mathbfΘ$ is a diagonal matrix with elements $\sqrt{\text{diag}(\mathbf{Θ}})$ (i.e., the square roots of the diagonal of $\hat{\mathbfΘ}$) and $i ≠ j$, indicating we are only interested in the off-diagonal elements.
+
+The diagonal elements of $\hat{\mathbf{Θ}}_{ij}^*$ are all 1, by definition (i.e., $\hat{\mathbf{Θ}}_{ij}^*$ is the correlation matrix of unique factors), so $\hat{\mathbf{Θ}}_{ij}^*$ doesn’t provide any useful information about the residual variances.  Instead, we can standardize $\hat{\mathbf{Θ}}$ using the model-implied $SD$s of the indicator variables:
+
+```{=tex}
+\begin{equation}
+\hat{\mathbf\Theta}^*_{ii} = \mathbf{D}^{-1}_{\mathbf\Sigma} \hat{\mathbf\Theta} \mathbf{D}^{-1}_\mathbf\Sigma,
+(\#eq:15-05)
+\end{equation}
+```
+
+where $i = i$, indicating we are only interested in the diagonal elements. Each diagonal element of the resulting matrix $\hat{\mathbf\Theta}^*_{ii}$ contains the proportion of unexplained variance of the associated indicator variable. For example, the standardized matrix of residual variances in our illustrative example is: 
+
+$$
+\hat{\mathbf\Theta}^*_{ii} = \begin{bmatrix}
+\hat\theta^*_{11}\\
+0 & \hat\theta^*_{22}\\
+0&0&\hat\theta^*_{33}\\
+0&0&0&\hat\theta^*_{44}\\
+0&0&0&0&\hat\theta^*_{55}\\
+0&0&0&0&0&\hat\theta^*_{66}\\
+0&0&0&0&0&0&\hat\theta^*_{77}\\
+0&0&0&0&0&0&0&\hat\theta^*_{88}\\
+0&0&0&0&0&0&0&0&\hat\theta^*_{99}
+\end{bmatrix} = \begin{bmatrix}
+.32 \\
+0 & .38 \\
+0&0&.47 \\
+0&0&0& .26 \\
+0&0&0&0& .84 \\
+0&0&0&0&0&.50\\
+0&0&0&0&0&0&.41\\
+0&0&0&0&0&0&0&.44\\
+0&0&0&0&0&0&0&0& .54
+\end{bmatrix}.
+$$
+
+Here, we can see that the proportion of unexplained variance of the learning orientation ($\hatθ_{11}^*$) is .32, indicating that 32% of the variance of this variable is unexplained by the model. Thus, the explained variance for this indicator variable is 68% (i.e., 100% − 32%).
+
+## Structure coefficients
+Even though not all indicator variables load on all common factors, that does not mean that the indicator variables have no relation with the common factors that they are not directly regressed on. The relationship between the indicator variables and other common factors is modelled through the covariances between the common factors. To get insight into the complete correlation structure of the indicator variables and common factors, one can calculate structure coefficients. Structure coefficients are the correlations between all observed variables and all common factors. They are calculated by multiplying the matrix of standardized factor loadings with the matrix of common factor correlations:
+
+```{=tex}
+\begin{equation}
+\mathbf{P} = \hat{\mathbf{\Lambda}}^* \hat{\mathbf{\Phi}}^*
+(\#eq:15-06)
+\end{equation}
+```
+
+The result is a full (i.e., not symmetric) matrix $\mathbf{P}$ that contains the correlations between all observed variables (in the rows) and all common factors (in the columns).
+
+## Calculating standardized coefficients in lavaan {#ch15-5}
+Standardized parameter estimates can be obtained directly by analyzing the correlation matrix while scaling the common factors by fixing their variances to 1. However, it is not possible to (correctly) analyze a correlation matrix in `lavaan`, and in some situations (for example when doing multigroup analysis) analyzing a correlation matrix prevents meaningful comparison of coefficients across groups. Therefore, we show you how to calculate standardized coefficients in R using output from `lavaan.` 
+
+Script 15.1 shows the code that standardizes the matrices from Script 14.1, where the output was saved in the object `saqmodelOut.` To be able to extract parameter estimates from the `lavaan` output in a pre-specified order we have created the object `factornames` that contains the names of the common factors:
+
+```
+### Script 15.1 ###
+
+## save variable names
+obsnames <- c("learning","concentration","homework","fun",
+              "acceptance","teacher","selfexpr","selfeff","socialskill")
+factornames <- c("Motivation", "Satisfaction", "SelfConfidence")
+
+## EITHER request model-implied and latent covariance matrices from lavaan
+SIGMA     <- lavInspect(saqmodelOut, "cov.ov")[obsnames, obsnames]
+PHI       <- lavInspect(saqmodelOut, "cov.lv")[factornames, factornames]
+## OR extract parameter estimates and calculate it manually
+Estimates <- lavInspect(saqmodelOut, "est")
+LAMBDA    <- Estimates$lambda[obsnames, factornames] # must extract anyway
+PHI       <- Estimates$psi[factornames, factornames]
+THETA     <- Estimates$theta[obsnames, obsnames]     # must extract anyway
+SIGMA     <- LAMBDA %*% PHI %*% t(LAMBDA) + THETA
+
+## extract SDs from sigma and phi, store in a diagonal matrix
+SDSIGMA   <- diag(sqrt(diag(SIGMA)))
+SDPHI     <- diag(sqrt(diag(PHI)))
+
+## calculate standardized parameters
+LAMBDAstar  <- solve(SDSIGMA) %*% LAMBDA %*% SDPHI
+PHIstar     <- solve(SDPHI)   %*%  PHI   %*% solve(SDPHI) 
+THETAstar   <- solve(SDSIGMA) %*% THETA  %*% solve(SDSIGMA) 
+STRUC       <- LAMBDAstar %*% PHIstar
+
+## give labels to the matrices
+dimnames(LAMBDAstar)    <- list(obsnames, factornames)
+dimnames(PHIstar)       <- list(factornames, factornames)
+dimnames(THETAstar)     <- list(obsnames, obsnames)
+dimnames(STRUC)         <- list(obsnames, factornames)
+```
+
+First, the model-implied covariance matrix, $\mathbfΣ_{\text{model}}$, can be either requested directly from `lavaan`,
+
+```
+SIGMA       <- lavInspect(saqmodelOut, "cov.ov")[obsnames, obsnames]
+```
+
+or it can be calculated manually from the unstandardized $\mathbfΛ$, $\mathbfΦ$, and $\mathbfΘ$ parameter estimates: $\mathbf{\Sigma}_{\text{model}} = \mathbf\Lambda \mathbf\Phi \mathbf\Lambda^{\text{T}} + \mathbf\Theta$.
+
+```
+Estimates   <- lavInspect(saqmodelOut, "est")
+LAMBDA      <- Estimates$lambda[obsnames, factornames]
+PHI         <- Estimates$psi[factornames, factornames]
+THETA       <- Estimates$theta[obsnames, obsnames]
+SIGMA       <- LAMBDA %*% PHI %*% t(LAMBDA) + THETA
+```
+
+As we only need the $SD$s, we use the `diag()` function to extract the variances, take the square-roots using the `sqrt()` function, then put the $SD$s on the diagonal of a matrix using the `diag()` function again. We do this for both the model-implied $SD$s of observed indicators and for the $SD$s of common factors.
+
+```
+SDSIGMA 	<- diag(sqrt(diag(SIGMA)))
+SDPHI 	<- diag(sqrt(diag(PHI)))
+```
+
+The factor loadings are standardized by pre-multiplying them with the inverted matrix of $SD$s of observed variables, and post-multiplying them with the matrix of common-factor $SD$s.
+
+```
+LAMBDAstar <- solve(SDSIGMA) %*% LAMBDA %*% SDPHI
+```
+
+The common-factor covariances are standardized by pre- and post-multiplication with the inverted matrix of its $SD$s.
+
+```
+PHIstar <- solve(SDPHI) %*% PHI %*% solve(SDPHI) 
+```
+
+The unique-factor (i.e., residual) variances are standardized with respect to the observed variables by pre- and post-multiplying $\mathbfΘ$ with the inverted matrix of observed variable $SD$s.
+
+```
+THETAstar <- solve(SDSGIMA) %*% THETA %*% solve(SDSIGMA) 
+```
+
+The structure coefficients are calculated by multiplying the standardized $\mathbf\Lambda$ and $\mathbf\Phi$ matrices.
+
+```
+STRUC <- LAMBDAstar %*% PHIstar
+```
+
+One can give labels to the standardized matrices using the `dimnames()` function and the `obsnames` and `factornames` objects. The labels for the structure coefficients are the same as for the $\mathbfΛ$ matrix.
+
+```
+dimnames(LAMBDAstar) 	<- list(obsnames, factornames)
+dimnames(PHIstar) 	<- list(factornames, factornames)
+dimnames(THETAstar) 	<- list(obsnames, obsnames)
+dimnames(STRUC) 		<- list(obsnames, factornames)
+```
+
+## Request standardized output with lavaan 
+The same standardized matrices can be extracted using `lavaan`’s built-in function:
+
+```
+lavInspect(saqmodelOut, "std.all")
+```
+
+You can also request standardized estimates when you use the `summary()` or `parameterEstimates()` functions with the argument “`standardized = TRUE`”:
+
+```
+summary(saqmodelOut, standardized = TRUE)
+parameterEstimates(saqmodelOut, standardized = TRUE)
+```
+
+This will add two columns to the output, the column `std.lv` gives standardized parameters when only the exogenous variables are standardized, and the column `std.all` gives standardized parameters when both exogenous and endogenous variables are standardized. The latter one will give equivalent output as calculated in [Section 15.5](#ch15-5).
+
+You can also request standardized estimates using the `standardizedSolution()` function, which also provides $SE$s for the standardized estimates themselves.  However, we recommend only testing the unstandardized estimates for making inferences about population parameters (e.g., null-hypothesis significance tests), and using standardized estimates only as a standardized measure of effect size.
+
+The structure coefficients are available in the following output, which requests the correlations among all variables (latent and observed).
+
+```
+lavInspect(saqmodelOut, "cor.all")
+```
+
+The submatrix of this output that corresponds to rows of observed variables and columns of latent variables is the structure coefficient matrix.
+
+```
+lavInspect(saqmodelOut, "cor.all")[obsnames, factornames]
+```
+
+
+## References
+Cohen, J. (1992). A power primer. *Psychological Bulletin, 112*(1), 155–159. doi:10.1037/0033-2909.112.1.155
+
+
+

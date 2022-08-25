@@ -1,14 +1,14 @@
-# The Empirical Check for Identification
+# The Empirical Check for Identification {#Ch16}
 
 Factor models with cross-loadings or correlated residual factors (or both) may cause convergence problems and under-identification. There are no rules of thumb of how many cross-loadings or correlated residual factors are allowed while maintaining identification of the model. Therefore, other methods are needed to check for identification. In this chapter we will explain how to use lavaan to do an empirical check for identification of a model. The empirical check has two steps. 
 
--Step 1: Calculate a model-implied covariance matrix for the model you want to check.
+__Step 1__: Calculate a model-implied covariance matrix for the model you want to check.
  
--Step 2: Fit the model to the model-implied covariance matrix from Step 1. 
+__Step 2__: Fit the model to the model-implied covariance matrix from Step 1. 
 
 If the parameter estimates you obtain in Step 2 are identical to the parameter values you chose in Step 1, the model may be identified. If you obtain different parameter estimates in Step 2, your model is surely not identified. 
 
-In this chapter we will show two examples of the empirical check. We will first check identification of the factor model depicted in Figure 1a, and subsequently of the factor model depicted in Figure 1b.
+In this chapter we will show two examples of the empirical check. We will first check identification of the factor model depicted in Figure 1a, and subsequently of the factor model depicted in Figure \@ref(fig:fig16-1)b.
 
 ```{r label="fig16-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Two-factor CFA models with two indicators per factor. Model A (left) has orthogonal (uncorrelated) factors, whereas Model B (right) has correlated factors." }
 
@@ -27,7 +27,7 @@ LAMBDA <- matrix(c(.8, 0,
                     0,.8,
                     0,.7), nrow = 4, ncol = 2, byrow = TRUE)
 PHI <- matrix(c(1, 0,
-		    0, 1), nrow = 2, ncol = 2, byrow = TRUE)
+		            0, 1), nrow = 2, ncol = 2, byrow = TRUE)
 THETA <- diag(.5, nrow = 4, ncol = 4)
 
 SIGMA <- LAMBDA %*% PHI %*% t(LAMBDA) + THETA
@@ -131,4 +131,4 @@ If you run this modified script, you will notice that the parameter estimates ar
 
 ## References
 
-Steiger, J. H. (2002). When constraints interact: A caution about reference variables, identification constraints, and scale dependencies in structural equation modeling. Psychological Methods, 7(2), 210–227. doi:10.1037//1082-989X.7.2.210
+Steiger, J. H. (2002). When constraints interact: A caution about reference variables, identification constraints, and scale dependencies in structural equation modeling. *Psychological Methods, 7*(2), 210–227. doi:10.1037//1082-989X.7.2.210
