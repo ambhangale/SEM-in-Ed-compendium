@@ -416,7 +416,7 @@ DF <- AOV[["Df diff"]][2]
 Although the calculation of `cc` will not be affected by sample size or number of variables (because both models must be fit to the same sample people and variables), the number of factors $k$ may differ between nested models.  In this case, it is probably best to choose the larger $k$ between the two models, because the model with fewer factors is statistically equivalent to the model with more factors if the factor variances were constrained to equality and factor correlations were constrained to 1 (i.e., if the factors are the same variable).  This typically works in our favour because choosing the larger $k$ will also decrease the $χ^2$ more, so the model will appear to fit better.
 
 
-## References
+## References {-}
 Akaike, H. (1987). Factor analysis and AIC. *Psychometrika, 52*, 317–332. doi:10.1007/BF02294359
 
 Barret, P. (2007). Structural equation modelling: Adjudging model fit. *Personality and Individual Differences, 42*(5), 815–824. doi:10.1016/j.paid.2006.09.018

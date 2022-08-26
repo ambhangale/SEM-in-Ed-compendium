@@ -1,4 +1,4 @@
-# The Empirical Check for Identification {#Ch16}
+# The Empirical Check for Identification {#ch16}
 
 Factor models with cross-loadings or correlated residual factors (or both) may cause convergence problems and under-identification. There are no rules of thumb of how many cross-loadings or correlated residual factors are allowed while maintaining identification of the model. Therefore, other methods are needed to check for identification. In this chapter we will explain how to use lavaan to do an empirical check for identification of a model. The empirical check has two steps. 
 
@@ -8,7 +8,7 @@ __Step 2__: Fit the model to the model-implied covariance matrix from Step 1.
 
 If the parameter estimates you obtain in Step 2 are identical to the parameter values you chose in Step 1, the model may be identified. If you obtain different parameter estimates in Step 2, your model is surely not identified. 
 
-In this chapter we will show two examples of the empirical check. We will first check identification of the factor model depicted in Figure 1a, and subsequently of the factor model depicted in Figure \@ref(fig:fig16-1)b.
+In this chapter we will show two examples of the empirical check. We will first check identification of the factor model depicted in Figure \@ref(fig:fig16-1)a, and subsequently of the factor model depicted in Figure \@ref(fig:fig16-1)b.
 
 ```{r label="fig16-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Two-factor CFA models with two indicators per factor. Model A (left) has orthogonal (uncorrelated) factors, whereas Model B (right) has correlated factors." }
 
@@ -16,11 +16,10 @@ knitr::include_graphics("images/Ch16_CFA_models.png")
 ```
 
 ## Empirical check of Model A
-Script 16.1 is the script for the two steps to check identification of Model A. 
+[Script 16.1](#script-16.1) is the script for the two steps to check identification of Model A. 
 
+### Script 16.1 {-}
 ```
-### Script 16.1 ###
-
 ## STEP 1: calculate the model-implied covariance matrix
 LAMBDA <- matrix(c(.8, 0,
                    .7, 0,
@@ -76,10 +75,10 @@ Recall from [Chapter 14](#Ch14) that a factor with only two indicators requires 
 
 When the factors in Model B have a correlation that is substantially different from zero, the model actually is identified (Steiger, 2002). This seems counter-intuitive because Model B is specified the same way regardless of the data to which Model B is fit. That is, the covariances among indicators of the different factors provide a unique set of best-fitting estimated model parameters. However, Model B is empirically under-identified when the factor correlation is near zero (i.e., when the indicators from different factors are nearly uncorrelated).
 
-Script 16.2 checks the identification of Model B, assuming a moderate correlation (r = .3). 
+[Script 16.2](#script-16-2) checks the identification of Model B, assuming a moderate correlation ($r = .3$). 
 
+### Script 16.2 {-}
 ```
-### Script 16.2 ###
 
 ## STEP 1: calculate the model-implied covariance matrix
 LAMBDA <- matrix(c(.8, 0,
@@ -129,6 +128,6 @@ THETA
 If you run this modified script, you will notice that the parameter estimates are exactly equal to our chosen values from Step 1. This is a necessary requirement for identification, but not sufficient. So we only know that the model might be identified, but we cannot be sure whether it really is identified without using algebraic methods. The curious reader can find algebraic proof that Model B is identified in Steiger (2002).
 
 
-## References
+## References {-}
 
 Steiger, J. H. (2002). When constraints interact: A caution about reference variables, identification constraints, and scale dependencies in structural equation modeling. *Psychological Methods, 7*(2), 210–227. doi:10.1037//1082-989X.7.2.210

@@ -47,19 +47,18 @@ As an example dataset we use scores on four variables, obtained from 1377 studen
 We will fit the two-level model that is depicted below. 
 
 
-```{r echo = FALSE, out.width = "90%", fig.align = "center" }
+```{r label="fig13-1", echo = FALSE, out.width = "90%", fig.align = "center", fig.cap="A two-level path diagram." }
 
 knitr::include_graphics("figure_multilevelpathmodel.jpg")
 
 ```
-*Figure `r Chap.nr`.1.* A two-level path diagram
 
 ## Obtaining ICCs, and estimates of $\Sigma_\text{W}$ and $\Sigma_\text{B}$
 
-In script `r Chap.nr`.1, we fit saturated models to Level 1 and Level 2, by letting all variables covary with each other at both levels. The means of the variables will be estimated only at Level 2 because Level-1 means are zero by definition.  That is, Level-1 components of variables represent individual deviations from the cluster mean, and cluster-mean-centered variables have means of zero (both within clusters and across clusters). Fitting a saturated model will give us estimates of the within-level and between-level covariance matrices. The variance estimates from this model can be used to calculate ICCs. Fitting this model thus serves as a first step to obtain information about the variance distribution across levels.
+In [Script 13.1](#script-13.1), we fit saturated models to Level 1 and Level 2, by letting all variables covary with each other at both levels. The means of the variables will be estimated only at Level 2 because Level-1 means are zero by definition.  That is, Level-1 components of variables represent individual deviations from the cluster mean, and cluster-mean-centered variables have means of zero (both within clusters and across clusters). Fitting a saturated model will give us estimates of the within-level and between-level covariance matrices. The variance estimates from this model can be used to calculate ICCs. Fitting this model thus serves as a first step to obtain information about the variance distribution across levels.
 
+### Script 13.1 {-}
 ```{r label='script13-1'}
-### Script 13.1 ###
 library(lavaan)
 data <- read.table("GaloComplete.dat", header = TRUE)
 head(data)
@@ -107,11 +106,10 @@ The ICC values show that a proportion `r round(ICCs["galo"],3)` of the total var
 
 
 ## Fitting a two-level path model
-In script `r Chap.nr`.2, we fit the two-level path model as depicted in Figure `r Chap.nr`.1 to the data. 
+In [Script 13.2](#script-13.2), we fit the two-level path model as depicted in Figure \@ref(fig:fig13-1) to the data. 
 
-
+### Script 13.2 {-}
 ```{r label='script13-2'}
-### Script 13.2 ###
 model2 <- '
          level: 1 
             advice ~ galo  
@@ -190,8 +188,7 @@ b43.contextual := b43.b - b43.w   # obtain Wald z test of equivalence v. context
 In standard multilevel regression, one may also include random slopes in the model. This way one could test whether the effect of some variable on another variable varies across clusters. Random slopes are not yet a feature in `lavaan`'s multilevel SEM, although the wide-format approach might be feasible in samples with many small clusters (Barendse & Rosseel, 2020). 
 
 
-## References
-
+## References {-}
 
 Barendse, M. T., & Rosseel, Y. (2020). Multilevel modeling in the ‘wide format’ approach with discrete data: A solution for small cluster sizes. *Structural Equation Modeling, 27*(5), 696--721. <https://doi.org/10.1080/10705511.2019.1689366>
 

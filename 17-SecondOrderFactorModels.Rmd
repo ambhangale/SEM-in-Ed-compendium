@@ -1,16 +1,16 @@
-# Second Order Factor Models {#Ch17}
+# Second Order Factor Models {#ch17}
 
 The expression for a factor model is $\mathbfΣ_{\text{model}} = \mathbfΛ \mathbfΦ \mathbfΛ’+ \mathbfΘ$. In a hierarchical factor model, the covariances between the common factors in $\mathbfΦ$ are modeled by a second-order factor model, $\mathbfΦ = \mathbfΛ_2 \mathbfΦ_2 \mathbfΛ_2’+ \mathbfΘ_2$, where $\mathbfΦ$ denotes the covariances between first-order factors, $\mathbfΛ_2$ is a full matrix with second-order factor loadings, $\mathbfΦ_2$ is a symmetric matrix with variances and covariances of the second-order factors and $\mathbfΘ_2$ is a diagonal matrix with the variances of the second-order residual factors.
 
-Script 17.1 fits a second order factor model to the data of the School Attitudes Questionnaire (SAQ; Smits & Vorst, 1982) from [Chapter 14](#Ch14). Instead of having all three latent variables correlate with each other, we hypothesize that there is one second-order common factor (Attitudes) that explains the correlations between the first-order common factors. This model is depicted in Figure \@ref(fig:fig17-1). 
+[Script 17.1](#script-17.1) fits a second order factor model to the data of the School Attitudes Questionnaire (SAQ; Smits & Vorst, 1982) from [Chapter 14](#Ch14). Instead of having all three latent variables correlate with each other, we hypothesize that there is one second-order common factor (Attitudes) that explains the correlations between the first-order common factors. This model is depicted in Figure \@ref(fig:fig17-1). 
 
 ```{r label="fig17-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Second-order factor model for the School Attitudes Questionnaire" }
 
 knitr::include_graphics("images/Ch17_second_order.png")
 ```
 
+### Script 17.1 {-}
 ```
-### Script 17.1 ###
 
 ## Specify second-order factor model
 saqmodel2nd <- '
@@ -61,7 +61,7 @@ saqmodel2ndOut <- lavaan(saqmodel2nd, sample.cov = saqcov,
 summary(saqmodel2ndOut, fit = TRUE, std = TRUE)
 ```
 
-So, in the first part of the script, we create the “First-order part” of the model. We specify the parameters of the $\mathbfΛ$ matrix (factor loadings) and Θ matrix (residual variances observed indicators), but do not specify the parameters of the Φ matrix (the variances and covariances of the first-order common factors) as this matrix is now a function of second-order factor loadings ($\mathbfΛ_2$), second-order factor variances and covariances ($\mathbfΦ_2$) and second-order residual variances and covariances ($\mathbfΘ_2$).
+So, in the first part of the [script](#script-17.1), we create the “First-order part” of the model. We specify the parameters of the $\mathbfΛ$ matrix (factor loadings) and Θ matrix (residual variances observed indicators), but do not specify the parameters of the Φ matrix (the variances and covariances of the first-order common factors) as this matrix is now a function of second-order factor loadings ($\mathbfΛ_2$), second-order factor variances and covariances ($\mathbfΦ_2$) and second-order residual variances and covariances ($\mathbfΘ_2$).
 
 In second-order factor analysis, it is difficult to scale the first-order factors by fixing their variances to 1, because the $\mathbfΦ$ matrix is not directly defined. Therefore we scaled the first-order common factors by fixing the first factor loading of each factor to 1. Scaling of the second-order factors can be done through factor loadings or factor variances. In the current example we scaled the second-order factor through one of the factor loadings.
 
@@ -93,10 +93,11 @@ Notice that the estimated residual variance of the first order factor Motivation
 In this example, the estimated variance is −1.675, but the $SE = 1.704$, so the CI includes positive values. RMSEA indicates mediocre fit, and $\text{CFI} > .95$, so it would be reasonable to conclude that the 2nd-order factor explains most variance in Motivation, and that the estimate is negative only because of sampling error.
 
 ## Getting the parameter estimates in matrix form {-}
-The `lavaan` package uses a slightly different parameterization of structural equation models than we do. All unidirectional effects between latent variables are part of matrix beta, and all (residual) variances and covariances of latent variables are part of matrix psi in lavaan. So, the second-order factor loadings, $\mathbfΛ_2$, are part of matrix beta, and the second-order factor variances and covariances, $\mathbfΦ_2$, as well as the second-order residual variances of the second order model, $\mathbfΘ_2$, are part of matrix psi. You can extract the parameter estimates in matrix form using the names of the variables and factors with the following code:
+The `lavaan` package uses a slightly different parameterization of structural equation models than we do. All unidirectional effects between latent variables are part of matrix beta, and all (residual) variances and covariances of latent variables are part of matrix psi in lavaan. So, the second-order factor loadings, $\mathbfΛ_2$, are part of matrix beta, and the second-order factor variances and covariances, $\mathbfΦ_2$, as well as the second-order residual variances of the second order model, $\mathbfΘ_2$, are part of matrix psi. You can extract the parameter estimates in matrix form using the names of the variables and factors with the [following code](#script-17.2):
 
+### Script 17.2 {-}
 ```
-### Script 17.2 ###
+
 Estimates <- lavInspect(saqmodel2ndOut, "est")
 
 factor1names <- c("Motivation","Satisfaction","SelfConfidence")
@@ -112,17 +113,18 @@ phi1 <- lambda2 %*% phi2 %*% t(lambda2) + theta2
 ```
 That is, by selecting the appropriate rows and columns using the names of the observed variables, first order common factors, and second order common factors, one can extract the submatrices from the larger matrices that lavaan uses. For `psi2` and `lambda2`, we used the `drop = FALSE` argument in this example. This is only necessary if `lambda2` has only 1 column (i.e. if there is a single second-order factor). When extracting more than 1 column (and row) from a matrix, the result will remain a matrix automatically. 
 
-Notice that the phi1 matrix is now calculated using $\mathbfΦ_1 = \mathbfΛ_2 \mathbfΦ_2 \mathbfΛ_2’+ \mathbfΘ_2$, because in the second-order factor model the variances and covariances of the first-order common factors are modelled as a function of second-order parameters.
+Notice that the `phi1` matrix is now calculated using $\mathbfΦ_1 = \mathbfΛ_2 \mathbfΦ_2 \mathbfΛ_2’+ \mathbfΘ_2$, because in the second-order factor model the variances and covariances of the first-order common factors are modelled as a function of second-order parameters.
 
 ## Standardized parameter estimates for the higher-order part of the model
-In addition to obtaining standardized estimates for (first-order) factor loadings and residual variances (as described in Chapter 13), we can also obtain standardized estimates for the second-order factor loadings, residual variances, and second-order common factor variances and covariances using matrix algebra.
+In addition to obtaining standardized estimates for (first-order) factor loadings and residual variances (as described in [Chapter 13](#ch13)), we can also obtain standardized estimates for the second-order factor loadings, residual variances, and second-order common factor variances and covariances using matrix algebra.
 
 Standardization of the second-order coefficients involves calculating the parameter estimates that would be obtained if the standard deviations of all first- and second-order factors were equal to 1.
 
-Script 17.3 has commands that can be added to Script 17.2 to calculate the standardized parameters of the second order part of the model.
+[Script 17.3](#script-17.3) has commands that can be added to [Script 17.2](#script-17.3) to calculate the standardized parameters of the second order part of the model.
 
+### Script 17.3 {-}
 ```
-Script 17.3
+
 ## calculate standard deviations first- and second-order common factors
 SDphi1 <- diag(sqrt(diag(phi1)))
 SDphi2 <- diag(sqrt(diag(phi2)), nrow = 1, ncol = 1)
@@ -144,6 +146,6 @@ The operations that are used to calculate the standardized parameters of the sec
 
 Notice that we used the nrow and `ncol` arguments to the outer `diag()` function when creating SDphi2. Recall that the inner call to `diag()` is used to extract the diagonal of `phi2`. The outer call to `diag()` is used to create a matrix. There are actually two ways that `diag()` will accept your instructions:
 
--If you give it a vector of numbers, it will place those numbers on the diagonal.  So the dimensions of the resulting matrix will be determined by how many numbers are in the vector.  For example, `sqrt(diag(phi1))` contains three standard deviations, so `diag(sqrt(diag(phi1)))` creates a 3 × 3 diagonal matrix.
+-If you give it a vector of numbers, it will place those numbers on the diagonal.  So the dimensions of the resulting matrix will be determined by how many numbers are in the vector.  For example, `sqrt(diag(phi1))` contains three standard deviations, so `diag(sqrt(diag(phi1)))` creates a $3 × 3$ diagonal matrix.
 
 -If you give it a single number, it will drop any decimal values and give you an identity matrix (ones on the diagonal) with that many rows and columns.  For example, `sqrt(diag(phi2))` contains only one standard deviation ($SD = 3.196$), so `diag(sqrt(diag(phi2)))` would create a $3 × 3$ identity matrix. To correctly return a $1 × 1$ matrix with 3.196 on the “diagonal,” we need to explicitly tell `diag()` that we want 1 row and 1 column.

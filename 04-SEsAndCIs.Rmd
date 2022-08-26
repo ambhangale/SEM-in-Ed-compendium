@@ -58,7 +58,7 @@ One can also obtain this information from the `parameterEstimates()` function, w
 parameterEstimates(AWmodelOut, level = .90)
 ```
 
-## **References**
+## References {-}
 
 Cumming, G. (2013). *Understanding the new statistics: Effect sizes, confidence intervals, and meta-analysis*. New York, NY: Routledge.
 

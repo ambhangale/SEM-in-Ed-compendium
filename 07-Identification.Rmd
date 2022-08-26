@@ -70,7 +70,7 @@ Substituting Equation \@ref(eq:7-08) into Equation \@ref(eq:7-07) gives an equat
 (\#eq:7-09)
 \end{equation}
 
-Rewriting gives (for intermediate steps, see [Appendix I](#appendix-7):
+Rewriting gives (for intermediate steps, see this chapters [Appendix](#appendix-1):
 
 \begin{equation}
 \beta_{31} = \frac{\sigma_{31}\psi_{22}-\sigma_{32}\psi_{21}}{\psi_{11}\psi_{22}-{\psi_{21}}^2}
@@ -102,9 +102,9 @@ and substituting Equations  \@ref(eq:7-02),  \@ref(eq:7-03) and  \@ref(eq:7-04) 
 
 Therefore, using the equations for the population covariances $\sigma_{31}$ and $\sigma_{32}$, both $\beta_{31}$ and $\beta_{32}$ are identified.
 
-The $\sigma_{33}$, $\sigma_{41}$ and $\sigma_{44}$ equations then have just a single unknown each ($\psi_{33}$, $\beta_{43}$ and $\psi_{44}$) which indicates that these model parameters are also identified. In [Appendix I](#appendix-7) we demonstrate that the unknown parameters $\psi_{33}$, $\beta_{43}$ and $\psi_{44}$ can indeed be written as a function of known parameters. 
+The $\sigma_{33}$, $\sigma_{41}$ and $\sigma_{44}$ equations then have just a single unknown each ($\psi_{33}$, $\beta_{43}$ and $\psi_{44}$) which indicates that these model parameters are also identified. In this chapters [Appendix I](#appendix-1) we demonstrate that the unknown parameters $\psi_{33}$, $\beta_{43}$ and $\psi_{44}$ can indeed be written as a function of known parameters. 
 
-All model parameters of Equation \@ref(eq:3-10) are identified and therefore the model of Equation \@ref(eq:3-10) is identified. Moreover, we did not use the $\sigma_{42}$ and $\sigma_{43}$ equations yet, which shows that the model given by Equation \@ref(eq:3-10) is over-identified. Specifically, we have two more nonredundant elements in the population covariance matrix than the number of unknown model parameters (i.e., the model has two degrees of freedom). The equations for $\sigma_{41}$,$\sigma_{42}$ and $\sigma_{43}$ can all be used to express $\beta_{43}$ in terms of population variances and covariances. To illustrate this over identification of $\beta_{43}$ these different equations are given in [Appendix I](#appendix-7). 
+All model parameters of Equation \@ref(eq:3-10) are identified and therefore the model of Equation \@ref(eq:3-10) is identified. Moreover, we did not use the $\sigma_{42}$ and $\sigma_{43}$ equations yet, which shows that the model given by Equation \@ref(eq:3-10) is over-identified. Specifically, we have two more nonredundant elements in the population covariance matrix than the number of unknown model parameters (i.e., the model has two degrees of freedom). The equations for $\sigma_{41}$,$\sigma_{42}$ and $\sigma_{43}$ can all be used to express $\beta_{43}$ in terms of population variances and covariances. To illustrate this over identification of $\beta_{43}$ these different equations are given in the [Appendix](#appendix-1). 
 
 The expression of model parameters in terms of population variances and covariances can be used to arrive at a theoretical assessment of identification. However, a model that is theoretically identified might not necessarily be empirically identified. The theoretical identification of model parameter rests on the assumption that for each population parameter there is at least one estimate in terms of sample parameters. However, this assumption might be violated when some of the observed variables in the model exhibit very large or very small correlations. For example, when the sample covariance between two variables is zero, then the equations for the unknown parameters might involve division by zero, which is not possible. Therefore, researchers should always be aware of identification problems, even if the model is theoretically identified. 
 
@@ -162,11 +162,10 @@ Step 2: Fit the model to the model implied covariance matrix from Step 1.
 
 If the parameter estimates you obtain in Step 2 are identical to the parameter values you chose in Step 1, the model may be identified. If you obtain different parameter estimates in Step 2, your model is surely not identified. 
 
-Below, we will show two examples of the empirical check. In Script 7.1 we will check identification of the path model depicted in Figure \@ref(fig:fig7-1). First we will check identification if we add a covariance between the residual factors of $\mathrm{y}_3$ and $\mathrm{y}_4$ (Model 1), and subsequently we will check identification when we additionally add a reciprocal effect from $\mathrm{y}_4$ to $\mathrm{y}_3$ (Model 2). 
+Below, we will show two examples of the empirical check. In [Script 7.1](#script-7.1) we will check identification of the path model depicted in Figure \@ref(fig:fig7-1). First we will check identification if we add a covariance between the residual factors of $\mathrm{y}_3$ and $\mathrm{y}_4$ (Model 1), and subsequently we will check identification when we additionally add a reciprocal effect from $\mathrm{y}_4$ to $\mathrm{y}_3$ (Model 2). 
 
+### Script 7.1 {-}
 ```{r label='script7-1'}
-### Script 7.1 ### 
-
 ## STEP 1: calculate the model implied covariance matrix
 
 BETA <- matrix(c( 0, 0, 0,0,
@@ -224,11 +223,10 @@ summary(EmpiricalCheckOut)
 
 When you run the script for Model 1, you will notice that the parameter estimates are exactly equal to our chosen values from Step 1. Thus, this indicates that the model may be identified. As this empirical check is a necessary requirement for identification, but not sufficient, we are not completely sure that the model is truly identified.
 
-In the next script we show the empirical check of Model 2, where we also add the effect from $\mathrm{y}_4$ to $\mathrm{y}_3$. 
+In the [next script](#script-7.2) we show the empirical check of Model 2, where we also add the effect from $\mathrm{y}_4$ to $\mathrm{y}_3$. 
 
+### Script 7.2 {-}
 ```{r label='script7-2'}
-### Script 7.2 ### 
-
 ## STEP 1: calculate the model implied covariance matrix
 
 BETA <- matrix(c(0, 0, 0, 0,
@@ -278,9 +276,9 @@ summary(EmpiricalCheckOut)
 
 The output for the empirical check of Model 2 does not lead to the same parameter estimates as we used in Step 1. Therefore, we can be sure that this model is not identified. 
 
-## Appendix I ## {#appendix-7}
+## Appendix  {-}
 
-### Algebraic assessment of identification using elements of $\mathbf\Sigma_{\text{population}}$ and $\mathbf\Sigma_{\text{model}}$
+### Algebraic assessment of identification using elements of $\mathbf\Sigma_{\text{population}}$ and $\mathbf\Sigma_{\text{model}}$ {-}
 
 \begin{equation}
 \beta_{31} = \frac{\sigma_{31}-\frac{\sigma_{32}-\beta_{31}\psi_{21}}{\psi_{22}}\psi_{21}}{\psi_{11}}

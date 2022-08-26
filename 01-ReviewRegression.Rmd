@@ -624,7 +624,7 @@ Covariance can also be partitioned into components
 
 The decomposition of covariances will be explained after introducing path analysis.
 
-## References
+## References {-}
 
 Bollen, K. A. (1989). *Structural equations with latent variables*. Wiley. <http://dx.doi.org/10.1002/9781118619179>
 

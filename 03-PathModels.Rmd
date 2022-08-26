@@ -215,7 +215,7 @@ $$\mathrm{y} = \mathbf{B} \mathrm{y} + \zeta \Leftrightarrow$$
 (\#eq:3-08)
 \end{equation}
 
-where $\mathbf{I}$ is an identity matrix that needs to be introduced to come to the end result, and $(\mathbf{I} - \mathbf{B})^{-1}$ denotes the inverse of the matrix $(\mathbf{I} - \mathbf{B})$. Derivations of Equation \@ref(eq:3-08) are given in [Appendix 1](#appendix-3).
+where $\mathbf{I}$ is an identity matrix that needs to be introduced to come to the end result, and $(\mathbf{I} - \mathbf{B})^{-1}$ denotes the inverse of the matrix $(\mathbf{I} - \mathbf{B})$. Derivations of Equation \@ref(eq:3-08) are given in this chapters [Appendix](#derivations-of-equation-3.08).
 
 We now have an expression for the scores on the variables. However, in standard SEM, we do not model the observed scores directly, but the variances and covariance of the observed scores. Therefore, we need to find an expression for the model implied covariance matrix. Using Equation 3.08 and some covariance algebra, we obtain the expression for the variances and covariances of $\mathrm{y}$, called $\mathbf{\Sigma}_{\text{model}}$ = COV$(\mathbf{y},\mathbf{y})$:
 
@@ -224,7 +224,7 @@ We now have an expression for the scores on the variables. However, in standard 
 (\#eq:3-09)
 \end{equation}
 
-where $\boldsymbol{\Psi}$ is written for COV($\boldsymbol\zeta$,$\boldsymbol\zeta$), and $(\mathbf{I} - \mathbf{B})^{-1\mathrm{T}}$ denotes the transpose of the matrix $(\mathbf{I} - \mathbf{B})^{-1}$. Derivations of Equation \@ref(eq:3-09) are given in [Appendix 1](#appendix-3).
+where $\boldsymbol{\Psi}$ is written for COV($\boldsymbol\zeta$,$\boldsymbol\zeta$), and $(\mathbf{I} - \mathbf{B})^{-1\mathrm{T}}$ denotes the transpose of the matrix $(\mathbf{I} - \mathbf{B})^{-1}$. Derivations of Equation \@ref(eq:3-09) are given this chapters [Appendix ](#derivations-of-equation-3.09).
 
 The symmetric matrix $\boldsymbol{\Psi}$ contains the variances and the covariances of the residual factors $\boldsymbol\zeta$. For the model given in Equation \@ref(eq:3-07), matrix $\boldsymbol{\Psi}$ is
 
@@ -240,7 +240,7 @@ $$
 
 where $\psi_{11}$ and $\psi_{22}$ represent the variances of $\zeta_1$ and $\zeta_2$ and are thus equivalent with the variances of the exogenous variables $\mathrm{y}_1$ and $\mathrm{y}_2$. The covariance of $\zeta_{1}$ and $\zeta_{2}$ is represented by $\psi_{12}$ and is thus equivalent with the covariance of $\mathrm{y}_1$ and $\mathrm{y}_2$. Because a covariance matrix is a symmetric matrix, $\psi_{12}$ is equal to $\psi_{21}$. Parameters $\psi_{33}$ and $\psi_{44}$ are the variances of $\zeta_3$ and $\zeta_4$, equivalent with the residual variances (or disturbance variances) of $\mathrm{y}_3$ and $\mathrm{y}_4$, that is, that part of the variances of $\mathrm{y}_3$ and $\mathrm{y}_4$ that are not explained by the model.Note that the $\zeta$ variances associated with endogenous variables $\mathrm{y}_3$ and $\mathrm{y}_4$ have the same interpretation as the $\zeta$ variances associated with exogenous variables $\mathrm{y}_1$ and $\mathrm{y}_2$, but whereas all variance of $\mathrm{y}_1$ and $\mathrm{y}_2$ is unexplained by the model (and thus $\psi_{11}$ and $\psi_{22}$ are equivalent with the variances of $\mathrm{y}_1$ and $\mathrm{y}_2$), only part of the variances of $\mathrm{y}_3$ and $\mathrm{y}_4$ is unexplained by the model.
 
-Now that we have found the general expression for the variances and covariances as a function of model parameters, we can evaluate Equation 3.09 of our example. Substituting $\mathbf{B}$ and $\boldsymbol{\Psi}$ of our example we obtain:
+Now that we have found the general expression for the variances and covariances as a function of model parameters, we can evaluate Equation \@ref(eq:3-09) of our example. Substituting $\mathbf{B}$ and $\boldsymbol{\Psi}$ of our example we obtain:
 
 $\mathbf{\Sigma}_{\text{model}} = (\mathbf{I} - \mathbf{B})^{-1} \boldsymbol{\Psi} (\mathbf{I} - \mathbf{B})^{-1\mathrm{T}}$, where:
 
@@ -406,9 +406,9 @@ Every time you start R you need to use this command to activate the `lavaan` pac
 
 ### Fitting a path model
 
-Script 3.1 fits the path model of Figure \@ref(fig:fig3-2) to the covariance matrix that is given in Affrunti and Woodruff-Borden (2014). All commands will be explained below.
+[Script 3.1](#script-3.1) fits the path model of Figure \@ref(fig:fig3-2) to the covariance matrix that is given in Affrunti and Woodruff-Borden (2014). All commands will be explained below.
 
-***Script 3.1***
+#### Script 3.1 {-}
 
 ```{r eval=FALSE}
 # names observed variables
@@ -567,7 +567,7 @@ summary(AWmodelOut, rsquare = TRUE)
 
 ### Syntax shortcuts
 
-Script 3.1 specifies every single nonzero parameter depicted in the path model of Figure \@ref(fig:fig3-2). In larger models, this can become quite cumbersome, increase the chance of making an error, and make the model syntax more difficult to read (e.g., to find mistakes). Some parameters can be specified automatically in the `lavaan()` call. For example, setting the option `auto.var = TRUE` will tell `lavaan` to freely estimate all (residual) variances of variables included in the model syntax, and the option `fixed.x = FALSE` already tells `lavaan` to freely estimate covariances among exogenous variables. Thus, adding these options to the `lavaan()` call means that the model syntax requires only the specification of regression parameters, which is quite easy to read:
+[Script 3.1](#script-3.1) specifies every single nonzero parameter depicted in the path model of Figure \@ref(fig:fig3-2). In larger models, this can become quite cumbersome, increase the chance of making an error, and make the model syntax more difficult to read (e.g., to find mistakes). Some parameters can be specified automatically in the `lavaan()` call. For example, setting the option `auto.var = TRUE` will tell `lavaan` to freely estimate all (residual) variances of variables included in the model syntax, and the option `fixed.x = FALSE` already tells `lavaan` to freely estimate covariances among exogenous variables. Thus, adding these options to the `lavaan()` call means that the model syntax requires only the specification of regression parameters, which is quite easy to read:
 
 ```{r, eval = FALSE}
 
@@ -625,13 +625,12 @@ psi22 <- format( round(PSI[[2,2]], 3), nsmall = 3)
 
 Here, we can see that the variance of the residual factor of parent anxiety ($\psi_{11}$) is `r psi11` and the variance of the residual factor of parent perfectionism ($\psi_{22}$) is `r psi22`.
 
-## References
+## References {-}
 
 Rosseel, Y. (2012). lavaan: An R package for structural equation modeling. *Journal of Statistical Software, 48*(2), 1-36.
 
-## Appendix I. Derivations of equation 3.08 and 3.09 ## {#appendix-3}
-
-**Derivation of Equation 3.08**
+## Appendix {-}
+### Derivations of equation 3.08 {-}
 
 $\mathbf{y} = \mathbf{B} \mathbf{y} + \boldsymbol{\zeta} \Leftrightarrow$
 
@@ -647,7 +646,7 @@ $(\mathbf{I} - \mathbf{B})^{-1} (\mathbf{I} - \mathbf{B}) \mathbf{y} = (\mathbf{
 
 $\mathbf{y} = (\mathbf{I} - \mathbf{B})^{-1} \zeta$
 
-**Derivation of Equation 3.09**
+### Derivations of equation 3.09 {-}
 
 $\mathbf{\Sigma} = \mathrm{COV}(\mathbf{y},\mathbf{y}) \Leftrightarrow$
 

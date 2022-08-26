@@ -14,7 +14,7 @@ library(lavaan)
 
 ### Import Example Data
 
-We will use example data provided on the [M\textit{plus} website}](http://www.statmodel.com) for a technical report (Muthén, 2011, p. 24).  The example data can be downloaded onto your computer from the report's [supplementary materials](http://www.statmodel.com/examples/penn.shtml#extendSEM), or you can provide the URL directly to `read.table(file=)`, as shown below.  Note that the data are in summary format (i.e., a table with frequencies for each combination of categories for the 3 variables).  The `read.table()` output is therefore transformed into a standard `data.frame` with 1 row per subject.
+We will use example data provided on the [M*plus*} website}](http://www.statmodel.com) for a technical report (Muthén, 2011, p. 24).  The example data can be downloaded onto your computer from the report's [supplementary materials](http://www.statmodel.com/examples/penn.shtml#extendSEM), or you can provide the URL directly to `read.table(file=)`, as shown below.  Note that the data are in summary format (i.e., a table with frequencies for each combination of categories for the 3 variables).  The `read.table()` output is therefore transformed into a standard `data.frame` with 1 row per subject.
 
 ```{r import data-12}
 dd <- read.table(file = "http://www.statmodel.com/examples/shortform/4cat%20m.dat",
@@ -76,9 +76,13 @@ This limitation of linear probability models is resolved with a *link function* 
 
 - The *probit* (**prob**ability un**it**) transformation dates back to Bliss (1934). A probability can be transformed to a corresponding quantile in a cumulative distribution function (CDF), such as the standard-normal distribution.  In other words, any probability $p$ between 0--1 has a corresponding $z$ score, such as can be requested from `qnorm(p)`.  Likewise, any predicted value on the probit scale can be transformed back into a probability using `pnorm(probit)`.  The GLM takes the form below, where $\Phi()$ is the standard-normal CDF, $\Phi^{-1}()$ is its inverse, and $\mathbf{XB}$ is the linear predictor ($\widehat{y}$):
 
-$$\text{Probit}(y=1) = \Phi(\pi) = z = \mathbf{XB}$$
+$$
+\text{Probit}(y=1) = \Phi(\pi) = z = \mathbf{XB}
+$$
 
-$$\text{Pr}(y=1) = \pi = \Phi^{-1}(z)$$
+$$
+\text{Pr}(y=1) = \pi = \Phi^{-1}(z)
+$$
 
 - The *logit* (**log**istic un**it**) transformation is often favored because its coefficients can be interpreted on the (natural-)log-odds scale.  Recall the *odds* of an outcome is a ratio of its probability ($\pi$) to its complement ($1-\pi$), so its range is 0 to $+\infty$ (i.e., it is merely bound to nonnegative numbers).  The natural (i.e., base-$e$) log of a nonnegative number can take any real number.  The formulas below show how probabilities, odds, and logits are related.
 
@@ -226,7 +230,6 @@ par(opar)
 
 Notice that the distributions are identical.  Only the $x$-axis differs, reflecting the change in (arbitrary) identification constraint.
 
-
 ### Ordinal Outcomes
 
 The LRV interpretation is easily extended to polytomous ordinal variables, such as intent to smoke.  This is called the *cumulative probit* model (and link function).  Any ordinal variable with categories $c=0, \ldots, C$ can be interpreted as a crude discretization of an underlying LRV, whose $C$ thresholds divide the latent distribution into $C+1$ categories.
@@ -290,7 +293,6 @@ qnorm(c(0, cumsum(p.intent)))
 
 The upper and lower thresholds are $+/-\infty$ by definition, corresponding to 0 and 100\%.  Those never need to be estimated because they are fixed by design.  The remaining 3 thresholds are actual borders between observed categories, showing how far above/below the mean a subject must be in order to indicate a particular response category. 
 
-
 ### Estimating Polychoric Correlations
 
 With multiple ordinal variables, we can estimate the correlations between their associated LRVs by relying on the assumption that the LRVs are normally distributed (Olsson, 1979, 1982). These correlations are called *polychoric correlations* (Olsson, 1979), which are **bivariate** statistics (like the covariance matrix).  If the model also includes a continuous variable, its correlation with an ordinal variable's LRV is called the *polyserial correlation* (Olsson, 1982).  Special names for 2-category variables are *tetrachoric correlation* (between 2 binary variables) or *biserial correlation* (between a binary and continuous variable).  For example, the estimated covariance between cigarette use and intent to smoke in the model above is a polychoric correlation because each LRV's $SD$ was fixed to 1 in that unrestricted (saturated) model.
@@ -301,7 +303,6 @@ lavInspect(fit2, "sampstat")
 ```
 
 Notice that the means are 0 and variances are 1, consistent with the correlation metric and the assumption that the underlying LRV is a $z$ score. These values are actually fixed to *identify* the saturated model.  We will discuss *scaling constraints* and identification of latent variables more when we introduce the common-factor model.
-
 
 ### Estimating an SEM with Estimated Input
 
@@ -318,7 +319,6 @@ Another alternative is unweighted/ordinary least squares (ULS), where $\mathbf{W
 There are also likelihood-based estimators.  One option is marginal maximum likelihood (`estimator = "MML"`), which is *currently* disabled in `lavaan` because it was too computationally intensive and the developer is exploring better routines.  A less computationally intensive alternative is pairwise maximum likelihood (`estimator = "PML"`), which maximizes only the (sum of) uni- and bivariate (log-)likelihoods.  This is a quite robust procedure even in small samples, and because it is likelihood-based, information criteria (AIC and BIC) are available.
 
 *Note*: The "robust" statistics are only corrected for the two-stage estimation procedure (thresholds+pollychorics, followed by SEM parameters using DWLS or ULS) or for combining pairwise log-likelihoods (using PML).  The LRV interpretation for categorical outcomes **assumes a normal distribution** for latent responses.  Because LRVs are (by definition) unobserved, there is no way to estimate their degree of nonnormality, which would be necessary to correct for it.
-
 
 #### Counting Degrees of Freedom
 
@@ -532,7 +532,7 @@ So when using path analysis with categorical outcomes, it is best to exercise ca
 
 
 
-## References
+## References {-}
 
 Bliss, C. I. (1934). The method of probits. *Science, 79*(2037), 38--39. <https://doi.org/10.1126/science.79.2037.38>
 

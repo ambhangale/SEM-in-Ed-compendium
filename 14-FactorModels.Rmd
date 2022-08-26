@@ -1,4 +1,4 @@
-# Factor Models {#Ch14}
+# Factor Models {#ch14}
 
 Factor analysis is the second family of statistical analyses within the structural equation modeling (SEM) framework. Factor analysis is used to describe the dependencies between a set of observed variables, by using a limited number of so-called underlying or common factors. These common factors are not directly observed (i.e., they are latent factors) and represent everything that the associated observed variables have in common. In this chapter we first introduce an empirical example that will be used to explain factor models in this and subsequent chapters, then we give a general explanation of the factor model—both conceptually and through symbols, and explain how to fit the factor model using `lavaan`.
  
@@ -22,7 +22,7 @@ knitr::include_graphics("images/Ch14_factor_model.png")
 The circles $ε_{LO}$ through $ε_{SK}$ at the bottom of Figure \@ref(fig:fig14-1) are so-called residual factors. Just as with path analysis, residual factors in factor analysis are unobserved, latent factors that represent all factors that fall outside the model but may influence the states of the corresponding observed indicator variables. In the context of factor analysis, these residual factors can be considered ‘container variables’ that represent everything that is specific to the associated observed indicator variable (as opposed to everything that the observed indicator variables have in common, as represented by the common factors). The residual factors also reflect measurement error. The variance of a residual factor therefore partly consists of variance due to random error fluctuations (i.e., measurement error; unsystematic variance) and partly of specific variable variance (i.e., due to unmeasured causes; systematic variance). The directional effects from the residual factors to the corresponding observed indicator variables are accompanied by the scaling constant ‘1’ for reasons of identification (which is explained in more detail in section 14.4).
 
 ## Symbolic explanation of a factor model
-Figure 2 is again a graphical representation of the factor model of the SAQ, but now also includes the Greek symbols that are associated with the common factors (‘$ξ$’, or ‘ksi’) and the directional effects between the common factors and observed indicator variables (‘$λ$’, or ‘lambda’). Using these symbols, the relationships between the observed indicator variables and the underlying common factor as presented in Figure 2 can be given by the following equations:
+Figure \@ref(fig:fig14-2) is again a graphical representation of the factor model of the SAQ, but now also includes the Greek symbols that are associated with the common factors (‘$ξ$’, or ‘ksi’) and the directional effects between the common factors and observed indicator variables (‘$λ$’, or ‘lambda’). Using these symbols, the relationships between the observed indicator variables and the underlying common factor as presented in Figure 2 can be given by the following equations:
 
 \begin{align}
 \mathrm{x}_1 = \lambda_{11}\xi_1+\varepsilon_1, (\#eq:14-1) \\
@@ -122,7 +122,7 @@ We now have an expression for the scores on the observed indicator variables. Ho
 \end{equation}
 ```
 
-where the variances and covariances of the common factors are represented by $\text{COV}(\mathbf\xi,\mathbf\xi) = \mathbf\Phi$, and the variances and covariances of the residual factors represented by $\text{COV}(\mathbf\varepsilon,\mathbf\varepsilon) = \mathbf\Theta$. The matrix $\mathbf\Lambda$ contains the common factor loadings, and $\mathbf\Lambda^\text{T}$ denotes the transpose of the matrix $\mathbf\Lambda$. Derivations of Equation \@ref(eq:14-13) are given in [Appendix 1](#appendix14) at the end of this Chapter. 
+where the variances and covariances of the common factors are represented by $\text{COV}(\mathbf\xi,\mathbf\xi) = \mathbf\Phi$, and the variances and covariances of the residual factors represented by $\text{COV}(\mathbf\varepsilon,\mathbf\varepsilon) = \mathbf\Theta$. The matrix $\mathbf\Lambda$ contains the common factor loadings, and $\mathbf\Lambda^\text{T}$ denotes the transpose of the matrix $\mathbf\Lambda$. Derivations of Equation \@ref(eq:14-13) are given in the [Appendix](#derivations-of-equation-14.13) at the end of this chapter. 
 
 Matrix $\mathbf\Phi$ is a symmetric matrix and contains the variances and covariances of the common factors $\mathbfξ$. For the model given in Equation \@ref(eq:14-12), matrix $\mathbf\Phi$ is:
 
@@ -249,10 +249,10 @@ When a factor has fewer than three indicators, these scaling methods are not suf
 To make the situation more complicated, you can estimate a two-indicator factor with only one constraint, but only when the factor has a nonzero covariance with another factor in the model.  The covariances of the two indicators with other indicators in the other factor will be enough to empirically identify the factor loading(s) and/or factor variance of the two-indicator factor—but *only* if the factor covariance is substantial. If the factor covariance is close to zero, the model will still be empirically underidentified. It is therefore preferable to ensure identification, ideally by fixing both factor loadings to 1 so that the freely estimated factor variance represents what it literally is: the covariance between the indicators.
 
 ## Fitting a factor model using lavaan
-The lavaan script for fitting a factor model resembles the script for fitting a path model. We again use equations to specify the model, but we now use the “`=~`” operator to define the common factors. Whereas the “`~`” operator specifies regression paths that point from predictor(s) on the right-hand side to outcome(s) on the left-hand side, the “`=~`” operator specifies regression paths (called factor loadings) that point from the predictor (common factor) on the left-hand side to the outcomes (indicators) on the right-hand side. Script 14.1 fits the three-factor model from Figure \@ref(fig:fig14-3) to the covariance matrix from observed scores of the SAQ that was administered to 915 school pupils.
+The lavaan script for fitting a factor model resembles the script for fitting a path model. We again use equations to specify the model, but we now use the “`=~`” operator to define the common factors. Whereas the “`~`” operator specifies regression paths that point from predictor(s) on the right-hand side to outcome(s) on the left-hand side, the “`=~`” operator specifies regression paths (called factor loadings) that point from the predictor (common factor) on the left-hand side to the outcomes (indicators) on the right-hand side. [Script 14.1](#script-14.1) fits the three-factor model from Figure \@ref(fig:fig14-3) to the covariance matrix from observed scores of the SAQ that was administered to 915 school pupils.
 
+### Script 14.1 {-}
 ```
-### Script 14.1 ###
 ## observed covariance matrix
 obsnames <- c("learning","concentration","homework","fun",
             "acceptance","teacher","selfexpr","selfeff","socialskill")
@@ -307,10 +307,9 @@ saqmodel <- '
 		# L73 == 1
 	# effects-coding method (MUST specify in syntax)
       # NOTE: 3 different ways yield the same solution
-	(L11 + L21 + L31) / 3 == 1 # mean(Λ) = 1
-	L42 + L52 + L62 == 3       # sum(Λ) = number of indicators
-	L73 == 3 – L83 – L93       # 1 λ = difference between the
-                                 # sum and remaining loadings
+	(L11 + L21 + L31) / 3 == 1 # mean(Lambda) = 1
+	L42 + L52 + L62 == 3       # sum(Lambda) = number of indicators
+	L73 == 3 – L83 – L93       # 1 lambda = difference between the sum and remaining loadings
 	'
 ## fit model
 saqmodelOut <- lavaan(saqmodel, sample.cov = saqcov, 
@@ -342,7 +341,7 @@ We use labels for the estimates of the factor loadings, where the label refers t
 Motivation =~ L11*learning + L21*concentration + L31*homework
 ```
 
-The residual errors are specified in the same way as they are with the path model, using the double tildes (~~) to represent two-headed arrows. These are the residual terms that are represented in the theta matrix (Θ). As there are no covariances between residual factors specified in our model, this matrix is diagonal.  That is, the diagonal elements of the symmetric Θ are the indicators’ residual variances, and all residual covariances are fixed to zero. We use labels “TH11” through “TH99” to represent the 1st-row/1st-column element through the 9th-row/9th-column element.  
+The residual errors are specified in the same way as they are with the path model, using the double tildes (`~~`) to represent two-headed arrows. These are the residual terms that are represented in the theta matrix ($\mathbfΘ$). As there are no covariances between residual factors specified in our model, this matrix is diagonal.  That is, the diagonal elements of the symmetric $\mathbfΘ$ are the indicators’ residual variances, and all residual covariances are fixed to zero. We use labels “`TH11`” through “`TH99`” to represent the 1st-row/1st-column element through the 9th-row/9th-column element.  
 
 ```
 	# indicator residual variances (or use "auto.var = TRUE") 
@@ -380,7 +379,7 @@ Next, we need to specify the variances and covariances between the common factor
 
 Similar to residual variances, common-factor variances can be omitted from the model syntax if you use the argument "`auto.var = TRUE`".  Likewise, you can omit common-factor covariances from the model syntax if you use the argument "`auto.cov.lv.x = TRUE`". 
 
-Now we have specified all parameters of our factor model that are free to be estimated. However, although our model has positive degrees of freedom, it is still not identified. We must fix either the factor variances at a nonzero value or constrain at least one factor loading for each factor to give the factors a scale. Script 14.1 shows three ways to specify within the model syntax the scaling constraints necessary to identify the model. First we demonstrate the UVI (fixed-factor) constraint:
+Now we have specified all parameters of our factor model that are free to be estimated. However, although our model has positive degrees of freedom, it is still not identified. We must fix either the factor variances at a nonzero value or constrain at least one factor loading for each factor to give the factors a scale. [Script 14.1](#script-14.1) shows three ways to specify within the model syntax the scaling constraints necessary to identify the model. First we demonstrate the UVI (fixed-factor) constraint:
 
 ```
 	# UVI / fixed-factor method (or use "std.lv = TRUE")
@@ -436,10 +435,9 @@ saqmodelOut <- lavaan(saqmodel, sample.cov = saqcov,
                       sample.nobs = 915, likelihood = "wishart")
 ```
 
-There is a dedicated “wrapper” function (i.e., a function that calls `lavaan()` with specific defaults turned on) called `cfa()`. Specifically, `cfa()` calls `lavaan()` with the arguments `auto.fix.first`, `auto.var`, and `auto.cov.lv.x` set to `TRUE.` To use UVI instead of ULI, you can implicitly set `auto.fix.first` back to FALSE by setting `std.lv = TRUE`. Effects coding, however, requires calling `lavaan()` directly. Script 14.2 yields the same results as Script 14.1 (specifically, using the UVI constraint) but with many fewer lines of syntax.
-
+There is a dedicated “wrapper” function (i.e., a function that calls `lavaan()` with specific defaults turned on) called `cfa()`. Specifically, `cfa()` calls `lavaan()` with the arguments `auto.fix.first`, `auto.var`, and `auto.cov.lv.x` set to `TRUE.` To use UVI instead of ULI, you can implicitly set `auto.fix.first` back to FALSE by setting `std.lv = TRUE`. Effects coding, however, requires calling `lavaan()` directly. [Script 14.2](#script-14.2) yields the same results as [Script 14.1](#script-14.1) (specifically, using the UVI constraint) but with many fewer lines of syntax.
+### Script 14.2 {-}
 ```
-Script 14.2
 ## observed covariance matrix
 obsnames <- c("learning","concentration","homework","fun",
             "acceptance","teacher","selfexpr","selfeff","socialskill")
@@ -487,7 +485,7 @@ lavInspect(saqmodelOut, "est")
 
 When we introduced path model notation in Chapter 3, we used Psi to represent the matrix of exogenous (co)variances and endogenous residual (co)variances. After we introduce the full SEM, which combines a path model with a factor model, `lavaan`’s use of $\mathbfΨ$ instead of $\mathbfΦ$ will make more sense.  For now, think of them as arbitrary labels—either way, we are talking about the covariance matrix of latent variables. The use of Φ implies the latent variables are exogenous, and the use of Ψ implies at least one latent variable may be endogenous, but the formulas work the same either way.
 
-## References
+## References {-}
 Gonzalez, R., & Griffin, D. (2001). Testing parameters in structural equation modeling: Every “one” matters. *Psychological Methods, 6*(3), 258–269. doi:10.1037//1082-989X.6.3.258
 
 Little, T. D., Slegers, D. W., & Card, N. A. (2006). A non-arbitrary method of identifying and scaling latent variables in SEM and MACS models. *Structural Equation Modeling, 13*(1), 59–72. doi:10.1207/s15328007sem1301_3
@@ -496,7 +494,8 @@ Smits, J. A., & Vorst, H. C. M. (1982). *Schoolvragenlijst voor basisonderwijs e
 
 Steiger, J. H. (2002). When constraints interact: A caution about reference variables, identification constraints, and scale dependencies in structural equation modeling. *Psychological Methods, 7*(2), 210–227. doi:10.1037//1082-989X.7.2.210
 
-## Appendix. Derivations of Equation 14.13 {#appendix14}
+## Appendix {-}
+### Derivations of Equation 14.13 {-}
 
 $$
 \mathbf\Sigma = \text{COV}(\mathbf{x},\mathbf{x}) \Leftrightarrow

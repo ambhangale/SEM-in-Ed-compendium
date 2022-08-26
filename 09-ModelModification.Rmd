@@ -56,18 +56,17 @@ Table 2. *Modification indices for the full mediation model of child anxiety.*
 | Direct effect: | child_anx $\leftarrow$ perfectionism        | .109    | .038     |
 | Covariance:    | perfectionism $↔$ child_anx                 | .598    | −.079    |
 
-The lavaan Script 9.0 below demonstrates how to make a minor model adjustment, such as adding a single parameter.  Note that the model syntax does not need to be a single character string, but can be a vector of character strings, so we do not need to write out the whole model again.  The new model can be fit to the data using all the same `lavaan()` arguments in Script 3.1, or we can use the `update()` function as a shortcut.  Any specified arguments will replace the original model-fit arguments found in the object `AWmodelOut`.  The first argument to `lavaan()` is called `model`), so we provide our new model syntax.  All other (unspecified) arguments will be the same when the new model is fit, saving the results in the object `AWmodel2Out`.
+The lavaan [Script 9.0](#script-9.0) below demonstrates how to make a minor model adjustment, such as adding a single parameter.  Note that the model syntax does not need to be a single character string, but can be a vector of character strings, so we do not need to write out the whole model again.  The new model can be fit to the data using all the same `lavaan()` arguments in Script 3.1, or we can use the `update()` function as a shortcut.  Any specified arguments will replace the original model-fit arguments found in the object `AWmodelOut`.  The first argument to `lavaan()` is called `model`), so we provide our new model syntax.  All other (unspecified) arguments will be the same when the new model is fit, saving the results in the object `AWmodel2Out`.
 
+### Script 9.0 
 ```
-### Script 9.0 ###
-
 # add a direct effect of Parent Anxiety on Child Anxiety to the path model
 AWmodel2 <- c(AWmodel, ' child_anx ~ b41* parent_anx ')
 # fit the new model by "updating" the original model
 AWmodel2Out <- update(AWmodelOut, model = AWmodel2)
 ```
 
-In our illustrative example of child anxiety, the partial mediation model (where the regression of child anxiety on parent anxiety is added to the model) yields the following test result: $χ^2$(1) = 0.397, p = .53. Thus, the $χ^2$ value is no longer significant (at $α$ = .05), so the null hypothesis of exact fit cannot be rejected. This gives support to the notion that the model gives a true description of reality. However, one could question the parsimony of this model with a single degree of freedom. The size of the direct effect in standardized metric is estimated to be .292, which is substantial.  Note that the actual value matches the SEPC in Table 2 to the third decimal place.  Expected and actual estimated values will not always correspond so perfectly, but they will typically be very close.
+In our illustrative example of child anxiety, the partial mediation model (where the regression of child anxiety on parent anxiety is added to the model) yields the following test result: $χ^2(1) = 0.397$, $p = .53$. Thus, the $χ^2$ value is no longer significant (at $α = .05$), so the null hypothesis of exact fit cannot be rejected. This gives support to the notion that the model gives a true description of reality. However, one could question the parsimony of this model with a single degree of freedom. The size of the direct effect in standardized metric is estimated to be .292, which is substantial.  Note that the actual value matches the SEPC in Table 2 to the third decimal place.  Expected and actual estimated values will not always correspond so perfectly, but they will typically be very close.
 
 ## Cross-validation
 When post hoc model modification is used, one is actually not testing hypotheses anymore, but one is generating hypotheses based on the data under consideration. That is, it falls under exploratory research, and its results carry less scientific certainty than the results of confirmatory research. Future research could focus on trying to replicate the findings based on the final model from exploratory research. 
@@ -163,7 +162,7 @@ You can also request that MIs be printed at the bottom of the `summary()` output
 summary(AWmodelOut, modindices = TRUE)
 ```
 
-## References
+## References {-}
 Bentler, P. M. (1995). *EQS structural equations program manual*. Encino, CA: Multivariate Software.
 
 Bollen, K. A. (1989). *Structural equations with latent variables*. Hoboken, NJ: Wiley.

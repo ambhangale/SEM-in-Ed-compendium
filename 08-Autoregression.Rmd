@@ -10,11 +10,10 @@ knitr::include_graphics("images/Ch8_simple_autoregression_model.png")
 
 ```
 
-Script 8.1 fits this model to the data of Duncan and Duncan (1996).
+[Script 8.1](#script-8.1) fits this model to the data of Duncan and Duncan (1996).
 
+### Script 8.1 {-}
 ```{r echo = TRUE, eval=FALSE}
-### Script 8.1 ###
-
 ## observed data
 obsnames <- c("year1","year2","year3","year4","gender","famstat")
 
@@ -78,17 +77,15 @@ It is only theoretically justifiable to make this constraint if the lag (time be
 ## Autoregression models with predictors
 If an autoregression model fits the data well, predictors can be added to the model. These predictors are usually entered as exogenous variables, with a direct effect on the first measurement. When the predictor variable represents an intervention that took place after the first measurement, one would only add direct effects of that predictor on timepoints after the intervention. 
 
-Script 8.2 fits an autoregression model, with second order autoregression effects, and ‘gender’ and ‘family status’ as predictors to the same data of Duncan and Duncan (1996) as in script 8.1. This model is depicted in Figure \@ref(fig:fig8-2).
+[Script 8.2](#script-8.2) fits an autoregression model, with second order autoregression effects, and ‘gender’ and ‘family status’ as predictors to the same data of Duncan and Duncan (1996) as in [Script 8.1](#script-8.1). This model is depicted in Figure \@ref(fig:fig8-2).
 
 ```{r label="fig8-2", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Simple autoregression model, including predictor variables." }
 
 knitr::include_graphics("images/Ch8_Autoregression_w_predictors.png")
 
 ```
-
+### Script 8.2 {-}
 ```{r echo = TRUE, eval = FALSE}
-### Script 8.2 ###
-
 ## define model
 duncanmodel <- '
 			# COVARIANCES
@@ -127,7 +124,8 @@ If more than one variable are measured at several time points, one could also ev
 knitr::include_graphics("images/Ch8_Cross_lagged_panels.png")
 ```
 
-## References
+## References {-}
 Biesanz, J.C. (2012). Autoregressive longitudinal models. In Hoyle, R.H. (Ed.), *Handbook of Structural Equation Modeling* (pp. 459-471). New York: Guilford Press.
+
 Duncan, S. C. & Duncan, T. E. (1996). A multivariate latent growth curve analysis of adolescent substance use. *Structural Equation Modeling, 3*, 323-347.
 

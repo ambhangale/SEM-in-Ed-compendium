@@ -113,8 +113,9 @@ The standardized variances of the residual factors can be interpreted as the pro
 
 There are several ways to obtain standardized parameter estimates from a path model. Here, we will show how to manually calculate standardized parameter estimates from the estimated ($\hat{\mathbf{B}}$ $\hat{\mathbf\Psi}$) and model-implied ($\hat{\Sigma}$) matrices. 
 
-Script 6.1 shows the syntax that standardizes the $\hat{\mathbf{B}}$ and $\hat{\mathbf{\Psi}}$matrices ($\hat{\mathbf{B}}^*$ and $\hat{\mathbf{\Psi}}^*$) from the output of the Affrunti & Woodruff-Borden model that was saved in the object `AWmodelOut`.
+[Script 6.1](#script-6.1) shows the syntax that standardizes the $\hat{\mathbf{B}}$ and $\hat{\mathbf{\Psi}}$matrices ($\hat{\mathbf{B}}^*$ and $\hat{\mathbf{\Psi}}^*$) from the output of the Affrunti & Woodruff-Borden model that was saved in the object `AWmodelOut`.
 
+### Script 6.1 {-}
 ```{r label='script6-1'}
 # parameter estimates from the model
 Estimates <- lavInspect(AWmodelOut, "est")

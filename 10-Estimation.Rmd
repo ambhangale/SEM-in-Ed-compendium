@@ -209,7 +209,7 @@ AWmodelOut <- lavaan(model = AWmodel,
                      missing = "ML")
 ```
 
-## References
+## References {-}
 Browne, M. W. (1984). Asymptotic distribution free methods in the analysis of covariance structures. *British Journal of Mathematical and Statistical Psychology, 37*, 62–83. doi:10.1111/j.2044-8317.1984.tb00789.x
 
 Chen, F., Bollen, K. A., Paxton, P., Curran, P. J., & Kirby, J. B. (2001). Improper solutions in structural equation models. *Sociological Methods & Research, 29*, 468–508. doi:10.1177/0049124101029004003

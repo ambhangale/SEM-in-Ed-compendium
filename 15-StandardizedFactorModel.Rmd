@@ -1,7 +1,7 @@
-# Standardized Parameter Estimates for the Factor Model {#Ch15}
+# Standardized Parameter Estimates for the Factor Model {#ch15}
 
 ## Standardized factor loadings
-The matrix $\mathbfΛ$ from our illustrative factor model example from [Chapter 14](#Ch14) contains unstandardized factor loadings. These unstandardized estimates of factor loading parameters are interpreted relative to the units of measurement of the latent and observed variables (i.e., a factor loading is a slope, representing the average number of units the indicator changes when the factor increases by one unit). Thus, higher loadings indicate stronger linear relationships between the factor and indicator. When the indicator variables of a common factor are measured on the same scale, comparison of unstandardized coefficients can indicate the relative magnitudes among indicators of the same common factor (i.e., the highest loading belongs to the indicator most strongly related to the construct). For example, when we would estimate the effect of Motivation for school tasks on learning orientation and concentration on school work—and these variables are measured on the same scale (e.g., a 7-point Likert scale)—the unstandardized effects can be directly compared to give an indication of the relative importance of learning orientation and concentration on school work for the measurement of Motivation. 
+The matrix $\mathbfΛ$ from our illustrative factor model example from [Chapter 14](#ch14) contains unstandardized factor loadings. These unstandardized estimates of factor loading parameters are interpreted relative to the units of measurement of the latent and observed variables (i.e., a factor loading is a slope, representing the average number of units the indicator changes when the factor increases by one unit). Thus, higher loadings indicate stronger linear relationships between the factor and indicator. When the indicator variables of a common factor are measured on the same scale, comparison of unstandardized coefficients can indicate the relative magnitudes among indicators of the same common factor (i.e., the highest loading belongs to the indicator most strongly related to the construct). For example, when we would estimate the effect of Motivation for school tasks on learning orientation and concentration on school work—and these variables are measured on the same scale (e.g., a 7-point Likert scale)—the unstandardized effects can be directly compared to give an indication of the relative importance of learning orientation and concentration on school work for the measurement of Motivation. 
 
 However, a meaningful comparison of effects may be complicated when the interpretation of units on the scales of the variables are not equivalent (e.g., if one indicator is measured on a 5-point scale and the other on a 7-point scale, how does one unit on learning orientation relate to one unit on concentration on school work?). In addition, unstandardized factor covariances must also be interpreted in the (unobserved) measurement scale of the common factors. Therefore, it would be helpful to obtain standardized parameter estimates that are independent of the units in which both the common factor variables and the indicator variables are scaled. Standardized factor loadings are the factor loadings that would be obtained if both the common factor and observed indicator had variances equal to 1. Consequently, standardized factor loadings can be calculated as a function of unstandardized factor loadings and the variances of the observed variables and the common factors. For example, the estimated unstandardized factor loading of learning orientation on Motivation, $\hatλ_{11}$, can be standardized through:
 
@@ -125,11 +125,10 @@ The result is a full (i.e., not symmetric) matrix $\mathbf{P}$ that contains the
 ## Calculating standardized coefficients in lavaan {#ch15-5}
 Standardized parameter estimates can be obtained directly by analyzing the correlation matrix while scaling the common factors by fixing their variances to 1. However, it is not possible to (correctly) analyze a correlation matrix in `lavaan`, and in some situations (for example when doing multigroup analysis) analyzing a correlation matrix prevents meaningful comparison of coefficients across groups. Therefore, we show you how to calculate standardized coefficients in R using output from `lavaan.` 
 
-Script 15.1 shows the code that standardizes the matrices from Script 14.1, where the output was saved in the object `saqmodelOut.` To be able to extract parameter estimates from the `lavaan` output in a pre-specified order we have created the object `factornames` that contains the names of the common factors:
+[Script 15.1](#script-15.1) shows the code that standardizes the matrices from [Script 14.1](#script-14.1), where the output was saved in the object `saqmodelOut.` To be able to extract parameter estimates from the `lavaan` output in a pre-specified order we have created the object `factornames` that contains the names of the common factors:
 
+### Script 15.1 {-}
 ```
-### Script 15.1 ###
-
 ## save variable names
 obsnames <- c("learning","concentration","homework","fun",
               "acceptance","teacher","selfexpr","selfeff","socialskill")
@@ -249,7 +248,7 @@ lavInspect(saqmodelOut, "cor.all")[obsnames, factornames]
 ```
 
 
-## References
+## References {-}
 Cohen, J. (1992). A power primer. *Psychological Bulletin, 112*(1), 155–159. doi:10.1037/0033-2909.112.1.155
 
 
