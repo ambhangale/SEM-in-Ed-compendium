@@ -1,0 +1,149 @@
+# Mean structures {#ch21}
+
+Until now we have only addressed the analysis of covariance structure. However, we can also analyze mean structure using structural equation modeling. In the case of longitudinal or multigroup models, the analyses of means becomes especially relevant if the goal of the analysis is to compare means across groups or occasions. 
+
+We have shown the models for the covariances in both factor analysis and path analysis previously (see [Chapters 3](#ch3) and [14](#ch14)), but we have not yet shown the mean structure in those models. In this chapter we will first extent the models for factor analysis and path analysis to include the mean structure, and then explain how to model the mean structure in a factor model and in a path model in `lavaan`. 
+
+## Mean structure of a factor model
+Let’s reconsider the factor model that we used as an example in [Chapter 14](#ch14). The figure below is a graphical representation of the equations \@ref(eq:21-1) through \@ref(eq:21-9). 
+
+```{r label="fig21-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Factor model of the School Attitudes Questionnaire" }
+
+knitr::include_graphics("images/Ch14_factor_model_lambdas.png")
+```
+
+\begin{align}
+\mathrm{x}_1 = \lambda_{11}\xi_1+\varepsilon_1, (\#eq:21-1) \\
+\mathrm{x}_2 = \lambda_{21}\xi_1+\varepsilon_2, (\#eq:21-2) \\
+\mathrm{x}_3 = \lambda_{31}\xi_1+\varepsilon_3, (\#eq:21-3) \\
+\mathrm{x}_4 = \lambda_{42}\xi_2+\varepsilon_4, (\#eq:21-4) \\
+\mathrm{x}_5 = \lambda_{52}\xi_2+\varepsilon_5, (\#eq:21-5) \\
+\mathrm{x}_6 = \lambda_{62}\xi_2+\varepsilon_6, (\#eq:21-6) \\
+\mathrm{x}_7 = \lambda_{73}\xi_3+\varepsilon_7, (\#eq:21-7) \\
+\mathrm{x}_8 = \lambda_{83}\xi_3+\varepsilon_8, (\#eq:21-8) \\
+\mathrm{x}_9 = \lambda_{93}\xi_3+\varepsilon_9, (\#eq:21-9) 
+\end{align}
+
+If we add the mean structure to the factor model, we arrive at the following equations:
+
+\begin{align}
+\mathrm{x}_1 = \tau_{1} + \lambda_{11}\xi_1+\varepsilon_1, (\#eq:21-10) \\
+\mathrm{x}_2 = \tau_{2} + \lambda_{21}\xi_1+\varepsilon_2, (\#eq:21-11) \\
+\mathrm{x}_3 = \tau_{3} + \lambda_{31}\xi_1+\varepsilon_3, (\#eq:21-12) \\
+\mathrm{x}_4 = \tau_{4} + \lambda_{42}\xi_2+\varepsilon_4, (\#eq:21-13) \\
+\mathrm{x}_5 = \tau_{5} + \lambda_{52}\xi_2+\varepsilon_5, (\#eq:21-14) \\
+\mathrm{x}_6 = \tau_{6} + \lambda_{62}\xi_2+\varepsilon_6, (\#eq:21-15) \\
+\mathrm{x}_7 = \tau_{7} + \lambda_{73}\xi_3+\varepsilon_7, (\#eq:21-16) \\
+\mathrm{x}_8 = \tau_{8} + \lambda_{83}\xi_3+\varepsilon_8, (\#eq:21-17) \\
+\mathrm{x}_9 = \tau_{9} + \lambda_{93}\xi_3+\varepsilon_9, (\#eq:21-18) 
+\end{align}
+
+Equations \@ref(eq:21-10) through \@ref(eq:21-18) can also be written in matrix form:
+
+```{=tex}
+\begin{equation}
+\mathbf{x} = \mathbf\tau + \Lambda \mathbf\xi+\varepsilon,
+(\#eq:21-19)
+\end{equation}
+```
+
+where $\mathbf{x}$ is a vector of all observed variables, $\mathbf\xi$ is a vector of all common factors, $\mathbf\varepsilon$ is a vector of all residual factors, $\mathbf\Lambda$ is a matrix of factor loadings, and $\mathbf\tau$ is a vector of intercepts:
+$$
+\mathbf{x}=
+\begin{bmatrix}
+x_1\\x_2\\x_3\\x_4\\x_5\\x_6\\x_7\\x_8\\x_9
+\end{bmatrix},
+\mathbf\xi =
+\begin{bmatrix}
+\xi_1\\\xi_2\\\xi_3
+\end{bmatrix},
+\mathbf\varepsilon =
+\begin{bmatrix}
+\varepsilon_1\\\varepsilon_2\\\varepsilon_3\\\varepsilon_4\\\varepsilon_5\\\varepsilon_6\\\varepsilon_7\\\varepsilon_8\\\varepsilon_9
+\end{bmatrix}, 
+\mathbf\Lambda =
+\begin{bmatrix}
+\lambda_{11}&0&0\\\lambda_{21}&0&0\\\lambda_{31}&0&0\\0&\lambda_{42}&0\\0&\lambda_{52}&0\\0&\lambda_{62}&0\\0&0&\lambda_{73}\\0&0&\lambda_{83}\\0&0&\lambda_{93}
+\end{bmatrix}, \text{ and} \mathbf\tau =
+\begin{bmatrix}
+\tau_1\\\tau_2\\\tau_3\\\tau_4\\\tau_5\\\tau_6\\\tau_7\\\tau_8\\\tau_9
+\end{bmatrix}.
+$$
+
+The means of the common factors are represented by $\text{MEAN}(\xi) = \mathbf\kappa$, the means of the residual factors are assumed zero, $\text{MEAN}(\varepsilon) = 0$. With these assumptions we can derive expressions for the means of observed variables $\mathbf{x}$, called $\text{MEAN}(\mathbf{x}) = \mathbf{\mu}$,
+
+```{=tex}
+\begin{equation}
+\mathbf\mu = \mathbf\tau + \mathbf\Lambda \mathbf\kappa 
+(\#eq:21-20)
+\end{equation}
+```
+
+where $\mathbfμ$ (‘mu’) is a column vector of means of the observed variables, $\mathbfτ$ (‘tau’) is a column vector of intercepts, $\mathbfΛ$ is a matrix of factor loadings, and $\mathbfκ$ (‘kappa’) is a column vector of means for the common factors. Derivations of Equation \@ref(eq:21-20) are given in the [Appendix](#appendix3) at the end of this Chapter. Substitution of the $\mathbf\tau$, $\mathbf\Lambda$, and $\mathbf\kappa$ of our example from Figure \@ref(fig:fig21-1) yields:
+```{=tex}
+\begin{equation}
+\mathbf\mu = \begin{bmatrix}
+\mu_1\\\mu_2\\\mu_3\\\mu_4\\\mu_5\\\mu_6\\\mu_7\\\mu_8\\\mu_9
+\end{bmatrix} = \begin{bmatrix}
+\tau_1 + \lambda_{11}\kappa_1\\
+\tau_2 + \lambda_{21}\kappa_2\\
+\tau_3 + \lambda_{31}\kappa_3\\
+\tau_4 + \lambda_{41}\kappa_4\\
+\tau_5 + \lambda_{51}\kappa_5\\
+\tau_6 + \lambda_{61}\kappa_6\\
+\tau_7 + \lambda_{71}\kappa_7\\
+\tau_8 + \lambda_{81}\kappa_8\\
+\tau_9 + \lambda_{91}\kappa_9
+\end{bmatrix},
+(\#eq:21-21)
+\end{equation}
+```
+
+or $\mathbf\mu_{\text{population}} = \mathbf\mu_{\text{model}} $
+
+## Mean structure of a path model
+If we go back to the path model from [Chapter 3](#ch3) (see Figure \@ref(fig:fig21-2)), and include the mean structure, we arrive at the following equations: 
+
+\begin{align}
+\mathrm{y}_1 & = \alpha_1 + \zeta_1, (\#eq:21-22) \\
+\mathrm{y}_2 & = \alpha_2 + \zeta_2 , (\#eq:21-23) \\
+\mathrm{y}_3 & = \alpha_3 + \beta_{31}\mathrm{y}_1 + \beta_{32}\mathrm{y}_2 + \zeta_3 (\#eq:21-24) \\
+\mathrm{y}_4 & = \alpha_4 + \beta_{43}\mathrm{y}_3 + \zeta_44 , (\#eq:21-25) \\
+\end{align}
+
+where $\mathrm{y}_1$, $\mathrm{y}_2$, $\mathrm{y}_3$, and $\mathrm{y}_4$ are observed variables, $\zeta_1$, $\zeta_2$, $\zeta_3$ and $\zeta_4$ are residual factors, $\alpha_1$ $\alpha_2$, $\alpha_3$, and $\alpha_4$ are intercepts, and $\beta_{31}$, $\beta_{32}$, and $\beta_{43}$ are regression coefficients.
+```{r label="fig21-2", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Path model of child anxiety." }
+
+knitr::include_graphics("images/Ch21_path_model.png")
+```
+
+Equations \@ref(eq:21-22) through \@ref(eq:21-25) can also be written in matrix form:
+```{=tex}
+\begin{equation}
+\mathbf{y} = \mathbf\alpha+\mathbf{B}\mathbf{y}+\mathbf\zeta
+(\#eq:21-26)
+\end{equation}
+```
+
+where $\mathbf{y}$ is a vector of all observed variables, $\mathbf\zeta$ is a vector of all residual factors, $\mathbf\alpha$ is a vector of intercepts, and $\mathbf{B}$ is a matrix of regression coefficients,
+
+$$
+\mathbf{y} = \begin{bmatrix}\mathrm{y}_1\\ \mathrm{y}_2\\ \mathrm{y}_3 \\ \mathrm{y}_4 
+\end{bmatrix}, \mathbf\zeta = \begin{bmatrix} \zeta_1 \\ \zeta_2 \\ \zeta_3 \\ \zeta_4
+\end{bmatrix}, \mathbf\alpha = \begin{bmatrix} \alpha_1 \\ \alpha_2 \\ \alpha_3 \\ \alpha_4
+\end{bmatrix}, \text{ and }\mathbf{B} = \begin{bmatrix} 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ \beta_{31} & \beta_{32} & 0 & 0 \\ 0 & 0 & \beta_{43} & 0
+\end{bmatrix}.
+$$
+
+We assume the residual factors have zero means: $\text{MEAN}(\mathbf\zeta) = 0$.
+
+In order to find the model for the means of the observed variables, we first have to rewrite $\mathbf{y}$ in Equation \@ref(eq:21-26) as a function of model parameters.
+
+\begin{align}
+\mathbf{y} &= \mathbf\alpha + \mathbf{B} \mathbf{y} + \mathbf\zeta \Leftrightarrow \\
+\mathbf{y} &= (\mathbf{I} - \mathbf{B})^{-1} \mathbf\alpha + (\mathbf{I} - \mathbf{B})^{-1} \mathbf\zeta, (\#eq:21-27)
+\end{align}
+
+
+
+
