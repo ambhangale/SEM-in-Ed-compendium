@@ -25,3 +25,8 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tinytex'
 ), 'packages.bib')
 ```
+
+```{r echo = FALSE, out.width = "50%", fig.align = "left" }
+
+knitr::include_graphics("images/draft_cover.png")
+```
