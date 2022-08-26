@@ -1,0 +1,54 @@
+# Second-order Correlation Residuals {#ch19}
+
+In a second-order factor model ([Chapter 17](#ch17)), $\mathbfΦ$ has the structure of a factor model. In a structural regression model, $\mathbfΦ$ has the structure of a path model ([Chapter 18](#ch18)). In both models, one might want to have information to guide re-specification of the second-order part (i.e. the model for the (first-order) common factors). Correlation residuals provide this information. 
+
+Correlation residuals for the higher-order part are the differences between the model-implied factor correlations, and the correlation matrix of common factors ($\mathbfΦ$) from the measurement model (without a higher-order model). 
+
+To obtain them in `lavaan`, you have to run a script for the measurement model first ([Chapter 14](#ch14)), and save the covariance matrix $\mathbfΦ$ in an object. Then, after running the higher-order model or SR model, the correlation residuals can be calculated. 
+
+We will show the additional commands that could be added to [Script 17.1](#script-17.1) and to [Script 18.1](#script-18.1), to calculate the correlation residuals of the second-order part of the hierarchical factor model and the structural part of the SR model respectively. Before using this script, we ran a script with the measurement model ([Script 14.1](#script-14.1)), and saved the matrix with the covariances between common factors ($\mathbfΦ$) to the object: 
+```
+phi <- lavInspect(saqmodelOut, "est")$psi
+```
+Then, we ran [Script 17.1](#script-17.1) and we calculate the model-implied $\mathbfΦ$ matrix of the second-order factor model (see also [Script 17.2](#script-17.1)), with:
+```
+## calculate model-implied covariance  matrix first-order factors 
+Estimates <- lavInspect(saqmodel2ndOut, "est")
+
+factor1names <- c("Motivation","Satisfaction","SelfConfidence")
+factor2names <- c("Attitudes")
+
+lambda2 <- Estimates$beta[factor1names, factor2names, drop = FALSE]
+theta2 <- Estimates$psi[factor1names, factor1names]
+phi2 <- Estimates$psi[factor2names, factor2names]
+
+phi_2nd <- lambda2 %*% phi2 %*% t(lambda2) + theta2
+```
+
+The correlation residuals are then calculated by standardizing the two $\mathbfΦ$ matrices, and subtracting the $\mathbfΦ$ matrix of the second-order factor model (`phi_2nd`) from the Φ matrix of the measurement model (`phi`).
+```
+corres2nd <- cov2cor(phi) - cov2cor(phi_2nd)
+```
+To calculate the correlation residuals for the structural regression model, we ran [Script 18.1](#script-18.1) and we calculate the model-implied $\mathbfΦ$ matrix (see also [Script 18.2](#script-18.2)), with:
+```
+# calculate model-implied covariance matrix of common factors
+Estimates <- lavInspect(saqmodelSROut, "est")
+factornames <- c("Motivation","Satisfaction","SelfConfidence")
+
+# Reorder parameter matrices and store them in separate objects 
+beta <- Estimates$beta[factornames, factornames, drop = FALSE]
+psi <- Estimates$psi[factornames, factornames]
+iden <- diag(nrow(beta))
+
+# Calculate model-implied covariance matrix of factors (phi_SR)
+phi_SR <- solve(iden-beta) %*% psi %*% t(solve(iden-beta))
+```
+The correlation residuals are then calculated by standardizing the two $\mathbfΦ$ matrices, and subtracting the $\mathbfΦ$ matrix of the SR model from the $\mathbfΦ$ matrix of the measurement model. 
+```
+corresSR <- cov2cor(phi) - cov2cor(phi_SR)
+```
+Like with the first-order correlation residuals, we can use some R functions to find the correlation residuals higher than .10, and to find the largest correlation residual.
+```
+abs(corresSR) >= .10	
+corresSR == max(abs(corresSR))
+```
