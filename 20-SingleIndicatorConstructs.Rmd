@@ -1,0 +1,185 @@
+# Factors with single indicators {#ch20}
+
+Like most SEM software, `lavaan` expresses covariance structure using LISREL matrices^[LISREL matrices are not the only possible way to express covariance structure, but it is the most popular because it is the oldest expression of full SEM.  RAM notation (reticular action model), for example, collects all directed paths into a single matrix and all undirected paths (covariances) into a single matrix, so the distinction between observed and latent variables is only conceptual.] (__LI__near __S__tructural __REL__ations). LISREL matrices include two matrices of directed paths (i.e., regression slopes, or single-headed arrows in a path diagram). The Beta matrix includes paths between latent variables, and the Lambda matrix includes paths from latent variables to observed variables. There is no matrix for regression paths between observed variables, but so we use Beta in a path model, we implicitly treat each observed variable as a single indicator of a latent construct, and software automatically fixes the factor loading to 1 and residual variance to 0.
+
+If we specify a SR model that has directed effect of an observed variable on a latent variable, we need to model the observed variable as if it were a common factor. We do this by defining a common factor with just one indicator. For scaling, we will fix the factor loading to one, so a 1-unit increase in the “factor” corresponds to a 1-unit increase in the observed variable. The residual variance cannot be estimated with just one indicator and must therefore also be fixed, either to zero (assuming no measurement error) or to some nonzero value (if the reliability of the measure can be known or estimated, e.g., from previous studies). Using these restrictions transfers all the information of the indicator into the common factor so that we essentially treat this variable as we would any other common factors in the SR model. Most computer programs (like `lavaan`) automatically impose these modelling restrictions when direct effects between observed and latent variables are specified, just as they do in a path model that has only observed variables. But we can also impose these restrictions ourselves, which gives us the freedom to choose how to fix the residual variance of the single indicator. 
+
+[Script 20.1](#script-20.1) fits the SR model from [Chapter 16](#ch16), with the single indicators “`age`” and “`sex`”. They are modelled as explanatory variables of self-confidence (see Figure \@ref(fig:fig18-1) in [Ch. 18](#ch18)).
+
+### Script 20.1 {-}
+```
+## observed data 
+obsnames <- c("learning","concentration","homework","fun","acceptance",
+              "teacher","selfexpr","selfeff","socialskill","sex","age")
+
+values <- c(30.6301,
+            26.9452, 56.8918,
+            24.1473, 31.6878, 53.2488,
+            16.3770, 18.4153, 16.8599, 27.9758,
+             7.8174,  9.6851, 10.0114, 12.8765, 47.0970,
+            13.6902, 16.9232, 12.9326, 17.2880, 10.3672, 29.0119,
+            15.3122, 24.2849, 21.4935, 10.9621, 13.9909, 11.6333, 59.5343,
+            13.4457, 21.8158, 18.8545,  7.3931, 10.2333,  7.1434,  29.7953, 49.2213,
+             6.6074, 12.7343, 10.5768,  6.4065, 13.4258,  6.1429,  26.0849, 23.6253, 40.0922,
+             0.3698,  0.3706,  0.6557,  0.3491, -0.2171,  0.2958,       -0.0441, -0.4148, -0.5830,  0.2502,
+            -0.6759, -0.9188, -0.2958, -0.7017,  0.1006, -0.4551,  0.3684,   0.4908,  0.3331, -0.0178,  0.9237)
+
+saqcov <- getCov(values, names = obsnames)
+
+## define structural regression model with single indicators 
+saqmodelSRsinind <- '# MEASUREMENT PART
+	# regression equations
+	Motivation =~ L11*learning + L21*concentration + L31*homework
+	Satisfaction =~ L42*fun + L52*acceptance + L62*teacher
+	SelfConfidence =~ L73*selfexpr + L83*selfeff + L93*socialskill
+
+	# create single indicator common factors
+	SEX =~ L104*sex
+	AGE =~ L115*age
+
+	# residual variances observed variables 
+	learning ~~ TH11*learning
+	concentration ~~ TH22*concentration
+	homework ~~ TH33*homework
+	fun ~~ TH44*fun
+	acceptance ~~ TH55*acceptance
+	teacher ~~ TH66*teacher
+	selfexpr ~~ TH77*selfexpr
+	selfeff ~~ TH88*selfeff
+	socialskill ~~ TH99*socialskill
+	sex ~~ TH1010*sex
+	age ~~ TH1111*age
+
+	# scaling constraints
+	L11 == 1
+	L42 == 1
+	L73 == 1
+	L104 == 1
+	L115 == 1
+	TH1010 == 0
+	TH1111 == 0
+
+# STRUCTURAL PART
+	# regressions between common factors
+	Motivation ~ b13*SelfConfidence
+	Satisfaction ~ b21*Motivation
+	SelfConfidence ~ b34*SEX + b35*AGE
+
+	# residual variances common factors
+	Motivation ~~ p11*Motivation
+	Satisfaction ~~ p22*Satisfaction
+	SelfConfidence ~~ p33*SelfConfidence
+
+	# (co)variances exogenous common factors
+	SEX ~~ p44*SEX
+	AGE ~~ p55*AGE
+	SEX ~~ p54*AGE
+'
+## fit model
+saqmodelSRsinindOut <- lavaan(saqmodelSRsinind, sample.cov = saqcov,
+          sample.nobs = 915, likelihood = "wishart", fixed.x = FALSE)
+## results
+summary(saqmodelSRsinindOut, fit = TRUE, std = TRUE)
+```
+
+The first part of the script is identical to the definition of the measurement part of the model from the SR model from [Chapter 18](#ch18). Because the covariances between the common factors are modelled as a path model, it is required to scale the common factors through the factor loadings. Therefore, we have fixed one of the factor loadings for each of the common factors to ‘1’ as a scaling constraint. 
+
+To identify the single indicators as common factors we create the common factors “`SEX`” and “`AGE`” with only one indicator. 
+
+```
+	# create single indicator common factors
+	SEX =~ L104*sex
+	AGE =~ L115*age
+```
+In addition, we specify the residual variances.
+```
+	# residual variances observed variables 
+	sex ~~ TH1010*sex
+	age ~~ TH1111*age
+```
+The identification constraints that we used for the single indicators are that the factor loadings are constrained to 1 and the residual variances to 0.
+```
+	# scaling constraints
+	L104 == 1
+	L115 == 1
+	TH1010 == 0
+	TH1111 == 0
+```
+By choosing 0 for the residual variance, we assume that there is no measurement error for age and sex. This might make sense (e.g., most people can be categorized as one of two biological sexes, with some exceptions such as a second Y chromosome, so we can expect measurement error to be nearly zero), but for indicators of constructs that cannot be directly observed or are defined abstractly, this might be an unrealistic assumption.
+
+For example, if we have a single indicator variable for a measure of depression, then we might be able to estimate the measurement error for this indicator. Suppose that you know the reliability of the depression measure, for example .70, then consequently, the proportion of residual variance is .30. The (unstandardized) residual variance can then be fixed to the .30 proportion of the total variance. For example, when the variance of the indicator would be 5.8, the residual variance can be constrained to $0.30 × 5.8 = 1.74$.
+
+In the second part we define the structural part of the model, where we add effects from the single indicators `SEX` and `AGE` on self-confidence. The variances of the exogenous variables and the covariance between the exogenous variables are also defined. 
+```
+		# STRUCTURAL PART
+		# regressions between common factors
+		Motivation ~ b13*SelfConfidence
+		Satisfaction ~ b21*Motivation
+		SelfConfidence ~ b34*SEX + b35*AGE
+
+		# residual variances common factors
+		Motivation ~~ p11*Motivation
+		Satisfaction ~~ p22*Satisfaction
+		SelfConfidence ~~ p33*SelfConfidence
+
+		# (co)variances exogenous common factors
+		SEX ~~ p44*SEX
+		AGE ~~ p55*AGE
+		SEX ~~ p54*AGE
+```
+When we run the model and request the output, we can see that boys score higher on self-confidence than girls (as boys are coded 0 and girls are coded 1), and that the older the pupil the higher the self-confidence. 
+
+We can also request output in matrix representation using the `lavInspect()` function.
+```
+lavInspect(saqmodelSRsinindOut, "est")
+```
+[Script 20.2](#script-20.2) fits the same SR model with the single indicators “`age`” and “`sex`”, but here we specify the relations between the common factors and observed indicators directly. This means that the variables “`age`” and “`sex`” will only appear in the structural part of the model, and not in the measurement part. The `summary()` output will simply display the effect of the observed variables “`age`” and “`sex`” on the latent factors, as though no single-indicator constructs were defined. But if we request the output in matrix form, we see that `lavaan` does define single-indicator constructs, using the same names as the observed variables “`age`” and “`sex`”; however, the variances are in Theta instead of Psi, so those single-indicator constructs are identified by fixing the factor (not residual) variance to 0.
+
+### Script 20.2 {-}
+```
+## define structural regression model with single indicators 
+saqmodelSRsinind <- '
+	# MEASUREMENT PART
+	# regression equations
+	Motivation =~ L11*learning + L21*concentration + L31*homework
+	Satisfaction =~ L42*fun + L52*acceptance + L62*teacher
+	SelfConfidence =~ L73*selfexpr + L83*selfeff + L93*socialskill
+
+	# residual variances observed variables 
+	learning ~~ TH11*learning
+	concentration ~~ TH22*concentration
+	homework ~~ TH33*homework
+	fun ~~ TH44*fun
+	acceptance ~~ TH55*acceptance
+	teacher ~~ TH66*teacher
+	selfexpr ~~ TH77*selfexpr
+	selfeff ~~ TH88*selfeff
+	socialskill ~~ TH99*socialskill
+
+	# scaling constraints
+	L11 == 1
+	L42 == 1
+	L73 == 1
+
+	# STRUCTURAL PART
+	# regressions between common factors
+	Motivation ~ b13*SelfConfidence
+	Satisfaction ~ b21*Motivation
+	SelfConfidence ~ b34*sex + b35*age
+
+	# (residual) variances common factors
+	Motivation ~~ p11*Motivation
+	Satisfaction ~~ p22*Satisfaction
+	SelfConfidence ~~ p33*SelfConfidence
+
+	# (co)variances exogenous variables
+	sex ~~ p44*sex
+	age ~~ p55*age
+	sex ~~ p54*age
+'
+## fit model
+saqmodelSRsinindOut <- lavaan(saqmodelSRsinind, sample.cov = saqcov,
+          sample.nobs = 915, likelihood = "wishart", fixed.x = FALSE)
+## results
+lavInspect(saqmodelSRsinindOut, "est")
+```
