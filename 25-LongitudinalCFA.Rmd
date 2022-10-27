@@ -1,0 +1,10 @@
+# Longitudinal Factor Analysis
+
+With longitudinal factor analysis, a factor model is fitted to a set of indicators of which responses are collected at different time points. It may be interesting to compare factor means and variance across time. 
+
+Fitting a longitudinal factor model is not very different from fitting a factor model with means, except that in a longitudinal factor model there are covariances between the residual factors of the same indicator at different time points. Figure 1 depicts a one-factor model of “Self-efficacy” with six indicators, measured at two different time points. Because each indicator is measured twice in the same individuals, the item specific components of each indicator covary across timepoints. 
+
+```{r label="fig25-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Self-efficacy measured at two time points." }
+
+knitr::include_graphics("images/Ch25_self-efficacy.png")
+```
