@@ -1,4 +1,4 @@
-# Calculating Mean Residuals (#ch23)
+# Calculating Mean Residuals {#ch23}
 
 When testing equality constraints on the intercepts across groups or across time points, one may find that not all intercepts are equal. Valid comparison can still be made between groups’ latent means as long as at least two intercepts can be constrained to equality.  If some, but not all, of a factor’s measurement parameters (loadings, intercepts, or residual variances) can be constrained to equality across groups or occasions, this is called ‘partial measurement invariance’. Invalid equality constraints on factor loadings are not clearly revealed by correlation residuals, but standardized mean residuals can be useful to identify which intercepts vary most across groups or occasions. They are calculated by standardizing the observed means and the model implied means, and looking at the difference between them. 
 

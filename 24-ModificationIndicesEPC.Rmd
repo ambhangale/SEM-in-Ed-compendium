@@ -1,0 +1,132 @@
+# Modification Indices and EPC's for Equality Constraints {#ch24}
+
+To test whether a fixed parameter should be freely estimated, you can fit a constrained model in which the parameter is fixed, and an unconstrained model in which the parameter is freely estimated.  Because these models are nested, the $Δχ^2$ provides a valid test statistic, assuming distributional assumptions of the test are met. Model modification would be quite cumbersome if it required fitting every possible alternative model in which a single parameter is freed to improve fit.  Luckily, the original results from the constrained model provide enough information to estimate how much $Δχ^2$ would be if a parameter (or set of parameters) were to be freed. These estimates are called Lagrange multipliers, often referred to as modification indices. The same information also provides a way to estimate how much a parameter would change if that (or another) parameter were to be freed. These are called expected parameter changes (EPCs), for which standardized versions (SEPCs) are available.
+
+[Chapter 9](#ch9) introduced these statistics for model modification, but there they were only discussed in their most limited sense: a $1-df$ $Δχ^2$ test for freeing a single, fixed parameter (modification index) and how much that same parameter might change (EPC).  In this chapter, we will extend the same concept in three ways (see Bentler & Chou, 1993, for details).  First, modification indices can be calculated for releasing a constraint on a parameter that is already estimated rather than fixed.  These constraints can refer to inequalities (e.g., `psi22` $> 0$ or `beta32` $< 1$) or to equalities (e.g., constraining measurement parameters to equality across groups or occasions).  Second, modification indices can be calculated for releasing multiple constraints (e.g., a $3-df$ $Δχ^2$ test for releasing three constraints).  Third, EPCs can be calculated on the condition that other parameters are freed, rather than the same parameter.  For example, if we were to release an equality constrain for one indicator’s intercepts across groups, how much might the estimated mean of its common factor change?  This type of EPC has been called EPC-interest (Oberski, 2014).
+
+Although most SEM software make modification indices available for the first extension (for equality constraints as well as fixed parameters), only `lavaan` currently offers the second and third extensions.  These are available via the function `lavTestScore()`.  We will demonstrate how to implement each of these three extensions in the following three sections.
+
+## Modification index for simultaneously freeing a set of parameters 
+[Script 24.1](#script-24.1) demonstrates how to request the simplest case from `lavaan.`  Using the path model we fit in [Script 3.1](#script-3.1), recall that the largest modification index (that made sense in the context of the model) was for the regression of child anxiety on parent anxiety.  We can reproduce the same value using the `lavTestScore()` function with the add argument, which is used to provide model syntax for currently fixed parameter(s) to be added to the model syntax.  The resulting modification indices are identical.
+
+### Script 24.1 {-}
+```
+## using the modificationIndices() function
+modificationIndices(AWmodelOut, sort. = TRUE)
+## using the lavTestScore() function
+lavTestScore(AWmodelOut, add = 'child_anx ~ parent_anx')
+
+Script 24.2 demonstrates how to get multiple modification indices, by specifying multiple additional parameters to free.  In the path model from chapter 3, the only parameters that it makes sense to free are the regressions of child anxiety onto both exogenous variables (parent anxiety and parent perfectionism). 
+
+Script 24.2
+lavTestScore(AWmodelOut, add = c('child_anx ~ parent_anx',
+                                 'child_anx ~ perfect'))
+```
+
+Again, the individual (univariate) modification indices are identical to the output from the `modificationIndices()` function.  But unlike the `modificationIndices()` function, `lavTestScore()` also provides a total test statistic, corresponding the estimated $2-df$ $Δχ^2$ test if both parameters were freed at the same time and compared to the constrained model.
+
+```
+total score test:
+   test    X2 df p.value
+1 score 7.082  2   0.029
+
+univariate score tests:
+                   lhs op rhs    X2 df p.value
+1 child_anx~parent_anx ==   0 6.716  1   0.010
+2    child_anx~perfect ==   0 0.109  1   0.742
+```
+
+## Modification indices for releasing equality constraints
+[Script 22.3](#script-22.3) fits a strong invariance (scalar equivalence) model, which fit significantly worse than the weak invariance (metric equivalence) model.  Thus, we rejected the $\text{H}_0$ that all indicators’ intercepts were equal across groups.  To establish partial invariance, we first inspected standardized mean residuals in [chapter 23](#ch23).  [Script 24.3](#script-24.3) demonstrates how to request modification indices for the intercept constraints using the release argument.  This involves multiple steps, but it is good motivation for researchers to think carefully about which (and therefore how many) modification indices to inspect, and adjust $α$ accordingly.
+
+### Script 24.3 {-}
+```
+## save parameter table
+(PT <- parTable(saqout.scalar))
+## extract the part of the table regarding constraints
+CT <- PT[PT$op == "==", ]
+rownames(CT) <- NULL ## to know the actual "constraint number"
+CT
+## find out which constraints involve the intercepts
+PT[PT$op == "~1", ]
+## Parameters 25-33 are constrained to equal parameters 61-69.
+## In the constraints table, these are rows 10-18
+CT[10:18, ]
+## We need to adjust our alpha level for the number of tests
+length(10:18) ## 9 tests
+.05 / 9       ## Bonferroni-adjusted alpha level
+1 - .95^(1/9) ## Sidak-adjusted alpha level
+## To calculate modification indices for these constraints, specify those
+## rows.  Compare the values in the "X2" column to the critical value.
+lavTestScore(saqout.scalar, release = 10:18)
+## The following constraints are significant
+## .p27. == .p63.
+## .p29. == .p65
+## .p31. == .p67
+## .p33. == .p69.
+## They correspond to these indicators:
+PT$lhs[PT$plabel %in% c(".p27.",".p29.",".p31.",".p33.")]
+```
+
+First, we extract the parameter table from our fitted lavaan object.  This contains all the free parameters we specified in our model syntax, as well as any parameters that may have been freed by default in the `cfa()` function or using (for example) the `auto.*` arguments in `lavaan()`.  At the bottom are rows corresponding to equality constraints.
+
+```
+(PT <- parTable(saqout.scalar))
+```
+
+Notice that there are columns for the left-hand side (`lhs`) and right-hand side (`rhs`) of every parameter specification, separated by the operator (`op`) that defines the relationship between the two variables in `lhs` and `rhs`.  For mean-structure parameters, the rhs is empty because the operator is a regression onto a constant rather than a variable (`~1`).  The operator for equality constraints is the double-equals sign (`==`).  To request modification indices for specific constraints, we need to refer to the order in which they appear in the parameter table.  So we next need to extract the rows corresponding only to constraints, and “erase” the row numbers from the full parameter table by setting them to `NULL`.
+
+```
+CT <- PT[PT$op == "==", ]
+rownames(CT) <- NULL ## to know the actual "constraint number"
+CT
+```
+
+Because `lavaan` uses its own internal labels, it is not obvious to which parameters these constraints refer.  To find out, we refer back to the full parameter table, and pay attention to the `plabel` column, which contains `lavaan`’s default parameter labels (distinct from your user-defined labels in the label column).  Rather than print the full table, we can request the rows we are interested in.  For example, if weak invariance (metric equivalence) did not pass, then we would be interested in equality constraints involving factor loadings, so we would request rows of `PT` corresponding to `op == "=~"`.  Because we are testing equality constraints on intercepts in this example, we request rows only corresponding to mean-structure parameters (where `op == "~1"`).  This also prints out the latent means, but there are only a few of those, so they are easy to ignore.
+
+```
+PT[PT$op == "~1", ]
+```
+
+Now that we can see that the intercepts were labeled by `lavaan` with the numbers 25–33 in the first group (boys) and 61–69 in the second group (girls; notice the group column, as well as the estimate and se columns).  Looking back at the constraints table (`CT`), we can now see that rows 10–18 correspond to constraints on the intercepts.  Therefore, we request modification indices for those specific constraints.
+
+```
+lavTestScore(saqout.scalar, release = 10:18)
+```
+
+Because there are 9 tests (one for each intercept), we need to test the $Δχ^2$ value in the `X2` column using a Bonferroni-adjusted $α = .05 / 9 = .0056$, or a Sidak-adjusted $α = 1 –.95^{1⁄9} = .0057$, to which we can compare the $p$-values in the output.  Notice that there are four significant constraints.  We can see which indicators those constraints correspond to by printing the `lhs` variable only for rows of `PT` where `plabel` is in that list of strings (only one `plabel` per constraint is necessary).
+
+```
+PT$lhs[PT$plabel %in% c(".p27.",".p29.",".p31.",".p33.")]
+```
+
+Notice that "`acceptance`" has the third largest modification index.  This indicator also had the largest pair of mean residuals.  The indicators "`homework`" and "`selfexpr`" also had large pairs of residuals (using Bollen’s formula), and their modification indices are significant, too.  The social skills modification index is significant, but its residual is only large for boys. 
+
+## EPC-interest
+If we were to release the equality constraint on the ‘`acceptance`’ intercepts, how much would we expect each of the intercept estimates to change?  And how much would that affect the estimated latent mean of its factor (`Satisfaction`) in Group 2 (`girls`)?  We can request these EPCs to be added to the output of `lavTestScore()` using the epc argument.  They will reflect how much we expect each free (not fixed, unless the parameter(s) are specified using the add argument) model parameter to change if all constraints specified in the release argument were freed.  Thus, when we request EPCs, we should only specify one constraint at a time.  If there are more than two groups, specify only one indicator’s set of constraints.
+
+```
+## request all EPCs
+lavTestScore(saqout.scalar, release = 14, epc = TRUE)
+## save them to print only the mean-structure EPCs
+EPCs.accept <- lavTestScore(saqout.scalar, release = 14, epc = TRUE)$epc
+EPCs.accept[EPCs.accept$op == "~1", ]
+```
+
+The columns `est`, `epc`, and `epv` correspond to the current estimate, the expected change (EPC), and the expected resulting value ($\text{epc} = \text{est} + \text{epc}$), respectively.  Notice that there are no standardized versions (SEPCs) currently available (as of `lavaan 0.5-22`), but they could easily be calculated to use the 0.1 rule-of-thumb.  According to the EPC output, the estimated means and intercepts of other factors and their indicators are not expected to change if we free the ‘`acceptance`’ intercepts across groups.  However, the ‘`acceptance`’ intercepts themselves are expected to increase by 0.659 for boys and to decrease by 1.076 for girls.  Using the methods described in [chapter 22](#ch22), we can find out that the model-implied variances of acceptance are 41.165 for boys and 52.617 for girls, so we could calculate our own SEPCs:
+
+$$
+\text{SEPC}_\text{Boys} =0.659/√41.165=0.103 \hspace{10mm} \text{SEPC}_\text{Girls} =1.076/√52.617=0.148 
+$$
+
+These are both substantial changes.  The other Satisfaction-indicator intercepts are expected to change only a little bit (0.05–0.07), and the latent mean of Satisfaction itself is expected to increase by 0.028 for girls (the latent mean for boys is fixed to zero, so it is not expected to change).  With a latent Satisfaction variance of 0.78 for girls, the SEPC would be:
+
+$$
+\text{SEPC} =0.028/√0.78=0.03 
+$$
+
+That is a small EPC-interest, so Oberski (2014) might argue that there is little practical consequence to leaving the intercepts fixed.  But EPC-interest is a newly implemented method, so it needs more study before we can comfortably draw this conclusion.  In this example, the latent mean difference is already significant, so freeing the intercept constraint would not change our decision.  However, allowing an invalid constraint might bias our results enough to bias any meta-analysis results that included this study.  Only time will tell!
+
+## References {-}
+Bentler, P. M., & Chou, C. P. (1993). Some new covariance structure model improvement statistics. *Sage Focus Editions, 154*, 235–255.
+Oberski, D. L. (2014). Evaluating sensitivity of parameters of interest to measurement invariance in latent variable models. *Political Analysis, 22*(1), 45–60. doi:10.1093/pan/mpt014
