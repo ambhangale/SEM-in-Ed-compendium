@@ -1,0 +1,119 @@
+# Multigroup Models {#ch22}
+
+With multigroup models, we can simultaneously fit models to different groups (samples from different populations). This gives the possibility to test the equality of parameters across groups. It may for example be interesting to compare factor means and variances across groups. However, in order to make reliable comparisons on factor variances and means over groups, one has to make sure that the factors have the same meaning in the two groups. In other words, in order to make comparisons on factors, the measurement of those factors should be invariant across groups (Mellenbergh, 1989; Meredith, 1993). Measurement invariance can be tested by equating measurement parameters across groups. Before equating parameters, one should evaluate whether the same factor structure holds in all groups.
+
+To test measurement invariance, we can use the following steps:
+
+2.	Configural invariance. Fit the same factor model structure to all groups.
+3.	Weak factorial invariance. Fit a model with equality constraints on the factor loadings across groups, and free factor variances at all but the first group (the reference group). Weak factorial invariance is also called metric invariance. 
+4.	Strong factorial invariance. Fit a model with additional equality constraints on the intercepts across groups, and free factor means all but the first group. Strong factorial invariance is also called scalar invariance. 
+5.	Strict factorial invariance. Fit a model with additional equality constraints on the residual factor variances across groups.
+
+The last step (strict factorial invariance) is not required for a valid comparison of common factor means, variances, or covariances across groups, but it is required (along with equality of common-factor variances over groups) if one wants to test whether the observed indicators are equally reliable across groups.
+
+Table 1 shows the different types of invariance with the associated constraints, together with the appropriate methods of scaling and giving origin to the common factors. Subscripts 1 and 2 refer to the parameters associated with group 1 or 2. So Λ1 indicates the factor loadings in group 1 and Λ2  indicated the factor loadings in group 2. 
+
+| **Degree of invariance**                        | **Constraints**           | **Scaling**        | **Origin** |
+|:------------------------------------------------|---------------------------|--------------------|------------|
+| Configural invariance                           | $\text{pattern } \mathbf{Λ}_1 = \text{pattern } \mathbf{Λ}_2$   | $\text{diag }(\mathbfΦ_1) = \text{diag}(\textbf{I})$ | $\mathbf{κ}_1 = 0$     |
+|                                                 |                           | diag($Φ$2) = diag(I) | $κ$2 = 0     |
+| Weak factorial invariance / Metric invariance   | $\mathbfΛ_1 = \mathbf\Lambda_2$                   | diag($\mathbfΦ_1$) = diag(I) | $κ$1 = 0     |
+|                                                 |                           | diag(Φ2) = free    | κ2 = 0     |
+| Strong factorial invariance / Scalar Invariance | Λ1 = Λ2,  τ1 = τ2         | diag(Φ1) = diag(I) | κ1 = 0     |
+|                                                 |                           | diag(Φ2) = free    | κ2 = free  |
+| Strict factorial invariance                     | Λ1 = Λ2, τ1 = τ2, Θ1 = Θ2 | diag(Φ1) = diag(I) | κ1 = 0     |
+|                                                 |                           | diag(Φ2) = free    | κ2 = free  |
+
+In this chapter, we will discuss two-group models, but the same principles apply to multigroup models with more groups. 
+
+[Script 22.1](#script-22.1) fits the measurement model of the SAQ with mean structure, where the sample is split into two groups: a sample of boys ($N = 467$) and girls ($N = 448$). We give scale and origin to the common factors by fixing the common factor variances at 1 and common factor means at 0. There are no equality constraints across groups, so this represents the model with configural invariance. 
+
+## Script 22.1 {-}
+```
+## SAQ observed data names
+obsnames <- c("learning","concentration","homework","fun",
+              "acceptance","teacher","selfexpr","selfeff",
+              "socialskill")
+## SAQ observed data boys
+bvalues <- c(
+  33.1673,
+  29.3029, 58.9056,
+  28.1938, 34.8028, 58.3240,
+  17.5110, 19.6911, 18.9098, 30.9436,
+   8.2167, 10.7283,  9.6210, 13.2711, 40.2987,
+  13.2590, 18.2347, 13.9296, 19.0842, 10.4321, 30.2353,
+  15.7417, 23.8981, 23.6277, 12.0223, 12.9815, 11.3998, 59.1952,
+  12.8761, 21.3100, 20.0288,  7.3135, 10.3282,  7.1202, 28.5092, 44.5547,
+   7.7550, 13.1092, 10.3934,  7.7236, 11.9903,  7.5445, 23.8209, 21.0226, 32.6244)
+saqcovboy <- getCov(bvalues, names = obsnames)
+
+saqmeansboy <- c(39.01, 35.46, 36.17, 42.22, 41.75, 40.83, 35.84,
+                 36.43, 40.05)
+names(saqmeansboy) <- obsnames
+
+## SAQ observed data girls
+gvalues <- c(
+  27.0021,
+  23.4847, 53.9206,
+  18.0520, 26.5917, 44.6775,
+  14.2107, 16.1073, 12.9246, 24.0094,
+   8.0902,  9.2953, 11.6241, 13.1408, 54.0089,
+  13.3044, 14.7323, 10.3630, 14.6472, 10.8696, 27.1497,
+  15.0637, 24.9267, 19.5973, 10.0306, 15.0257, 12.0336, 60.1345,
+  15.3504, 23.6937, 19.9337,  8.6904,  9.4411,  8.1999, 31.1155, 52.8966,
+   7.2009, 14.1647, 13.9375,  6.7247, 13.9469,  6.1179, 28.3494, 24.4655, 45.2774) 
+saqcovgirl <- getCov(gvalues, names = obsnames)
+
+saqmeansgirl <- c(40.49, 36.94, 38.79, 43.61, 40.88, 42.01, 35.66,
+                  34.77, 37.72)
+names(saqmeansgirl) <- obsnames
+
+## specify the multigroup model, using fixed-factor constraints
+saqmod.config <- ' ## MODEL COVARIANCE STRUCTURE
+# regression equations
+  Motivation =~ learning + concentration + homework
+  Satisfaction =~ fun + acceptance + teacher
+  SelfConfidence =~ selfexpr + selfeff + socialskill
+# residual variances observed variables 
+  learning ~~ learning
+  concentration ~~ concentration
+  homework ~~ homework
+  fun ~~ fun
+  acceptance ~~ acceptance
+  teacher ~~ teacher
+  selfexpr ~~ selfexpr
+  selfeff ~~ selfeff
+  socialskill ~~ socialskill
+# variances and covariances common factors
+  Motivation ~~ 1*Motivation
+  Satisfaction ~~ 1*Satisfaction
+  SelfConfidence ~~ 1*SelfConfidence
+  Motivation ~~ Satisfaction
+  Motivation ~~ SelfConfidence
+  Satisfaction ~~ SelfConfidence
+
+## MODEL MEAN STRUCTURE
+# intercepts observed variables
+  learning ~ 1
+  concentration ~ 1
+  homework ~ 1
+  fun ~ 1
+  acceptance ~ 1
+  teacher ~ 1
+  selfexpr ~ 1
+  selfeff ~ 1
+  socialskill ~ 1
+# means common factors
+  Motivation ~ 0*1
+  Satisfaction ~ 0*1
+  SelfConfidence ~ 0*1
+'
+## fit the model
+saqout.config <- lavaan(saqmod.config, group.label = c("boys","girls"),
+                        sample.nobs = list(467, 448),
+                        sample.cov = list(saqcovboy, saqcovgirl), 
+                        sample.mean = list(saqmeansboy, saqmeansgirl)) ## results
+summary(saqout.config, fit = TRUE, std = TRUE)
+```
+
+
