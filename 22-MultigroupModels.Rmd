@@ -1,5 +1,6 @@
 # Multigroup Models {#ch22}
 
+## Measurement invariance
 With multigroup models, we can simultaneously fit models to different groups (samples from different populations). This gives the possibility to test the equality of parameters across groups. It may for example be interesting to compare factor means and variances across groups. However, in order to make reliable comparisons on factor variances and means over groups, one has to make sure that the factors have the same meaning in the two groups. In other words, in order to make comparisons on factors, the measurement of those factors should be invariant across groups (Mellenbergh, 1989; Meredith, 1993). Measurement invariance can be tested by equating measurement parameters across groups. Before equating parameters, one should evaluate whether the same factor structure holds in all groups.
 
 To test measurement invariance, we can use the following steps:
@@ -13,22 +14,23 @@ The last step (strict factorial invariance) is not required for a valid comparis
 
 Table 1 shows the different types of invariance with the associated constraints, together with the appropriate methods of scaling and giving origin to the common factors. Subscripts 1 and 2 refer to the parameters associated with group 1 or 2. So Λ1 indicates the factor loadings in group 1 and Λ2  indicated the factor loadings in group 2. 
 
-| **Degree of invariance**                        | **Constraints**           | **Scaling**        | **Origin** |
-|:------------------------------------------------|---------------------------|--------------------|------------|
-| Configural invariance                           | $\text{pattern } \mathbf{Λ}_1 = \text{pattern } \mathbf{Λ}_2$   | $\text{diag }(\mathbfΦ_1) = \text{diag}(\textbf{I})$ | $\mathbf{κ}_1 = 0$     |
-|                                                 |                           | diag($Φ$2) = diag(I) | $κ$2 = 0     |
-| Weak factorial invariance / Metric invariance   | $\mathbfΛ_1 = \mathbf\Lambda_2$                   | diag($\mathbfΦ_1$) = diag(I) | $κ$1 = 0     |
-|                                                 |                           | diag(Φ2) = free    | κ2 = 0     |
-| Strong factorial invariance / Scalar Invariance | Λ1 = Λ2,  τ1 = τ2         | diag(Φ1) = diag(I) | κ1 = 0     |
-|                                                 |                           | diag(Φ2) = free    | κ2 = free  |
-| Strict factorial invariance                     | Λ1 = Λ2, τ1 = τ2, Θ1 = Θ2 | diag(Φ1) = diag(I) | κ1 = 0     |
-|                                                 |                           | diag(Φ2) = free    | κ2 = free  |
+| **Degree of invariance**     | **Constraints**                            | **Scaling**                                     | **Origin**         |
+|:-----------------------------|:------------------------------------------:|:-----------------------------------------------:|:------------------:|
+|                              |                                            |                                                 |                    |
+| Configural invariance        | pattern $\mathbfΛ_1=$ pattern $\mathbfΛ_2$ | $\text{diag}(\mathbfΦ_1)=\text{diag}(\textbf{I})$ | $\mathbf{κ}_1=0$ |
+|                              |                                            | $\text{diag}(\mathbfΦ_2)=\text{diag}(\textbf{I})$ | $\mathbfκ_2 = 0$ |
+|Weak factorial invariance / Metric invariance|$\mathbfΛ_1 = \mathbf\Lambda_2$|$\text{diag}(\mathbfΦ_1) = \text{diag}(\textbf{I})$|$\mathbfκ_1 = 0$|
+|                              |                                            | $\text{diag}(\mathbf{Φ}_2) = \text{free}$    | $\mathbfκ_2 = 0$     |
+|Strong factorial invariance / Scalar Invariance|$\mathbfΛ_1=\mathbfΛ_2,\mathbfτ_1=\mathbfτ_2$|$\text{diag}(\mathbfΦ_1)=\text{diag}(\textbf{I})$|$\mathbfκ_1 = 0$|
+|                              |                                            | $\text{diag}(\mathbfΦ_2) = \text{free}$ | $\mathbfκ_2 = \text{free}$  |
+| Strict factorial invariance  | $\mathbfΛ_1=\mathbfΛ_2,\mathbfτ_1=\mathbfτ_2,\mathbfΘ_1=\mathbfΘ_2$|$\text{diag}(\mathbfΦ_1)=\text{diag}(\textbf{I})$ | $\mathbfκ_1 = 0$  |
+|                              |                                            | $\text{diag}(\mathbfΦ_2) = \text{free}$ | $\mathbfκ_2 = \text{free}$ |
 
 In this chapter, we will discuss two-group models, but the same principles apply to multigroup models with more groups. 
 
 [Script 22.1](#script-22.1) fits the measurement model of the SAQ with mean structure, where the sample is split into two groups: a sample of boys ($N = 467$) and girls ($N = 448$). We give scale and origin to the common factors by fixing the common factor variances at 1 and common factor means at 0. There are no equality constraints across groups, so this represents the model with configural invariance. 
 
-## Script 22.1 {-}
+### Script 22.1 {-}
 ```
 ## SAQ observed data names
 obsnames <- c("learning","concentration","homework","fun",
@@ -116,4 +118,379 @@ saqout.config <- lavaan(saqmod.config, group.label = c("boys","girls"),
 summary(saqout.config, fit = TRUE, std = TRUE)
 ```
 
+We first define our observed data. In this case, we have a covariance matrix for boys (`saqcovboy`) and a covariance matrix for girls (`saqcovgirl`), and also a mean vector for boys (`saqmeansboys`) and a mean vector for girls (`saqmeansgirl`). The specifications of the model are not different from specifying a single-group model, but we need to tell `lavaan` that the model should be fitted to the two samples separately by providing both group’s covariance matrices in a list (likewise for mean vectors and sample sizes) to the `lavaan()` function:
+
+```
+saqout.config <- lavaan(saqmod.config, group.label = c("boys","girls"),
+                        sample.nobs = list(467, 448),
+                        sample.cov = list(saqcovboy, saqcovgirl), 
+                        sample.mean = list(saqmeansboy, saqmeansgirl))
+```
+
+Here, we use `list()` to tell `lavaan` there are two inputs for each group. This can be extended to multiple groups by adding additional elements to the lists. When we run this model, the factor model that we specified (SAQ measurement model) will be modelled for both groups without any across-group equality constraints.  So the all parameters will be able to differ, unless they are fixed to zero or one for identification.
+
+The output will show the results for both groups separately. By default `lavaan` will name the output “`Group 1`”, “`Group 2`”, etc. You can also provide names for the groups by specifying group.label in the `lavaan()` function. For example, to name the groups “`boys`” and “`girls`”, we used:
+
+```
+group.label = c("boys","girls")
+```
+
+The multigroup model without any across group constraints is called the “configural” model, meaning that the only constraint placed across groups is that their models have the same configuration (same form, same pattern of fixed and free values).  Traditionally, the assumption of configural invariance is evaluated using the $χ^2$ test of overall model fit, which is simply the sum of each group’s $χ^2$ value (discrepancy between the observed and model-implied covariance matrix and mean vector in that group).  The $df$ of the overall model is calculated the same way as for single-group models: by subtracting the total number of estimated parameters from the total number of observed sample statistics (variances, covariances, and means).  By default, `lavaan` displays the $χ^2$ value of each individual group, as well as the total $χ^2$ value.  Note that a group with a higher $χ^2$ does not necessarily mean that the model fits worse in that group, because a group’s $χ^2$ value is calculated using that group’s $N$.
+
+Because we fit the same model to both groups’ data, failing to reject the $\text{H}_0$ of exact fit of the model to the entire sample would imply failing to reject the same $\text{H}_0$ for any particular group.  And if the same model fits well in all groups, that implies that the groups must have the same model configurations.  However, when we reject the H0 of exact fit for the overall model, it is unclear whether the test was significant because (a) the model configuration is correct for one group but incorrect for another group, in which case configural invariance does not hold, or because (b) the groups’ true population models do have the same configuration, but the analysis model only approximately corresponds to the true model.  
+
+Testing configural invariance is still an active area of research.  In current practice, most researchers accept configural invariance as tenable if the configural model’s RMSEA and/or CFI show good approximate fit, even if the $χ^2$ test is significant.  
+
+## Across group equality constraints
+To test additional measurement invariance models, we must apply equality constraints to the model parameters. In the next section, we will fit two additional models, with the following constraints on model parameters across groups:
+  
+1.	Metric equivalence (or weak factorial invariance): A multigroup model with equality constraints on factor loadings, and free factor variances in all but the first group.
+2.	Scalar equivalence (or strong factorial invariance): A multigroup model with additional equality constraints on intercepts, and free factor means in all but the first group.
+
+Strict measurement equivalence/invariance can also be tested by additionally constraining indicators’ residual variances to equality across groups; however, this assumption is not required to compare means, variances, or correlations of latent common factors across groups. In [Script 22.2](#script-22.2) we fit the metric equivalence model to the data from the SAQ for boys and girls.
+
+### Script 22.2 {-}
+```
+## specify the multigroup model with metric equivalence constraints
+saqmod.metric <- ' ## MODEL COVARIANCE STRUCTURE
+# regression equations
+  Motivation =~ c(L1, L1)*learning + 
+                c(L2, L2)*concentration +
+                c(L3, L3)*homework
+  Satisfaction =~ c(L4, L4)*fun + 
+                  c(L5, L5)*acceptance +
+                  c(L6, L6)*teacher
+  SelfConfidence =~ c(L7, L7)*selfexpr +
+                    c(L8, L8)*selfeff +
+                    c(L9, L9)*socialskill
+# residual variances observed variables 
+  learning ~~ learning
+  concentration ~~ concentration
+  homework ~~ homework
+  fun ~~ fun
+  acceptance ~~ acceptance
+  teacher ~~ teacher
+  selfexpr ~~ selfexpr
+  selfeff ~~ selfeff
+  socialskill ~~ socialskill
+# variances and covariances common factors
+  Motivation ~~ c(1, NA)*Motivation
+  Satisfaction ~~ c(1, NA)*Satisfaction
+  SelfConfidence ~~ c(1, NA)*SelfConfidence
+  Motivation ~~ Satisfaction
+  Motivation ~~ SelfConfidence
+  Satisfaction ~~ SelfConfidence
+
+## MODEL MEAN STRUCTURE
+# intercepts observed variables
+  learning ~ 1
+  concentration ~ 1
+  homework ~ 1
+  fun ~ 1
+  acceptance ~ 1
+  teacher ~ 1
+  selfexpr ~ 1
+  selfeff ~ 1
+  socialskill ~ 1
+# means common factors
+  Motivation ~ 0*1
+  Satisfaction ~ 0*1
+  SelfConfidence ~ 0*1
+'
+## fit model
+saqout.metric <- lavaan(saqmod.metric, group.label = c("boys","girls"),
+                        sample.nobs = list(467, 448),
+                        sample.cov = list(saqcovboy, saqcovgirl), 
+                        sample.mean = list(saqmeansboy, saqmeansgirl))
+## results
+summary(saqout.metric, fit = TRUE, std = TRUE)
+## test difference in fit
+anova(saqout.config, saqout.metric)
+```
+
+Equality constraints across groups are specified by giving the associated parameter(s) the same label(s) in the two groups. We do this by multiplying the indicator with the specified label, and repeating the label for both groups using the `c()` function. For example, to constrain the factor loadings of the common factor Motivation to be equal across groups we use:
+
+```
+  Motivation =~ c(L1, L1)*learning + 
+                c(L2, L2)*concentration +
+                c(L3, L3)*homework
+```
+
+The first `L1` applies to the first group (`boys`) and the second `L1` applies to the second group (`girls`).  In order to test only the assumption of equal factor loadings, we must allow the factor variances to differ across groups.  If we forget to free the constraints on the factor variances, then we are simultaneously testing the equality of factor loadings and factor variances.  The assumption of equal factor loadings implies that the only reason indicators have different variances is because their common and unique factor variances differ, not because the relationships between the common factor and the indicator(s) differ(s).  
+
+Because we constrain the factor loadings to be equal across groups, a factor’s variance only needs to be identified in one group. Therefore, we can freely estimate all other groups’ factor variances, and those estimates are identified. In our example, we use the common practice of fixing the variances of the first group to 1. To let `lavaan` know that this constraint only applies to the first group, we use the `c()` function and specify “`NA`” for the second group.  This works because when `lavaan` sees values instead of labels, it assumes you want to fix the parameters to those values; and if a fixed value is missing (`NA`), that indicates the parameter should be estimated.
+
+```
+  Motivation ~~ c(1, NA)*Motivation
+  Satisfaction ~~ c(1, NA)*Satisfaction
+  SelfConfidence ~~ c(1, NA)*SelfConfidence
+```
+
+When we run the model and look at the parameter estimates, we can now see that the estimates for the factor loadings are the same for both boys and girls. In addition, the common factor variances for girls are now freely estimated. To test whether the equality constraints on the factor loadings are tenable, we can test the difference in model fit using the `anova()` function:
+
+```
+anova(saqout.metric, saqout.config)
+```
+
+This will display the results of the $Δχ^2$ test (also AIC). In our example, the $\text{H}_0$ of weak factorial invariance (or metric equivalence) cannot be rejected, so there is no evidence that the relationships between common factors and indicators differ across groups.  Thus, we assume the common factors are on the same metric in both groups.
+
+[Script 22.3](#script-22.3) fits the model with additional equality constraints on the intercepts across groups (the $\text{H}_0$ of strong factorial invariance, also called scalar equivalence because it refers to the scalar/constant in the indicator’s regression model: the intercept).
+
+### Script 22.3 {-}
+```
+## specify the multigroup model with scalar equivalence constraints
+saqmod.scalar <- ' ## MODEL COVARIANCE STRUCTURE
+# regression equations
+  Motivation =~ c(L1, L1)*learning + 
+                c(L2, L2)*concentration +
+                c(L3, L3)*homework
+  Satisfaction =~ c(L4, L4)*fun + 
+                  c(L5, L5)*acceptance +
+                  c(L6, L6)*teacher
+  SelfConfidence =~ c(L7, L7)*selfexpr +
+                    c(L8, L8)*selfeff +
+                    c(L9, L9)*socialskill
+# residual variances observed variables 
+  learning ~~ learning
+  concentration ~~ concentration
+  homework ~~ homework
+  fun ~~ fun
+  acceptance ~~ acceptance
+  teacher ~~ teacher
+  selfexpr ~~ selfexpr
+  selfeff ~~ selfeff
+  socialskill ~~ socialskill
+# variances and covariances common factors
+  Motivation ~~ c(1, NA)*Motivation
+  Satisfaction ~~ c(1, NA)*Satisfaction
+  SelfConfidence ~~ c(1, NA)*SelfConfidence
+  Motivation ~~ Satisfaction
+  Motivation ~~ SelfConfidence
+  Satisfaction ~~ SelfConfidence
+
+## MODEL MEAN STRUCTURE
+# intercepts observed variables
+  learning ~ c(T1, T1)*1
+  concentration ~ c(T2, T2)*1
+  homework ~ c(T3, T3)*1
+  fun ~ c(T4, T4)*1
+  acceptance ~ c(T5, T5)*1
+  teacher ~ c(T6, T6)*1
+  selfexpr ~ c(T7, T7)*1
+  selfeff ~ c(T8, T8)*1
+  socialskill ~ c(T9, T9)*1
+# means common factors
+  Motivation ~ c(0, NA)*1
+  Satisfaction ~ c(0, NA)*1
+  SelfConfidence ~ c(0, NA)*1
+'
+## fit model
+saqout.scalar <- lavaan(saqmod.scalar, group.label = c("boys","girls"),
+                        sample.nobs = list(467, 448),
+                        sample.cov = list(saqcovboy, saqcovgirl), 
+                        sample.mean = list(saqmeansboy, saqmeansgirl))
+## results
+summary(saqout.scalar, fit = TRUE, std = TRUE)
+## test difference in fit
+anova(saqout.scalar, saqout.metric)
+```
+
+Here we use the labels “`T1`” to “`T9`” to constrain the intercepts to be equal for both boys and girls.  In order to test only the assumption of equal intercepts, we must allow the factor means to differ across groups.  If we forget to free the constraints on the factor means, then we are simultaneously testing the equality of intercepts and factor means.  Testing the assumption of equal intercepts implies that we think the only reason indicators have different means is because their common factors have different means.  In other words, there if we had observed the common factor and used it (and the grouping variable) to predict the indicator in a regular regression model, there would be no interaction effect between the common factor and the grouping variable.
+
+Because we constrain the intercepts to be equal across groups, a factor’s mean only needs to be identified in one group. Therefore, we can freely estimate all other groups’ factor means, and those estimates are identified. In our example, we use the common practice of fixing the means of the first group to 0. The factor mean estimates in the second group then represent the difference in factor means across groups. We tell `lavaan` to fix this parameter only in the first group by using the `c()` function and specifying “`NA`” for the second group.
+
+We can use the `summary()` function to inspect model parameters and fit, and `anova()` to test whether to reject the $\text{H}_0$ of strong factorial invariance (scalar equivalence). 
+
+```
+anova(saqout.scalar, saqout.metric)
+```
+
+We can see from the output that we reject the $\text{H}_0$, so we must test which equality constraints do not hold.  In the following two chapters, we will show how to obtain mean residuals, and how to obtain modification indices and SEPCs involving equality constraints rather than parameters fixed to specific values.
+
+## Standardized estimates for a multigroup model
+Standardized estimates of the multigroup model can be calculated for each group separately, using the same operations as in [Chapter 15](#ch15). The function `lavInspect()` returns parameter estimates in matrix form, but with multiple groups, there is now a higher-level list: one list of matrices per group.
+
+```
+Estimates <- lavInspect(saqout.scalar, "est")
+```
+
+Each group’s matrices can be extracted using the group names you gave them, after which you can extract the individual matrices in a similar way as with a single-group factor model. Thus, to extract the parameter matrices of the first group you can use:
+
+```
+boyEstimates <- Estimates$boys
+girlEstimates <- Estimates$girls
+## calculate 
+LAMBDA  <- boyEstimates$lambda 
+PHI 	  <- boyEstimates$psi     # note: lavaan doesn't use "phi"
+THETA   <- boyEstimates$theta
+TAU     <- boyEstimates$nu      # note: lavaan doesn't use "tau"
+KAPPA   <- boyEstimates$nu      # note: lavaan doesn't use "kappa"
+```
+
+You can now calculate standardized covariance-structure parameters for the factor model of the first group using the guidelines in [Chapter 13](#ch13), as well as standardized mean-structure parameters of the first group using the guidelines in [Chapter 21](#ch21).
+
+## `lavaan` shortcuts
+You can also obtain the standardized solution easily from the `summary()` and `parameterEstimates()` functions by specifying “`standardized = TRUE`”.
+
+Because factor models are so much larger than path models, specifying every single nonzero parameter (or labeling each parameter) increases the likelihood of user error.  Therefore, it may be preferable to use `lavaan`’s built-in arguments and wrapper functions.  Namely, factor models can be fit using the `cfa()` function, which runs `lavaan()` with several sensible defaults (e.g., `auto.fix.first`, `auto.fix.single`, `auto.var`, and `auto.cov.lv.x` are all set to `TRUE`).  This enables you to specify the same model in a much shorter script.  [Script 22.4](#script-22.4) reproduces the exact same results as Scripts 22.1–22.3, but using much less space.  Note that specifying `meanstructure = TRUE` makes it necessary to specify means only in the strong invariance (scalar equivalence) model, and the `auto.*` and `std.lv` arguments remove the need to specify residual or latent (co)variances, unless we need to override `std.lv = TRUE` in the second group.
+
+### Script 22.4 {-}
+```
+## specify the multigroup model, using fixed-factor constraints
+saqmod.config <- ' ## factor loadings
+  Motivation =~ learning + concentration + homework
+  Satisfaction =~ fun + acceptance + teacher
+  SelfConfidence =~ selfexpr + selfeff + socialskill
+'
+## fit the model
+saqout.config <- cfa(saqmod.config, group.label = c("boys","girls"),
+                     sample.nobs = list(467, 448), 
+                     sample.cov = list(saqcovboy, saqcovgirl), 
+                     sample.mean = list(saqmeansboy, saqmeansgirl),
+                     meanstructure = TRUE, std.lv = TRUE)
+
+## specify the multigroup model with metric equivalence constraints
+saqmod.metric <- ' ## factor loadings
+  Motivation =~ c(L1, L1)*learning + 
+                c(L2, L2)*concentration +
+                c(L3, L3)*homework
+  Satisfaction =~ c(L4, L4)*fun + 
+                  c(L5, L5)*acceptance +
+                  c(L6, L6)*teacher
+  SelfConfidence =~ c(L7, L7)*selfexpr +
+                    c(L8, L8)*selfeff +
+                    c(L9, L9)*socialskill
+# variances and covariances common factors
+  Motivation ~~ c(1, NA)*Motivation
+  Satisfaction ~~ c(1, NA)*Satisfaction
+  SelfConfidence ~~ c(1, NA)*SelfConfidence
+'
+## fit the model
+saqout.metric <- cfa(saqmod.metric, group.label = c("boys","girls"),
+                     sample.nobs = list(467, 448),
+                     sample.cov = list(saqcovboy, saqcovgirl), 
+                     sample.mean = list(saqmeansboy, saqmeansgirl),
+                     meanstructure = TRUE, std.lv = TRUE)
+## test difference in fit
+anova(saqout.config, saqout.metric)
+
+## specify the multigroup model with scalar equivalence constraints
+saqmod.scalar <- ' ## factor loadings
+  Motivation =~ c(L1, L1)*learning + 
+                c(L2, L2)*concentration +
+                c(L3, L3)*homework
+  Satisfaction =~ c(L4, L4)*fun + 
+                  c(L5, L5)*acceptance +
+                  c(L6, L6)*teacher
+  SelfConfidence =~ c(L7, L7)*selfexpr +
+                    c(L8, L8)*selfeff +
+                    c(L9, L9)*socialskill
+# variances and covariances common factors
+  Motivation ~~ c(1, NA)*Motivation
+  Satisfaction ~~ c(1, NA)*Satisfaction
+  SelfConfidence ~~ c(1, NA)*SelfConfidence
+## MODEL MEAN STRUCTURE
+# intercepts observed variables
+  learning ~ c(T1, T1)*1
+  concentration ~ c(T2, T2)*1
+  homework ~ c(T3, T3)*1
+  fun ~ c(T4, T4)*1
+  acceptance ~ c(T5, T5)*1
+  teacher ~ c(T6, T6)*1
+  selfexpr ~ c(T7, T7)*1
+  selfeff ~ c(T8, T8)*1
+  socialskill ~ c(T9, T9)*1
+# means common factors
+  Motivation ~ c(0, NA)*1
+  Satisfaction ~ c(0, NA)*1
+  SelfConfidence ~ c(0, NA)*1
+'
+## fit the model
+saqout.scalar <- cfa(saqmod.scalar, group.label = c("boys","girls"),
+                     sample.nobs = list(467, 448),
+                     sample.cov = list(saqcovboy, saqcovgirl), 
+                     sample.mean = list(saqmeansboy, saqmeansgirl),
+                     meanstructure = TRUE, std.lv = TRUE)
+## test difference in fit
+anova(saqout.scalar, saqout.metric)
+```
+
+Using the group.equal argument allows you to tell `lavaan` what kinds of parameters you want to constrain across groups, rather than specifying the constraints manually with labels in the model syntax.  [Script 22.5](#script-22.5) is thus even short than [Script 22.4](#script-22.4), because `lavaan` will automatically free latent means in all but the first group when the intercepts are constrained to equality across groups.  Thus, the `group.equal` argument allows you to use the same metric-equivalence model syntax to fit the metric and scalar models.
+
+### Script 22.5 {-}
+```
+## specify the multigroup model, using fixed-factor constraints
+saqmod.config <- ' ## factor loadings
+  Motivation =~ learning + concentration + homework
+  Satisfaction =~ fun + acceptance + teacher
+  SelfConfidence =~ selfexpr + selfeff + socialskill
+'
+## fit the model
+saqout.config <- cfa(saqmod.config, group.label = c("boys","girls"),
+                     sample.nobs = list(467, 448), 
+                     sample.cov = list(saqcovboy, saqcovgirl), 
+                     sample.mean = list(saqmeansboy, saqmeansgirl),
+                     meanstructure = TRUE, std.lv = TRUE)
+
+## specify the multigroup model with metric equivalence constraints
+saqmod.metric <- ' ## factor loadings
+  Motivation =~ learning + concentration + homework
+  Satisfaction =~ fun + acceptance + teacher
+  SelfConfidence =~ selfexpr + selfeff + socialskill
+# variances and covariances common factors
+  Motivation ~~ c(1, NA)*Motivation
+  Satisfaction ~~ c(1, NA)*Satisfaction
+  SelfConfidence ~~ c(1, NA)*SelfConfidence
+'
+## fit the model
+saqout.metric <- cfa(saqmod.metric, group.label = c("boys","girls"),
+                     sample.nobs = list(467, 448),
+                     sample.cov = list(saqcovboy, saqcovgirl), 
+                     sample.mean = list(saqmeansboy, saqmeansgirl),
+                     meanstructure = TRUE, std.lv = TRUE,
+                     group.equal = "loadings")
+## test difference in fit
+anova(saqout.config, saqout.metric)
+
+## fit the scalar-invariance model
+saqout.scalar <- cfa(saqmod.metric, group.label = c("boys","girls"),
+                     sample.nobs = list(467, 448),
+                     sample.cov = list(saqcovboy, saqcovgirl), 
+                     sample.mean = list(saqmeansboy, saqmeansgirl),
+                     meanstructure = TRUE, std.lv = TRUE,
+                     group.equal = c("loadings","intercepts"))
+## test difference in fit
+anova(saqout.scalar, saqout.metric)
+```
+
+Note that `group.equal` can only simplify testing equality constraints in multigroup (not longitudinal) models. Additionally, the `semTools` package provides a function that accepts a single model syntax (for the configural model) and automatically adapts it to fit all levels of measurement invariance.  [Script 22.6](#script-22.6) shows how to use it.
+
+### Script 22.6 {-}
+```
+## specify the multigroup configural model
+saqmod.config <- ' ## factor loadings
+  Motivation =~ learning + concentration + homework
+  Satisfaction =~ fun + acceptance + teacher
+  SelfConfidence =~ selfexpr + selfeff + socialskill
+'
+## fit all measurement invariance models in one step
+library(semTools)
+mi.out <- measurementInvariance(saqmod.config, std.lv = TRUE,
+              meanstructure = TRUE, group.label = c("boys","girls"),
+              sample.nobs = list(467, 448), 
+              sample.cov = list(saqcovboy, saqcovgirl), 
+              sample.mean = list(saqmeansboy, saqmeansgirl))
+```
+
+Notice that the output prints tables of nested model comparisons, and these show the same results as above, as well as a test of an additional model (equal factor means).  There is an additional argument for strict invariance, if that is of interest.  There is also a table of differences in fit indices (by default, RMSEA and CFI), but the rules of thumb proposed to evaluate measurement equivalence with fit indices do not perform well.
+
+This function returns a list of the fitted models, so you can extract and print the parameter estimates or any other information.
+
+```
+saqout.config <- mi.out[["fit.configural"]]
+saqout.metric <- mi.out[["fit.loadings"]]
+saqout.scalar <- mi.out[["fit.intercepts"]]
+```
+
+If measurement invariance is rejected at an earlier step (e.g., loadings, or even a poorly fitting configural model), then the `measurementInvariance` function may not save you much time because you would have to make model modifications before proceeding to more constrained models.  The next two chapters demonstrate some tools for detecting invalid equality constraints using mean residuals, modification indices, and expected parameter changes.
 
