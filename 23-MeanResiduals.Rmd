@@ -1,0 +1,102 @@
+# Calculating Mean Residuals (#ch23)
+
+When testing equality constraints on the intercepts across groups or across time points, one may find that not all intercepts are equal. Valid comparison can still be made between groups’ latent means as long as at least two intercepts can be constrained to equality.  If some, but not all, of a factor’s measurement parameters (loadings, intercepts, or residual variances) can be constrained to equality across groups or occasions, this is called ‘partial measurement invariance’. Invalid equality constraints on factor loadings are not clearly revealed by correlation residuals, but standardized mean residuals can be useful to identify which intercepts vary most across groups or occasions. They are calculated by standardizing the observed means and the model implied means, and looking at the difference between them. 
+
+You may have noticed when requesting correlation residuals from lavaan that it also outputs a vector of standardized means.  Previously, these mean vectors were zero because we did not include a mean structure in our models.  Now that we are including mean structure that is not saturated, the standardized residuals can be informative.  [Script 23.1](#script-23.1) reiterates how to request these from `lavaan.`
+
+## Script 23.1 {-}
+```
+resid(saqout.scalar, type = "cor")
+## the default standardization method is Bollen's (1989) formula
+resid(saqout.scalar, type = "cor.bollen")
+```
+
+For pedagogical purposes, [Script 23.2](#script-23.2) shows how to manually calculate the mean residuals—using Bollen’s (1989) formula—for the boys and girls using the multigroup output from [Script 22.3](#script-22.3). This may be necessary, for example, if you want to test invariance of a second-order factor, and you need to calculate second-order mean residuals.  
+
+## Script 22.2 {-}
+```
+## extract model-implied covariance matrices and mean vectors
+(Sigma <- lavInspect(saqout.scalar, "cov.ov"))
+(Mu <- lavInspect(saqout.scalar, "mean.ov"))
+## extract observed sample statistics
+(Obs <- lavInspect(saqout.scalar, "sampstat"))
+## pay attention to the nested structure of the lists
+
+## for boys:
+## divide model-implied means by model-implied SDs
+std.mod.means.boys <- Mu$boys / sqrt(diag(Sigma$boys))
+## likewise, divide observed means by observed SDs
+std.obs.means.boys <- Obs$boys$mean / sqrt(diag(Obs$boys$cov))
+## standardized mean residuals are the differences
+(meanresid.boys <- std.obs.means.boys - std.mod.means.boys)
+
+## for girls
+std.mod.means.girls <- Mu$girls / sqrt(diag(Sigma$girls))
+std.obs.means.girls <- Obs$girls$mean / sqrt(diag(Obs$girls$cov))
+(meanresid.girls <- std.obs.means.girls - std.mod.means.girls)
+
+## search boys and girls residuals at the same time
+round(cbind(meanresid.boys, meanresid.girls), 3)
+```
+
+To calculate the mean residuals, we first save the model-implied means and covariance matrices in two objects, embedding the assignment within parentheses to simultaneously print the newly created objects.  Notices that these objects are lists, with one matrix/vector for Group 1 (`boys`) and another for Group 2 (`girls`).
+
+```
+(Sigma <- lavInspect(saqout.scalar, "cov.ov"))
+(Mu <- lavInspect(saqout.scalar, "mean.ov"))
+```
+
+We also save the observed sample statistics (which would be EM estimates if any data are missing and we use FIML estimation).  This is also a list, but it is a list of lists: the first element is called “boys”, which is a list with two elements (a covariance matrix and a mean vector), and the second element is the same type of list but for girls.
+
+```
+(Obs <- lavInspect(saqout.scalar, "sampstat"))
+```
+
+Because R will perform regular scalar mathematical operations (e.g., +, −, ×, or ÷) in a “vectorized” manner (i.e., element-by-element), we can standardize each mean vector by dividing them by the square-root of the diagonal of the covariance matrix (i.e., $SD$s). 
+
+```
+std.mod.means.boys <- Mu$boys / sqrt(diag(Sigma$boys))
+std.obs.means.boys <- Obs$boys$mean / sqrt(diag(Obs$boys$cov))
+```
+
+The standardized mean residuals are calculated by subtracting the standardized mean vectors from each other. The procedure for calculating girls’ residuals is identical.
+
+```
+(meanresid.boys <- std.obs.means.boys - std.mod.means.boys)
+```
+When looking for fixed parameters that should be freely estimated, the largest residual probably causes the largest misfit in the model.  An equality constrained parameter is still estimated, but freeing that constraint would “free” multiple estimates simultaneously.  Thus, rather than freeing the largest residual, you should look for variables with large residuals in both groups. 
+
+```
+round(cbind(meanresid.boys, meanresid.girls), 3)
+```
+
+Notice that the indicator ‘acceptance’ has large residuals for both groups (0.179 and −0.199), as do (to a lesser degree) the indicators ‘`homework`’ (−0.097 and 0.232) and ‘`self-expression`’ (−0.146 and 0.094).  Perhaps freeing the equality constraint for ‘`acceptance`’ would allow for partial measurement invariance.
+
+[Script 23.3](#script-23.3) shows how to request standardized mean residuals using Bentler’s (1995) formula, which you may recall differs in that the differences in unstandardized observed and model-implied means are calculated first, then standardized with respect to the observed $SD$s only.
+
+## Script 23.3 {-}
+```
+## request Bentler's (1995) formula
+resid(saqout.scalar, type = "cor.bentler")
+
+## extract model-implied mean vectors (covariances not required)
+(Mu <- lavInspect(saqout.scalar, "mean.ov"))
+## extract observed sample statistics
+(Obs <- lavInspect(saqout.scalar, "sampstat"))
+
+## for boys:
+(meanresid.boys <- Obs$boys$mean - Mu$boys) / sqrt(diag(Obs$boys$cov))
+## for girls
+(meanresid.girls <- Obs$girls$mean - Mu$girls) / sqrt(diag(Obs$girls$cov))
+
+## search boys and girls residuals at the same time
+round(cbind(meanresid.boys, meanresid.girls), 3)
+```
+
+Notice that this produces slightly different results (the residuals seem smaller), but they are just as valid as Bollen’s (1989) formula.  Using Bentler’s (1995) formula, only the ‘`acceptance`’ indicator has large residuals in both groups, so it is the clear choice to free that equality constraint.
+
+In the next chapter, we will see how to also inspect modification indices for equality constraints, along with their associated expected parameter changes.
+
+## References {-}
+Bentler, P. M. (1995). *EQS structural equations program manual*. Encino, CA: Multivariate Software.
+Bollen, K. A. (1989). *Structural equations with latent variables*. Hoboken, NJ: Wiley.
