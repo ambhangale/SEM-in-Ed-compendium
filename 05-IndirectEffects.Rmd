@@ -32,7 +32,7 @@ When the sample size is large, the ratio $ab$ / $SEab$ can be used as the $z$ te
 Table 1. *Direct, total indirect and total effects on Child Anxiety with standard errors, z-values and p-values and standardized values for the model from Figure 2.*
 
 | **Parameter**         | **Estimate** | **SE** | **Z-value** | **p(\>\|z\|)** | **LB 95%CI** | **UB 95%CI** | **Std.** |
-|---------|---------|---------|---------|---------|---------|---------|---------|
+|-----------------------|--------------|--------|-------------|----------------|--------------|--------------|----------|
 | Effects from PA on CA |              |        |             |                |              |              |          |
 | Direct                | .091         | .033   | 2.771       | .006           | .027         | .155         | .317     |
 | Total indirect        | .011         | .009   | 1.148       | .251           | -.008        | .029         | .038     |
@@ -212,9 +212,11 @@ total_PE := total_ind_PE + b42
 
 We can define new variables that are a function of free parameter estimates by using the operator "`:=`". We name the indirect effect of PA on CA `I1_PA`. If there would have been more mediators than Overcontrol, we could name other indirect effects `I2_PA`, `I3_PA` etc. The total indirect effect is calculated by summing the specific indirect effects. In this example there is just one specific indirect effect, so the total indirect effect is equal to the specific indirect effect. We used similar code for the indirect, total indirect and total effect of PE on CA.
 
+```
     I1_PA := b31*b43
     total_ind_PA := I1_PA
     total_PA := total_ind_PA + b41
+```
 
 The summary output of `lavaan` will give the result of the calculations, including a standard error of the estimate (using the delta-method) and the associated $z$-statistic. This provides a test of significance for the indirect ant total effects. When you request standardized output these are also given for the indirect effects. The results are added at the end of the output under `“Defined parameters”`:
 
