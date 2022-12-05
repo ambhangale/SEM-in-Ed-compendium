@@ -1,4 +1,4 @@
-# Fitting CFA models with multilevel data {#ch27}
+# Fitting CFA models with multilevel data {#ch28}
 
 In this chapter we introduce multilevel (two-level) factor models. These models will be relevant if one has obtained data with a nested structure, such as students nested in school classes, and the theoretical model involves latent variables. In Chapter 13, we introduced path models on observed variables with multilevel data. If constructs are operationalised with multiple indicators, these can be modeled using CFA. In a CFA with multilevel data, there are special considerations relating to measurement invariance and the interpretation of the common factor(s) at the different levels. We will illustrate the analysis of multilevel CFA using 6 indicators of teacher-student conflict. The items inquired after the amount of conflict students experiences with their teacher. An example item is: "I can be very angry at my teacher". The items were scored on a 5-point Likert scale ranging from 'definitely does not apply' to 'definitely does apply'. These items were answered by 800 students, on 44 independent teachers. So, the same teacher was the referent for about 20 students. For these data, it seems likely that the item responses from students that share a teacher will differ (some students experience more conflict than others with the same teacher), and that the average scores between teachers will vary (some teachers experience (on average) more conflict with their students than others).
 
@@ -22,9 +22,9 @@ Just as with multilevel path analysis, the overall covariances of $y_{ij}$ ($\Si
 \end{align}
 
 ## Intraclass correlations of observed variables
-Intraclass correlations (ICCs) indicate what proportion of a variable’s total variance exists at Level 2. [Script 27.1](#script-27.1) shows how to obtain the ICCs of the conflict items using `lavaan.`the file `"conflict.dat"` contains the item scores of the students (multilevel models require the analysis of raw data). 
+Intraclass correlations (ICCs) indicate what proportion of a variable’s total variance exists at Level 2. [Script 28.1](#script-28.1) shows how to obtain the ICCs of the conflict items using `lavaan.`the file `"conflict.dat"` contains the item scores of the students (multilevel models require the analysis of raw data). 
 
-### Script 27.1 {-}
+### Script 28.1 {-}
 ```{r}
 library(lavaan)
 data <- read.table("conflict.dat")
@@ -103,8 +103,8 @@ In such a case, the common factor at the two levels still represents the within-
 
 If in addition the factor loadings are not equal, so that weak factorial invariance (metric) invariance across clusters does not hold, then this will also lead to increased residual variance at the between level, and in addition the factor loadings may become unequal across levels (Jak, Oort \& Dolan, 2013; Muthén \& Asparouhov, 2018). If factor loadings are unequal across levels, the interpretation of the common factor at the two levels becomes very complicated, as they do not longer represent the within- and between components of the same latent variable (Mehta \& Neale, 2005). Moreover, it would mean that the common factor has a different interpretation in each cluster. The between-level part of the model then reflects a model for cluster differences in different latent variables (Jak \& Jorgensen, 2017).
 
-[Script 27.2](#script-27.2) fits the multilevel factor model to the six conflict indicators, in which there is one factor underlying the indicator scores. Below you can find a graphical display of the model. 
-```{r label="fig27-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="A two-level factor model on six conflict items." }
+[Script 28.2](#script-28.2) fits the multilevel factor model to the six conflict indicators, in which there is one factor underlying the indicator scores. Below you can find a graphical display of the model. 
+```{r label="fig28-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="A two-level factor model on six conflict items." }
 
 knitr::include_graphics("images/Conflict_2level.jpg")
 
@@ -112,7 +112,7 @@ knitr::include_graphics("images/Conflict_2level.jpg")
 
 The factor loadings are constrained to be equal across levels by providing the same labels to the parameters across levels. Because these equality constraints already provide a scale to the between-level common factor, the factor variance at the between level is freely estimated, while the factor variance at the within level is fixed at one (this could also be specified the other way around). In this model the residual variances at the between level are freely estimated.
 
-### Script 27.2 {-}
+### Script 28.2 {-}
 ```{r}
 # Fit two-level factor model with equal factor loadings across levels
 
