@@ -1243,7 +1243,7 @@ And if there is a predictor of growth factors, then the same principles from [Se
 When the growth-factor indicators are latent variables (see [Section 6](#latent-indicators-of-growth-factors)), comparisons across groups are only valid in the presence of invariance constraints.  For common factors, scalar invariance must therefore be tested across both groups and occasions.  For discrete indicators, thresholds must be invariant across both groups and occasions.  For both types of latent indicator, identification constraints for the latent scale only need to be set on one Group--Time combination (typically the "first" group on the first occasion), while latent scales in all other groups/occasions can be freely estimated.
 
 
-## References
+## References {-}
 
 Bauer, D. J. (2003). Estimating multilevel linear models as structural equation models. *Journal of Educational and Behavioral Statistics, 28*(2), 135--167. <https://doi.org/10.3102/10769986028002135>
 
