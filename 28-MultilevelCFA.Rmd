@@ -224,7 +224,7 @@ Marsh, H. W., Lüdtke, O., Robitzsch, A., Trautwein, U., Asparouhov, T., Muthén
 
 Mehta, P. D., & Neale, M. C. (2005). People are variables too: multilevel structural equations modeling. *Psychological methods, 10*(3), 259.
 
-Muthén, B.). (1990). *Mean and covariance structure analysis of hierarchical data*. Los Angeles, CA: UCLA.
+Muthén, B.O. (1990). *Mean and covariance structure analysis of hierarchical data*. Los Angeles, CA: UCLA.
 
 Muthén, B.O. (1994). Multilevel covariance structure analysis. *Sociological Methods & Research, 22*(3), 376--398. <https://doi.org/10.1177%2F0049124194022003006>
 
