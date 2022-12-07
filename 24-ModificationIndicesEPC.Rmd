@@ -129,4 +129,5 @@ That is a small EPC-interest, so Oberski (2014) might argue that there is little
 
 ## References {-}
 Bentler, P. M., & Chou, C. P. (1993). Some new covariance structure model improvement statistics. *Sage Focus Editions, 154*, 235–255.
+
 Oberski, D. L. (2014). Evaluating sensitivity of parameters of interest to measurement invariance in latent variable models. *Political Analysis, 22*(1), 45–60. doi:10.1093/pan/mpt014

@@ -1,12 +1,12 @@
-# Longitudinal Factor Analysis {#ch25}
+# Longitudinal Factor Analysis {#ch26}
 
 With longitudinal factor analysis, a factor model is fitted to a set of indicators of which responses are collected at different time points. It may be interesting to compare factor means and variance across time. 
 
 Fitting a longitudinal factor model is not very different from fitting a factor model with means, except that in a longitudinal factor model there are covariances between the residual factors of the same indicator at different time points. Figure 1 depicts a one-factor model of “Self-efficacy” with six indicators, measured at two different time points. Because each indicator is measured twice in the same individuals, the item specific components of each indicator covary across timepoints. 
 
-```{r label="fig25-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Self-efficacy measured at two time points." }
+```{r label="fig26-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Self-efficacy measured at two time points." }
 
-knitr::include_graphics("images/Ch25_self-efficacy.png")
+knitr::include_graphics("images/Ch26_self-efficacy.png")
 ```
 
 In order to compare latent variances or latent means over across timepoints, the measurement of the latent variables should be equal over time. To test longitudinal invariance, we can use similar steps as when testing measurement invariance across groups:
@@ -20,9 +20,9 @@ The last step (strict factorial invariance) is not required for a valid comparis
 
 
 ## Step 1: A longitudinal factor model with configural invariance
-[Script 25.1](#script-25.1) fits the model from Figure 1 to data from Hornstra, van der Veen, Peetsma and Volman (2013), without equality constraints across time. 
+[Script 26.1](#script-26.1) fits the model from Figure 1 to data from Hornstra, van der Veen, Peetsma and Volman (2013), without equality constraints across time. 
 
-### Script 25.1 {-}
+### Script 26.1 {-}
 ```
 ## observed data
 
@@ -113,9 +113,9 @@ Actually, the longitudinal factor model is an ordinary factor model (with mean s
 
 
 ## Step 2: A longitudinal model with weak factorial invariance.
-[Script 25.2](#script-25.2) shows how to fit the model from Figure 1 to the data of Hornstra et al. with equality constraints on the factor loadings across time, and free to be estimated factor variances at the later time points.
+[Script 26.2](#script-26.2) shows how to fit the model from Figure 1 to the data of Hornstra et al. with equality constraints on the factor loadings across time, and free to be estimated factor variances at the later time points.
  
-### Script 25.2 {-}
+### Script 26.2 {-}
 ```
 ## STEP 2
 ## constrain factor loadings to be equal across occasions
@@ -191,9 +191,9 @@ We constrain the factor loadings of the same indicator to be equal across time p
 The fit of this model can be compared to the model fit of the model without any across occasion constraints to test whether the equality constraints on the factor loadings lead to a (significant) deterioration in model fit. When the deterioration in fit is not significant, we may conclude that the assumption of weak factorial invariance holds.
 
 ## Step 3: Longitudinal model with strong factorial invariance
-[Script 25.3](#script-25.3) shows how to fit the model with additional equality constraints on the intercepts across time, and free to be estimated factor means at later time points.
+[Script 26.3](#script-26.3) shows how to fit the model with additional equality constraints on the intercepts across time, and free to be estimated factor means at later time points.
 
-### Script 25.3 {-}
+### Script 26.3 {-}
 ```
 ## STEP 3
 ## Constrain intercepts to be equal across occasions
@@ -267,9 +267,9 @@ anova(hornstramodel2Out,hornstramodel3Out)
 Again, we use labels to constrain the intercepts to be equal across occasions. This allows us to freely estimate the common factor mean of self-efficacy at the second time point. To test whether the assumption of strong factorial invariance holds, we can compare the model fit of this model to the model fit of the model without equality constraints imposed on the intercepts.
 
 ## Step 4: A model with strict factorial invariance
-Sometimes, additional equality constraints are imposed on the residual factor variances across time. This is also referred to as ‘strict factorial invariance’. We can use labels to impose the equality constraints, similar like we did with the intercepts. [Script 25.4](#script-25.4) shows how to fit this model.
+Sometimes, additional equality constraints are imposed on the residual factor variances across time. This is also referred to as ‘strict factorial invariance’. We can use labels to impose the equality constraints, similar like we did with the intercepts. [Script 26.4](#script-26.4) shows how to fit this model.
 
-### Script 25.4 {-}
+### Script 26.4 {-}
 ```
 ## STEP 4: Additional constraints on THETA
 hornstramodel4 <- '
@@ -342,9 +342,9 @@ anova(hornstramodel3Out,hornstramodel4Out)
 ## Standardized estimates for a (longitudinal) factor model with means
 Standardizing a longitudinal factor model works the same as standardizing a normal factor model, only now we also have a mean structure which can be standardized. To extract the estimates in matrix form from the `lavaan` output, including the estimates for the intercepts of the observed indicators and the common factor means, we use the `lavInspect()` function. 
 
-[Script 25.5](#script-25.5) has the code that uses matrix algebra to obtain the standardized parameter estimates. 
+[Script 26.5](#script-26.5) has the code that uses matrix algebra to obtain the standardized parameter estimates. 
 
-### Script 25.5 {-}
+### Script 26.5 {-}
 ```
 factornames <- c("selfeff1","selfeff2")
 Estimates <- lavInspect(hornstramodel3Out, "est")

@@ -1,21 +1,21 @@
-# Analysis of categorical outcomes {#ch27}
+# Analysis of categorical outcomes {#ch28}
 
 Until now we have focused on the analysis of continuous outcomes (endogenous variables in path models, indicators in factor models), and we have used the maximum likelihood (ML) estimator that assumes that the distribution of the scores on the observed variables are multivariate normal. Various robust estimators can be used when the assumption of multivariate normality cannot be met, which adjust the $χ^2$ test statistic and $SE$s for nonnormality, but those robust estimators still assume the data are continuous. When we want to analyse categorical data, adjusting for nonnormality is not sufficient because the parameters are not interpretable if the model does not take into account the categorical nature of the observed variables it is trying to explain.
 
 The chapters on [multiple groups](#ch22) and [single-indicator constructs](#ch20) introduced how to incorporate categorical predictors into a SEM. In this chapter we will focus on how we can analyse categorical outcomes. When we have categorical data instead of continuous data, the responses are limited to a small number of values (e.g., 2, 3, or 4 response categories). To be able to analyse these responses, we assume that the categorical responses are representations of a continuous underlying variable, often called a "latent response" variable (distinct from a latent common factor). A latent response is a variable we would like to have measured (e.g., how happy you are) using a more sensitive instrument, but in practice we were only capable of measuring whether someone is in a particular range (e.g., whether they feel happy *never*, *rarely*, *often*, or *always*). The idea is that people with lower scores on the latent response are likely to indicate lower categories of the observed categorical response, whereas people with higher scores on the latent response are likely to indicate higher categories of the observed categorical response. We can think of each latent response as being a single-indicator construct, where the single indicator is the observed categorical response.
 
-Figure \@ref(fig:fig27-1) shows the relation between the underlying continuous variable ($\mathrm{y}^{*}$) and the observed categorical response ($\mathrm{y}$) for a dichotomous variable. Let's consider this to be a test question, which is a common situation with binary indicators. In this example, the latent response variable $\mathrm{y}^{*}$ could be labelled "how well [they] understand this test question" or their "propensity for solving this problem", and the observed binary response would simply be correct (1) or incorrect (0). Here, the difference between the answer "0" and "1" is determined by the threshold ($δ_1$), which represents "how well [they] need to understand this test question in order to get it correct". When an individual's unobserved $\mathrm{y}^{*}$ is below the threshold, we assume that the observed categorical response would be "0" (i.e., they do not understand well enough to get the question correct), whereas a latent response above the threshold would result in an observed response of "1" (i.e., they do understand well enough to get the question correct). When we assume this underlying variable follows a standard normal distribution (i.e., with $μ = 0$ and $σ = 1$), then the position of the threshold is the value of the standard normal distribution ($z$ score) that makes the area under the curve lower than (to the left of) the threshold equal to the proportion of observed responses of '0' (i.e., what percentage got the question incorrect).
+Figure \@ref(fig:fig28-1) shows the relation between the underlying continuous variable ($\mathrm{y}^{*}$) and the observed categorical response ($\mathrm{y}$) for a dichotomous variable. Let's consider this to be a test question, which is a common situation with binary indicators. In this example, the latent response variable $\mathrm{y}^{*}$ could be labelled "how well [they] understand this test question" or their "propensity for solving this problem", and the observed binary response would simply be correct (1) or incorrect (0). Here, the difference between the answer "0" and "1" is determined by the threshold ($δ_1$), which represents "how well [they] need to understand this test question in order to get it correct". When an individual's unobserved $\mathrm{y}^{*}$ is below the threshold, we assume that the observed categorical response would be "0" (i.e., they do not understand well enough to get the question correct), whereas a latent response above the threshold would result in an observed response of "1" (i.e., they do understand well enough to get the question correct). When we assume this underlying variable follows a standard normal distribution (i.e., with $μ = 0$ and $σ = 1$), then the position of the threshold is the value of the standard normal distribution ($z$ score) that makes the area under the curve lower than (to the left of) the threshold equal to the proportion of observed responses of '0' (i.e., what percentage got the question incorrect).
 
-```{r label="fig27-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="A dichotomous response ($y$) and associated theshold ($δ_1$) for an underlying continuous variable $y^{*}$"}
+```{r label="fig28-1", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="A dichotomous response ($y$) and associated theshold ($δ_1$) for an underlying continuous variable $y^{*}$"}
 
-knitr::include_graphics("images/Ch27-1.png")
+knitr::include_graphics("images/Ch28-1.png")
 ```
 
-The information above applies to the situation when we have two response categories (dichotomous/binary data), but can easily be extended to multiple ordered response categories (polytomous/ordinal data). Additional thresholds define the classification of the observed categorical responses, where the number of thresholds ($c$) is equal the number of categories ($C$) minus one ($c = C − 1$). An example of a variable with three response categories is given in Figure \@ref(fig:fig27-2). 
+The information above applies to the situation when we have two response categories (dichotomous/binary data), but can easily be extended to multiple ordered response categories (polytomous/ordinal data). Additional thresholds define the classification of the observed categorical responses, where the number of thresholds ($c$) is equal the number of categories ($C$) minus one ($c = C − 1$). An example of a variable with three response categories is given in Figure \@ref(fig:fig28-2). 
 
-```{r label="fig27-2", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="The estimation of thresholds ($δ_1$ and $δ_2$): Observed categorical responses y are representations of underlying continuous scores $y^*$. There are 20%, 45%, and 35% observed responses in categories 0, 1, and 2 respectively. Cumulatively this is 20%, 65% (20 + 45), and 100% (20 + 45 + 35) of the entire distribution. The first threshold is located where the area under the curve to the left of the threshold is 20% ($δ_1 = Z_{20} = −0.842$). The second threshold is located where the area under the curve to the left of the threshold is 65% ($δ_2 = Z_{65} = 0.385$)." }
+```{r label="fig28-2", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="The estimation of thresholds ($δ_1$ and $δ_2$): Observed categorical responses y are representations of underlying continuous scores $y^*$. There are 20%, 45%, and 35% observed responses in categories 0, 1, and 2 respectively. Cumulatively this is 20%, 65% (20 + 45), and 100% (20 + 45 + 35) of the entire distribution. The first threshold is located where the area under the curve to the left of the threshold is 20% ($δ_1 = Z_{20} = −0.842$). The second threshold is located where the area under the curve to the left of the threshold is 65% ($δ_2 = Z_{65} = 0.385$)." }
 
-knitr::include_graphics("images/Ch27-2.png")
+knitr::include_graphics("images/Ch28-2.png")
 ```
 
 With multiple ordinal variables, we can estimate the correlations between their associated latent responses (called “polychoric” correlations) by relying on the assumption that the latent response variables are normally distributed. A polychoric correlation approximates what the Pearson correlation would be if the variables had been measured using a continuous scale that represented their true distributional form. In the special case that both observed categorical responses are binary, this estimate is called a “tetrachoric” correlation, but we can use the more general term polychoric correlation matrix to refer to these summary statistics. 
@@ -25,14 +25,14 @@ When we fit a SEM to categorical outcomes, we therefore need to estimate thresho
 In the current chapter we will explain how to fit CFA models to categorical outcomes in `lavaan` using the diagonally weighted least squares (DWLS) estimator of parameters, which does not rely on assuming that data are normally distributed, or even continuous (although they certainly can be). Because the standard $χ^2$ test statistic and $SE$s have inflated Type I error rates, `lavaan` also provides a robust $χ^2$ and $SE$s. Models must be fitted to complete raw data rather than summary statistics. We will give two examples: one for binary item responses and one for three-category ordinal item responses. Because CFA models for categorical indicators are fit to individual items (e.g., test questions) rather than to sums of test/questionnaire items, this is sometimes called “item factor analysis” (IFA). The implied distinction is that CFA models are not appropriate for item-level data, which cannot be normally (or continuously) distributed in practice because they are measured using binary (e.g., yes/no) or ordinal (e.g., Likert-type) scales. Factor models were indeed developed for explaining covariation among separate tests of a common construct (e.g., sum scores on separate tests of mathematical skills) rather than for explaining covariation among individual test/questionnaire items.
 
 ## Factor analysis using categorical indicators
-The [Script 26.1](#script-26.1) fits the three-factor model of Smits and Vorst’s (1982) School Attitudes Questionnaire (SAQ) to raw observed data from $N = 915$ school pupils, where the responses have been dichotomized to “1” and “2’. See a depiction of the factor model from [Chapter 12](#ch12) in Figure \@ref(fig:fig27-3), which now includes nonlinear effects of latent responses on observed responses.
+The [Script 28.1](#script-28.1) fits the three-factor model of Smits and Vorst’s (1982) School Attitudes Questionnaire (SAQ) to raw observed data from $N = 915$ school pupils, where the responses have been dichotomized to “1” and “2’. See a depiction of the factor model from [Chapter 12](#ch12) in Figure \@ref(fig:fig28-3), which now includes nonlinear effects of latent responses on observed responses.
 
-```{r label="fig27-3", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Item Factor Analysis (IFA) model of the School Aptitude Questionnaire (SAQ)." }
+```{r label="fig28-3", echo = FALSE, out.width = "80%", fig.align = "center", fig.cap="Item Factor Analysis (IFA) model of the School Aptitude Questionnaire (SAQ)." }
 
-knitr::include_graphics("images/Ch27-3.png")
+knitr::include_graphics("images/Ch28-3.png")
 ```
 
-### Script 26.1 {-}
+### Script 28.1 {-}
 ```
 ## import raw data
 library(foreign)	# the package foreign contains the read.spss function
@@ -141,9 +141,9 @@ Scales y*:
 
 Thresholds are therefore interpreted as $z$ scores. Likewise, factor loadings are already correlations between the latent common factor and the latent item-response. Because the scaling method is arbitrary, we could have chosen instead to fix the residual variances of the latent responses to be $θ = 1$, so that the total variances would be $1 + λ^2ψ$. This is called the “theta” parameterization, which produces a statistically equivalent model.
 
-The theta parameterization becomes useful when testing hypotheses about equivalence of residual variances, such as strict measurement invariance. In single-group single-occasion models, the choice between delta and theta parameterizations is of little consequence. As [Script 26.2](#script-26.2) shows, the standardized solution is identical to the unstandardized delta solution.
+The theta parameterization becomes useful when testing hypotheses about equivalence of residual variances, such as strict measurement invariance. In single-group single-occasion models, the choice between delta and theta parameterizations is of little consequence. As [Script 28.2](#script-28.2) shows, the standardized solution is identical to the unstandardized delta solution.
 
-### Script 26.2 {-}
+### Script 28.2 {-}
 ```
 ## fit the same model to data, using theta parameterization
 out.theta <- cfa(modSAQ, std.lv = TRUE, data = saq2cat,
@@ -182,9 +182,9 @@ Variances:
 
 Fixing the latent-response intercepts is also an arbitrary choice. It merely allows us to interpret a threshold between two categories as being a certain distance from the mean, assuming the latent-response mean is zero (controlling for the common factor). But we could just as easily identify the model by fixing the thresholds to zero (an equally arbitrary choice) and estimating the latent-response intercepts. We actually get the same answers but with opposite signs (i.e., $τ = −δ$), which provides the same interpretation. We still interpret a threshold as being a certain distance from the mean of the latent-response distribution, but now we arbitrarily assume the threshold $δ = 0$ instead of assuming the intercept $τ = 0$.
 
-[Script 26.3](#script-26.3) shows how to specify threshold parameters by using the “`|`” operator (called a “vertical bar” or “pipe”, found by holding the Shift key and typing the backslash above the Enter/Return key). `lavaan` always labels thresholds in an orderly fashion, so the first (and only) threshold for a dichotomous response is defined with “`| t1`”.
+[Script 28.3](#script-28.3) shows how to specify threshold parameters by using the “`|`” operator (called a “vertical bar” or “pipe”, found by holding the Shift key and typing the backslash above the Enter/Return key). `lavaan` always labels thresholds in an orderly fashion, so the first (and only) threshold for a dichotomous response is defined with “`| t1`”.
 
-### Script 26.3 {-}
+### Script 28.3 {-}
 ```
 ## specify free intercepts and fixed thresholds
 mod.fixThresh <- '# factor loadings
@@ -278,9 +278,9 @@ selfeff       0.362  0.367  0.343  0.261 0.148  0.241  0.681  1.000
 socialskill   0.290  0.293  0.275  0.209 0.119  0.193  0.544  0.491  1.000
 ```
 
-The [Script 26.4](#script-26.4) fits the same three-factor model of the SAQ, but now to the raw data of categorical responses with three categories (“1”, “2”, and “3”). With three categories, items now have 2 thresholds (“`| t1`” and “`| t2`”). Although specifying factor loadings is sufficient when using the` cfa()` function because all factor (co)variances and residual variances will be estimated by default, we specify labels for the thresholds in order to illustrate how thresholds can be specified in `lavaan` model syntax.
+The [Script 28.4](#script-28.4) fits the same three-factor model of the SAQ, but now to the raw data of categorical responses with three categories (“1”, “2”, and “3”). With three categories, items now have 2 thresholds (“`| t1`” and “`| t2`”). Although specifying factor loadings is sufficient when using the` cfa()` function because all factor (co)variances and residual variances will be estimated by default, we specify labels for the thresholds in order to illustrate how thresholds can be specified in `lavaan` model syntax.
 
-### Script 26.4 {-}
+### Script 28.4 {-}
 ```
 ## import 3-category data from the SPSS file saq3cat 
 saq3cat <- read.spss("saq3cat.sav", to.data.frame = TRUE)

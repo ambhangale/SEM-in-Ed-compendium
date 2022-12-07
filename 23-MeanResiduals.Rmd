@@ -99,4 +99,5 @@ In the next chapter, we will see how to also inspect modification indices for eq
 
 ## References {-}
 Bentler, P. M. (1995). *EQS structural equations program manual*. Encino, CA: Multivariate Software.
+
 Bollen, K. A. (1989). *Structural equations with latent variables*. Hoboken, NJ: Wiley.

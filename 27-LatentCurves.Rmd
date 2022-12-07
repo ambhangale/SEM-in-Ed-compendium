@@ -1,6 +1,6 @@
-# Latent Growth Curve Models {#ch26}
+# Latent Growth Curve Models {#ch27}
 
-```{r setup-26, include=FALSE}
+```{r setup-27, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 FigNumber <- 1L # initialize Figure number for automatic ordering
 ```
@@ -18,7 +18,7 @@ In this chapter we first import and summarize example data, then we use a single
 
 ## Prepare Data and Workspace
 
-```{r load lavaan-26, message=FALSE}
+```{r load lavaan-27, message=FALSE}
 library(lavaan)
 ```
 
@@ -38,7 +38,7 @@ We also imported 2 variables measured at the beginning of the study:
 
 The following summary statistics were observed for the $N=321$ adolescents who provided complete data in all 4 years.
 
-```{r import data-26}
+```{r import data-27}
 ## variable names
 vn <- c(paste0("alc", 1:4), paste0("cig", 1:4), paste0("thc", 1:4),"age","peer")
 ## mean vector
@@ -80,11 +80,11 @@ R
 Let's focus on a single measure---alcohol use---measured on 4 occasions for each of $N=`r N`$ adolescents.  A random-intercept model for Subject $i$'s alcohol use in Year $t$ is frequently depicted in MLM as:
 
 \begin{align} 
-\mathrm{y}_{i,t} &= \beta_{i,0} + \varepsilon_{i,t} (\#eq:26-1) \\
-        &= (\gamma_{0} + u_i) + \varepsilon_{i,t} (\#eq:26-2)
+\mathrm{y}_{i,t} &= \beta_{i,0} + \varepsilon_{i,t} (\#eq:27-1) \\
+        &= (\gamma_{0} + u_i) + \varepsilon_{i,t} (\#eq:27-2)
 \end{align}
 
-indicating that each Subject $i$ has their own intercept, so the random intercept $\beta_{i,0}$ is itself a variable.  As Eq. \@ref(eq:26-2) shows, the average intercept can be depicted as the sum of 2 components:
+indicating that each Subject $i$ has their own intercept, so the random intercept $\beta_{i,0}$ is itself a variable.  As Eq. \@ref(eq:27-2) shows, the average intercept can be depicted as the sum of 2 components:
 
 - the average intercept ($\gamma_{0}$)
     - This is the grand mean because there are no other predictors.
@@ -98,7 +98,7 @@ $$
 u_i \sim \mathcal{N}(0, \tau_0) \ \ \ , \ \ \ \varepsilon_{i,t} \sim \mathcal{N}(0, \sigma)
 $$
 
-This MLM can also be represented as a SEM.  In fact, *random effects* are latent variables (Mehta & Neale, 2005; Skrondal & Rabe-Hesketh, 2004).  The SEM representation of Equations \@ref(eq:26-1) and \@ref(eq:26-2) looks superficially different: there are different symbols, and Subject $i$'s $t=1, \dots, T$ measurements are stored in a single vector $\mathbf{y}_i$:
+This MLM can also be represented as a SEM.  In fact, *random effects* are latent variables (Mehta & Neale, 2005; Skrondal & Rabe-Hesketh, 2004).  The SEM representation of Equations \@ref(eq:27-1) and \@ref(eq:27-2) looks superficially different: there are different symbols, and Subject $i$'s $t=1, \dots, T$ measurements are stored in a single vector $\mathbf{y}_i$:
 
 \begin{align*}
 \mathbf{y}_i    &= \Lambda \mathbf{\eta}_i + \varepsilon_i \\
@@ -111,7 +111,7 @@ $$\mathbf{\eta}_i=\beta_{0,i} \ \ , \ \ \alpha=\gamma_0 \ \ , \ \ \zeta_i=u_i   
 
 Note that the factor-loading matrix is merely a vector of ones, filling the role of the constant in a regression model.  That is, a vector of ones is treated as a predictor, and its "slope" is the regression model's intercept.  The role of factor loadings in a LGCM is counter-intuitive because in most SEMs, we think of them as slopes.  Instead, the loadings of a growth factor instead map onto observed variables in a multilevel regression, and random coefficients ($\beta_{0,i}$) are represented by the latent variables (growth factors: $\mathbf{\eta}_i$).  
 
-```{r label="fig26-1", engine='tikz', fig.ext='svg', echo = FALSE, fig.cap="Random intercept model for alcohol-use data from Duncan and Duncan (1996)." }
+```{r label="fig27-1", engine='tikz', fig.ext='svg', echo = FALSE, fig.cap="Random intercept model for alcohol-use data from Duncan and Duncan (1996)." }
 
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -166,7 +166,7 @@ The mean structure of the latent curve model is a special case of the mean struc
 
 ### Specification and Estimation
 
-The following `lavaan` model syntax specifies the model from Figure \@ref(fig:fig26-1).
+The following `lavaan` model syntax specifies the model from Figure \@ref(fig:fig27-1).
 
 ```{r fit RI mod}
 mod.ri <- ' ## loadings for random intercept
@@ -240,7 +240,7 @@ $$\mathbf{X}_i \Longleftrightarrow \mathbf{\Lambda} = \begin{bmatrix} 1 & -3 \\ 
 
 Using this alternative coding scheme, the mean rate-of-change would remain the same, but the mean of the latent intercept would instead be interpreted as the average status at the *end* of the study (*final* status, rather than *initial* status).  However, we will proceed by coding 0 for the first occasion so that the latent intercept represents initial status.
 
-```{r, engine='tikz', fig.ext='svg', label="fig26-2", echo = FALSE, fig.cap="Linear growth model for alcohol-use data from Duncan and Duncan (1996)." }
+```{r, engine='tikz', fig.ext='svg', label="fig27-2", echo = FALSE, fig.cap="Linear growth model for alcohol-use data from Duncan and Duncan (1996)." }
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
 error/.style={draw, circle, thick, minimum size=1cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -389,7 +389,7 @@ There are a couple of options for exploratory LGCMs, described below.
 
 The most popular is the *latent basis curve*, which resembles the linear model but only fixes 2 loadings for the rate-of-change factor, freeing the others to capture non-specific change patterns.  For example, fixing the first 2 loadings to 0 and 1, respectively, sets the (average) amount of change between the first 2 occasions as a baseline.  This is depicted in the path diagram below (left panel).
 
-```{r, engine='tikz',fig.ext='svg', label="fig26-3", echo = FALSE, fig.cap="Latent basis models for alcohol-use data from Duncan and Duncan (1996)."}
+```{r, engine='tikz',fig.ext='svg', label="fig27-3", echo = FALSE, fig.cap="Latent basis models for alcohol-use data from Duncan and Duncan (1996)."}
 
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -494,7 +494,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 \end{tikzpicture}
 ```
 
-The script below specifies the model depicted in the left panel of Figure \@ref(fig:fig26-3).
+The script below specifies the model depicted in the left panel of Figure \@ref(fig:fig27-3).
 ```{r basis12, echo=-1}
 mod.basis12 <- ' ## loadings
     Init.Status =~ 1*alc1 + 1*alc2 +  1*alc3 +  1*alc4
@@ -519,7 +519,7 @@ lavTestLRT(fit.lin, fit.basis12) # or anova(fit.lin, fit.basis12)
 ```
 We cannot reject the null hypothesis that linearity is sufficiently complex.
 
-Another example of a latent basis curve fixes the first and *last* loadings to 0 and 1, respectively, with similar implications for interpretation.  The script below specifies the model depicted in the right panel of Figure \@ref(fig:fig26-3).
+Another example of a latent basis curve fixes the first and *last* loadings to 0 and 1, respectively, with similar implications for interpretation.  The script below specifies the model depicted in the right panel of Figure \@ref(fig:fig27-3).
 ```{r basis14, echo=-1}
 mod.basis14 <- ' ## loadings
     Init.Status =~ 1*alc1 +  1*alc2 +  1*alc3 + 1*alc4
@@ -562,9 +562,9 @@ If we have unequally spaced measurements (e.g., measured at ages 7, 9, 12, and 1
 
 Rather than fixing loadings of the latent intercept to 1, we can specify a "**center**cept" (Wainer, 2000) as $\frac{1}{\sqrt{T}}$ ($\frac{1}{2}$).  The advantage of specifying the latent "level" (rather than initial status) in this way is that its variance ($\psi_{1,1}$) captures individual differences in grand means, not merely individual differences at a particular occasion or in the middle of all occasions (Voelkle & McKnight, 2012, p. 26). 
 
-Finally, because there is a growth factor for each occasion, the entire covariance structure can be reproduced in the latent space (factor (co)variances).  Thus, we must fix indicators' residual variances to zero, as depicted in Figure \@ref(fig:fig26-4).
+Finally, because there is a growth factor for each occasion, the entire covariance structure can be reproduced in the latent space (factor (co)variances).  Thus, we must fix indicators' residual variances to zero, as depicted in Figure \@ref(fig:fig27-4).
 
-```{r, engine='tikz',fig.ext='svg', label="fig26-4", echo = FALSE, fig.cap="Saturated growth model for alcohol-use data from Duncan and Duncan (1996)." }
+```{r, engine='tikz',fig.ext='svg', label="fig27-4", echo = FALSE, fig.cap="Saturated growth model for alcohol-use data from Duncan and Duncan (1996)." }
 
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -645,7 +645,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 \end{tikzpicture}
 ```
 
-The script below specifies the model in Figure \@ref(fig:fig26-4), fits the model, and prints the estimated latent means for interpretation.
+The script below specifies the model in Figure \@ref(fig:fig27-4), fits the model, and prints the estimated latent means for interpretation.
 ```{r sat mod, echo=-1}
 #TODO: add figure
 mod.sat <- ' ## loadings
@@ -730,39 +730,39 @@ Either type of predictor introduces moderation of (or by) time, which is not as 
 \begin{align}
 Y_i &= \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i1} X_{i2} + \varepsilon_i \\
     &= (\beta_0 + \beta_1 X_{i1}) + (\beta_2 + \beta_3 X_{i1}) \times X_{i2} + \varepsilon_i \\
-    &= \vartheta_0 + \vartheta_1 X_{i2} + \varepsilon_i (\#eq:26-3)
+    &= \vartheta_0 + \vartheta_1 X_{i2} + \varepsilon_i (\#eq:27-3)
 \end{align}
 
 
-By grouping the terms in the second row of Eq. \@ref(eq:26-3), we can reinterpret it as a simple regression of $Y$ on $X_2$ (the third row of Eq. \@ref(eq:26-3)).  But the intercept and slope are themselves variables because they depend on (are functions of) $X_1$.
+By grouping the terms in the second row of Eq. \@ref(eq:27-3), we can reinterpret it as a simple regression of $Y$ on $X_2$ (the third row of Eq. \@ref(eq:27-3)).  But the intercept and slope are themselves variables because they depend on (are functions of) $X_1$.
 
 - Simple intercepts: $\vartheta_0 = \beta_0 + \beta_1 X_{i1}$
 - Simple slopes: $\vartheta_1 = \beta_2 + \beta_3 X_{i1}$
 
-Recall the moderation is symmetric, so the terms in Eq. \@ref(eq:26-3) could also be grouped such that the effect of $X_1$ depends on $X_2$.  Moderation can also be interpreted in both directions in a LGCM, but it is not as obvious how because time is not an explicit variable in the model, as other predictors are.
+Recall the moderation is symmetric, so the terms in Eq. \@ref(eq:27-3) could also be grouped such that the effect of $X_1$ depends on $X_2$.  Moderation can also be interpreted in both directions in a LGCM, but it is not as obvious how because time is not an explicit variable in the model, as other predictors are.
 
 Before proceeding, consider that growth factors are variables in a SEM.  They can therefore be predictors as well as outcomes, even in the same model.  Growth factors have already been treated as predictors of occasion-specific indicators in the sections above, but they could also predict subject-level outcome variables (e.g., to investigate whether the rate of increased alcohol consumption predictors a student's academic performance).  The following sections only elaborate on predictors of growth factors and correlations among latent trajectories, but bear in mind that more complex models are possible.
 
 
 ### Time-Invariant (Level-2) Predictors
 
-Level-2 predictors vary between subjects, so they can explain between-subject differences in trajectories, which are represented by growth factors.  Although Duncan and Duncan (1996) had several such covariates, our example data include the following two subject-level predictors: `age` at the beginning of the study and `peer` encouragement to consume illicit substances.  Consider the MLM for growth, which extends Eq. \@ref(eq:26-3) by adding time as a predictor.  Below, we intersperse some equivalent SEM symbols \color{blue}{in blue} as reminders of how the MLM and SEM frameworks map onto each other (Bauer, 2003; Curran, 2003; Singer & Willett, 2003, ch. 8).
+Level-2 predictors vary between subjects, so they can explain between-subject differences in trajectories, which are represented by growth factors.  Although Duncan and Duncan (1996) had several such covariates, our example data include the following two subject-level predictors: `age` at the beginning of the study and `peer` encouragement to consume illicit substances.  Consider the MLM for growth, which extends Eq. \@ref(eq:27-3) by adding time as a predictor.  Below, we intersperse some equivalent SEM symbols \color{blue}{in blue} as reminders of how the MLM and SEM frameworks map onto each other (Bauer, 2003; Curran, 2003; Singer & Willett, 2003, ch. 8).
 
 ```{=tex}
 \begin{equation}
 \text{Level 1: } y_{i,t} = \beta_{i,0} + \beta_{i,1} \text{Time}_{i,t} + \varepsilon_{i,t} = \color{blue}{\Lambda \mathbf{\eta}_i + \varepsilon_i}
-(\#eq:26-4)
+(\#eq:27-4)
 \end{equation}
 ```
 
 \begin{align}
 \text{Level 2: } \beta_{i,0} &= \color{blue}{(\eta_0=)} \gamma_{0,0} + \gamma_{0,1} \text{Age}_i + \gamma_{0,2} \text{Peer-Influence}_i + u_{0,i} \\
-\beta_{i,1} &= \color{blue}{(\eta_1=)} \gamma_{1,0} + \gamma_{1,1} \text{Age}_i + \gamma_{1,2} \text{Peer-Influence}_i + u_{1,i} (\#eq:26-5)
+\beta_{i,1} &= \color{blue}{(\eta_1=)} \gamma_{1,0} + \gamma_{1,1} \text{Age}_i + \gamma_{1,2} \text{Peer-Influence}_i + u_{1,i} (\#eq:27-5)
 \end{align}
 
 The path diagram below depicts age and peer influence as observed variables that predict growth factors, conforming to how `?lavaan::model.syntax` works.  In the background, `lavaan` internally represents observed predictors as single-indicator factors.  Thus, age and peer influence are assigned $\eta_3$ and $\eta_4$, respectively, in the path diagram below. 
 
-```{r, engine='tikz',fig.ext='svg', label="fig26-5", echo = FALSE, fig.align = "center", fig.cap="Linear growth model for alcohol-use data from Duncan and Duncan (1996) with subject-level predictors of growth factors." }
+```{r, engine='tikz',fig.ext='svg', label="fig27-5", echo = FALSE, fig.align = "center", fig.cap="Linear growth model for alcohol-use data from Duncan and Duncan (1996) with subject-level predictors of growth factors." }
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
 error/.style={draw, circle, thick, minimum size=1cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -815,7 +815,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 
 \end{tikzpicture}
 ```
-The LGCM script below specifies a measurement model for the growth factors (Eq. \@ref(eq:26-)) and a structural model that includes both predictors of initial status (Eq. \@ref(26-4)) and rate of change (Eq. \@ref(eq:L2slope+pred)).  We will consider the combined model in Eqs. \@ref(eq:26-5)--\ref{eq:L2res} further when we interpret the structural model.
+The LGCM script below specifies a measurement model for the growth factors (Eq. \@ref(eq:27-)) and a structural model that includes both predictors of initial status (Eq. \@ref(27-4)) and rate of change (Eq. \@ref(eq:L2slope+pred)).  We will consider the combined model in Eqs. \@ref(eq:27-5)--\ref{eq:L2res} further when we interpret the structural model.
 
 ```{r lev2 pred}
 mod.pred2 <- ' ##### MEASUREMENT MODEL
@@ -841,7 +841,7 @@ The estimated intercept for the initial-status factor is $\alpha_0=-1.774$, whic
 
 #### Simple Effects {-}
 
-There are 3 predictors with simple effects in Eq. \@ref(eq-26-5): `age`, `peer`, and Time.  But their effects are not represented in the same way in a LGCM.  First, we focus on the effects of time-invariant predictors.
+There are 3 predictors with simple effects in Eq. \@ref(eq-27-5): `age`, `peer`, and Time.  But their effects are not represented in the same way in a LGCM.  First, we focus on the effects of time-invariant predictors.
 
 Both effects of Level-2 predictors on initial status were significant ($p<.001, R^2=39.7\%$), indicating that when the study began, adolescents who were older and whose best friends more strongly encouraged illicit-substance use exhibited more frequent alcohol consumption.  Standardized slopes indicator both effects were medium, but unstandardized slopes are interpretable in the given units.  Specifically, each year older increases their expected initial alcohol consumption by $\gamma_{0,1}=0.269$ units, for a given level of peer influence.  And at a given age, one (Likert-scale) unit higher peer influence increases their expected initial alcohol consumption by $\gamma_{0,2}=0.086$ units.  
 
@@ -852,7 +852,7 @@ The simple effect of Time, on the other hand, is not an explicit regression slop
 
 #### Moderation Effects {-}
 
-The interactions in Eq. \@ref(eq:26-5) are represented by the predictors' effects on the rate-of-change factor, which explained $R^2=8.6\%$ of between-subjects variance in growth trajectories.  That is, the effect of Time depends on both `age` and `peer`.  The form of the model facilitates describing the nature of this interaction when Time is the focal predictor.  At a given level of peer influence, one year older **decreases the effect of Time on alcohol consumption** by $\gamma_{1,1}=-0.033$ units/year.  The effect of peer influence (given age) was not significant, implying no evidence moderation of Time's effect by peer influence.
+The interactions in Eq. \@ref(eq:27-5) are represented by the predictors' effects on the rate-of-change factor, which explained $R^2=8.6\%$ of between-subjects variance in growth trajectories.  That is, the effect of Time depends on both `age` and `peer`.  The form of the model facilitates describing the nature of this interaction when Time is the focal predictor.  At a given level of peer influence, one year older **decreases the effect of Time on alcohol consumption** by $\gamma_{1,1}=-0.033$ units/year.  The effect of peer influence (given age) was not significant, implying no evidence moderation of Time's effect by peer influence.
 
 We did not estimate an `age` $\times$ `peer` interaction, so the LGCM also did not estimate a 3-way interaction.  This is not possible in our example because doing so would require raw data to calculate the product term and include it as an additional predictor of growth factors.  The 3-way interaction would be represented by the `age` $\times$ `peer` product term's effect on the rate-of-change factor, while the product's (simple) 2-way interaction would be represented by its effect on the initial-status factor.
 
@@ -864,16 +864,16 @@ Level-1 predictors vary within subjects, as does Time.  Thus, we can estimate th
 ```{=tex}
 \begin{equation}
 \text{AlcUse}_{i,t} = \beta_{i,0} + \beta_{i,1} \text{Time}_{i,t} + \beta_2 \text{CigUse}_{i,t} + \beta_3 (\text{Time}_{i,t} \times \text{CigUse}_{i,t}) + \varepsilon_{i,t}
-(\#eq:26-5)
+(\#eq:27-5)
 \end{equation}
 ```
 
-Notice that Eq. \@ref(eq:26-6) only includes a fixed (not random) effect of cigarette use. The possibility of including a random effect for both Time and cigarette use is one of the ways in which MLM is more flexible than SEM.  Notice also that Eq. \@ref(eq:26-6) includes a Time $\times$ cigarette-use interaction effect ($\beta_3$).  This is how moderation is represented in a regression model, but moderation of Time by a Level-1 variable in LGCM is quite different, involving more than one parameter. 
+Notice that Eq. \@ref(eq:27-6) only includes a fixed (not random) effect of cigarette use. The possibility of including a random effect for both Time and cigarette use is one of the ways in which MLM is more flexible than SEM.  Notice also that Eq. \@ref(eq:27-6) includes a Time $\times$ cigarette-use interaction effect ($\beta_3$).  This is how moderation is represented in a regression model, but moderation of Time by a Level-1 variable in LGCM is quite different, involving more than one parameter. 
 
 The path diagram below depicts both alcohol and cigarette use as observed variables, with the latter predicting the former.  However, `lavaan`'s internal LISREL representation does not have a parameter matrix for regressions among observed variables (M*plus* does, and the RAM representation used by the `OpenMx` package only has a single matrix with all slopes among observed and latent variables). So internally, `lavaan` "promotes" alcohol and cigarette use variables to latent variables corresponding to their single indicators.  However, to keep the path diagram readable, this is overlooked and the slopes are labeled simply as $\beta$s.
 
 
-```{r, engine='tikz',fig.ext='svg', label="fig26-6", echo = FALSE, fig.align = "center", fig.cap="Linear growth model for alcohol-use data from Duncan and Duncan (1996), controlling for cigarette-use data." }
+```{r, engine='tikz',fig.ext='svg', label="fig27-6", echo = FALSE, fig.align = "center", fig.cap="Linear growth model for alcohol-use data from Duncan and Duncan (1996), controlling for cigarette-use data." }
 
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -961,7 +961,7 @@ fit.tc <- lavaan(mod.pred1, sample.cov = duncanCOV, sample.mean = duncanM,
 lavTestLRT(fit.pred1, fit.tc)
 ```
 
-The effect of cigarette use now decreases as time goes on, and the decrease is not linear as it is in Eq. \@ref(eq:26-6) because the LGCM can add 3 parameters to account for moderation more flexibly than only $\beta_3$.  Because the effect of cigarette use now depends on Time, the estimated rate-of-change mean is only a simple slope for Time conditional on $\text{CigUse} = 0$ (again, an extrapolation beyond the bounds of this 1--5 scale).  Probing the effect of time at different levels of cigarette use is simple enough: simply center the moderator (all 4 `cig` variables) at the same theoretically interesting value (e.g., 1, 3, and 5), which changes the interpretation of each $\text{AlcUse}$ intercept to the expected value at that level of $\text{CigUse}$.
+The effect of cigarette use now decreases as time goes on, and the decrease is not linear as it is in Eq. \@ref(eq:27-6) because the LGCM can add 3 parameters to account for moderation more flexibly than only $\beta_3$.  Because the effect of cigarette use now depends on Time, the estimated rate-of-change mean is only a simple slope for Time conditional on $\text{CigUse} = 0$ (again, an extrapolation beyond the bounds of this 1--5 scale).  Probing the effect of time at different levels of cigarette use is simple enough: simply center the moderator (all 4 `cig` variables) at the same theoretically interesting value (e.g., 1, 3, and 5), which changes the interpretation of each $\text{AlcUse}$ intercept to the expected value at that level of $\text{CigUse}$.
 ```{r print lev1 mod, echo=FALSE}
 PE.tc <- parameterEstimates(fit.tc, standardized = TRUE, ci = FALSE, output = "pretty")
 PE.tc[PE.tc$op %in% c("~", "~1") & PE.tc$se > 0, ]
@@ -1025,11 +1025,11 @@ At first glance, common factors may seem like poor indicators of growth because 
 
 Thus, growth factors could be specified to reproduce the mean (and covariance) structure among the common factors.  However, because the common-factor mean remains fixed to zero at the first occasion, it follows that the Initial-Status growth factor must have a mean of zero.  In a LGCM, all growth-factor indicators have their intercepts fixed to zero, but with common-factor indicators, the first indicator's latent intercept is already fixed to zero for identification, so there is no exchange of *df* to estimate the latent mean of Initial Status.  Therefore, in a LGCM with common-factor indicators, the mean of Initial Status must be fixed to zero for identification.
 
-The path diagram in Figure \@ref(fig:fig26-7) illustrates a "curve of factors" model, in which growth factors explain growth among repeated measures of a common factor "substance use".  This common factor represents adolescents' propensity for engaging in risk substance-use behaviors, indicated by their use of `alc`ohol, `cig`arettes, and cannabis (`thc`).  The left panel of Figure 7 illustrates only one occasion's measurement model, with longitudinal scalar-invariance constraints in place (i.e., the same $\lambda$s and $\nu$s are constant across occasions).  The left panel also shows that each common-factor intercept is fixed to $\alpha=0$ because those means are structured by the (higher-order) LGCM.  The gray arrow directed from the left to right panels indicates that this measurement model applies to each latent indicator of growth.  The right panel depicts the (higher-order) LGCM itself.  Because only one measurement model for substance use is depicted, Figure 7 is missing the residual covariances that should be estimated for each substance-use indicator across time (i.e., `alc1`'s residuals are correlated with `alc2`'s, `alc3`'s, and `alc4`'s residuals; same for cigarettes and cannabis).
+The path diagram in Figure \@ref(fig:fig27-7) illustrates a "curve of factors" model, in which growth factors explain growth among repeated measures of a common factor "substance use".  This common factor represents adolescents' propensity for engaging in risk substance-use behaviors, indicated by their use of `alc`ohol, `cig`arettes, and cannabis (`thc`).  The left panel of Figure 7 illustrates only one occasion's measurement model, with longitudinal scalar-invariance constraints in place (i.e., the same $\lambda$s and $\nu$s are constant across occasions).  The left panel also shows that each common-factor intercept is fixed to $\alpha=0$ because those means are structured by the (higher-order) LGCM.  The gray arrow directed from the left to right panels indicates that this measurement model applies to each latent indicator of growth.  The right panel depicts the (higher-order) LGCM itself.  Because only one measurement model for substance use is depicted, Figure 7 is missing the residual covariances that should be estimated for each substance-use indicator across time (i.e., `alc1`'s residuals are correlated with `alc2`'s, `alc3`'s, and `alc4`'s residuals; same for cigarettes and cannabis).
 
-In practice, measurement invariance should be tested first, as shown in [Chapter 25](#ch25). Although some authors have advocated testing longitudinal invariance with the LGCM in place (), we recommend using a CFA to test invariance because it places no restrictions on the latent mean or covariance structures.  Any misfit due to invalid structural constraints (e.g., linear growth when true growth is nonlinear) would inflate Type I error rates for tests of invariance.  Note also that if one identifies common factors by fixing a reference (or average) indicator's loading to 1 and intercept to 0, common-factor means and variances would be freely estimated even without invariance constraints in place.  However, the LGCM would not truly model change in a common factor, but rather change in the reference indicator.  Measurement invariance is a prerequisite to drawing valid inferences about structural differences/changes in a construct.
+In practice, measurement invariance should be tested first, as shown in [Chapter 26](#ch26). Although some authors have advocated testing longitudinal invariance with the LGCM in place (), we recommend using a CFA to test invariance because it places no restrictions on the latent mean or covariance structures.  Any misfit due to invalid structural constraints (e.g., linear growth when true growth is nonlinear) would inflate Type I error rates for tests of invariance.  Note also that if one identifies common factors by fixing a reference (or average) indicator's loading to 1 and intercept to 0, common-factor means and variances would be freely estimated even without invariance constraints in place.  However, the LGCM would not truly model change in a common factor, but rather change in the reference indicator.  Measurement invariance is a prerequisite to drawing valid inferences about structural differences/changes in a construct.
 
-```{r, engine='tikz',fig.ext='svg', label="fig26-7", echo = FALSE, fig.align = "center", fig.cap="Curve-of-factors model for substance-use data from Duncan and Duncan (1996)." }
+```{r, engine='tikz',fig.ext='svg', label="fig27-7", echo = FALSE, fig.align = "center", fig.cap="Curve-of-factors model for substance-use data from Duncan and Duncan (1996)." }
 
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=2cm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -1118,7 +1118,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 ```
 
 
-The script below specifies the curve-of-factors model depicted in Figure \@ref(fig:fig26-7).
+The script below specifies the curve-of-factors model depicted in Figure \@ref(fig:fig27-7).
 ```{r curve of factors}
 mod.cof <- ' ##### MEASUREMENT MODEL (3 indicators)
   ## equal loadings across 4 occasions
@@ -1207,9 +1207,9 @@ $$\mathrm{y}=c \ \ \ \text{ if } \ \ \ \tau_c < \mathrm{y}^* \le \tau_{c+1}$$
 
 Because the normal distribution is unbounded, the first category "starts" at $\tau_0 = -\infty$, and the last category "ends" at $\tau_{C+1} = +\infty$.  
 
-With only 3 categories, there is only enough information to trade the $C=2$ thresholds for the LRV intercept and variance, which is sufficient to link the response scales across occasions.  So we can still only assume (not test) the assumption that thresholds do not change over time, but *threshold invariance* can be tested when items have $\ge3$ thresholds (Mehta et al., 2004).  In our example data, substance use was measured with 5 categories, so each indicator would have $C=4$ thresholds, enabling us to test the assumption of threshold invariance (if we had access to the raw data).  Chapter 27 will discuss threshold invariance in greater detail in the context of CFA with categorical indicators, but here it is sufficient to say that we can constrain thresholds across occasions in LGCM model syntax by using the same labels (below, `a`, `b`, `c`, and `d`) for equality-constrained parameters.  
+With only 3 categories, there is only enough information to trade the $C=2$ thresholds for the LRV intercept and variance, which is sufficient to link the response scales across occasions.  So we can still only assume (not test) the assumption that thresholds do not change over time, but *threshold invariance* can be tested when items have $\ge3$ thresholds (Mehta et al., 2004).  In our example data, substance use was measured with 5 categories, so each indicator would have $C=4$ thresholds, enabling us to test the assumption of threshold invariance (if we had access to the raw data).  [Chapter 29](#ch29) will discuss threshold invariance in greater detail in the context of CFA with categorical indicators, but here it is sufficient to say that we can constrain thresholds across occasions in LGCM model syntax by using the same labels (below, `a`, `b`, `c`, and `d`) for equality-constrained parameters.  
 
-```{r syntax thresh-26, eval=FALSE}
+```{r syntax thresh-27, eval=FALSE}
 ' alc1 | a*t1 + b*t2 + c*t3 + d*t4
   alc2 | a*t1 + b*t2 + c*t3 + d*t4
   alc3 | a*t1 + b*t2 + c*t3 + d*t4
