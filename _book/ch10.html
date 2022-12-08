@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>10 Estimation | Compendium Structural Equation Modeling in Educational Research</title>
+  <meta name="description" content="10 Estimation | Compendium Structural Equation Modeling in Educational Research" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="10 Estimation | Compendium Structural Equation Modeling in Educational Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="LJGroot/SEM-Compendium" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="10 Estimation | Compendium Structural Equation Modeling in Educational Research" />
+  
+  
+  
+
+<meta name="author" content="Suzanne Jak and Terrence D. Jorgensen" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ch9.html"/>
+<link rel="next" href="ch11.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="ch1.html"><a href="ch1.html"><i class="fa fa-check"></i><b>1</b> Regression as Mean- and Covariance-Structure Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="ch1.html"><a href="ch1.html#installing-lavaan"><i class="fa fa-check"></i><b>1.1</b> Installing <code>lavaan</code></a></li>
+<li class="chapter" data-level="1.2" data-path="ch1.html"><a href="ch1.html#types-of-data-used-in-sem"><i class="fa fa-check"></i><b>1.2</b> Types of Data Used in SEM</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="ch1.html"><a href="ch1.html#raw-data"><i class="fa fa-check"></i><b>1.2.1</b> Raw Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="ch1.html"><a href="ch1.html#summary-statistics-from-raw-data"><i class="fa fa-check"></i><b>1.2.2</b> Summary Statistics from Raw Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="ch1.html"><a href="ch1.html#importing-summary-data"><i class="fa fa-check"></i><b>1.2.3</b> Importing Summary Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="ch1.html"><a href="ch1.html#regression-review"><i class="fa fa-check"></i><b>1.3</b> Regression Review</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="ch1.html"><a href="ch1.html#linear-regression-models"><i class="fa fa-check"></i><b>1.3.1</b> Linear Regression Models</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ch1.html"><a href="ch1.html#matrix-notation"><i class="fa fa-check"></i><b>1.3.2</b> Matrix Notation</a></li>
+<li class="chapter" data-level="1.3.3" data-path="ch1.html"><a href="ch1.html#interpreting-and-estimating-coefficients"><i class="fa fa-check"></i><b>1.3.3</b> Interpreting and Estimating Coefficients</a></li>
+<li class="chapter" data-level="1.3.4" data-path="ch1.html"><a href="ch1.html#syntax-examples-with-raw-data"><i class="fa fa-check"></i><b>1.3.4</b> Syntax Examples with Raw Data</a></li>
+<li class="chapter" data-level="1.3.5" data-path="ch1.html"><a href="ch1.html#categorical-predictors"><i class="fa fa-check"></i><b>1.3.5</b> Categorical Predictors</a></li>
+<li class="chapter" data-level="1.3.6" data-path="ch1.html"><a href="ch1.html#constant-vs.-varying-slopes"><i class="fa fa-check"></i><b>1.3.6</b> Constant vs. Varying Slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="ch1.html"><a href="ch1.html#summary-statistics"><i class="fa fa-check"></i><b>1.4</b> Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="ch1.html"><a href="ch1.html#reimport-data"><i class="fa fa-check"></i><b>1.4.1</b> Reimport Data</a></li>
+<li class="chapter" data-level="1.4.2" data-path="ch1.html"><a href="ch1.html#raw-data-vs.-summary-statistics"><i class="fa fa-check"></i><b>1.4.2</b> Raw Data vs. Summary Statistics</a></li>
+<li class="chapter" data-level="1.4.3" data-path="ch1.html"><a href="ch1.html#what-is-covariance"><i class="fa fa-check"></i><b>1.4.3</b> What Is Covariance?</a></li>
+<li class="chapter" data-level="1.4.4" data-path="ch1.html"><a href="ch1.html#interpreting-covariance"><i class="fa fa-check"></i><b>1.4.4</b> Interpreting Covariance</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="ch1.html"><a href="ch1.html#covariance-matrix"><i class="fa fa-check"></i><b>1.5</b> Covariance Matrix</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="ch1.html"><a href="ch1.html#ols-with-summary-statistics-beta-mathbfx-mathbfx-1-mathbfx-mathbfy"><i class="fa fa-check"></i><b>1.5.1</b> OLS with Summary Statistics: <span class="math inline">\(\beta = (\mathbf{X}^{&#39;} \mathbf{X})^{-1} \mathbf{X}^{&#39;} \mathbf{y}\)</span></a></li>
+<li class="chapter" data-level="1.5.2" data-path="ch1.html"><a href="ch1.html#intercepts-and-means"><i class="fa fa-check"></i><b>1.5.2</b> Intercepts and Means</a></li>
+<li class="chapter" data-level="1.5.3" data-path="ch1.html"><a href="ch1.html#intercepts-and-means-1"><i class="fa fa-check"></i><b>1.5.3</b> Intercepts and Means</a></li>
+<li class="chapter" data-level="1.5.4" data-path="ch1.html"><a href="ch1.html#what-are-mean-and-covariance-structures"><i class="fa fa-check"></i><b>1.5.4</b> What Are Mean and Covariance <em>Structures</em>?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch1.html"><a href="ch1.html#references"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="ch2.html"><a href="ch2.html"><i class="fa fa-check"></i><b>2</b> Using <code>lavaan</code> to Run Regression and ANOVA as a SEM</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="ch2.html"><a href="ch2.html#prepare-data-and-workspace"><i class="fa fa-check"></i><b>2.1</b> Prepare Data and Workspace</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="ch2.html"><a href="ch2.html#import-example-data"><i class="fa fa-check"></i><b>2.1.1</b> Import Example Data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="ch2.html"><a href="ch2.html#load-lavaan-into-workspace"><i class="fa fa-check"></i><b>2.1.2</b> Load <code>lavaan</code> into Workspace</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="ch2.html"><a href="ch2.html#multiple-regression-in-sem"><i class="fa fa-check"></i><b>2.2</b> Multiple Regression in SEM</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="ch2.html"><a href="ch2.html#lavaan-syntax"><i class="fa fa-check"></i><b>2.2.1</b> <code>lavaan</code> Syntax</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="ch2.html"><a href="ch2.html#caveats-with-sem"><i class="fa fa-check"></i><b>2.3</b> Caveats with SEM</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="ch2.html"><a href="ch2.html#model-comparison-with-ols"><i class="fa fa-check"></i><b>2.3.1</b> Model Comparison with OLS</a></li>
+<li class="chapter" data-level="2.3.2" data-path="ch2.html"><a href="ch2.html#model-comparison-with-lavaan"><i class="fa fa-check"></i><b>2.3.2</b> Model Comparison with <code>lavaan</code></a></li>
+<li class="chapter" data-level="2.3.3" data-path="ch2.html"><a href="ch2.html#moderation-caveats"><i class="fa fa-check"></i><b>2.3.3</b> Moderation Caveats</a></li>
+<li class="chapter" data-level="2.3.4" data-path="ch2.html"><a href="ch2.html#summary-of-caveats"><i class="fa fa-check"></i><b>2.3.4</b> Summary of Caveats</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="ch2.html"><a href="ch2.html#multigroup-sem"><i class="fa fa-check"></i><b>2.4</b> Multigroup SEM</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="ch2.html"><a href="ch2.html#group-specific-intercepts-in-ols"><i class="fa fa-check"></i><b>2.4.1</b> Group-Specific Intercepts in OLS</a></li>
+<li class="chapter" data-level="2.4.2" data-path="ch2.html"><a href="ch2.html#group-specific-intercepts-in-sem"><i class="fa fa-check"></i><b>2.4.2</b> Group-Specific Intercepts in SEM?</a></li>
+<li class="chapter" data-level="2.4.3" data-path="ch2.html"><a href="ch2.html#multiple-groups-in-sem"><i class="fa fa-check"></i><b>2.4.3</b> Multiple Groups in SEM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ch3.html"><a href="ch3.html"><i class="fa fa-check"></i><b>3</b> Path Models</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ch3.html"><a href="ch3.html#illustrative-example"><i class="fa fa-check"></i><b>3.1</b> Illustrative example</a></li>
+<li class="chapter" data-level="3.2" data-path="ch3.html"><a href="ch3.html#conceptual-explanation"><i class="fa fa-check"></i><b>3.2</b> Conceptual explanation</a></li>
+<li class="chapter" data-level="3.3" data-path="ch3.html"><a href="ch3.html#matrix-explanation"><i class="fa fa-check"></i><b>3.3</b> Matrix explanation</a></li>
+<li class="chapter" data-level="3.4" data-path="ch3.html"><a href="ch3.html#path-analysis-using-lavaan"><i class="fa fa-check"></i><b>3.4</b> Path analysis using lavaan</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="ch3.html"><a href="ch3.html#installing-lavaan-1"><i class="fa fa-check"></i><b>3.4.1</b> Installing lavaan</a></li>
+<li class="chapter" data-level="3.4.2" data-path="ch3.html"><a href="ch3.html#fitting-a-path-model"><i class="fa fa-check"></i><b>3.4.2</b> Fitting a path model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="ch3.html"><a href="ch3.html#syntax-shortcuts"><i class="fa fa-check"></i><b>3.4.3</b> Syntax shortcuts</a></li>
+<li class="chapter" data-level="3.4.4" data-path="ch3.html"><a href="ch3.html#extracting-results-from-lavaan-output-in-matrix-form"><i class="fa fa-check"></i><b>3.4.4</b> Extracting results from lavaan output in matrix form</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#references-1"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#appendix"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.08"><i class="fa fa-check"></i>Derivations of equation 3.08</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.09"><i class="fa fa-check"></i>Derivations of equation 3.09</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ch4.html"><a href="ch4.html"><i class="fa fa-check"></i><b>4</b> Standard Errors and Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ch4.html"><a href="ch4.html#standard-errors"><i class="fa fa-check"></i><b>4.1</b> Standard Errors</a></li>
+<li class="chapter" data-level="4.2" data-path="ch4.html"><a href="ch4.html#confidence-intervals"><i class="fa fa-check"></i><b>4.2</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="ch4.html"><a href="ch4.html#likelihood-based-confidence-intervals"><i class="fa fa-check"></i><b>4.2.1</b> Likelihood-based confidence intervals</a></li>
+<li class="chapter" data-level="4.2.2" data-path="ch4.html"><a href="ch4.html#bootstrapped-confidence-intervals"><i class="fa fa-check"></i><b>4.2.2</b> Bootstrapped confidence intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="ch4.html"><a href="ch4.html#obtaining-standard-errors-and-confidence-intervals-in-lavaan"><i class="fa fa-check"></i><b>4.3</b> Obtaining standard errors and confidence intervals in <code>lavaan</code></a></li>
+<li class="chapter" data-level="" data-path="ch4.html"><a href="ch4.html#references-2"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ch5.html"><a href="ch5.html"><i class="fa fa-check"></i><b>5</b> Direct, Indirect, and Total Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ch5.html"><a href="ch5.html#testing-significance-of-indirect-effects"><i class="fa fa-check"></i><b>5.1</b> Testing significance of indirect effects</a></li>
+<li class="chapter" data-level="5.2" data-path="ch5.html"><a href="ch5.html#higher-order-indirect-effects"><i class="fa fa-check"></i><b>5.2</b> Higher order indirect effects</a></li>
+<li class="chapter" data-level="5.3" data-path="ch5.html"><a href="ch5.html#using-matrix-algebra-to-calculate-total-total-indirect-and-specific-indirect-effects"><i class="fa fa-check"></i><b>5.3</b> Using matrix algebra to calculate total, total indirect and specific indirect effects</a></li>
+<li class="chapter" data-level="5.4" data-path="ch5.html"><a href="ch5.html#calculating-total-total-indirect-and-specific-indirect-effects-using-lavaan-output"><i class="fa fa-check"></i><b>5.4</b> Calculating total, total indirect and specific indirect effects using lavaan output</a></li>
+<li class="chapter" data-level="5.5" data-path="ch5.html"><a href="ch5.html#calculating-specific-indirect-effects-in-lavaan"><i class="fa fa-check"></i><b>5.5</b> Calculating specific indirect effects in lavaan</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ch6.html"><a href="ch6.html"><i class="fa fa-check"></i><b>6</b> Calculating Standardized Parameter Estimates</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ch6.html"><a href="ch6.html#standardized-regression-coefficients"><i class="fa fa-check"></i><b>6.1</b> Standardized regression coefficients</a></li>
+<li class="chapter" data-level="6.2" data-path="ch6.html"><a href="ch6.html#standardized-residual-factor-variances-and-covariances"><i class="fa fa-check"></i><b>6.2</b> Standardized residual factor variances and covariances</a></li>
+<li class="chapter" data-level="6.3" data-path="ch6.html"><a href="ch6.html#calculating-standardized-coefficients-in-r-using-lavaan-results"><i class="fa fa-check"></i><b>6.3</b> Calculating standardized coefficients in R using lavaan results</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch6.html"><a href="ch6.html#script-6.1"><i class="fa fa-check"></i>Script 6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="ch6.html"><a href="ch6.html#request-standardized-output-with-lavaan"><i class="fa fa-check"></i><b>6.4</b> Request standardized output with lavaan</a></li>
+<li class="chapter" data-level="6.5" data-path="ch6.html"><a href="ch6.html#standardizing-indirect-and-total-effects"><i class="fa fa-check"></i><b>6.5</b> Standardizing indirect and total effects</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch7.html"><a href="ch7.html"><i class="fa fa-check"></i><b>7</b> Identification</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ch7.html"><a href="ch7.html#assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i><b>7.1</b> Assessment of identification using the elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
+<li class="chapter" data-level="7.2" data-path="ch7.html"><a href="ch7.html#assessing-identification-through-heuristics-rules-of-thumb"><i class="fa fa-check"></i><b>7.2</b> Assessing identification through heuristics (rules of thumb)</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="ch7.html"><a href="ch7.html#the-recursive-rule"><i class="fa fa-check"></i><b>7.2.1</b> The recursive rule</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ch7.html"><a href="ch7.html#the-order-condition"><i class="fa fa-check"></i><b>7.2.2</b> The order condition</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ch7.html"><a href="ch7.html#the-rank-condition"><i class="fa fa-check"></i><b>7.2.3</b> The rank condition</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ch7.html"><a href="ch7.html#assessment-of-empirical-model-identification-using-lavaan"><i class="fa fa-check"></i><b>7.3</b> Assessment of empirical model identification using <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="ch7.html"><a href="ch7.html#script-7.1"><i class="fa fa-check"></i>Script 7.1</a></li>
+<li class="chapter" data-level="" data-path="ch7.html"><a href="ch7.html#script-7.2"><i class="fa fa-check"></i>Script 7.2</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch7.html"><a href="ch7.html#appendix-1"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch7.html"><a href="ch7.html#algebraic-assessment-of-identification-using-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i>Algebraic assessment of identification using elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ch8.html"><a href="ch8.html"><i class="fa fa-check"></i><b>8</b> Autoregression</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch8.html"><a href="ch8.html#script-8.1"><i class="fa fa-check"></i>Script 8.1</a></li>
+<li class="chapter" data-level="8.1" data-path="ch8.html"><a href="ch8.html#autoregression-models-with-predictors"><i class="fa fa-check"></i><b>8.1</b> Autoregression models with predictors</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch8.html"><a href="ch8.html#script-8.2"><i class="fa fa-check"></i>Script 8.2</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="ch8.html"><a href="ch8.html#cross-lagged-panel-models"><i class="fa fa-check"></i><b>8.2</b> Cross-lagged panel models</a></li>
+<li class="chapter" data-level="" data-path="ch8.html"><a href="ch8.html#references-3"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch9.html"><a href="ch9.html"><i class="fa fa-check"></i><b>9</b> Model Specification and Model Identification</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ch9.html"><a href="ch9.html#from-theory-to-model"><i class="fa fa-check"></i><b>9.1</b> From theory to model</a></li>
+<li class="chapter" data-level="9.2" data-path="ch9.html"><a href="ch9.html#model-parsimony"><i class="fa fa-check"></i><b>9.2</b> Model parsimony</a></li>
+<li class="chapter" data-level="9.3" data-path="ch9.html"><a href="ch9.html#a-priori-model-specification"><i class="fa fa-check"></i><b>9.3</b> A priori model specification</a></li>
+<li class="chapter" data-level="9.4" data-path="ch9.html"><a href="ch9.html#post-hoc-model-modification"><i class="fa fa-check"></i><b>9.4</b> Post hoc model modification</a></li>
+<li class="chapter" data-level="9.5" data-path="ch9.html"><a href="ch9.html#backward-and-forward-specification-searches"><i class="fa fa-check"></i><b>9.5</b> Backward and forward specification searches</a></li>
+<li class="chapter" data-level="9.6" data-path="ch9.html"><a href="ch9.html#correlation-residuals"><i class="fa fa-check"></i><b>9.6</b> Correlation residuals</a></li>
+<li class="chapter" data-level="9.7" data-path="ch9.html"><a href="ch9.html#modification-indices"><i class="fa fa-check"></i><b>9.7</b> Modification indices</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="ch9.html"><a href="ch9.html#script-9.0"><i class="fa fa-check"></i><b>9.7.1</b> Script 9.0</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="ch9.html"><a href="ch9.html#cross-validation"><i class="fa fa-check"></i><b>9.8</b> Cross-validation</a></li>
+<li class="chapter" data-level="9.9" data-path="ch9.html"><a href="ch9.html#calculating-correlation-residuals-in-lavaan"><i class="fa fa-check"></i><b>9.9</b> Calculating correlation residuals in <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="9.9.1" data-path="ch9.html"><a href="ch9.html#requesting-mis-and-sepcs-in-lavaan"><i class="fa fa-check"></i><b>9.9.1</b> Requesting MIs and (S)EPCs in <code>lavaan</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch9.html"><a href="ch9.html#references-4"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch10.html"><a href="ch10.html"><i class="fa fa-check"></i><b>10</b> Estimation</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ch10.html"><a href="ch10.html#improper-solutions"><i class="fa fa-check"></i><b>10.1</b> Improper Solutions</a></li>
+<li class="chapter" data-level="10.2" data-path="ch10.html"><a href="ch10.html#specifying-starting-values-in-lavaan"><i class="fa fa-check"></i><b>10.2</b> Specifying starting values in lavaan</a></li>
+<li class="chapter" data-level="10.3" data-path="ch10.html"><a href="ch10.html#alternative-estimators"><i class="fa fa-check"></i><b>10.3</b> Alternative estimators</a></li>
+<li class="chapter" data-level="10.4" data-path="ch10.html"><a href="ch10.html#robust-estimators"><i class="fa fa-check"></i><b>10.4</b> Robust estimators</a></li>
+<li class="chapter" data-level="10.5" data-path="ch10.html"><a href="ch10.html#requesting-alternative-and-robust-estimators-in-lavaan"><i class="fa fa-check"></i><b>10.5</b> Requesting alternative and robust estimators in lavaan</a></li>
+<li class="chapter" data-level="10.6" data-path="ch10.html"><a href="ch10.html#ch10-6"><i class="fa fa-check"></i><b>10.6</b> Alternative calculation of the ML discrepancy function when analysing raw data</a></li>
+<li class="chapter" data-level="10.7" data-path="ch10.html"><a href="ch10.html#ch10-7"><i class="fa fa-check"></i><b>10.7</b> Using FIML to analyse raw data with missing values in lavaan</a></li>
+<li class="chapter" data-level="" data-path="ch10.html"><a href="ch10.html#references-5"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ch11.html"><a href="ch11.html"><i class="fa fa-check"></i><b>11</b> Measures of Model Fit</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ch11.html"><a href="ch11.html#the-chi-squared-test-of-exact-fit"><i class="fa fa-check"></i><b>11.1</b> The chi-squared test of exact fit</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="ch11.html"><a href="ch11.html#alternative-basis-for-calculating-the-test-statistic-when-analysing-raw-data"><i class="fa fa-check"></i><b>11.1.1</b> Alternative basis for calculating the test statistic when analysing raw data</a></li>
+<li class="chapter" data-level="11.1.2" data-path="ch11.html"><a href="ch11.html#testing-exact-fit-vs.-describing-the-degree-of-approximate-fit"><i class="fa fa-check"></i><b>11.1.2</b> Testing exact fit vs. describing the degree of approximate fit</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="ch11.html"><a href="ch11.html#root-mean-square-error-of-approximation-rmsea"><i class="fa fa-check"></i><b>11.2</b> Root Mean Square Error of Approximation (RMSEA)</a></li>
+<li class="chapter" data-level="11.3" data-path="ch11.html"><a href="ch11.html#other-descriptive-fit-indices"><i class="fa fa-check"></i><b>11.3</b> Other descriptive fit indices</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="ch11.html"><a href="ch11.html#the-tuckerlewis-index-tli-and-the-comparative-fit-index-cfi"><i class="fa fa-check"></i><b>11.3.1</b> The Tucker–Lewis Index (TLI) and the Comparative Fit Index (CFI)</a></li>
+<li class="chapter" data-level="11.3.2" data-path="ch11.html"><a href="ch11.html#the-root-mean-square-residual-rmr-and-standardized-rmr-srmr"><i class="fa fa-check"></i><b>11.3.2</b> The Root Mean Square Residual (RMR) and Standardized RMR (SRMR)</a></li>
+<li class="chapter" data-level="11.3.3" data-path="ch11.html"><a href="ch11.html#information-criteria"><i class="fa fa-check"></i><b>11.3.3</b> Information Criteria</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="ch11.html"><a href="ch11.html#a-note-on-using-available-fit-indices"><i class="fa fa-check"></i><b>11.4</b> A note on using available fit indices</a></li>
+<li class="chapter" data-level="11.5" data-path="ch11.html"><a href="ch11.html#difference-in-model-fit"><i class="fa fa-check"></i><b>11.5</b> Difference in model fit</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#δχ2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> Δχ2 as a likelihood ratio test</a></li>
+<li class="chapter" data-level="11.5.2" data-path="ch11.html"><a href="ch11.html#describing-differences-in-fit"><i class="fa fa-check"></i><b>11.5.2</b> Describing differences in fit</a></li>
+<li class="chapter" data-level="11.5.3" data-path="ch11.html"><a href="ch11.html#testing-differences-in-fit-between-non-nested-models"><i class="fa fa-check"></i><b>11.5.3</b> Testing differences in fit between non-nested models</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="ch11.html"><a href="ch11.html#request-fit-measures-in-lavaan"><i class="fa fa-check"></i><b>11.6</b> Request fit measures in <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="ch11.html"><a href="ch11.html#compare-fit-of-lavaan-models"><i class="fa fa-check"></i><b>11.6.1</b> Compare fit of lavaan models</a></li>
+<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in lavaan when adjusting for non-normal data</a></li>
+<li class="chapter" data-level="11.6.3" data-path="ch11.html"><a href="ch11.html#test-statistic-adjusted-for-small-sample-size"><i class="fa fa-check"></i><b>11.6.3</b> Test statistic adjusted for small sample size</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch11.html"><a href="ch11.html#references-6"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ch12.html"><a href="ch12.html"><i class="fa fa-check"></i><b>12</b> Path Analysis with Categorical Outcomes</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="ch12.html"><a href="ch12.html#prepare-data-and-workspace-1"><i class="fa fa-check"></i><b>12.1</b> Prepare Data and Workspace</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="ch12.html"><a href="ch12.html#import-example-data-1"><i class="fa fa-check"></i><b>12.1.1</b> Import Example Data</a></li>
+<li class="chapter" data-level="12.1.2" data-path="ch12.html"><a href="ch12.html#summarize-data"><i class="fa fa-check"></i><b>12.1.2</b> Summarize Data</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="ch12.html"><a href="ch12.html#regression-models-for-binary-variables"><i class="fa fa-check"></i><b>12.2</b> Regression Models for Binary Variables</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="ch12.html"><a href="ch12.html#fit-a-logistic-regression-model"><i class="fa fa-check"></i><b>12.2.1</b> Fit a Logistic Regression Model</a></li>
+<li class="chapter" data-level="12.2.2" data-path="ch12.html"><a href="ch12.html#fit-a-probit-regression-model"><i class="fa fa-check"></i><b>12.2.2</b> Fit a Probit Regression Model</a></li>
+<li class="chapter" data-level="12.2.3" data-path="ch12.html"><a href="ch12.html#compare-models"><i class="fa fa-check"></i><b>12.2.3</b> Compare Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="ch12.html"><a href="ch12.html#latent-response-variable"><i class="fa fa-check"></i><b>12.3</b> Latent Response Variable</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="ch12.html"><a href="ch12.html#ordinal-outcomes"><i class="fa fa-check"></i><b>12.3.1</b> Ordinal Outcomes</a></li>
+<li class="chapter" data-level="12.3.2" data-path="ch12.html"><a href="ch12.html#estimating-thresholds"><i class="fa fa-check"></i><b>12.3.2</b> Estimating Thresholds</a></li>
+<li class="chapter" data-level="12.3.3" data-path="ch12.html"><a href="ch12.html#estimating-polychoric-correlations"><i class="fa fa-check"></i><b>12.3.3</b> Estimating Polychoric Correlations</a></li>
+<li class="chapter" data-level="12.3.4" data-path="ch12.html"><a href="ch12.html#estimating-an-sem-with-estimated-input"><i class="fa fa-check"></i><b>12.3.4</b> Estimating an SEM with Estimated Input</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="ch12.html"><a href="ch12.html#mediation-model-with-categorical-outcomes"><i class="fa fa-check"></i><b>12.4</b> Mediation Model with Categorical Outcomes</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="ch12.html"><a href="ch12.html#estimate-mediation-models"><i class="fa fa-check"></i><b>12.4.1</b> Estimate Mediation Models</a></li>
+<li class="chapter" data-level="12.4.2" data-path="ch12.html"><a href="ch12.html#interpreting-coefficients"><i class="fa fa-check"></i><b>12.4.2</b> Interpreting Coefficients</a></li>
+<li class="chapter" data-level="12.4.3" data-path="ch12.html"><a href="ch12.html#delta-vs.-theta-parameterizations"><i class="fa fa-check"></i><b>12.4.3</b> Delta vs. Theta Parameterizations</a></li>
+<li class="chapter" data-level="12.4.4" data-path="ch12.html"><a href="ch12.html#decomposing-total-effects"><i class="fa fa-check"></i><b>12.4.4</b> Decomposing Total Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch12.html"><a href="ch12.html#references-7"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ch13.html"><a href="ch13.html"><i class="fa fa-check"></i><b>13</b> Fitting Path Models with Multilevel Data</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="ch13.html"><a href="ch13.html#intraclass-correlation"><i class="fa fa-check"></i><b>13.1</b> Intraclass correlation</a></li>
+<li class="chapter" data-level="13.2" data-path="ch13.html"><a href="ch13.html#multilevel-structure-as-a-nuisance-correcting-for-the-dependency"><i class="fa fa-check"></i><b>13.2</b> Multilevel structure as a nuisance: Correcting for the dependency</a></li>
+<li class="chapter" data-level="13.3" data-path="ch13.html"><a href="ch13.html#two-level-path-models"><i class="fa fa-check"></i><b>13.3</b> Two-level path models</a></li>
+<li class="chapter" data-level="13.4" data-path="ch13.html"><a href="ch13.html#obtaining-iccs-and-estimates-of-sigma_textw-and-sigma_textb"><i class="fa fa-check"></i><b>13.4</b> Obtaining ICCs, and estimates of <span class="math inline">\(\Sigma_\text{W}\)</span> and <span class="math inline">\(\Sigma_\text{B}\)</span></a>
+<ul>
+<li class="chapter" data-level="" data-path="ch13.html"><a href="ch13.html#script-13.1"><i class="fa fa-check"></i>Script 13.1</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="ch13.html"><a href="ch13.html#fitting-a-two-level-path-model"><i class="fa fa-check"></i><b>13.5</b> Fitting a two-level path model</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch13.html"><a href="ch13.html#script-13.2"><i class="fa fa-check"></i>Script 13.2</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch13.html"><a href="ch13.html#references-8"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="ch14.html"><a href="ch14.html"><i class="fa fa-check"></i><b>14</b> Factor Models</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="ch14.html"><a href="ch14.html#empirical-example-of-a-factor-model"><i class="fa fa-check"></i><b>14.1</b> Empirical example of a factor model</a></li>
+<li class="chapter" data-level="14.2" data-path="ch14.html"><a href="ch14.html#conceptual-explanation-of-a-factor-model"><i class="fa fa-check"></i><b>14.2</b> Conceptual explanation of a factor model</a></li>
+<li class="chapter" data-level="14.3" data-path="ch14.html"><a href="ch14.html#symbolic-explanation-of-a-factor-model"><i class="fa fa-check"></i><b>14.3</b> Symbolic explanation of a factor model</a></li>
+<li class="chapter" data-level="14.4" data-path="ch14.html"><a href="ch14.html#identification-of-model-parameters-in-a-factor-model"><i class="fa fa-check"></i><b>14.4</b> Identification of model parameters in a factor model</a></li>
+<li class="chapter" data-level="14.5" data-path="ch14.html"><a href="ch14.html#fitting-a-factor-model-using-lavaan"><i class="fa fa-check"></i><b>14.5</b> Fitting a factor model using lavaan</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#script-14.1"><i class="fa fa-check"></i>Script 14.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#references-9"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#appendix-2"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#derivations-of-equation-14.13"><i class="fa fa-check"></i>Derivations of Equation 14.13</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="ch15.html"><a href="ch15.html"><i class="fa fa-check"></i><b>15</b> Standardized Parameter Estimates for the Factor Model</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="ch15.html"><a href="ch15.html#standardized-factor-loadings"><i class="fa fa-check"></i><b>15.1</b> Standardized factor loadings</a></li>
+<li class="chapter" data-level="15.2" data-path="ch15.html"><a href="ch15.html#standardized-common-factor-variances-and-covariances"><i class="fa fa-check"></i><b>15.2</b> Standardized common-factor variances and covariances</a></li>
+<li class="chapter" data-level="15.3" data-path="ch15.html"><a href="ch15.html#standardized-unique-factor-variances-and-covariances"><i class="fa fa-check"></i><b>15.3</b> Standardized unique-factor variances and covariances</a></li>
+<li class="chapter" data-level="15.4" data-path="ch15.html"><a href="ch15.html#structure-coefficients"><i class="fa fa-check"></i><b>15.4</b> Structure coefficients</a></li>
+<li class="chapter" data-level="15.5" data-path="ch15.html"><a href="ch15.html#ch15-5"><i class="fa fa-check"></i><b>15.5</b> Calculating standardized coefficients in lavaan</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch15.html"><a href="ch15.html#script-15.1"><i class="fa fa-check"></i>Script 15.1</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="ch15.html"><a href="ch15.html#request-standardized-output-with-lavaan-1"><i class="fa fa-check"></i><b>15.6</b> Request standardized output with lavaan</a></li>
+<li class="chapter" data-level="" data-path="ch15.html"><a href="ch15.html#references-10"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="ch16.html"><a href="ch16.html"><i class="fa fa-check"></i><b>16</b> The Empirical Check for Identification</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="ch16.html"><a href="ch16.html#empirical-check-of-model-a"><i class="fa fa-check"></i><b>16.1</b> Empirical check of Model A</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch16.html"><a href="ch16.html#script-16.1"><i class="fa fa-check"></i>Script 16.1</a></li>
+<li class="chapter" data-level="" data-path="ch16.html"><a href="ch16.html#script-16.2"><i class="fa fa-check"></i>Script 16.2</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch16.html"><a href="ch16.html#references-11"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="ch17.html"><a href="ch17.html"><i class="fa fa-check"></i><b>17</b> Second Order Factor Models</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch17.html"><a href="ch17.html#script-17.1"><i class="fa fa-check"></i>Script 17.1</a></li>
+<li class="chapter" data-level="" data-path="ch17.html"><a href="ch17.html#getting-the-parameter-estimates-in-matrix-form"><i class="fa fa-check"></i>Getting the parameter estimates in matrix form</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch17.html"><a href="ch17.html#script-17.2"><i class="fa fa-check"></i>Script 17.2</a></li>
+</ul></li>
+<li class="chapter" data-level="17.1" data-path="ch17.html"><a href="ch17.html#standardized-parameter-estimates-for-the-higher-order-part-of-the-model"><i class="fa fa-check"></i><b>17.1</b> Standardized parameter estimates for the higher-order part of the model</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch17.html"><a href="ch17.html#script-17.3"><i class="fa fa-check"></i>Script 17.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="ch18.html"><a href="ch18.html"><i class="fa fa-check"></i><b>18</b> Structural Regression Models</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch18.html"><a href="ch18.html#script-18.1"><i class="fa fa-check"></i>Script 18.1</a></li>
+<li class="chapter" data-level="" data-path="ch18.html"><a href="ch18.html#script-18.2"><i class="fa fa-check"></i>Script 18.2</a></li>
+<li class="chapter" data-level="18.1" data-path="ch18.html"><a href="ch18.html#standardized-parameter-estimates-for-the-structural-part-of-the-model"><i class="fa fa-check"></i><b>18.1</b> Standardized parameter estimates for the structural part of the model</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch18.html"><a href="ch18.html#script-18.3"><i class="fa fa-check"></i>Script 18.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="ch19.html"><a href="ch19.html"><i class="fa fa-check"></i><b>19</b> Second-order Correlation Residuals</a></li>
+<li class="chapter" data-level="20" data-path="ch20.html"><a href="ch20.html"><i class="fa fa-check"></i><b>20</b> Factors with single indicators</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch20.html"><a href="ch20.html#script-20.1"><i class="fa fa-check"></i>Script 20.1</a></li>
+<li class="chapter" data-level="" data-path="ch20.html"><a href="ch20.html#script-20.2"><i class="fa fa-check"></i>Script 20.2</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="ch21.html"><a href="ch21.html"><i class="fa fa-check"></i><b>21</b> Mean structures</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="ch21.html"><a href="ch21.html#mean-structure-of-a-factor-model"><i class="fa fa-check"></i><b>21.1</b> Mean structure of a factor model</a></li>
+<li class="chapter" data-level="21.2" data-path="ch21.html"><a href="ch21.html#mean-structure-of-a-path-model"><i class="fa fa-check"></i><b>21.2</b> Mean structure of a path model</a></li>
+<li class="chapter" data-level="21.3" data-path="ch21.html"><a href="ch21.html#mean-structure-of-a-factor-model-in-lavaan"><i class="fa fa-check"></i><b>21.3</b> Mean structure of a factor model in <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#script-21.1"><i class="fa fa-check"></i>Script 21.1</a></li>
+</ul></li>
+<li class="chapter" data-level="21.4" data-path="ch21.html"><a href="ch21.html#mean-structure-of-a-path-model-1"><i class="fa fa-check"></i><b>21.4</b> Mean structure of a path model</a></li>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#appendix-3"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#derivation-of-equation-21.20"><i class="fa fa-check"></i>Derivation of Equation 21.20</a></li>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#derivation-of-equation-21.27"><i class="fa fa-check"></i>Derivation of Equation 21.27</a></li>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#derivation-of-equation-21.28"><i class="fa fa-check"></i>Derivation of Equation 21.28</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="ch22.html"><a href="ch22.html"><i class="fa fa-check"></i><b>22</b> Multigroup Models</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="ch22.html"><a href="ch22.html#measurement-invariance"><i class="fa fa-check"></i><b>22.1</b> Measurement invariance</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.1"><i class="fa fa-check"></i>Script 22.1</a></li>
+</ul></li>
+<li class="chapter" data-level="22.2" data-path="ch22.html"><a href="ch22.html#across-group-equality-constraints"><i class="fa fa-check"></i><b>22.2</b> Across group equality constraints</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.2"><i class="fa fa-check"></i>Script 22.2</a></li>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.3"><i class="fa fa-check"></i>Script 22.3</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="ch22.html"><a href="ch22.html#standardized-estimates-for-a-multigroup-model"><i class="fa fa-check"></i><b>22.3</b> Standardized estimates for a multigroup model</a></li>
+<li class="chapter" data-level="22.4" data-path="ch22.html"><a href="ch22.html#lavaan-shortcuts"><i class="fa fa-check"></i><b>22.4</b> <code>lavaan</code> shortcuts</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.4"><i class="fa fa-check"></i>Script 22.4</a></li>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.5"><i class="fa fa-check"></i>Script 22.5</a></li>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.6"><i class="fa fa-check"></i>Script 22.6</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="ch23.html"><a href="ch23.html"><i class="fa fa-check"></i><b>23</b> Calculating Mean Residuals</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch23.html"><a href="ch23.html#script-23.1"><i class="fa fa-check"></i>Script 23.1</a></li>
+<li class="chapter" data-level="" data-path="ch23.html"><a href="ch23.html#script-22.2-1"><i class="fa fa-check"></i>Script 22.2</a></li>
+<li class="chapter" data-level="" data-path="ch23.html"><a href="ch23.html#script-23.3"><i class="fa fa-check"></i>Script 23.3</a></li>
+<li class="chapter" data-level="" data-path="ch23.html"><a href="ch23.html#references-12"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="ch24.html"><a href="ch24.html"><i class="fa fa-check"></i><b>24</b> Modification Indices and EPC’s for Equality Constraints</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="ch24.html"><a href="ch24.html#modification-index-for-simultaneously-freeing-a-set-of-parameters"><i class="fa fa-check"></i><b>24.1</b> Modification index for simultaneously freeing a set of parameters</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch24.html"><a href="ch24.html#script-24.1"><i class="fa fa-check"></i>Script 24.1</a></li>
+</ul></li>
+<li class="chapter" data-level="24.2" data-path="ch24.html"><a href="ch24.html#modification-indices-for-releasing-equality-constraints"><i class="fa fa-check"></i><b>24.2</b> Modification indices for releasing equality constraints</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch24.html"><a href="ch24.html#script-24.3"><i class="fa fa-check"></i>Script 24.3</a></li>
+</ul></li>
+<li class="chapter" data-level="24.3" data-path="ch24.html"><a href="ch24.html#epc-interest"><i class="fa fa-check"></i><b>24.3</b> EPC-interest</a></li>
+<li class="chapter" data-level="" data-path="ch24.html"><a href="ch24.html#references-13"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="ch25.html"><a href="ch25.html"><i class="fa fa-check"></i><b>25</b> MIMIC (and RFA) models</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="ch25.html"><a href="ch25.html#illustration-testing-uniform-bias-in-a-mimic-model"><i class="fa fa-check"></i><b>25.1</b> Illustration testing uniform bias in a MIMIC model</a></li>
+<li class="chapter" data-level="25.2" data-path="ch25.html"><a href="ch25.html#evaluating-non-uniform-measurement-bias"><i class="fa fa-check"></i><b>25.2</b> Evaluating non-uniform measurement bias</a></li>
+<li class="chapter" data-level="25.3" data-path="ch25.html"><a href="ch25.html#connection-with-measurement-invariance-testing-in-multigroup-models"><i class="fa fa-check"></i><b>25.3</b> Connection with measurement invariance testing in multigroup models</a></li>
+<li class="chapter" data-level="25.4" data-path="ch25.html"><a href="ch25.html#rfa-models"><i class="fa fa-check"></i><b>25.4</b> RFA-models</a></li>
+<li class="chapter" data-level="" data-path="ch25.html"><a href="ch25.html#references-14"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="ch26.html"><a href="ch26.html"><i class="fa fa-check"></i><b>26</b> Longitudinal Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="ch26.html"><a href="ch26.html#step-1-a-longitudinal-factor-model-with-configural-invariance"><i class="fa fa-check"></i><b>26.1</b> Step 1: A longitudinal factor model with configural invariance</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.1"><i class="fa fa-check"></i>Script 26.1</a></li>
+</ul></li>
+<li class="chapter" data-level="26.2" data-path="ch26.html"><a href="ch26.html#step-2-a-longitudinal-model-with-weak-factorial-invariance."><i class="fa fa-check"></i><b>26.2</b> Step 2: A longitudinal model with weak factorial invariance.</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.2"><i class="fa fa-check"></i>Script 26.2</a></li>
+</ul></li>
+<li class="chapter" data-level="26.3" data-path="ch26.html"><a href="ch26.html#step-3-longitudinal-model-with-strong-factorial-invariance"><i class="fa fa-check"></i><b>26.3</b> Step 3: Longitudinal model with strong factorial invariance</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.3"><i class="fa fa-check"></i>Script 26.3</a></li>
+</ul></li>
+<li class="chapter" data-level="26.4" data-path="ch26.html"><a href="ch26.html#step-4-a-model-with-strict-factorial-invariance"><i class="fa fa-check"></i><b>26.4</b> Step 4: A model with strict factorial invariance</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.4"><i class="fa fa-check"></i>Script 26.4</a></li>
+</ul></li>
+<li class="chapter" data-level="26.5" data-path="ch26.html"><a href="ch26.html#standardized-estimates-for-a-longitudinal-factor-model-with-means"><i class="fa fa-check"></i><b>26.5</b> Standardized estimates for a (longitudinal) factor model with means</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.5"><i class="fa fa-check"></i>Script 26.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#references-15"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="ch27.html"><a href="ch27.html"><i class="fa fa-check"></i><b>27</b> Latent Growth Curve Models</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ch27.html"><a href="ch27.html#prepare-data-and-workspace-2"><i class="fa fa-check"></i><b>27.1</b> Prepare Data and Workspace</a></li>
+<li class="chapter" data-level="27.2" data-path="ch27.html"><a href="ch27.html#random-intercept-model"><i class="fa fa-check"></i><b>27.2</b> Random Intercept Model</a>
+<ul>
+<li class="chapter" data-level="27.2.1" data-path="ch27.html"><a href="ch27.html#specification-and-estimation"><i class="fa fa-check"></i><b>27.2.1</b> Specification and Estimation</a></li>
+<li class="chapter" data-level="27.2.2" data-path="ch27.html"><a href="ch27.html#interpret-results"><i class="fa fa-check"></i><b>27.2.2</b> Interpret Results</a></li>
+</ul></li>
+<li class="chapter" data-level="27.3" data-path="ch27.html"><a href="ch27.html#linear-growth-model"><i class="fa fa-check"></i><b>27.3</b> Linear Growth Model</a>
+<ul>
+<li class="chapter" data-level="27.3.1" data-path="ch27.html"><a href="ch27.html#model-fit-and-comparison"><i class="fa fa-check"></i><b>27.3.1</b> Model Fit and Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="27.4" data-path="ch27.html"><a href="ch27.html#unrestricted-growth-models"><i class="fa fa-check"></i><b>27.4</b> Unrestricted Growth Models</a>
+<ul>
+<li class="chapter" data-level="27.4.1" data-path="ch27.html"><a href="ch27.html#latent-basis-curve"><i class="fa fa-check"></i><b>27.4.1</b> Latent Basis Curve</a></li>
+<li class="chapter" data-level="27.4.2" data-path="ch27.html"><a href="ch27.html#saturated-growth-model"><i class="fa fa-check"></i><b>27.4.2</b> Saturated Growth Model</a></li>
+</ul></li>
+<li class="chapter" data-level="27.5" data-path="ch27.html"><a href="ch27.html#explaining-growth-factors"><i class="fa fa-check"></i><b>27.5</b> Explaining Growth Factors</a>
+<ul>
+<li class="chapter" data-level="27.5.1" data-path="ch27.html"><a href="ch27.html#time-invariant-level-2-predictors"><i class="fa fa-check"></i><b>27.5.1</b> Time-Invariant (Level-2) Predictors</a></li>
+<li class="chapter" data-level="27.5.2" data-path="ch27.html"><a href="ch27.html#time-varying-level-1-predictors"><i class="fa fa-check"></i><b>27.5.2</b> Time-Varying (Level-1) Predictors</a></li>
+<li class="chapter" data-level="27.5.3" data-path="ch27.html"><a href="ch27.html#parallel-growth-curves"><i class="fa fa-check"></i><b>27.5.3</b> Parallel Growth Curves</a></li>
+</ul></li>
+<li class="chapter" data-level="27.6" data-path="ch27.html"><a href="ch27.html#latent-indicators-of-growth-factors"><i class="fa fa-check"></i><b>27.6</b> Latent Indicators of Growth Factors</a>
+<ul>
+<li class="chapter" data-level="27.6.1" data-path="ch27.html"><a href="ch27.html#common-factors"><i class="fa fa-check"></i><b>27.6.1</b> Common Factors</a></li>
+<li class="chapter" data-level="27.6.2" data-path="ch27.html"><a href="ch27.html#discrete-indicators"><i class="fa fa-check"></i><b>27.6.2</b> Discrete Indicators</a></li>
+</ul></li>
+<li class="chapter" data-level="27.7" data-path="ch27.html"><a href="ch27.html#multigroup-growth-models"><i class="fa fa-check"></i><b>27.7</b> Multigroup Growth Models</a></li>
+<li class="chapter" data-level="" data-path="ch27.html"><a href="ch27.html#references-16"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="ch28.html"><a href="ch28.html"><i class="fa fa-check"></i><b>28</b> Analysis of categorical outcomes</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="ch28.html"><a href="ch28.html#factor-analysis-using-categorical-indicators"><i class="fa fa-check"></i><b>28.1</b> Factor analysis using categorical indicators</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#script-28.1"><i class="fa fa-check"></i>Script 28.1</a></li>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#script-28.2"><i class="fa fa-check"></i>Script 28.2</a></li>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#script-28.3"><i class="fa fa-check"></i>Script 28.3</a></li>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#script-28.4"><i class="fa fa-check"></i>Script 28.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#references-and-further-reading"><i class="fa fa-check"></i>References and further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="ch29.html"><a href="ch29.html"><i class="fa fa-check"></i><b>29</b> Fitting CFA models with multilevel data</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="ch29.html"><a href="ch29.html#intraclass-correlations-of-observed-variables"><i class="fa fa-check"></i><b>29.1</b> Intraclass correlations of observed variables</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch29.html"><a href="ch29.html#script-29.1"><i class="fa fa-check"></i>Script 29.1</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="ch29.html"><a href="ch29.html#multilevel-structure-as-a-nuisance-correcting-for-the-dependency-1"><i class="fa fa-check"></i><b>29.2</b> Multilevel structure as a nuisance: Correcting for the dependency</a></li>
+<li class="chapter" data-level="29.3" data-path="ch29.html"><a href="ch29.html#two-level-factor-models"><i class="fa fa-check"></i><b>29.3</b> Two-level factor models</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch29.html"><a href="ch29.html#script-29.2"><i class="fa fa-check"></i>Script 29.2</a></li>
+</ul></li>
+<li class="chapter" data-level="29.4" data-path="ch29.html"><a href="ch29.html#intraclass-correlations-of-common-factors"><i class="fa fa-check"></i><b>29.4</b> Intraclass correlations of common factors</a></li>
+<li class="chapter" data-level="29.5" data-path="ch29.html"><a href="ch29.html#climate-and-contextual-between-level-latent-variables"><i class="fa fa-check"></i><b>29.5</b> Climate and contextual between-level latent variables</a></li>
+<li class="chapter" data-level="29.6" data-path="ch29.html"><a href="ch29.html#full-sem-with-multilevel-data"><i class="fa fa-check"></i><b>29.6</b> Full SEM with multilevel data</a></li>
+<li class="chapter" data-level="" data-path="ch29.html"><a href="ch29.html#references-17"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Compendium Structural Equation Modeling in Educational Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ch10" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">10</span> Estimation<a href="ch10.html#ch10" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In the chapter on identification we saw that model parameters can be written as a function of elements from <span class="math inline">\(\mathbf{\Sigma}_\text{population}\)</span>. Subsequently, we can use these equations to estimate model parameters derived from the sample variances and covariances (<span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span>). For just-identified models, the number of known elements in <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span> equals the number of unknown model parameters, and one can derive parameter estimates by solving the equations that satisfy <span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}\)</span> = <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span>. For models that are over identified (i.e., that have positive <span class="math inline">\(df\)</span>) the estimation of model parameters is more complicated. In our illustrative example of child anxiety, we can derive three different equations in terms of population variances and covariances (i.e., by rewriting the equations of <span class="math inline">\(\sigma_{41}\)</span>, <span class="math inline">\(\sigma_{42}\)</span> and <span class="math inline">\(\sigma_{43}\)</span>) for the expression of the single model parameter <span class="math inline">\(\beta_{43}\)</span>. When we subsequently want to use these equations to estimate the model parameter <span class="math inline">\(\hat\beta_{43}\)</span> we can never derive an estimate so that all three elements <span class="math inline">\(\hat\sigma_{41}\)</span>, <span class="math inline">\(\hat\sigma_{42}\)</span> and <span class="math inline">\(\hat\sigma_{43}\)</span> of <span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}\)</span> are equal to the corresponding elements of <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span>. Therefore, for over-identified models there will always be a certain amount of discrepancy between <span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}\)</span> and <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span>. In such cases, the estimation of model parameters requires an iterative procedure to minimize the discrepancy between <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span> and <span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}\)</span> (i.e., What value of <span class="math inline">\(\hat\beta_{43}\)</span>will lead to expressions of <span class="math inline">\(\hat\sigma_{41}\)</span>, <span class="math inline">\(\hat\sigma_{42}\)</span> and <span class="math inline">\(\hat\sigma_{43}\)</span> that are as close as possible to the corresponding elements in <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span>?).</p>
+<p>The estimation procedures are iterative because the initial solution (i.e., the first attempt to estimate model parameters and evaluate the discrepancy between <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span> and <span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}\)</span>) is improved through subsequent cycles of calculations until the improvement in model fit falls below a predefined minimum value (i.e., the decrease in discrepancy between <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span> and <span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}\)</span> is very small). When this happens, the estimation process has converged. Convergence may be achieved more quickly when the initial solution, or the initial estimates of the parameters (i.e., start values) are reasonably accurate. If these initial estimates are completely inaccurate, then iterative estimation may even fail to converge. Most computer programs automatically generate reasonable start values and will give a warning if a solution has not converged. However, sometimes it may be necessary to provide user-specified start values in order for the solution to converge, especially for more complex models.</p>
+<p>Several discrepancy functions exist that can be used for the estimation of model parameters. Three desirable qualities of a good estimation procedure are <em>unbiasedness</em>, <em>consistency</em> and <em>efficiency.</em> Suppose we repeat the estimation procedure for a given model an infinite number of times on an infinite number of datasets. The estimator is unbiased when the expected parameter values (i.e., means of the sampling distributions of parameter estimates) are equal to the population values, i.e., they are not systematically biased upwards or downwards. The estimator is consistent when parameter estimates are closer to the population parameters with increased sample size, i.e., the larger the sample size, the closer the estimated values are to the population values (given that the sample is representative of the population). Efficiency refers to the variance of the sampling distribution of parameter estimates, where the most efficient estimator has a sampling distribution with the smallest variance (and thus the smallest <span class="math inline">\(SE\)</span>s).</p>
+<p>The most intuitive method that could be used to minimize the discrepancies between <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span> and <span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}\)</span> is to simply calculate the difference between the two matrices and try to minimize the values within the resulting residual covariance matrix. This is what is commonly referred to as the unweighted least squares (ULS) discrepancy function<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>:</p>
+<span class="math display" id="eq:10-01">\[\begin{equation}
+\text{F}_\text{ULS}(\mathbf\Sigma_{\text{sample}}, \hat{\mathbf{\Sigma}}_{\text{model}}) = ½ \text{trace}((\mathbf\Sigma_{\text{sample}}, \hat{\mathbf{\Sigma}}_{\text{model}})^2),
+\tag{10.1}
+\end{equation}\]</span>
+<p>which minimizes the squared deviations between the observed sample variances and covariances and the corresponding elements predicted by the model. If the deviations are zero (i.e., observed and model-implied matrices are identical), then FULS is zero, indicating perfect fit. Any nonzero discrepancies yield a positive FULS. Minimizing FULS yields unweighted least squares (ULS) estimates of all the model parameters given by Equations <a href="ch3.html#eq:3-09">(3.9)</a> and <a href="ch3.html#eq:3-10">(3.10)</a>, under the assumption that the model is valid and identified. It leads to unbiased and consistent estimates of model parameters, and does not require that the observed variables have a particular distribution. However, it is not the most efficient estimator.</p>
+<p>A particularly attractive discrepancy function is given by:</p>
+<span class="math display" id="eq:10-02">\[\begin{equation}
+\text{F}_{\text{ML}}(\mathbf\Sigma_{\text{sample}}, \hat{\mathbf{\Sigma}}_{\text{model}}) = \log|\hat{\mathbf{\Sigma}}_{\text{model}}|-\log|\mathbf{\Sigma}_{\text{sample}}| + \text{trace}(\mathbf{\Sigma}_{\text{sample}}\hat{\mathbf{\Sigma}}^{-1}_{\text{model}})-p,
+\tag{10.2}
+\end{equation}\]</span>
+<p>which gives so-called maximum likelihood (ML) estimates of all model parameters, assuming that the distribution of the scores of the observed variables (<span class="math inline">\(p\)</span>) is multivariate normal and that the model is valid and identified. It is the most widely used fitting function for general structural equation models, and the estimator is unbiased, consistent and more efficient than ULS. Although it is a more complex nonlinear function, it has additional important properties. First, it allows for tests of statistical significance of parameter estimates as the estimators are asymptotically normally distributed. Second, unlike FULS, FML is scale invariant and scale free. These properties refer to the dependency of the fitting function on the units of measurement of the observed variables. When the fitting function is scale invariant, the value of the fit function is independent of the measurement scales of the variables, i.e., the value of the fit function will be the same for different scales of measurement. In addition, scale freeness refers to the property that when the scales of the observed variables are linearly transformed (i.e., multiplied by and/or added to a constant), the relationship between the parameter estimates of the transformed and untransformed solution can be derived too (i.e., they are linearly transformed in a similar fashion).</p>
+<p>In general, smaller values of discrepancy functions indicate better fit of the model to the data. A value of zero indicates the fit is perfect, i.e., the parameter estimates can perfectly reproduce the sample covariance matrix (<span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}=\mathbf{\Sigma}_\text{sample}\)</span>).</p>
+<p>Using Equation <a href="ch10.html#eq:10-02">(10.2)</a> to arrive at ML estimates of model parameter of the path model from our illustrative example, yields:</p>
+<p><span class="math display">\[
+\hat{\mathbf{\Sigma}}_\text{model} =
+\begin{bmatrix}
+91.58 &amp; \\
+53.36 &amp; 194.32 \\
+28.39 &amp; 50.90 &amp; 130.19 \\
+2.05 &amp; 3.68 &amp; 9.41 &amp; 7.56
+\end{bmatrix}
+\]</span>
+whereas the observed variances and covariances of the sample are given by:
+<span class="math display">\[
+\mathbf{\Sigma}_\text{sample} =
+\begin{bmatrix}
+91.58 &amp; \\
+53.36 &amp; 194.32 \\
+28.39 &amp; 50.90 &amp; 130.19 \\
+9.21 &amp; 4.98 &amp; 9.41 &amp; 7.56
+\end{bmatrix}
+\]</span></p>
+<p>When we compare <span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}\)</span> and <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span> from our illustrative example, we can see that there are some discrepancies between the two matrices. Specifically, the elements <span class="math inline">\(\hat\sigma_{41}\)</span> and <span class="math inline">\(\hat\sigma_{42}\)</span> of <span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}\)</span> are different from the corresponding sample covariance. These two elements featured in the equations for the over-identified model parameter <span class="math inline">\(\hat\beta_{43}\)</span>. As can be seen, the model parameter was estimated so that the element <span class="math inline">\(\hat\beta_{43}\)</span> of <span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}\)</span> equals the corresponding element of the sample covariance matrix, which thus leads to a misfit for the elements <span class="math inline">\(\hat\sigma_{41}\)</span> and <span class="math inline">\(\hat\sigma_{42}\)</span>. The residual covariance matrix (i.e., <span class="math inline">\(\Sigma_\text{sample} - \hat\Sigma_\text{model}\)</span>) is:</p>
+<p><span class="math display">\[
+\mathbf{\Sigma}_{residual} =
+\begin{bmatrix}
+0\\
+0&amp;0\\
+0&amp;0&amp;0\\
+7.2 &amp; 1.3 &amp; 0 &amp; 0
+\end{bmatrix}
+\]</span></p>
+<p>This shows that the covariance between variable 4 (child anxiety) and variables 1 and 2 (parent anxiety and parent perfectionism) are underestimated by the model. When the residual values would be negative, this would indicate that the covariances are overestimated by the model. Model fit evaluation (which is the topic of Chapter 11) is used to evaluate whether the amount of misfit in these elements is substantial enough to reject the model, i.e., concluding that the specified model is not an adequate representation of the developmental process of child anxiety.</p>
+<p>It is important to note that models should only be fit to covariance matrices. Fitting a model to a correlation matrix without additional constraints yields incorrect <span class="math inline">\(SE\)</span>s (Cudeck, 1989), so Wald <span class="math inline">\(z\)</span> tests do not have nominal Type I error rates.</p>
+<div id="improper-solutions" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Improper Solutions<a href="ch10.html#improper-solutions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Even when the estimation procedure has reached convergence, a researcher should always be aware of inadmissible solutions and so-called Heywood cases. Heywood cases refer to parameter estimates with an illogical value, like for example negative variance estimates, or estimated correlations with absolute values larger than 1.0<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. These kind of estimates have no plausible interpretations, and therefore such solutions are inadmissible. Sometimes the associated SEs of parameter estimates are very large (e.g., 999,999.99), which usually indicates that there is a problem with the model solution. Inadmissible solutions may be caused by several factors, including underidentification, misspecification, or bad starting values. Some computer programs give warnings that parameter estimates take on illogical values, but it is important to always carefully inspect all parameter estimates, unstandardized and standardized, to ensure that the solution is indeed admissible. Chen, Bollen, Paxton, Curran and Kirby (2001) describe the possible causes of, consequences of, and possible strategies to handle improper solutions in more detail.</p>
+<p>For instance, a Heywood case could result from either (a) model misspecification or (b) sampling error. So before trying to “fix” a Heywood case, one should first test the null hypothesis that the parameter is an admissible solution. For example, if the 95% CI for a residual variance includes positive values, then you cannot reject the null hypothesis (using α = .05) that the true population value is indeed positive; in this case, if the model fits well and there are no other signs of misspecification, you could conclude that the true parameter is simply close enough to zero that sampling error occasionally yields a negative estimate.</p>
+</div>
+<div id="specifying-starting-values-in-lavaan" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Specifying starting values in lavaan<a href="ch10.html#specifying-starting-values-in-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Methods for choosing default start values are quite excellent in recent software such as M<em>plus</em> and <code>lavaan</code>, so it is rarely necessary for a user to provide start values manually. However, it may be useful to know how to do so, particularly when having difficulty converging on a proper (or any) solution. There are three ways to provide non-default starting values in <code>lavaan</code>. The first two involve specifying them in the <code>lavaan</code> model syntax, either using the <code>start()</code> modifier:</p>
+<pre><code>AWmodel &lt;- &#39; child_anx ~ start(0.666)*overcontrol &#39;</code></pre>
+<p>Or you may use the ? operator:</p>
+<pre><code>AWmodel &lt;- &#39; child_anx ~ 0.666?overcontrol &#39;</code></pre>
+<p>Note that if you want to provide both a starting value and use other modifiers/operators (e.g., to fix a parameter or label it) on the same parameter, then you have to specify that parameter twice on the same line of syntax:</p>
+<pre><code>AWmodel &lt;- &#39; child_anx ~ b43*overcontrol + start(0.666)*overcontrol &#39;</code></pre>
+</div>
+<div id="alternative-estimators" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Alternative estimators<a href="ch10.html#alternative-estimators" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Additional estimators are available, but are less often used with continuous data. For categorical data, however, covariance structure analysis is not appropriate, so some version of the weighted least-squares (WLS) estimator is typically used. WLS estimation is available for continuous data as well, although this special case of WLS is referred to in the SEM literature as the asymptotical distribution-free (ADF; Browne, 1984) estimator. The WLS fit function is:</p>
+<span class="math display" id="eq:10-03">\[\begin{equation}
+\text{F}_{\text{WLS}}(\mathbf{\Sigma}_\text{sample},\hat{\mathbf{\Sigma}}_\text{model}) = \text{vech}(\mathbf{\Sigma}_\text{sample} - \hat{\mathbf{\Sigma}}_\text{model})^{T}  W^{-1}  \text{vech}(\mathbf{\Sigma}_\text{sample} - \hat{\mathbf{\Sigma}}_\text{model}),
+\tag{10.3}
+\end{equation}\]</span>
+<p>where <code>vech()</code> vectorizes the unique elements of its argument. The WLS fit function essentially incorporates higher-order information beyond the covariance matrix (specifically, kurtosis) into a weight matrix (the <span class="math inline">\(W\)</span> matrix in Equation <a href="ch10.html#eq:10-03">(10.3)</a>). It is usually chosen to be the sampling covariance matrix of the elements in <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span>. Equation <a href="ch10.html#eq:10-03">(10.3)</a> is a very general fit function, because in principle, any weight matrix can be used. If an identity matrix is used as the weight matrix, this yields the ULS estimator. The ML fit function (using Wishart likelihood for analyses of covariance structure only) can actually be conceived of as WLS where the weight matrix is derived from <span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}\)</span>. Likewise, there is also a “generalized” least-squares estimator (GLS), which can be conceived as WLS if the weight matrix would be derived from <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span>. GLS also requires multivariate normality, but it is not as efficient as MLE, so there is no advantage in using GLS.</p>
+<p>Computers did not always have such great hardware (processing and memory) and software (optimization techniques to find ML solutions) that we are used to today. Therefore, GLS was popular 20 years ago when it was more common that SEM programs would fail to converge on a ML solution. Nowadays, most of the above estimators (ULS, GLS, ADF) are rarely, if ever, used. Not only is the ML estimator the most efficient (i.e., the smallest SEs), but being based on likelihoods comes with other advantages, such as being able to calculate likelihood-based information criteria (e.g., AIC and BIC) to compare models. Also, ADF requires extremely large sample sizes to be stable (i.e., <span class="math inline">\(N\)</span> &gt; 2000 or 5000). Although MLE is based on asymptotic (“large-sample”) theory, sample sizes in the hundreds are often sufficient for stable solutions (or even ~120 for smaller models).</p>
+</div>
+<div id="robust-estimators" class="section level2 hasAnchor" number="10.4">
+<h2><span class="header-section-number">10.4</span> Robust estimators<a href="ch10.html#robust-estimators" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>If data are not drawn from a multivariate normal population, then ML estimates are still consistent (and effectively unbiased, as sample size increases). However, the <span class="math inline">\(SE\)</span>s tend to be underestimated and fit statistic inflated, both leading to inflated Type I error rates. If you have a sample size in the thousands, you could just use ADF. However, such large samples are rare for practicing behavioral researchers. A more practical solution is to “correct” the SEs and fit statistic so that they do yield nominal Type I error rates.</p>
+<p>The most often used correction for <span class="math inline">\(SE\)</span>s is to use a “sandwich-type” estimator. The asymptotic covariance matrix of model parameters, <span class="math inline">\(A\)</span>, estimates how much model parameters would (co)vary from sample to sample. <span class="math inline">\(SE\)</span>s are the square-roots of the diagonal elements of <span class="math inline">\(A\)</span> (i.e., the sampling variances). If the normality assumption does not hold, then <span class="math inline">\(A\)</span> is incorrect, but it can be corrected using a weight matrix, <span class="math inline">\(W\)</span>, calculated from the observed kurtosis. Without getting into the technical details, the term “sandwich” refers to the basic form of the matrix-algebra equation, in which <span class="math inline">\(A\)</span> is the outer “break” and <span class="math inline">\(W\)</span> is the “meat” (see Savalei, 2014, for more information).</p>
+<p>Several robust corrections for the fit statistic have been proposed. The Satorra–Bentler (2001) scaled test statistic is the most popular, but it requires complete data, whereas the Yuan–Bentler (2000) scaled test statistic (T2*) can be used with partially observed data (i.e., using full-information maximum likelihood)—they are asymptotically equivalent to each other (i.e., in large samples). These methods “scale” the actual distribution of the test statistic to have a mean that equals the df, which is the actual mean of the <span class="math inline">\(χ^2\)</span> distribution. Satterthwaite-type methods also adjust the variance of the test statistic, so that its variance is approximately equal to the <span class="math inline">\(χ^2\)</span> distribution’s (i.e., <span class="math inline">\(2 × df\)</span>). Scaling and shifting the observed statistic will yield Type I error rates that are closer to the nominal <span class="math inline">\(α\)</span> level. These scaled–shifted statistics are sometimes referred to as mean- and variance-adjusted statistics (e.g., in M<em>plus</em>). Because the unadjusted <span class="math inline">\(χ^2\)</span> fit statistic will have inflated Type I errors when the normality assumption is not met, a scaled test statistic usually indicates better fit.</p>
+</div>
+<div id="requesting-alternative-and-robust-estimators-in-lavaan" class="section level2 hasAnchor" number="10.5">
+<h2><span class="header-section-number">10.5</span> Requesting alternative and robust estimators in lavaan<a href="ch10.html#requesting-alternative-and-robust-estimators-in-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <code>lavaan()</code> function (and the <code>cfa()</code> and <code>sem()</code> wrappers) accept arguments to specify the desired estimator, type of test statistic, and method for calculating <span class="math inline">\(SE\)</span>s. In the examples up until now, we have been using the defaults for normally distributed data. Below, we explicitly request those default arguments:</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="ch10.html#cb221-1" aria-hidden="true" tabindex="-1"></a>AWmodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(<span class="at">model =</span> AWmodel, </span>
+<span id="cb221-2"><a href="ch10.html#cb221-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sample.cov =</span> AWcov, <span class="at">sample.nobs =</span> <span class="dv">77</span>, </span>
+<span id="cb221-3"><a href="ch10.html#cb221-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>, <span class="at">fixed.x =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb221-4"><a href="ch10.html#cb221-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">estimator =</span> <span class="st">&quot;ML&quot;</span>, <span class="at">se =</span> <span class="st">&quot;standard&quot;</span>, <span class="at">test =</span> <span class="st">&quot;standard&quot;</span>)</span></code></pre></div>
+<p>Alternative estimators can be requested easily; for example, to request GLS, simply use the argument <code>estimator = "GLS"</code>. When analyzing categorical outcomes (see Chapter 23), the default will be switched to <code>estimator = "DWLS"</code> (diagonally weighted least squares).</p>
+<p>If you are analyzing raw data instead of summary statistics, robust <span class="math inline">\(SE\)</span>s and fit statistics can be requested just as easily. For example, to request sandwich-type <span class="math inline">\(SE\)</span>s, use the argument <code>se = "robust.sem"</code> with complete data or <code>se = "robust.huber.white"</code> with missing data (in combination with <code>missing = "FIML"</code>). To request a scaled test statistic, use the argument <code>test = "Satorra.Bentler"</code> with complete data or <code>test = "Yuan.Bentler"</code> with missing data (in combination with missing = “FIML”; see the following section for more information). Bootstrapping can be used to calculate <span class="math inline">\(SE\)</span>s and the <span class="math inline">\(p\)</span> value for the fit statistic by requesting both <code>se = "boot"</code> and <code>test = "boot"</code> (in addition to setting the number of bootstrap samples to use in the <code>boot</code> argument); bootstrapping the fit statistics is currently only available with complete data, although the <code>semTools</code> package includes a function (<code>bsBootMiss()</code>) to bootstrap fit with missing data.</p>
+<p>Because the popular SEM software M<em>plus</em> uses a single shortcut to specify the choice of estimator, <span class="math inline">\(SE\)</span>s, and fit statistic, many of those shortcuts are being used by applied researchers as though they are the names of the estimator itself (e.g., “MLR” for robust ML). Even if robust <span class="math inline">\(SE\)</span>s and fit statistic are used, ML is still the estimation method use to obtain point estimates of parameters (i.e., assuming normality—only the <span class="math inline">\(SE\)</span>s and fit statistic are adjusted after parameters are estimated). Still, <code>lavaan</code> allows some of these shortcuts, which you can read about on the <code>?lavaan</code> help page, in the description of the estimator argument. Likewise, the help page describes all other available estimators (e.g., marginal maximum likelihood [MML] for IRT estimation), <span class="math inline">\(SE\)</span>s (e.g., based on first-order derivatives), and test statistics (e.g., scaled and shifted, or mean- and variance-adjusted).</p>
+</div>
+<div id="ch10-6" class="section level2 hasAnchor" number="10.6">
+<h2><span class="header-section-number">10.6</span> Alternative calculation of the ML discrepancy function when analysing raw data<a href="ch10.html#ch10-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Equation <a href="ch10.html#eq:10-02">(10.2)</a> shows how to calculate FML from summary statistics (i.e., observed (<span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span>) and model-implied (<span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}\)</span>) covariance matrices). This equation only applies when analysing complete data. In practice, data are often partially observed. When some data are missing, it is still possible to use full-information maximum likelihood (FIML) estimation, where the likelihood of each individual is calculated using only the parameters relevant to the variables on which they have observed data. Individual <span class="math inline">\(i\)</span>’s likelihood is calculated by plugging their vector of observed values (<span class="math inline">\(\mathrm{y}_i\)</span>) into the multivariate normal probability density function:</p>
+<span class="math display" id="eq:10-04">\[\begin{equation}
+\text{likelihood}(\textbf{y}_i) = \frac{1}{(2\pi)^{p/2|\mathbf{\Sigma}|1/2}}\mathrm{e}^{-\frac{1}{2}(y_i-\mu)&#39;\mathbf{\Sigma}^{-1}(y_i-\mu)}
+\tag{10.4}
+\end{equation}\]</span>
+<p>using the model-implied mean vector<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> as <span class="math inline">\(μ\)</span> and the model-implied covariance matrix as <span class="math inline">\(\mathbfΣ\)</span>, where <span class="math inline">\(p\)</span> is the number of variables in <span class="math inline">\(\mathrm{y}_i\)</span>. After calculating the likelihood for each row of data, the joint likelihood of observing the entire sample is the product<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> of all the individual likelihoods. Because likelihoods are bound between 0 and 1, the joint likelihood becomes very small—too small even for computers to calculate with enough precision<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. It is easier to work with log-likelihoods because the log of numbers ranging from 0 to 1 will range from <span class="math inline">\(−∞\)</span> to 0 (so not as much precision is needed). Because the log of a product is equal to the sum of the individual logs — <span class="math inline">\(\log(a × b) = \log(a) + \log(b)\)</span> — we can simply add together all the individual log-likelihoods to calculate the log-likelihood of the sample. The log of equation <a href="ch10.html#eq:10-04">(10.4)</a> is:</p>
+<span class="math display" id="eq:10-05">\[\begin{equation}
+\ell_i = \frac{p}{2}\log(2\pi) - \log(|\mathbf{\Sigma}|) - \frac{1}{2}(y_i-\mu)&#39;\mathbf{\Sigma}^{-1}(y_i-\mu)
+\tag{10.5}
+\end{equation}\]</span>
+<p>In a model with 5 variables, person <span class="math inline">\(i\)</span>’s vector <span class="math inline">\(\mathrm{y}_i\)</span> would have 5 observed values in it, the model-implied mean vector<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> μ would have 5 means in it, and the model-implied covariance matrix <span class="math inline">\(\mathbfΣ\)</span> would have 5 rows and 5 columns. If person <span class="math inline">\(i\)</span> has complete data, all this information would be included in the calculation of equation <a href="ch10.html#eq:10-05">(10.5)</a>:</p>
+<p><span class="math display">\[
+y_i = \begin{bmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \\ y_5 \end{bmatrix} \mu_i = \begin{bmatrix} \mu_1 \\ \mu_2\\ \mu_3\\ \mu_4\\ \mu_5 \end{bmatrix} \mathbf{\Sigma}_i = \begin{bmatrix}
+\sigma^2_1 &amp; \sigma_{12} &amp; \sigma_{13} &amp; \sigma_{14} &amp; \sigma_{15} \\
+\sigma_{21} &amp; \sigma^2_2 &amp; \sigma_{23} &amp; \sigma_{24} &amp; \sigma_{25} \\
+\sigma_{31} &amp; \sigma_{32} &amp; \sigma^2_3 &amp; \sigma_{34} &amp; \sigma_{35} \\
+\sigma_{41} &amp; \sigma_{42} &amp; \sigma_{43} &amp; \sigma^2_4 &amp; \sigma_{45} \\
+\sigma_{51} &amp; \sigma_{52} &amp; \sigma_{53} &amp; \sigma_{54} &amp; \sigma^2_5 \end{bmatrix}
+\]</span></p>
+<p>However, if person <span class="math inline">\(i\)</span> was only observed on <span class="math inline">\(\mathrm{y}_1\)</span>, <span class="math inline">\(\mathrm{y}_2\)</span>, and <span class="math inline">\(\mathrm{y}_5\)</span>:</p>
+<p><span class="math display">\[
+y_i = \begin{bmatrix} y_1 \\ y_2 \\. \\ . \\ y_5 \end{bmatrix} \mu_i = \begin{bmatrix} \mu_1 \\ \mu_2\\ \color{lightgrey}{\mu_3} \\ \color{lightgrey}{\mu_4}\\ \mu_5 \end{bmatrix}
+\mathbf{\Sigma}_i = \begin{bmatrix}
+\sigma^2_1 &amp; \sigma_{12} &amp; \color{lightgrey}{\sigma_{13}} &amp; \color{lightgrey}{\sigma_{14}} &amp; \sigma_{15} \\
+\sigma_{21} &amp; \sigma^2_2 &amp; \color{lightgrey}{\sigma_{23}} &amp; \color{lightgrey}{\sigma_{24}} &amp; \sigma_{25} \\
+\color{lightgrey}{\sigma_{31}} &amp; \color{lightgrey}{\sigma_{32}} &amp; \color{lightgrey}{\sigma^2_3} &amp; \color{lightgrey}{\sigma_{34}} &amp; \color{lightgrey}{\sigma_{35}} \\
+\color{lightgrey}{\sigma_{41}} &amp; \color{lightgrey}{\sigma_{42}} &amp; \color{lightgrey}{\sigma_{43}} &amp; \color{lightgrey}{\sigma^2_4} &amp; \color{lightgrey}{\sigma_{45}} \\
+\sigma_{51} &amp; \sigma_{52} &amp; \color{lightgrey}{\sigma_{53}} &amp; \color{lightgrey}{\sigma_{54}} &amp; \sigma^2_5
+\end{bmatrix}
+\]</span></p>
+<p>Only use parameters involving those variables to calculate her/his <span class="math inline">\(\ell_i\)</span>:</p>
+<p><span class="math display">\[
+y_i = \begin{bmatrix} y_1 \\ y_2 \\ y_5 \end{bmatrix}
+\mu_i = \begin{bmatrix} \mu_1 \\ \mu_2\\  \mu_5 \end{bmatrix}
+\mathbf{\Sigma}_i = \begin{bmatrix}
+\sigma^2_1 &amp; \sigma_{12} &amp; \sigma_{15} \\
+\sigma_{21} &amp; \sigma^2_2 &amp; \sigma_{25} \\
+\sigma_{51} &amp; \sigma_{52} &amp; \sigma^2_5
+\end{bmatrix}
+\]</span></p>
+<p>Thus, an individual’s likelihood is calculated using all available information. The log-likelihood <span class="math inline">\(\ell\)</span> for a sample is the sum of all the individual log-likelihoods (<span class="math inline">\(ℓ = Σℓ_i\)</span>), so FIML estimation utilizes each person’s available information when choosing the best parameter estimates that maximize the likelihood of the entire sample.</p>
+<p>We discuss tests statistics for model fit and model comparison in Chapter 11. However, in order to understand how <span class="math inline">\(\ell\)</span> is related to FML, we must first introduce the likelihood-ratio test (LRT). The ratio of two likelihoods tells you how much more (or less) likely you are to observe the sample data if the model in the numerator (A) is true than if the model in the denominator (B) is true: <span class="math inline">\(\frac{\text{likelihood under model A}}{\text{likelihood under model B}}\)</span>. Recall that we work with log-likelihoods for greater precision. Furthermore, we multiply <span class="math inline">\(ℓ\)</span> by −2 so that the resulting statistics are distributed as <span class="math inline">\(χ^2\)</span> random variables (see Chapter 11 for details). Because the log of a ratio is equal to the difference in each log - i.e., <span class="math inline">\(log(a / b) = log(a) − log(b)\)</span> — we can calculate the log of the likelihood-ratio as a difference between the log-likelihoods <span class="math inline">\(ℓ\)</span>:</p>
+<span class="math display" id="eq:10-06">\[\begin{equation}
+LRT = -2\ell_A - (-2\ell_B) = -2 \times (\ell_A - \ell_B)
+\tag{10.6}
+\end{equation}\]</span>
+<p>Suppose we label our hypothesized (target) model as Model A, and we compare it to a perfectly fitting saturated model (labelled Model B) whose estimates are therefore identical to the observed sample statistics (<span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span>). If the hypothesized model is the true data-generating model, then there should be little or no difference between <span class="math inline">\(ℓ_{Target}\)</span> and <span class="math inline">\(ℓ_{Saturated}\)</span>, so the LRT should be small (close to zero). You might notice how equation <a href="ch10.html#eq:10-02">(10.2)</a> incorporates this concept into the calculation of FML, by taking the difference between the <span class="math inline">\(\log\)</span>s (of the determinants) of the target-model-implied <span class="math inline">\(\Sigma\)</span> (i.e., <span class="math inline">\(\hat{\mathbf{\Sigma}}_\text{model}\)</span>) and the saturated-model-implied <span class="math inline">\(\Sigma\)</span> (i.e., <span class="math inline">\(\mathbf{\Sigma}_\text{sample}\)</span>), which would be Models A and B in equation <a href="ch10.html#eq:10-06">(10.6)</a>.</p>
+<p>Having established the concept of a LRT, we can show how to calculate the same FML from equation <a href="ch10.html#eq:10-02">(10.2)</a> using <span class="math inline">\(ℓ\)</span>. Notice that a mean (<span class="math inline">\(\overline{X}\)</span>) is simply a sum of values divided by the number of values: <span class="math inline">\(\overline{X} = \frac{1}{N} Σ x_i = \frac{Σ x_i}{N}\)</span>. If we calculate equation <a href="ch10.html#eq:10-06">(10.6)</a> using the average log-likelihood (<span class="math inline">\(\overline{\ell} = \frac{1}{N} Σ\ell_i = \frac{\ell}{N}\)</span>) instead of the sum <span class="math inline">\(ℓ\)</span>, then the result would be <span class="math inline">\(\frac{LRT}{N} = F_{ML}\)</span>. So <span class="math inline">\(F_{ML}\)</span> can be interpreted as the average person’s log-likelihood-ratio in the sample. As you will see in Chapter 11, the <span class="math inline">\(χ^2\)</span> statistic is used to test whether the model fits the entire sample, so we simply convert the mean (FML) back to a sum (LRT, or <span class="math inline">\(χ^2\)</span>) by multiplying the mean by the sample size<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> (<span class="math inline">\(N × F_{ML}\)</span>).</p>
+</div>
+<div id="ch10-7" class="section level2 hasAnchor" number="10.7">
+<h2><span class="header-section-number">10.7</span> Using FIML to analyse raw data with missing values in lavaan<a href="ch10.html#ch10-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In <code>lavaan</code>, the default way to handle missing values is to apply listwise deletion. FIML estimation will be invoked by adding the argument <code>missing = "ML"</code> to the model. The missing values in the raw data (here stored in the object <code>AWdata</code>) should be specified as <code>NA</code>. Since using FIML requires the analysis of the means of the variables, one should also include the model for the means in the model syntax. To specify an unrestricted mean structure one would freely estimate an intercept for each observed variable. The <code>lavaan</code> syntax to specify the intercept for a variable involves regressing the variable on the constant 1. For example, the intercept of variable <span class="math inline">\(\mathrm{y}_1\)</span> would be estimated by including the syntax: <code>y1 ~ 1</code>.</p>
+<pre><code>AWmodelOut &lt;- lavaan(model = AWmodel, 
+                     data = AWdata, 
+                     missing = &quot;ML&quot;)</code></pre>
+</div>
+<div id="references-5" class="section level2 unnumbered hasAnchor">
+<h2>References<a href="ch10.html#references-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Browne, M. W. (1984). Asymptotic distribution free methods in the analysis of covariance structures. <em>British Journal of Mathematical and Statistical Psychology, 37</em>, 62–83. <a href="doi:10.1111/j.2044-8317.1984.tb00789.x" class="uri">doi:10.1111/j.2044-8317.1984.tb00789.x</a></p>
+<p>Chen, F., Bollen, K. A., Paxton, P., Curran, P. J., &amp; Kirby, J. B. (2001). Improper solutions in structural equation models. <em>Sociological Methods &amp; Research, 29</em>, 468–508. <a href="doi:10.1177/0049124101029004003" class="uri">doi:10.1177/0049124101029004003</a></p>
+<p>Cudeck, R. (1989). Analysis of correlation matrices using covariance structure models. <em>Psychological Bulletin, 105</em>(2), 317–327. <a href="doi:10.1037/0033-2909.105.2.317" class="uri">doi:10.1037/0033-2909.105.2.317</a></p>
+<p>Heywood, H. B. (1931). On finite sequences of real numbers. <em>Proceedings of the Royal Society of London, 134</em>, 486–501.</p>
+<p>Jöreskog, K. G. (1973). A general method for estimating a linear structural equation system. In A. S. Goldberger &amp; O. D. Duncan (Eds.). <em>Structural equation models in the social sciences</em> (pp. 85–112). New York, NY: Academic Press.</p>
+<p>Myung, J. (2003). Tutorial on maximum likelihood estimation. <em>Journal of Mathematical Psychology, 47</em>, 90–100. <a href="doi:10.1016/S0022-2496(02)00028-7" class="uri">doi:10.1016/S0022-2496(02)00028-7</a></p>
+<p>Satorra, A., &amp; Bentler, P. M. (2001). A scaled difference chi-square test statistic for moment structure analysis. <em>Psychometrika, 66</em>(4), 507–514. <a href="doi:10.1007/BF02296192" class="uri">doi:10.1007/BF02296192</a></p>
+<p>Savalei, V. (2014). Understanding robust corrections in structural equation modeling. <em>Structural Equation Modeling, 21</em>(1), 149–160. <a href="doi:10.1080/10705511.2013.824793" class="uri">doi:10.1080/10705511.2013.824793</a></p>
+<p>Yuan, K.-H., &amp; Bentler, P. M. (2000). Three likelihood-based methods for mean and covariance structure analysis with nonnormal missing data. <em>Sociological Methodology, 30</em>(1), 165–200. <a href="doi:10.1111/0081-1750.00078" class="uri">doi:10.1111/0081-1750.00078</a></p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>In a later <a href="ch21.html#ch21">chapter</a> we will introduce mean structures, where we will give versions of Equations <a href="ch10.html#eq:10-01">(10.1)</a> and <a href="ch10.html#eq:10-02">(10.2)</a> that incorporate observed and model-implied means<a href="ch10.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>If the estimated parameter is a covariance, then it would be necessary to check the standardized solution to see whether the correlation is greater than 1 in absolute value. Calculating a 95% CI for the correlation would in that case require standardizing the upper and lower confidence limits of the covariance, using the model-implied <span class="math inline">\(SD\)</span>s (i.e., square-roots of estimated variances).<a href="ch10.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>When mean structure is excluded from the model, μ can be set to a vector of zeros, and each variable in the data set should be mean-centered.<a href="ch10.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>This is the same as calculating the probability of flipping a coin twice and getting “heads” both times. The probability of “heads” is 50% for each coin-toss, so the probability of 2 “heads” is <span class="math inline">\(0.5 × 0.5 = 0.25\)</span> (or 25%).<a href="ch10.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>R, for instance, only keeps track to the 16th decimal place, although it might only be very precise to the 12th decimal place in practice.<a href="ch10.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>When mean structure is excluded from the model, <span class="math inline">\(μ\)</span> can be set to zero and data should be mean-centered.<a href="ch10.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Or by <span class="math inline">\(N − 1\)</span> when analysing only covariance structure based on complete-data summary statistics.<a href="ch10.html#fnref7" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ch9.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ch11.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

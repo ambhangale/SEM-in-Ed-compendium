@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 Regression as Mean- and Covariance-Structure Analysis | Compendium Structural Equation Modeling in Educational Research</title>
+  <meta name="description" content="1 Regression as Mean- and Covariance-Structure Analysis | Compendium Structural Equation Modeling in Educational Research" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 Regression as Mean- and Covariance-Structure Analysis | Compendium Structural Equation Modeling in Educational Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="LJGroot/SEM-Compendium" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Regression as Mean- and Covariance-Structure Analysis | Compendium Structural Equation Modeling in Educational Research" />
+  
+  
+  
+
+<meta name="author" content="Suzanne Jak and Terrence D. Jorgensen" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="using-lavaan-to-run-regression-and-anova-as-a-sem.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html"><i class="fa fa-check"></i><b>1</b> Regression as Mean- and Covariance-Structure Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#installing-lavaan"><i class="fa fa-check"></i><b>1.1</b> Installing <code>lavaan</code></a></li>
+<li class="chapter" data-level="1.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#types-of-data-used-in-sem"><i class="fa fa-check"></i><b>1.2</b> Types of Data Used in SEM</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#raw-data"><i class="fa fa-check"></i><b>1.2.1</b> Raw Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#summary-statistics-from-raw-data"><i class="fa fa-check"></i><b>1.2.2</b> Summary Statistics from Raw Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#importing-summary-data"><i class="fa fa-check"></i><b>1.2.3</b> Importing Summary Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#regression-review"><i class="fa fa-check"></i><b>1.3</b> Regression Review</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#linear-regression-models"><i class="fa fa-check"></i><b>1.3.1</b> Linear Regression Models</a></li>
+<li class="chapter" data-level="1.3.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#matrix-notation"><i class="fa fa-check"></i><b>1.3.2</b> Matrix Notation</a></li>
+<li class="chapter" data-level="1.3.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#interpreting-and-estimating-coefficients"><i class="fa fa-check"></i><b>1.3.3</b> Interpreting and Estimating Coefficients</a></li>
+<li class="chapter" data-level="1.3.4" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#syntax-examples-with-raw-data"><i class="fa fa-check"></i><b>1.3.4</b> Syntax Examples with Raw Data</a></li>
+<li class="chapter" data-level="1.3.5" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#categorical-predictors"><i class="fa fa-check"></i><b>1.3.5</b> Categorical Predictors</a></li>
+<li class="chapter" data-level="1.3.6" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#constant-vs.-varying-slopes"><i class="fa fa-check"></i><b>1.3.6</b> Constant vs. Varying Slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#summary-statistics"><i class="fa fa-check"></i><b>1.4</b> Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#reimport-data"><i class="fa fa-check"></i><b>1.4.1</b> Reimport Data</a></li>
+<li class="chapter" data-level="1.4.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#raw-data-vs.-summary-statistics"><i class="fa fa-check"></i><b>1.4.2</b> Raw Data vs. Summary Statistics</a></li>
+<li class="chapter" data-level="1.4.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#what-is-covariance"><i class="fa fa-check"></i><b>1.4.3</b> What Is Covariance?</a></li>
+<li class="chapter" data-level="1.4.4" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#interpreting-covariance"><i class="fa fa-check"></i><b>1.4.4</b> Interpreting Covariance</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#covariance-matrix"><i class="fa fa-check"></i><b>1.5</b> Covariance Matrix</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#ols-with-summary-statistics-beta-mathbfx-mathbfx-1-mathbfx-mathbfy"><i class="fa fa-check"></i><b>1.5.1</b> OLS with Summary Statistics: <span class="math inline">\(\beta = (\mathbf{X}^{&#39;} \mathbf{X})^{-1} \mathbf{X}^{&#39;} \mathbf{y}\)</span></a></li>
+<li class="chapter" data-level="1.5.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#intercepts-and-means"><i class="fa fa-check"></i><b>1.5.2</b> Intercepts and Means</a></li>
+<li class="chapter" data-level="1.5.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#intercepts-and-means-1"><i class="fa fa-check"></i><b>1.5.3</b> Intercepts and Means</a></li>
+<li class="chapter" data-level="1.5.4" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#what-are-mean-and-covariance-structures"><i class="fa fa-check"></i><b>1.5.4</b> What Are Mean and Covariance <em>Structures</em>?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#references"><i class="fa fa-check"></i><b>1.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><i class="fa fa-check"></i><b>2</b> Using <code>lavaan</code> to Run Regression and ANOVA as a SEM</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#prepare-data-and-workspace"><i class="fa fa-check"></i><b>2.1</b> Prepare Data and Workspace</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#import-example-data"><i class="fa fa-check"></i><b>2.1.1</b> Import Example Data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#load-lavaan-into-workspace"><i class="fa fa-check"></i><b>2.1.2</b> Load <code>lavaan</code> into Workspace</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#multiple-regression-in-sem"><i class="fa fa-check"></i><b>2.2</b> Multiple Regression in SEM</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#lavaan-syntax"><i class="fa fa-check"></i><b>2.2.1</b> <code>lavaan</code> Syntax</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#caveats-with-sem"><i class="fa fa-check"></i><b>2.3</b> Caveats with SEM</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#model-comparison-with-ols"><i class="fa fa-check"></i><b>2.3.1</b> Model Comparison with OLS</a></li>
+<li class="chapter" data-level="2.3.2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#model-comparison-with-lavaan"><i class="fa fa-check"></i><b>2.3.2</b> Model Comparison with <code>lavaan</code></a></li>
+<li class="chapter" data-level="2.3.3" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#moderation-caveats"><i class="fa fa-check"></i><b>2.3.3</b> Moderation Caveats</a></li>
+<li class="chapter" data-level="2.3.4" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#summary-of-caveats"><i class="fa fa-check"></i><b>2.3.4</b> Summary of Caveats</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#multigroup-sem"><i class="fa fa-check"></i><b>2.4</b> Multigroup SEM</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#group-specific-intercepts-in-ols"><i class="fa fa-check"></i><b>2.4.1</b> Group-Specific Intercepts in OLS</a></li>
+<li class="chapter" data-level="2.4.2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#group-specific-intercepts-in-sem"><i class="fa fa-check"></i><b>2.4.2</b> Group-Specific Intercepts in SEM?</a></li>
+<li class="chapter" data-level="2.4.3" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#multiple-groups-in-sem"><i class="fa fa-check"></i><b>2.4.3</b> Multiple Groups in SEM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="path-models.html"><a href="path-models.html"><i class="fa fa-check"></i><b>3</b> Path Models</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="path-models.html"><a href="path-models.html#illustrative-example"><i class="fa fa-check"></i><b>3.1</b> Illustrative example</a></li>
+<li class="chapter" data-level="3.2" data-path="path-models.html"><a href="path-models.html#conceptual-explanation"><i class="fa fa-check"></i><b>3.2</b> Conceptual explanation</a></li>
+<li class="chapter" data-level="3.3" data-path="path-models.html"><a href="path-models.html#matrix-explanation"><i class="fa fa-check"></i><b>3.3</b> Matrix explanation</a></li>
+<li class="chapter" data-level="3.4" data-path="path-models.html"><a href="path-models.html#path-analysis-using-lavaan"><i class="fa fa-check"></i><b>3.4</b> Path analysis using lavaan</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="path-models.html"><a href="path-models.html#installing-lavaan-1"><i class="fa fa-check"></i><b>3.4.1</b> Installing lavaan</a></li>
+<li class="chapter" data-level="3.4.2" data-path="path-models.html"><a href="path-models.html#fitting-a-path-model"><i class="fa fa-check"></i><b>3.4.2</b> Fitting a path model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="path-models.html"><a href="path-models.html#syntax-shortcuts"><i class="fa fa-check"></i><b>3.4.3</b> Syntax shortcuts</a></li>
+<li class="chapter" data-level="3.4.4" data-path="path-models.html"><a href="path-models.html#extracting-results-from-lavaan-output-in-matrix-form"><i class="fa fa-check"></i><b>3.4.4</b> Extracting results from lavaan output in matrix form</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="path-models.html"><a href="path-models.html#references-1"><i class="fa fa-check"></i><b>3.5</b> References</a></li>
+<li class="chapter" data-level="3.6" data-path="path-models.html"><a href="path-models.html#appendix-3"><i class="fa fa-check"></i><b>3.6</b> Appendix I. Derivations of equation 3.08 and 3.09</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html"><i class="fa fa-check"></i><b>4</b> Standard Errors and Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html#standard-errors"><i class="fa fa-check"></i><b>4.1</b> Standard Errors</a></li>
+<li class="chapter" data-level="4.2" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html#confidence-intervals"><i class="fa fa-check"></i><b>4.2</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html#likelihood-based-confidence-intervals"><i class="fa fa-check"></i><b>4.2.1</b> Likelihood-based confidence intervals</a></li>
+<li class="chapter" data-level="4.2.2" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html#bootstrapped-confidence-intervals"><i class="fa fa-check"></i><b>4.2.2</b> Bootstrapped confidence intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html#obtaining-standard-errors-and-confidence-intervals-in-lavaan"><i class="fa fa-check"></i><b>4.3</b> Obtaining standard errors and confidence intervals in <code>lavaan</code></a></li>
+<li class="chapter" data-level="4.4" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html#references-2"><i class="fa fa-check"></i><b>4.4</b> <strong>References</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="direct-indirect-and-total-effects.html"><a href="direct-indirect-and-total-effects.html"><i class="fa fa-check"></i><b>5</b> Direct, Indirect, and Total Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="direct-indirect-and-total-effects.html"><a href="direct-indirect-and-total-effects.html#testing-significance-of-indirect-effects"><i class="fa fa-check"></i><b>5.1</b> Testing significance of indirect effects</a></li>
+<li class="chapter" data-level="5.2" data-path="direct-indirect-and-total-effects.html"><a href="direct-indirect-and-total-effects.html#higher-order-indirect-effects"><i class="fa fa-check"></i><b>5.2</b> Higher order indirect effects</a></li>
+<li class="chapter" data-level="5.3" data-path="direct-indirect-and-total-effects.html"><a href="direct-indirect-and-total-effects.html#using-matrix-algebra-to-calculate-total-total-indirect-and-specific-indirect-effects"><i class="fa fa-check"></i><b>5.3</b> Using matrix algebra to calculate total, total indirect and specific indirect effects</a></li>
+<li class="chapter" data-level="5.4" data-path="direct-indirect-and-total-effects.html"><a href="direct-indirect-and-total-effects.html#calculating-total-total-indirect-and-specific-indirect-effects-using-lavaan-output"><i class="fa fa-check"></i><b>5.4</b> Calculating total, total indirect and specific indirect effects using lavaan output</a></li>
+<li class="chapter" data-level="5.5" data-path="direct-indirect-and-total-effects.html"><a href="direct-indirect-and-total-effects.html#calculating-specific-indirect-effects-in-lavaan"><i class="fa fa-check"></i><b>5.5</b> Calculating specific indirect effects in lavaan</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="calculating-standardized-parameter-estimates.html"><a href="calculating-standardized-parameter-estimates.html"><i class="fa fa-check"></i><b>6</b> Calculating Standardized Parameter Estimates</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="calculating-standardized-parameter-estimates.html"><a href="calculating-standardized-parameter-estimates.html#standardized-regression-coefficients"><i class="fa fa-check"></i><b>6.1</b> Standardized regression coefficients</a></li>
+<li class="chapter" data-level="6.2" data-path="calculating-standardized-parameter-estimates.html"><a href="calculating-standardized-parameter-estimates.html#standardized-residual-factor-variances-and-covariances"><i class="fa fa-check"></i><b>6.2</b> Standardized residual factor variances and covariances</a></li>
+<li class="chapter" data-level="6.3" data-path="calculating-standardized-parameter-estimates.html"><a href="calculating-standardized-parameter-estimates.html#calculating-standardized-coefficients-in-r-using-lavaan-results"><i class="fa fa-check"></i><b>6.3</b> Calculating standardized coefficients in R using lavaan results</a></li>
+<li class="chapter" data-level="6.4" data-path="calculating-standardized-parameter-estimates.html"><a href="calculating-standardized-parameter-estimates.html#request-standardized-output-with-lavaan"><i class="fa fa-check"></i><b>6.4</b> Request standardized output with lavaan</a></li>
+<li class="chapter" data-level="6.5" data-path="calculating-standardized-parameter-estimates.html"><a href="calculating-standardized-parameter-estimates.html#standardizing-indirect-and-total-effects"><i class="fa fa-check"></i><b>6.5</b> Standardizing indirect and total effects</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i><b>7</b> Identification</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="identification.html"><a href="identification.html#assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i><b>7.1</b> Assessment of identification using the elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
+<li class="chapter" data-level="7.2" data-path="identification.html"><a href="identification.html#assessing-identification-through-heuristics-rules-of-thumb"><i class="fa fa-check"></i><b>7.2</b> Assessing identification through heuristics (rules of thumb)</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="identification.html"><a href="identification.html#the-recursive-rule"><i class="fa fa-check"></i><b>7.2.1</b> The recursive rule</a></li>
+<li class="chapter" data-level="7.2.2" data-path="identification.html"><a href="identification.html#the-order-condition"><i class="fa fa-check"></i><b>7.2.2</b> The order condition</a></li>
+<li class="chapter" data-level="7.2.3" data-path="identification.html"><a href="identification.html#the-rank-condition"><i class="fa fa-check"></i><b>7.2.3</b> The rank condition</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="identification.html"><a href="identification.html#assessment-of-empirical-model-identification-using-lavaan"><i class="fa fa-check"></i><b>7.3</b> Assessment of empirical model identification using <code>lavaan</code></a></li>
+<li class="chapter" data-level="7.4" data-path="identification.html"><a href="identification.html#appendix-7"><i class="fa fa-check"></i><b>7.4</b> Appendix I</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="identification.html"><a href="identification.html#algebraic-assessment-of-identification-using-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i><b>7.4.1</b> Algebraic assessment of identification using elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="autoregression.html"><a href="autoregression.html"><i class="fa fa-check"></i><b>8</b> Autoregression</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="autoregression.html"><a href="autoregression.html#autoregression-models-with-predictors"><i class="fa fa-check"></i><b>8.1</b> Autoregression models with predictors</a></li>
+<li class="chapter" data-level="8.2" data-path="autoregression.html"><a href="autoregression.html#cross-lagged-panel-models"><i class="fa fa-check"></i><b>8.2</b> Cross-lagged panel models</a></li>
+<li class="chapter" data-level="8.3" data-path="autoregression.html"><a href="autoregression.html#references-3"><i class="fa fa-check"></i><b>8.3</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch9.html"><a href="ch9.html"><i class="fa fa-check"></i><b>9</b> Model Specification and Model Identification</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ch9.html"><a href="ch9.html#from-theory-to-model"><i class="fa fa-check"></i><b>9.1</b> From theory to model</a></li>
+<li class="chapter" data-level="9.2" data-path="ch9.html"><a href="ch9.html#model-parsimony"><i class="fa fa-check"></i><b>9.2</b> Model parsimony</a></li>
+<li class="chapter" data-level="9.3" data-path="ch9.html"><a href="ch9.html#a-priori-model-specification"><i class="fa fa-check"></i><b>9.3</b> A priori model specification</a></li>
+<li class="chapter" data-level="9.4" data-path="ch9.html"><a href="ch9.html#post-hoc-model-modification"><i class="fa fa-check"></i><b>9.4</b> Post hoc model modification</a></li>
+<li class="chapter" data-level="9.5" data-path="ch9.html"><a href="ch9.html#backward-and-forward-specification-searches"><i class="fa fa-check"></i><b>9.5</b> Backward and forward specification searches</a></li>
+<li class="chapter" data-level="9.6" data-path="ch9.html"><a href="ch9.html#correlation-residuals"><i class="fa fa-check"></i><b>9.6</b> Correlation residuals</a></li>
+<li class="chapter" data-level="9.7" data-path="ch9.html"><a href="ch9.html#modification-indices"><i class="fa fa-check"></i><b>9.7</b> Modification indices</a></li>
+<li class="chapter" data-level="9.8" data-path="ch9.html"><a href="ch9.html#cross-validation"><i class="fa fa-check"></i><b>9.8</b> Cross-validation</a></li>
+<li class="chapter" data-level="9.9" data-path="ch9.html"><a href="ch9.html#calculating-correlation-residuals-in-lavaan"><i class="fa fa-check"></i><b>9.9</b> Calculating correlation residuals in <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="9.9.1" data-path="ch9.html"><a href="ch9.html#requesting-mis-and-sepcs-in-lavaan"><i class="fa fa-check"></i><b>9.9.1</b> Requesting MIs and (S)EPCs in <code>lavaan</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.10" data-path="ch9.html"><a href="ch9.html#references-4"><i class="fa fa-check"></i><b>9.10</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="estimation.html"><a href="estimation.html"><i class="fa fa-check"></i><b>10</b> Estimation</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="estimation.html"><a href="estimation.html#improper-solutions"><i class="fa fa-check"></i><b>10.1</b> Improper Solutions</a></li>
+<li class="chapter" data-level="10.2" data-path="estimation.html"><a href="estimation.html#specifying-starting-values-in-lavaan"><i class="fa fa-check"></i><b>10.2</b> Specifying starting values in lavaan</a></li>
+<li class="chapter" data-level="10.3" data-path="estimation.html"><a href="estimation.html#alternative-estimators"><i class="fa fa-check"></i><b>10.3</b> Alternative estimators</a></li>
+<li class="chapter" data-level="10.4" data-path="estimation.html"><a href="estimation.html#robust-estimators"><i class="fa fa-check"></i><b>10.4</b> Robust estimators</a></li>
+<li class="chapter" data-level="10.5" data-path="estimation.html"><a href="estimation.html#requesting-alternative-and-robust-estimators-in-lavaan"><i class="fa fa-check"></i><b>10.5</b> Requesting alternative and robust estimators in lavaan</a></li>
+<li class="chapter" data-level="10.6" data-path="estimation.html"><a href="estimation.html#alternative-calculation-of-the-ml-discrepancy-function-when-analysing-raw-data"><i class="fa fa-check"></i><b>10.6</b> Alternative calculation of the ML discrepancy function when analysing raw data</a></li>
+<li class="chapter" data-level="10.7" data-path="estimation.html"><a href="estimation.html#using-fiml-to-analyse-raw-data-with-missing-values-in-lavaan"><i class="fa fa-check"></i><b>10.7</b> Using FIML to analyse raw data with missing values in lavaan</a></li>
+<li class="chapter" data-level="10.8" data-path="estimation.html"><a href="estimation.html#references-5"><i class="fa fa-check"></i><b>10.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="measures-of-model-fit.html"><a href="measures-of-model-fit.html"><i class="fa fa-check"></i><b>11</b> Measures of Model Fit</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="measures-of-model-fit.html"><a href="measures-of-model-fit.html#the-chi-squared-test-of-exact-fit"><i class="fa fa-check"></i><b>11.1</b> The chi-squared test of exact fit</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="measures-of-model-fit.html"><a href="measures-of-model-fit.html#alternative-basis-for-calculating-the-test-statistic-when-analysing-raw-data"><i class="fa fa-check"></i><b>11.1.1</b> Alternative basis for calculating the test statistic when analysing raw data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html"><i class="fa fa-check"></i><b>12</b> Path Analysis with Categorical Outcomes</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#prepare-data-and-workspace-1"><i class="fa fa-check"></i><b>12.1</b> Prepare Data and Workspace</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#import-example-data-1"><i class="fa fa-check"></i><b>12.1.1</b> Import Example Data</a></li>
+<li class="chapter" data-level="12.1.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#summarize-data"><i class="fa fa-check"></i><b>12.1.2</b> Summarize Data</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#regression-models-for-binary-variables"><i class="fa fa-check"></i><b>12.2</b> Regression Models for Binary Variables</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#fit-a-logistic-regression-model"><i class="fa fa-check"></i><b>12.2.1</b> Fit a Logistic Regression Model</a></li>
+<li class="chapter" data-level="12.2.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#fit-a-probit-regression-model"><i class="fa fa-check"></i><b>12.2.2</b> Fit a Probit Regression Model</a></li>
+<li class="chapter" data-level="12.2.3" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#compare-models"><i class="fa fa-check"></i><b>12.2.3</b> Compare Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#latent-response-variable"><i class="fa fa-check"></i><b>12.3</b> Latent Response Variable</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#ordinal-outcomes"><i class="fa fa-check"></i><b>12.3.1</b> Ordinal Outcomes</a></li>
+<li class="chapter" data-level="12.3.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#estimating-thresholds"><i class="fa fa-check"></i><b>12.3.2</b> Estimating Thresholds</a></li>
+<li class="chapter" data-level="12.3.3" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#estimating-polychoric-correlations"><i class="fa fa-check"></i><b>12.3.3</b> Estimating Polychoric Correlations</a></li>
+<li class="chapter" data-level="12.3.4" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#estimating-an-sem-with-estimated-input"><i class="fa fa-check"></i><b>12.3.4</b> Estimating an SEM with Estimated Input</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#mediation-model-with-categorical-outcomes"><i class="fa fa-check"></i><b>12.4</b> Mediation Model with Categorical Outcomes</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#estimate-mediation-models"><i class="fa fa-check"></i><b>12.4.1</b> Estimate Mediation Models</a></li>
+<li class="chapter" data-level="12.4.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#interpreting-coefficients"><i class="fa fa-check"></i><b>12.4.2</b> Interpreting Coefficients</a></li>
+<li class="chapter" data-level="12.4.3" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#delta-vs.-theta-parameterizations"><i class="fa fa-check"></i><b>12.4.3</b> Delta vs. Theta Parameterizations</a></li>
+<li class="chapter" data-level="12.4.4" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#decomposing-total-effects"><i class="fa fa-check"></i><b>12.4.4</b> Decomposing Total Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#references-6"><i class="fa fa-check"></i><b>12.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html"><i class="fa fa-check"></i><b>13</b> Fitting path models with multilevel data</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html#intraclass-correlation"><i class="fa fa-check"></i><b>13.1</b> Intraclass correlation</a></li>
+<li class="chapter" data-level="13.2" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html#multilevel-structure-as-a-nuisance-correcting-for-the-dependency"><i class="fa fa-check"></i><b>13.2</b> Multilevel structure as a nuisance: Correcting for the dependency</a></li>
+<li class="chapter" data-level="13.3" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html#two-level-path-models"><i class="fa fa-check"></i><b>13.3</b> Two-level path models</a></li>
+<li class="chapter" data-level="13.4" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html#obtaining-iccs-and-estimates-of-sigma_textw-and-sigma_textb"><i class="fa fa-check"></i><b>13.4</b> Obtaining ICCs, and estimates of <span class="math inline">\(\Sigma_\text{W}\)</span> and <span class="math inline">\(\Sigma_\text{B}\)</span></a></li>
+<li class="chapter" data-level="13.5" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html#fitting-a-two-level-path-model"><i class="fa fa-check"></i><b>13.5</b> Fitting a two-level path model</a></li>
+<li class="chapter" data-level="13.6" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html#references-7"><i class="fa fa-check"></i><b>13.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html"><i class="fa fa-check"></i><b>14</b> Latent Growth Curve Models</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#prepare-data-and-workspace-2"><i class="fa fa-check"></i><b>14.1</b> Prepare Data and Workspace</a></li>
+<li class="chapter" data-level="14.2" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#random-intercept-model"><i class="fa fa-check"></i><b>14.2</b> Random Intercept Model</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#specification-and-estimation"><i class="fa fa-check"></i><b>14.2.1</b> Specification and Estimation</a></li>
+<li class="chapter" data-level="14.2.2" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#interpret-results"><i class="fa fa-check"></i><b>14.2.2</b> Interpret Results</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#linear-growth-model"><i class="fa fa-check"></i><b>14.3</b> Linear Growth Model</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#model-fit-and-comparison"><i class="fa fa-check"></i><b>14.3.1</b> Model Fit and Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#unrestricted-growth-models"><i class="fa fa-check"></i><b>14.4</b> Unrestricted Growth Models</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#latent-basis-curve"><i class="fa fa-check"></i><b>14.4.1</b> Latent Basis Curve</a></li>
+<li class="chapter" data-level="14.4.2" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#saturated-growth-model"><i class="fa fa-check"></i><b>14.4.2</b> Saturated Growth Model</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#explaining-growth-factors"><i class="fa fa-check"></i><b>14.5</b> Explaining Growth Factors</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#time-invariant-level-2-predictors"><i class="fa fa-check"></i><b>14.5.1</b> Time-Invariant (Level-2) Predictors</a></li>
+<li class="chapter" data-level="14.5.2" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#time-varying-level-1-predictors"><i class="fa fa-check"></i><b>14.5.2</b> Time-Varying (Level-1) Predictors</a></li>
+<li class="chapter" data-level="14.5.3" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#parallel-growth-curves"><i class="fa fa-check"></i><b>14.5.3</b> Parallel Growth Curves</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#latent-indicators-of-growth-factors"><i class="fa fa-check"></i><b>14.6</b> Latent Indicators of Growth Factors</a>
+<ul>
+<li class="chapter" data-level="14.6.1" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#common-factors"><i class="fa fa-check"></i><b>14.6.1</b> Common Factors</a></li>
+<li class="chapter" data-level="14.6.2" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#discrete-indicators"><i class="fa fa-check"></i><b>14.6.2</b> Discrete Indicators</a></li>
+</ul></li>
+<li class="chapter" data-level="14.7" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#multigroup-growth-models"><i class="fa fa-check"></i><b>14.7</b> Multigroup Growth Models</a></li>
+<li class="chapter" data-level="14.8" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#references-8"><i class="fa fa-check"></i><b>14.8</b> References</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Compendium Structural Equation Modeling in Educational Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regression-as-mean--and-covariance-structure-analysis" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> Regression as Mean- and Covariance-Structure Analysis<a href="regression-as-mean--and-covariance-structure-analysis.html#regression-as-mean--and-covariance-structure-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter prepares the reader to learn about structural equation modeling (SEM) by reviewing the fundamentals of ordinary least-squares (OLS) regression. Different types of data are discussed, and some review of matrix algebra will be incorporated into the regression review.</p>
+<div id="installing-lavaan" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Installing <code>lavaan</code><a href="regression-as-mean--and-covariance-structure-analysis.html#installing-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The SEM software that we will use is an open-source R package called <a href="https://lavaan.ugent.be/"><code>lavaan</code></a> <a href="http://dx.doi.org/10.18637/jss.v048.i02">(Rosseel, 2012)</a>. To install the <code>lavaan</code> package you can type the following command in the R console:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;lavaan&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Depending on your <a href="https://www.r-project.org/">R</a>(<a href="https://www.rstudio.com/">Studio</a>) settings, this might open a window where you have to select a <a href="https://cran.r-project.org/">CRAN</a> mirror (select “[your country], [closest city]”) prior to installing the package, including all additional packages that it depends on. You only need to install the package once (on a specific computer), but you must also “load” the library to access its functionality (similar to first installing an app, then opening the app to use it):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span></code></pre></div>
+<p>Every time you start R you need to use this command to activate the <code>lavaan</code> package into the current R workspace. Therefore, it is advisable to start every script with this command.</p>
+<p>Sometimes, it will be necessary to install the <em>development version</em> of <code>lavaan</code> before the next version is made available on CRAN. For example, if the developer has fixed a bug or introduced a new feature, the development version can be installed using this syntax:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;lavaan&quot;</span>, <span class="at">repos =</span> <span class="st">&quot;https://www.da.ugent.be&quot;</span>, <span class="at">type =</span> <span class="st">&quot;source&quot;</span>)</span></code></pre></div>
+</div>
+<div id="types-of-data-used-in-sem" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Types of Data Used in SEM<a href="regression-as-mean--and-covariance-structure-analysis.html#types-of-data-used-in-sem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>SEM can be seen as a generalization of the general(ized) linear model (GLM) for multivariate data. But rather than merely allowing multiple predictors and multiple outcomes, any variable can operate <strong>both</strong> as a predictor and an outcome in the same model. This allows us to model complex relationships among variables, including chains of causation (i.e., mediation).</p>
+<p>Estimation of a GLM involves minimizing discrepancies (differences) between observed (<span class="math inline">\(\mathrm{y}\)</span>) and expected (<span class="math inline">\(\hat{\mathrm{y}}\)</span>) <em>casewise</em> values (i.e., an individual subject’s score on an outcome variable <span class="math inline">\(y\)</span>). In contrast, estimation of a SEM involves minimizing discrepancies between observed and expected <em>summary statistics</em> (i.e., the modeled variables’ means and covariance matrix). This is why another (older) name for an SEM is <em>covariance structure analysis</em> (when only trying to explain why variables are related to each other), or mean and covariance structure (MACS) analysis when means are also modeled.</p>
+<p>Summary statistics can be calculated from observed raw data, so raw data can be provided directly to SEM software for analysis. But if data are complete and come from a multivariate normal distribution, summary statistics can also be passed directly to the SEM software, which has advantages. Unlike raw data, summary statistics do not compromise the privacy of the research participants, so summary statistics can be reported in published empirical research. That allows readers (and students like you!) to have access to the same summary statistics to replicate the results or to fit a different model (e.g., that represents a competing theory). Thus, this chapter will show how to import both raw and summary data, as well as how to calculate summary statistics from raw data so that they can be reported along with results.</p>
+<div id="raw-data" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Raw Data<a href="regression-as-mean--and-covariance-structure-analysis.html#raw-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Typically, data are already stored in an external file with a predefined format, such as SPSS (*.sav) or Excel (*.xlsx), and there are some pre-specified functions in R that can read in data from such type of formats, although they require the installation of specific packages. As an alternative, you can store the data in a plain text (with .txt or .csv extensions), where each line represents the observed responses of one individual. Spaces, commas, semicolons or tabs can be used to separate the individual responses. Some programs (like SPSS) can also export data to these types of file formats.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="st">&quot;data.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read.spss</span>(<span class="st">&quot;data.sav&quot;</span>, <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>) <span class="co"># requires the package foreign</span></span>
+<span id="cb4-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read.xls</span>(<span class="st">&quot;data.xls&quot;</span>)    <span class="co"># requires the package gdata</span></span>
+<span id="cb4-4"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(<span class="fu">read_excel</span>(<span class="st">&quot;data.xlsx&quot;</span>))  <span class="co"># requires the package readxl</span></span></code></pre></div>
+<p>This chapter uses data from a tutorial published on the <a href="http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf"></a>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> foreign<span class="sc">::</span><span class="fu">read.spss</span>(<span class="st">&quot;MODMED.sav&quot;</span>, <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>)[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)]</span>
+<span id="cb5-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
+<pre><code>##   MOOD      NFC      POS      ATT
+## 1   -1  3.07579   6.2500  18.5455
+## 2   -1  2.59489  -5.0671 -16.9684
+## 3   -1 -1.00952   0.9346  -5.9578
+## 4   -1 -0.43824   2.8668  -7.2256
+## 5   -1  0.21788 -16.5601 -26.7000
+## 6   -1  0.43842 -13.1365 -24.1241</code></pre>
+<p><code>MOOD</code> indicates experimental conditions</p>
+<ul>
+<li><span class="math inline">\(+1\)</span> = positive mood induction</li>
+<li><span class="math inline">\(-1\)</span> = neutral mood (control condition)</li>
+</ul>
+<p><code>NFC</code> = need for cognition, <code>POS</code> = positive thoughts, and <code>ATT</code> = attitude</p>
+</div>
+<div id="summary-statistics-from-raw-data" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Summary Statistics from Raw Data<a href="regression-as-mean--and-covariance-structure-analysis.html#summary-statistics-from-raw-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To report summary statistics of your modeled variables, they can be calculated using the <code>colMeans()</code> function for means, the <code>cov()</code> function for a covariance matrix, and the <code>nrow()</code> function for the sample size</p>
+<ul>
+<li><em>Note</em>: Counting the number of rows <strong>assumes you have complete data</strong></li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb7-1" aria-hidden="true" tabindex="-1"></a>(M <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(dat)) <span class="co"># mean vector</span></span></code></pre></div>
+<pre><code>##       MOOD        NFC        POS        ATT 
+##  0.0000000 -0.0000002  0.0000040  1.9807230</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb9-1" aria-hidden="true" tabindex="-1"></a>(S <span class="ot">&lt;-</span> <span class="fu">cov</span>(dat)) <span class="co"># covariance matrix</span></span></code></pre></div>
+<pre><code>##             MOOD         NFC        POS        ATT
+## MOOD  1.01010101 -0.03243879  4.3546465   6.841187
+## NFC  -0.03243879  1.97289018  0.7953901   2.598788
+## POS   4.35464646  0.79539011 69.2629723  87.914121
+## ATT   6.84118687  2.59878834 87.9141208 282.059756</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb11-1" aria-hidden="true" tabindex="-1"></a>(N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dat)) <span class="co"># complete-data sample size</span></span></code></pre></div>
+<pre><code>## [1] 100</code></pre>
+<p>Covariances are explained in more detail in a later section, but it is sufficient here to understand that the covariance between variables <span class="math inline">\(x\)</span> and <span class="math inline">\(\mathrm{y}\)</span> (i.e., <span class="math inline">\(\sigma_{xy}\)</span>) is their unstandardized correlation coefficient (<span class="math inline">\(r_{xy}\)</span>). That is, a correlation is a covariance between <span class="math inline">\(z\)</span> scores. Because correlations are easier to interpret than covariances, it is common to report the means, <em>SD</em>s, and correlations. Using the <em>SD</em>s, readers can rescale correlations to covariances in the orignal units of measurement (i.e., <span class="math inline">\(\sigma_{xy} = \sigma_x \times \sigma_y \times r_{xy}\)</span>). The <code>cov2cor()</code> function can standardize a covariance matrix, or you can use the <code>cor()</code> function directly.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb13-1" aria-hidden="true" tabindex="-1"></a>(SD <span class="ot">&lt;-</span> <span class="fu">sapply</span>(dat, sd))</span></code></pre></div>
+<pre><code>##      MOOD       NFC       POS       ATT 
+##  1.005038  1.404596  8.322438 16.794635</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">diag</span>(S)) <span class="co"># SDs == square-roots of variances </span></span></code></pre></div>
+<pre><code>##      MOOD       NFC       POS       ATT 
+##  1.005038  1.404596  8.322438 16.794635</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov2cor</span>(S) <span class="co"># standardize the covariance matrix, or use cor()</span></span></code></pre></div>
+<pre><code>##             MOOD         NFC        POS       ATT
+## MOOD  1.00000000 -0.02297898 0.52061891 0.4053018
+## NFC  -0.02297898  1.00000000 0.06804217 0.1101663
+## POS   0.52061891  0.06804217 1.00000000 0.6289810
+## ATT   0.40530176  0.11016633 0.62898098 1.0000000</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb19-1" aria-hidden="true" tabindex="-1"></a>(R <span class="ot">&lt;-</span> <span class="fu">cor</span>(dat))</span></code></pre></div>
+<pre><code>##             MOOD         NFC        POS       ATT
+## MOOD  1.00000000 -0.02297898 0.52061891 0.4053018
+## NFC  -0.02297898  1.00000000 0.06804217 0.1101663
+## POS   0.52061891  0.06804217 1.00000000 0.6289810
+## ATT   0.40530176  0.11016633 0.62898098 1.0000000</code></pre>
+<p>Because covariance and correlation matrices are symmetric (and diagonal elements of a correlation matrix are 1 by definition), both could be reported in a single table. For example, the upper triangle could be correlations, and the lower triangle (including the diagonal) could be (co)variances.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb21-1" aria-hidden="true" tabindex="-1"></a>printS <span class="ot">&lt;-</span> S</span>
+<span id="cb21-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb21-2" aria-hidden="true" tabindex="-1"></a>printS[<span class="fu">upper.tri</span>(R)] <span class="ot">&lt;-</span> R[<span class="fu">upper.tri</span>(R)]</span>
+<span id="cb21-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb21-3" aria-hidden="true" tabindex="-1"></a>printS <span class="co"># not symmetric, correlations in upper triangle</span></span></code></pre></div>
+<pre><code>##             MOOD         NFC         POS         ATT
+## MOOD  1.01010101 -0.02297898  0.52061891   0.4053018
+## NFC  -0.03243879  1.97289018  0.06804217   0.1101663
+## POS   4.35464646  0.79539011 69.26297231   0.6289810
+## ATT   6.84118687  2.59878834 87.91412077 282.0597561</code></pre>
+<div id="summary-statistics-for-multiple-groups" class="section level4 hasAnchor" number="1.2.2.1">
+<h4><span class="header-section-number">1.2.2.1</span> Summary Statistics for Multiple Groups<a href="regression-as-mean--and-covariance-structure-analysis.html#summary-statistics-for-multiple-groups" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In SEM, it is common to estimate model parameters simultaneously in multiple groups (i.e., multigroup SEM or MG-SEM). In our example data, the <code>MOOD</code> variable is a 2-group variable, so we could create a <code>factor</code> from the numeric codes:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb23-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>mood.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>MOOD, <span class="at">levels =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb23-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb23-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;neutral&quot;</span>,<span class="st">&quot;positive&quot;</span>))</span></code></pre></div>
+<p>Then we can calculate the summary statistics separately within each group.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb24-1" aria-hidden="true" tabindex="-1"></a>modVars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATT&quot;</span>,<span class="st">&quot;NFC&quot;</span>,<span class="st">&quot;POS&quot;</span>)   <span class="co"># modeled variables</span></span>
+<span id="cb24-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb24-2" aria-hidden="true" tabindex="-1"></a>gM <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">&quot;neutral&quot;</span>,<span class="st">&quot;positive&quot;</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb24-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb24-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">FUN =</span> <span class="cf">function</span>(g) <span class="fu">colMeans</span>(dat[dat<span class="sc">$</span>mood.f <span class="sc">==</span> g, modVars]) )</span>
+<span id="cb24-4"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb24-4" aria-hidden="true" tabindex="-1"></a>gS <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">&quot;neutral&quot;</span>,<span class="st">&quot;positive&quot;</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb24-5"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb24-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">FUN =</span> <span class="cf">function</span>(g) <span class="fu">cov</span>(dat[dat<span class="sc">$</span>mood.f <span class="sc">==</span> g, modVars]) )</span>
+<span id="cb24-6"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb24-6" aria-hidden="true" tabindex="-1"></a>gN <span class="ot">&lt;-</span> <span class="fu">table</span>(dat<span class="sc">$</span>mood.f)</span></code></pre></div>
+<p>To fit a MG-SEM in <code>lavaan</code>, the summary statistics must be a list with one (mean vector or covariance matrix) per group, as well as a vector of group sample sizes.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb25-1" aria-hidden="true" tabindex="-1"></a>gM</span></code></pre></div>
+<pre><code>## $neutral
+##        ATT        NFC        POS 
+## -4.7920520  0.0321142 -4.3110960 
+## 
+## $positive
+##        ATT        NFC        POS 
+##  8.7534980 -0.0321146  4.3111040</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb27-1" aria-hidden="true" tabindex="-1"></a>gS</span></code></pre></div>
+<pre><code>## $neutral
+##            ATT       NFC       POS
+## ATT 245.020884  4.812796 61.799307
+## NFC   4.812796  2.456274 -1.201971
+## POS  61.799307 -1.201971 47.663230
+## 
+## $positive
+##             ATT       NFC       POS
+## ATT 231.2417228 0.8817017 56.235120
+## NFC   0.8817017 1.5276643  3.091531
+## POS  56.2351197 3.0915313 54.346483</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb29-1" aria-hidden="true" tabindex="-1"></a>gN</span></code></pre></div>
+<pre><code>## 
+##  neutral positive 
+##       50       50</code></pre>
+</div>
+</div>
+<div id="importing-summary-data" class="section level3 hasAnchor" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Importing Summary Data<a href="regression-as-mean--and-covariance-structure-analysis.html#importing-summary-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="full-covariance-matrix" class="section level4 hasAnchor" number="1.2.3.1">
+<h4><span class="header-section-number">1.2.3.1</span> Full Covariance Matrix<a href="regression-as-mean--and-covariance-structure-analysis.html#full-covariance-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If we are importing summary data (e.g., from an article that reported them), we can type our data directly to our R script. Suppose the values above from <code>S</code> were rounded to 3 decimal places:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb31-1" aria-hidden="true" tabindex="-1"></a>covVals <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="fl">1.010</span>, <span class="sc">-</span><span class="fl">0.032</span>,  <span class="fl">4.355</span>,   <span class="fl">6.841</span>, </span>
+<span id="cb31-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb31-2" aria-hidden="true" tabindex="-1"></a>             <span class="sc">-</span><span class="fl">0.032</span>,  <span class="fl">1.973</span>,  <span class="fl">0.795</span>,   <span class="fl">2.599</span>, </span>
+<span id="cb31-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb31-3" aria-hidden="true" tabindex="-1"></a>              <span class="fl">4.355</span>,  <span class="fl">0.795</span>, <span class="fl">69.263</span>,  <span class="fl">87.914</span>,</span>
+<span id="cb31-4"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb31-4" aria-hidden="true" tabindex="-1"></a>              <span class="fl">6.841</span>,  <span class="fl">2.599</span>, <span class="fl">87.914</span>, <span class="fl">282.060</span>)</span>
+<span id="cb31-5"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb31-5" aria-hidden="true" tabindex="-1"></a>covVals</span></code></pre></div>
+<pre><code>##  [1]   1.010  -0.032   4.355   6.841  -0.032   1.973   0.795   2.599   4.355
+## [10]   0.795  69.263  87.914   6.841   2.599  87.914 282.060</code></pre>
+<p>If these values were saved as plain text, we could also read the data from a file using the <code>scan()</code> function, which returns a vector that contains the stored values in the file <code>"values.txt"</code>.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb33-1" aria-hidden="true" tabindex="-1"></a>covVals <span class="ot">&lt;-</span> <span class="fu">scan</span>(<span class="st">&quot;values.txt&quot;</span>)</span></code></pre></div>
+<p>Either way, we can place these values from the full covariance matrix into a matrix using the <code>matrix()</code> function, specifying how many rows and columns there are:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb34-1" aria-hidden="true" tabindex="-1"></a>(newS <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> covVals, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">4</span>))</span></code></pre></div>
+<pre><code>##        [,1]   [,2]   [,3]    [,4]
+## [1,]  1.010 -0.032  4.355   6.841
+## [2,] -0.032  1.973  0.795   2.599
+## [3,]  4.355  0.795 69.263  87.914
+## [4,]  6.841  2.599 87.914 282.060</code></pre>
+<p>We can give names to the variables in the covariance matrix by using the <code>dimnames=</code> argument of the <code>matrix()</code> function, or by using the <code>dimnames()</code> function after creating the matrix. Let’s save the variable names in an object <code>obsnames</code>, then use them to assign names.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb36-1" aria-hidden="true" tabindex="-1"></a>obsnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;MOOD&quot;</span>, <span class="st">&quot;NFC&quot;</span>, <span class="st">&quot;POS&quot;</span>, <span class="st">&quot;ATT&quot;</span>)</span>
+<span id="cb36-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="do">## providing names when creating matrix</span></span>
+<span id="cb36-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb36-3" aria-hidden="true" tabindex="-1"></a>newS <span class="ot">&lt;-</span> <span class="fu">matrix</span>(covVals, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">4</span>,</span>
+<span id="cb36-4"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb36-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">dimnames =</span> <span class="fu">list</span>(obsnames, obsnames))</span>
+<span id="cb36-5"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="do">## or assign afterward, all at once</span></span>
+<span id="cb36-6"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(newS) <span class="ot">&lt;-</span> <span class="fu">list</span>(obsnames, obsnames)</span>
+<span id="cb36-7"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="do">## or one dimension at a time (useful for asymmetric matrix)</span></span>
+<span id="cb36-8"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(newS) <span class="ot">&lt;-</span> obsnames</span>
+<span id="cb36-9"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(newS) <span class="ot">&lt;-</span> obsnames</span></code></pre></div>
+<div id="rescaling-a-correlation-matrix" class="section level5 hasAnchor" number="1.2.3.1.1">
+<h5><span class="header-section-number">1.2.3.1.1</span> Rescaling a Correlation Matrix<a href="regression-as-mean--and-covariance-structure-analysis.html#rescaling-a-correlation-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>If the imported matrix is instead a full correlation matrix (i.e., assuming all variables have <span class="math inline">\(SD=1\)</span>), then it can be transformed back into a covariance matrix using the <span class="math inline">\(SD\)</span>s, so variables will be in their original units. This is important because an SEM fitted to a correlation matrix will have biased <span class="math inline">\(SE\)</span>s and inflated Type I error rates unless complex constraints are imposed.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="do">## store values from correlation matrix</span></span>
+<span id="cb37-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb37-2" aria-hidden="true" tabindex="-1"></a>corVals <span class="ot">&lt;-</span> <span class="fu">c</span>(  <span class="dv">1</span>,    <span class="sc">-</span><span class="fl">0.023</span>, <span class="fl">0.521</span>, <span class="fl">0.405</span>,</span>
+<span id="cb37-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb37-3" aria-hidden="true" tabindex="-1"></a>              <span class="sc">-</span><span class="fl">0.023</span>, <span class="dv">1</span>,     <span class="fl">0.068</span>, <span class="fl">0.110</span>,</span>
+<span id="cb37-4"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb37-4" aria-hidden="true" tabindex="-1"></a>               <span class="fl">0.521</span>, <span class="fl">0.068</span>, <span class="dv">1</span>,     <span class="fl">0.629</span>, </span>
+<span id="cb37-5"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb37-5" aria-hidden="true" tabindex="-1"></a>               <span class="fl">0.405</span>, <span class="fl">0.110</span>, <span class="fl">0.629</span>, <span class="dv">1</span>)</span>
+<span id="cb37-6"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb37-6" aria-hidden="true" tabindex="-1"></a>newR <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> corVals, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">4</span>,</span>
+<span id="cb37-7"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb37-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">dimnames =</span> <span class="fu">list</span>(obsnames, obsnames))</span>
+<span id="cb37-8"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb37-8" aria-hidden="true" tabindex="-1"></a>newR</span></code></pre></div>
+<pre><code>##        MOOD    NFC   POS   ATT
+## MOOD  1.000 -0.023 0.521 0.405
+## NFC  -0.023  1.000 0.068 0.110
+## POS   0.521  0.068 1.000 0.629
+## ATT   0.405  0.110 0.629 1.000</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="do">## store SDs as a diagonal matrix</span></span>
+<span id="cb39-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb39-2" aria-hidden="true" tabindex="-1"></a>(SDs <span class="ot">&lt;-</span> <span class="fu">diag</span>(SD))</span></code></pre></div>
+<pre><code>##          [,1]     [,2]     [,3]     [,4]
+## [1,] 1.005038 0.000000 0.000000  0.00000
+## [2,] 0.000000 1.404596 0.000000  0.00000
+## [3,] 0.000000 0.000000 8.322438  0.00000
+## [4,] 0.000000 0.000000 0.000000 16.79463</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">## transform correlations to covariances</span></span>
+<span id="cb41-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb41-2" aria-hidden="true" tabindex="-1"></a>scaled.S <span class="ot">&lt;-</span> SDs <span class="sc">%*%</span> newR <span class="sc">%*%</span> SDs</span>
+<span id="cb41-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(scaled.S, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##        [,1]   [,2]   [,3]    [,4]
+## [1,]  1.010 -0.032  4.358   6.836
+## [2,] -0.032  1.973  0.795   2.595
+## [3,]  4.358  0.795 69.263  87.917
+## [4,]  6.836  2.595 87.917 282.060</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="do">## matches covariance matrix (within rounding error)</span></span>
+<span id="cb43-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb43-2" aria-hidden="true" tabindex="-1"></a>newS</span></code></pre></div>
+<pre><code>##        MOOD    NFC    POS     ATT
+## MOOD  1.010 -0.032  4.355   6.841
+## NFC  -0.032  1.973  0.795   2.599
+## POS   4.355  0.795 69.263  87.914
+## ATT   6.841  2.599 87.914 282.060</code></pre>
+<p>Note that rescaling the correlation matrix to be a covariance matrix required pre- and postmultipication of the (diagnal matrix of) <span class="math inline">\(SD\)</span>s. The operator for matrix multiplication is <code>%*%</code> (the normal scalar multiplication operator <code>*</code> would simply multiply each cell of one matrix with the corresponding cell of another matrix). The table below gives an overview of commonly used functions in matrix algebra in R.</p>
+<table>
+<thead>
+<tr class="header">
+<th><strong>Symbol</strong></th>
+<th><strong>Function</strong></th>
+<th><strong>Example in R</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(A+B\)</span></td>
+<td>Addition</td>
+<td><code>A + B</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(A-B\)</span></td>
+<td>Subtraction</td>
+<td><code>A - B</code></td>
+</tr>
+<tr class="odd">
+<td>(none)</td>
+<td>Elementwise Multiplication (in R)</td>
+<td><code>A * B</code></td>
+</tr>
+<tr class="even">
+<td>(none)</td>
+<td>Elementwise Division (in R)</td>
+<td><code>A / B</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(AB\)</span></td>
+<td>Matrix Multiplication</td>
+<td><code>A %*% B</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(A^{-1}\)</span></td>
+<td>Inverse (enables “division”)</td>
+<td><code>solve(A)</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(A^{&#39;}\)</span></td>
+<td>Transpose (rows become columns)</td>
+<td><code>t(A)</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(|A|\)</span></td>
+<td>Determinant (generalized variance)</td>
+<td><code>det(A)</code></td>
+</tr>
+</tbody>
+</table>
+<p>To review basic matrix algebra, consult a linear algebra text or an appendix of some SEM textbooks (e.g., Bollen, 1989; Schumacker &amp; Lomax, 2016).</p>
+</div>
+</div>
+<div id="upperlower-triangle-of-a-covariance-matrix" class="section level4 hasAnchor" number="1.2.3.2">
+<h4><span class="header-section-number">1.2.3.2</span> Upper/Lower Triangle of a Covariance Matrix<a href="regression-as-mean--and-covariance-structure-analysis.html#upperlower-triangle-of-a-covariance-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>As a covariance matrix is a symmetric matrix, we do not need to provide the complete matrix. Instead, we can import only the nonredundant information from only the lower (or upper) triangle of the covariance matrix, then use the <code>lavaan</code> function <code>getCov()</code> to create the full matrix. By default, <code>getCov()</code> expects the values from the lower triangle, and it will read values row-by-row (i.e., left-to-right, top-to-bottom), including the diagonal elements (<code>diagonal = TRUE</code> is the default argument).</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1.010 &amp; &amp; &amp; \\
+-0.032 &amp; 1.973 &amp; &amp; \\
+4.355 &amp; 0.795 &amp; 69.263 &amp; \\
+6.841 &amp; 2.599 &amp; 87.914 &amp; 282.060
+\end{bmatrix}
+\]</span></p>
+<p>This is equivalent to reading the upper triangle column-by-column (i.e., top-to-bottom, left-to-right). One can also add a vector with the <code>names=</code> of the observed variables. It returns the complete covariance matrix, including row and column names. The following code can be used to create a full matrix that is equal to <code>S</code> and <code>newS</code> above, using only the values from the lower triangle of the matrix.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb45-1" aria-hidden="true" tabindex="-1"></a>lowerS <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="fl">1.010</span>,</span>
+<span id="cb45-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb45-2" aria-hidden="true" tabindex="-1"></a>            <span class="sc">-</span><span class="fl">0.032</span>, <span class="fl">1.973</span>, </span>
+<span id="cb45-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb45-3" aria-hidden="true" tabindex="-1"></a>             <span class="fl">4.355</span>, <span class="fl">0.795</span>, <span class="fl">69.263</span>, </span>
+<span id="cb45-4"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb45-4" aria-hidden="true" tabindex="-1"></a>             <span class="fl">6.841</span>, <span class="fl">2.599</span>, <span class="fl">87.914</span>, <span class="fl">282.060</span>)</span>
+<span id="cb45-5"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="fu">getCov</span>(<span class="at">x =</span> lowerS, <span class="at">names =</span> obsnames)</span></code></pre></div>
+<pre><code>##        MOOD    NFC    POS     ATT
+## MOOD  1.010 -0.032  4.355   6.841
+## NFC  -0.032  1.973  0.795   2.599
+## POS   4.355  0.795 69.263  87.914
+## ATT   6.841  2.599 87.914 282.060</code></pre>
+<p>Sometimes you will find the upper triangle reported in a published paper instead of the lower triangle. Because <code>getCov()</code> <strong>only reads values row-by-row</strong> (i.e., left-to-right, top-to-bottom), reading an upper-triangle requires changing the argument to <code>lower = FALSE</code>.</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1.010 &amp; -0.032 &amp;  4.355 &amp;   6.841  \\
+      &amp;  1.973 &amp;  0.795 &amp;   2.599  \\
+      &amp;        &amp; 69.263 &amp;  87.914  \\
+      &amp;        &amp;        &amp; 282.060  
+\end{bmatrix}
+\]</span></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb47-1" aria-hidden="true" tabindex="-1"></a>upperS <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.010</span>, <span class="sc">-</span><span class="fl">0.032</span>, <span class="fl">4.355</span>,  <span class="fl">6.841</span>, </span>
+<span id="cb47-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb47-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fl">1.973</span>, <span class="fl">0.795</span>,  <span class="fl">2.599</span>, </span>
+<span id="cb47-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb47-3" aria-hidden="true" tabindex="-1"></a>                          <span class="fl">69.263</span>, <span class="fl">87.914</span>,</span>
+<span id="cb47-4"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb47-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="fl">282.060</span>)</span>
+<span id="cb47-5"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">getCov</span>(<span class="at">x =</span> upperS, <span class="at">names =</span> obsnames, <span class="at">lower =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>##        MOOD    NFC    POS     ATT
+## MOOD  1.010 -0.032  4.355   6.841
+## NFC  -0.032  1.973  0.795   2.599
+## POS   4.355  0.795 69.263  87.914
+## ATT   6.841  2.599 87.914 282.060</code></pre>
+<div id="upperlower-triangle-of-a-correlation-matrix" class="section level5 hasAnchor" number="1.2.3.2.1">
+<h5><span class="header-section-number">1.2.3.2.1</span> Upper/Lower Triangle of a Correlation Matrix<a href="regression-as-mean--and-covariance-structure-analysis.html#upperlower-triangle-of-a-correlation-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Quite frequently, in published papers the covariance matrix is not provided, but instead a correlation matrix and <span class="math inline">\(SD\)</span>s are given separately. The <code>getCov()</code> argument <code>sds=</code> can be used to automatically rescale the correlation matrix. Because the diagonal of a correlation matrix is always 1, it is not necessary to include the diagonal values.</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; &amp; &amp; \\
+-0.023 &amp; 1 &amp; &amp; \\
+0.521 &amp; 0.068 &amp; 1 &amp; \\
+0.405 &amp; 0.110 &amp; 0.629 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p>In this case, tell <code>lavaan</code> that the diagonal entries are omitted using the <code>diagonal=FALSE</code> argument. The following syntax creates the complete covariance matrix that was used in the previous examples from the correlations and <span class="math inline">\(SD\)</span>s.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getCov</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.023</span>, <span class="fl">0.521</span>, <span class="fl">0.068</span>, <span class="fl">0.405</span>, <span class="fl">0.110</span>, <span class="fl">0.629</span>),</span>
+<span id="cb49-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb49-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">diagonal =</span> <span class="cn">FALSE</span>, <span class="at">sds =</span> SD, <span class="at">names =</span> obsnames)</span></code></pre></div>
+<pre><code>##             MOOD         NFC        POS        ATT
+## MOOD  1.01010101 -0.03246846  4.3578341   6.836093
+## NFC  -0.03246846  1.97289018  0.7948971   2.594865
+## POS   4.35783405  0.79489713 69.2629723  87.916779
+## ATT   6.83609342  2.59486462 87.9167795 282.059756</code></pre>
+<p>If you are wondering whether the correlations appear in the correct order in the matrix, you can first leave the <span class="math inline">\(SD\)</span>s out and check that the cells of the correlation matrix are in the correct order. If everything looks correct, then you can add the <span class="math inline">\(SD\)</span>s. Covariance/correlation matrices are also symmetric, so it is also important to check that the lower triangle is a reflection of the upper triangle (i.e., Row-<span class="math inline">\(x\)</span> Column-<span class="math inline">\(\mathrm{y}\)</span> of the matrix should contain the same value as Row-<span class="math inline">\(\mathrm{y}\)</span> Column-<span class="math inline">\(x\)</span>). The R function <code>isSymmetric()</code> can perform this check for you:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">isSymmetric</span>(S)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="regression-review" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Regression Review<a href="regression-as-mean--and-covariance-structure-analysis.html#regression-review" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="linear-regression-models" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Linear Regression Models<a href="regression-as-mean--and-covariance-structure-analysis.html#linear-regression-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An outcome <span class="math inline">\(\mathrm{y}\)</span> is a linear combination (weighted sum) of predictors</p>
+<ul>
+<li>Like a recipe for the outcome: How much of <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> do you need to recreate <span class="math inline">\(\mathrm{y}\)</span>?</li>
+</ul>
+<span class="math display">\[\begin{align*}
+y_i &amp;= \color{blue}{\beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip}} &amp;+&amp; \color{darkred}{\varepsilon_i} &amp; \\
+    &amp;= \color{blue}{\beta_0 + \sum_{j=1}^p \beta_j x_{ij}} &amp;+&amp; \color{darkred}{\varepsilon_i} &amp;\sim \color{darkred}{\mathcal{N}(0, \sigma)}
+\end{align*}\]</span>
+<ul>
+<li>The of <span class="math inline">\(\mathrm{y}\)</span> can be predicted or explained by <span class="math inline">\(\mathbf{X}\)</span></li>
+<li>The of <span class="math inline">\(\mathrm{y}\)</span> includes all other unmodeled effects (omitted variables) and sources of error</li>
+</ul>
+</div>
+<div id="matrix-notation" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Matrix Notation<a href="regression-as-mean--and-covariance-structure-analysis.html#matrix-notation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For subjects <span class="math inline">\(i = 1, \dots, N\)</span> in rows and predictors <span class="math inline">\(j = 1, \dots, p\)</span> in columns:</p>
+<span class="math display">\[\begin{equation*}
+  \begin{bmatrix}
+    \mathrm{y}_1 \\
+    \mathrm{y}_2 \\
+    \vdots \\
+    \mathrm{y}_N
+  \end{bmatrix} =
+  \begin{bmatrix}
+      1 &amp; x_{1,1} &amp; x_{1,2} &amp; \dots  &amp; x_{1,p} \\
+      1 &amp; x_{2,1} &amp; x_{2,2} &amp; \dots  &amp; x_{2,p} \\
+\vdots &amp; \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+      1 &amp; x_{N,1} &amp; x_{N,2} &amp; \dots  &amp; x_{N,p}
+  \end{bmatrix}
+  \begin{bmatrix}
+    \beta_0 \\
+    \beta_1 \\
+    \beta_2 \\
+    \vdots \\
+    \beta_p
+  \end{bmatrix} +
+  \begin{bmatrix}
+    \varepsilon_1 \\
+    \varepsilon_2 \\
+    \vdots \\
+    \varepsilon_N
+  \end{bmatrix}
+\end{equation*}\]</span>
+<ul>
+<li>Shorthand: <span class="math inline">\(\mathrm{y} = \mathbf{X} \mathbf{\beta} + \mathbf{\varepsilon}\)</span></li>
+</ul>
+<p>The <strong>generalized linear model</strong> (GLM) extends basic linear models by incorporating different</p>
+<ul>
+<li>functions that link the outcome to its linear predictor</li>
+<li>distributional assumptions about the outcome(’s errors)</li>
+</ul>
+</div>
+<div id="interpreting-and-estimating-coefficients" class="section level3 hasAnchor" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Interpreting and Estimating Coefficients<a href="regression-as-mean--and-covariance-structure-analysis.html#interpreting-and-estimating-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Regression models provide predictions of the outcome for any level(s) of the predictor(s)</p>
+<ul>
+<li><strong>Only the intercept</strong> (<span class="math inline">\(\beta_0\)</span>) is interpreted as a mean:
+<ul>
+<li>The <strong>expected value</strong> (<span class="math inline">\(\hat{\mathrm{y}}\)</span>) when each predictor <span class="math inline">\(x=0\)</span></li>
+</ul></li>
+<li>Each slope (<span class="math inline">\(\beta_j\)</span>) is interpreted as the <strong>change</strong> in <span class="math inline">\(\hat{\mathrm{y}}\)</span> as <span class="math inline">\(x_j\)</span> increases
+<ul>
+<li>i.e., How does <span class="math inline">\(\mathrm{y}\)</span> <strong>covary</strong> with <span class="math inline">\(x_j\)</span>, given other <span class="math inline">\(x\)</span>s?</li>
+</ul></li>
+</ul>
+<p>Ordinary Least Squares (OLS) estimator of coefficients minimizes overall discrepancies between observations and predictions (<span class="math inline">\(\mathrm{y} - \hat{\mathrm{y}}\)</span>):</p>
+<p><span class="math display">\[\beta = (\mathbf{X}^{&#39;} \mathbf{X})^{-1} \mathbf{X}^{&#39;} \mathbf{y}\]</span></p>
+<ul>
+<li>Minimizing residual variance = maximizing <span class="math inline">\(R^2\)</span></li>
+<li><span class="math inline">\(R\)</span> = Cor(<span class="math inline">\(\mathrm{y}, \hat{\mathrm{y}}\)</span>)</li>
+</ul>
+</div>
+<div id="syntax-examples-with-raw-data" class="section level3 hasAnchor" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Syntax Examples with Raw Data<a href="regression-as-mean--and-covariance-structure-analysis.html#syntax-examples-with-raw-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using matrix algebra to estimate the coefficients:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb53-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> dat<span class="sc">$</span>ATT</span>
+<span id="cb53-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb53-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="co"># first column is constant</span></span>
+<span id="cb53-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb53-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">as.matrix</span>(dat[<span class="fu">c</span>(<span class="st">&quot;MOOD&quot;</span>,<span class="st">&quot;NFC&quot;</span>,<span class="st">&quot;POS&quot;</span>)]))</span>
+<span id="cb53-4"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> y <span class="co"># beta</span></span></code></pre></div>
+<pre><code>##                  [,1]
+## (Intercept) 1.9807186
+## MOOD        1.8839147
+## NFC         0.8883671
+## POS         1.1406346</code></pre>
+<p>Matches results from linear-modeling function:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb55-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(ATT <span class="sc">~</span> MOOD <span class="sc">+</span> NFC <span class="sc">+</span> POS, <span class="at">data =</span> dat)</span>
+<span id="cb55-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod)</span></code></pre></div>
+<pre><code>## (Intercept)        MOOD         NFC         POS 
+##   1.9807186   1.8839147   0.8883671   1.1406346</code></pre>
+</div>
+<div id="categorical-predictors" class="section level3 hasAnchor" number="1.3.5">
+<h3><span class="header-section-number">1.3.5</span> Categorical Predictors<a href="regression-as-mean--and-covariance-structure-analysis.html#categorical-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Groups <span class="math inline">\(g = 1, \ldots, G\)</span> can be represented using numeric codes</p>
+<ul>
+<li>dummy code for Group <span class="math inline">\(g\)</span> indicates whether someone belongs to Group <span class="math inline">\(g\)</span> (1) or not (0)</li>
+<li>effects codes and orthogonal contrast codes are alternatives</li>
+</ul>
+<p><code>MOOD</code> is an effects-coded to indicate experimental conditions</p>
+<ul>
+<li><span class="math inline">\(+1\)</span> = positive mood induction</li>
+<li><span class="math inline">\(-1\)</span> = neutral mood (control condition)</li>
+</ul>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>MOOD)</span></code></pre></div>
+<pre><code>## 
+## -1  1 
+## 50 50</code></pre>
+<div id="regression-with-a-baseline-group" class="section level4 hasAnchor" number="1.3.5.1">
+<h4><span class="header-section-number">1.3.5.1</span> Regression with a Baseline Group<a href="regression-as-mean--and-covariance-structure-analysis.html#regression-with-a-baseline-group" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>When we are interested in comparing scores on a variable across groups, we are typically interested in the differences between the group means. Recall that an intercept-only model estimates a single mean for everyone</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb59-1" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> dat)</span></code></pre></div>
+<p>When we add a predictor to the model, the intercept becomes a conditional mean (i.e., the expected value when each predictor = 0), and the slope represents how the means differ between groups.</p>
+<p>By default, <code>lm()</code> will create dummy codes for all levels of a <code>factor</code> variable, except for the first group (the baseline for comparison)</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb60-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>mood.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>MOOD, <span class="at">levels =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb60-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb60-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;neutral&quot;</span>,<span class="st">&quot;positive&quot;</span>))</span>
+<span id="cb60-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> mood.f, <span class="at">data =</span> dat))</span></code></pre></div>
+<pre><code>##    (Intercept) mood.fpositive 
+##      -4.311096       8.622200</code></pre>
+<p><strong>Practice interpreting</strong> the intercept and slope:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(POS <span class="sc">~</span> mood.f, <span class="at">data =</span> dat, <span class="at">FUN =</span> mean)</span></code></pre></div>
+<pre><code>##     mood.f       POS
+## 1  neutral -4.311096
+## 2 positive  4.311104</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span>(<span class="fu">aggregate</span>(POS <span class="sc">~</span> mood.f, dat, mean)<span class="sc">$</span>POS)</span></code></pre></div>
+<pre><code>## [1] 8.6222</code></pre>
+</div>
+<div id="regression-with-group-specific-intercepts" class="section level4 hasAnchor" number="1.3.5.2">
+<h4><span class="header-section-number">1.3.5.2</span> Regression with Group-Specific Intercepts<a href="regression-as-mean--and-covariance-structure-analysis.html#regression-with-group-specific-intercepts" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Rather than choosing a baseline group, we can omit the intercept from the model, in which case <code>lm()</code> will include all <span class="math inline">\(G\)</span> dummy codes (not <span class="math inline">\(G-1\)</span>)</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> mood.f, <span class="at">data =</span> dat))</span></code></pre></div>
+<pre><code>##  mood.fneutral mood.fpositive 
+##      -4.311096       4.311104</code></pre>
+<p>Essentially, this model gives each group its own intercept, which is also the group-mean when there are no other predictors in the model</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(POS <span class="sc">~</span> mood.f, <span class="at">data =</span> dat, <span class="at">FUN =</span> mean)</span></code></pre></div>
+<pre><code>##     mood.f       POS
+## 1  neutral -4.311096
+## 2 positive  4.311104</code></pre>
+<p>Later in this course, you will learn about <em>multigroup SEM</em>, which is when the same SEM is fitted separately (but simultaneously) to 2 or more groups. Multigroup SEM is analogously advantageous, but (unlike in the GLM) variances can also differ across groups, so we do not need to assume homoskedasticity when using multigroup SEM.</p>
+</div>
+<div id="baseline-comparison-vs.-group-specific-intercepts" class="section level4 hasAnchor" number="1.3.5.3">
+<h4><span class="header-section-number">1.3.5.3</span> Baseline Comparison vs. Group-Specific Intercepts<a href="regression-as-mean--and-covariance-structure-analysis.html#baseline-comparison-vs.-group-specific-intercepts" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To test the <span class="math inline">\(H_0\)</span> that the group means are equivalent, we can compare the model that represents <span class="math inline">\(H_0\)</span> (i.e., the intercept-only model, which estimates a single mean for all groups) to the model that represents the alternative hypothesis (<span class="math inline">\(H_A\)</span>) that group means may differ.</p>
+<p>Because the models <code>mod1</code> (intercept + 1 slope) and <code>mod2</code> (2 slopes that are group-specific intercepts) are statistically equivalent (i.e., they make identical predictions), the ANOVA results are identical:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod0, mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: POS ~ 1
+## Model 2: POS ~ mood.f
+##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1     99 6857.0                                  
+## 2     98 4998.5  1    1858.6 36.439 2.819e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod0, mod2)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: POS ~ 1
+## Model 2: POS ~ -1 + mood.f
+##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1     99 6857.0                                  
+## 2     98 4998.5  1    1858.6 36.439 2.819e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>That is, both <code>mod1</code> and <code>mod2</code> say that we need 2 parameters to make good predictors (i.e., separate means for 2 groups), whereas the intercept-only model says that estimating 1 parameter provides similar predictions.</p>
+</div>
+<div id="t-vs.-f-tests" class="section level4 hasAnchor" number="1.3.5.4">
+<h4><span class="header-section-number">1.3.5.4</span> <span class="math inline">\(t\)</span> vs. <span class="math inline">\(F\)</span> Tests<a href="regression-as-mean--and-covariance-structure-analysis.html#t-vs.-f-tests" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The group mean difference can also be tested if it is an estimated parameter, as it is in the baseline-group approach</p>
+<pre><code>## 
+## Call:
+## lm(formula = POS ~ mood.f, data = dat)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -13.7416  -5.6706  -0.4135   4.4780  17.4323 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      -4.311      1.010  -4.268 4.55e-05 ***
+## mood.fpositive    8.622      1.428   6.036 2.82e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.142 on 98 degrees of freedom
+## Multiple R-squared:  0.271,  Adjusted R-squared:  0.2636 
+## F-statistic: 36.44 on 1 and 98 DF,  p-value: 2.819e-08</code></pre>
+<ul>
+<li>Same <span class="math inline">\(p\)</span> value, <span class="math inline">\(t^2 = F\)</span> from ANOVA</li>
+</ul>
+<p>But group-specific intercepts (and slopes) can also be advantageous</p>
+<ul>
+<li>Each group’s intercept and slopes are model parameters, rather than functions of parameters when using a baseline group</li>
+</ul>
+</div>
+</div>
+<div id="constant-vs.-varying-slopes" class="section level3 hasAnchor" number="1.3.6">
+<h3><span class="header-section-number">1.3.6</span> Constant vs. Varying Slopes<a href="regression-as-mean--and-covariance-structure-analysis.html#constant-vs.-varying-slopes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose we are investigating the possibility that this grouping variable <em>moderates</em> the effect of another (focal) predictor: <em>Need for cognition</em> (NFC).</p>
+<ul>
+<li>See <a href="http://quantpsy.org/interact/interactions.htm">this primer</a> for a review.</li>
+</ul>
+<p>To represent the <span class="math inline">\(H_0\)</span> that NFC has a constant effect on positive thoughts across groups, we can add it as a predictor to the model without an intercept. In this case, rather than group-specific means, the dummy codes are <em>group-specific intercepts</em>.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb75-1" aria-hidden="true" tabindex="-1"></a>slope0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> mood.f <span class="sc">+</span> NFC, <span class="at">data =</span> dat)</span>
+<span id="cb75-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(slope0)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = POS ~ -1 + mood.f + NFC, data = dat)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -13.1713  -5.4855  -0.2585   4.5490  16.9279 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## mood.fneutral   -4.3263     1.0109  -4.280 4.39e-05 ***
+## mood.fpositive   4.3263     1.0109   4.280 4.39e-05 ***
+## NFC              0.4743     0.5115   0.927    0.356    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.147 on 97 degrees of freedom
+## Multiple R-squared:  0.2774, Adjusted R-squared:  0.2551 
+## F-statistic: 12.42 on 3 and 97 DF,  p-value: 6.115e-07</code></pre>
+<p>An interaction implies that slopes differ across groups</p>
+<ul>
+<li>With a <em>baseline group</em>, the reference-group’s slope is estimated, along with how much each of <span class="math inline">\(G-1\)</span> group’s slopes differ from it</li>
+</ul>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="do">## or        POS ~ mood.f * NFC</span></span>
+<span id="cb77-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb77-2" aria-hidden="true" tabindex="-1"></a>slope1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> mood.f <span class="sc">+</span> NFC <span class="sc">+</span> mood.f<span class="sc">:</span>NFC, <span class="at">data =</span> dat)</span>
+<span id="cb77-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(slope1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = POS ~ mood.f + NFC + mood.f:NFC, data = dat)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -14.3300  -5.3633   0.3697   4.7769  15.2801 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)         -4.2954     0.9858  -4.357  3.3e-05 ***
+## mood.fpositive       8.6715     1.3943   6.219  1.3e-08 ***
+## NFC                 -0.4893     0.6353  -0.770   0.4430    
+## mood.fpositive:NFC   2.5130     1.0259   2.450   0.0161 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.969 on 96 degrees of freedom
+## Multiple R-squared:   0.32,  Adjusted R-squared:  0.2987 
+## F-statistic: 15.06 on 3 and 96 DF,  p-value: 4.168e-08</code></pre>
+<ul>
+<li>With <em>group-specific parameters</em>, each group’s own intercept <strong>and</strong> slope are estimated, but multiplying each group’s dummy code against the moderator</li>
+</ul>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="do">## no &quot;main effect&quot; of NFC without a reference group</span></span>
+<span id="cb79-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb79-2" aria-hidden="true" tabindex="-1"></a>slope2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> mood.f <span class="sc">+</span> mood.f<span class="sc">:</span>NFC, <span class="at">data =</span> dat)</span>
+<span id="cb79-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(slope2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = POS ~ -1 + mood.f + mood.f:NFC, data = dat)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -14.3300  -5.3633   0.3697   4.7769  15.2801 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## mood.fneutral       -4.2954     0.9858  -4.357 3.30e-05 ***
+## mood.fpositive       4.3761     0.9860   4.438 2.42e-05 ***
+## mood.fneutral:NFC   -0.4893     0.6353  -0.770   0.4430    
+## mood.fpositive:NFC   2.0237     0.8055   2.512   0.0137 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.969 on 96 degrees of freedom
+## Multiple R-squared:   0.32,  Adjusted R-squared:  0.2916 
+## F-statistic: 11.29 on 4 and 96 DF,  p-value: 1.498e-07</code></pre>
+</div>
+</div>
+<div id="summary-statistics" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Summary Statistics<a href="regression-as-mean--and-covariance-structure-analysis.html#summary-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="reimport-data" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Reimport Data<a href="regression-as-mean--and-covariance-structure-analysis.html#reimport-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The next section is easier if all the variables in the <code>data.frame</code> are <code>numeric</code>, so let’s just use the given effects-coded <code>MOOD</code></p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb81-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> foreign<span class="sc">::</span><span class="fu">read.spss</span>(<span class="st">&quot;MODMED.sav&quot;</span>,</span>
+<span id="cb81-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb81-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>)[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)]</span></code></pre></div>
+</div>
+<div id="raw-data-vs.-summary-statistics" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Raw Data vs. Summary Statistics<a href="regression-as-mean--and-covariance-structure-analysis.html#raw-data-vs.-summary-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Regression models include both mean-structure parameters (intercepts) and covariance-structure parameters (slopes, residual variance).</p>
+<p>Much of SEM involves the analysis of mean and covariance structures (MACS).</p>
+<ul>
+<li>OLS regression minimizes discrepancies between observed and predicted <strong>casewise observations</strong> of <span class="math inline">\(\mathrm{y}\)</span>
+<ul>
+<li><span class="math inline">\(\mathrm{y} - \hat{\mathrm{y}}\)</span></li>
+</ul></li>
+<li>LS and ML estimators in SEM minimize discrepancies between observed and predicted <strong>summary statistics</strong>
+<ul>
+<li>mean vector: <span class="math inline">\(\bar{\mathrm{y}} - \widehat{\mu}\)</span>
+<ul>
+<li><span class="math inline">\(\bar{\mathrm{y}}\)</span> = observed sample means</li>
+<li><span class="math inline">\(\widehat{\mu}\)</span> = expected/predicted/model-implied population means</li>
+</ul></li>
+<li>covariance matrix: <span class="math inline">\(\mathbf{S} - \widehat{\Sigma}\)</span>
+<ul>
+<li><span class="math inline">\(\mathbf{S}\)</span> = observed sample (co)variances</li>
+<li><span class="math inline">\(\widehat{\Sigma}\)</span> = expected/predicted/model-implied population (co)variances</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Rather than raw data in <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{y}\)</span>, we can obtain the same estimates using summary statistics alone</p>
+</div>
+<div id="what-is-covariance" class="section level3 hasAnchor" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> What Is Covariance?<a href="regression-as-mean--and-covariance-structure-analysis.html#what-is-covariance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Variance (<span class="math inline">\(\sigma^2_y\)</span>) quantifies how individual scores vary</p>
+<ul>
+<li>the mean of squared deviations from <span class="math inline">\(\bar{y}\)</span></li>
+</ul>
+<p><span class="math display">\[\text{Var}(\mathrm{y}) = \frac{\sum_{i=1}^N (\mathrm{y}_i - \bar{\mathrm{y}})^2}{N-1} = \frac{\sum_{i=1}^N (\mathrm{y}_i - \bar{\mathrm{y}})(\mathrm{y}_i - \bar{\mathrm{y}})}{N-1}\]</span></p>
+<p>Covariance (<span class="math inline">\(\sigma_{xy}\)</span>) quantifies how <span class="math inline">\(x\)</span> and <span class="math inline">\(\mathrm{y}\)</span> are linearly related</p>
+<ul>
+<li><em>co</em>vary = vary together</li>
+</ul>
+<p><span class="math display">\[\text{Cov}(x,y) = \frac{\sum_{i=1}^N (x_i - \bar{x})(\mathrm{y}_i - \bar{\mathrm{y}})}{N-1}\]</span></p>
+<p>Difficult to interpret its absolute value</p>
+<ul>
+<li>bound by <span class="math inline">\(\pm \sigma_x \sigma_y\)</span></li>
+<li>so, dividing <span class="math inline">\(\sigma_{xy}\)</span> by <span class="math inline">\(\sigma_x \sigma_y\)</span> limits the range to <span class="math inline">\(\pm 1\)</span></li>
+</ul>
+<p>For <span class="math inline">\(&gt;2\)</span> variables in a data set <span class="math inline">\(\mathbf{Y}\)</span>, we can simultaneously calculate all (co)variances using matrix algebra:</p>
+<ol style="list-style-type: decimal">
+<li>Mean-center the data-matrix
+<ul>
+<li><span class="math inline">\(\mathbf{Y} - \bar{\mathbf{Y}}\)</span></li>
+</ul></li>
+<li>“Square” it by (pre)multiplying it by its transpose</li>
+</ol>
+<p><span class="math display">\[\mathbf\Sigma = (\mathbf{Y} - \bar{\mathbf{Y}})^{&#39;} (\mathbf{Y} - \bar{\mathbf{Y}})\]</span></p>
+<p>Variances are on the diagonal of <span class="math inline">\(\Sigma\)</span>, and each off-diagonal cell contains the covariance between the row-variable and the column-variable.</p>
+</div>
+<div id="interpreting-covariance" class="section level3 hasAnchor" number="1.4.4">
+<h3><span class="header-section-number">1.4.4</span> Interpreting Covariance<a href="regression-as-mean--and-covariance-structure-analysis.html#interpreting-covariance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can scale the covariance to provide familiar interpretations.</p>
+<p><strong>Slopes</strong> are change in <span class="math inline">\(\mathrm{y}\)</span> (or <span class="math inline">\(x\)</span>) per unit <span class="math inline">\(x\)</span> (or <span class="math inline">\(\mathrm{y}\)</span>)</p>
+<ul>
+<li>divide by variance: <span class="math inline">\(\beta_{yx} = \frac{\sigma_{xy}}{\sigma^2_x} = \frac{\sigma_{xy}}{\sigma_x \sigma_x}\)</span> (or <span class="math inline">\(\frac{\sigma_{xy}}{\sigma^2_y} = \frac{\sigma_{xy}}{\sigma_y \sigma_y}\)</span>)</li>
+</ul>
+<p><strong>Correlations</strong> are standardized covariances (bound by <span class="math inline">\(\pm 1\)</span>)</p>
+<ul>
+<li>divide by both <span class="math inline">\(SD\)</span>s: <span class="math inline">\(\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}\)</span></li>
+</ul>
+<p>This is how slopes can be standardized (<span class="math inline">\(\beta^*\)</span>), which is a correlation when there is only 1 predictor</p>
+<span class="math display">\[\begin{align*}
+\beta^*_{yx} &amp;= \beta_{yx} \times \frac{\sigma_x}{\sigma_y} \\
+&amp;= \frac{\sigma_{xy}}{\mathcolorbox{orange}{\sigma_x} \sigma_x} \times \frac{\mathcolorbox{orange}{\sigma_x}}{\sigma_y} \text{ (\colorbox{orange}{these} cancel out)} \\
+&amp;= \frac{\sigma_{xy}}{\sigma_x \sigma_y} (= \rho_{xy})
+\end{align*}\]</span>
+</div>
+</div>
+<div id="covariance-matrix" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Covariance Matrix<a href="regression-as-mean--and-covariance-structure-analysis.html#covariance-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>With mean-centered predictors, <span class="math inline">\((\mathbf{X}^{&#39;} \mathbf{X})^{-1}\)</span> is their covariance matrix and <span class="math inline">\(\mathbf{X}^{&#39;} \mathrm{y}\)</span> captures their covariances with the outcome</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb82-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dat) <span class="sc">-</span> 1L</span>
+<span id="cb82-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb82-2" aria-hidden="true" tabindex="-1"></a>Xc <span class="ot">&lt;-</span> <span class="fu">scale</span>(dat[<span class="fu">c</span>(<span class="st">&quot;MOOD&quot;</span>,<span class="st">&quot;NFC&quot;</span>,<span class="st">&quot;POS&quot;</span>)],</span>
+<span id="cb82-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb82-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb82-4"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb82-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="fu">t</span>(Xc) <span class="sc">%*%</span> Xc   ,   <span class="fu">t</span>(Xc) <span class="sc">%*%</span> y)  <span class="sc">/</span> n</span></code></pre></div>
+<pre><code>##             MOOD         NFC        POS          
+## MOOD  1.01010101 -0.03243879  4.3546465  6.841187
+## NFC  -0.03243879  1.97289018  0.7953901  2.598788
+## POS   4.35464646  0.79539011 69.2629723 87.914121</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(dat)</span></code></pre></div>
+<pre><code>##             MOOD         NFC        POS        ATT
+## MOOD  1.01010101 -0.03243879  4.3546465   6.841187
+## NFC  -0.03243879  1.97289018  0.7953901   2.598788
+## POS   4.35464646  0.79539011 69.2629723  87.914121
+## ATT   6.84118687  2.59878834 87.9141208 282.059756</code></pre>
+<div id="ols-with-summary-statistics-beta-mathbfx-mathbfx-1-mathbfx-mathbfy" class="section level3 hasAnchor" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> OLS with Summary Statistics: <span class="math inline">\(\beta = (\mathbf{X}^{&#39;} \mathbf{X})^{-1} \mathbf{X}^{&#39;} \mathbf{y}\)</span><a href="regression-as-mean--and-covariance-structure-analysis.html#ols-with-summary-statistics-beta-mathbfx-mathbfx-1-mathbfx-mathbfy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In simple regression (1 predictor), the slope is simply the covariance scaled by the predictor’s variance: <span class="math inline">\(\beta_1 = \frac{\text{Cov}(x,y)}{\text{Var}(x)}\)</span></p>
+<ul>
+<li><span class="math inline">\(\mathbf{X}^{&#39;} \mathbf{X} = \text{Var}(x)\)</span>, so <span class="math inline">\((\mathbf{X}^{&#39;} \mathbf{X})^{-1} = \frac{1}{\text{Var}(x)}\)</span>
+<ul>
+<li>matrix-multiplication by inverse <span class="math inline">\(\approx\)</span> division</li>
+</ul></li>
+<li><span class="math inline">\(\mathbf{X}^{&#39;} \mathbf{y} = \text{Cov}(x,y)\)</span></li>
+</ul>
+<p>In multiple regression, the same formulas additionally account for covariances of <span class="math inline">\(x\)</span> and <span class="math inline">\(\mathrm{y}\)</span> with covariates</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(dat)[<span class="st">&quot;POS&quot;</span>,<span class="st">&quot;ATT&quot;</span>] <span class="sc">/</span> <span class="fu">var</span>(dat<span class="sc">$</span>POS)</span></code></pre></div>
+<pre><code>## [1] 1.26928</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">lm</span>(ATT <span class="sc">~</span> POS, <span class="at">data =</span> dat))[[<span class="st">&quot;POS&quot;</span>]]</span></code></pre></div>
+<pre><code>## [1] 1.26928</code></pre>
+</div>
+<div id="intercepts-and-means" class="section level3 hasAnchor" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Intercepts and Means<a href="regression-as-mean--and-covariance-structure-analysis.html#intercepts-and-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>With uncentered data, <span class="math inline">\(X\)</span> can include a constant (all 1s) in the first column, which effectively “partials out” the mean.</p>
+<p>With no other predictors (an intercept-only model):</p>
+<span class="math display">\[\begin{align*}
+\mathrm{y}_i &amp;= \beta_0 (1) + \varepsilon_i \\
+    &amp;= \bar{\mathrm{y}} + (\mathrm{y}_i - \bar{\mathrm{y}})
+\end{align*}\]</span>
+<ul>
+<li>the intercept is the mean</li>
+<li>residuals are mean-centered <span class="math inline">\(\mathrm{y}\)</span> (same variance)</li>
+</ul>
+<p>OLS simplifies to the arithmetic mean formula: <span class="math inline">\(\bar{\mathrm{y}} = \frac{\Sigma_y}{N}\)</span></p>
+<ul>
+<li><span class="math inline">\((\mathbf{X}^{&#39;} \mathbf{X})^{-1} = \frac{1}{N}\)</span></li>
+<li><span class="math inline">\(\mathbf{X}^{&#39;} \mathrm{y} = \sum y\)</span></li>
+</ul>
+</div>
+<div id="intercepts-and-means-1" class="section level3 hasAnchor" number="1.5.3">
+<h3><span class="header-section-number">1.5.3</span> Intercepts and Means<a href="regression-as-mean--and-covariance-structure-analysis.html#intercepts-and-means-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="do">## using matrix algebra</span></span>
+<span id="cb90-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb90-2" aria-hidden="true" tabindex="-1"></a>ONE <span class="ot">&lt;-</span> X[ , <span class="st">&quot;(Intercept)&quot;</span>]</span>
+<span id="cb90-3"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(<span class="fu">t</span>(ONE) <span class="sc">%*%</span> ONE) <span class="sc">%*%</span> <span class="fu">t</span>(ONE) <span class="sc">%*%</span> y</span></code></pre></div>
+<pre><code>##          [,1]
+## [1,] 1.980723</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="do">## fitted linear model with only an intercept</span></span>
+<span id="cb92-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## (Intercept) 
+##    1.980723</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="do">## calculate the mean</span></span>
+<span id="cb94-2"><a href="regression-as-mean--and-covariance-structure-analysis.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y)</span></code></pre></div>
+<pre><code>## [1] 1.980723</code></pre>
+</div>
+<div id="what-are-mean-and-covariance-structures" class="section level3 hasAnchor" number="1.5.4">
+<h3><span class="header-section-number">1.5.4</span> What Are Mean and Covariance <em>Structures</em>?<a href="regression-as-mean--and-covariance-structure-analysis.html#what-are-mean-and-covariance-structures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Regression models already illustrate how means are structured</p>
+<ul>
+<li>A mean (<span class="math inline">\(\bar{\mathrm{y}}\)</span>) is an expected value under a particular condition (<span class="math inline">\(\beta_0\)</span> when <span class="math inline">\(X=0\)</span>) plus predictors’ means times their slopes: <span class="math inline">\(\bar{\mathrm{y}} = \beta_0 + \sum \beta_j \bar{x}_j\)</span></li>
+</ul>
+<p>Recall how often statistical procedures involve partitioning variance into components</p>
+<ul>
+<li>Regression: explained (<span class="math inline">\(R^2\)</span>) vs. unexplained (residual) variance</li>
+<li>ANOVA: variance between vs. within groups</li>
+<li>Multilevel modeling: Level-1 v. -2 variance
+<ul>
+<li>and (un)explained at each level</li>
+</ul></li>
+<li>Between vs. within multiple imputations of missing data</li>
+</ul>
+<p>Covariance can also be partitioned into components</p>
+<ul>
+<li>Variance is merely a variable covarying with itself</li>
+<li>We can account for multiple reasons why 2 variables are related</li>
+</ul>
+<p>The decomposition of covariances will be explained after introducing path analysis.</p>
+</div>
+</div>
+<div id="references" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> References<a href="regression-as-mean--and-covariance-structure-analysis.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Bollen, K. A. (1989). <em>Structural equations with latent variables</em>. Wiley. <a href="http://dx.doi.org/10.1002/9781118619179" class="uri">http://dx.doi.org/10.1002/9781118619179</a></p>
+<p>Rosseel, Y. (2012). <code>lavaan</code>: An R package for structural equation modeling. <em>Journal of Statistical Software, 48</em>(2), 1–36. <a href="http://dx.doi.org/10.18637/jss.v048.i02" class="uri">http://dx.doi.org/10.18637/jss.v048.i02</a></p>
+<p>Schumacker, R. E., &amp; Lomax, R. G. (2016). <em>A beginner’s guide to structural equation modeling</em> (4th ed.). Lawrence Erlbaum.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

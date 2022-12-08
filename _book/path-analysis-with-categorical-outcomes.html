@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>12 Path Analysis with Categorical Outcomes | Compendium Structural Equation Modeling in Educational Research</title>
+  <meta name="description" content="12 Path Analysis with Categorical Outcomes | Compendium Structural Equation Modeling in Educational Research" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="12 Path Analysis with Categorical Outcomes | Compendium Structural Equation Modeling in Educational Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="LJGroot/SEM-Compendium" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="12 Path Analysis with Categorical Outcomes | Compendium Structural Equation Modeling in Educational Research" />
+  
+  
+  
+
+<meta name="author" content="Suzanne Jak and Terrence D. Jorgensen" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="measures-of-model-fit.html"/>
+<link rel="next" href="fitting-path-models-with-multilevel-data.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html"><i class="fa fa-check"></i><b>1</b> Regression as Mean- and Covariance-Structure Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#installing-lavaan"><i class="fa fa-check"></i><b>1.1</b> Installing <code>lavaan</code></a></li>
+<li class="chapter" data-level="1.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#types-of-data-used-in-sem"><i class="fa fa-check"></i><b>1.2</b> Types of Data Used in SEM</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#raw-data"><i class="fa fa-check"></i><b>1.2.1</b> Raw Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#summary-statistics-from-raw-data"><i class="fa fa-check"></i><b>1.2.2</b> Summary Statistics from Raw Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#importing-summary-data"><i class="fa fa-check"></i><b>1.2.3</b> Importing Summary Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#regression-review"><i class="fa fa-check"></i><b>1.3</b> Regression Review</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#linear-regression-models"><i class="fa fa-check"></i><b>1.3.1</b> Linear Regression Models</a></li>
+<li class="chapter" data-level="1.3.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#matrix-notation"><i class="fa fa-check"></i><b>1.3.2</b> Matrix Notation</a></li>
+<li class="chapter" data-level="1.3.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#interpreting-and-estimating-coefficients"><i class="fa fa-check"></i><b>1.3.3</b> Interpreting and Estimating Coefficients</a></li>
+<li class="chapter" data-level="1.3.4" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#syntax-examples-with-raw-data"><i class="fa fa-check"></i><b>1.3.4</b> Syntax Examples with Raw Data</a></li>
+<li class="chapter" data-level="1.3.5" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#categorical-predictors"><i class="fa fa-check"></i><b>1.3.5</b> Categorical Predictors</a></li>
+<li class="chapter" data-level="1.3.6" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#constant-vs.-varying-slopes"><i class="fa fa-check"></i><b>1.3.6</b> Constant vs. Varying Slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#summary-statistics"><i class="fa fa-check"></i><b>1.4</b> Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#reimport-data"><i class="fa fa-check"></i><b>1.4.1</b> Reimport Data</a></li>
+<li class="chapter" data-level="1.4.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#raw-data-vs.-summary-statistics"><i class="fa fa-check"></i><b>1.4.2</b> Raw Data vs. Summary Statistics</a></li>
+<li class="chapter" data-level="1.4.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#what-is-covariance"><i class="fa fa-check"></i><b>1.4.3</b> What Is Covariance?</a></li>
+<li class="chapter" data-level="1.4.4" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#interpreting-covariance"><i class="fa fa-check"></i><b>1.4.4</b> Interpreting Covariance</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#covariance-matrix"><i class="fa fa-check"></i><b>1.5</b> Covariance Matrix</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#ols-with-summary-statistics-beta-mathbfx-mathbfx-1-mathbfx-mathbfy"><i class="fa fa-check"></i><b>1.5.1</b> OLS with Summary Statistics: <span class="math inline">\(\beta = (\mathbf{X}^{&#39;} \mathbf{X})^{-1} \mathbf{X}^{&#39;} \mathbf{y}\)</span></a></li>
+<li class="chapter" data-level="1.5.2" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#intercepts-and-means"><i class="fa fa-check"></i><b>1.5.2</b> Intercepts and Means</a></li>
+<li class="chapter" data-level="1.5.3" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#intercepts-and-means-1"><i class="fa fa-check"></i><b>1.5.3</b> Intercepts and Means</a></li>
+<li class="chapter" data-level="1.5.4" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#what-are-mean-and-covariance-structures"><i class="fa fa-check"></i><b>1.5.4</b> What Are Mean and Covariance <em>Structures</em>?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="regression-as-mean--and-covariance-structure-analysis.html"><a href="regression-as-mean--and-covariance-structure-analysis.html#references"><i class="fa fa-check"></i><b>1.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><i class="fa fa-check"></i><b>2</b> Using <code>lavaan</code> to Run Regression and ANOVA as a SEM</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#prepare-data-and-workspace"><i class="fa fa-check"></i><b>2.1</b> Prepare Data and Workspace</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#import-example-data"><i class="fa fa-check"></i><b>2.1.1</b> Import Example Data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#load-lavaan-into-workspace"><i class="fa fa-check"></i><b>2.1.2</b> Load <code>lavaan</code> into Workspace</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#multiple-regression-in-sem"><i class="fa fa-check"></i><b>2.2</b> Multiple Regression in SEM</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#lavaan-syntax"><i class="fa fa-check"></i><b>2.2.1</b> <code>lavaan</code> Syntax</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#caveats-with-sem"><i class="fa fa-check"></i><b>2.3</b> Caveats with SEM</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#model-comparison-with-ols"><i class="fa fa-check"></i><b>2.3.1</b> Model Comparison with OLS</a></li>
+<li class="chapter" data-level="2.3.2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#model-comparison-with-lavaan"><i class="fa fa-check"></i><b>2.3.2</b> Model Comparison with <code>lavaan</code></a></li>
+<li class="chapter" data-level="2.3.3" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#moderation-caveats"><i class="fa fa-check"></i><b>2.3.3</b> Moderation Caveats</a></li>
+<li class="chapter" data-level="2.3.4" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#summary-of-caveats"><i class="fa fa-check"></i><b>2.3.4</b> Summary of Caveats</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#multigroup-sem"><i class="fa fa-check"></i><b>2.4</b> Multigroup SEM</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#group-specific-intercepts-in-ols"><i class="fa fa-check"></i><b>2.4.1</b> Group-Specific Intercepts in OLS</a></li>
+<li class="chapter" data-level="2.4.2" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#group-specific-intercepts-in-sem"><i class="fa fa-check"></i><b>2.4.2</b> Group-Specific Intercepts in SEM?</a></li>
+<li class="chapter" data-level="2.4.3" data-path="using-lavaan-to-run-regression-and-anova-as-a-sem.html"><a href="using-lavaan-to-run-regression-and-anova-as-a-sem.html#multiple-groups-in-sem"><i class="fa fa-check"></i><b>2.4.3</b> Multiple Groups in SEM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="path-models.html"><a href="path-models.html"><i class="fa fa-check"></i><b>3</b> Path Models</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="path-models.html"><a href="path-models.html#illustrative-example"><i class="fa fa-check"></i><b>3.1</b> Illustrative example</a></li>
+<li class="chapter" data-level="3.2" data-path="path-models.html"><a href="path-models.html#conceptual-explanation"><i class="fa fa-check"></i><b>3.2</b> Conceptual explanation</a></li>
+<li class="chapter" data-level="3.3" data-path="path-models.html"><a href="path-models.html#matrix-explanation"><i class="fa fa-check"></i><b>3.3</b> Matrix explanation</a></li>
+<li class="chapter" data-level="3.4" data-path="path-models.html"><a href="path-models.html#path-analysis-using-lavaan"><i class="fa fa-check"></i><b>3.4</b> Path analysis using lavaan</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="path-models.html"><a href="path-models.html#installing-lavaan-1"><i class="fa fa-check"></i><b>3.4.1</b> Installing lavaan</a></li>
+<li class="chapter" data-level="3.4.2" data-path="path-models.html"><a href="path-models.html#fitting-a-path-model"><i class="fa fa-check"></i><b>3.4.2</b> Fitting a path model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="path-models.html"><a href="path-models.html#syntax-shortcuts"><i class="fa fa-check"></i><b>3.4.3</b> Syntax shortcuts</a></li>
+<li class="chapter" data-level="3.4.4" data-path="path-models.html"><a href="path-models.html#extracting-results-from-lavaan-output-in-matrix-form"><i class="fa fa-check"></i><b>3.4.4</b> Extracting results from lavaan output in matrix form</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="path-models.html"><a href="path-models.html#references-1"><i class="fa fa-check"></i><b>3.5</b> References</a></li>
+<li class="chapter" data-level="3.6" data-path="path-models.html"><a href="path-models.html#appendix-3"><i class="fa fa-check"></i><b>3.6</b> Appendix I. Derivations of equation 3.08 and 3.09</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html"><i class="fa fa-check"></i><b>4</b> Standard Errors and Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html#standard-errors"><i class="fa fa-check"></i><b>4.1</b> Standard Errors</a></li>
+<li class="chapter" data-level="4.2" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html#confidence-intervals"><i class="fa fa-check"></i><b>4.2</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html#likelihood-based-confidence-intervals"><i class="fa fa-check"></i><b>4.2.1</b> Likelihood-based confidence intervals</a></li>
+<li class="chapter" data-level="4.2.2" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html#bootstrapped-confidence-intervals"><i class="fa fa-check"></i><b>4.2.2</b> Bootstrapped confidence intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html#obtaining-standard-errors-and-confidence-intervals-in-lavaan"><i class="fa fa-check"></i><b>4.3</b> Obtaining standard errors and confidence intervals in <code>lavaan</code></a></li>
+<li class="chapter" data-level="4.4" data-path="standard-errors-and-confidence-intervals.html"><a href="standard-errors-and-confidence-intervals.html#references-2"><i class="fa fa-check"></i><b>4.4</b> <strong>References</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="direct-indirect-and-total-effects.html"><a href="direct-indirect-and-total-effects.html"><i class="fa fa-check"></i><b>5</b> Direct, Indirect, and Total Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="direct-indirect-and-total-effects.html"><a href="direct-indirect-and-total-effects.html#testing-significance-of-indirect-effects"><i class="fa fa-check"></i><b>5.1</b> Testing significance of indirect effects</a></li>
+<li class="chapter" data-level="5.2" data-path="direct-indirect-and-total-effects.html"><a href="direct-indirect-and-total-effects.html#higher-order-indirect-effects"><i class="fa fa-check"></i><b>5.2</b> Higher order indirect effects</a></li>
+<li class="chapter" data-level="5.3" data-path="direct-indirect-and-total-effects.html"><a href="direct-indirect-and-total-effects.html#using-matrix-algebra-to-calculate-total-total-indirect-and-specific-indirect-effects"><i class="fa fa-check"></i><b>5.3</b> Using matrix algebra to calculate total, total indirect and specific indirect effects</a></li>
+<li class="chapter" data-level="5.4" data-path="direct-indirect-and-total-effects.html"><a href="direct-indirect-and-total-effects.html#calculating-total-total-indirect-and-specific-indirect-effects-using-lavaan-output"><i class="fa fa-check"></i><b>5.4</b> Calculating total, total indirect and specific indirect effects using lavaan output</a></li>
+<li class="chapter" data-level="5.5" data-path="direct-indirect-and-total-effects.html"><a href="direct-indirect-and-total-effects.html#calculating-specific-indirect-effects-in-lavaan"><i class="fa fa-check"></i><b>5.5</b> Calculating specific indirect effects in lavaan</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="calculating-standardized-parameter-estimates.html"><a href="calculating-standardized-parameter-estimates.html"><i class="fa fa-check"></i><b>6</b> Calculating Standardized Parameter Estimates</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="calculating-standardized-parameter-estimates.html"><a href="calculating-standardized-parameter-estimates.html#standardized-regression-coefficients"><i class="fa fa-check"></i><b>6.1</b> Standardized regression coefficients</a></li>
+<li class="chapter" data-level="6.2" data-path="calculating-standardized-parameter-estimates.html"><a href="calculating-standardized-parameter-estimates.html#standardized-residual-factor-variances-and-covariances"><i class="fa fa-check"></i><b>6.2</b> Standardized residual factor variances and covariances</a></li>
+<li class="chapter" data-level="6.3" data-path="calculating-standardized-parameter-estimates.html"><a href="calculating-standardized-parameter-estimates.html#calculating-standardized-coefficients-in-r-using-lavaan-results"><i class="fa fa-check"></i><b>6.3</b> Calculating standardized coefficients in R using lavaan results</a></li>
+<li class="chapter" data-level="6.4" data-path="calculating-standardized-parameter-estimates.html"><a href="calculating-standardized-parameter-estimates.html#request-standardized-output-with-lavaan"><i class="fa fa-check"></i><b>6.4</b> Request standardized output with lavaan</a></li>
+<li class="chapter" data-level="6.5" data-path="calculating-standardized-parameter-estimates.html"><a href="calculating-standardized-parameter-estimates.html#standardizing-indirect-and-total-effects"><i class="fa fa-check"></i><b>6.5</b> Standardizing indirect and total effects</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i><b>7</b> Identification</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="identification.html"><a href="identification.html#assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i><b>7.1</b> Assessment of identification using the elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
+<li class="chapter" data-level="7.2" data-path="identification.html"><a href="identification.html#assessing-identification-through-heuristics-rules-of-thumb"><i class="fa fa-check"></i><b>7.2</b> Assessing identification through heuristics (rules of thumb)</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="identification.html"><a href="identification.html#the-recursive-rule"><i class="fa fa-check"></i><b>7.2.1</b> The recursive rule</a></li>
+<li class="chapter" data-level="7.2.2" data-path="identification.html"><a href="identification.html#the-order-condition"><i class="fa fa-check"></i><b>7.2.2</b> The order condition</a></li>
+<li class="chapter" data-level="7.2.3" data-path="identification.html"><a href="identification.html#the-rank-condition"><i class="fa fa-check"></i><b>7.2.3</b> The rank condition</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="identification.html"><a href="identification.html#assessment-of-empirical-model-identification-using-lavaan"><i class="fa fa-check"></i><b>7.3</b> Assessment of empirical model identification using <code>lavaan</code></a></li>
+<li class="chapter" data-level="7.4" data-path="identification.html"><a href="identification.html#appendix-7"><i class="fa fa-check"></i><b>7.4</b> Appendix I</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="identification.html"><a href="identification.html#algebraic-assessment-of-identification-using-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i><b>7.4.1</b> Algebraic assessment of identification using elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="autoregression.html"><a href="autoregression.html"><i class="fa fa-check"></i><b>8</b> Autoregression</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="autoregression.html"><a href="autoregression.html#autoregression-models-with-predictors"><i class="fa fa-check"></i><b>8.1</b> Autoregression models with predictors</a></li>
+<li class="chapter" data-level="8.2" data-path="autoregression.html"><a href="autoregression.html#cross-lagged-panel-models"><i class="fa fa-check"></i><b>8.2</b> Cross-lagged panel models</a></li>
+<li class="chapter" data-level="8.3" data-path="autoregression.html"><a href="autoregression.html#references-3"><i class="fa fa-check"></i><b>8.3</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch9.html"><a href="ch9.html"><i class="fa fa-check"></i><b>9</b> Model Specification and Model Identification</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ch9.html"><a href="ch9.html#from-theory-to-model"><i class="fa fa-check"></i><b>9.1</b> From theory to model</a></li>
+<li class="chapter" data-level="9.2" data-path="ch9.html"><a href="ch9.html#model-parsimony"><i class="fa fa-check"></i><b>9.2</b> Model parsimony</a></li>
+<li class="chapter" data-level="9.3" data-path="ch9.html"><a href="ch9.html#a-priori-model-specification"><i class="fa fa-check"></i><b>9.3</b> A priori model specification</a></li>
+<li class="chapter" data-level="9.4" data-path="ch9.html"><a href="ch9.html#post-hoc-model-modification"><i class="fa fa-check"></i><b>9.4</b> Post hoc model modification</a></li>
+<li class="chapter" data-level="9.5" data-path="ch9.html"><a href="ch9.html#backward-and-forward-specification-searches"><i class="fa fa-check"></i><b>9.5</b> Backward and forward specification searches</a></li>
+<li class="chapter" data-level="9.6" data-path="ch9.html"><a href="ch9.html#correlation-residuals"><i class="fa fa-check"></i><b>9.6</b> Correlation residuals</a></li>
+<li class="chapter" data-level="9.7" data-path="ch9.html"><a href="ch9.html#modification-indices"><i class="fa fa-check"></i><b>9.7</b> Modification indices</a></li>
+<li class="chapter" data-level="9.8" data-path="ch9.html"><a href="ch9.html#cross-validation"><i class="fa fa-check"></i><b>9.8</b> Cross-validation</a></li>
+<li class="chapter" data-level="9.9" data-path="ch9.html"><a href="ch9.html#calculating-correlation-residuals-in-lavaan"><i class="fa fa-check"></i><b>9.9</b> Calculating correlation residuals in <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="9.9.1" data-path="ch9.html"><a href="ch9.html#requesting-mis-and-sepcs-in-lavaan"><i class="fa fa-check"></i><b>9.9.1</b> Requesting MIs and (S)EPCs in <code>lavaan</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.10" data-path="ch9.html"><a href="ch9.html#references-4"><i class="fa fa-check"></i><b>9.10</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="estimation.html"><a href="estimation.html"><i class="fa fa-check"></i><b>10</b> Estimation</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="estimation.html"><a href="estimation.html#improper-solutions"><i class="fa fa-check"></i><b>10.1</b> Improper Solutions</a></li>
+<li class="chapter" data-level="10.2" data-path="estimation.html"><a href="estimation.html#specifying-starting-values-in-lavaan"><i class="fa fa-check"></i><b>10.2</b> Specifying starting values in lavaan</a></li>
+<li class="chapter" data-level="10.3" data-path="estimation.html"><a href="estimation.html#alternative-estimators"><i class="fa fa-check"></i><b>10.3</b> Alternative estimators</a></li>
+<li class="chapter" data-level="10.4" data-path="estimation.html"><a href="estimation.html#robust-estimators"><i class="fa fa-check"></i><b>10.4</b> Robust estimators</a></li>
+<li class="chapter" data-level="10.5" data-path="estimation.html"><a href="estimation.html#requesting-alternative-and-robust-estimators-in-lavaan"><i class="fa fa-check"></i><b>10.5</b> Requesting alternative and robust estimators in lavaan</a></li>
+<li class="chapter" data-level="10.6" data-path="estimation.html"><a href="estimation.html#alternative-calculation-of-the-ml-discrepancy-function-when-analysing-raw-data"><i class="fa fa-check"></i><b>10.6</b> Alternative calculation of the ML discrepancy function when analysing raw data</a></li>
+<li class="chapter" data-level="10.7" data-path="estimation.html"><a href="estimation.html#using-fiml-to-analyse-raw-data-with-missing-values-in-lavaan"><i class="fa fa-check"></i><b>10.7</b> Using FIML to analyse raw data with missing values in lavaan</a></li>
+<li class="chapter" data-level="10.8" data-path="estimation.html"><a href="estimation.html#references-5"><i class="fa fa-check"></i><b>10.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="measures-of-model-fit.html"><a href="measures-of-model-fit.html"><i class="fa fa-check"></i><b>11</b> Measures of Model Fit</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="measures-of-model-fit.html"><a href="measures-of-model-fit.html#the-chi-squared-test-of-exact-fit"><i class="fa fa-check"></i><b>11.1</b> The chi-squared test of exact fit</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="measures-of-model-fit.html"><a href="measures-of-model-fit.html#alternative-basis-for-calculating-the-test-statistic-when-analysing-raw-data"><i class="fa fa-check"></i><b>11.1.1</b> Alternative basis for calculating the test statistic when analysing raw data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html"><i class="fa fa-check"></i><b>12</b> Path Analysis with Categorical Outcomes</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#prepare-data-and-workspace-1"><i class="fa fa-check"></i><b>12.1</b> Prepare Data and Workspace</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#import-example-data-1"><i class="fa fa-check"></i><b>12.1.1</b> Import Example Data</a></li>
+<li class="chapter" data-level="12.1.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#summarize-data"><i class="fa fa-check"></i><b>12.1.2</b> Summarize Data</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#regression-models-for-binary-variables"><i class="fa fa-check"></i><b>12.2</b> Regression Models for Binary Variables</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#fit-a-logistic-regression-model"><i class="fa fa-check"></i><b>12.2.1</b> Fit a Logistic Regression Model</a></li>
+<li class="chapter" data-level="12.2.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#fit-a-probit-regression-model"><i class="fa fa-check"></i><b>12.2.2</b> Fit a Probit Regression Model</a></li>
+<li class="chapter" data-level="12.2.3" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#compare-models"><i class="fa fa-check"></i><b>12.2.3</b> Compare Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#latent-response-variable"><i class="fa fa-check"></i><b>12.3</b> Latent Response Variable</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#ordinal-outcomes"><i class="fa fa-check"></i><b>12.3.1</b> Ordinal Outcomes</a></li>
+<li class="chapter" data-level="12.3.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#estimating-thresholds"><i class="fa fa-check"></i><b>12.3.2</b> Estimating Thresholds</a></li>
+<li class="chapter" data-level="12.3.3" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#estimating-polychoric-correlations"><i class="fa fa-check"></i><b>12.3.3</b> Estimating Polychoric Correlations</a></li>
+<li class="chapter" data-level="12.3.4" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#estimating-an-sem-with-estimated-input"><i class="fa fa-check"></i><b>12.3.4</b> Estimating an SEM with Estimated Input</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#mediation-model-with-categorical-outcomes"><i class="fa fa-check"></i><b>12.4</b> Mediation Model with Categorical Outcomes</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#estimate-mediation-models"><i class="fa fa-check"></i><b>12.4.1</b> Estimate Mediation Models</a></li>
+<li class="chapter" data-level="12.4.2" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#interpreting-coefficients"><i class="fa fa-check"></i><b>12.4.2</b> Interpreting Coefficients</a></li>
+<li class="chapter" data-level="12.4.3" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#delta-vs.-theta-parameterizations"><i class="fa fa-check"></i><b>12.4.3</b> Delta vs. Theta Parameterizations</a></li>
+<li class="chapter" data-level="12.4.4" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#decomposing-total-effects"><i class="fa fa-check"></i><b>12.4.4</b> Decomposing Total Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="path-analysis-with-categorical-outcomes.html"><a href="path-analysis-with-categorical-outcomes.html#references-6"><i class="fa fa-check"></i><b>12.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html"><i class="fa fa-check"></i><b>13</b> Fitting path models with multilevel data</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html#intraclass-correlation"><i class="fa fa-check"></i><b>13.1</b> Intraclass correlation</a></li>
+<li class="chapter" data-level="13.2" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html#multilevel-structure-as-a-nuisance-correcting-for-the-dependency"><i class="fa fa-check"></i><b>13.2</b> Multilevel structure as a nuisance: Correcting for the dependency</a></li>
+<li class="chapter" data-level="13.3" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html#two-level-path-models"><i class="fa fa-check"></i><b>13.3</b> Two-level path models</a></li>
+<li class="chapter" data-level="13.4" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html#obtaining-iccs-and-estimates-of-sigma_textw-and-sigma_textb"><i class="fa fa-check"></i><b>13.4</b> Obtaining ICCs, and estimates of <span class="math inline">\(\Sigma_\text{W}\)</span> and <span class="math inline">\(\Sigma_\text{B}\)</span></a></li>
+<li class="chapter" data-level="13.5" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html#fitting-a-two-level-path-model"><i class="fa fa-check"></i><b>13.5</b> Fitting a two-level path model</a></li>
+<li class="chapter" data-level="13.6" data-path="fitting-path-models-with-multilevel-data.html"><a href="fitting-path-models-with-multilevel-data.html#references-7"><i class="fa fa-check"></i><b>13.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html"><i class="fa fa-check"></i><b>14</b> Latent Growth Curve Models</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#prepare-data-and-workspace-2"><i class="fa fa-check"></i><b>14.1</b> Prepare Data and Workspace</a></li>
+<li class="chapter" data-level="14.2" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#random-intercept-model"><i class="fa fa-check"></i><b>14.2</b> Random Intercept Model</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#specification-and-estimation"><i class="fa fa-check"></i><b>14.2.1</b> Specification and Estimation</a></li>
+<li class="chapter" data-level="14.2.2" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#interpret-results"><i class="fa fa-check"></i><b>14.2.2</b> Interpret Results</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#linear-growth-model"><i class="fa fa-check"></i><b>14.3</b> Linear Growth Model</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#model-fit-and-comparison"><i class="fa fa-check"></i><b>14.3.1</b> Model Fit and Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#unrestricted-growth-models"><i class="fa fa-check"></i><b>14.4</b> Unrestricted Growth Models</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#latent-basis-curve"><i class="fa fa-check"></i><b>14.4.1</b> Latent Basis Curve</a></li>
+<li class="chapter" data-level="14.4.2" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#saturated-growth-model"><i class="fa fa-check"></i><b>14.4.2</b> Saturated Growth Model</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#explaining-growth-factors"><i class="fa fa-check"></i><b>14.5</b> Explaining Growth Factors</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#time-invariant-level-2-predictors"><i class="fa fa-check"></i><b>14.5.1</b> Time-Invariant (Level-2) Predictors</a></li>
+<li class="chapter" data-level="14.5.2" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#time-varying-level-1-predictors"><i class="fa fa-check"></i><b>14.5.2</b> Time-Varying (Level-1) Predictors</a></li>
+<li class="chapter" data-level="14.5.3" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#parallel-growth-curves"><i class="fa fa-check"></i><b>14.5.3</b> Parallel Growth Curves</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#latent-indicators-of-growth-factors"><i class="fa fa-check"></i><b>14.6</b> Latent Indicators of Growth Factors</a>
+<ul>
+<li class="chapter" data-level="14.6.1" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#common-factors"><i class="fa fa-check"></i><b>14.6.1</b> Common Factors</a></li>
+<li class="chapter" data-level="14.6.2" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#discrete-indicators"><i class="fa fa-check"></i><b>14.6.2</b> Discrete Indicators</a></li>
+</ul></li>
+<li class="chapter" data-level="14.7" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#multigroup-growth-models"><i class="fa fa-check"></i><b>14.7</b> Multigroup Growth Models</a></li>
+<li class="chapter" data-level="14.8" data-path="latent-growth-curve-models.html"><a href="latent-growth-curve-models.html#references-8"><i class="fa fa-check"></i><b>14.8</b> References</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Compendium Structural Equation Modeling in Educational Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="path-analysis-with-categorical-outcomes" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">12</span> Path Analysis with Categorical Outcomes<a href="path-analysis-with-categorical-outcomes.html#path-analysis-with-categorical-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Structural equation modeling is a technique designed for continuous variables. In practice, variables are often not continuous but categorical, such as variables scored on <em>discrete</em> Likert scales (i.e., ordinal data) or correct/incorrect responses on test items (i.e., binary data). If endogenous variables in a path model (or in any SEM) are categorical, the SEM-method to deal with the categorical variables is to assume that there exists a latent (unobserved) continuous variable that underlies the observed categorical variable. The underlying variable is called a <em>latent response variable</em> (LRV). Categorical SEM fits the model to the LRVs instead of to the categorical variables. The observed categorical scores can be linked to the LRV using so-called <em>thresholds</em> that represent the value on the LRV beyond which individuals who score higher would get an observed categorical score in the higher category. For example, for a test item that asks ‘How many degrees of freedom does this path model have?’, the students could give the incorrect (scored 0) or the correct (scored 1) answer. The LRV here represents the <em>ability</em> (LRV) to calculate <span class="math inline">\(df\)</span> for this path model on a continuous scale. Students whose ability is high enough would give the correct response; otherwise, the response would be incorrect. The threshold would reflect the minimum required ability to indicate the correct response. Fitting path models to categorical data thus involves linking the LRV to the observed categorical variables.</p>
+<p>In this chapter we first import example data, then we show how one can use probit and logit link functions in a generalized linear model (GLM). Next, we discuss the concept of the LRV for one ordinal variable, for multiple ordinal variables, and then we illustrate fitting a path model to ordinal variables.</p>
+<div id="prepare-data-and-workspace-1" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">12.1</span> Prepare Data and Workspace<a href="path-analysis-with-categorical-outcomes.html#prepare-data-and-workspace-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="path-analysis-with-categorical-outcomes.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span></code></pre></div>
+<div id="import-example-data-1" class="section level3 hasAnchor" number="12.1.1">
+<h3><span class="header-section-number">12.1.1</span> Import Example Data<a href="path-analysis-with-categorical-outcomes.html#import-example-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We will use example data provided on the <a href="http://www.statmodel.com">M website}</a> for a technical report (Muthén, 2011, p. 24). The example data can be downloaded onto your computer from the report’s <a href="http://www.statmodel.com/examples/penn.shtml#extendSEM">supplementary materials</a>, or you can provide the URL directly to <code>read.table(file=)</code>, as shown below. Note that the data are in summary format (i.e., a table with frequencies for each combination of categories for the 3 variables). The <code>read.table()</code> output is therefore transformed into a standard <code>data.frame</code> with 1 row per subject.</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="path-analysis-with-categorical-outcomes.html#cb224-1" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">&quot;http://www.statmodel.com/examples/shortform/4cat%20m.dat&quot;</span>,</span>
+<span id="cb224-2"><a href="path-analysis-with-categorical-outcomes.html#cb224-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;intention&quot;</span>, <span class="st">&quot;intervention&quot;</span>, <span class="st">&quot;ciguse&quot;</span>, <span class="st">&quot;w&quot;</span>))</span>
+<span id="cb224-3"><a href="path-analysis-with-categorical-outcomes.html#cb224-3" aria-hidden="true" tabindex="-1"></a>dd<span class="sc">$</span>intention <span class="ot">&lt;-</span> dd<span class="sc">$</span>intention <span class="sc">-</span> 1L <span class="co"># make the lowest category 0, not 1</span></span>
+<span id="cb224-4"><a href="path-analysis-with-categorical-outcomes.html#cb224-4" aria-hidden="true" tabindex="-1"></a><span class="do">## transform frequency table to casewise data</span></span>
+<span id="cb224-5"><a href="path-analysis-with-categorical-outcomes.html#cb224-5" aria-hidden="true" tabindex="-1"></a>myData <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dd), <span class="cf">function</span>(RR) {</span>
+<span id="cb224-6"><a href="path-analysis-with-categorical-outcomes.html#cb224-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="fu">rep</span>(<span class="dv">1</span>, dd<span class="sc">$</span>w[RR]) <span class="sc">%*%</span> <span class="fu">as.matrix</span>(dd[RR, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]))</span>
+<span id="cb224-7"><a href="path-analysis-with-categorical-outcomes.html#cb224-7" aria-hidden="true" tabindex="-1"></a>}))</span></code></pre></div>
+<ul>
+<li><strong>Predictor</strong>: <code>intervention</code> (1 = treatment, 0 = control)</li>
+<li><strong>Mediator</strong>: <code>intention</code> to smoke in the following 2 months (measured 6 months after intervention)
+<ul>
+<li>0 = No, 1 = I don’t think so, 2 = Probably, 3 = Yes</li>
+</ul></li>
+<li><strong>Outcome</strong>: <code>ciguse</code> in previous month (1 = smoked, 0 = not), measured a 1-year follow-up</li>
+</ul>
+</div>
+<div id="summarize-data" class="section level3 hasAnchor" number="12.1.2">
+<h3><span class="header-section-number">12.1.2</span> Summarize Data<a href="path-analysis-with-categorical-outcomes.html#summarize-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The resulting <code>data.frame</code> looks like this:</p>
+<pre><code>##     intention intervention ciguse
+## 792         0            0      0
+## 331         0            1      0
+## 6           3            1      1
+## 779         0            0      0
+## 322         0            1      0</code></pre>
+<p>The marginal frequencies for each variable are:</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="path-analysis-with-categorical-outcomes.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="do">## table for each variable</span></span>
+<span id="cb226-2"><a href="path-analysis-with-categorical-outcomes.html#cb226-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(myData, table)</span></code></pre></div>
+<pre><code>## $intention
+## 
+##   0   1   2   3 
+## 644 103  60  57 
+## 
+## $intervention
+## 
+##   0   1 
+## 371 493 
+## 
+## $ciguse
+## 
+##   0   1 
+## 708 156</code></pre>
+<p>Let’s begin with a frequency table to estimate the proportion of subjects who smoke cigarettes (i.e., the estimated probability of smoking: <span class="math inline">\(\widehat{\pi}\)</span>) in each combination of categories for the predictors.</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="path-analysis-with-categorical-outcomes.html#cb228-1" aria-hidden="true" tabindex="-1"></a>tab3way <span class="ot">&lt;-</span> <span class="fu">table</span>(myData)</span>
+<span id="cb228-2"><a href="path-analysis-with-categorical-outcomes.html#cb228-2" aria-hidden="true" tabindex="-1"></a>probs <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(tab3way, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)[,,<span class="dv">2</span>]</span>
+<span id="cb228-3"><a href="path-analysis-with-categorical-outcomes.html#cb228-3" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(probs, <span class="at">FUN =</span> mean)</span></code></pre></div>
+<pre><code>## Margins computed over dimensions
+## in the following order:
+## 1: intention
+## 2: intervention</code></pre>
+<pre><code>##          intervention
+## intention          0          1       mean
+##      0    0.11583012 0.08311688 0.09947350
+##      1    0.26530612 0.20370370 0.23450491
+##      2    0.58823529 0.42307692 0.50565611
+##      3    0.68965517 0.67857143 0.68411330
+##      mean 0.41475668 0.34711723 0.38093696</code></pre>
+<p>The treatment group (<code>intervention == 1</code>) smokes less, both on average and within each <code>intention</code> group. Smoking also increases with intent to smoke (both on average and within treatment/control groups). Treatment appears least effective among those who were certain they would continue smoking (row 4).</p>
+</div>
+</div>
+<div id="regression-models-for-binary-variables" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">12.2</span> Regression Models for Binary Variables<a href="path-analysis-with-categorical-outcomes.html#regression-models-for-binary-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Suppose we used a linear model to predict the probability of smoking, treating intention as a continuous predictor to estimate only its linear effect.</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="path-analysis-with-categorical-outcomes.html#cb231-1" aria-hidden="true" tabindex="-1"></a>mod.lin <span class="ot">&lt;-</span> <span class="fu">lm</span>(ciguse <span class="sc">~</span> intervention <span class="sc">+</span> intention, <span class="at">data =</span> myData)</span>
+<span id="cb231-2"><a href="path-analysis-with-categorical-outcomes.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod.lin)</span></code></pre></div>
+<pre><code>##  (Intercept) intervention    intention 
+##    0.1177588   -0.0439528    0.1927033</code></pre>
+<p>The estimated intercept indicates the predicted probability of smoking when predictors are zero (i.e., those in the control group with no intent to smoke). The estimated slopes reflect what we saw in the table: treatment reduces the probability of smoking (given the intent to smoke), and intent to smoke is associated with more smoking (given treatment).</p>
+<ul>
+<li><em>Note</em>: No interaction is included here, but you can test for yourself that it was not significant.</li>
+</ul>
+<p>It would be problematic if the model predicted any probabilities outside the natural 0–1 range. We do not observed that problem in this specific sample:</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="path-analysis-with-categorical-outcomes.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">fitted</span>(mod.lin))</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## 0.07381 0.07381 0.11776 0.18056 0.26651 0.69587</code></pre>
+<p>This limitation of linear probability models is resolved with a <em>link function</em> in a GLM that allows for predicted values along the entire real-number line. Two such transformations are in frequent use:</p>
+<ul>
+<li>The <em>probit</em> (<strong>prob</strong>ability un<strong>it</strong>) transformation dates back to Bliss (1934). A probability can be transformed to a corresponding quantile in a cumulative distribution function (CDF), such as the standard-normal distribution. In other words, any probability <span class="math inline">\(p\)</span> between 0–1 has a corresponding <span class="math inline">\(z\)</span> score, such as can be requested from <code>qnorm(p)</code>. Likewise, any predicted value on the probit scale can be transformed back into a probability using <code>pnorm(probit)</code>. The GLM takes the form below, where <span class="math inline">\(\Phi()\)</span> is the standard-normal CDF, <span class="math inline">\(\Phi^{-1}()\)</span> is its inverse, and <span class="math inline">\(\mathbf{XB}\)</span> is the linear predictor (<span class="math inline">\(\widehat{y}\)</span>):</li>
+</ul>
+<p><span class="math display">\[\text{Probit}(y=1) = \Phi(\pi) = z = \mathbf{XB}\]</span></p>
+<p><span class="math display">\[\text{Pr}(y=1) = \pi = \Phi^{-1}(z)\]</span></p>
+<ul>
+<li>The <em>logit</em> (<strong>log</strong>istic un<strong>it</strong>) transformation is often favored because its coefficients can be interpreted on the (natural-)log-odds scale. Recall the <em>odds</em> of an outcome is a ratio of its probability (<span class="math inline">\(\pi\)</span>) to its complement (<span class="math inline">\(1-\pi\)</span>), so its range is 0 to <span class="math inline">\(+\infty\)</span> (i.e., it is merely bound to nonnegative numbers). The natural (i.e., base-<span class="math inline">\(e\)</span>) log of a nonnegative number can take any real number. The formulas below show how probabilities, odds, and logits are related.</li>
+</ul>
+<p><span class="math display">\[
+\text{Logit}(\pi) = \ln(\text{odds}) = \ln \Bigg(\frac{\pi}{1 - \pi} \Bigg) = \mathbf{XB}
+\]</span></p>
+<p><span class="math display">\[
+\text{odds} = \frac{\pi}{1 - \pi} = \mathrm{e}^{\text{Logit}(\pi)} \text{ , where } \; \; \mathrm{e} = 2.7182818
+\]</span></p>
+<p><span class="math display">\[
+\pi = \frac{\text{odds}}{1 + \text{odds}} = \frac{\mathrm{e}^\text{Logit}}{1 + \mathrm{e}^\text{Logit}}
+\]</span></p>
+<p>There is a <code>logit()</code> function in the <code>psych</code> package, but it is simple enough to calculate the transformation (and its inverse):</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="path-analysis-with-categorical-outcomes.html#cb235-1" aria-hidden="true" tabindex="-1"></a>logit <span class="ot">&lt;-</span> <span class="fu">log</span>( p <span class="sc">/</span> (<span class="dv">1</span><span class="sc">-</span>p) )           <span class="co"># odds &lt;- p / (1-p)</span></span>
+<span id="cb235-2"><a href="path-analysis-with-categorical-outcomes.html#cb235-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">exp</span>(logit) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(logit))  <span class="co"># odds &lt;- exp(logit)</span></span></code></pre></div>
+<p>Both probit and logistic regression models can be estimated using the <code>glm()</code> function, demonstrated below.</p>
+<div id="fit-a-logistic-regression-model" class="section level3 hasAnchor" number="12.2.1">
+<h3><span class="header-section-number">12.2.1</span> Fit a Logistic Regression Model<a href="path-analysis-with-categorical-outcomes.html#fit-a-logistic-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In order to compare the results of fitting the logistic and the probit regression models, we first fit the GLM with the logit link. We continue to treat the ordinal mediator <code>intention</code> as continuous for now.</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="path-analysis-with-categorical-outcomes.html#cb236-1" aria-hidden="true" tabindex="-1"></a>mod.logit <span class="ot">&lt;-</span> <span class="fu">glm</span>(ciguse <span class="sc">~</span> intervention <span class="sc">+</span> intention, <span class="at">data =</span> myData,</span>
+<span id="cb236-2"><a href="path-analysis-with-categorical-outcomes.html#cb236-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> <span class="fu">binomial</span>(<span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb236-3"><a href="path-analysis-with-categorical-outcomes.html#cb236-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod.logit)</span></code></pre></div>
+<pre><code>##  (Intercept) intervention    intention 
+##   -2.0177349   -0.3771387    1.0379733</code></pre>
+</div>
+<div id="fit-a-probit-regression-model" class="section level3 hasAnchor" number="12.2.2">
+<h3><span class="header-section-number">12.2.2</span> Fit a Probit Regression Model<a href="path-analysis-with-categorical-outcomes.html#fit-a-probit-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="path-analysis-with-categorical-outcomes.html#cb238-1" aria-hidden="true" tabindex="-1"></a>mod.probit <span class="ot">&lt;-</span> <span class="fu">glm</span>(ciguse <span class="sc">~</span> intervention <span class="sc">+</span> intention, <span class="at">data =</span> myData,</span>
+<span id="cb238-2"><a href="path-analysis-with-categorical-outcomes.html#cb238-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="st">&quot;probit&quot;</span>))</span>
+<span id="cb238-3"><a href="path-analysis-with-categorical-outcomes.html#cb238-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod.probit)</span></code></pre></div>
+<pre><code>##  (Intercept) intervention    intention 
+##   -1.1894765   -0.2030216    0.6081512</code></pre>
+</div>
+<div id="compare-models" class="section level3 hasAnchor" number="12.2.3">
+<h3><span class="header-section-number">12.2.3</span> Compare Models<a href="path-analysis-with-categorical-outcomes.html#compare-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The GLMs make very similar predictions. We can compare all 3 models’ (linear, logit and probit) predictions to the observed probabilities in each group.</p>
+<pre><code>##    intention intervention      p.obs   p.linear    p.logit   p.probit
+## 1          3            1 0.67857143 0.65191604 0.67239696 0.66711311
+## 3          3            0 0.68965517 0.69586883 0.74954459 0.73727830
+## 5          2            1 0.42307692 0.45921270 0.42093726 0.43007009
+## 7          2            0 0.58823529 0.50316549 0.51454880 0.51070069
+## 9          1            1 0.20370370 0.26650936 0.20474455 0.21641830
+## 11         1            0 0.26530612 0.31046215 0.27293908 0.28051061
+## 13         0            1 0.08311688 0.07380601 0.08356445 0.08188581
+## 15         0            0 0.11583012 0.11775881 0.11735341 0.11712611</code></pre>
+<p>Notice how similar the predicted probabilities are across models, and how close they are to the observed proportions in each group.</p>
+<p>Each of these models estimates the same number of parameters, but their functional form differs (identity, logit, and probit link functions, with different models for error). So we can only compare the fit of each model to the data descriptively. Here are two examples: (1) sum the squared differences between each model’s predicted probabilities and the observed probabilities, summarized by Pearson’s <span class="math inline">\(\chi^2\)</span> statistic (lower fits better):</p>
+<pre><code>##   p.linear    p.logit   p.probit 
+## 0.04094642 0.01564608 0.01676192</code></pre>
+<p>Or compare their Tjur’s pseudo-<span class="math inline">\(R^2\)</span> values (higher fits better):</p>
+<pre><code>##    linear     logit    probit 
+## 0.2042811 0.2074272 0.2063500</code></pre>
+<p>In both cases, the logit model performs slightly better than probit, both of which perform better than the linear model. But the discrepancies are small.</p>
+</div>
+</div>
+<div id="latent-response-variable" class="section level2 hasAnchor" number="12.3">
+<h2><span class="header-section-number">12.3</span> Latent Response Variable<a href="path-analysis-with-categorical-outcomes.html#latent-response-variable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In SEM, the probit model is often preferred because predicted values are <span class="math inline">\(z\)</span> scores that can be transformed into probabilities. This lends itself easily to a latent-response interpretation, which can be stated as follows for the cigarette-use example.</p>
+<ul>
+<li>Each subject has a latent propensity to smoke. This propensity is a continuous, normally distributed trait. Subjects whose propensity exceeds a threshold succumb to smoking, whereas those whose propensity does not exceed the threshold refrain from smoking.</li>
+</ul>
+<p>The probit model above can therefore be reframed in terms of this LRV, <span class="math inline">\(\mathrm{y}^*\)</span>.</p>
+<p><span class="math display">\[\mathrm{y}^* = \mathbf{XB} + \varepsilon ,\]</span>
+where <span class="math inline">\(\varepsilon \sim \mathcal{N}(0, \sigma)\)</span> and the observed binary response <span class="math inline">\(\mathrm{y}\)</span> is linked to the LRV by a <em>threshold model</em>:</p>
+<p><span class="math display">\[\mathrm{y} = I(y^* &gt; \tau),\]</span>
+where the indicator function <span class="math inline">\(I()\)</span> assigns 1 when its argument is <code>TRUE</code> and 0 when it is <code>FALSE</code>. Because the LRV is unobserved (i.e., <em>latent</em>), its distributional parameters cannot be estimated from the data. GLM software like the <code>glm()</code> function typically identify the model by fixing the residual variance <span class="math inline">\(\sigma=1\)</span> and the threshold <span class="math inline">\(\tau=0\)</span>. For simplicity, consider an intercept-only model for cigarette use.</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="path-analysis-with-categorical-outcomes.html#cb243-1" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(ciguse <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> myData, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="st">&quot;probit&quot;</span>))</span>
+<span id="cb243-2"><a href="path-analysis-with-categorical-outcomes.html#cb243-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod0)</span></code></pre></div>
+<pre><code>## (Intercept) 
+##  -0.9132499</code></pre>
+<p>In <code>lavaan</code> the default is instead to fix the <em>intercept</em> to 0 and estimate the threshold. The model syntax below shows how thresholds are specified with the “pipe” (vertical bar: <code>|</code>) followed by <code>t1</code> indicating the first threshold.</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="path-analysis-with-categorical-outcomes.html#cb245-1" aria-hidden="true" tabindex="-1"></a>mod0.ciguse <span class="ot">&lt;-</span> <span class="st">&#39;ciguse | t1&#39;</span> <span class="co"># specify first (and only) threshold</span></span>
+<span id="cb245-2"><a href="path-analysis-with-categorical-outcomes.html#cb245-2" aria-hidden="true" tabindex="-1"></a>fit0.ciguse <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod0.ciguse, <span class="at">data =</span> myData)</span>
+<span id="cb245-3"><a href="path-analysis-with-categorical-outcomes.html#cb245-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit0.ciguse, <span class="at">header =</span> <span class="cn">FALSE</span>, <span class="at">nd =</span> <span class="dv">7</span>)</span></code></pre></div>
+<pre><code>## 
+## Parameter Estimates:
+## 
+##   Standard errors                                           Robust.sem
+##   Information                                                 Expected
+##   Information saturated (h1) model                        Unstructured
+## 
+## Intercepts:
+##                        Estimate      Std.Err      z-value      P(&gt;|z|)
+##     ciguse            0.0000000                                       
+## 
+## Thresholds:
+##                        Estimate      Std.Err      z-value      P(&gt;|z|)
+##     ciguse|t1         0.9132499    0.0498031   18.3372246    0.0000000
+## 
+## Variances:
+##                        Estimate      Std.Err      z-value      P(&gt;|z|)
+##     ciguse            1.0000000                                       
+## 
+## Scales y*:
+##                        Estimate      Std.Err      z-value      P(&gt;|z|)
+##     ciguse            1.0000000</code></pre>
+<p>Binary variables have only 1 threshold that splits a normal distribution into 2 categories. Notice that it is arbitrary whether the intercept (mean) or threshold is fixed to 0.</p>
+<ul>
+<li>In the output of <code>glm()</code> the threshold was fixed at zero and intercept was estimated to be <span class="math inline">\(-0.913\)</span>.</li>
+<li>In the output of <code>lavaan</code> the intercept is fixed at zero and the threshold was estimated to be <span class="math inline">\(+0.913\)</span>.</li>
+</ul>
+<p>In either case, the threshold is the same distance from the LRV’s mean, as depicted in the figure below.</p>
+<p><img src="_main_files/figure-html/plot%20binary-1.png" width="672" /></p>
+<p>Notice that the distributions are identical. Only the <span class="math inline">\(x\)</span>-axis differs, reflecting the change in (arbitrary) identification constraint.</p>
+<div id="ordinal-outcomes" class="section level3 hasAnchor" number="12.3.1">
+<h3><span class="header-section-number">12.3.1</span> Ordinal Outcomes<a href="path-analysis-with-categorical-outcomes.html#ordinal-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The LRV interpretation is easily extended to polytomous ordinal variables, such as intent to smoke. This is called the <em>cumulative probit</em> model (and link function). Any ordinal variable with categories <span class="math inline">\(c=0, \ldots, C\)</span> can be interpreted as a crude discretization of an underlying LRV, whose <span class="math inline">\(C\)</span> thresholds divide the latent distribution into <span class="math inline">\(C+1\)</span> categories.</p>
+<p><span class="math display">\[\mathrm{y}=c \ \ \ \text{ if } \ \ \ \tau_c &lt; y^* \le \tau_{c+1} \]</span></p>
+<p>Because the normal distribution is unbounded, the first category “starts” at <span class="math inline">\(\tau_0 = -\infty\)</span>, and the last category “ends” at <span class="math inline">\(\tau_{C+1} = +\infty\)</span>. For example, intent to smoke has 4 categories, so there are <span class="math inline">\(C=3\)</span> thresholds. We do not have to specify thresholds in <code>lavaan</code> model syntax if we tell <code>lavaan</code> which variables are ordinal using the argument <code>ordered=</code>. When <strong>all</strong> modeled variables are ordinal, one can use <code>TRUE</code> as a shortcut.</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="path-analysis-with-categorical-outcomes.html#cb247-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;ciguse ~~ intention&#39;</span>, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb247-2"><a href="path-analysis-with-categorical-outcomes.html#cb247-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2, <span class="at">header =</span> <span class="cn">FALSE</span>, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+## Parameter Estimates:
+## 
+##   Standard errors                           Robust.sem
+##   Information                                 Expected
+##   Information saturated (h1) model        Unstructured
+## 
+## Covariances:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##   ciguse ~~                                                             
+##     intention         0.637    0.041   15.496    0.000    0.637    0.637
+## 
+## Intercepts:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##     ciguse            0.000                               0.000    0.000
+##     intention         0.000                               0.000    0.000
+## 
+## Thresholds:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##     ciguse|t1         0.913    0.050   18.337    0.000    0.913    0.913
+##     intention|t1      0.660    0.046   14.280    0.000    0.660    0.660
+##     intention|t2      1.101    0.054   20.570    0.000    1.101    1.101
+##     intention|t3      1.506    0.066   22.867    0.000    1.506    1.506
+## 
+## Variances:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##     ciguse            1.000                               1.000    1.000
+##     intention         1.000                               1.000    1.000
+## 
+## Scales y*:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##     ciguse            1.000                               1.000    1.000
+##     intention         1.000                               1.000    1.000</code></pre>
+<p>Notice that intent has 3 thresholds, labeled with sequential integers following the letter <code>t</code>. This is how they would be specified in <code>lavaan</code> model syntax, e.g.,</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="path-analysis-with-categorical-outcomes.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39; intention | NA*t1 + NA*t2 + NA*t3 &#39;</span></span></code></pre></div>
+<p>Alternatively, set the argument <code>auto.th=TRUE</code> to automatically estimate all thresholds.</p>
+<p>The LRV for <code>intention</code> can be interpreted as the degree to which someone intends to smoke—similar to the observed variable, but the degree increases continuously rather than in discrete increments.</p>
+<ol start="0" style="list-style-type: decimal">
+<li>Subjects in Category 0 do not have a latent intent to smoke that exceeds the first threshold (<span class="math inline">\(\hat\tau_1\)</span>), so they do not indicate that they intend to smoke.</li>
+<li>Subjects will only respond that they “don’t know” when their latent intent exceeds <span class="math inline">\(\hat\tau_1=\)</span> 0.66 <span class="math inline">\(SD\)</span>s above the mean of that distribution.</li>
+<li>Subjects must exceed <span class="math inline">\(\hat\tau_2=\)</span> 1.101 <span class="math inline">\(SD\)</span> above the mean before they begin indicating “probably”.</li>
+<li>Only those whose latent intent exceeds <span class="math inline">\(\hat\tau_3=\)</span> 1.506 <span class="math inline">\(SD\)</span>s above the mean do they respond firmly “yes”.</li>
+</ol>
+<p>The plot below visualizes the “classification rules” above.</p>
+<p><img src="_main_files/figure-html/plot%20poly-1.png" width="672" /></p>
+</div>
+<div id="estimating-thresholds" class="section level3 hasAnchor" number="12.3.2">
+<h3><span class="header-section-number">12.3.2</span> Estimating Thresholds<a href="path-analysis-with-categorical-outcomes.html#estimating-thresholds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Thresholds are <strong>univariate</strong> statistics (like means). Threshold estimates are based on the frequency distribution of a categorical variable. Recall that the probit function merely transforms a (predicted) probability (<span class="math inline">\(\pi\)</span>) into a corresponding <span class="math inline">\(z\)</span> score. The (standardized) thresholds are these <span class="math inline">\(z\)</span> scores. We can estimate them by plugging into <code>qnorm()</code> the cumulative proportions (<span class="math inline">\(\widehat\pi_c\)</span>) up to each category <span class="math inline">\(c\)</span>. For example, here are the (cumulative) proportions in each category of <code>intention</code>.</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="path-analysis-with-categorical-outcomes.html#cb250-1" aria-hidden="true" tabindex="-1"></a>p.intent <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(<span class="fu">table</span>(myData<span class="sc">$</span>intention)) <span class="co"># proportions per category</span></span>
+<span id="cb250-2"><a href="path-analysis-with-categorical-outcomes.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(p.intent) <span class="co"># cumulative proportions (up to and including each category)</span></span></code></pre></div>
+<pre><code>##         0         1         2         3 
+## 0.7453704 0.8645833 0.9340278 1.0000000</code></pre>
+<p>By definition, 100% of the sample was observed in any of the categories up to (and including) the highest category, so the final cumulative proportion is 1. Likewise, no one in the sample was observed in a category lower than the lowest category (by definition), so we can append a zero as the first number in this vector of cumulative proportions. Then we can find the corresponding <span class="math inline">\(z\)</span> scores in a normal distribution, which are the thresholds between categories:</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="path-analysis-with-categorical-outcomes.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">cumsum</span>(p.intent)))</span></code></pre></div>
+<pre><code>##                   0         1         2         3 
+##      -Inf 0.6599915 1.1011455 1.5064783       Inf</code></pre>
+<p>The upper and lower thresholds are <span class="math inline">\(+/-\infty\)</span> by definition, corresponding to 0 and 100%. Those never need to be estimated because they are fixed by design. The remaining 3 thresholds are actual borders between observed categories, showing how far above/below the mean a subject must be in order to indicate a particular response category.</p>
+</div>
+<div id="estimating-polychoric-correlations" class="section level3 hasAnchor" number="12.3.3">
+<h3><span class="header-section-number">12.3.3</span> Estimating Polychoric Correlations<a href="path-analysis-with-categorical-outcomes.html#estimating-polychoric-correlations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>With multiple ordinal variables, we can estimate the correlations between their associated LRVs by relying on the assumption that the LRVs are normally distributed (Olsson, 1979, 1982). These correlations are called <em>polychoric correlations</em> (Olsson, 1979), which are <strong>bivariate</strong> statistics (like the covariance matrix). If the model also includes a continuous variable, its correlation with an ordinal variable’s LRV is called the <em>polyserial correlation</em> (Olsson, 1982). Special names for 2-category variables are <em>tetrachoric correlation</em> (between 2 binary variables) or <em>biserial correlation</em> (between a binary and continuous variable). For example, the estimated covariance between cigarette use and intent to smoke in the model above is a polychoric correlation because each LRV’s <span class="math inline">\(SD\)</span> was fixed to 1 in that unrestricted (saturated) model.</p>
+<p>The reason that the probit model is so popular in SEM is that the standard SEM matrices and interpretations still apply to normal data, except those normal variables are latent. All we need to do is append the SEM with a threshold model in order to link these normal LRVs to their observed discrete counterparts. The default saturated model in <em>lavaan</em> estimates all thresholds and polychoric (and polyserial, if applicable) correlations, along with means and (co)variances among any continuous variables. This is used as input data when fitting any hypothesized model (even when fitting a regression model with <span class="math inline">\(df=0\)</span>). We can see the <em>estimated</em> sample statistics for the model above:</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="path-analysis-with-categorical-outcomes.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lavInspect</span>(fit2, <span class="st">&quot;sampstat&quot;</span>)</span></code></pre></div>
+<pre><code>## $cov
+##           ciguse intntn
+## ciguse    1.000        
+## intention 0.637  1.000 
+## 
+## $mean
+##    ciguse intention 
+##         0         0 
+## 
+## $th
+##    ciguse|t1 intention|t1 intention|t2 intention|t3 
+##        0.913        0.660        1.101        1.506</code></pre>
+<p>Notice that the means are 0 and variances are 1, consistent with the correlation metric and the assumption that the underlying LRV is a <span class="math inline">\(z\)</span> score. These values are actually fixed to <em>identify</em> the saturated model. We will discuss <em>scaling constraints</em> and identification of latent variables more when we introduce the common-factor model.</p>
+</div>
+<div id="estimating-an-sem-with-estimated-input" class="section level3 hasAnchor" number="12.3.4">
+<h3><span class="header-section-number">12.3.4</span> Estimating an SEM with Estimated Input<a href="path-analysis-with-categorical-outcomes.html#estimating-an-sem-with-estimated-input" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The problem with treating thresholds and polychoric correlations as observed data is that they were not observed. They are estimates of population parameters, based on the data. They each have an associated <span class="math inline">\(SE\)</span> and 95% CI. In order to trust the <span class="math inline">\(SE\)</span>s, 95% CIs, and test statistics in our hypothesized model, we need to take the uncertainty of the “data” into account. This is often accomplished using weighted least-squares estimation, where the weight matrix <span class="math inline">\(\mathbf{W}\)</span> is the sampling covariance matrix of the estimated thresholds and polychoric correlations.</p>
+<ul>
+<li><em>Note</em>: Do not confuse the sampling covariance matrix of <em>estimated parameters</em> with the covariance matrix of <em>variables</em>. The latter is used as input data, and it is what we want our SEM to explain. The sampling covariance of parameter estimates is how we quantify their uncertainty: its diagonal contains sampling variances, the square-roots of which are the <span class="math inline">\(SE\)</span>s that we use to calculate Wald <span class="math inline">\(z\)</span> tests and CIs.</li>
+</ul>
+<p>The more variables (and categories) there are, the larger <span class="math inline">\(\mathbf{W}\)</span> becomes: there is one row/column for every estimated threshold and correlation. Even in samples as large as 1000, this makes estimation unstable. An alternative is to simply ignore the sampling <strong>co</strong>variances during estimation, so <span class="math inline">\(\text{diag}(\mathbf{W})\)</span> is the weight matrix to obtain point estimates of parameters. This is called diagonally weighted least squares (<code>estimator = "DWLS"</code>), which is the default in <code>lavaan</code>. Even with DWLS, the full weight matrix is still needed to calculate <span class="math inline">\(SE\)</span>s and the <span class="math inline">\(\chi^2\)</span> statistic. The <span class="math inline">\(\chi^2\)</span> statistic needs to be robust against the uncertainty of the input data, so it is adjusted by scaling it (a <em>mean-adjusted</em> statistic) and optionally shifting it (a <em>mean- and variance-adjusted</em> statistic). The default is both: <code>estimator = "WLSMV"</code> is a shortcut that implies</p>
+<ul>
+<li><code>lavaan(..., estimator = "DWLS", se = "robust.sem", test = "scaled.shifted")</code></li>
+</ul>
+<p>Another alternative is unweighted/ordinary least squares (ULS), where <span class="math inline">\(\mathbf{W}\)</span> is an identity matrix. This often yields good point estimates, but Type I error rates can differ from the <span class="math inline">\(\alpha\)</span> level, so it is still recommended to request a scaled/shifted <span class="math inline">\(\chi^2\)</span> statistic (e.g., <code>estimator = "ULSMV"</code>).</p>
+<p>There are also likelihood-based estimators. One option is marginal maximum likelihood (<code>estimator = "MML"</code>), which is <em>currently</em> disabled in <code>lavaan</code> because it was too computationally intensive and the developer is exploring better routines. A less computationally intensive alternative is pairwise maximum likelihood (<code>estimator = "PML"</code>), which maximizes only the (sum of) uni- and bivariate (log-)likelihoods. This is a quite robust procedure even in small samples, and because it is likelihood-based, information criteria (AIC and BIC) are available.</p>
+<p><em>Note</em>: The “robust” statistics are only corrected for the two-stage estimation procedure (thresholds+pollychorics, followed by SEM parameters using DWLS or ULS) or for combining pairwise log-likelihoods (using PML). The LRV interpretation for categorical outcomes <strong>assumes a normal distribution</strong> for latent responses. Because LRVs are (by definition) unobserved, there is no way to estimate their degree of nonnormality, which would be necessary to correct for it.</p>
+<div id="counting-degrees-of-freedom" class="section level4 hasAnchor" number="12.3.4.1">
+<h4><span class="header-section-number">12.3.4.1</span> Counting Degrees of Freedom<a href="path-analysis-with-categorical-outcomes.html#counting-degrees-of-freedom" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>For SEM with only continuous variables, the number of observed summary statistics <span class="math inline">\(p^*\)</span> is a simply function of the number of variables <span class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[p^* = \frac{p(p+3)}{2} \text{ (with mean structure) or } \frac{p(p+1)}{2} \text{ (without means)}\]</span></p>
+<ul>
+<li><span class="math inline">\(p\)</span> means</li>
+<li><span class="math inline">\(p\)</span> variances</li>
+<li><span class="math inline">\(\frac{p(p-1)}{2}\)</span> covariances</li>
+</ul>
+<p>The number of “observed” covariances does not differ between continuous and categorical variables, but some covariances are replaced by:</p>
+<ul>
+<li>polychoric correlations among LRVs</li>
+<li>(scaled) polyserial correlations between LRVs and observed variables</li>
+</ul>
+<p>But the number of univariate statistics can differ. Whereas continuous variables each contribute an observed mean and variance, categorical variables do not contribute either (i.e., those values are fixed to 0 and 1, respectively, to estimate thresholds and polychoric correlations). Instead, each categorical variable contributes <span class="math inline">\(C\)</span> “observed” standardized thresholds for its <span class="math inline">\(C+1\)</span> categories. So each binary variable contributes <span class="math inline">\(C=1\)</span> threshold, each “ternary” (3-category) variable contributes <span class="math inline">\(C=2\)</span> thresholds, and so on. Thus, the number summary statistics is a function of the number of observed continuous and discrete variables. Suppose we denote:</p>
+<ul>
+<li><span class="math inline">\(p_c\)</span> the number of continuous variables</li>
+<li><span class="math inline">\(p_d\)</span> the number of discrete variables</li>
+<li>so the total number of observed variables remains <span class="math inline">\(p = p_c + p_d\)</span></li>
+<li>the number of thresholds for discrete variables <span class="math inline">\(d = 1, \dots, D\)</span> is <span class="math inline">\(C_d\)</span></li>
+<li>the total number of thresholds is <span class="math inline">\(K = \sum_{d=1}^D C_d\)</span></li>
+</ul>
+<p>Then the number summary statistics is <span class="math inline">\(\frac{p(p-1)}{2} + 2p_c + K\)</span>. That is, both continuous and discrete variables contribute covariances/correlations (first term), only continuous variables contribute a mean and variance (second term), and only discrete variables contribute thresholds (third term).</p>
+<p>This has implications for determining the expected <span class="math inline">\(df\)</span>, which is an important part of verifying that you fit the model you intended to fit. Just as mean structures are typically saturated (e.g., for every observed mean, an intercept is estimated), each “observed” standardized threshold has a corresponding estimated threshold (not necessarily standardized, but is by default in <code>lavaan</code>). Likewise, intercepts and (residual or marginal) variances typically remain fixed for LRVs in hypothesized models, as they do in the default saturated model. Thresholds might be constrained (contributing <span class="math inline">\(df\)</span>) in models for multiple groups or occasions—as might LRV intercepts or (residual or marginal) variances—which we discuss in later chapters.</p>
+</div>
+<div id="missing-data" class="section level4 hasAnchor" number="12.3.4.2">
+<h4><span class="header-section-number">12.3.4.2</span> Missing Data<a href="path-analysis-with-categorical-outcomes.html#missing-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>When multivariate-normal data are incomplete, all available information can be used to estimate parameters by setting <code>missing = "FIML"</code> (full-information ML estimation) to override the default <code>listwise</code> deletion method. Actually, FIML applies to nonnormal continuous data as well, since a robust correction for nonnormality is available with FIML results (<code>estimator = "MLR"</code>). FIML is also available for categorical outcome(s), but only when using (marginal) ML estimation. Until <code>estimator = "MML"</code> becomes available in <code>lavaan</code>, the FIML option is unfortunately unavailable.</p>
+<p>When at least 1 endogenous variable is binary/ordinal, <code>missing = "pairwise"</code> deletion retains as much information as possible, so it is still preferred over the default <code>missing = "listwise"</code> deletion. However, both deletion methods make the restrictive assumption that data are missing <strong>completely</strong> at random (MCAR). The reason pairwise deletion assumes MCAR data is that <em>for each pair of variables</em>, it estimates their covariance (or polychoric/polyserial correlation) using all jointly observed complete data for that pair of variables. So no information from other observed variables can be used to estimate the covariance/correlation.</p>
+<p>In contrast, FIML estimates parameters using each person’s entire vector of observed data, so missing data on Variable A can be compensated by observed data on Variable B. Thus, FIML makes the less restrictive assumption that data are missing at random (MAR)—that is, the missingness is still random <strong>conditional on the observed data</strong> (see Little et al., 2014, for more detailed conceptual explanations).</p>
+<p>Pairwise deletion is available with any (diagonally or un)weighted least-squares estimators, as well as with (P)ML. But with PML for categorical outcomes, a <code>missing = "doubly.robust"</code> estimation method is available that only requires assuming data are MAR (Katsikatsou et al., in press). It is computationally intensive, but it may be worth it if the MAR assumption is not feasible.</p>
+</div>
+</div>
+</div>
+<div id="mediation-model-with-categorical-outcomes" class="section level2 hasAnchor" number="12.4">
+<h2><span class="header-section-number">12.4</span> Mediation Model with Categorical Outcomes<a href="path-analysis-with-categorical-outcomes.html#mediation-model-with-categorical-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Consider the mediation model depicted below. The dashed line is the direct effect of treatment on smoking behavior, given the intent to smoke.</p>
+<p>Because SEM treats an exogenous binary predictor as numeric (like dummy-coded predictors in standard OLS regression models), these <span class="math inline">\(p=3\)</span> variables include <span class="math inline">\(p_c=1\)</span> “continuous” predictor (<code>intervention</code>) and <span class="math inline">\(p_d=2\)</span> discrete outcomes. These contribute <span class="math inline">\(p^* = \frac{p(p-1)}{2} = 3\)</span> “observed” covariances:</p>
+<ul>
+<li>The polyserial correlations of <code>intervention</code> with <code>ciguse</code> and <code>intention</code></li>
+<li>The polychoric correlation between <code>ciguse</code> and <code>intention</code></li>
+</ul>
+<p>The predictor also contributes <span class="math inline">\(2p_c=2\)</span> observed values: a mean and a variance. The endogenous binary variable <code>ciguse</code> contributes 1 threshold, and the endogenous ordinal variable <code>intention</code> contributes 3 thresholds, so <span class="math inline">\(K=4\)</span>. Thus, there are 3 + 2 + 4 = 9 summary statistics in this 3-variable system.</p>
+<p>There are 3 possible conclusions:</p>
+<ul>
+<li><strong>No mediation</strong>: the indirect effect <span class="math inline">\(\beta_{21} \times \beta_{32}=0\)</span> because either <span class="math inline">\(\beta_{21}=0\)</span> or <span class="math inline">\(\beta_{32}=0\)</span></li>
+<li><strong>Partial mediation</strong>: the indirect effect <span class="math inline">\(\beta_{21} \times \beta_{32} \ne 0\)</span> <em>and</em> the direct effect <span class="math inline">\(\beta_{31} \ne 0\)</span></li>
+<li><strong>Full mediation</strong>: the indirect effect <span class="math inline">\(\beta_{21} \times \beta_{32} \ne 0\)</span> but the direct effect <span class="math inline">\(\beta_{31} = 0\)</span></li>
+</ul>
+<p>Omitting the dashed line (by fixing <span class="math inline">\(\beta_{31}=0\)</span>) would imply full mediation. A full-mediation model would estimate 8 parameters:</p>
+<ul>
+<li>2 regression slopes (<span class="math inline">\(\beta_{21}\)</span> and <span class="math inline">\(\beta_{32}\)</span>)</li>
+<li>1 mean and 1 variance for the exogenous dummy coded <code>intervention</code></li>
+<li>3 thresholds for the mediator <code>intention</code></li>
+<li>1 threshold for the outcome <code>ciguse</code></li>
+</ul>
+<p>Thus, the full-mediation model will have <span class="math inline">\(df=1\)</span>. The partial-mediation model would estimate the dashed line, reducing <span class="math inline">\(df=0\)</span>. No mediation could be represented by a model that estimates the dashed line but fixes either <span class="math inline">\(\beta_{21}=0\)</span> (a multiple-regression model for <code>ciguse</code>) or <span class="math inline">\(\beta_{32}=0\)</span> (a multivariate regression model for <code>intention</code> and <code>ciguse</code>). We will only fit the full and partial mediation models in the next section.</p>
+<div id="estimate-mediation-models" class="section level3 hasAnchor" number="12.4.1">
+<h3><span class="header-section-number">12.4.1</span> Estimate Mediation Models<a href="path-analysis-with-categorical-outcomes.html#estimate-mediation-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Begin by fitting the partial-mediation model to the data, to test <span class="math inline">\(H_0: \beta_{21} \times \beta_{32}=0\)</span> (no mediation). We will only specify the regression slopes and user-defined parameters because the residual variances are not estimated. The identification constraints require more explanation (see the following section).</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="path-analysis-with-categorical-outcomes.html#cb256-1" aria-hidden="true" tabindex="-1"></a>mod.part <span class="ot">&lt;-</span> <span class="st">&#39; ## regression paths</span></span>
+<span id="cb256-2"><a href="path-analysis-with-categorical-outcomes.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="st">    intention ~ b21*intervention</span></span>
+<span id="cb256-3"><a href="path-analysis-with-categorical-outcomes.html#cb256-3" aria-hidden="true" tabindex="-1"></a><span class="st">    ciguse ~ b31*intervention + b32*intention</span></span>
+<span id="cb256-4"><a href="path-analysis-with-categorical-outcomes.html#cb256-4" aria-hidden="true" tabindex="-1"></a><span class="st">  ## define indirect and total effects</span></span>
+<span id="cb256-5"><a href="path-analysis-with-categorical-outcomes.html#cb256-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ind := b21*b32</span></span>
+<span id="cb256-6"><a href="path-analysis-with-categorical-outcomes.html#cb256-6" aria-hidden="true" tabindex="-1"></a><span class="st">    tot := ind + b31</span></span>
+<span id="cb256-7"><a href="path-analysis-with-categorical-outcomes.html#cb256-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb256-8"><a href="path-analysis-with-categorical-outcomes.html#cb256-8" aria-hidden="true" tabindex="-1"></a>fit.part <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.part, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb256-9"><a href="path-analysis-with-categorical-outcomes.html#cb256-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.part, <span class="at">standardized =</span> <span class="cn">TRUE</span>, <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## lavaan 0.6-12 ended normally after 13 iterations
+## 
+##   Estimator                                       DWLS
+##   Optimization method                           NLMINB
+##   Number of model parameters                         7
+## 
+##   Number of observations                           864
+## 
+## Model Test User Model:
+##                                               Standard      Robust
+##   Test Statistic                                 0.000       0.000
+##   Degrees of freedom                                 0           0
+## 
+## Parameter Estimates:
+## 
+##   Standard errors                           Robust.sem
+##   Information                                 Expected
+##   Information saturated (h1) model        Unstructured
+## 
+## Regressions:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##   intention ~                                                           
+##     intrvntn (b21)   -0.246    0.089   -2.758    0.006   -0.246   -0.121
+##   ciguse ~                                                              
+##     intrvntn (b31)   -0.130    0.093   -1.402    0.161   -0.130   -0.064
+##     intentin (b32)    0.631    0.042   15.105    0.000    0.631    0.629
+## 
+## Intercepts:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##    .intention         0.000                               0.000    0.000
+##    .ciguse            0.000                               0.000    0.000
+## 
+## Thresholds:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##     intention|t1      0.525    0.067    7.844    0.000    0.525    0.521
+##     intention|t2      0.970    0.071   13.572    0.000    0.970    0.963
+##     intention|t3      1.378    0.082   16.710    0.000    1.378    1.368
+##     ciguse|t1         0.760    0.072   10.491    0.000    0.760    0.752
+## 
+## Variances:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##    .intention         1.000                               1.000    0.985
+##    .ciguse            0.602                               0.602    0.591
+## 
+## Scales y*:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##     intention         1.000                               1.000    1.000
+##     ciguse            1.000                               1.000    1.000
+## 
+## R-Square:
+##                    Estimate
+##     intention         0.015
+##     ciguse            0.409
+## 
+## Defined Parameters:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##     ind              -0.155    0.057   -2.713    0.007   -0.155   -0.076
+##     tot              -0.285    0.100   -2.845    0.004   -0.285   -0.140</code></pre>
+<p>Using the standard criterion <span class="math inline">\(\alpha=5\%\)</span>, the Wald <span class="math inline">\(z\)</span> tests allow us to reject the <span class="math inline">\(H_0\)</span> of no mediation: indirect effect <span class="math inline">\(b\)</span> = <span class="math inline">\(-0.155\)</span>, <span class="math inline">\(z = -2.713\)</span>, <em>p</em> = 0.007, <span class="math inline">\(\beta = -0.076\)</span>. We fail to reject the <span class="math inline">\(H_0\)</span> of full mediation: direct effect <em>b</em> = <span class="math inline">\(-0.13\)</span>, <span class="math inline">\(z = -1.402\)</span>, <em>p</em> = 0.161, <span class="math inline">\(\beta = -0.064\)</span>.</p>
+<p>Because the scales of the LRVs are arbitrary, it is safer to</p>
+<ul>
+<li>interpret the standardized slopes</li>
+<li>test a <span class="math inline">\(H_0\)</span> using a <span class="math inline">\(\Delta \chi^2\)</span> test</li>
+</ul>
+<p>We can fit a full-mediation model to the data to obtain the LRT.</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="path-analysis-with-categorical-outcomes.html#cb258-1" aria-hidden="true" tabindex="-1"></a>mod.full <span class="ot">&lt;-</span> <span class="st">&#39; ## regression paths</span></span>
+<span id="cb258-2"><a href="path-analysis-with-categorical-outcomes.html#cb258-2" aria-hidden="true" tabindex="-1"></a><span class="st">    intention ~ b21*intervention</span></span>
+<span id="cb258-3"><a href="path-analysis-with-categorical-outcomes.html#cb258-3" aria-hidden="true" tabindex="-1"></a><span class="st">    ciguse ~ b32*intention</span></span>
+<span id="cb258-4"><a href="path-analysis-with-categorical-outcomes.html#cb258-4" aria-hidden="true" tabindex="-1"></a><span class="st">  ## define indirect and total effects</span></span>
+<span id="cb258-5"><a href="path-analysis-with-categorical-outcomes.html#cb258-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ind := b21*b32</span></span>
+<span id="cb258-6"><a href="path-analysis-with-categorical-outcomes.html#cb258-6" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb258-7"><a href="path-analysis-with-categorical-outcomes.html#cb258-7" aria-hidden="true" tabindex="-1"></a>fit.full <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.full, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb258-8"><a href="path-analysis-with-categorical-outcomes.html#cb258-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lavTestLRT</span>(fit.full, fit.part) <span class="co"># or anova(), which then calls lavTestLRT()</span></span></code></pre></div>
+<pre><code>## Scaled Chi-Squared Difference Test (method = &quot;satorra.2000&quot;)
+## 
+## lavaan NOTE:
+##     The &quot;Chisq&quot; column contains standard test statistics, not the
+##     robust test that should be reported per model. A robust difference
+##     test is a function of two standard (not robust) statistics.
+##  
+##          Df AIC BIC  Chisq Chisq diff Df diff Pr(&gt;Chisq)
+## fit.part  0         0.0000                              
+## fit.full  1         1.2648     1.9567       1     0.1619</code></pre>
+<p>Notice that <code>lavTestLRT()</code> automatically detects the robust estimator and test statistic requested when fitting the models, so it appropriately uses the same robust correction (mean- and variance-adjustment) for the <span class="math inline">\(\Delta \chi^2\)</span> statistic. This is why the <code>Chisq Diff</code> column <strong>does not match</strong> the difference between (uncorrected) <span class="math inline">\(\chi^2\)</span> values in the <code>Chisq</code> column. The <span class="math inline">\(p\)</span> value is very close to the Wald test’s <span class="math inline">\(p\)</span> value (also calculated using a robust <span class="math inline">\(SE\)</span>), which is expected when <span class="math inline">\(N\)</span> is large.</p>
+</div>
+<div id="interpreting-coefficients" class="section level3 hasAnchor" number="12.4.2">
+<h3><span class="header-section-number">12.4.2</span> Interpreting Coefficients<a href="path-analysis-with-categorical-outcomes.html#interpreting-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Notice that the <code>glm()</code> estimates from the probit regression for <code>ciguse</code> do not match those from the <code>sem()</code> function. There are noteworthy differences in parameterization:</p>
+<ul>
+<li>The GLM approach fixes the threshold to 0 and estimates the intercept. The SEM approach fixes the intercept to 0 and estimates the threshold. As shown in the figure above, this distinction is arbitrary because the LRV has no “location” that we can identify from the data. The intercept and threshold can only be said to be a certain distance apart, which is why they take the same absolute value. For example, we can free the <code>ciguse</code> intercept in <code>lavaan</code> syntax and fix its threshold instead:</li>
+</ul>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="path-analysis-with-categorical-outcomes.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="do">## fixed intercept</span></span>
+<span id="cb260-2"><a href="path-analysis-with-categorical-outcomes.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.part, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>)[<span class="fu">c</span>(<span class="st">&quot;ciguse|t1&quot;</span>,<span class="st">&quot;ciguse~1&quot;</span>)]</span></code></pre></div>
+<pre><code>## ciguse|t1  ciguse~1 
+## 0.7596909 0.0000000</code></pre>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="path-analysis-with-categorical-outcomes.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="do">## fixed threshold</span></span>
+<span id="cb262-2"><a href="path-analysis-with-categorical-outcomes.html#cb262-2" aria-hidden="true" tabindex="-1"></a>mod.trade <span class="ot">&lt;-</span> <span class="st">&#39; ciguse | 0*t1 # fix threshold</span></span>
+<span id="cb262-3"><a href="path-analysis-with-categorical-outcomes.html#cb262-3" aria-hidden="true" tabindex="-1"></a><span class="st">               ciguse ~ NA*1 # estimate intercept &#39;</span></span>
+<span id="cb262-4"><a href="path-analysis-with-categorical-outcomes.html#cb262-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">sem</span>(<span class="fu">c</span>(mod.part, mod.trade), <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb262-5"><a href="path-analysis-with-categorical-outcomes.html#cb262-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;all&quot;</span>)[<span class="fu">c</span>(<span class="st">&quot;ciguse|t1&quot;</span>,<span class="st">&quot;ciguse~1&quot;</span>)]</span></code></pre></div>
+<pre><code>##  ciguse|t1   ciguse~1 
+##  0.0000000 -0.7596909</code></pre>
+<ul>
+<li>The GLM approach treats all predictors as fixed, and predictors are distinct from outcomes. Intent to smoke was treated as continuous. Although we could have used polynomial contrast codes to estimate linear, quadratic, and cubic effects, we still would have to take the observed category weights (0–3) as given.</li>
+<li>The SEM approach allows outcomes to predict other outcomes. So the LRV underlying intent to smoke was used as a predictor of smoking propensity (LRV underlying <code>ciguse</code>). This allows us to extrapolate from our results what we would expect if we had measured intent as a continuous variable (and it happened to be normally distributed).</li>
+</ul>
+<p>A final distinction has to do with the identification constraint on the LRV scale.</p>
+</div>
+<div id="delta-vs.-theta-parameterizations" class="section level3 hasAnchor" number="12.4.3">
+<h3><span class="header-section-number">12.4.3</span> Delta vs. Theta Parameterizations<a href="path-analysis-with-categorical-outcomes.html#delta-vs.-theta-parameterizations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The SEM approach in <code>lavaan</code> (by default) fixes the <em>marginal</em> (i.e., total) variance of the LRV to 1. This is called the “delta parameterization” in the SEM literature. The GLM approach fixes the residual/conditional variance to 1. This is called the “theta parameterization” in the SEM literature.</p>
+<p>Under the delta parameterization, the residual variance is fixed such that it equals 1 minus the explained variance (<span class="math inline">\(1-R^2\)</span>). Under the theta parameterization, the LRV’s total variance is the sum of explained and unexplained variance (1 + explained variance). The total variances is not an explicit SEM parameter; instead, the <em>scaling factors</em> (<code>Scales y*</code> in the output) are the reciprocal of the total <span class="math inline">\(SD\)</span> (i.e., <span class="math inline">\(\frac{1}{SD}\)</span>).</p>
+<p>Use the argument <code>parameterization = "theta"</code> to override the default delta parameterization, if there is a reason to do so (i.e., if you want to model residual variances). This will be discussed further in the chapter about item factor analysis (i.e., common-factor models for categorical indicators).</p>
+<p>This arbitrary distinction can have important consequences for the interpretation and decomposition of mediated effects. For example, the indirect effects would not be comparable between full- and partial-mediation models when fixing residual variances to 1, because doing so would change the scale of the LRV across the two models. That is, the <strong>relative amount of residual variance would be different</strong> for the full- and partial mediation models. The partial-mediation model explains less variance (lower <span class="math inline">\(R^2\)</span>, so its residual variance should be larger) than the full-mediation model, but residual variances are fixed to 1 in both cases, making the total variance <em>appear smaller</em> in the partial-mediation model. This change of scales changes the meaning of ‘one unit increase’ across the models.</p>
+<p>Luckily, <strong>when using the delta parameterization in single-group models</strong>, the outcome’s LRV scale (and any categorical mediator’s LRV scale) is already held constant by fixing the marginal variance to 1 (Breene et al., 2013). However, this good news would not apply in more complex situations that affect LRV scales, such as multigroup models. So when using path analysis with categorical outcomes, it is best to exercise caution. Use the delta parameterization, and do not use a multigroup models to compare paths across groups (i.e., moderated mediation) unless you understand how to equate the LRV scales across groups.</p>
+</div>
+<div id="decomposing-total-effects" class="section level3 hasAnchor" number="12.4.4">
+<h3><span class="header-section-number">12.4.4</span> Decomposing Total Effects<a href="path-analysis-with-categorical-outcomes.html#decomposing-total-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Furthermore, a common method of quantifying the size of an indirect effect is the proportion of the total effect: <span class="math inline">\(\frac{\beta_{21} \times \beta_{32}}{(\beta_{21} \times \beta_{32}) + \beta_{31}}\)</span>. This is already problematic when the direct and indirect effects have opposite signs (called <em>inconsistent mediation</em>). But when the scale of a LRV varies between models with(out) a mediator, then the sum of estimated direct and indirect effects would no longer match the total effect.</p>
+<p>For example, fit separate probit models for the mediator and outcome, as would be necessary using the GLM approach. For simplicity, only treat <code>ciguse</code> as categorical.</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="path-analysis-with-categorical-outcomes.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="do">## simple regression to obtain the total effect</span></span>
+<span id="cb264-2"><a href="path-analysis-with-categorical-outcomes.html#cb264-2" aria-hidden="true" tabindex="-1"></a>(total <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">sem</span>(<span class="st">&#39;ciguse ~ total*intervention&#39;</span>, <span class="at">data =</span> myData,</span>
+<span id="cb264-3"><a href="path-analysis-with-categorical-outcomes.html#cb264-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ordered =</span> <span class="st">&#39;ciguse&#39;</span>, <span class="at">parameterization =</span> <span class="st">&quot;theta&quot;</span>))[<span class="st">&quot;total&quot;</span>])</span></code></pre></div>
+<pre><code>##      total 
+## -0.2850428</code></pre>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="path-analysis-with-categorical-outcomes.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="do">## model for mediator</span></span>
+<span id="cb266-2"><a href="path-analysis-with-categorical-outcomes.html#cb266-2" aria-hidden="true" tabindex="-1"></a>(b21 <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">sem</span>(<span class="st">&#39;intention ~ b21*intervention&#39;</span>, <span class="at">data =</span> myData))[<span class="st">&quot;b21&quot;</span>])</span></code></pre></div>
+<pre><code>##        b21 
+## -0.1644697</code></pre>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="path-analysis-with-categorical-outcomes.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="do">## model for outcome</span></span>
+<span id="cb268-2"><a href="path-analysis-with-categorical-outcomes.html#cb268-2" aria-hidden="true" tabindex="-1"></a>(b3 <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">sem</span>(<span class="st">&#39;ciguse ~ b31*intervention + b32*intention&#39;</span>, <span class="at">data =</span> myData,</span>
+<span id="cb268-3"><a href="path-analysis-with-categorical-outcomes.html#cb268-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">ordered =</span> <span class="st">&#39;ciguse&#39;</span>, <span class="at">parameterization =</span> <span class="st">&quot;theta&quot;</span>))[<span class="fu">c</span>(<span class="st">&quot;b31&quot;</span>,<span class="st">&quot;b32&quot;</span>)])</span></code></pre></div>
+<pre><code>##        b31        b32 
+## -0.2030216  0.6081512</code></pre>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="path-analysis-with-categorical-outcomes.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate total effect from decomposition</span></span>
+<span id="cb270-2"><a href="path-analysis-with-categorical-outcomes.html#cb270-2" aria-hidden="true" tabindex="-1"></a>b3[[<span class="dv">1</span>]] <span class="sc">+</span> b21<span class="sc">*</span>b3[[<span class="dv">2</span>]]</span></code></pre></div>
+<pre><code>##       b21 
+## -0.303044</code></pre>
+<p>This does not match the total effect from the simple probit regression because the LRV scales differ. That is, the simple regression has more residual variance (less explained variance without <code>intention</code> in the model), yet the residual variance is still fixed to 1. Imai et al. (2010) proposed a general solution to this problem, using the causal-modeling framework, implemented in the <a href="https://cran.r-project.org/package=mediation"><code>mediation</code></a> (see their <a href="https://cran.r-project.org/web/packages/mediation/vignettes/mediation.pdf">`vignette</a> for examples). It is quite complicated, but here is how it would apply to our current example (see also Muthén, 2011, for corresponding M<em>plus</em> syntax):</p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="path-analysis-with-categorical-outcomes.html#cb272-1" aria-hidden="true" tabindex="-1"></a>mod.Imai <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb272-2"><a href="path-analysis-with-categorical-outcomes.html#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="st">    ciguse ~ c*intervention + b*intention</span></span>
+<span id="cb272-3"><a href="path-analysis-with-categorical-outcomes.html#cb272-3" aria-hidden="true" tabindex="-1"></a><span class="st">    intention ~ a*intervention</span></span>
+<span id="cb272-4"><a href="path-analysis-with-categorical-outcomes.html#cb272-4" aria-hidden="true" tabindex="-1"></a><span class="st"># label threshold for ciguse</span></span>
+<span id="cb272-5"><a href="path-analysis-with-categorical-outcomes.html#cb272-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ciguse | b0*t1</span></span>
+<span id="cb272-6"><a href="path-analysis-with-categorical-outcomes.html#cb272-6" aria-hidden="true" tabindex="-1"></a><span class="st"># biased SEs</span></span>
+<span id="cb272-7"><a href="path-analysis-with-categorical-outcomes.html#cb272-7" aria-hidden="true" tabindex="-1"></a><span class="st">    naive.indirect := a*b</span></span>
+<span id="cb272-8"><a href="path-analysis-with-categorical-outcomes.html#cb272-8" aria-hidden="true" tabindex="-1"></a><span class="st">    naive.direct := c</span></span>
+<span id="cb272-9"><a href="path-analysis-with-categorical-outcomes.html#cb272-9" aria-hidden="true" tabindex="-1"></a><span class="st"># correct</span></span>
+<span id="cb272-10"><a href="path-analysis-with-categorical-outcomes.html#cb272-10" aria-hidden="true" tabindex="-1"></a><span class="st">    probit11 := (-b0+c+b*a)/sqrt(b^2+1)</span></span>
+<span id="cb272-11"><a href="path-analysis-with-categorical-outcomes.html#cb272-11" aria-hidden="true" tabindex="-1"></a><span class="st">    probit10 := (-b0+c )/sqrt(b^2+1)</span></span>
+<span id="cb272-12"><a href="path-analysis-with-categorical-outcomes.html#cb272-12" aria-hidden="true" tabindex="-1"></a><span class="st">    probit00 := (-b0 )/sqrt(b^2+1)</span></span>
+<span id="cb272-13"><a href="path-analysis-with-categorical-outcomes.html#cb272-13" aria-hidden="true" tabindex="-1"></a><span class="st">    indirect := pnorm(probit11) - pnorm(probit10)</span></span>
+<span id="cb272-14"><a href="path-analysis-with-categorical-outcomes.html#cb272-14" aria-hidden="true" tabindex="-1"></a><span class="st">    direct := pnorm(probit10) - pnorm(probit00)</span></span>
+<span id="cb272-15"><a href="path-analysis-with-categorical-outcomes.html#cb272-15" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb272-16"><a href="path-analysis-with-categorical-outcomes.html#cb272-16" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.Imai, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="fu">c</span>(<span class="st">&quot;ciguse&quot;</span>,<span class="st">&quot;intention&quot;</span>))</span>
+<span id="cb272-17"><a href="path-analysis-with-categorical-outcomes.html#cb272-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## lavaan 0.6-12 ended normally after 13 iterations
+## 
+##   Estimator                                       DWLS
+##   Optimization method                           NLMINB
+##   Number of model parameters                         7
+## 
+##   Number of observations                           864
+## 
+## Model Test User Model:
+##                                               Standard      Robust
+##   Test Statistic                                 0.000       0.000
+##   Degrees of freedom                                 0           0
+## 
+## Parameter Estimates:
+## 
+##   Standard errors                           Robust.sem
+##   Information                                 Expected
+##   Information saturated (h1) model        Unstructured
+## 
+## Regressions:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##   ciguse ~                                                              
+##     interventn (c)   -0.130    0.093   -1.402    0.161   -0.130   -0.064
+##     intention  (b)    0.631    0.042   15.105    0.000    0.631    0.629
+##   intention ~                                                           
+##     interventn (a)   -0.246    0.089   -2.758    0.006   -0.246   -0.121
+## 
+## Intercepts:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##    .ciguse            0.000                               0.000    0.000
+##    .intention         0.000                               0.000    0.000
+## 
+## Thresholds:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##     ciguse|t1 (b0)    0.760    0.072   10.491    0.000    0.760    0.752
+##     intntn|t1         0.525    0.067    7.844    0.000    0.525    0.521
+##     intntn|t2         0.970    0.071   13.572    0.000    0.970    0.963
+##     intntn|t3         1.378    0.082   16.710    0.000    1.378    1.368
+## 
+## Variances:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##    .ciguse            0.602                               0.602    0.591
+##    .intention         1.000                               1.000    0.985
+## 
+## Scales y*:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##     ciguse            1.000                               1.000    1.000
+##     intention         1.000                               1.000    1.000
+## 
+## Defined Parameters:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##     naive.indirect   -0.155    0.057   -2.713    0.007   -0.155   -0.076
+##     naive.direct     -0.130    0.093   -1.402    0.161   -0.130   -0.064
+##     probit11         -0.884    0.062  -14.182    0.000   -0.884   -0.755
+##     probit10         -0.752    0.070  -10.714    0.000   -0.752   -0.691
+##     probit00         -0.643    0.063  -10.184    0.000   -0.643   -0.637
+##     indirect         -0.037    0.014   -2.647    0.008   -0.037   -0.020
+##     direct           -0.034    0.024   -1.403    0.161   -0.034   -0.017</code></pre>
+<p>However, Breen et al. (2013) proposed a simpler, less restrictive solution that holds the LRV scale consistent so that the decomposition holds. Their method is meant for researchers fitting separate regression models, and performed quite well in simulations (and similar to Imai et al.’s method). Luckily, <strong>when using the delta parameterization in single-group models</strong>, their method is unnecessary when simultaneously estimating the full/partial-mediation model as a path analysis. This is because the outcome’s LRV scale (and any categorical mediator’s LRV scale) is already held constant by fixing the marginal variance to 1. However, this good news would not apply in more complex situations that affect LRV scales, such as multigroup models.</p>
+<p>So when using path analysis with categorical outcomes, it is best to exercise caution. Use the delta parameterization, and do not use a multigroup models to compare paths across groups (i.e., moderated mediation) unless you understand how to equate the LRV scales across groups.</p>
+</div>
+</div>
+<div id="references-6" class="section level2 hasAnchor" number="12.5">
+<h2><span class="header-section-number">12.5</span> References<a href="path-analysis-with-categorical-outcomes.html#references-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Bliss, C. I. (1934). The method of probits. <em>Science, 79</em>(2037), 38–39. <a href="https://doi.org/10.1126/science.79.2037.38" class="uri">https://doi.org/10.1126/science.79.2037.38</a></p>
+<p>Breen, R., Karlson, K. B., &amp; Holm, A. (2013). Total, direct, and indirect effects in logit and probit models. <em>Sociological Methods &amp; Research, 42</em>(2), 164–191. <a href="https://doi.org/10.1177/0049124113494572" class="uri">https://doi.org/10.1177/0049124113494572</a></p>
+<!-- Imai, K., Keele, L., & Tingley, D. (2010). A general approach to causal mediation analysis. *Psychological Methods, 15*(4), 309--334. <https://doi.org/10.1037/a0020761> -->
+<p>Katsikatsou, M., Moustaki, I., &amp; Jamil, H. (in press). Pairwise likelihood estimation for confirmatory factor analysis models with categorical variables and data that are missing at random. <em>British Journal of Mathematical and Statistical Psychology</em>. <a href="https://doi.org/10.1111/bmsp.12243" class="uri">https://doi.org/10.1111/bmsp.12243</a></p>
+<p>Little, T. D., Jorgensen, T. D., Lang, K. M., &amp; Moore, E. W. G. (2014). On the joys of missing data. <em>Journal of Pediatric Psychology, 39</em>(2), 151–162. <a href="https://doi.org/10.1093/jpepsy/jst048" class="uri">https://doi.org/10.1093/jpepsy/jst048</a></p>
+<p>Muthén, B. (2011). <em>Applications of causally defined direct and indirect effects in mediation analysis using SEM in Mplus</em> [Technical report]. Retrieved from <a href="http://www.statmodel.com/download/causalmediation.pdf" class="uri">http://www.statmodel.com/download/causalmediation.pdf</a></p>
+<p>Olsson, U. (1979). Maximum likelihood estimation of the polychoric correlation coefficient. <em>Psychometrika, 44</em>(4), 443–460. <a href="https://doi.org/10.1007/BF02296207" class="uri">https://doi.org/10.1007/BF02296207</a></p>
+<p>Olsson, U., Drasgow, F., &amp; Dorans, N. J. (1982). The polyserial correlation coefficient. <em>Psychometrika, 47</em>(3), 337–347. <a href="https://doi.org/10.1007/BF02294164" class="uri">https://doi.org/10.1007/BF02294164</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="measures-of-model-fit.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fitting-path-models-with-multilevel-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
