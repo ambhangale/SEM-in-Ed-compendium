@@ -746,19 +746,23 @@ Before proceeding, consider that growth factors are variables in a SEM.  They ca
 
 ### Time-Invariant (Level-2) Predictors
 
-Level-2 predictors vary between subjects, so they can explain between-subject differences in trajectories, which are represented by growth factors.  Although Duncan and Duncan (1996) had several such covariates, our example data include the following two subject-level predictors: `age` at the beginning of the study and `peer` encouragement to consume illicit substances.  Consider the MLM for growth, which extends Eq. \@ref(eq:27-3) by adding time as a predictor.  Below, we intersperse some equivalent SEM symbols \color{blue}{in blue} as reminders of how the MLM and SEM frameworks map onto each other (Bauer, 2003; Curran, 2003; Singer & Willett, 2003, ch. 8).
-
-```{=tex}
-\begin{equation}
-\text{Level 1: } y_{i,t} = \beta_{i,0} + \beta_{i,1} \text{Time}_{i,t} + \varepsilon_{i,t} = \color{blue}{\Lambda \mathbf{\eta}_i + \varepsilon_i}
-(\#eq:27-4)
-\end{equation}
-```
+Level-2 predictors vary between subjects, so they can explain between-subject differences in trajectories, which are represented by growth factors.  Although Duncan and Duncan (1996) had several such covariates, our example data include the following two subject-level predictors: `age` at the beginning of the study and `peer` encouragement to consume illicit substances.  Consider the MLM for growth, which extends Eq. \@ref(eq:27-1) by adding time as a predictor.  Below, we intersperse some equivalent SEM symbols \color{blue}{in blue} as reminders of how the MLM and SEM frameworks map onto each other (Bauer, 2003; Curran, 2003; Singer & Willett, 2003, ch. 8).
 
 \begin{align}
-\text{Level 2: } \beta_{i,0} &= \color{blue}{(\eta_0=)} \gamma_{0,0} + \gamma_{0,1} \text{Age}_i + \gamma_{0,2} \text{Peer-Influence}_i + u_{0,i} \\
-\beta_{i,1} &= \color{blue}{(\eta_1=)} \gamma_{1,0} + \gamma_{1,1} \text{Age}_i + \gamma_{1,2} \text{Peer-Influence}_i + u_{1,i} (\#eq:27-5)
-\end{align}
+
+\text{Level 1: } y_{i,t} &= \beta_{i,0} + \beta_{i,1} \text{Time}_{i,t} + \varepsilon_{i,t} = \color{blue}{\Lambda \mathbf{\eta}_i + \varepsilon_i} (\#eq:27-4) \\
+
+\text{Level 2: } \beta_{i,0} &= \color{blue}{(\eta_0=)} \gamma_{0,0} + \gamma_{0,1} \text{Age}_i + \gamma_{0,2} \text{Peer-Influence}_i + u_{0,i} (\#eq:27-5) \\
+
+\beta_{i,1} &= \color{blue}{(\eta_1=)} \gamma_{1,0} + \gamma_{1,1} \text{Age}_i + \gamma_{1,2} \text{Peer-Influence}_i + u_{1,i} (\#eq:27-6) \\
+
+\text{Combined: } y_{i,t} &= \gamma_{0,0} + \gamma_{0,1} \text{Age}_i + \gamma_{0,2} \text{Peer-Influence}_i + \gamma_{1,0} \text{Time}_{i,t} (\#eq:27-7) \\
+
+&+ \gamma_{1,1} (\text{Age}_i \times \text{Time}_{i,t}) + \gamma_{1,2} (\text{Peer-Influence}_i \times \text{Time}_{i,t}) (\#eq:27-8) \\
+
+&+ u_{0,i} + u_{1,i} \text{Time}_{i,t} + \varepsilon_{i,t} \ \ \color{gray}{\text{(joint residual)}} (\#eq:27-9)
+
+\end{align} 
 
 The path diagram below depicts age and peer influence as observed variables that predict growth factors, conforming to how `?lavaan::model.syntax` works.  In the background, `lavaan` internally represents observed predictors as single-indicator factors.  Thus, age and peer influence are assigned $\eta_3$ and $\eta_4$, respectively, in the path diagram below. 
 
@@ -815,7 +819,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 
 \end{tikzpicture}
 ```
-The LGCM script below specifies a measurement model for the growth factors (Eq. \@ref(eq:27-)) and a structural model that includes both predictors of initial status (Eq. \@ref(27-4)) and rate of change (Eq. \@ref(eq:L2slope+pred)).  We will consider the combined model in Eqs. \@ref(eq:27-5)--\ref{eq:L2res} further when we interpret the structural model.
+The LGCM script below specifies a measurement model for the growth factors (Eq. \@ref(eq:27-4)) and a structural model that includes both predictors of initial status (Eq. \@ref(eq:27-5)) and rate of change (Eq. \@ref(eq:27-6)).  We will consider the combined model in Eqs. \@ref(eq:27-7)--\@ref(eq:27-9) further when we interpret the structural model.
 
 ```{r lev2 pred}
 mod.pred2 <- ' ##### MEASUREMENT MODEL
@@ -841,7 +845,7 @@ The estimated intercept for the initial-status factor is $\alpha_0=-1.774$, whic
 
 #### Simple Effects {-}
 
-There are 3 predictors with simple effects in Eq. \@ref(eq-27-5): `age`, `peer`, and Time.  But their effects are not represented in the same way in a LGCM.  First, we focus on the effects of time-invariant predictors.
+There are 3 predictors with simple effects in Eq. \@ref(eq:27-7): `age`, `peer`, and Time.  But their effects are not represented in the same way in a LGCM.  First, we focus on the effects of time-invariant predictors.
 
 Both effects of Level-2 predictors on initial status were significant ($p<.001, R^2=39.7\%$), indicating that when the study began, adolescents who were older and whose best friends more strongly encouraged illicit-substance use exhibited more frequent alcohol consumption.  Standardized slopes indicator both effects were medium, but unstandardized slopes are interpretable in the given units.  Specifically, each year older increases their expected initial alcohol consumption by $\gamma_{0,1}=0.269$ units, for a given level of peer influence.  And at a given age, one (Likert-scale) unit higher peer influence increases their expected initial alcohol consumption by $\gamma_{0,2}=0.086$ units.  
 
@@ -852,7 +856,7 @@ The simple effect of Time, on the other hand, is not an explicit regression slop
 
 #### Moderation Effects {-}
 
-The interactions in Eq. \@ref(eq:27-5) are represented by the predictors' effects on the rate-of-change factor, which explained $R^2=8.6\%$ of between-subjects variance in growth trajectories.  That is, the effect of Time depends on both `age` and `peer`.  The form of the model facilitates describing the nature of this interaction when Time is the focal predictor.  At a given level of peer influence, one year older **decreases the effect of Time on alcohol consumption** by $\gamma_{1,1}=-0.033$ units/year.  The effect of peer influence (given age) was not significant, implying no evidence moderation of Time's effect by peer influence.
+The interactions in Eq. \@ref(eq:27-8) are represented by the predictors' effects on the rate-of-change factor, which explained $R^2=8.6\%$ of between-subjects variance in growth trajectories.  That is, the effect of Time depends on both `age` and `peer`.  The form of the model facilitates describing the nature of this interaction when Time is the focal predictor.  At a given level of peer influence, one year older **decreases the effect of Time on alcohol consumption** by $\gamma_{1,1}=-0.033$ units/year.  The effect of peer influence (given age) was not significant, implying no evidence moderation of Time's effect by peer influence.
 
 We did not estimate an `age` $\times$ `peer` interaction, so the LGCM also did not estimate a 3-way interaction.  This is not possible in our example because doing so would require raw data to calculate the product term and include it as an additional predictor of growth factors.  The 3-way interaction would be represented by the `age` $\times$ `peer` product term's effect on the rate-of-change factor, while the product's (simple) 2-way interaction would be represented by its effect on the initial-status factor.
 
@@ -864,11 +868,11 @@ Level-1 predictors vary within subjects, as does Time.  Thus, we can estimate th
 ```{=tex}
 \begin{equation}
 \text{AlcUse}_{i,t} = \beta_{i,0} + \beta_{i,1} \text{Time}_{i,t} + \beta_2 \text{CigUse}_{i,t} + \beta_3 (\text{Time}_{i,t} \times \text{CigUse}_{i,t}) + \varepsilon_{i,t}
-(\#eq:27-5)
+(\#eq:27-10)
 \end{equation}
 ```
 
-Notice that Eq. \@ref(eq:27-6) only includes a fixed (not random) effect of cigarette use. The possibility of including a random effect for both Time and cigarette use is one of the ways in which MLM is more flexible than SEM.  Notice also that Eq. \@ref(eq:27-6) includes a Time $\times$ cigarette-use interaction effect ($\beta_3$).  This is how moderation is represented in a regression model, but moderation of Time by a Level-1 variable in LGCM is quite different, involving more than one parameter. 
+Notice that Eq. \@ref(eq:27-10) only includes a fixed (not random) effect of cigarette use. The possibility of including a random effect for both Time and cigarette use is one of the ways in which MLM is more flexible than SEM.  Notice also that Eq. \@ref(eq:27-10) includes a Time $\times$ cigarette-use interaction effect ($\beta_3$).  This is how moderation is represented in a regression model, but moderation of Time by a Level-1 variable in LGCM is quite different, involving more than one parameter. 
 
 The path diagram below depicts both alcohol and cigarette use as observed variables, with the latter predicting the former.  However, `lavaan`'s internal LISREL representation does not have a parameter matrix for regressions among observed variables (M*plus* does, and the RAM representation used by the `OpenMx` package only has a single matrix with all slopes among observed and latent variables). So internally, `lavaan` "promotes" alcohol and cigarette use variables to latent variables corresponding to their single indicators.  However, to keep the path diagram readable, this is overlooked and the slopes are labeled simply as $\beta$s.
 
@@ -955,13 +959,15 @@ summary(fit.pred1, std = TRUE)
 We reject the $H_0$ of perfect model fit, $\chi^2(20)=86.677, p<.001$, and there are many large standardized residuals (`lavResiduals(fit.pred1)` output not shown).  This is not surprising given how constrained this model is.  Cigarette-use is not only constrained to have a constant effect across time, but the effects only occur within an occasion.  There are many theoretically motivated reasons to improve the model---for example, one might expect that smoking leads to *later* alcohol consumption.  We could add lagged effects (e.g., `alc2 ~ cig1`) to improve model fit, which combines features of cross-lagged panel models and LGCMs.  In fact, there have also been attempts to merge autoregressive and latent-growth models (e.g., the autoregressive latent-trajectory (ALT) model; Bollen & Curran, 2004).  
 
 We will not explore these complexities here, but we will briefly discuss the importance of the equality-constrained slopes on the interpretation of Time's average effect (i.e., the rate-of-change mean).  The script below releases the constraints, which significantly improves model fit.
+
 ```{r lev1 mod}
 fit.tc <- lavaan(mod.pred1, sample.cov = duncanCOV, sample.mean = duncanM,
                  sample.nobs = N, int.lv.free = TRUE, auto.var = TRUE)
 lavTestLRT(fit.pred1, fit.tc)
 ```
 
-The effect of cigarette use now decreases as time goes on, and the decrease is not linear as it is in Eq. \@ref(eq:27-6) because the LGCM can add 3 parameters to account for moderation more flexibly than only $\beta_3$.  Because the effect of cigarette use now depends on Time, the estimated rate-of-change mean is only a simple slope for Time conditional on $\text{CigUse} = 0$ (again, an extrapolation beyond the bounds of this 1--5 scale).  Probing the effect of time at different levels of cigarette use is simple enough: simply center the moderator (all 4 `cig` variables) at the same theoretically interesting value (e.g., 1, 3, and 5), which changes the interpretation of each $\text{AlcUse}$ intercept to the expected value at that level of $\text{CigUse}$.
+The effect of cigarette use now decreases as time goes on, and the decrease is not linear as it is in Eq. \@ref(eq:27-10) because the LGCM can add 3 parameters to account for moderation more flexibly than only $\beta_3$.  Because the effect of cigarette use now depends on Time, the estimated rate-of-change mean is only a simple slope for Time conditional on $\text{CigUse} = 0$ (again, an extrapolation beyond the bounds of this 1--5 scale).  Probing the effect of time at different levels of cigarette use is simple enough: simply center the moderator (all 4 `cig` variables) at the same theoretically interesting value (e.g., 1, 3, and 5), which changes the interpretation of each $\text{AlcUse}$ intercept to the expected value at that level of $\text{CigUse}$.
+
 ```{r print lev1 mod, echo=FALSE}
 PE.tc <- parameterEstimates(fit.tc, standardized = TRUE, ci = FALSE, output = "pretty")
 PE.tc[PE.tc$op %in% c("~", "~1") & PE.tc$se > 0, ]
