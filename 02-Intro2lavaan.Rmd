@@ -99,7 +99,7 @@ mle <- sem('ATT ~ MOOD + NFC + POS', sample.nobs = N,
 
 Now inspect the output.  Identify each parameter estimate, and compare it to the corresponding OLS estimate in the `lm()` results.
 ```{r SEM summary}
-summary(mle, rsquare = TRUE, header = FALSE, nd = 4)
+summary(mle, header = FALSE, nd = 4) # rsquare = TRUE also available
 sigma(ols)^2 # compare to residual variance from OLS
 ```
 
