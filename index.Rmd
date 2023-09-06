@@ -1,5 +1,5 @@
 ---
-title: "Compendium Structural Equation Modeling in Educational Research"
+title: "A `lavaan` Compendium for Structural Equation Modeling in Educational Research"
 author: "Suzanne Jak and Terrence D. Jorgensen"
 site: bookdown::bookdown_site
 output: 
@@ -12,7 +12,7 @@ documentclass: book
 bibliography: [SEM-Compendium.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: LJGroot/SEM-Compendium
+github-repo: TDJorgensen/SEM-in-Ed-compendium
 delete_merged_file: yes
 new_session: yes
 ---
