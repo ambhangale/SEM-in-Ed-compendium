@@ -36,7 +36,7 @@ The illustration uses data from the open-source psychometrics project [Open Psyc
 
 ```{r}
 library(lavaan)
-data <- read.csv("dataHSQ.csv")
+data <- read.csv("demoData/dataHSQ.csv")
 
 subdat <- data[,c("Q5","Q13","Q21","age","gender")]
 
