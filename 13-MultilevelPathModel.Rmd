@@ -60,7 +60,7 @@ In [Script 13.1](#script-13.1), we fit saturated models to Level 1 and Level 2, 
 ### Script 13.1 {-}
 ```{r label='script13-1'}
 library(lavaan)
-data <- read.table("GaloComplete.dat", header = TRUE)
+data <- read.table("demoData/GaloComplete.dat", header = TRUE)
 head(data)
 
 satmodel <- '

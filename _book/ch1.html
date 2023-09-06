@@ -386,6 +386,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.5" data-path="ch14.html"><a href="ch14.html#fitting-a-factor-model-using-lavaan"><i class="fa fa-check"></i><b>14.5</b> Fitting a factor model using lavaan</a>
 <ul>
 <li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#script-14.1"><i class="fa fa-check"></i>Script 14.1</a></li>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#script-14.2"><i class="fa fa-check"></i>Script 14.2</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#references-9"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#appendix-2"><i class="fa fa-check"></i>Appendix</a>
@@ -630,7 +631,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-3"><a href="ch1.html#cb4-3" tabindex="-1"></a><span class="fu">read.xls</span>(<span class="st">&quot;data.xls&quot;</span>)    <span class="co"># requires the package gdata</span></span>
 <span id="cb4-4"><a href="ch1.html#cb4-4" tabindex="-1"></a><span class="fu">as.data.frame</span>(<span class="fu">read_excel</span>(<span class="st">&quot;data.xlsx&quot;</span>))  <span class="co"># requires the package readxl</span></span></code></pre></div>
 <p>This chapter uses data from a tutorial published on the <a href="http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf"></a>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="ch1.html#cb5-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> foreign<span class="sc">::</span><span class="fu">read.spss</span>(<span class="st">&quot;MODMED.sav&quot;</span>, <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>)[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)]</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="ch1.html#cb5-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> foreign<span class="sc">::</span><span class="fu">read.spss</span>(<span class="st">&quot;demoData/MODMED.sav&quot;</span>, <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>)[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)]</span>
 <span id="cb5-2"><a href="ch1.html#cb5-2" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
 <pre><code>##   MOOD      NFC      POS      ATT
 ## 1   -1  3.07579   6.2500  18.5455
@@ -1207,7 +1208,7 @@ y_i &amp;= \color{blue}{\beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip}} &amp
 <div id="reimport-data" class="section level3 hasAnchor" number="1.4.1">
 <h3><span class="header-section-number">1.4.1</span> Reimport Data<a href="ch1.html#reimport-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The next section is easier if all the variables in the <code>data.frame</code> are <code>numeric</code>, so let’s just use the given effects-coded <code>MOOD</code></p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="ch1.html#cb81-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> foreign<span class="sc">::</span><span class="fu">read.spss</span>(<span class="st">&quot;MODMED.sav&quot;</span>,</span>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="ch1.html#cb81-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> foreign<span class="sc">::</span><span class="fu">read.spss</span>(<span class="st">&quot;demoData/MODMED.sav&quot;</span>,</span>
 <span id="cb81-2"><a href="ch1.html#cb81-2" tabindex="-1"></a>                          <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>)[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)]</span></code></pre></div>
 </div>
 <div id="raw-data-vs.-summary-statistics" class="section level3 hasAnchor" number="1.4.2">

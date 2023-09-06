@@ -386,6 +386,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.5" data-path="ch14.html"><a href="ch14.html#fitting-a-factor-model-using-lavaan"><i class="fa fa-check"></i><b>14.5</b> Fitting a factor model using lavaan</a>
 <ul>
 <li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#script-14.1"><i class="fa fa-check"></i>Script 14.1</a></li>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#script-14.2"><i class="fa fa-check"></i>Script 14.2</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#references-9"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#appendix-2"><i class="fa fa-check"></i>Appendix</a>
@@ -611,7 +612,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="import-example-data" class="section level3 hasAnchor" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Import Example Data<a href="ch2.html#import-example-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We will use data from a tutorial published on the <a href="http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf">Social Change Lab’s web site</a>.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="ch2.html#cb96-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> foreign<span class="sc">::</span><span class="fu">read.spss</span>(<span class="st">&quot;MODMED.sav&quot;</span>, <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>)[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)]</span>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="ch2.html#cb96-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> foreign<span class="sc">::</span><span class="fu">read.spss</span>(<span class="st">&quot;demoData/MODMED.sav&quot;</span>, <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>)[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)]</span>
 <span id="cb96-2"><a href="ch2.html#cb96-2" tabindex="-1"></a><span class="do">## Save summary statistics</span></span>
 <span id="cb96-3"><a href="ch2.html#cb96-3" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(dat)</span>
 <span id="cb96-4"><a href="ch2.html#cb96-4" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">cov</span>(dat)</span>

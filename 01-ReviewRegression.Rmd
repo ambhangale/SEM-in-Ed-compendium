@@ -46,7 +46,7 @@ as.data.frame(read_excel("data.xlsx"))	# requires the package readxl
 This chapter uses data from a tutorial published on the [\textcolor{blue}{Social Change Lab's web site}](http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf).
 
 ```{r import data-01, message=FALSE}
-dat <- foreign::read.spss("MODMED.sav", to.data.frame = TRUE)[c(2, 3, 5, 7)]
+dat <- foreign::read.spss("demoData/MODMED.sav", to.data.frame = TRUE)[c(2, 3, 5, 7)]
 head(dat)
 ```
 
@@ -472,7 +472,7 @@ summary(slope2)
 The next section is easier if all the variables in the `data.frame` are `numeric`, so let's just use the given effects-coded `MOOD`
 
 ```{r import again, message=FALSE}
-dat <- foreign::read.spss("MODMED.sav",
+dat <- foreign::read.spss("demoData/MODMED.sav",
                           to.data.frame = TRUE)[c(2, 3, 5, 7)]
 ```
 
