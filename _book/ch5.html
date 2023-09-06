@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Direct, Indirect, and Total Effects | Compendium Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="5 Direct, Indirect, and Total Effects | Compendium Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Direct, Indirect, and Total Effects | Compendium Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 </head>
@@ -939,57 +943,57 @@ Figure 5.3: The hypothesized model of Affrunti and Woodruff-Borden (2014).
 <h2><span class="header-section-number">5.4</span> Calculating total, total indirect and specific indirect effects using lavaan output<a href="ch5.html#calculating-total-total-indirect-and-specific-indirect-effects-using-lavaan-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We will use the output of the anxiety model to compute a matrix that contains the total effects (<span class="math inline">\(\mathbf{T}\)</span>), a matrix that contains the total indirect effects (<span class="math inline">\(\mathbf{U}\)</span>) and illustrate the calculation of a specific indirect effects (“I1”).</p>
 <p>In recursive models, matrix <span class="math inline">\(\mathbf{T}\)</span> is calculated by addition of matrix B with multiplications of matrix <span class="math inline">\(\mathbf{B}\)</span>, as often as the number of variables minus one. So, if there are 4 observed variables, the expression for <span class="math inline">\(\mathbf{T}\)</span> stops after <span class="math inline">\(\mathbf{B}\)</span> is multiplied with itself 3 times. <span class="math inline">\(\mathbf{T}\)</span> contains the total effects.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="ch5.html#cb168-1" aria-hidden="true" tabindex="-1"></a>Estimates <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(AWmodelOut, <span class="st">&quot;est&quot;</span>)</span>
-<span id="cb168-2"><a href="ch5.html#cb168-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> Estimates<span class="sc">$</span>beta[obsnames, obsnames] </span>
-<span id="cb168-3"><a href="ch5.html#cb168-3" aria-hidden="true" tabindex="-1"></a>Tot <span class="ot">&lt;-</span> B <span class="sc">+</span> B <span class="sc">%*%</span> B <span class="sc">+</span> B <span class="sc">%*%</span> B <span class="sc">%*%</span> B</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="ch5.html#cb168-1" tabindex="-1"></a>Estimates <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(AWmodelOut, <span class="st">&quot;est&quot;</span>)</span>
+<span id="cb168-2"><a href="ch5.html#cb168-2" tabindex="-1"></a>B <span class="ot">&lt;-</span> Estimates<span class="sc">$</span>beta[obsnames, obsnames] </span>
+<span id="cb168-3"><a href="ch5.html#cb168-3" tabindex="-1"></a>Tot <span class="ot">&lt;-</span> B <span class="sc">+</span> B <span class="sc">%*%</span> B <span class="sc">+</span> B <span class="sc">%*%</span> B <span class="sc">%*%</span> B</span></code></pre></div>
 <p>Matrix <span class="math inline">\(\mathbf{U}\)</span> is calculated as the matrix with total effects, minus the matrix with direct effects. The result is a matrix with the total indirect effects. Please notice that if there are multiple indirect effects between two variables, matrix <span class="math inline">\(\mathbf{U}\)</span> has the sum of the indirect effects.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="ch5.html#cb169-1" aria-hidden="true" tabindex="-1"></a>U <span class="ot">&lt;-</span> Tot <span class="sc">-</span> B</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="ch5.html#cb169-1" tabindex="-1"></a>U <span class="ot">&lt;-</span> Tot <span class="sc">-</span> B</span></code></pre></div>
 <p>A single indirect effect is calculated by multiplying specific elements from matrix <span class="math inline">\(\mathbf{B}\)</span>. For example, <code>B[3,1]</code> selects the element in row 3, column 1 from the <span class="math inline">\(\mathbf{B}\)</span> matrix, and this element is multiplied with element <code>B[4,3]</code>. This is the indirect effect of Parental anxiety on Child anxiety via Overcontrol (see Figure <a href="ch5.html#fig:fig5-1">5.1</a>). We gave this effect the name <code>I1</code>, because you may want to calculate more indirect effects, which could then be named <code>I2</code>, <code>I3</code>, <code>I4</code> etc.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="ch5.html#cb170-1" aria-hidden="true" tabindex="-1"></a>I1 <span class="ot">&lt;-</span> B[<span class="dv">3</span>,<span class="dv">1</span>] <span class="sc">*</span> B[<span class="dv">4</span>,<span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="ch5.html#cb170-1" tabindex="-1"></a>I1 <span class="ot">&lt;-</span> B[<span class="dv">3</span>,<span class="dv">1</span>] <span class="sc">*</span> B[<span class="dv">4</span>,<span class="dv">3</span>]</span></code></pre></div>
 <p>The resulting matrices are shown by asking for the result:</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="ch5.html#cb171-1" aria-hidden="true" tabindex="-1"></a>Tot</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="ch5.html#cb171-1" tabindex="-1"></a>Tot</span></code></pre></div>
 <pre><code>##             parent_anx    perfect overcontrol child_anx
 ## parent_anx  0.00000000 0.00000000  0.00000000         0
 ## perfect     0.00000000 0.00000000  0.00000000         0
 ## overcontrol 0.18735753 0.21049095  0.00000000         0
 ## child_anx   0.01354201 0.01521407  0.07227898         0</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="ch5.html#cb173-1" aria-hidden="true" tabindex="-1"></a>U</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="ch5.html#cb173-1" tabindex="-1"></a>U</span></code></pre></div>
 <pre><code>##             parent_anx    perfect overcontrol child_anx
 ## parent_anx  0.00000000 0.00000000           0         0
 ## perfect     0.00000000 0.00000000           0         0
 ## overcontrol 0.00000000 0.00000000           0         0
 ## child_anx   0.01354201 0.01521407           0         0</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="ch5.html#cb175-1" aria-hidden="true" tabindex="-1"></a>I1</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="ch5.html#cb175-1" tabindex="-1"></a>I1</span></code></pre></div>
 <pre><code>## [1] 0.01354201</code></pre>
 </div>
 <div id="calculating-specific-indirect-effects-in-lavaan" class="section level2 hasAnchor" number="5.5">
 <h2><span class="header-section-number">5.5</span> Calculating specific indirect effects in lavaan<a href="ch5.html#calculating-specific-indirect-effects-in-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In <code>lavaan</code> we can also calculate total, total indirect and specific indirect effects. However, we cannot use matrix algebra but have to specify each effect individually. The script below shows how to calculate the specific indirect effect, total indirect effect and total effect of Parental Anxiety and Perfectionism on Child anxiety. In order to refer to the direct effects that make up the indirect effects, we have labelled the specific direct effects in the <code>lavaan</code> model, using <code>[label]\*[variable]</code>.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="ch5.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="co"># specify the path model</span></span>
-<span id="cb177-2"><a href="ch5.html#cb177-2" aria-hidden="true" tabindex="-1"></a>AWmodel <span class="ot">&lt;-</span> <span class="st">&#39;# regression equations</span></span>
-<span id="cb177-3"><a href="ch5.html#cb177-3" aria-hidden="true" tabindex="-1"></a><span class="st">overcontrol ~ b31*parent_anx + b32*perfect</span></span>
-<span id="cb177-4"><a href="ch5.html#cb177-4" aria-hidden="true" tabindex="-1"></a><span class="st">child_anx ~ b43*overcontrol + </span></span>
-<span id="cb177-5"><a href="ch5.html#cb177-5" aria-hidden="true" tabindex="-1"></a><span class="st">b41*parent_anx +    b42*perfect</span></span>
-<span id="cb177-6"><a href="ch5.html#cb177-6" aria-hidden="true" tabindex="-1"></a><span class="st"> </span></span>
-<span id="cb177-7"><a href="ch5.html#cb177-7" aria-hidden="true" tabindex="-1"></a><span class="st"># (residual) variance</span></span>
-<span id="cb177-8"><a href="ch5.html#cb177-8" aria-hidden="true" tabindex="-1"></a><span class="st">parent_anx ~~ p11*parent_anx</span></span>
-<span id="cb177-9"><a href="ch5.html#cb177-9" aria-hidden="true" tabindex="-1"></a><span class="st">perfect ~~ p22*perfect</span></span>
-<span id="cb177-10"><a href="ch5.html#cb177-10" aria-hidden="true" tabindex="-1"></a><span class="st">overcontrol ~~ p33*overcontrol</span></span>
-<span id="cb177-11"><a href="ch5.html#cb177-11" aria-hidden="true" tabindex="-1"></a><span class="st">child_anx ~~ p44*child_anx</span></span>
-<span id="cb177-12"><a href="ch5.html#cb177-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb177-13"><a href="ch5.html#cb177-13" aria-hidden="true" tabindex="-1"></a><span class="st"># covariance exogenous variables</span></span>
-<span id="cb177-14"><a href="ch5.html#cb177-14" aria-hidden="true" tabindex="-1"></a><span class="st">parent_anx ~~ p21*perfect</span></span>
-<span id="cb177-15"><a href="ch5.html#cb177-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb177-16"><a href="ch5.html#cb177-16" aria-hidden="true" tabindex="-1"></a><span class="st"># specific, total indirect and total effects of PA on CA</span></span>
-<span id="cb177-17"><a href="ch5.html#cb177-17" aria-hidden="true" tabindex="-1"></a><span class="st">I1_PA := b31*b43</span></span>
-<span id="cb177-18"><a href="ch5.html#cb177-18" aria-hidden="true" tabindex="-1"></a><span class="st">total_ind_PA := I1_PA</span></span>
-<span id="cb177-19"><a href="ch5.html#cb177-19" aria-hidden="true" tabindex="-1"></a><span class="st">total_PA := total_ind_PA + b41</span></span>
-<span id="cb177-20"><a href="ch5.html#cb177-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb177-21"><a href="ch5.html#cb177-21" aria-hidden="true" tabindex="-1"></a><span class="st"># specific, total indirect and total effects of PE on CA</span></span>
-<span id="cb177-22"><a href="ch5.html#cb177-22" aria-hidden="true" tabindex="-1"></a><span class="st">I1_PE := b32*b43</span></span>
-<span id="cb177-23"><a href="ch5.html#cb177-23" aria-hidden="true" tabindex="-1"></a><span class="st">total_ind_PE := I1_PE</span></span>
-<span id="cb177-24"><a href="ch5.html#cb177-24" aria-hidden="true" tabindex="-1"></a><span class="st">total_PE := total_ind_PE + b42</span></span>
-<span id="cb177-25"><a href="ch5.html#cb177-25" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="ch5.html#cb177-1" tabindex="-1"></a><span class="co"># specify the path model</span></span>
+<span id="cb177-2"><a href="ch5.html#cb177-2" tabindex="-1"></a>AWmodel <span class="ot">&lt;-</span> <span class="st">&#39;# regression equations</span></span>
+<span id="cb177-3"><a href="ch5.html#cb177-3" tabindex="-1"></a><span class="st">overcontrol ~ b31*parent_anx + b32*perfect</span></span>
+<span id="cb177-4"><a href="ch5.html#cb177-4" tabindex="-1"></a><span class="st">child_anx ~ b43*overcontrol + </span></span>
+<span id="cb177-5"><a href="ch5.html#cb177-5" tabindex="-1"></a><span class="st">b41*parent_anx +    b42*perfect</span></span>
+<span id="cb177-6"><a href="ch5.html#cb177-6" tabindex="-1"></a><span class="st"> </span></span>
+<span id="cb177-7"><a href="ch5.html#cb177-7" tabindex="-1"></a><span class="st"># (residual) variance</span></span>
+<span id="cb177-8"><a href="ch5.html#cb177-8" tabindex="-1"></a><span class="st">parent_anx ~~ p11*parent_anx</span></span>
+<span id="cb177-9"><a href="ch5.html#cb177-9" tabindex="-1"></a><span class="st">perfect ~~ p22*perfect</span></span>
+<span id="cb177-10"><a href="ch5.html#cb177-10" tabindex="-1"></a><span class="st">overcontrol ~~ p33*overcontrol</span></span>
+<span id="cb177-11"><a href="ch5.html#cb177-11" tabindex="-1"></a><span class="st">child_anx ~~ p44*child_anx</span></span>
+<span id="cb177-12"><a href="ch5.html#cb177-12" tabindex="-1"></a></span>
+<span id="cb177-13"><a href="ch5.html#cb177-13" tabindex="-1"></a><span class="st"># covariance exogenous variables</span></span>
+<span id="cb177-14"><a href="ch5.html#cb177-14" tabindex="-1"></a><span class="st">parent_anx ~~ p21*perfect</span></span>
+<span id="cb177-15"><a href="ch5.html#cb177-15" tabindex="-1"></a></span>
+<span id="cb177-16"><a href="ch5.html#cb177-16" tabindex="-1"></a><span class="st"># specific, total indirect and total effects of PA on CA</span></span>
+<span id="cb177-17"><a href="ch5.html#cb177-17" tabindex="-1"></a><span class="st">I1_PA := b31*b43</span></span>
+<span id="cb177-18"><a href="ch5.html#cb177-18" tabindex="-1"></a><span class="st">total_ind_PA := I1_PA</span></span>
+<span id="cb177-19"><a href="ch5.html#cb177-19" tabindex="-1"></a><span class="st">total_PA := total_ind_PA + b41</span></span>
+<span id="cb177-20"><a href="ch5.html#cb177-20" tabindex="-1"></a></span>
+<span id="cb177-21"><a href="ch5.html#cb177-21" tabindex="-1"></a><span class="st"># specific, total indirect and total effects of PE on CA</span></span>
+<span id="cb177-22"><a href="ch5.html#cb177-22" tabindex="-1"></a><span class="st">I1_PE := b32*b43</span></span>
+<span id="cb177-23"><a href="ch5.html#cb177-23" tabindex="-1"></a><span class="st">total_ind_PE := I1_PE</span></span>
+<span id="cb177-24"><a href="ch5.html#cb177-24" tabindex="-1"></a><span class="st">total_PE := total_ind_PE + b42</span></span>
+<span id="cb177-25"><a href="ch5.html#cb177-25" tabindex="-1"></a><span class="st">&#39;</span></span></code></pre></div>
 <p>We can define new variables that are a function of free parameter estimates by using the operator “<code>:=</code>”. We name the indirect effect of PA on CA <code>I1_PA</code>. If there would have been more mediators than Overcontrol, we could name other indirect effects <code>I2_PA</code>, <code>I3_PA</code> etc. The total indirect effect is calculated by summing the specific indirect effects. In this example there is just one specific indirect effect, so the total indirect effect is equal to the specific indirect effect. We used similar code for the indirect, total indirect and total effect of PE on CA.</p>
 <pre><code>    I1_PA := b31*b43
     total_ind_PA := I1_PA

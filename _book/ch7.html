@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7 Identification | Compendium Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="7 Identification | Compendium Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 Identification | Compendium Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 </head>
@@ -728,56 +732,56 @@ The empirical check has two steps.</p>
 <p>Below, we will show two examples of the empirical check. In <a href="ch7.html#script-7.1">Script 7.1</a> we will check identification of the path model depicted in Figure <a href="ch7.html#fig:fig7-1">7.1</a>. First we will check identification if we add a covariance between the residual factors of <span class="math inline">\(\mathrm{y}_3\)</span> and <span class="math inline">\(\mathrm{y}_4\)</span> (Model 1), and subsequently we will check identification when we additionally add a reciprocal effect from <span class="math inline">\(\mathrm{y}_4\)</span> to <span class="math inline">\(\mathrm{y}_3\)</span> (Model 2).</p>
 <div id="script-7.1" class="section level3 unnumbered hasAnchor">
 <h3>Script 7.1<a href="ch7.html#script-7.1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="ch7.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="do">## STEP 1: calculate the model implied covariance matrix</span></span>
-<span id="cb198-2"><a href="ch7.html#cb198-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb198-3"><a href="ch7.html#cb198-3" aria-hidden="true" tabindex="-1"></a>BETA <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,<span class="dv">0</span>,</span>
-<span id="cb198-4"><a href="ch7.html#cb198-4" aria-hidden="true" tabindex="-1"></a>            <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,<span class="dv">0</span>,</span>
-<span id="cb198-5"><a href="ch7.html#cb198-5" aria-hidden="true" tabindex="-1"></a>             .<span class="dv">5</span>,.<span class="dv">5</span>, <span class="dv">0</span>,<span class="dv">0</span>,</span>
-<span id="cb198-6"><a href="ch7.html#cb198-6" aria-hidden="true" tabindex="-1"></a>            <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">0</span>),</span>
-<span id="cb198-7"><a href="ch7.html#cb198-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb198-8"><a href="ch7.html#cb198-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb198-9"><a href="ch7.html#cb198-9" aria-hidden="true" tabindex="-1"></a>PSI <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(  <span class="dv">1</span>,.<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
-<span id="cb198-10"><a href="ch7.html#cb198-10" aria-hidden="true" tabindex="-1"></a>             .<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
-<span id="cb198-11"><a href="ch7.html#cb198-11" aria-hidden="true" tabindex="-1"></a>              <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">8</span>,.<span class="dv">5</span>,</span>
-<span id="cb198-12"><a href="ch7.html#cb198-12" aria-hidden="true" tabindex="-1"></a>              <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">5</span>,.<span class="dv">7</span>),</span>
-<span id="cb198-13"><a href="ch7.html#cb198-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb198-14"><a href="ch7.html#cb198-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb198-15"><a href="ch7.html#cb198-15" aria-hidden="true" tabindex="-1"></a>IDEN <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">4</span>)</span>
-<span id="cb198-16"><a href="ch7.html#cb198-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb198-17"><a href="ch7.html#cb198-17" aria-hidden="true" tabindex="-1"></a>SIGMA <span class="ot">&lt;-</span> <span class="fu">solve</span>(IDEN<span class="sc">-</span>BETA) <span class="sc">%*%</span> PSI <span class="sc">%*%</span> <span class="fu">t</span>(<span class="fu">solve</span>(IDEN<span class="sc">-</span>BETA))</span>
-<span id="cb198-18"><a href="ch7.html#cb198-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb198-19"><a href="ch7.html#cb198-19" aria-hidden="true" tabindex="-1"></a>obsnames <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;y1&quot;</span>,<span class="st">&quot;y2&quot;</span>,<span class="st">&quot;y3&quot;</span>,<span class="st">&quot;y4&quot;</span>)</span>
-<span id="cb198-20"><a href="ch7.html#cb198-20" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(SIGMA) <span class="ot">&lt;-</span> <span class="fu">list</span>(obsnames,obsnames)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="ch7.html#cb198-1" tabindex="-1"></a><span class="do">## STEP 1: calculate the model implied covariance matrix</span></span>
+<span id="cb198-2"><a href="ch7.html#cb198-2" tabindex="-1"></a></span>
+<span id="cb198-3"><a href="ch7.html#cb198-3" tabindex="-1"></a>BETA <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb198-4"><a href="ch7.html#cb198-4" tabindex="-1"></a>            <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb198-5"><a href="ch7.html#cb198-5" tabindex="-1"></a>             .<span class="dv">5</span>,.<span class="dv">5</span>, <span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb198-6"><a href="ch7.html#cb198-6" tabindex="-1"></a>            <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">0</span>),</span>
+<span id="cb198-7"><a href="ch7.html#cb198-7" tabindex="-1"></a>            <span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb198-8"><a href="ch7.html#cb198-8" tabindex="-1"></a></span>
+<span id="cb198-9"><a href="ch7.html#cb198-9" tabindex="-1"></a>PSI <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(  <span class="dv">1</span>,.<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb198-10"><a href="ch7.html#cb198-10" tabindex="-1"></a>             .<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb198-11"><a href="ch7.html#cb198-11" tabindex="-1"></a>              <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">8</span>,.<span class="dv">5</span>,</span>
+<span id="cb198-12"><a href="ch7.html#cb198-12" tabindex="-1"></a>              <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">5</span>,.<span class="dv">7</span>),</span>
+<span id="cb198-13"><a href="ch7.html#cb198-13" tabindex="-1"></a>              <span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb198-14"><a href="ch7.html#cb198-14" tabindex="-1"></a></span>
+<span id="cb198-15"><a href="ch7.html#cb198-15" tabindex="-1"></a>IDEN <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">4</span>)</span>
+<span id="cb198-16"><a href="ch7.html#cb198-16" tabindex="-1"></a></span>
+<span id="cb198-17"><a href="ch7.html#cb198-17" tabindex="-1"></a>SIGMA <span class="ot">&lt;-</span> <span class="fu">solve</span>(IDEN<span class="sc">-</span>BETA) <span class="sc">%*%</span> PSI <span class="sc">%*%</span> <span class="fu">t</span>(<span class="fu">solve</span>(IDEN<span class="sc">-</span>BETA))</span>
+<span id="cb198-18"><a href="ch7.html#cb198-18" tabindex="-1"></a></span>
+<span id="cb198-19"><a href="ch7.html#cb198-19" tabindex="-1"></a>obsnames <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;y1&quot;</span>,<span class="st">&quot;y2&quot;</span>,<span class="st">&quot;y3&quot;</span>,<span class="st">&quot;y4&quot;</span>)</span>
+<span id="cb198-20"><a href="ch7.html#cb198-20" tabindex="-1"></a><span class="fu">dimnames</span>(SIGMA) <span class="ot">&lt;-</span> <span class="fu">list</span>(obsnames,obsnames)</span></code></pre></div>
 <div class="figure" style="text-align: left"><span style="display:block;" id="fig:fig7-1"></span>
 <img src="images/Ch7_Path_model_Identification.png" alt="Path model for which identification is assessed in the situation when effects $ψ_{43}$ (Model 1) and both $ψ_{43}$ and $ß_{34}$ (Model 2) are added." width="100%" />
 <p class="caption">
 Figure 7.1: Path model for which identification is assessed in the situation when effects <span class="math inline">\(ψ_{43}\)</span> (Model 1) and both <span class="math inline">\(ψ_{43}\)</span> and <span class="math inline">\(ß_{34}\)</span> (Model 2) are added.
 </p>
 </div>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="ch7.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="do">## STEP 2: fit model to the covariance matrix from step 1</span></span>
-<span id="cb199-2"><a href="ch7.html#cb199-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-3"><a href="ch7.html#cb199-3" aria-hidden="true" tabindex="-1"></a>EmpiricalCheck <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb199-4"><a href="ch7.html#cb199-4" aria-hidden="true" tabindex="-1"></a><span class="st">            # regressions</span></span>
-<span id="cb199-5"><a href="ch7.html#cb199-5" aria-hidden="true" tabindex="-1"></a><span class="st">            y4 ~ b43*y3</span></span>
-<span id="cb199-6"><a href="ch7.html#cb199-6" aria-hidden="true" tabindex="-1"></a><span class="st">            y3 ~ b32*y2 + b31*y1</span></span>
-<span id="cb199-7"><a href="ch7.html#cb199-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-8"><a href="ch7.html#cb199-8" aria-hidden="true" tabindex="-1"></a><span class="st">            # residual (co)variances</span></span>
-<span id="cb199-9"><a href="ch7.html#cb199-9" aria-hidden="true" tabindex="-1"></a><span class="st">            y1 ~~ p11*y1</span></span>
-<span id="cb199-10"><a href="ch7.html#cb199-10" aria-hidden="true" tabindex="-1"></a><span class="st">            y2 ~~ p22*y2</span></span>
-<span id="cb199-11"><a href="ch7.html#cb199-11" aria-hidden="true" tabindex="-1"></a><span class="st">            y3 ~~ p33*y3</span></span>
-<span id="cb199-12"><a href="ch7.html#cb199-12" aria-hidden="true" tabindex="-1"></a><span class="st">            y4 ~~ p44*y4</span></span>
-<span id="cb199-13"><a href="ch7.html#cb199-13" aria-hidden="true" tabindex="-1"></a><span class="st">            y3 ~~ p43*y4</span></span>
-<span id="cb199-14"><a href="ch7.html#cb199-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-15"><a href="ch7.html#cb199-15" aria-hidden="true" tabindex="-1"></a><span class="st">            # covariance exogenous variables</span></span>
-<span id="cb199-16"><a href="ch7.html#cb199-16" aria-hidden="true" tabindex="-1"></a><span class="st">            y1 ~~ p21*y2</span></span>
-<span id="cb199-17"><a href="ch7.html#cb199-17" aria-hidden="true" tabindex="-1"></a><span class="st">            &#39;</span></span>
-<span id="cb199-18"><a href="ch7.html#cb199-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-19"><a href="ch7.html#cb199-19" aria-hidden="true" tabindex="-1"></a>EmpiricalCheckOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(EmpiricalCheck, <span class="at">sample.cov=</span>SIGMA,</span>
-<span id="cb199-20"><a href="ch7.html#cb199-20" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sample.nobs=</span><span class="dv">100</span>, <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>,</span>
-<span id="cb199-21"><a href="ch7.html#cb199-21" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fixed.x=</span><span class="cn">FALSE</span>)</span>
-<span id="cb199-22"><a href="ch7.html#cb199-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-23"><a href="ch7.html#cb199-23" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(EmpiricalCheckOut)</span></code></pre></div>
-<pre><code>## lavaan 0.6-12 ended normally after 20 iterations
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="ch7.html#cb199-1" tabindex="-1"></a><span class="do">## STEP 2: fit model to the covariance matrix from step 1</span></span>
+<span id="cb199-2"><a href="ch7.html#cb199-2" tabindex="-1"></a></span>
+<span id="cb199-3"><a href="ch7.html#cb199-3" tabindex="-1"></a>EmpiricalCheck <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb199-4"><a href="ch7.html#cb199-4" tabindex="-1"></a><span class="st">            # regressions</span></span>
+<span id="cb199-5"><a href="ch7.html#cb199-5" tabindex="-1"></a><span class="st">            y4 ~ b43*y3</span></span>
+<span id="cb199-6"><a href="ch7.html#cb199-6" tabindex="-1"></a><span class="st">            y3 ~ b32*y2 + b31*y1</span></span>
+<span id="cb199-7"><a href="ch7.html#cb199-7" tabindex="-1"></a></span>
+<span id="cb199-8"><a href="ch7.html#cb199-8" tabindex="-1"></a><span class="st">            # residual (co)variances</span></span>
+<span id="cb199-9"><a href="ch7.html#cb199-9" tabindex="-1"></a><span class="st">            y1 ~~ p11*y1</span></span>
+<span id="cb199-10"><a href="ch7.html#cb199-10" tabindex="-1"></a><span class="st">            y2 ~~ p22*y2</span></span>
+<span id="cb199-11"><a href="ch7.html#cb199-11" tabindex="-1"></a><span class="st">            y3 ~~ p33*y3</span></span>
+<span id="cb199-12"><a href="ch7.html#cb199-12" tabindex="-1"></a><span class="st">            y4 ~~ p44*y4</span></span>
+<span id="cb199-13"><a href="ch7.html#cb199-13" tabindex="-1"></a><span class="st">            y3 ~~ p43*y4</span></span>
+<span id="cb199-14"><a href="ch7.html#cb199-14" tabindex="-1"></a></span>
+<span id="cb199-15"><a href="ch7.html#cb199-15" tabindex="-1"></a><span class="st">            # covariance exogenous variables</span></span>
+<span id="cb199-16"><a href="ch7.html#cb199-16" tabindex="-1"></a><span class="st">            y1 ~~ p21*y2</span></span>
+<span id="cb199-17"><a href="ch7.html#cb199-17" tabindex="-1"></a><span class="st">            &#39;</span></span>
+<span id="cb199-18"><a href="ch7.html#cb199-18" tabindex="-1"></a></span>
+<span id="cb199-19"><a href="ch7.html#cb199-19" tabindex="-1"></a>EmpiricalCheckOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(EmpiricalCheck, <span class="at">sample.cov=</span>SIGMA,</span>
+<span id="cb199-20"><a href="ch7.html#cb199-20" tabindex="-1"></a>                     <span class="at">sample.nobs=</span><span class="dv">100</span>, <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>,</span>
+<span id="cb199-21"><a href="ch7.html#cb199-21" tabindex="-1"></a>                     <span class="at">fixed.x=</span><span class="cn">FALSE</span>)</span>
+<span id="cb199-22"><a href="ch7.html#cb199-22" tabindex="-1"></a></span>
+<span id="cb199-23"><a href="ch7.html#cb199-23" tabindex="-1"></a><span class="fu">summary</span>(EmpiricalCheckOut)</span></code></pre></div>
+<pre><code>## lavaan 0.6.17.1883 ended normally after 20 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -823,54 +827,54 @@ Figure 7.1: Path model for which identification is assessed in the situation whe
 </div>
 <div id="script-7.2" class="section level3 unnumbered hasAnchor">
 <h3>Script 7.2<a href="ch7.html#script-7.2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="ch7.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="do">## STEP 1: calculate the model implied covariance matrix</span></span>
-<span id="cb201-2"><a href="ch7.html#cb201-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-3"><a href="ch7.html#cb201-3" aria-hidden="true" tabindex="-1"></a>BETA <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
-<span id="cb201-4"><a href="ch7.html#cb201-4" aria-hidden="true" tabindex="-1"></a>             <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
-<span id="cb201-5"><a href="ch7.html#cb201-5" aria-hidden="true" tabindex="-1"></a>            .<span class="dv">5</span>,.<span class="dv">5</span>, <span class="dv">0</span>,.<span class="dv">5</span>,</span>
-<span id="cb201-6"><a href="ch7.html#cb201-6" aria-hidden="true" tabindex="-1"></a>             <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">5</span>, <span class="dv">0</span>),</span>
-<span id="cb201-7"><a href="ch7.html#cb201-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb201-8"><a href="ch7.html#cb201-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-9"><a href="ch7.html#cb201-9" aria-hidden="true" tabindex="-1"></a>PSI <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>( <span class="dv">1</span>,.<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
-<span id="cb201-10"><a href="ch7.html#cb201-10" aria-hidden="true" tabindex="-1"></a>            .<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
-<span id="cb201-11"><a href="ch7.html#cb201-11" aria-hidden="true" tabindex="-1"></a>             <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">8</span>,.<span class="dv">5</span>,</span>
-<span id="cb201-12"><a href="ch7.html#cb201-12" aria-hidden="true" tabindex="-1"></a>             <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">5</span>,.<span class="dv">7</span>),</span>
-<span id="cb201-13"><a href="ch7.html#cb201-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb201-14"><a href="ch7.html#cb201-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-15"><a href="ch7.html#cb201-15" aria-hidden="true" tabindex="-1"></a>IDEN <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">4</span>)</span>
-<span id="cb201-16"><a href="ch7.html#cb201-16" aria-hidden="true" tabindex="-1"></a>SIGMA <span class="ot">&lt;-</span> <span class="fu">solve</span>(IDEN<span class="sc">-</span>BETA) <span class="sc">%*%</span> PSI <span class="sc">%*%</span> <span class="fu">t</span>(<span class="fu">solve</span>(IDEN<span class="sc">-</span>BETA))</span>
-<span id="cb201-17"><a href="ch7.html#cb201-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-18"><a href="ch7.html#cb201-18" aria-hidden="true" tabindex="-1"></a>obsnames <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;y1&quot;</span>,<span class="st">&quot;y2&quot;</span>,<span class="st">&quot;y3&quot;</span>,<span class="st">&quot;y4&quot;</span>)</span>
-<span id="cb201-19"><a href="ch7.html#cb201-19" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(SIGMA) <span class="ot">&lt;-</span> <span class="fu">list</span>(obsnames,obsnames)</span>
-<span id="cb201-20"><a href="ch7.html#cb201-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-21"><a href="ch7.html#cb201-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-22"><a href="ch7.html#cb201-22" aria-hidden="true" tabindex="-1"></a><span class="do">## STEP 2: fit model to the covariance matrix from step 1</span></span>
-<span id="cb201-23"><a href="ch7.html#cb201-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-24"><a href="ch7.html#cb201-24" aria-hidden="true" tabindex="-1"></a>EmpiricalCheck <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb201-25"><a href="ch7.html#cb201-25" aria-hidden="true" tabindex="-1"></a><span class="st">            # regressions</span></span>
-<span id="cb201-26"><a href="ch7.html#cb201-26" aria-hidden="true" tabindex="-1"></a><span class="st">            y4 ~ b43*y3</span></span>
-<span id="cb201-27"><a href="ch7.html#cb201-27" aria-hidden="true" tabindex="-1"></a><span class="st">            y3 ~ b32*y2 + b31*y1 + b34*y4</span></span>
-<span id="cb201-28"><a href="ch7.html#cb201-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-29"><a href="ch7.html#cb201-29" aria-hidden="true" tabindex="-1"></a><span class="st">            # residual (co)variances</span></span>
-<span id="cb201-30"><a href="ch7.html#cb201-30" aria-hidden="true" tabindex="-1"></a><span class="st">            y1 ~~ p11*y1</span></span>
-<span id="cb201-31"><a href="ch7.html#cb201-31" aria-hidden="true" tabindex="-1"></a><span class="st">            y2 ~~ p22*y2</span></span>
-<span id="cb201-32"><a href="ch7.html#cb201-32" aria-hidden="true" tabindex="-1"></a><span class="st">            y3 ~~ p33*y3</span></span>
-<span id="cb201-33"><a href="ch7.html#cb201-33" aria-hidden="true" tabindex="-1"></a><span class="st">            y4 ~~ p44*y4</span></span>
-<span id="cb201-34"><a href="ch7.html#cb201-34" aria-hidden="true" tabindex="-1"></a><span class="st">            y3 ~~ p43*y4</span></span>
-<span id="cb201-35"><a href="ch7.html#cb201-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-36"><a href="ch7.html#cb201-36" aria-hidden="true" tabindex="-1"></a><span class="st">            # covariance exogenous variables</span></span>
-<span id="cb201-37"><a href="ch7.html#cb201-37" aria-hidden="true" tabindex="-1"></a><span class="st">            y1 ~~ p21*y2</span></span>
-<span id="cb201-38"><a href="ch7.html#cb201-38" aria-hidden="true" tabindex="-1"></a><span class="st">            &#39;</span></span>
-<span id="cb201-39"><a href="ch7.html#cb201-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-40"><a href="ch7.html#cb201-40" aria-hidden="true" tabindex="-1"></a>EmpiricalCheckOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(EmpiricalCheck, <span class="at">sample.cov=</span>SIGMA,</span>
-<span id="cb201-41"><a href="ch7.html#cb201-41" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sample.nobs=</span><span class="dv">100</span>, <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>,</span>
-<span id="cb201-42"><a href="ch7.html#cb201-42" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fixed.x=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="ch7.html#cb201-1" tabindex="-1"></a><span class="do">## STEP 1: calculate the model implied covariance matrix</span></span>
+<span id="cb201-2"><a href="ch7.html#cb201-2" tabindex="-1"></a></span>
+<span id="cb201-3"><a href="ch7.html#cb201-3" tabindex="-1"></a>BETA <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb201-4"><a href="ch7.html#cb201-4" tabindex="-1"></a>             <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb201-5"><a href="ch7.html#cb201-5" tabindex="-1"></a>            .<span class="dv">5</span>,.<span class="dv">5</span>, <span class="dv">0</span>,.<span class="dv">5</span>,</span>
+<span id="cb201-6"><a href="ch7.html#cb201-6" tabindex="-1"></a>             <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">5</span>, <span class="dv">0</span>),</span>
+<span id="cb201-7"><a href="ch7.html#cb201-7" tabindex="-1"></a>             <span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb201-8"><a href="ch7.html#cb201-8" tabindex="-1"></a></span>
+<span id="cb201-9"><a href="ch7.html#cb201-9" tabindex="-1"></a>PSI <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>( <span class="dv">1</span>,.<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb201-10"><a href="ch7.html#cb201-10" tabindex="-1"></a>            .<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb201-11"><a href="ch7.html#cb201-11" tabindex="-1"></a>             <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">8</span>,.<span class="dv">5</span>,</span>
+<span id="cb201-12"><a href="ch7.html#cb201-12" tabindex="-1"></a>             <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">5</span>,.<span class="dv">7</span>),</span>
+<span id="cb201-13"><a href="ch7.html#cb201-13" tabindex="-1"></a>             <span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb201-14"><a href="ch7.html#cb201-14" tabindex="-1"></a></span>
+<span id="cb201-15"><a href="ch7.html#cb201-15" tabindex="-1"></a>IDEN <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">4</span>)</span>
+<span id="cb201-16"><a href="ch7.html#cb201-16" tabindex="-1"></a>SIGMA <span class="ot">&lt;-</span> <span class="fu">solve</span>(IDEN<span class="sc">-</span>BETA) <span class="sc">%*%</span> PSI <span class="sc">%*%</span> <span class="fu">t</span>(<span class="fu">solve</span>(IDEN<span class="sc">-</span>BETA))</span>
+<span id="cb201-17"><a href="ch7.html#cb201-17" tabindex="-1"></a></span>
+<span id="cb201-18"><a href="ch7.html#cb201-18" tabindex="-1"></a>obsnames <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;y1&quot;</span>,<span class="st">&quot;y2&quot;</span>,<span class="st">&quot;y3&quot;</span>,<span class="st">&quot;y4&quot;</span>)</span>
+<span id="cb201-19"><a href="ch7.html#cb201-19" tabindex="-1"></a><span class="fu">dimnames</span>(SIGMA) <span class="ot">&lt;-</span> <span class="fu">list</span>(obsnames,obsnames)</span>
+<span id="cb201-20"><a href="ch7.html#cb201-20" tabindex="-1"></a></span>
+<span id="cb201-21"><a href="ch7.html#cb201-21" tabindex="-1"></a></span>
+<span id="cb201-22"><a href="ch7.html#cb201-22" tabindex="-1"></a><span class="do">## STEP 2: fit model to the covariance matrix from step 1</span></span>
+<span id="cb201-23"><a href="ch7.html#cb201-23" tabindex="-1"></a></span>
+<span id="cb201-24"><a href="ch7.html#cb201-24" tabindex="-1"></a>EmpiricalCheck <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb201-25"><a href="ch7.html#cb201-25" tabindex="-1"></a><span class="st">            # regressions</span></span>
+<span id="cb201-26"><a href="ch7.html#cb201-26" tabindex="-1"></a><span class="st">            y4 ~ b43*y3</span></span>
+<span id="cb201-27"><a href="ch7.html#cb201-27" tabindex="-1"></a><span class="st">            y3 ~ b32*y2 + b31*y1 + b34*y4</span></span>
+<span id="cb201-28"><a href="ch7.html#cb201-28" tabindex="-1"></a></span>
+<span id="cb201-29"><a href="ch7.html#cb201-29" tabindex="-1"></a><span class="st">            # residual (co)variances</span></span>
+<span id="cb201-30"><a href="ch7.html#cb201-30" tabindex="-1"></a><span class="st">            y1 ~~ p11*y1</span></span>
+<span id="cb201-31"><a href="ch7.html#cb201-31" tabindex="-1"></a><span class="st">            y2 ~~ p22*y2</span></span>
+<span id="cb201-32"><a href="ch7.html#cb201-32" tabindex="-1"></a><span class="st">            y3 ~~ p33*y3</span></span>
+<span id="cb201-33"><a href="ch7.html#cb201-33" tabindex="-1"></a><span class="st">            y4 ~~ p44*y4</span></span>
+<span id="cb201-34"><a href="ch7.html#cb201-34" tabindex="-1"></a><span class="st">            y3 ~~ p43*y4</span></span>
+<span id="cb201-35"><a href="ch7.html#cb201-35" tabindex="-1"></a></span>
+<span id="cb201-36"><a href="ch7.html#cb201-36" tabindex="-1"></a><span class="st">            # covariance exogenous variables</span></span>
+<span id="cb201-37"><a href="ch7.html#cb201-37" tabindex="-1"></a><span class="st">            y1 ~~ p21*y2</span></span>
+<span id="cb201-38"><a href="ch7.html#cb201-38" tabindex="-1"></a><span class="st">            &#39;</span></span>
+<span id="cb201-39"><a href="ch7.html#cb201-39" tabindex="-1"></a></span>
+<span id="cb201-40"><a href="ch7.html#cb201-40" tabindex="-1"></a>EmpiricalCheckOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(EmpiricalCheck, <span class="at">sample.cov=</span>SIGMA,</span>
+<span id="cb201-41"><a href="ch7.html#cb201-41" tabindex="-1"></a>                     <span class="at">sample.nobs=</span><span class="dv">100</span>, <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>,</span>
+<span id="cb201-42"><a href="ch7.html#cb201-42" tabindex="-1"></a>                     <span class="at">fixed.x=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## Warning in lav_model_vcov(lavmodel = lavmodel, lavsamplestats = lavsamplestats, : lavaan WARNING:
 ##     Could not compute standard errors! The information matrix could
 ##     not be inverted. This may be a symptom that the model is not
 ##     identified.</code></pre>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="ch7.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(EmpiricalCheckOut)</span></code></pre></div>
-<pre><code>## lavaan 0.6-12 ended normally after 21 iterations
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="ch7.html#cb203-1" tabindex="-1"></a><span class="fu">summary</span>(EmpiricalCheckOut)</span></code></pre></div>
+<pre><code>## lavaan 0.6.17.1883 ended normally after 21 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB

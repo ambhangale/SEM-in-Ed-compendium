@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Standard Errors and Confidence Intervals | Compendium Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="4 Standard Errors and Confidence Intervals | Compendium Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Standard Errors and Confidence Intervals | Compendium Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 </head>
@@ -703,7 +707,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="obtaining-standard-errors-and-confidence-intervals-in-lavaan" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Obtaining standard errors and confidence intervals in <code>lavaan</code><a href="ch4.html#obtaining-standard-errors-and-confidence-intervals-in-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the standard summary output of <code>lavaan</code>, the <span class="math inline">\(SE\)</span>s of parameter estimates are given in the column after the parameter estimates, and the ratios of the parameter estimates over their <span class="math inline">\(SE\)</span>’s (Wald <span class="math inline">\(z\)</span> value) is given in the next column. To request confidence intervals from the summary, use the argument <code>ci = TRUE</code>. The regression parameter output look like this:</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="ch4.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut, <span class="at">ci =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="ch4.html#cb164-1" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut, <span class="at">ci =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ## Regressions:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper
@@ -713,25 +717,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   child_anx ~                                                           
 ##     ovrcntrl (b43)    0.072    0.026    2.741    0.006    0.021    0.124</code></pre>
 <p>One can also obtain this information from the <code>parameterEstimates()</code> function, which provides more flexibility. For example, we can ask for any width of the interval (although 99%, 95% and 90% are most common), and we can specify particular types of bootstrap CIs. The format is similar to the <code>summary()</code> output, but it is a data.frame, so the parameters are indicated by the left-hand side (<code>lhs</code>), operator (<code>op</code>), and right-hand side (<code>rhs</code>) of the equation used to specify a parameter in <code>lavaan</code> model syntax. For example, to calculate a 90% CI:</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="ch4.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parameterEstimates</span>(AWmodelOut, <span class="at">level =</span> .<span class="dv">90</span>)</span></code></pre></div>
-<pre><code>##           lhs op         rhs label     est     se     z pvalue ci.lower
-## 1 overcontrol  ~  parent_anx   b31   0.187  0.140 1.341  0.180   -0.042
-## 2 overcontrol  ~     perfect   b32   0.210  0.096 2.194  0.028    0.053
-## 3   child_anx  ~ overcontrol   b43   0.072  0.026 2.741  0.006    0.029
-## 4  parent_anx ~~  parent_anx   p11  91.580 14.856 6.164  0.000   67.144
-## 5     perfect ~~     perfect   p22 194.320 31.523 6.164  0.000  142.469
-## 6 overcontrol ~~ overcontrol   p33 114.157 18.519 6.164  0.000   83.696
-## 7   child_anx ~~   child_anx   p44   6.880  1.116 6.164  0.000    5.044
-## 8  parent_anx ~~     perfect   p21  53.360 16.481 3.238  0.001   26.251
-##   ci.upper
-## 1    0.417
-## 2    0.368
-## 3    0.116
-## 4  116.016
-## 5  246.171
-## 6  144.617
-## 7    8.716
-## 8   80.469</code></pre>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="ch4.html#cb166-1" tabindex="-1"></a><span class="fu">parameterEstimates</span>(AWmodelOut, <span class="at">level =</span> .<span class="dv">90</span>)</span></code></pre></div>
+<pre><code>##           lhs op         rhs label     est     se     z pvalue ci.lower ci.upper
+## 1 overcontrol  ~  parent_anx   b31   0.187  0.140 1.341  0.180   -0.042    0.417
+## 2 overcontrol  ~     perfect   b32   0.210  0.096 2.194  0.028    0.053    0.368
+## 3   child_anx  ~ overcontrol   b43   0.072  0.026 2.741  0.006    0.029    0.116
+## 4  parent_anx ~~  parent_anx   p11  91.580 14.856 6.164  0.000   67.144  116.016
+## 5     perfect ~~     perfect   p22 194.320 31.523 6.164  0.000  142.469  246.171
+## 6 overcontrol ~~ overcontrol   p33 114.157 18.519 6.164  0.000   83.696  144.617
+## 7   child_anx ~~   child_anx   p44   6.880  1.116 6.164  0.000    5.044    8.716
+## 8  parent_anx ~~     perfect   p21  53.360 16.481 3.238  0.001   26.251   80.469</code></pre>
 </div>
 <div id="references-2" class="section level2 unnumbered hasAnchor">
 <h2>References<a href="ch4.html#references-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>

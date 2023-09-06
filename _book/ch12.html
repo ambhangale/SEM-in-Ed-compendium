@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12 Path Analysis with Categorical Outcomes | Compendium Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="12 Path Analysis with Categorical Outcomes | Compendium Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12 Path Analysis with Categorical Outcomes | Compendium Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 </head>
@@ -606,17 +610,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this chapter we first import example data, then we show how one can use probit and logit link functions in a generalized linear model (GLM). Next, we discuss the concept of the LRV for one ordinal variable, for multiple ordinal variables, and then we illustrate fitting a path model to ordinal variables.</p>
 <div id="prepare-data-and-workspace-1" class="section level2 hasAnchor" number="12.1">
 <h2><span class="header-section-number">12.1</span> Prepare Data and Workspace<a href="ch12.html#prepare-data-and-workspace-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="ch12.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="ch12.html#cb237-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span></code></pre></div>
 <div id="import-example-data-1" class="section level3 hasAnchor" number="12.1.1">
 <h3><span class="header-section-number">12.1.1</span> Import Example Data<a href="ch12.html#import-example-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We will use example data provided on the <a href="http://www.statmodel.com">M<em>plus</em>} website}</a> for a technical report (Muthén, 2011, p. 24). The example data can be downloaded onto your computer from the report’s <a href="http://www.statmodel.com/examples/penn.shtml#extendSEM">supplementary materials</a>, or you can provide the URL directly to <code>read.table(file=)</code>, as shown below. Note that the data are in summary format (i.e., a table with frequencies for each combination of categories for the 3 variables). The <code>read.table()</code> output is therefore transformed into a standard <code>data.frame</code> with 1 row per subject.</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="ch12.html#cb238-1" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">&quot;http://www.statmodel.com/examples/shortform/4cat%20m.dat&quot;</span>,</span>
-<span id="cb238-2"><a href="ch12.html#cb238-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;intention&quot;</span>, <span class="st">&quot;intervention&quot;</span>, <span class="st">&quot;ciguse&quot;</span>, <span class="st">&quot;w&quot;</span>))</span>
-<span id="cb238-3"><a href="ch12.html#cb238-3" aria-hidden="true" tabindex="-1"></a>dd<span class="sc">$</span>intention <span class="ot">&lt;-</span> dd<span class="sc">$</span>intention <span class="sc">-</span> 1L <span class="co"># make the lowest category 0, not 1</span></span>
-<span id="cb238-4"><a href="ch12.html#cb238-4" aria-hidden="true" tabindex="-1"></a><span class="do">## transform frequency table to casewise data</span></span>
-<span id="cb238-5"><a href="ch12.html#cb238-5" aria-hidden="true" tabindex="-1"></a>myData <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dd), <span class="cf">function</span>(RR) {</span>
-<span id="cb238-6"><a href="ch12.html#cb238-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="fu">rep</span>(<span class="dv">1</span>, dd<span class="sc">$</span>w[RR]) <span class="sc">%*%</span> <span class="fu">as.matrix</span>(dd[RR, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]))</span>
-<span id="cb238-7"><a href="ch12.html#cb238-7" aria-hidden="true" tabindex="-1"></a>}))</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="ch12.html#cb238-1" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">&quot;http://www.statmodel.com/examples/shortform/4cat%20m.dat&quot;</span>,</span>
+<span id="cb238-2"><a href="ch12.html#cb238-2" tabindex="-1"></a>                 <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;intention&quot;</span>, <span class="st">&quot;intervention&quot;</span>, <span class="st">&quot;ciguse&quot;</span>, <span class="st">&quot;w&quot;</span>))</span>
+<span id="cb238-3"><a href="ch12.html#cb238-3" tabindex="-1"></a>dd<span class="sc">$</span>intention <span class="ot">&lt;-</span> dd<span class="sc">$</span>intention <span class="sc">-</span> 1L <span class="co"># make the lowest category 0, not 1</span></span>
+<span id="cb238-4"><a href="ch12.html#cb238-4" tabindex="-1"></a><span class="do">## transform frequency table to casewise data</span></span>
+<span id="cb238-5"><a href="ch12.html#cb238-5" tabindex="-1"></a>myData <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dd), <span class="cf">function</span>(RR) {</span>
+<span id="cb238-6"><a href="ch12.html#cb238-6" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="fu">rep</span>(<span class="dv">1</span>, dd<span class="sc">$</span>w[RR]) <span class="sc">%*%</span> <span class="fu">as.matrix</span>(dd[RR, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]))</span>
+<span id="cb238-7"><a href="ch12.html#cb238-7" tabindex="-1"></a>}))</span></code></pre></div>
 <ul>
 <li><strong>Predictor</strong>: <code>intervention</code> (1 = treatment, 0 = control)</li>
 <li><strong>Mediator</strong>: <code>intention</code> to smoke in the following 2 months (measured 6 months after intervention)
@@ -630,14 +634,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">12.1.2</span> Summarize Data<a href="ch12.html#summarize-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The resulting <code>data.frame</code> looks like this:</p>
 <pre><code>##     intention intervention ciguse
-## 94          2            0      1
-## 416         0            1      0
-## 590         0            1      0
-## 512         0            1      0
-## 296         0            1      0</code></pre>
+## 851         0            0      0
+## 257         0            1      0
+## 547         0            1      0
+## 106         2            0      0
+## 334         0            1      0</code></pre>
 <p>The marginal frequencies for each variable are:</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="ch12.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="do">## table for each variable</span></span>
-<span id="cb240-2"><a href="ch12.html#cb240-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(myData, table)</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="ch12.html#cb240-1" tabindex="-1"></a><span class="do">## table for each variable</span></span>
+<span id="cb240-2"><a href="ch12.html#cb240-2" tabindex="-1"></a><span class="fu">lapply</span>(myData, table)</span></code></pre></div>
 <pre><code>## $intention
 ## 
 ##   0   1   2   3 
@@ -653,9 +657,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   0   1 
 ## 708 156</code></pre>
 <p>Let’s begin with a frequency table to estimate the proportion of subjects who smoke cigarettes (i.e., the estimated probability of smoking: <span class="math inline">\(\widehat{\pi}\)</span>) in each combination of categories for the predictors.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="ch12.html#cb242-1" aria-hidden="true" tabindex="-1"></a>tab3way <span class="ot">&lt;-</span> <span class="fu">table</span>(myData)</span>
-<span id="cb242-2"><a href="ch12.html#cb242-2" aria-hidden="true" tabindex="-1"></a>probs <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(tab3way, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)[,,<span class="dv">2</span>]</span>
-<span id="cb242-3"><a href="ch12.html#cb242-3" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(probs, <span class="at">FUN =</span> mean)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="ch12.html#cb242-1" tabindex="-1"></a>tab3way <span class="ot">&lt;-</span> <span class="fu">table</span>(myData)</span>
+<span id="cb242-2"><a href="ch12.html#cb242-2" tabindex="-1"></a>probs <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(tab3way, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)[,,<span class="dv">2</span>]</span>
+<span id="cb242-3"><a href="ch12.html#cb242-3" tabindex="-1"></a><span class="fu">addmargins</span>(probs, <span class="at">FUN =</span> mean)</span></code></pre></div>
 <pre><code>## Margins computed over dimensions
 ## in the following order:
 ## 1: intention
@@ -673,8 +677,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="regression-models-for-binary-variables" class="section level2 hasAnchor" number="12.2">
 <h2><span class="header-section-number">12.2</span> Regression Models for Binary Variables<a href="ch12.html#regression-models-for-binary-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Suppose we used a linear model to predict the probability of smoking, treating intention as a continuous predictor to estimate only its linear effect.</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="ch12.html#cb245-1" aria-hidden="true" tabindex="-1"></a>mod.lin <span class="ot">&lt;-</span> <span class="fu">lm</span>(ciguse <span class="sc">~</span> intervention <span class="sc">+</span> intention, <span class="at">data =</span> myData)</span>
-<span id="cb245-2"><a href="ch12.html#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod.lin)</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="ch12.html#cb245-1" tabindex="-1"></a>mod.lin <span class="ot">&lt;-</span> <span class="fu">lm</span>(ciguse <span class="sc">~</span> intervention <span class="sc">+</span> intention, <span class="at">data =</span> myData)</span>
+<span id="cb245-2"><a href="ch12.html#cb245-2" tabindex="-1"></a><span class="fu">coef</span>(mod.lin)</span></code></pre></div>
 <pre><code>##  (Intercept) intervention    intention 
 ##    0.1177588   -0.0439528    0.1927033</code></pre>
 <p>The estimated intercept indicates the predicted probability of smoking when predictors are zero (i.e., those in the control group with no intent to smoke). The estimated slopes reflect what we saw in the table: treatment reduces the probability of smoking (given the intent to smoke), and intent to smoke is associated with more smoking (given treatment).</p>
@@ -682,7 +686,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><em>Note</em>: No interaction is included here, but you can test for yourself that it was not significant.</li>
 </ul>
 <p>It would be problematic if the model predicted any probabilities outside the natural 0–1 range. We do not observed that problem in this specific sample:</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="ch12.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">fitted</span>(mod.lin))</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="ch12.html#cb247-1" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">fitted</span>(mod.lin))</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ## 0.07381 0.07381 0.11776 0.18056 0.26651 0.69587</code></pre>
 <p>This limitation of linear probability models is resolved with a <em>link function</em> in a GLM that allows for predicted values along the entire real-number line. Two such transformations are in frequent use:</p>
@@ -708,23 +712,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \pi = \frac{\text{odds}}{1 + \text{odds}} = \frac{\mathrm{e}^\text{Logit}}{1 + \mathrm{e}^\text{Logit}}
 \]</span></p>
 <p>There is a <code>logit()</code> function in the <code>psych</code> package, but it is simple enough to calculate the transformation (and its inverse):</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="ch12.html#cb249-1" aria-hidden="true" tabindex="-1"></a>logit <span class="ot">&lt;-</span> <span class="fu">log</span>( p <span class="sc">/</span> (<span class="dv">1</span><span class="sc">-</span>p) )           <span class="co"># odds &lt;- p / (1-p)</span></span>
-<span id="cb249-2"><a href="ch12.html#cb249-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">exp</span>(logit) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(logit))  <span class="co"># odds &lt;- exp(logit)</span></span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="ch12.html#cb249-1" tabindex="-1"></a>logit <span class="ot">&lt;-</span> <span class="fu">log</span>( p <span class="sc">/</span> (<span class="dv">1</span><span class="sc">-</span>p) )           <span class="co"># odds &lt;- p / (1-p)</span></span>
+<span id="cb249-2"><a href="ch12.html#cb249-2" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">exp</span>(logit) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(logit))  <span class="co"># odds &lt;- exp(logit)</span></span></code></pre></div>
 <p>Both probit and logistic regression models can be estimated using the <code>glm()</code> function, demonstrated below.</p>
 <div id="fit-a-logistic-regression-model" class="section level3 hasAnchor" number="12.2.1">
 <h3><span class="header-section-number">12.2.1</span> Fit a Logistic Regression Model<a href="ch12.html#fit-a-logistic-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In order to compare the results of fitting the logistic and the probit regression models, we first fit the GLM with the logit link. We continue to treat the ordinal mediator <code>intention</code> as continuous for now.</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="ch12.html#cb250-1" aria-hidden="true" tabindex="-1"></a>mod.logit <span class="ot">&lt;-</span> <span class="fu">glm</span>(ciguse <span class="sc">~</span> intervention <span class="sc">+</span> intention, <span class="at">data =</span> myData,</span>
-<span id="cb250-2"><a href="ch12.html#cb250-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> <span class="fu">binomial</span>(<span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb250-3"><a href="ch12.html#cb250-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod.logit)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="ch12.html#cb250-1" tabindex="-1"></a>mod.logit <span class="ot">&lt;-</span> <span class="fu">glm</span>(ciguse <span class="sc">~</span> intervention <span class="sc">+</span> intention, <span class="at">data =</span> myData,</span>
+<span id="cb250-2"><a href="ch12.html#cb250-2" tabindex="-1"></a>                 <span class="at">family =</span> <span class="fu">binomial</span>(<span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb250-3"><a href="ch12.html#cb250-3" tabindex="-1"></a><span class="fu">coef</span>(mod.logit)</span></code></pre></div>
 <pre><code>##  (Intercept) intervention    intention 
 ##   -2.0177349   -0.3771387    1.0379733</code></pre>
 </div>
 <div id="fit-a-probit-regression-model" class="section level3 hasAnchor" number="12.2.2">
 <h3><span class="header-section-number">12.2.2</span> Fit a Probit Regression Model<a href="ch12.html#fit-a-probit-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="ch12.html#cb252-1" aria-hidden="true" tabindex="-1"></a>mod.probit <span class="ot">&lt;-</span> <span class="fu">glm</span>(ciguse <span class="sc">~</span> intervention <span class="sc">+</span> intention, <span class="at">data =</span> myData,</span>
-<span id="cb252-2"><a href="ch12.html#cb252-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="st">&quot;probit&quot;</span>))</span>
-<span id="cb252-3"><a href="ch12.html#cb252-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod.probit)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="ch12.html#cb252-1" tabindex="-1"></a>mod.probit <span class="ot">&lt;-</span> <span class="fu">glm</span>(ciguse <span class="sc">~</span> intervention <span class="sc">+</span> intention, <span class="at">data =</span> myData,</span>
+<span id="cb252-2"><a href="ch12.html#cb252-2" tabindex="-1"></a>                  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="st">&quot;probit&quot;</span>))</span>
+<span id="cb252-3"><a href="ch12.html#cb252-3" tabindex="-1"></a><span class="fu">coef</span>(mod.probit)</span></code></pre></div>
 <pre><code>##  (Intercept) intervention    intention 
 ##   -1.1894765   -0.2030216    0.6081512</code></pre>
 </div>
@@ -761,14 +765,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 where <span class="math inline">\(\varepsilon \sim \mathcal{N}(0, \sigma)\)</span> and the observed binary response <span class="math inline">\(\mathrm{y}\)</span> is linked to the LRV by a <em>threshold model</em>:</p>
 <p><span class="math display">\[\mathrm{y} = I(y^* &gt; \tau),\]</span>
 where the indicator function <span class="math inline">\(I()\)</span> assigns 1 when its argument is <code>TRUE</code> and 0 when it is <code>FALSE</code>. Because the LRV is unobserved (i.e., <em>latent</em>), its distributional parameters cannot be estimated from the data. GLM software like the <code>glm()</code> function typically identify the model by fixing the residual variance <span class="math inline">\(\sigma=1\)</span> and the threshold <span class="math inline">\(\tau=0\)</span>. For simplicity, consider an intercept-only model for cigarette use.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="ch12.html#cb257-1" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(ciguse <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> myData, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="st">&quot;probit&quot;</span>))</span>
-<span id="cb257-2"><a href="ch12.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod0)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="ch12.html#cb257-1" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(ciguse <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> myData, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="st">&quot;probit&quot;</span>))</span>
+<span id="cb257-2"><a href="ch12.html#cb257-2" tabindex="-1"></a><span class="fu">coef</span>(mod0)</span></code></pre></div>
 <pre><code>## (Intercept) 
 ##  -0.9132499</code></pre>
 <p>In <code>lavaan</code> the default is instead to fix the <em>intercept</em> to 0 and estimate the threshold. The model syntax below shows how thresholds are specified with the “pipe” (vertical bar: <code>|</code>) followed by <code>t1</code> indicating the first threshold.</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="ch12.html#cb259-1" aria-hidden="true" tabindex="-1"></a>mod0.ciguse <span class="ot">&lt;-</span> <span class="st">&#39;ciguse | t1&#39;</span> <span class="co"># specify first (and only) threshold</span></span>
-<span id="cb259-2"><a href="ch12.html#cb259-2" aria-hidden="true" tabindex="-1"></a>fit0.ciguse <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod0.ciguse, <span class="at">data =</span> myData)</span>
-<span id="cb259-3"><a href="ch12.html#cb259-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit0.ciguse, <span class="at">header =</span> <span class="cn">FALSE</span>, <span class="at">nd =</span> <span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="ch12.html#cb259-1" tabindex="-1"></a>mod0.ciguse <span class="ot">&lt;-</span> <span class="st">&#39;ciguse | t1&#39;</span> <span class="co"># specify first (and only) threshold</span></span>
+<span id="cb259-2"><a href="ch12.html#cb259-2" tabindex="-1"></a>fit0.ciguse <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod0.ciguse, <span class="at">data =</span> myData)</span>
+<span id="cb259-3"><a href="ch12.html#cb259-3" tabindex="-1"></a><span class="fu">summary</span>(fit0.ciguse, <span class="at">header =</span> <span class="cn">FALSE</span>, <span class="at">nd =</span> <span class="dv">7</span>)</span></code></pre></div>
 <pre><code>## 
 ## Parameter Estimates:
 ## 
@@ -804,8 +808,8 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <p>The LRV interpretation is easily extended to polytomous ordinal variables, such as intent to smoke. This is called the <em>cumulative probit</em> model (and link function). Any ordinal variable with categories <span class="math inline">\(c=0, \ldots, C\)</span> can be interpreted as a crude discretization of an underlying LRV, whose <span class="math inline">\(C\)</span> thresholds divide the latent distribution into <span class="math inline">\(C+1\)</span> categories.</p>
 <p><span class="math display">\[\mathrm{y}=c \ \ \ \text{ if } \ \ \ \tau_c &lt; y^* \le \tau_{c+1} \]</span></p>
 <p>Because the normal distribution is unbounded, the first category “starts” at <span class="math inline">\(\tau_0 = -\infty\)</span>, and the last category “ends” at <span class="math inline">\(\tau_{C+1} = +\infty\)</span>. For example, intent to smoke has 4 categories, so there are <span class="math inline">\(C=3\)</span> thresholds. We do not have to specify thresholds in <code>lavaan</code> model syntax if we tell <code>lavaan</code> which variables are ordinal using the argument <code>ordered=</code>. When <strong>all</strong> modeled variables are ordinal, one can use <code>TRUE</code> as a shortcut.</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="ch12.html#cb261-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;ciguse ~~ intention&#39;</span>, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb261-2"><a href="ch12.html#cb261-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2, <span class="at">header =</span> <span class="cn">FALSE</span>, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="ch12.html#cb261-1" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;ciguse ~~ intention&#39;</span>, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb261-2"><a href="ch12.html#cb261-2" tabindex="-1"></a><span class="fu">summary</span>(fit2, <span class="at">header =</span> <span class="cn">FALSE</span>, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ## Parameter Estimates:
 ## 
@@ -840,7 +844,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 ##     ciguse            1.000                               1.000    1.000
 ##     intention         1.000                               1.000    1.000</code></pre>
 <p>Notice that intent has 3 thresholds, labeled with sequential integers following the letter <code>t</code>. This is how they would be specified in <code>lavaan</code> model syntax, e.g.,</p>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="ch12.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39; intention | NA*t1 + NA*t2 + NA*t3 &#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="ch12.html#cb263-1" tabindex="-1"></a><span class="st">&#39; intention | NA*t1 + NA*t2 + NA*t3 &#39;</span></span></code></pre></div>
 <p>Alternatively, set the argument <code>auto.th=TRUE</code> to automatically estimate all thresholds.</p>
 <p>The LRV for <code>intention</code> can be interpreted as the degree to which someone intends to smoke—similar to the observed variable, but the degree increases continuously rather than in discrete increments.</p>
 <ol start="0" style="list-style-type: decimal">
@@ -855,12 +859,12 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <div id="estimating-thresholds" class="section level3 hasAnchor" number="12.3.2">
 <h3><span class="header-section-number">12.3.2</span> Estimating Thresholds<a href="ch12.html#estimating-thresholds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Thresholds are <strong>univariate</strong> statistics (like means). Threshold estimates are based on the frequency distribution of a categorical variable. Recall that the probit function merely transforms a (predicted) probability (<span class="math inline">\(\pi\)</span>) into a corresponding <span class="math inline">\(z\)</span> score. The (standardized) thresholds are these <span class="math inline">\(z\)</span> scores. We can estimate them by plugging into <code>qnorm()</code> the cumulative proportions (<span class="math inline">\(\widehat\pi_c\)</span>) up to each category <span class="math inline">\(c\)</span>. For example, here are the (cumulative) proportions in each category of <code>intention</code>.</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="ch12.html#cb264-1" aria-hidden="true" tabindex="-1"></a>p.intent <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(<span class="fu">table</span>(myData<span class="sc">$</span>intention)) <span class="co"># proportions per category</span></span>
-<span id="cb264-2"><a href="ch12.html#cb264-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(p.intent) <span class="co"># cumulative proportions (up to and including each category)</span></span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="ch12.html#cb264-1" tabindex="-1"></a>p.intent <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(<span class="fu">table</span>(myData<span class="sc">$</span>intention)) <span class="co"># proportions per category</span></span>
+<span id="cb264-2"><a href="ch12.html#cb264-2" tabindex="-1"></a><span class="fu">cumsum</span>(p.intent) <span class="co"># cumulative proportions (up to and including each category)</span></span></code></pre></div>
 <pre><code>##         0         1         2         3 
 ## 0.7453704 0.8645833 0.9340278 1.0000000</code></pre>
 <p>By definition, 100% of the sample was observed in any of the categories up to (and including) the highest category, so the final cumulative proportion is 1. Likewise, no one in the sample was observed in a category lower than the lowest category (by definition), so we can append a zero as the first number in this vector of cumulative proportions. Then we can find the corresponding <span class="math inline">\(z\)</span> scores in a normal distribution, which are the thresholds between categories:</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="ch12.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">cumsum</span>(p.intent)))</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="ch12.html#cb266-1" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">cumsum</span>(p.intent)))</span></code></pre></div>
 <pre><code>##                   0         1         2         3 
 ##      -Inf 0.6599915 1.1011455 1.5064783       Inf</code></pre>
 <p>The upper and lower thresholds are <span class="math inline">\(+/-\infty\)</span> by definition, corresponding to 0 and 100%. Those never need to be estimated because they are fixed by design. The remaining 3 thresholds are actual borders between observed categories, showing how far above/below the mean a subject must be in order to indicate a particular response category.</p>
@@ -869,11 +873,11 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <h3><span class="header-section-number">12.3.3</span> Estimating Polychoric Correlations<a href="ch12.html#estimating-polychoric-correlations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>With multiple ordinal variables, we can estimate the correlations between their associated LRVs by relying on the assumption that the LRVs are normally distributed (Olsson, 1979, 1982). These correlations are called <em>polychoric correlations</em> (Olsson, 1979), which are <strong>bivariate</strong> statistics (like the covariance matrix). If the model also includes a continuous variable, its correlation with an ordinal variable’s LRV is called the <em>polyserial correlation</em> (Olsson, 1982). Special names for 2-category variables are <em>tetrachoric correlation</em> (between 2 binary variables) or <em>biserial correlation</em> (between a binary and continuous variable). For example, the estimated covariance between cigarette use and intent to smoke in the model above is a polychoric correlation because each LRV’s <span class="math inline">\(SD\)</span> was fixed to 1 in that unrestricted (saturated) model.</p>
 <p>The reason that the probit model is so popular in SEM is that the standard SEM matrices and interpretations still apply to normal data, except those normal variables are latent. All we need to do is append the SEM with a threshold model in order to link these normal LRVs to their observed discrete counterparts. The default saturated model in <em>lavaan</em> estimates all thresholds and polychoric (and polyserial, if applicable) correlations, along with means and (co)variances among any continuous variables. This is used as input data when fitting any hypothesized model (even when fitting a regression model with <span class="math inline">\(df=0\)</span>). We can see the <em>estimated</em> sample statistics for the model above:</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="ch12.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lavInspect</span>(fit2, <span class="st">&quot;sampstat&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="ch12.html#cb268-1" tabindex="-1"></a><span class="fu">lavInspect</span>(fit2, <span class="st">&quot;sampstat&quot;</span>)</span></code></pre></div>
 <pre><code>## $cov
 ##           ciguse intntn
-## ciguse    1.000        
-## intention 0.637  1.000 
+## ciguse     1.000       
+## intention  0.637  1.000
 ## 
 ## $mean
 ##    ciguse intention 
@@ -957,16 +961,16 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <div id="estimate-mediation-models" class="section level3 hasAnchor" number="12.4.1">
 <h3><span class="header-section-number">12.4.1</span> Estimate Mediation Models<a href="ch12.html#estimate-mediation-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Begin by fitting the partial-mediation model to the data, to test <span class="math inline">\(H_0: \beta_{21} \times \beta_{32}=0\)</span> (no mediation). We will only specify the regression slopes and user-defined parameters because the residual variances are not estimated. The identification constraints require more explanation (see the following section).</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="ch12.html#cb270-1" aria-hidden="true" tabindex="-1"></a>mod.part <span class="ot">&lt;-</span> <span class="st">&#39; ## regression paths</span></span>
-<span id="cb270-2"><a href="ch12.html#cb270-2" aria-hidden="true" tabindex="-1"></a><span class="st">    intention ~ b21*intervention</span></span>
-<span id="cb270-3"><a href="ch12.html#cb270-3" aria-hidden="true" tabindex="-1"></a><span class="st">    ciguse ~ b31*intervention + b32*intention</span></span>
-<span id="cb270-4"><a href="ch12.html#cb270-4" aria-hidden="true" tabindex="-1"></a><span class="st">  ## define indirect and total effects</span></span>
-<span id="cb270-5"><a href="ch12.html#cb270-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ind := b21*b32</span></span>
-<span id="cb270-6"><a href="ch12.html#cb270-6" aria-hidden="true" tabindex="-1"></a><span class="st">    tot := ind + b31</span></span>
-<span id="cb270-7"><a href="ch12.html#cb270-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb270-8"><a href="ch12.html#cb270-8" aria-hidden="true" tabindex="-1"></a>fit.part <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.part, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb270-9"><a href="ch12.html#cb270-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.part, <span class="at">standardized =</span> <span class="cn">TRUE</span>, <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6-12 ended normally after 13 iterations
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="ch12.html#cb270-1" tabindex="-1"></a>mod.part <span class="ot">&lt;-</span> <span class="st">&#39; ## regression paths</span></span>
+<span id="cb270-2"><a href="ch12.html#cb270-2" tabindex="-1"></a><span class="st">    intention ~ b21*intervention</span></span>
+<span id="cb270-3"><a href="ch12.html#cb270-3" tabindex="-1"></a><span class="st">    ciguse ~ b31*intervention + b32*intention</span></span>
+<span id="cb270-4"><a href="ch12.html#cb270-4" tabindex="-1"></a><span class="st">  ## define indirect and total effects</span></span>
+<span id="cb270-5"><a href="ch12.html#cb270-5" tabindex="-1"></a><span class="st">    ind := b21*b32</span></span>
+<span id="cb270-6"><a href="ch12.html#cb270-6" tabindex="-1"></a><span class="st">    tot := ind + b31</span></span>
+<span id="cb270-7"><a href="ch12.html#cb270-7" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb270-8"><a href="ch12.html#cb270-8" tabindex="-1"></a>fit.part <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.part, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb270-9"><a href="ch12.html#cb270-9" tabindex="-1"></a><span class="fu">summary</span>(fit.part, <span class="at">standardized =</span> <span class="cn">TRUE</span>, <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## lavaan 0.6.17.1883 ended normally after 13 iterations
 ## 
 ##   Estimator                                       DWLS
 ##   Optimization method                           NLMINB
@@ -975,7 +979,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 ##   Number of observations                           864
 ## 
 ## Model Test User Model:
-##                                               Standard      Robust
+##                                               Standard      Scaled
 ##   Test Statistic                                 0.000       0.000
 ##   Degrees of freedom                                 0           0
 ## 
@@ -1031,15 +1035,16 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <li>test a <span class="math inline">\(H_0\)</span> using a <span class="math inline">\(\Delta \chi^2\)</span> test</li>
 </ul>
 <p>We can fit a full-mediation model to the data to obtain the LRT.</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="ch12.html#cb272-1" aria-hidden="true" tabindex="-1"></a>mod.full <span class="ot">&lt;-</span> <span class="st">&#39; ## regression paths</span></span>
-<span id="cb272-2"><a href="ch12.html#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="st">    intention ~ b21*intervention</span></span>
-<span id="cb272-3"><a href="ch12.html#cb272-3" aria-hidden="true" tabindex="-1"></a><span class="st">    ciguse ~ b32*intention</span></span>
-<span id="cb272-4"><a href="ch12.html#cb272-4" aria-hidden="true" tabindex="-1"></a><span class="st">  ## define indirect and total effects</span></span>
-<span id="cb272-5"><a href="ch12.html#cb272-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ind := b21*b32</span></span>
-<span id="cb272-6"><a href="ch12.html#cb272-6" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb272-7"><a href="ch12.html#cb272-7" aria-hidden="true" tabindex="-1"></a>fit.full <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.full, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb272-8"><a href="ch12.html#cb272-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lavTestLRT</span>(fit.full, fit.part) <span class="co"># or anova(), which then calls lavTestLRT()</span></span></code></pre></div>
-<pre><code>## Scaled Chi-Squared Difference Test (method = &quot;satorra.2000&quot;)
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="ch12.html#cb272-1" tabindex="-1"></a>mod.full <span class="ot">&lt;-</span> <span class="st">&#39; ## regression paths</span></span>
+<span id="cb272-2"><a href="ch12.html#cb272-2" tabindex="-1"></a><span class="st">    intention ~ b21*intervention</span></span>
+<span id="cb272-3"><a href="ch12.html#cb272-3" tabindex="-1"></a><span class="st">    ciguse ~ b32*intention</span></span>
+<span id="cb272-4"><a href="ch12.html#cb272-4" tabindex="-1"></a><span class="st">  ## define indirect and total effects</span></span>
+<span id="cb272-5"><a href="ch12.html#cb272-5" tabindex="-1"></a><span class="st">    ind := b21*b32</span></span>
+<span id="cb272-6"><a href="ch12.html#cb272-6" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb272-7"><a href="ch12.html#cb272-7" tabindex="-1"></a>fit.full <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.full, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb272-8"><a href="ch12.html#cb272-8" tabindex="-1"></a><span class="fu">lavTestLRT</span>(fit.full, fit.part) <span class="co"># or anova(), which then calls lavTestLRT()</span></span></code></pre></div>
+<pre><code>## 
+## Scaled Chi-Squared Difference Test (method = &quot;satorra.2000&quot;)
 ## 
 ## lavaan NOTE:
 ##     The &quot;Chisq&quot; column contains standard test statistics, not the
@@ -1057,15 +1062,15 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <ul>
 <li>The GLM approach fixes the threshold to 0 and estimates the intercept. The SEM approach fixes the intercept to 0 and estimates the threshold. As shown in the figure above, this distinction is arbitrary because the LRV has no “location” that we can identify from the data. The intercept and threshold can only be said to be a certain distance apart, which is why they take the same absolute value. For example, we can free the <code>ciguse</code> intercept in <code>lavaan</code> syntax and fix its threshold instead:</li>
 </ul>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="ch12.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="do">## fixed intercept</span></span>
-<span id="cb274-2"><a href="ch12.html#cb274-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit.part, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>)[<span class="fu">c</span>(<span class="st">&quot;ciguse|t1&quot;</span>,<span class="st">&quot;ciguse~1&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="ch12.html#cb274-1" tabindex="-1"></a><span class="do">## fixed intercept</span></span>
+<span id="cb274-2"><a href="ch12.html#cb274-2" tabindex="-1"></a><span class="fu">coef</span>(fit.part, <span class="at">type =</span> <span class="st">&quot;all&quot;</span>)[<span class="fu">c</span>(<span class="st">&quot;ciguse|t1&quot;</span>,<span class="st">&quot;ciguse~1&quot;</span>)]</span></code></pre></div>
 <pre><code>## ciguse|t1  ciguse~1 
 ## 0.7596909 0.0000000</code></pre>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="ch12.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="do">## fixed threshold</span></span>
-<span id="cb276-2"><a href="ch12.html#cb276-2" aria-hidden="true" tabindex="-1"></a>mod.trade <span class="ot">&lt;-</span> <span class="st">&#39; ciguse | 0*t1 # fix threshold</span></span>
-<span id="cb276-3"><a href="ch12.html#cb276-3" aria-hidden="true" tabindex="-1"></a><span class="st">               ciguse ~ NA*1 # estimate intercept &#39;</span></span>
-<span id="cb276-4"><a href="ch12.html#cb276-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">sem</span>(<span class="fu">c</span>(mod.part, mod.trade), <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb276-5"><a href="ch12.html#cb276-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;all&quot;</span>)[<span class="fu">c</span>(<span class="st">&quot;ciguse|t1&quot;</span>,<span class="st">&quot;ciguse~1&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="ch12.html#cb276-1" tabindex="-1"></a><span class="do">## fixed threshold</span></span>
+<span id="cb276-2"><a href="ch12.html#cb276-2" tabindex="-1"></a>mod.trade <span class="ot">&lt;-</span> <span class="st">&#39; ciguse | 0*t1 # fix threshold</span></span>
+<span id="cb276-3"><a href="ch12.html#cb276-3" tabindex="-1"></a><span class="st">               ciguse ~ NA*1 # estimate intercept &#39;</span></span>
+<span id="cb276-4"><a href="ch12.html#cb276-4" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">sem</span>(<span class="fu">c</span>(mod.part, mod.trade), <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb276-5"><a href="ch12.html#cb276-5" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;all&quot;</span>)[<span class="fu">c</span>(<span class="st">&quot;ciguse|t1&quot;</span>,<span class="st">&quot;ciguse~1&quot;</span>)]</span></code></pre></div>
 <pre><code>##  ciguse|t1   ciguse~1 
 ##  0.0000000 -0.7596909</code></pre>
 <ul>
@@ -1086,43 +1091,43 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <h3><span class="header-section-number">12.4.4</span> Decomposing Total Effects<a href="ch12.html#decomposing-total-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Furthermore, a common method of quantifying the size of an indirect effect is the proportion of the total effect: <span class="math inline">\(\frac{\beta_{21} \times \beta_{32}}{(\beta_{21} \times \beta_{32}) + \beta_{31}}\)</span>. This is already problematic when the direct and indirect effects have opposite signs (called <em>inconsistent mediation</em>). But when the scale of a LRV varies between models with(out) a mediator, then the sum of estimated direct and indirect effects would no longer match the total effect.</p>
 <p>For example, fit separate probit models for the mediator and outcome, as would be necessary using the GLM approach. For simplicity, only treat <code>ciguse</code> as categorical.</p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="ch12.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="do">## simple regression to obtain the total effect</span></span>
-<span id="cb278-2"><a href="ch12.html#cb278-2" aria-hidden="true" tabindex="-1"></a>(total <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">sem</span>(<span class="st">&#39;ciguse ~ total*intervention&#39;</span>, <span class="at">data =</span> myData,</span>
-<span id="cb278-3"><a href="ch12.html#cb278-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ordered =</span> <span class="st">&#39;ciguse&#39;</span>, <span class="at">parameterization =</span> <span class="st">&quot;theta&quot;</span>))[<span class="st">&quot;total&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="ch12.html#cb278-1" tabindex="-1"></a><span class="do">## simple regression to obtain the total effect</span></span>
+<span id="cb278-2"><a href="ch12.html#cb278-2" tabindex="-1"></a>(total <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">sem</span>(<span class="st">&#39;ciguse ~ total*intervention&#39;</span>, <span class="at">data =</span> myData,</span>
+<span id="cb278-3"><a href="ch12.html#cb278-3" tabindex="-1"></a>                   <span class="at">ordered =</span> <span class="st">&#39;ciguse&#39;</span>, <span class="at">parameterization =</span> <span class="st">&quot;theta&quot;</span>))[<span class="st">&quot;total&quot;</span>])</span></code></pre></div>
 <pre><code>##      total 
 ## -0.2850428</code></pre>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="ch12.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="do">## model for mediator</span></span>
-<span id="cb280-2"><a href="ch12.html#cb280-2" aria-hidden="true" tabindex="-1"></a>(b21 <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">sem</span>(<span class="st">&#39;intention ~ b21*intervention&#39;</span>, <span class="at">data =</span> myData))[<span class="st">&quot;b21&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="ch12.html#cb280-1" tabindex="-1"></a><span class="do">## model for mediator</span></span>
+<span id="cb280-2"><a href="ch12.html#cb280-2" tabindex="-1"></a>(b21 <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">sem</span>(<span class="st">&#39;intention ~ b21*intervention&#39;</span>, <span class="at">data =</span> myData))[<span class="st">&quot;b21&quot;</span>])</span></code></pre></div>
 <pre><code>##        b21 
 ## -0.1644697</code></pre>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="ch12.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="do">## model for outcome</span></span>
-<span id="cb282-2"><a href="ch12.html#cb282-2" aria-hidden="true" tabindex="-1"></a>(b3 <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">sem</span>(<span class="st">&#39;ciguse ~ b31*intervention + b32*intention&#39;</span>, <span class="at">data =</span> myData,</span>
-<span id="cb282-3"><a href="ch12.html#cb282-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">ordered =</span> <span class="st">&#39;ciguse&#39;</span>, <span class="at">parameterization =</span> <span class="st">&quot;theta&quot;</span>))[<span class="fu">c</span>(<span class="st">&quot;b31&quot;</span>,<span class="st">&quot;b32&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="ch12.html#cb282-1" tabindex="-1"></a><span class="do">## model for outcome</span></span>
+<span id="cb282-2"><a href="ch12.html#cb282-2" tabindex="-1"></a>(b3 <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">sem</span>(<span class="st">&#39;ciguse ~ b31*intervention + b32*intention&#39;</span>, <span class="at">data =</span> myData,</span>
+<span id="cb282-3"><a href="ch12.html#cb282-3" tabindex="-1"></a>                <span class="at">ordered =</span> <span class="st">&#39;ciguse&#39;</span>, <span class="at">parameterization =</span> <span class="st">&quot;theta&quot;</span>))[<span class="fu">c</span>(<span class="st">&quot;b31&quot;</span>,<span class="st">&quot;b32&quot;</span>)])</span></code></pre></div>
 <pre><code>##        b31        b32 
 ## -0.2030216  0.6081512</code></pre>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="ch12.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate total effect from decomposition</span></span>
-<span id="cb284-2"><a href="ch12.html#cb284-2" aria-hidden="true" tabindex="-1"></a>b3[[<span class="dv">1</span>]] <span class="sc">+</span> b21<span class="sc">*</span>b3[[<span class="dv">2</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="ch12.html#cb284-1" tabindex="-1"></a><span class="do">## estimate total effect from decomposition</span></span>
+<span id="cb284-2"><a href="ch12.html#cb284-2" tabindex="-1"></a>b3[[<span class="dv">1</span>]] <span class="sc">+</span> b21<span class="sc">*</span>b3[[<span class="dv">2</span>]]</span></code></pre></div>
 <pre><code>##       b21 
 ## -0.303044</code></pre>
 <p>This does not match the total effect from the simple probit regression because the LRV scales differ. That is, the simple regression has more residual variance (less explained variance without <code>intention</code> in the model), yet the residual variance is still fixed to 1. Imai et al. (2010) proposed a general solution to this problem, using the causal-modeling framework, implemented in the <a href="https://cran.r-project.org/package=mediation"><code>mediation</code></a> (see their <a href="https://cran.r-project.org/web/packages/mediation/vignettes/mediation.pdf">`vignette</a> for examples). It is quite complicated, but here is how it would apply to our current example (see also Muthén, 2011, for corresponding M<em>plus</em> syntax):</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="ch12.html#cb286-1" aria-hidden="true" tabindex="-1"></a>mod.Imai <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb286-2"><a href="ch12.html#cb286-2" aria-hidden="true" tabindex="-1"></a><span class="st">    ciguse ~ c*intervention + b*intention</span></span>
-<span id="cb286-3"><a href="ch12.html#cb286-3" aria-hidden="true" tabindex="-1"></a><span class="st">    intention ~ a*intervention</span></span>
-<span id="cb286-4"><a href="ch12.html#cb286-4" aria-hidden="true" tabindex="-1"></a><span class="st"># label threshold for ciguse</span></span>
-<span id="cb286-5"><a href="ch12.html#cb286-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ciguse | b0*t1</span></span>
-<span id="cb286-6"><a href="ch12.html#cb286-6" aria-hidden="true" tabindex="-1"></a><span class="st"># biased SEs</span></span>
-<span id="cb286-7"><a href="ch12.html#cb286-7" aria-hidden="true" tabindex="-1"></a><span class="st">    naive.indirect := a*b</span></span>
-<span id="cb286-8"><a href="ch12.html#cb286-8" aria-hidden="true" tabindex="-1"></a><span class="st">    naive.direct := c</span></span>
-<span id="cb286-9"><a href="ch12.html#cb286-9" aria-hidden="true" tabindex="-1"></a><span class="st"># correct</span></span>
-<span id="cb286-10"><a href="ch12.html#cb286-10" aria-hidden="true" tabindex="-1"></a><span class="st">    probit11 := (-b0+c+b*a)/sqrt(b^2+1)</span></span>
-<span id="cb286-11"><a href="ch12.html#cb286-11" aria-hidden="true" tabindex="-1"></a><span class="st">    probit10 := (-b0+c )/sqrt(b^2+1)</span></span>
-<span id="cb286-12"><a href="ch12.html#cb286-12" aria-hidden="true" tabindex="-1"></a><span class="st">    probit00 := (-b0 )/sqrt(b^2+1)</span></span>
-<span id="cb286-13"><a href="ch12.html#cb286-13" aria-hidden="true" tabindex="-1"></a><span class="st">    indirect := pnorm(probit11) - pnorm(probit10)</span></span>
-<span id="cb286-14"><a href="ch12.html#cb286-14" aria-hidden="true" tabindex="-1"></a><span class="st">    direct := pnorm(probit10) - pnorm(probit00)</span></span>
-<span id="cb286-15"><a href="ch12.html#cb286-15" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb286-16"><a href="ch12.html#cb286-16" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.Imai, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="fu">c</span>(<span class="st">&quot;ciguse&quot;</span>,<span class="st">&quot;intention&quot;</span>))</span>
-<span id="cb286-17"><a href="ch12.html#cb286-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6-12 ended normally after 13 iterations
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="ch12.html#cb286-1" tabindex="-1"></a>mod.Imai <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb286-2"><a href="ch12.html#cb286-2" tabindex="-1"></a><span class="st">    ciguse ~ c*intervention + b*intention</span></span>
+<span id="cb286-3"><a href="ch12.html#cb286-3" tabindex="-1"></a><span class="st">    intention ~ a*intervention</span></span>
+<span id="cb286-4"><a href="ch12.html#cb286-4" tabindex="-1"></a><span class="st"># label threshold for ciguse</span></span>
+<span id="cb286-5"><a href="ch12.html#cb286-5" tabindex="-1"></a><span class="st">    ciguse | b0*t1</span></span>
+<span id="cb286-6"><a href="ch12.html#cb286-6" tabindex="-1"></a><span class="st"># biased SEs</span></span>
+<span id="cb286-7"><a href="ch12.html#cb286-7" tabindex="-1"></a><span class="st">    naive.indirect := a*b</span></span>
+<span id="cb286-8"><a href="ch12.html#cb286-8" tabindex="-1"></a><span class="st">    naive.direct := c</span></span>
+<span id="cb286-9"><a href="ch12.html#cb286-9" tabindex="-1"></a><span class="st"># correct</span></span>
+<span id="cb286-10"><a href="ch12.html#cb286-10" tabindex="-1"></a><span class="st">    probit11 := (-b0+c+b*a)/sqrt(b^2+1)</span></span>
+<span id="cb286-11"><a href="ch12.html#cb286-11" tabindex="-1"></a><span class="st">    probit10 := (-b0+c )/sqrt(b^2+1)</span></span>
+<span id="cb286-12"><a href="ch12.html#cb286-12" tabindex="-1"></a><span class="st">    probit00 := (-b0 )/sqrt(b^2+1)</span></span>
+<span id="cb286-13"><a href="ch12.html#cb286-13" tabindex="-1"></a><span class="st">    indirect := pnorm(probit11) - pnorm(probit10)</span></span>
+<span id="cb286-14"><a href="ch12.html#cb286-14" tabindex="-1"></a><span class="st">    direct := pnorm(probit10) - pnorm(probit00)</span></span>
+<span id="cb286-15"><a href="ch12.html#cb286-15" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb286-16"><a href="ch12.html#cb286-16" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.Imai, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="fu">c</span>(<span class="st">&quot;ciguse&quot;</span>,<span class="st">&quot;intention&quot;</span>))</span>
+<span id="cb286-17"><a href="ch12.html#cb286-17" tabindex="-1"></a><span class="fu">summary</span>(fit, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## lavaan 0.6.17.1883 ended normally after 13 iterations
 ## 
 ##   Estimator                                       DWLS
 ##   Optimization method                           NLMINB
@@ -1131,7 +1136,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 ##   Number of observations                           864
 ## 
 ## Model Test User Model:
-##                                               Standard      Robust
+##                                               Standard      Scaled
 ##   Test Statistic                                 0.000       0.000
 ##   Degrees of freedom                                 0           0
 ## 
