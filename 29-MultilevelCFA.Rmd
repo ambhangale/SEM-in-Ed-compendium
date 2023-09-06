@@ -27,7 +27,7 @@ Intraclass correlations (ICCs) indicate what proportion of a variable’s total 
 ### Script 29.1 {-}
 ```{r}
 library(lavaan)
-data <- read.table("conflict.dat")
+data <- read.table("demoData/conflict.dat")
 names(data) <- c("teacher",paste0("v",1:6))
 
 head(data)
