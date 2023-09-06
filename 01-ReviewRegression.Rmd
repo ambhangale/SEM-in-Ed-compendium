@@ -1,10 +1,109 @@
 # Regression as Mean- and Covariance-Structure Analysis {#ch1}
 
-This chapter prepares the reader to learn about structural equation modeling (SEM) by reviewing the fundamentals of ordinary least-squares (OLS) regression. Different types of data are discussed, and some review of matrix algebra will be incorporated into the regression review.
+This chapter prepares the reader to learn about structural equation modeling (SEM) by reviewing the fundamentals of ordinary least-squares (OLS) regression in the general(ized) linear modeling (GLM) framework. Different types of data are discussed, and some review of matrix algebra will be incorporated into the regression review.
 
-## Installing `lavaan`
+## What Are Mean and Covariance *Structures*?
 
-The SEM software that we will use is an open-source R package called [`lavaan`](https://lavaan.ugent.be/) [(Rosseel, 2012)](http://dx.doi.org/10.18637/jss.v048.i02). To install the `lavaan` package you can type the following command in the R console:
+Another (older) name for an SEM is *covariance structure analysis*.  What is meant by this?
+
+Covariance is the linear relationship we observe between 2 variables (more on this below).  There might be many reasons why 2 variables covary, such as 
+
+- one variable influences the other
+- common causes influence them both
+- both variables appear in a chain or web of causal effects
+
+A covariance can be partitioned into components that are due to these different reasons.  The decomposition of covariances will be explained after introducing path analysis, but recall how many statistical procedures you may already have learned about, which partition variance into components:
+
+- Regression: explained ($R^2$) vs. unexplained (residual) variance
+- ANOVA: variance between vs. within groups
+- Multilevel modeling: Level-1 v. -2 variance
+    - and (un)explained at each level
+- Between vs. within multiple imputations of missing data 
+
+Regression models in the GLM framework primarily analyze how the mean and variance of the outcome are structured. 
+
+- A grand mean ($\bar{y}$) is an unconditional expected value, whereas a predicted value from a regression model ($\hat{y}$) is an expected value under a particular condition (e.g., $\hat{y}=\beta_0$ when $X=0$).  We calculate these conditional expectations as the intercept ($\beta_0$) plus each predictor times its slope: $\sum \beta_j x_j$.  
+- Variance is partitioned into (un)explained variance (e.g., $R^2$), and its structure can be further explored via unique contributions of each predictor (e.g., partial $\eta^2$ in AN(C)OVA).
+
+SEM is a multivariate method capable of partitioning means and variances of each variable, as well as partitioning the covariance between any pair of variables.
+
+
+
+### Types of Data Used in SEM
+
+SEM can be seen as a generalization of the GLM for multivariate data. But rather than merely allowing multiple predictors and multiple outcomes, any variable can operate **both** as a predictor and an outcome in the same model.  This allows us to model complex relationships among variables, including chains of causation (i.e., mediation). 
+
+Estimation of a GLM involves minimizing discrepancies (differences) between observed ($y$) and expected ($\hat{y}$) *casewise* values (i.e., an individual subject's score on an outcome variable $y$).  These discrepancies are called "residuals" ($y - \hat{y}$).  In contrast, estimation of a SEM involves minimizing discrepancies between observed and expected *summary statistics* (i.e., the modeled variables' means and covariance matrix, see table below).  This is why another (older) name for an SEM is *covariance structure analysis* (when only trying to explain why variables are related to each other), or mean and covariance structure (MACS) analysis when means are also modeled.
+
+
+| | **Casewise observations** (GLM) |    **Mean vector** (SEM)  | **Covariance matrix** (SEM) |
+|:-------------|:------------------:|:-------------------------:|:---------------------------:|
+| Observations | $y_i$              | $\bar{y}$                 | $\mathbf{S}$                |
+| Expectations | $\hat{y}_i$        | $\widehat{\mu}$           | $\widehat{\Sigma}$          |
+| Residuals    | $y_i - \hat{y}_i$  | $\bar{y} - \widehat{\mu}$ | $\mathbf{S} - \widehat{\Sigma}$ |
+
+
+Summary statistics can be calculated from observed raw data, so raw data can be provided directly to SEM software for analysis.  But if data are complete and come from a multivariate normal distribution, summary statistics can also be passed directly to the SEM software, which has advantages.  Unlike raw data, summary statistics do not compromise the privacy of the research participants, so summary statistics can be reported in published empirical research. That allows research-consumers (like you) to have access to the same summary statistics to replicate the results or to fit a different model (e.g., that represents a competing theory). Thus, this chapter will show how to import both raw and summary data, as well as how to calculate summary statistics from raw data so that they can be reported along with results.  First, we provide some information about interpreting the summary statistics most relevant for SEM.
+
+
+### Interpreting Covariance
+
+Whether in a GLM or as part of a larger SEM, a regression model includes both mean-structure parameters (intercepts) and covariance-structure parameters (slopes, residual variance).  Generally speaking, covariance-structure parameters are informative about how variables are related to each other, and even the variances of (and covariances among) predictors are pivotal to estimating regression slopes.  In GLM, this is not immediately apparent from regression output, so later in this chapter we will demonstrate how to manually calculate regression slopes from raw data, revealing the role of summary statistics in estimating slopes.  But first, **what is covariance?**
+
+Recall that a variable's variance ($\sigma^2_y$) is the mean of squared deviations from $\bar{y}$, which quantifies how individual scores vary:
+
+$$\text{Var}(y) = \frac{\sum_{i=1}^N (y_i - \bar{y})^2}{N-1} = \frac{\sum_{i=1}^N (y_i - \bar{y})(y_i - \bar{y})}{N-1}$$
+
+Covariance ($\sigma_{xy}$) quantifies how $x$ and $y$ are linearly related (*co*vary means "vary together").
+
+$$\text{Cov}(x,y) = \frac{\sum_{i=1}^N (x_i - \bar{x})(y_i - \bar{y})}{N-1}$$
+
+Thus, a variance can be seen as a special case of covariance, when $x=y$.
+
+Its absolute value is difficult to interpret because it is in a squared metric. For a variance, we usually overcome this limitation by interpreting its square-root: the standard deviation ($\sigma$, or sample estimate *SD*), expressed in the original units of measurement.  In contrast, the square-root of a *co*variance does not have a meaningful or practical interpretation.
+
+However, the covariance between 2 variables cannot exceed the product of their *SD*s ($\pm \sigma_x \sigma_y$), so we can standardize a covariance via division of $\sigma_{xy}$ by $\sigma_x \sigma_y$.  This limits the range to $\pm 1$, and we call the standardized covariance a *correlation coefficient*:
+
+$$\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}$$
+
+For $>2$ variables in a data set $\mathbf{Y}$, we can simultaneously calculate all (co)variances using matrix algebra:
+
+1. Mean-center the data-matrix
+    - $\mathbf{Y} - \bar{\mathbf{Y}}$
+2. "Square" it by (pre)multiplying it by its transpose
+3. Divide the result by (1 minus) the sample size
+
+$$\Sigma = \frac{1}{N-1} (\mathbf{Y} - \bar{\mathbf{Y}})^{'} (\mathbf{Y} - \bar{\mathbf{Y}})$$
+
+Each off-diagonal cell of $\Sigma$ contains the covariance between the row-variable and the column-variable.  A covariance matrix is symmetric above/below the diagonal because the covariance (or correlation) between $x$ and $y$ is the same as between $y$ and $x$.  On the diagonal of $\Sigma$, the row and column variables are the same---how does a variable covary with itself? The diagonal contains each variable's variance.  Some authors refer to $\Sigma$ as a "variance--covariance matrix", but that is redundant because variances appear on the diagonal by definition (see Cov($x,y$) formula above).  So the term "covariance matrix" is sufficiently descriptive.
+
+Standardizing a covariance (i.e., scaling by both *SD*s) is only one way to facilitate its interpretation. If it makes sense to think of one variable $x$ affecting another variable $y$, then another way to scale the covariance would be to divide by variance of $x$.
+
+$$\beta_{yx} = \frac{\sigma_{xy}}{\sigma^2_x} = \frac{\sigma_{xy}}{\sigma_x \sigma_x}$$
+
+This provides a familiar interpretation from simple regression of $y$ on $x$:  the slope ($\beta_{yx}$) is interpreted as the change in $y$ per unit $x$.
+Recall that a standardized simple regression slope ($\beta^*_{yx}$) is the correlation $\rho_{xy}$.  The transformation below reveals why:
+
+```{=tex}
+\begin{align*}
+\beta^*_{yx} &= \beta_{yx} \times \frac{\sigma_x}{\sigma_y} \\
+&= \frac{\sigma_{xy}}{\sigma_x \sigma_x} \times \frac{\sigma_x}{\sigma_y} \\
+&= \frac{\sigma_{xy}}{\sigma_x \sigma_y} (= \rho_{xy})
+\end{align*},
+```
+where one pair of $\sigma_x$ terms cancels out. This transformation is how slopes can be standardized even when there are multiple predictors. Partial regression slopes can also be calculated from summary statistics, but the formulas are more complicated because they take into account how the predictors are related to each other.  
+
+The take-home message is that (un)standardized slopes and (zero-order or partial) correlations are just different ways of scaling a covariance to make it more interpretable.  Like covariances, correlations are agnostic about whether one variable affects another, but slopes imply a causal direction (although other conditions must be met to draw a valid causal inference).
+
+
+
+## Importing Data for SEM
+
+This section covers importing both raw data and summary statistics, either of which can be analyzed by SEM software.  We will utilize some special features in the open-source R package for SEM called [`lavaan`](https://lavaan.ugent.be/) [(Rosseel, 2012)](http://dx.doi.org/10.18637/jss.v048.i02), which is also the primary software we use for conducting SEM analyses in later chapters.
+
+### Installing `lavaan`
+
+To install the `lavaan` package you can type the following command in the R console:
 
 ```{r install, eval=FALSE}
 install.packages("lavaan", dependencies = TRUE)
@@ -18,21 +117,15 @@ library(lavaan)
 
 Every time you start R you need to use this command to activate the `lavaan` package into the current R workspace. Therefore, it is advisable to start every script with this command.
 
-Sometimes, it will be necessary to install the *development version* of `lavaan` before the next version is made available on CRAN. For example, if the developer has fixed a bug or introduced a new feature, the development version can be installed using this syntax:
+Sometimes, it will be necessary to install the *development version* of `lavaan` before the next version is made available on CRAN. For example, if the developer has fixed a bug or introduced a new feature in the source code (hosted on [GitHub](https://github.com/yrosseel/lavaan/)), the development version can be installed using the `remotes` package:
 
 ```{r install dev, eval=FALSE}
-install.packages("lavaan", repos = "https://www.da.ugent.be", type = "source")
+install.packages("remotes") # if necessary
+remotes::install_github("yrosseel/lavaan")
 ```
 
-## Types of Data Used in SEM
 
-SEM can be seen as a generalization of the general(ized) linear model (GLM) for multivariate data. But rather than merely allowing multiple predictors and multiple outcomes, any variable can operate **both** as a predictor and an outcome in the same model. This allows us to model complex relationships among variables, including chains of causation (i.e., mediation).
-
-Estimation of a GLM involves minimizing discrepancies (differences) between observed ($\mathrm{y}$) and expected ($\hat{\mathrm{y}}$) *casewise* values (i.e., an individual subject's score on an outcome variable $y$). In contrast, estimation of a SEM involves minimizing discrepancies between observed and expected *summary statistics* (i.e., the modeled variables' means and covariance matrix). This is why another (older) name for an SEM is *covariance structure analysis* (when only trying to explain why variables are related to each other), or mean and covariance structure (MACS) analysis when means are also modeled.
-
-Summary statistics can be calculated from observed raw data, so raw data can be provided directly to SEM software for analysis. But if data are complete and come from a multivariate normal distribution, summary statistics can also be passed directly to the SEM software, which has advantages. Unlike raw data, summary statistics do not compromise the privacy of the research participants, so summary statistics can be reported in published empirical research. That allows readers (and students like you!) to have access to the same summary statistics to replicate the results or to fit a different model (e.g., that represents a competing theory). Thus, this chapter will show how to import both raw and summary data, as well as how to calculate summary statistics from raw data so that they can be reported along with results.
-
-### Raw Data
+### Importing Raw Data
 
 Typically, data are already stored in an external file with a predefined format, such as SPSS (\*.sav) or Excel (\*.xlsx), and there are some pre-specified functions in R that can read in data from such type of formats, although they require the installation of specific packages. As an alternative, you can store the data in a plain text (with .txt or .csv extensions), where each line represents the observed responses of one individual. Spaces, commas, semicolons or tabs can be used to separate the individual responses. Some programs (like SPSS) can also export data to these types of file formats.
 
@@ -43,7 +136,7 @@ read.xls("data.xls")	# requires the package gdata
 as.data.frame(read_excel("data.xlsx"))	# requires the package readxl
 ```
 
-This chapter uses data from a tutorial published on the [\textcolor{blue}{Social Change Lab's web site}](http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf).
+This chapter uses data from a tutorial published on the [Social Change Lab's web site](http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf).
 
 ```{r import data-01, message=FALSE}
 dat <- foreign::read.spss("demoData/MODMED.sav", to.data.frame = TRUE)[c(2, 3, 5, 7)]
@@ -57,7 +150,7 @@ head(dat)
 
 `NFC` = need for cognition, `POS` = positive thoughts, and `ATT` = attitude
 
-### Summary Statistics from Raw Data
+### Calculate Summary Statistics from Raw Data
 
 To report summary statistics of your modeled variables, they can be calculated using the `colMeans()` function for means, the `cov()` function for a covariance matrix, and the `nrow()` function for the sample size
 
@@ -69,7 +162,7 @@ To report summary statistics of your modeled variables, they can be calculated u
 (N <- nrow(dat)) # complete-data sample size
 ```
 
-Covariances are explained in more detail in a later section, but it is sufficient here to understand that the covariance between variables $x$ and $\mathrm{y}$ (i.e., $\sigma_{xy}$) is their unstandardized correlation coefficient ($r_{xy}$). That is, a correlation is a covariance between $z$ scores. Because correlations are easier to interpret than covariances, it is common to report the means, *SD*s, and correlations. Using the *SD*s, readers can rescale correlations to covariances in the orignal units of measurement (i.e., $\sigma_{xy} = \sigma_x \times \sigma_y \times r_{xy}$). The `cov2cor()` function can standardize a covariance matrix, or you can use the `cor()` function directly.
+Covariances are explained in more detail in a later section, but it is sufficient here to understand that the covariance between variables $x$ and $y$ (i.e., $\sigma_{xy}$) is their unstandardized correlation coefficient ($r_{xy}$). That is, a correlation is a covariance between $z$ scores. Because correlations are easier to interpret than covariances, it is common to report the means, *SD*s, and correlations. Using the *SD*s, readers can rescale correlations to covariances in the orignal units of measurement (i.e., $\sigma_{xy} = \sigma_x \times \sigma_y \times r_{xy}$). The `cov2cor()` function can standardize a covariance matrix, or you can use the `cor()` function directly.
 
 ```{r SD+cor}
 (SD <- sapply(dat, sd))
@@ -86,7 +179,7 @@ printS[upper.tri(R)] <- R[upper.tri(R)]
 printS # not symmetric, correlations in upper triangle
 ```
 
-#### Summary Statistics for Multiple Groups
+#### Calculate Summary Statistics for Multiple Groups
 
 In SEM, it is common to estimate model parameters simultaneously in multiple groups (i.e., multigroup SEM or MG-SEM). In our example data, the `MOOD` variable is a 2-group variable, so we could create a `factor` from the numeric codes:
 
@@ -99,10 +192,12 @@ Then we can calculate the summary statistics separately within each group.
 
 ```{r group summaries}
 modVars <- c("ATT","NFC","POS")   # modeled variables
-gM <- sapply(c("neutral","positive"), simplify = FALSE, 
-             FUN = function(g) colMeans(dat[dat$mood.f == g, modVars]) )
-gS <- sapply(c("neutral","positive"), simplify = FALSE,
-             FUN = function(g) cov(dat[dat$mood.f == g, modVars]) )
+neuRows <- dat$mood.f == "neutral"  # rows for neutral group
+posRows <- dat$mood.f == "positive" # rows for positive group
+gM <- list(neutral  = colMeans(dat[neuRows, modVars] ),
+           positive = colMeans(dat[posRows, modVars] ))
+gS <- list(neutral  = cov(     dat[neuRows, modVars] ),
+           positive = cov(     dat[posRows, modVars] ))
 gN <- table(dat$mood.f)
 ```
 
@@ -148,7 +243,7 @@ obsnames <- c("MOOD", "NFC", "POS", "ATT")
 newS <- matrix(covVals, nrow = 4, ncol = 4,
                dimnames = list(obsnames, obsnames))
 ## or assign afterward, all at once
-dimnames(newS) <- list(obsnames, obsnames)
+dimnames(newS) <- list(obsnames, obsnames) # (rows, columns)
 ## or one dimension at a time (useful for asymmetric matrix)
 rownames(newS) <- obsnames
 colnames(newS) <- obsnames
@@ -178,16 +273,16 @@ newS
 
 Note that rescaling the correlation matrix to be a covariance matrix required pre- and postmultipication of the (diagnal matrix of) $SD$s. The operator for matrix multiplication is `%*%` (the normal scalar multiplication operator `*` would simply multiply each cell of one matrix with the corresponding cell of another matrix). The table below gives an overview of commonly used functions in matrix algebra in R.
 
-| **Symbol** | **Function**                       | **Example in R** |
-|------------|------------------------------------|------------------|
-| $A+B$      | Addition                           | `A + B`          |
-| $A-B$      | Subtraction                        | `A - B`          |
-| (none)     | Elementwise Multiplication (in R)  | `A * B`          |
-| (none)     | Elementwise Division (in R)        | `A / B`          |
-| $AB$       | Matrix Multiplication              | `A %*% B`        |
-| $A^{-1}$   | Inverse (enables "division")       | `solve(A)`       |
-| $A^{'}$    | Transpose (rows become columns)    | `t(A)`           |
-| $|A|$      | Determinant (generalized variance) | `det(A)`         |
+| **Symbol** | **Function**                        | **Example in R** |
+|------------|-------------------------------------|------------------|
+| $A+B$      | Addition                            | `A + B`          |
+| $A-B$      | Subtraction                         | `A - B`          |
+| (none)     | Elementwise Multiplication (in R)   | `A * B`          |
+| (none)     | Elementwise Division (in R)         | `A / B`          |
+| $AB$       | Matrix Multiplication               | `A %*% B`        |
+| $A^{-1}$   | Inverse (enables "division" analog) | `solve(A)`       |
+| $A^{'}$    | Transpose (rows become columns)     | `t(A)`           |
+| $|A|$      | Determinant (generalized variance)  | `det(A)`         |
 
 To review basic matrix algebra, consult a linear algebra text or an appendix of some SEM textbooks (e.g., Bollen, 1989; Schumacker & Lomax, 2016).
 
@@ -253,40 +348,42 @@ getCov(x = c(-0.023, 0.521, 0.068, 0.405, 0.110, 0.629),
        diagonal = FALSE, sds = SD, names = obsnames)
 ```
 
-If you are wondering whether the correlations appear in the correct order in the matrix, you can first leave the $SD$s out and check that the cells of the correlation matrix are in the correct order. If everything looks correct, then you can add the $SD$s. Covariance/correlation matrices are also symmetric, so it is also important to check that the lower triangle is a reflection of the upper triangle (i.e., Row-$x$ Column-$\mathrm{y}$ of the matrix should contain the same value as Row-$\mathrm{y}$ Column-$x$). The R function `isSymmetric()` can perform this check for you:
+If you are wondering whether the correlations appear in the correct order in the matrix, you can first leave the $SD$s out and check that the cells of the correlation matrix are in the correct order. If everything looks correct, then you can add the $SD$s. Covariance/correlation matrices are also symmetric, so it is also important to check that the lower triangle is a reflection of the upper triangle (i.e., Row-$x$ Column-$y$ of the matrix should contain the same value as Row-$y$ Column-$x$). The R function `isSymmetric()` can perform this check for you:
 
 ```{r isSymmetric}
 isSymmetric(S)
 ```
 
-## Regression Review
+## Regression Using Matrix Algebra
+
+This section is more technical than most remaining chapters will be.  The main goal of this section is to demonstrate how GLM parameters can be estimated using raw data and summary statistics, revealing how these approaches are equivalent. Familiarity with the basics of matrix algebra will continue to remain important throughout later chapters as well, not only because much of SEM is expressed in matrix notation, but because later chapters will demonstrate certain methods (e.g., standardizing an entire matrix of regression slopes) using matrix algebra.
+
 
 ### Linear Regression Models
 
-An outcome $\mathrm{y}$ is a linear combination (weighted sum) of predictors
-
--   Like a recipe for the outcome: How much of $x_1$ and $x_2$ do you need to recreate $\mathrm{y}$?
+The GLM expresses an outcome $y$ as a linear combination (weighted sum) of predictors:
 
 ```{=tex}
 \begin{align*}
-y_i &= \color{blue}{\beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip}} &+& \color{darkred}{\varepsilon_i} & \\
-    &= \color{blue}{\beta_0 + \sum_{j=1}^p \beta_j x_{ij}} &+& \color{darkred}{\varepsilon_i} &\sim \color{darkred}{\mathcal{N}(0, \sigma)}
+y_i &= \beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip} &+& \varepsilon_i \\
+    &= \beta_0 + \sum_{j=1}^p \beta_j x_{ij} &+& \varepsilon_i \sim \mathcal{N}(0, \sigma)
 \end{align*}
 ```
--   The \color{blue}{deterministic component} of $\mathrm{y}$ can be predicted or explained by $\mathbf{X}$
--   The \color{darkred}{stochastic component} of $\mathrm{y}$ includes all other unmodeled effects (omitted variables) and sources of error
 
-### Matrix Notation
+- The *deterministic* component of $y$ can be predicted or explained by $X$
+- The *stochastic* component of $y$ includes all other unmodeled effects (omitted variables) and sources of error ($\varepsilon$)
 
-For subjects $i = 1, \dots, N$ in rows and predictors $j = 1, \dots, p$ in columns:
+This is analogous to a recipe for the outcome: How much of $x_1$ and $x_2$ do you need to recreate $y$?
+
+The notation above uses a subscript *i* as an "index variable" for subject $i = 1, \dots, N$.  There are other notations, such as the full matrix notation showing each subject's values of the outcome $y$ and predictors $j = 1, \dots, p$ in columns of the matrix $\mathbf{X}$:
 
 ```{=tex}
 \begin{equation*}
   \begin{bmatrix}
-    \mathrm{y}_1 \\
-    \mathrm{y}_2 \\
+    y_1 \\
+    y_2 \\
     \vdots \\
-    \mathrm{y}_N
+    y_N
   \end{bmatrix} =
   \begin{bmatrix}
       1 & x_{1,1} & x_{1,2} & \dots  & x_{1,p} \\
@@ -309,293 +406,65 @@ For subjects $i = 1, \dots, N$ in rows and predictors $j = 1, \dots, p$ in colum
   \end{bmatrix} 
 \end{equation*}
 ```
--   Shorthand: $\mathrm{y} = \mathbf{X} \mathbf{\beta} + \mathbf{\varepsilon}$
 
-The **generalized linear model** (GLM) extends basic linear models by incorporating different
+The shorthand notation simply uses bolded symbols for the matrices above: $\mathbf{y} = \mathbf{X} \mathbf{\beta} + \mathbf{\varepsilon}$
 
--   functions that link the outcome to its linear predictor
--   distributional assumptions about the outcome('s errors)
-
-### Interpreting and Estimating Coefficients
-
-Regression models provide predictions of the outcome for any level(s) of the predictor(s)
-
--   **Only the intercept** ($\beta_0$) is interpreted as a mean:
-    -   The **expected value** ($\hat{\mathrm{y}}$) when each predictor $x=0$
--   Each slope ($\beta_j$) is interpreted as the **change** in $\hat{\mathrm{y}}$ as $x_j$ increases
-    -   i.e., How does $\mathrm{y}$ **covary** with $x_j$, given other $x$s?
-
-Ordinary Least Squares (OLS) estimator of coefficients minimizes overall discrepancies between observations and predictions ($\mathrm{y} - \hat{\mathrm{y}}$):
+The ordinary least-squares (OLS) estimator of $\beta$ minimizes the sum of squared residuals (equivalent to maximizing $R^2$):
 
 $$\beta = (\mathbf{X}^{'} \mathbf{X})^{-1} \mathbf{X}^{'} \mathbf{y}$$
 
--   Minimizing residual variance = maximizing $R^2$
--   $R$ = Cor($\mathrm{y}, \hat{\mathrm{y}}$)
+The OLS estimator operates on the raw data: the matrix of predictors ($\mathbf{X}$) and the vector of outcomes ($\mathbf{y}$).  But recall from the previous section that if the data are mean-centered, then $\mathbf{X}^{'} \mathbf{X}$ is the covariance matrix of the predictors.  In that case, there would be no vector of ones in the first column of $\mathbf{X}$, and the first element of $\beta$ (the intercept) can be omitted because it would be zero whenever $\mathbf{X}$ and $\mathbf{y}$ are mean-centered.  The syntax examples below calculate $\mathbf{\Sigma}_\mathbf{X}$ both manually and using the `cov()` function to demonstrate their equivalence.
 
-### Syntax Examples with Raw Data
-
-Using matrix algebra to estimate the coefficients:
-
-```{r XtXiXtY}
-y <- dat$ATT
-X <- cbind(`(Intercept)` = 1, # first column is constant
-           as.matrix(dat[c("MOOD","NFC","POS")]))
-solve(t(X) %*% X) %*% t(X) %*% y # beta
+```{r cov matrix X}
+## Manual calculation
+n <- nrow(dat) - 1
+Xc <- scale(dat[c("MOOD","NFC","POS")],
+            center = TRUE, scale = FALSE)
+t(Xc) %*% Xc / n
+## Automated function
+cov(dat[c("MOOD","NFC","POS")])
 ```
 
-Matches results from linear-modeling function:
+
+Likewise, $\mathbf{X}^{'} \mathbf{y}$ captures the covariances of predictors with the outcome:
+```{r cov Xy}
+## Manual calculation
+t(Xc) %*% dat$ATT  / n
+## Automated function
+cov(x = dat[c("MOOD","NFC","POS")],
+    y = dat$ATT)
+```
+
+
+Thus, even without access to raw data, the OLS estimates of slopes can be obtained using the data's summary statistics:
+```{r beta from cov}
+Xcov <- cov(dat[c("MOOD","NFC","POS")])
+Xy <- cov(x = dat[c("MOOD","NFC","POS")],
+          y = dat$ATT)
+solve(Xcov) %*% Xy # calculate slopes from (co)variances
+```
+
+These slopes match the estimates from R's built-in linear-modeling function:
 
 ```{r multiple reg}
 mod <- lm(ATT ~ MOOD + NFC + POS, data = dat)
 coef(mod)
 ```
 
-### Categorical Predictors
-
-Groups $g = 1, \ldots, G$ can be represented using numeric codes
-
--   dummy code for Group $g$ indicates whether someone belongs to Group $g$ (1) or not (0)
--   effects codes and orthogonal contrast codes are alternatives
-
-`MOOD` is an effects-coded to indicate experimental conditions
-
--   $+1$ = positive mood induction
--   $-1$ = neutral mood (control condition)
-
-```{r MOOD table}
-table(dat$MOOD)
-```
-
-#### Regression with a Baseline Group
-
-When we are interested in comparing scores on a variable across groups, we are typically interested in the differences between the group means. Recall that an intercept-only model estimates a single mean for everyone
-
-```{r intercept only}
-mod0 <- lm(POS ~ 1, data = dat)
-```
-
-When we add a predictor to the model, the intercept becomes a conditional mean (i.e., the expected value when each predictor = 0), and the slope represents how the means differ between groups.
-
-By default, `lm()` will create dummy codes for all levels of a `factor` variable, except for the first group (the baseline for comparison)
-
-```{r MOOD factor}
-dat$mood.f <- factor(dat$MOOD, levels = c(-1, 1),
-                     labels = c("neutral","positive"))
-coef(mod1 <- lm(POS ~ mood.f, data = dat))
-```
-
-**Practice interpreting** the intercept and slope:
-
-```{r group means+diff}
-aggregate(POS ~ mood.f, data = dat, FUN = mean)
-diff(aggregate(POS ~ mood.f, dat, mean)$POS)
-```
-
-#### Regression with Group-Specific Intercepts
-
-Rather than choosing a baseline group, we can omit the intercept from the model, in which case `lm()` will include all $G$ dummy codes (not $G-1$)
-
-```{r no intercept}
-coef(mod2 <- lm(POS ~ -1 + mood.f, data = dat))
-```
-
-Essentially, this model gives each group its own intercept, which is also the group-mean when there are no other predictors in the model
-
-```{r group means}
-aggregate(POS ~ mood.f, data = dat, FUN = mean)
-```
-
-Later in this course, you will learn about *multigroup SEM*, which is when the same SEM is fitted separately (but simultaneously) to 2 or more groups. Multigroup SEM is analogously advantageous, but (unlike in the GLM) variances can also differ across groups, so we do not need to assume homoskedasticity when using multigroup SEM.
-
-#### Baseline Comparison vs. Group-Specific Intercepts
-
-To test the $H_0$ that the group means are equivalent, we can compare the model that represents $H_0$ (i.e., the intercept-only model, which estimates a single mean for all groups) to the model that represents the alternative hypothesis ($H_A$) that group means may differ.
-
-Because the models `mod1` (intercept + 1 slope) and `mod2` (2 slopes that are group-specific intercepts) are statistically equivalent (i.e., they make identical predictions), the ANOVA results are identical:
-
-```{r ANOVAs}
-anova(mod0, mod1)
-anova(mod0, mod2)
-```
-
-That is, both `mod1` and `mod2` say that we need 2 parameters to make good predictors (i.e., separate means for 2 groups), whereas the intercept-only model says that estimating 1 parameter provides similar predictions.
-
-#### $t$ vs. $F$ Tests
-
-The group mean difference can also be tested if it is an estimated parameter, as it is in the baseline-group approach
-
-```{r print t tests, echo=FALSE}
-summary(mod1)
-```
-
--   Same $p$ value, $t^2 = F$ from ANOVA
-
-But group-specific intercepts (and slopes) can also be advantageous
-
--   Each group's intercept and slopes are model parameters, rather than functions of parameters when using a baseline group
-
-### Constant vs. Varying Slopes
-
-Suppose we are investigating the possibility that this grouping variable *moderates* the effect of another (focal) predictor: *Need for cognition* (NFC).
-
--   See [this primer](http://quantpsy.org/interact/interactions.htm) for a review.
-
-To represent the $H_0$ that NFC has a constant effect on positive thoughts across groups, we can add it as a predictor to the model without an intercept. In this case, rather than group-specific means, the dummy codes are *group-specific intercepts*.
-
-```{r slope w/o int-a}
-slope0 <- lm(POS ~ -1 + mood.f + NFC, data = dat)
-summary(slope0)
-```
-
-An interaction implies that slopes differ across groups
-
--   With a *baseline group*, the reference-group's slope is estimated, along with how much each of $G-1$ group's slopes differ from it
-
-```{r slope baseline}
-## or        POS ~ mood.f * NFC
-slope1 <- lm(POS ~ mood.f + NFC + mood.f:NFC, data = dat)
-summary(slope1)
-```
-
--   With *group-specific parameters*, each group's own intercept **and** slope are estimated, but multiplying each group's dummy code against the moderator
-
-```{r group slopes}
-## no "main effect" of NFC without a reference group
-slope2 <- lm(POS ~ -1 + mood.f + mood.f:NFC, data = dat)
-summary(slope2)
-```
-
-## Summary Statistics
-
-### Reimport Data
-
-The next section is easier if all the variables in the `data.frame` are `numeric`, so let's just use the given effects-coded `MOOD`
-
-```{r import again, message=FALSE}
-dat <- foreign::read.spss("demoData/MODMED.sav",
-                          to.data.frame = TRUE)[c(2, 3, 5, 7)]
-```
-
-### Raw Data vs. Summary Statistics
-
-Regression models include both mean-structure parameters (intercepts) and covariance-structure parameters (slopes, residual variance).
-
-Much of SEM involves the analysis of mean and covariance structures (MACS).
-
--   OLS regression minimizes discrepancies between observed and predicted **casewise observations** of $\mathrm{y}$
-    -   $\mathrm{y} - \hat{\mathrm{y}}$
--   LS and ML estimators in SEM minimize discrepancies between observed and predicted **summary statistics**
-    -   mean vector: $\bar{\mathrm{y}} - \widehat{\mu}$
-        -   $\bar{\mathrm{y}}$ = observed sample means
-        -   $\widehat{\mu}$ = expected/predicted/model-implied population means
-    -   covariance matrix: $\mathbf{S} - \widehat{\Sigma}$
-        -   $\mathbf{S}$ = observed sample (co)variances
-        -   $\widehat{\Sigma}$ = expected/predicted/model-implied population (co)variances
-
-Rather than raw data in $\mathbf{X}$ and $\mathbf{y}$, we can obtain the same estimates using summary statistics alone
-
-### What Is Covariance?
-
-Variance ($\sigma^2_y$) quantifies how individual scores vary
-
--   the mean of squared deviations from $\bar{y}$
-
-$$\text{Var}(\mathrm{y}) = \frac{\sum_{i=1}^N (\mathrm{y}_i - \bar{\mathrm{y}})^2}{N-1} = \frac{\sum_{i=1}^N (\mathrm{y}_i - \bar{\mathrm{y}})(\mathrm{y}_i - \bar{\mathrm{y}})}{N-1}$$
-
-Covariance ($\sigma_{xy}$) quantifies how $x$ and $\mathrm{y}$ are linearly related
-
--   *co*vary = vary together
-
-$$\text{Cov}(x,y) = \frac{\sum_{i=1}^N (x_i - \bar{x})(\mathrm{y}_i - \bar{\mathrm{y}})}{N-1}$$
-
-Difficult to interpret its absolute value
-
--   bound by $\pm \sigma_x \sigma_y$
--   so, dividing $\sigma_{xy}$ by $\sigma_x \sigma_y$ limits the range to $\pm 1$
-
-For $>2$ variables in a data set $\mathbf{Y}$, we can simultaneously calculate all (co)variances using matrix algebra:
-
-1.  Mean-center the data-matrix
-    -   $\mathbf{Y} - \bar{\mathbf{Y}}$
-2.  "Square" it by (pre)multiplying it by its transpose
-
-$$\mathbf\Sigma = (\mathbf{Y} - \bar{\mathbf{Y}})^{'} (\mathbf{Y} - \bar{\mathbf{Y}})$$
-
-Variances are on the diagonal of $\Sigma$, and each off-diagonal cell contains the covariance between the row-variable and the column-variable.
-
-### Interpreting Covariance
-
-We can scale the covariance to provide familiar interpretations.
-
-**Slopes** are change in $\mathrm{y}$ (or $x$) per unit $x$ (or $\mathrm{y}$)
-
--   divide by variance: $\beta_{yx} = \frac{\sigma_{xy}}{\sigma^2_x} = \frac{\sigma_{xy}}{\sigma_x \sigma_x}$ (or $\frac{\sigma_{xy}}{\sigma^2_y} = \frac{\sigma_{xy}}{\sigma_y \sigma_y}$)
-
-**Correlations** are standardized covariances (bound by $\pm 1$)
-
--   divide by both $SD$s: $\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}$
-
-This is how slopes can be standardized ($\beta^*$), which is a correlation when there is only 1 predictor
-
-```{=tex}
-\begin{align*}
-\beta^*_{yx} &= \beta_{yx} \times \frac{\sigma_x}{\sigma_y} \\
-&= \frac{\sigma_{xy}}{\mathcolorbox{orange}{\sigma_x} \sigma_x} \times \frac{\mathcolorbox{orange}{\sigma_x}}{\sigma_y} \text{ (\colorbox{orange}{these} cancel out)} \\
-&= \frac{\sigma_{xy}}{\sigma_x \sigma_y} (= \rho_{xy})
-\end{align*}
-```
-## Covariance Matrix
-
-With mean-centered predictors, $(\mathbf{X}^{'} \mathbf{X})^{-1}$ is their covariance matrix and $\mathbf{X}^{'} \mathrm{y}$ captures their covariances with the outcome
-
-```{r cov matrix}
-n <- nrow(dat) - 1L
-Xc <- scale(dat[c("MOOD","NFC","POS")],
-            center = TRUE, scale = FALSE)
-cbind(t(Xc) %*% Xc   ,   t(Xc) %*% y)  / n
-cov(dat)
-```
-
-### OLS with Summary Statistics: $\beta = (\mathbf{X}^{'} \mathbf{X})^{-1} \mathbf{X}^{'} \mathbf{y}$
-
-In simple regression (1 predictor), the slope is simply the covariance scaled by the predictor's variance: $\beta_1 = \frac{\text{Cov}(x,y)}{\text{Var}(x)}$
-
--   $\mathbf{X}^{'} \mathbf{X} = \text{Var}(x)$, so $(\mathbf{X}^{'} \mathbf{X})^{-1} = \frac{1}{\text{Var}(x)}$
-    -   matrix-multiplication by inverse $\approx$ division
--   $\mathbf{X}^{'} \mathbf{y} = \text{Cov}(x,y)$
-
-In multiple regression, the same formulas additionally account for covariances of $x$ and $\mathrm{y}$ with covariates
-
-```{r slope from cov}
-cov(dat)["POS","ATT"] / var(dat$POS)
-coef(lm(ATT ~ POS, data = dat))[["POS"]]
-```
-
 ### Intercepts and Means
 
-With uncentered data, $X$ can include a constant (all 1s) in the first column, which effectively "partials out" the mean.
+The `lm()` output above also provides an intercept because the data were not centered.  In this case, the matrix $X$ includes a constant (all 1s) in the first column, so its covariance matrix no longer resembles the covariance matrix of the predictors alone.  However, the covariation among predictors (and outcome) are still captured, and the column of 1s effectively "partials out" the mean from the predictors and outcome.  
 
-With no other predictors (an intercept-only model):
+In the simplest case without any predictors (an intercept-only model), it is easier to see how the vector of 1s captures mean-structure information.  Recall the formula for an arithmetic mean is the sum of $y$ scores, divided by the number of $y$ scores: $\bar{y} = \frac{1}{N} \sum y$.  For the intercept-only model, the intercept ($\beta_0$) is the mean:
 
-```{=tex}
-\begin{align*}
-\mathrm{y}_i &= \beta_0 (1) + \varepsilon_i \\
-    &= \bar{\mathrm{y}} + (\mathrm{y}_i - \bar{\mathrm{y}})
-\end{align*}
-```
--   the intercept is the mean
--   residuals are mean-centered $\mathrm{y}$ (same variance)
+- $(\mathbf{X}^{'} \mathbf{X})^{-1} = (\mathbf{1}^{'} \mathbf{1})^{-1} = \frac{1}{N}$
+- $\mathbf{X}^{'} \mathbf{y} = \sum y$
 
-OLS simplifies to the arithmetic mean formula: $\bar{\mathrm{y}} = \frac{\Sigma_y}{N}$
-
--   $(\mathbf{X}^{'} \mathbf{X})^{-1} = \frac{1}{N}$
--   $\mathbf{X}^{'} \mathrm{y} = \sum y$
-
-### Intercepts and Means
-
+The syntax example below demonstrates the equivalence:
 ```{r mean from OLS}
 ## using matrix algebra
-ONE <- X[ , "(Intercept)"]
+y   <- dat$ATT
+ONE <- rep(1, times = length(y))
 solve(t(ONE) %*% ONE) %*% t(ONE) %*% y
 ## fitted linear model with only an intercept
 coef(lm(y ~ 1))
@@ -603,31 +472,82 @@ coef(lm(y ~ 1))
 mean(y)
 ```
 
-### What Are Mean and Covariance *Structures*?
 
-Regression models already illustrate how means are structured
+Finally, we will apply the OLS formula ($\beta = (\mathbf{X}^{'} \mathbf{X})^{-1} \mathbf{X}^{'} \mathbf{y}$) to the full model with uncentered raw data (i.e., intercept included):
+```{r XtXiXtY}
+X <- cbind(`(Intercept)` = ONE, # first column is constant
+           as.matrix(dat[c("MOOD","NFC","POS")]))
+solve(t(X) %*% X) %*% t(X) %*% y # beta
+```
 
--   A mean ($\bar{\mathrm{y}}$) is an expected value under a particular condition ($\beta_0$ when $X=0$) plus predictors' means times their slopes: $\bar{\mathrm{y}} = \beta_0 + \sum \beta_j \bar{x}_j$
+Which again matches results from the `lm()` function:
+```{r repeat reg}
+coef(mod)
+```
 
-Recall how often statistical procedures involve partitioning variance into components
+When we add a predictor to the model, the intercept becomes a conditional mean (i.e., the expected value when each predictor = 0) rather than the "marginal" or "grand" mean.
 
--   Regression: explained ($R^2$) vs. unexplained (residual) variance
--   ANOVA: variance between vs. within groups
--   Multilevel modeling: Level-1 v. -2 variance
-    -   and (un)explained at each level
--   Between vs. within multiple imputations of missing data
 
-Covariance can also be partitioned into components
+### Categorical Predictors
 
--   Variance is merely a variable covarying with itself
--   We can account for multiple reasons why 2 variables are related
+Recall also that groups $g = 1, \ldots, G$ can be represented using numeric codes, very often 1s, such as dummy codes.  For example, a dummy code for Group $g$ indicates whether someone belongs to Group $g$ (1) or not (0).  Alternative coding strategies include orthogonal contrast codes or effects coding, the latter of which was how our `MOOD` variable was coded to indicate experimental conditions:
 
-The decomposition of covariances will be explained after introducing path analysis.
+- $+1$ = positive mood induction
+- $-1$ = neutral mood (control condition)
+
+```{r MOOD table}
+table(dat$MOOD)
+```
+
+The algebra is identical, capturing how dummy codes covary with each other and with the outcome.  However, the set of all $G$ dummy codes would be perfectly multicollinear with the constant used to estimate the intercept (i.e., the column of 1s is exactly equal to the sum of the dummy-coded columns).  This is why we typically estimate slopes for $G-1$ dummy codes, treating the last one as the reference group.  Thus, each dummy-code's slope represents how that group's mean differs from the reference group's mean.
+
+#### Regression with Group-Specific Intercepts
+
+Rather than choosing a baseline group, we can omit the intercept from the model by dropping the vector of 1s from $X$.  This prevents multicollinearity among the dummy codes and the constant, so `lm()` will include all $G$ dummy codes (not $G-1$). 
+
+```{r no intercept}
+dat$mood.f <- factor(dat$MOOD, levels = c(-1, 1),
+                     labels = c("neutral","positive"))
+coef( lm(POS ~ -1 + mood.f, data = dat) )
+```
+
+Essentially, this model gives each group its own intercept, which is also the group-mean when there are no other predictors in the model
+```{r group means}
+aggregate(POS ~ mood.f, data = dat, FUN = mean)
+```
+
+Later in this course, you will learn about *multigroup SEM*, which is when the same SEM is fitted separately (but simultaneously) to 2 or more groups.  Multigroup SEM is analogously advantageous, but (unlike in the GLM) variances can also differ across groups, so we do not need to assume homoskedasticity when using multigroup SEM.
+
+Slopes can also be estimated separately per group when the intercept is dropped from the model.  This is specified by multiplying the predictor by each dummy code.
+```{r group slopes}
+## no "main/simple effect" of NFC without a reference group
+mod1 <- lm(POS ~ -1 + mood.f + mood.f:NFC, data = dat)
+coef(mod1)
+```
+
+This is equivalent to estimating the effect of `NFC` separately in each group.
+```{r separate groups}
+mod.neu <- lm(POS ~ NFC, data = dat,
+              subset = dat$mood.f == "neutral")
+coef(mod.neu)
+mod.pos <- lm(POS ~ NFC, data = dat,
+              subset = dat$mood.f == "positive")
+coef(mod.pos)
+```
+
+
+We will discuss (dis)advantages of the multigroup approach in the following chapter, after introducing regression models as SEM.
+
+
+## Summary
+
+This chapter introduced the idea of analyzing mean and covariance structures, which partition descriptive statistics (means and (co)variances) into meaningful components.  This enables researchers to impose a hypothesized structure on why variables are related to each other.  The next chapter will introduce the SEM framework, which was designed for researchers to specify such theoretical structures as statistical models, and fit them to data in order to estimate and test parameters of interest.  
+
 
 ## References {-}
 
-Bollen, K. A. (1989). *Structural equations with latent variables*. Wiley. <http://dx.doi.org/10.1002/9781118619179>
+Bollen, K. A. (1989). *Structural equations with latent variables*. Wiley. <https://doi.org/10.1002/9781118619179>
 
-Rosseel, Y. (2012). `lavaan`: An R package for structural equation modeling. *Journal of Statistical Software, 48*(2), 1--36. <http://dx.doi.org/10.18637/jss.v048.i02>
+Rosseel, Y. (2012). `lavaan`: An R package for structural equation modeling. *Journal of Statistical Software, 48*(2), 1--36. <https://doi.org/10.18637/jss.v048.i02>
 
-Schumacker, R. E., & Lomax, R. G. (2016). *A beginner's guide to structural equation modeling* (4th ed.). Lawrence Erlbaum.
+Schumacker, R. E., & Lomax, R. G. (2016). *A beginner's guide to structural equation modeling* (4th ed.). Lawrence Erlbaum. <https://doi.org/10.4324/9781315749105>

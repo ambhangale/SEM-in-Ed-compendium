@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Using lavaan to Run Regression and ANOVA as a SEM | Compendium Structural Equation Modeling in Educational Research</title>
-  <meta name="description" content="2 Using lavaan to Run Regression and ANOVA as a SEM | Compendium Structural Equation Modeling in Educational Research" />
+  <title>2 Using lavaan to Run Regression and ANOVA as a SEM | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
+  <meta name="description" content="2 Using lavaan to Run Regression and ANOVA as a SEM | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Using lavaan to Run Regression and ANOVA as a SEM | Compendium Structural Equation Modeling in Educational Research" />
+  <meta property="og:title" content="2 Using lavaan to Run Regression and ANOVA as a SEM | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
   
   
-  <meta name="github-repo" content="LJGroot/SEM-Compendium" />
+  <meta name="github-repo" content="TDJorgensen/SEM-in-Ed-compendium" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Using lavaan to Run Regression and ANOVA as a SEM | Compendium Structural Equation Modeling in Educational Research" />
+  <meta name="twitter:title" content="2 Using lavaan to Run Regression and ANOVA as a SEM | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   
   
   
@@ -139,36 +139,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="ch1.html"><a href="ch1.html"><i class="fa fa-check"></i><b>1</b> Regression as Mean- and Covariance-Structure Analysis</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="ch1.html"><a href="ch1.html#installing-lavaan"><i class="fa fa-check"></i><b>1.1</b> Installing <code>lavaan</code></a></li>
-<li class="chapter" data-level="1.2" data-path="ch1.html"><a href="ch1.html#types-of-data-used-in-sem"><i class="fa fa-check"></i><b>1.2</b> Types of Data Used in SEM</a>
+<li class="chapter" data-level="1.1" data-path="ch1.html"><a href="ch1.html#what-are-mean-and-covariance-structures"><i class="fa fa-check"></i><b>1.1</b> What Are Mean and Covariance <em>Structures</em>?</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="ch1.html"><a href="ch1.html#raw-data"><i class="fa fa-check"></i><b>1.2.1</b> Raw Data</a></li>
-<li class="chapter" data-level="1.2.2" data-path="ch1.html"><a href="ch1.html#summary-statistics-from-raw-data"><i class="fa fa-check"></i><b>1.2.2</b> Summary Statistics from Raw Data</a></li>
-<li class="chapter" data-level="1.2.3" data-path="ch1.html"><a href="ch1.html#importing-summary-data"><i class="fa fa-check"></i><b>1.2.3</b> Importing Summary Data</a></li>
+<li class="chapter" data-level="1.1.1" data-path="ch1.html"><a href="ch1.html#types-of-data-used-in-sem"><i class="fa fa-check"></i><b>1.1.1</b> Types of Data Used in SEM</a></li>
+<li class="chapter" data-level="1.1.2" data-path="ch1.html"><a href="ch1.html#interpreting-covariance"><i class="fa fa-check"></i><b>1.1.2</b> Interpreting Covariance</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="ch1.html"><a href="ch1.html#regression-review"><i class="fa fa-check"></i><b>1.3</b> Regression Review</a>
+<li class="chapter" data-level="1.2" data-path="ch1.html"><a href="ch1.html#importing-data-for-sem"><i class="fa fa-check"></i><b>1.2</b> Importing Data for SEM</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="ch1.html"><a href="ch1.html#installing-lavaan"><i class="fa fa-check"></i><b>1.2.1</b> Installing <code>lavaan</code></a></li>
+<li class="chapter" data-level="1.2.2" data-path="ch1.html"><a href="ch1.html#importing-raw-data"><i class="fa fa-check"></i><b>1.2.2</b> Importing Raw Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="ch1.html"><a href="ch1.html#calculate-summary-statistics-from-raw-data"><i class="fa fa-check"></i><b>1.2.3</b> Calculate Summary Statistics from Raw Data</a></li>
+<li class="chapter" data-level="1.2.4" data-path="ch1.html"><a href="ch1.html#importing-summary-data"><i class="fa fa-check"></i><b>1.2.4</b> Importing Summary Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="ch1.html"><a href="ch1.html#regression-using-matrix-algebra"><i class="fa fa-check"></i><b>1.3</b> Regression Using Matrix Algebra</a>
 <ul>
 <li class="chapter" data-level="1.3.1" data-path="ch1.html"><a href="ch1.html#linear-regression-models"><i class="fa fa-check"></i><b>1.3.1</b> Linear Regression Models</a></li>
-<li class="chapter" data-level="1.3.2" data-path="ch1.html"><a href="ch1.html#matrix-notation"><i class="fa fa-check"></i><b>1.3.2</b> Matrix Notation</a></li>
-<li class="chapter" data-level="1.3.3" data-path="ch1.html"><a href="ch1.html#interpreting-and-estimating-coefficients"><i class="fa fa-check"></i><b>1.3.3</b> Interpreting and Estimating Coefficients</a></li>
-<li class="chapter" data-level="1.3.4" data-path="ch1.html"><a href="ch1.html#syntax-examples-with-raw-data"><i class="fa fa-check"></i><b>1.3.4</b> Syntax Examples with Raw Data</a></li>
-<li class="chapter" data-level="1.3.5" data-path="ch1.html"><a href="ch1.html#categorical-predictors"><i class="fa fa-check"></i><b>1.3.5</b> Categorical Predictors</a></li>
-<li class="chapter" data-level="1.3.6" data-path="ch1.html"><a href="ch1.html#constant-vs.-varying-slopes"><i class="fa fa-check"></i><b>1.3.6</b> Constant vs. Varying Slopes</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ch1.html"><a href="ch1.html#intercepts-and-means"><i class="fa fa-check"></i><b>1.3.2</b> Intercepts and Means</a></li>
+<li class="chapter" data-level="1.3.3" data-path="ch1.html"><a href="ch1.html#categorical-predictors"><i class="fa fa-check"></i><b>1.3.3</b> Categorical Predictors</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="ch1.html"><a href="ch1.html#summary-statistics"><i class="fa fa-check"></i><b>1.4</b> Summary Statistics</a>
-<ul>
-<li class="chapter" data-level="1.4.1" data-path="ch1.html"><a href="ch1.html#reimport-data"><i class="fa fa-check"></i><b>1.4.1</b> Reimport Data</a></li>
-<li class="chapter" data-level="1.4.2" data-path="ch1.html"><a href="ch1.html#raw-data-vs.-summary-statistics"><i class="fa fa-check"></i><b>1.4.2</b> Raw Data vs. Summary Statistics</a></li>
-<li class="chapter" data-level="1.4.3" data-path="ch1.html"><a href="ch1.html#what-is-covariance"><i class="fa fa-check"></i><b>1.4.3</b> What Is Covariance?</a></li>
-<li class="chapter" data-level="1.4.4" data-path="ch1.html"><a href="ch1.html#interpreting-covariance"><i class="fa fa-check"></i><b>1.4.4</b> Interpreting Covariance</a></li>
-</ul></li>
-<li class="chapter" data-level="1.5" data-path="ch1.html"><a href="ch1.html#covariance-matrix"><i class="fa fa-check"></i><b>1.5</b> Covariance Matrix</a>
-<ul>
-<li class="chapter" data-level="1.5.1" data-path="ch1.html"><a href="ch1.html#ols-with-summary-statistics-beta-mathbfx-mathbfx-1-mathbfx-mathbfy"><i class="fa fa-check"></i><b>1.5.1</b> OLS with Summary Statistics: <span class="math inline">\(\beta = (\mathbf{X}^{&#39;} \mathbf{X})^{-1} \mathbf{X}^{&#39;} \mathbf{y}\)</span></a></li>
-<li class="chapter" data-level="1.5.2" data-path="ch1.html"><a href="ch1.html#intercepts-and-means"><i class="fa fa-check"></i><b>1.5.2</b> Intercepts and Means</a></li>
-<li class="chapter" data-level="1.5.3" data-path="ch1.html"><a href="ch1.html#intercepts-and-means-1"><i class="fa fa-check"></i><b>1.5.3</b> Intercepts and Means</a></li>
-<li class="chapter" data-level="1.5.4" data-path="ch1.html"><a href="ch1.html#what-are-mean-and-covariance-structures"><i class="fa fa-check"></i><b>1.5.4</b> What Are Mean and Covariance <em>Structures</em>?</a></li>
-</ul></li>
+<li class="chapter" data-level="1.4" data-path="ch1.html"><a href="ch1.html#summary"><i class="fa fa-check"></i><b>1.4</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="ch1.html"><a href="ch1.html#references"><i class="fa fa-check"></i>References</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="ch2.html"><a href="ch2.html"><i class="fa fa-check"></i><b>2</b> Using <code>lavaan</code> to Run Regression and ANOVA as a SEM</a>
@@ -386,7 +375,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.5" data-path="ch14.html"><a href="ch14.html#fitting-a-factor-model-using-lavaan"><i class="fa fa-check"></i><b>14.5</b> Fitting a factor model using lavaan</a>
 <ul>
 <li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#script-14.1"><i class="fa fa-check"></i>Script 14.1</a></li>
-<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#script-14.2"><i class="fa fa-check"></i>Script 14.2</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#references-9"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#appendix-2"><i class="fa fa-check"></i>Appendix</a>
@@ -597,7 +585,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Compendium Structural Equation Modeling in Educational Research</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A <code>lavaan</code> Compendium for Structural Equation Modeling in Educational Research</a>
           </h1>
         </div>
 
@@ -612,31 +600,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="import-example-data" class="section level3 hasAnchor" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Import Example Data<a href="ch2.html#import-example-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We will use data from a tutorial published on the <a href="http://www.socialchangelab.net/uploads/9/8/7/7/98771854/moderated_mediation_example_write-up.pdf">Social Change Lab’s web site</a>.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="ch2.html#cb96-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> foreign<span class="sc">::</span><span class="fu">read.spss</span>(<span class="st">&quot;demoData/MODMED.sav&quot;</span>, <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>)[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)]</span>
-<span id="cb96-2"><a href="ch2.html#cb96-2" tabindex="-1"></a><span class="do">## Save summary statistics</span></span>
-<span id="cb96-3"><a href="ch2.html#cb96-3" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(dat)</span>
-<span id="cb96-4"><a href="ch2.html#cb96-4" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">cov</span>(dat)</span>
-<span id="cb96-5"><a href="ch2.html#cb96-5" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dat)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="ch2.html#cb87-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> foreign<span class="sc">::</span><span class="fu">read.spss</span>(<span class="st">&quot;demoData/MODMED.sav&quot;</span>, <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>)[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)]</span>
+<span id="cb87-2"><a href="ch2.html#cb87-2" tabindex="-1"></a><span class="do">## Save summary statistics</span></span>
+<span id="cb87-3"><a href="ch2.html#cb87-3" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(dat)</span>
+<span id="cb87-4"><a href="ch2.html#cb87-4" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">cov</span>(dat)</span>
+<span id="cb87-5"><a href="ch2.html#cb87-5" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dat)</span></code></pre></div>
 <p>Recall from <a href="ch1.html#ch1">Chapter 1</a> that:</p>
 <ul>
 <li>SEM can equivalently be fitted to summary statistics rather than raw data</li>
 <li>It is possible to fit a “multigroup SEM” to obtain parameter estimates separately per group</li>
 </ul>
 <p>This chapter will show how to fit a multigroup SEM to raw data as well as to summary statistics. For the latter, we require group-specific summary statistics, which <a href="ch1.html#ch1">Chapter 1</a> discussed how to obtain:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="ch2.html#cb97-1" tabindex="-1"></a><span class="do">## Create factor from effects-coded conditions</span></span>
-<span id="cb97-2"><a href="ch2.html#cb97-2" tabindex="-1"></a>dat<span class="sc">$</span>mood.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>MOOD, <span class="at">levels =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb97-3"><a href="ch2.html#cb97-3" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;neutral&quot;</span>,<span class="st">&quot;positive&quot;</span>))</span>
-<span id="cb97-4"><a href="ch2.html#cb97-4" tabindex="-1"></a><span class="do">## Save lists of group-specific summary statistics</span></span>
-<span id="cb97-5"><a href="ch2.html#cb97-5" tabindex="-1"></a>CC <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATT&quot;</span>,<span class="st">&quot;NFC&quot;</span>,<span class="st">&quot;POS&quot;</span>)   <span class="co"># when group = &quot;mood.f&quot;</span></span>
-<span id="cb97-6"><a href="ch2.html#cb97-6" tabindex="-1"></a>gM <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">&quot;neutral&quot;</span>,<span class="st">&quot;positive&quot;</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb97-7"><a href="ch2.html#cb97-7" tabindex="-1"></a>             <span class="at">FUN =</span> <span class="cf">function</span>(g) <span class="fu">colMeans</span>(dat[dat<span class="sc">$</span>mood.f <span class="sc">==</span> g, CC]) )</span>
-<span id="cb97-8"><a href="ch2.html#cb97-8" tabindex="-1"></a>gS <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">&quot;neutral&quot;</span>,<span class="st">&quot;positive&quot;</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb97-9"><a href="ch2.html#cb97-9" tabindex="-1"></a>             <span class="at">FUN =</span> <span class="cf">function</span>(g) <span class="fu">cov</span>(dat[dat<span class="sc">$</span>mood.f <span class="sc">==</span> g, CC]) )</span>
-<span id="cb97-10"><a href="ch2.html#cb97-10" tabindex="-1"></a>gN <span class="ot">&lt;-</span> <span class="fu">table</span>(dat<span class="sc">$</span>mood.f)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="ch2.html#cb88-1" tabindex="-1"></a><span class="do">## Create factor from effects-coded conditions</span></span>
+<span id="cb88-2"><a href="ch2.html#cb88-2" tabindex="-1"></a>dat<span class="sc">$</span>mood.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>MOOD, <span class="at">levels =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb88-3"><a href="ch2.html#cb88-3" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;neutral&quot;</span>,<span class="st">&quot;positive&quot;</span>))</span>
+<span id="cb88-4"><a href="ch2.html#cb88-4" tabindex="-1"></a><span class="do">## Save lists of group-specific summary statistics</span></span>
+<span id="cb88-5"><a href="ch2.html#cb88-5" tabindex="-1"></a>CC <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATT&quot;</span>,<span class="st">&quot;NFC&quot;</span>,<span class="st">&quot;POS&quot;</span>)   <span class="co"># when group = &quot;mood.f&quot;</span></span>
+<span id="cb88-6"><a href="ch2.html#cb88-6" tabindex="-1"></a>gM <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">&quot;neutral&quot;</span>,<span class="st">&quot;positive&quot;</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb88-7"><a href="ch2.html#cb88-7" tabindex="-1"></a>             <span class="at">FUN =</span> <span class="cf">function</span>(g) <span class="fu">colMeans</span>(dat[dat<span class="sc">$</span>mood.f <span class="sc">==</span> g, CC]) )</span>
+<span id="cb88-8"><a href="ch2.html#cb88-8" tabindex="-1"></a>gS <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">&quot;neutral&quot;</span>,<span class="st">&quot;positive&quot;</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb88-9"><a href="ch2.html#cb88-9" tabindex="-1"></a>             <span class="at">FUN =</span> <span class="cf">function</span>(g) <span class="fu">cov</span>(dat[dat<span class="sc">$</span>mood.f <span class="sc">==</span> g, CC]) )</span>
+<span id="cb88-10"><a href="ch2.html#cb88-10" tabindex="-1"></a>gN <span class="ot">&lt;-</span> <span class="fu">table</span>(dat<span class="sc">$</span>mood.f)</span></code></pre></div>
 </div>
 <div id="load-lavaan-into-workspace" class="section level3 hasAnchor" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Load <code>lavaan</code> into Workspace<a href="ch2.html#load-lavaan-into-workspace" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="ch2.html#cb98-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="ch2.html#cb89-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span></code></pre></div>
 </div>
 </div>
 <div id="multiple-regression-in-sem" class="section level2 hasAnchor" number="2.2">
@@ -644,7 +632,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="lavaan-syntax" class="section level3 hasAnchor" number="2.2.1">
 <h3><span class="header-section-number">2.2.1</span> <code>lavaan</code> Syntax<a href="ch2.html#lavaan-syntax" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The standard syntax for regression is a formula object. To regress <code>ATT</code>itude on <code>MOOD</code> condition, <code>N</code>eed <code>F</code>or <code>C</code>ognition, and <code>POS</code>itive thoughts:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="ch2.html#cb99-1" tabindex="-1"></a>ATT <span class="sc">~</span> MOOD <span class="sc">+</span> NFC <span class="sc">+</span> POS</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="ch2.html#cb90-1" tabindex="-1"></a>ATT <span class="sc">~</span> MOOD <span class="sc">+</span> NFC <span class="sc">+</span> POS</span></code></pre></div>
 <p>SEM is a multivariate modeling framework</p>
 <ul>
 <li>There can be many outcome variables, each with its own formula</li>
@@ -652,12 +640,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>There can be unobserved (latent) variables</li>
 </ul>
 <p>So <code>lavaan</code> requires collecting these <em>simultaneous equations</em> in a <code>character</code> vector, even when there is only one outcome</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="ch2.html#cb100-1" tabindex="-1"></a><span class="st">&#39; ATT ~ MOOD + NFC + POS &#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="ch2.html#cb91-1" tabindex="-1"></a><span class="st">&#39; ATT ~ MOOD + NFC + POS &#39;</span></span></code></pre></div>
 <div id="ols-regression" class="section level4 hasAnchor" number="2.2.1.1">
 <h4><span class="header-section-number">2.2.1.1</span> OLS Regression<a href="ch2.html#ols-regression" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Using the familiar <code>lm()</code> function to obtain OLS estimates of a regression model:</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="ch2.html#cb101-1" tabindex="-1"></a>ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(ATT <span class="sc">~</span> MOOD <span class="sc">+</span> NFC <span class="sc">+</span> POS, <span class="at">data =</span> dat)</span>
-<span id="cb101-2"><a href="ch2.html#cb101-2" tabindex="-1"></a><span class="fu">summary</span>(ols)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="ch2.html#cb92-1" tabindex="-1"></a>ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(ATT <span class="sc">~</span> MOOD <span class="sc">+</span> NFC <span class="sc">+</span> POS, <span class="at">data =</span> dat)</span>
+<span id="cb92-2"><a href="ch2.html#cb92-2" tabindex="-1"></a><span class="fu">summary</span>(ols)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = ATT ~ MOOD + NFC + POS, data = dat)
@@ -689,14 +677,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>growth()</code> is meant for very simple latent growth curve models, also discussed in a later <a href="ch26.html#ch26">chapter</a></li>
 </ul>
 <p>For now, we will use the <code>sem()</code> function similar to the way we use the <code>lm()</code> function, including how we obtain results from <code>summary()</code>.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="ch2.html#cb103-1" tabindex="-1"></a><span class="do">## Raw Data</span></span>
-<span id="cb103-2"><a href="ch2.html#cb103-2" tabindex="-1"></a>mle <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;ATT ~ MOOD + NFC + POS&#39;</span>, <span class="at">data =</span> dat,</span>
-<span id="cb103-3"><a href="ch2.html#cb103-3" tabindex="-1"></a>           <span class="at">meanstructure =</span> <span class="cn">TRUE</span>) <span class="co"># explicitly request intercept</span></span>
-<span id="cb103-4"><a href="ch2.html#cb103-4" tabindex="-1"></a><span class="do">## Summary Data</span></span>
-<span id="cb103-5"><a href="ch2.html#cb103-5" tabindex="-1"></a>mle <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;ATT ~ MOOD + NFC + POS&#39;</span>, <span class="at">sample.nobs =</span> N,</span>
-<span id="cb103-6"><a href="ch2.html#cb103-6" tabindex="-1"></a>           <span class="at">sample.cov =</span> S, <span class="at">sample.mean =</span> M)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="ch2.html#cb94-1" tabindex="-1"></a><span class="do">## Raw Data</span></span>
+<span id="cb94-2"><a href="ch2.html#cb94-2" tabindex="-1"></a>mle <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;ATT ~ MOOD + NFC + POS&#39;</span>, <span class="at">data =</span> dat,</span>
+<span id="cb94-3"><a href="ch2.html#cb94-3" tabindex="-1"></a>           <span class="at">meanstructure =</span> <span class="cn">TRUE</span>) <span class="co"># explicitly request intercept</span></span>
+<span id="cb94-4"><a href="ch2.html#cb94-4" tabindex="-1"></a><span class="do">## Summary Data</span></span>
+<span id="cb94-5"><a href="ch2.html#cb94-5" tabindex="-1"></a>mle <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;ATT ~ MOOD + NFC + POS&#39;</span>, <span class="at">sample.nobs =</span> N,</span>
+<span id="cb94-6"><a href="ch2.html#cb94-6" tabindex="-1"></a>           <span class="at">sample.cov =</span> S, <span class="at">sample.mean =</span> M)</span></code></pre></div>
 <p>Now inspect the output. Identify each parameter estimate, and compare it to the corresponding OLS estimate in the <code>lm()</code> results.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="ch2.html#cb104-1" tabindex="-1"></a><span class="fu">summary</span>(mle, <span class="at">header =</span> <span class="cn">FALSE</span>, <span class="at">nd =</span> <span class="dv">4</span>) <span class="co"># rsquare = TRUE also available</span></span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="ch2.html#cb95-1" tabindex="-1"></a><span class="fu">summary</span>(mle, <span class="at">header =</span> <span class="cn">FALSE</span>, <span class="at">nd =</span> <span class="dv">4</span>) <span class="co"># rsquare = TRUE also available</span></span></code></pre></div>
 <pre><code>## 
 ## Parameter Estimates:
 ## 
@@ -718,7 +706,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Variances:
 ##                     Estimate   Std.Err   z-value   P(&gt;|z|)
 ##    .ATT             164.9191   23.3231    7.0711    0.0000</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="ch2.html#cb106-1" tabindex="-1"></a><span class="fu">sigma</span>(ols)<span class="sc">^</span><span class="dv">2</span> <span class="co"># compare to residual variance from OLS</span></span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="ch2.html#cb97-1" tabindex="-1"></a><span class="fu">sigma</span>(ols)<span class="sc">^</span><span class="dv">2</span> <span class="co"># compare to residual variance from OLS</span></span></code></pre></div>
 <pre><code>## [1] 171.7908</code></pre>
 </div>
 <div id="comparecontrast-estimates" class="section level4 hasAnchor" number="2.2.1.3">
@@ -729,11 +717,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>SEM estimators choose estimates that reproduce <span class="math inline">\(\bar{\mathrm{y}}\)</span> and <span class="math inline">\(S\)</span></li>
 </ul>
 <p>If we calculate variance of the residuals (<span class="math inline">\(\mathrm{y}_i - \hat{\mathrm{y}}\)</span>) using the “population formula” (dividing by <span class="math inline">\(N\)</span>), we obtain <code>lavaan</code>’s result</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="ch2.html#cb108-1" tabindex="-1"></a><span class="fu">sigma</span>(ols)<span class="sc">^</span><span class="dv">2</span> <span class="co"># residual variance from OLS</span></span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="ch2.html#cb99-1" tabindex="-1"></a><span class="fu">sigma</span>(ols)<span class="sc">^</span><span class="dv">2</span> <span class="co"># residual variance from OLS</span></span></code></pre></div>
 <pre><code>## [1] 171.7908</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="ch2.html#cb110-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">resid</span>(ols)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> N <span class="co"># manually calculated using POPULATION formula</span></span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="ch2.html#cb101-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">resid</span>(ols)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> N <span class="co"># manually calculated using POPULATION formula</span></span></code></pre></div>
 <pre><code>## [1] 164.9191</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="ch2.html#cb112-1" tabindex="-1"></a><span class="fu">coef</span>(mle)[[<span class="st">&quot;ATT~~ATT&quot;</span>]] <span class="co"># matches lavaan</span></span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="ch2.html#cb103-1" tabindex="-1"></a><span class="fu">coef</span>(mle)[[<span class="st">&quot;ATT~~ATT&quot;</span>]] <span class="co"># matches lavaan</span></span></code></pre></div>
 <pre><code>## [1] 164.9191</code></pre>
 <ul>
 <li><em>Note</em>: The double-tilde (<code>~~</code>) operator signifies a two-headed arrow, in contrast to the one-headed arrow (<code>~</code>) of a directed effect</li>
@@ -763,9 +751,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="model-comparison-with-ols" class="section level3 hasAnchor" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Model Comparison with OLS<a href="ch2.html#model-comparison-with-ols" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To test the <span class="math inline">\(H_0\)</span> that the experimental manipulation (<code>MOOD</code>) explains <span class="math inline">\(R^2=0\)</span>% of variance in <code>POS</code>itive thoughts, compare models that represent the <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span></p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="ch2.html#cb114-1" tabindex="-1"></a>ols0 <span class="ot">&lt;-</span>  <span class="fu">lm</span>(POS <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> dat)</span>
-<span id="cb114-2"><a href="ch2.html#cb114-2" tabindex="-1"></a>ols1 <span class="ot">&lt;-</span>  <span class="fu">lm</span>(POS <span class="sc">~</span> MOOD, <span class="at">data =</span> dat)</span>
-<span id="cb114-3"><a href="ch2.html#cb114-3" tabindex="-1"></a><span class="fu">anova</span>(ols0, ols1)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="ch2.html#cb105-1" tabindex="-1"></a>ols0 <span class="ot">&lt;-</span>  <span class="fu">lm</span>(POS <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> dat)</span>
+<span id="cb105-2"><a href="ch2.html#cb105-2" tabindex="-1"></a>ols1 <span class="ot">&lt;-</span>  <span class="fu">lm</span>(POS <span class="sc">~</span> MOOD, <span class="at">data =</span> dat)</span>
+<span id="cb105-3"><a href="ch2.html#cb105-3" tabindex="-1"></a><span class="fu">anova</span>(ols0, ols1)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: POS ~ 1
@@ -780,13 +768,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="model-comparison-with-lavaan" class="section level3 hasAnchor" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Model Comparison with <code>lavaan</code><a href="ch2.html#model-comparison-with-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Omitting variables from an SEM means they are removed from <span class="math inline">\(\bar{\mathrm{y}}\)</span> and <span class="math inline">\(S\)</span>, returning a warning</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="ch2.html#cb116-1" tabindex="-1"></a>mle0 <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1&#39;</span>, <span class="at">data =</span> dat)</span>
-<span id="cb116-2"><a href="ch2.html#cb116-2" tabindex="-1"></a>mle1 <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1 + MOOD&#39;</span>, <span class="at">data =</span> dat)</span>
-<span id="cb116-3"><a href="ch2.html#cb116-3" tabindex="-1"></a><span class="fu">anova</span>(mle0, mle1)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="ch2.html#cb107-1" tabindex="-1"></a>mle0 <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1&#39;</span>, <span class="at">data =</span> dat)</span>
+<span id="cb107-2"><a href="ch2.html#cb107-2" tabindex="-1"></a>mle1 <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1 + MOOD&#39;</span>, <span class="at">data =</span> dat)</span>
+<span id="cb107-3"><a href="ch2.html#cb107-3" tabindex="-1"></a><span class="fu">anova</span>(mle0, mle1)</span></code></pre></div>
 <pre><code>## ... models are based on a different set of observed variables</code></pre>
 <p>Instead, <strong>keep predictor(s) in the model</strong>, but fix the slope(s) to zero</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="ch2.html#cb118-1" tabindex="-1"></a>mle0 <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1 + 0*MOOD&#39;</span>, <span class="at">data =</span> dat)</span>
-<span id="cb118-2"><a href="ch2.html#cb118-2" tabindex="-1"></a><span class="fu">anova</span>(mle0, mle1)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="ch2.html#cb109-1" tabindex="-1"></a>mle0 <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1 + 0*MOOD&#39;</span>, <span class="at">data =</span> dat)</span>
+<span id="cb109-2"><a href="ch2.html#cb109-2" tabindex="-1"></a><span class="fu">anova</span>(mle0, mle1)</span></code></pre></div>
 <pre><code>## 
 ## Chi-Squared Difference Test
 ## 
@@ -807,13 +795,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>but the asterisk (<code>*</code>) is reserved for assigning labels or values to parameters</li>
 </ul>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="ch2.html#cb120-1" tabindex="-1"></a>POS <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> MOOD <span class="sc">+</span> NFC <span class="sc">+</span> MOOD<span class="sc">:</span>NFC</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="ch2.html#cb111-1" tabindex="-1"></a>POS <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> MOOD <span class="sc">+</span> NFC <span class="sc">+</span> MOOD<span class="sc">:</span>NFC</span></code></pre></div>
 <p><code>MOOD:NFC</code> is now an additional variable in <span class="math inline">\(\bar{\mathrm{y}}\)</span> and <span class="math inline">\(S\)</span>, so comparison to any model without that interaction term requires including the product term but fixing its effect to zero</p>
 <div id="estimate-and-test-an-interaction-with-ols" class="section level4 hasAnchor" number="2.3.3.1">
 <h4><span class="header-section-number">2.3.3.1</span> Estimate and Test an Interaction with OLS<a href="ch2.html#estimate-and-test-an-interaction-with-ols" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="ch2.html#cb121-1" tabindex="-1"></a>ols.hom <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> MOOD <span class="sc">+</span> NFC, <span class="at">data =</span> dat)</span>
-<span id="cb121-2"><a href="ch2.html#cb121-2" tabindex="-1"></a>ols.het <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> MOOD <span class="sc">+</span> NFC <span class="sc">+</span> MOOD<span class="sc">:</span>NFC, <span class="at">data =</span> dat)</span>
-<span id="cb121-3"><a href="ch2.html#cb121-3" tabindex="-1"></a><span class="fu">anova</span>(ols.hom, ols.het)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="ch2.html#cb112-1" tabindex="-1"></a>ols.hom <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> MOOD <span class="sc">+</span> NFC, <span class="at">data =</span> dat)</span>
+<span id="cb112-2"><a href="ch2.html#cb112-2" tabindex="-1"></a>ols.het <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> MOOD <span class="sc">+</span> NFC <span class="sc">+</span> MOOD<span class="sc">:</span>NFC, <span class="at">data =</span> dat)</span>
+<span id="cb112-3"><a href="ch2.html#cb112-3" tabindex="-1"></a><span class="fu">anova</span>(ols.hom, ols.het)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: POS ~ MOOD + NFC
@@ -830,9 +818,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="estimate-and-test-an-interaction-with-lavaan" class="section level4 hasAnchor" number="2.3.3.2">
 <h4><span class="header-section-number">2.3.3.2</span> Estimate and Test an Interaction with <code>lavaan</code><a href="ch2.html#estimate-and-test-an-interaction-with-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="ch2.html#cb123-1" tabindex="-1"></a>mle.hom <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1 + MOOD + NFC + 0*MOOD:NFC&#39;</span>, <span class="at">data =</span> dat)</span>
-<span id="cb123-2"><a href="ch2.html#cb123-2" tabindex="-1"></a>mle.het <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1 + MOOD + NFC +   MOOD:NFC&#39;</span>, <span class="at">data =</span> dat)</span>
-<span id="cb123-3"><a href="ch2.html#cb123-3" tabindex="-1"></a><span class="fu">anova</span>(mle.hom, mle.het)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="ch2.html#cb114-1" tabindex="-1"></a>mle.hom <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1 + MOOD + NFC + 0*MOOD:NFC&#39;</span>, <span class="at">data =</span> dat)</span>
+<span id="cb114-2"><a href="ch2.html#cb114-2" tabindex="-1"></a>mle.het <span class="ot">&lt;-</span> <span class="fu">sem</span>(<span class="st">&#39;POS ~ 1 + MOOD + NFC +   MOOD:NFC&#39;</span>, <span class="at">data =</span> dat)</span>
+<span id="cb114-3"><a href="ch2.html#cb114-3" tabindex="-1"></a><span class="fu">anova</span>(mle.hom, mle.het)</span></code></pre></div>
 <pre><code>## 
 ## Chi-Squared Difference Test
 ## 
@@ -852,8 +840,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>half the group mean difference</li>
 </ul>
 <p>The <span class="math inline">\(t\)</span> test (OLS) or Wald <span class="math inline">\(z\)</span> test (SEM) is sufficient to test the <span class="math inline">\(H_0: \hat{\mathrm{y}}_\text{Treatment}|x = \hat{\mathrm{y}}_\text{Control}|x\)</span></p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="ch2.html#cb125-1" tabindex="-1"></a><span class="fu">summary</span>(mle.hom)</span></code></pre></div>
-<pre><code>## lavaan 0.6.17.1883 ended normally after 19 iterations
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="ch2.html#cb116-1" tabindex="-1"></a><span class="fu">summary</span>(mle.hom)</span></code></pre></div>
+<pre><code>## lavaan 0.6.17.1884 ended normally after 19 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -910,8 +898,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="group-specific-intercepts-in-ols" class="section level3 hasAnchor" number="2.4.1">
 <h3><span class="header-section-number">2.4.1</span> Group-Specific Intercepts in OLS<a href="ch2.html#group-specific-intercepts-in-ols" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall that omitting the intercepts allows each group to have a dummy code in the model</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="ch2.html#cb127-1" tabindex="-1"></a>slope0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> mood.f <span class="sc">+</span> NFC, <span class="at">data =</span> dat)</span>
-<span id="cb127-2"><a href="ch2.html#cb127-2" tabindex="-1"></a><span class="fu">summary</span>(slope0)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="ch2.html#cb118-1" tabindex="-1"></a>slope0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(POS <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> mood.f <span class="sc">+</span> NFC, <span class="at">data =</span> dat)</span>
+<span id="cb118-2"><a href="ch2.html#cb118-2" tabindex="-1"></a><span class="fu">summary</span>(slope0)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = POS ~ -1 + mood.f + NFC, data = dat)
@@ -932,8 +920,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.2774, Adjusted R-squared:  0.2551 
 ## F-statistic: 12.42 on 3 and 97 DF,  p-value: 6.115e-07</code></pre>
 <p>This still assumes homoskedasticity of residuals, and comparing intercepts (or adjusted means) requires the <a href="https://en.wikipedia.org/wiki/Delta_method">delta method</a>, which is a way to estimate the <em>SE</em> of a function of parameters (e.g., difference between 2 slopes) from the <em>SE</em>s of the original parameter estimates.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="ch2.html#cb129-1" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">deltaMethod</span>(slope0, <span class="st">&quot;b2 - b1&quot;</span>, <span class="at">rhs =</span> <span class="dv">0</span>,</span>
-<span id="cb129-2"><a href="ch2.html#cb129-2" tabindex="-1"></a>                 <span class="at">parameterNames =</span> <span class="fu">paste0</span>(<span class="st">&quot;b&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="ch2.html#cb120-1" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">deltaMethod</span>(slope0, <span class="st">&quot;b2 - b1&quot;</span>, <span class="at">rhs =</span> <span class="dv">0</span>,</span>
+<span id="cb120-2"><a href="ch2.html#cb120-2" tabindex="-1"></a>                 <span class="at">parameterNames =</span> <span class="fu">paste0</span>(<span class="st">&quot;b&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span></code></pre></div>
 <pre><code>##         Estimate      SE   2.5 %  97.5 % Hypothesis z value  Pr(&gt;|z|)    
 ## b2 - b1   8.6527  1.4298  5.8504 11.4549     0.0000  6.0519 1.432e-09 ***
 ## ---
@@ -947,16 +935,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>model syntax includes user-defined parameters (<code>:=</code> operator)</li>
 </ul>
 <p>However, SEM cannot fit group-specific intercepts because they are linearly dependent (recall (multi)collinearity among predictors from a previously read regression text). That is, the positive-mood dummy code is simply 1 minus the neutral-mood dummy code, so they are perfectly (negatively) correlated. Therefore, <span class="math inline">\(S\)</span> would not be <a href="https://en.wikipedia.org/wiki/Definite_matrix">positive definite</a>, which is a term that indicates some redundancy among variables. This means that fitting a single-group SEM with group-specific intercepts is not possible:</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="ch2.html#cb131-1" tabindex="-1"></a>dat<span class="sc">$</span>treat   <span class="ot">&lt;-</span> dat<span class="sc">$</span>mood.f <span class="sc">==</span> <span class="st">&quot;positive&quot;</span></span>
-<span id="cb131-2"><a href="ch2.html#cb131-2" tabindex="-1"></a>dat<span class="sc">$</span>control <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> dat<span class="sc">$</span>treat <span class="co"># linear dependency</span></span>
-<span id="cb131-3"><a href="ch2.html#cb131-3" tabindex="-1"></a></span>
-<span id="cb131-4"><a href="ch2.html#cb131-4" tabindex="-1"></a><span class="do">## label slopes &quot;b1&quot; for neutral group, &quot;b2&quot; for positive group</span></span>
-<span id="cb131-5"><a href="ch2.html#cb131-5" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="st">&#39; POS ~ b1*mood.fneutral + b2*mood.fpositive + NFC</span></span>
-<span id="cb131-6"><a href="ch2.html#cb131-6" tabindex="-1"></a><span class="st">  ## user-defined parameter</span></span>
-<span id="cb131-7"><a href="ch2.html#cb131-7" tabindex="-1"></a><span class="st">    adj_mean_diff := b2 - b1</span></span>
-<span id="cb131-8"><a href="ch2.html#cb131-8" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb131-9"><a href="ch2.html#cb131-9" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod1, <span class="at">data =</span> dat) <span class="co"># lavaan ERROR: </span></span>
-<span id="cb131-10"><a href="ch2.html#cb131-10" tabindex="-1"></a><span class="do">## sample covariance matrix is not positive-definite</span></span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="ch2.html#cb122-1" tabindex="-1"></a>dat<span class="sc">$</span>treat   <span class="ot">&lt;-</span> dat<span class="sc">$</span>mood.f <span class="sc">==</span> <span class="st">&quot;positive&quot;</span></span>
+<span id="cb122-2"><a href="ch2.html#cb122-2" tabindex="-1"></a>dat<span class="sc">$</span>control <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> dat<span class="sc">$</span>treat <span class="co"># linear dependency</span></span>
+<span id="cb122-3"><a href="ch2.html#cb122-3" tabindex="-1"></a></span>
+<span id="cb122-4"><a href="ch2.html#cb122-4" tabindex="-1"></a><span class="do">## label slopes &quot;b1&quot; for neutral group, &quot;b2&quot; for positive group</span></span>
+<span id="cb122-5"><a href="ch2.html#cb122-5" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="st">&#39; POS ~ b1*mood.fneutral + b2*mood.fpositive + NFC</span></span>
+<span id="cb122-6"><a href="ch2.html#cb122-6" tabindex="-1"></a><span class="st">  ## user-defined parameter</span></span>
+<span id="cb122-7"><a href="ch2.html#cb122-7" tabindex="-1"></a><span class="st">    adj_mean_diff := b2 - b1</span></span>
+<span id="cb122-8"><a href="ch2.html#cb122-8" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb122-9"><a href="ch2.html#cb122-9" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod1, <span class="at">data =</span> dat) <span class="co"># lavaan ERROR: </span></span>
+<span id="cb122-10"><a href="ch2.html#cb122-10" tabindex="-1"></a><span class="do">## sample covariance matrix is not positive-definite</span></span></code></pre></div>
 </div>
 <div id="multiple-groups-in-sem" class="section level3 hasAnchor" number="2.4.3">
 <h3><span class="header-section-number">2.4.3</span> Multiple Groups in SEM<a href="ch2.html#multiple-groups-in-sem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -980,13 +968,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>below: <code>POS ~ c(b3, b3)*NFC</code></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="ch2.html#cb132-1" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="st">&#39; POS ~ c(b1, b2)*1 + c(b3, b3)*NFC</span></span>
-<span id="cb132-2"><a href="ch2.html#cb132-2" tabindex="-1"></a><span class="st">  ## user-defined parameter</span></span>
-<span id="cb132-3"><a href="ch2.html#cb132-3" tabindex="-1"></a><span class="st">    adj_M_diff := b2 - b1</span></span>
-<span id="cb132-4"><a href="ch2.html#cb132-4" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb132-5"><a href="ch2.html#cb132-5" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod2, <span class="at">data =</span> dat, <span class="at">group =</span> <span class="st">&quot;mood.f&quot;</span>)</span>
-<span id="cb132-6"><a href="ch2.html#cb132-6" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code></pre></div>
-<pre><code>## lavaan 0.6.17.1883 ended normally after 17 iterations
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="ch2.html#cb123-1" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="st">&#39; POS ~ c(b1, b2)*1 + c(b3, b3)*NFC</span></span>
+<span id="cb123-2"><a href="ch2.html#cb123-2" tabindex="-1"></a><span class="st">  ## user-defined parameter</span></span>
+<span id="cb123-3"><a href="ch2.html#cb123-3" tabindex="-1"></a><span class="st">    adj_M_diff := b2 - b1</span></span>
+<span id="cb123-4"><a href="ch2.html#cb123-4" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb123-5"><a href="ch2.html#cb123-5" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod2, <span class="at">data =</span> dat, <span class="at">group =</span> <span class="st">&quot;mood.f&quot;</span>)</span>
+<span id="cb123-6"><a href="ch2.html#cb123-6" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code></pre></div>
+<pre><code>## lavaan 0.6.17.1884 ended normally after 17 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -1047,8 +1035,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Defined Parameters:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|)
 ##     adj_M_diff        8.651    1.408    6.143    0.000</code></pre>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="ch2.html#cb134-1" tabindex="-1"></a><span class="do">## compare to OLS, which assumes homoskedasticity</span></span>
-<span id="cb134-2"><a href="ch2.html#cb134-2" tabindex="-1"></a><span class="fu">summary</span>(slope0)</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="ch2.html#cb125-1" tabindex="-1"></a><span class="do">## compare to OLS, which assumes homoskedasticity</span></span>
+<span id="cb125-2"><a href="ch2.html#cb125-2" tabindex="-1"></a><span class="fu">summary</span>(slope0)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = POS ~ -1 + mood.f + NFC, data = dat)
@@ -1068,9 +1056,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 7.147 on 97 degrees of freedom
 ## Multiple R-squared:  0.2774, Adjusted R-squared:  0.2551 
 ## F-statistic: 12.42 on 3 and 97 DF,  p-value: 6.115e-07</code></pre>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="ch2.html#cb136-1" tabindex="-1"></a><span class="do">## delta method to test adj_M_diff</span></span>
-<span id="cb136-2"><a href="ch2.html#cb136-2" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">deltaMethod</span>(slope0, <span class="st">&quot;b2 - b1&quot;</span>, <span class="at">rhs =</span> <span class="dv">0</span>,</span>
-<span id="cb136-3"><a href="ch2.html#cb136-3" tabindex="-1"></a>                 <span class="at">parameterNames =</span> <span class="fu">paste0</span>(<span class="st">&quot;b&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="ch2.html#cb127-1" tabindex="-1"></a><span class="do">## delta method to test adj_M_diff</span></span>
+<span id="cb127-2"><a href="ch2.html#cb127-2" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">deltaMethod</span>(slope0, <span class="st">&quot;b2 - b1&quot;</span>, <span class="at">rhs =</span> <span class="dv">0</span>,</span>
+<span id="cb127-3"><a href="ch2.html#cb127-3" tabindex="-1"></a>                 <span class="at">parameterNames =</span> <span class="fu">paste0</span>(<span class="st">&quot;b&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span></code></pre></div>
 <pre><code>##         Estimate      SE   2.5 %  97.5 % Hypothesis z value  Pr(&gt;|z|)    
 ## b2 - b1   8.6527  1.4298  5.8504 11.4549     0.0000  6.0519 1.432e-09 ***
 ## ---
@@ -1079,11 +1067,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="summary-statistics-for-multigroup-sem" class="section level4 hasAnchor" number="2.4.3.1">
 <h4><span class="header-section-number">2.4.3.1</span> Summary Statistics for Multigroup SEM<a href="ch2.html#summary-statistics-for-multigroup-sem" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><code>lavaan</code> calculates summary statistics from the raw <code>data=</code> separately in each group, but lists can be passed directly</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="ch2.html#cb138-1" tabindex="-1"></a>gN <span class="co"># vector of sample sizes</span></span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="ch2.html#cb129-1" tabindex="-1"></a>gN <span class="co"># vector of sample sizes</span></span></code></pre></div>
 <pre><code>## 
 ##  neutral positive 
 ##       50       50</code></pre>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="ch2.html#cb140-1" tabindex="-1"></a>gM <span class="co"># mean vectors</span></span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="ch2.html#cb131-1" tabindex="-1"></a>gM <span class="co"># mean vectors</span></span></code></pre></div>
 <pre><code>## $neutral
 ##        ATT        NFC        POS 
 ## -4.7920520  0.0321142 -4.3110960 
@@ -1091,7 +1079,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## $positive
 ##        ATT        NFC        POS 
 ##  8.7534980 -0.0321146  4.3111040</code></pre>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="ch2.html#cb142-1" tabindex="-1"></a>gS <span class="co"># list of covariance matrices</span></span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="ch2.html#cb133-1" tabindex="-1"></a>gS <span class="co"># list of covariance matrices</span></span></code></pre></div>
 <pre><code>## $neutral
 ##            ATT       NFC       POS
 ## ATT 245.020884  4.812796 61.799307
@@ -1103,8 +1091,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ATT 231.2417228 0.8817017 56.235120
 ## NFC   0.8817017 1.5276643  3.091531
 ## POS  56.2351197 3.0915313 54.346483</code></pre>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="ch2.html#cb144-1" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod2, <span class="at">sample.nobs =</span> gN, <span class="co"># &quot;group=&quot; is implied by lists</span></span>
-<span id="cb144-2"><a href="ch2.html#cb144-2" tabindex="-1"></a>            <span class="at">sample.mean =</span> gM, <span class="at">sample.cov =</span> gS)</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="ch2.html#cb135-1" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod2, <span class="at">sample.nobs =</span> gN, <span class="co"># &quot;group=&quot; is implied by lists</span></span>
+<span id="cb135-2"><a href="ch2.html#cb135-2" tabindex="-1"></a>            <span class="at">sample.mean =</span> gM, <span class="at">sample.cov =</span> gS)</span></code></pre></div>
 </div>
 <div id="advantages-of-multigroup-sem" class="section level4 hasAnchor" number="2.4.3.2">
 <h4><span class="header-section-number">2.4.3.2</span> Advantages of Multigroup SEM<a href="ch2.html#advantages-of-multigroup-sem" class="anchor-section" aria-label="Anchor link to header"></a></h4>
