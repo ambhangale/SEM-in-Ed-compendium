@@ -386,6 +386,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.5" data-path="ch14.html"><a href="ch14.html#fitting-a-factor-model-using-lavaan"><i class="fa fa-check"></i><b>14.5</b> Fitting a factor model using lavaan</a>
 <ul>
 <li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#script-14.1"><i class="fa fa-check"></i>Script 14.1</a></li>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#script-14.2"><i class="fa fa-check"></i>Script 14.2</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#references-9"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#appendix-2"><i class="fa fa-check"></i>Appendix</a>
@@ -634,7 +635,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 As an example dataset we use scores on four variables, obtained from 1377 students in 58 schools (Schijf &amp; Dronkers, 1991; Hox, Moerbeek &amp; van de Schoot, 2017). The four variables we use are: Education of the father (Feduc), Education of the mother (Meduc), Teacher’s advice about secondary education (Advice), and the result on a school achievement test (Galo).</p>
 <p>We will fit the two-level model that is depicted below.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig13-1"></span>
-<img src="figure_multilevelpathmodel.jpg" alt="A two-level path diagram." width="90%" />
+<img src="images/Ch13_figure_multilevelpathmodel.jpg" alt="A two-level path diagram." width="90%" />
 <p class="caption">
 Figure 13.1: A two-level path diagram.
 </p>
@@ -645,9 +646,9 @@ Figure 13.1: A two-level path diagram.
 <p>In <a href="ch13.html#script-13.1">Script 13.1</a>, we fit saturated models to Level 1 and Level 2, by letting all variables covary with each other at both levels. The means of the variables will be estimated only at Level 2 because Level-1 means are zero by definition. That is, Level-1 components of variables represent individual deviations from the cluster mean, and cluster-mean-centered variables have means of zero (both within clusters and across clusters). Fitting a saturated model will give us estimates of the within-level and between-level covariance matrices. The variance estimates from this model can be used to calculate ICCs. Fitting this model thus serves as a first step to obtain information about the variance distribution across levels.</p>
 <div id="script-13.1" class="section level3 unnumbered hasAnchor">
 <h3>Script 13.1<a href="ch13.html#script-13.1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="ch13.html#cb288-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
-<span id="cb288-2"><a href="ch13.html#cb288-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;GaloComplete.dat&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb288-3"><a href="ch13.html#cb288-3" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="ch13.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
+<span id="cb1-2"><a href="ch13.html#cb1-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;GaloComplete.dat&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-3"><a href="ch13.html#cb1-3" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
 <pre><code>##   school galo advice feduc meduc
 ## 1      1   78      1     1     1
 ## 2      1  104      4     4     3
@@ -655,40 +656,40 @@ Figure 13.1: A two-level path diagram.
 ## 4      1  114      4     2     1
 ## 5      1   95      2     2     2
 ## 6      1   98      2     1     1</code></pre>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="ch13.html#cb290-1" tabindex="-1"></a>satmodel <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb290-2"><a href="ch13.html#cb290-2" tabindex="-1"></a><span class="st">        level: 1</span></span>
-<span id="cb290-3"><a href="ch13.html#cb290-3" tabindex="-1"></a><span class="st">            galo ~~ advice + feduc + meduc</span></span>
-<span id="cb290-4"><a href="ch13.html#cb290-4" tabindex="-1"></a><span class="st">            advice ~~ feduc + meduc </span></span>
-<span id="cb290-5"><a href="ch13.html#cb290-5" tabindex="-1"></a><span class="st">            feduc ~~ meduc</span></span>
-<span id="cb290-6"><a href="ch13.html#cb290-6" tabindex="-1"></a></span>
-<span id="cb290-7"><a href="ch13.html#cb290-7" tabindex="-1"></a><span class="st">        level: 2</span></span>
-<span id="cb290-8"><a href="ch13.html#cb290-8" tabindex="-1"></a><span class="st">            galo ~~ advice + feduc + meduc </span></span>
-<span id="cb290-9"><a href="ch13.html#cb290-9" tabindex="-1"></a><span class="st">            advice ~~ feduc + meduc </span></span>
-<span id="cb290-10"><a href="ch13.html#cb290-10" tabindex="-1"></a><span class="st">            feduc ~~ meduc</span></span>
-<span id="cb290-11"><a href="ch13.html#cb290-11" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb290-12"><a href="ch13.html#cb290-12" tabindex="-1"></a><span class="st">            galo ~ 1</span></span>
-<span id="cb290-13"><a href="ch13.html#cb290-13" tabindex="-1"></a><span class="st">            advice ~ 1</span></span>
-<span id="cb290-14"><a href="ch13.html#cb290-14" tabindex="-1"></a><span class="st">            feduc ~ 1</span></span>
-<span id="cb290-15"><a href="ch13.html#cb290-15" tabindex="-1"></a><span class="st">            meduc ~ 1</span></span>
-<span id="cb290-16"><a href="ch13.html#cb290-16" tabindex="-1"></a><span class="st">    &#39;</span></span>
-<span id="cb290-17"><a href="ch13.html#cb290-17" tabindex="-1"></a></span>
-<span id="cb290-18"><a href="ch13.html#cb290-18" tabindex="-1"></a>fitsat <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(<span class="at">model =</span> satmodel, <span class="at">data =</span> data, <span class="at">cluster =</span> <span class="st">&quot;school&quot;</span>,</span>
-<span id="cb290-19"><a href="ch13.html#cb290-19" tabindex="-1"></a>                 <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="ch13.html#cb3-1" tabindex="-1"></a>satmodel <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb3-2"><a href="ch13.html#cb3-2" tabindex="-1"></a><span class="st">        level: 1</span></span>
+<span id="cb3-3"><a href="ch13.html#cb3-3" tabindex="-1"></a><span class="st">            galo ~~ advice + feduc + meduc</span></span>
+<span id="cb3-4"><a href="ch13.html#cb3-4" tabindex="-1"></a><span class="st">            advice ~~ feduc + meduc </span></span>
+<span id="cb3-5"><a href="ch13.html#cb3-5" tabindex="-1"></a><span class="st">            feduc ~~ meduc</span></span>
+<span id="cb3-6"><a href="ch13.html#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="ch13.html#cb3-7" tabindex="-1"></a><span class="st">        level: 2</span></span>
+<span id="cb3-8"><a href="ch13.html#cb3-8" tabindex="-1"></a><span class="st">            galo ~~ advice + feduc + meduc </span></span>
+<span id="cb3-9"><a href="ch13.html#cb3-9" tabindex="-1"></a><span class="st">            advice ~~ feduc + meduc </span></span>
+<span id="cb3-10"><a href="ch13.html#cb3-10" tabindex="-1"></a><span class="st">            feduc ~~ meduc</span></span>
+<span id="cb3-11"><a href="ch13.html#cb3-11" tabindex="-1"></a><span class="st">            </span></span>
+<span id="cb3-12"><a href="ch13.html#cb3-12" tabindex="-1"></a><span class="st">            galo ~ 1</span></span>
+<span id="cb3-13"><a href="ch13.html#cb3-13" tabindex="-1"></a><span class="st">            advice ~ 1</span></span>
+<span id="cb3-14"><a href="ch13.html#cb3-14" tabindex="-1"></a><span class="st">            feduc ~ 1</span></span>
+<span id="cb3-15"><a href="ch13.html#cb3-15" tabindex="-1"></a><span class="st">            meduc ~ 1</span></span>
+<span id="cb3-16"><a href="ch13.html#cb3-16" tabindex="-1"></a><span class="st">    &#39;</span></span>
+<span id="cb3-17"><a href="ch13.html#cb3-17" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="ch13.html#cb3-18" tabindex="-1"></a>fitsat <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(<span class="at">model =</span> satmodel, <span class="at">data =</span> data, <span class="at">cluster =</span> <span class="st">&quot;school&quot;</span>,</span>
+<span id="cb3-19"><a href="ch13.html#cb3-19" tabindex="-1"></a>                 <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>The clustering variable should be specified as an argument to the <code>lavaan()</code> function. The keywords <code>level: 1</code> (<strong>not</strong> <code>level 1:</code>) and level:2 (<strong>not</strong> <code>level 2:</code>, which would return an error) identify <em>blocks</em> in the model syntax, notifying <code>lavaan</code> that we are specifying a model at each level of analysis. If the model syntax does not contain separate models for levels 1 and 2, but the clustering variable is still specified, then <code>lavaan</code> will fit a single-level model and report cluster-robust <span class="math inline">\(SE\)</span>s and fit statistics.</p>
 <p>One can obtain the ICC estimates for each variable, and the estimated covariance matrices at Level 1 and Level 2 from the saturated (or any) multilevel model using the following code.</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="ch13.html#cb291-1" tabindex="-1"></a><span class="co"># ICCs</span></span>
-<span id="cb291-2"><a href="ch13.html#cb291-2" tabindex="-1"></a>(ICCs <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(fitsat,<span class="st">&quot;icc&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="ch13.html#cb4-1" tabindex="-1"></a><span class="co"># ICCs</span></span>
+<span id="cb4-2"><a href="ch13.html#cb4-2" tabindex="-1"></a>(ICCs <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(fitsat,<span class="st">&quot;icc&quot;</span>))</span></code></pre></div>
 <pre><code>##   galo advice  feduc  meduc 
 ##  0.156  0.143  0.293  0.211</code></pre>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="ch13.html#cb293-1" tabindex="-1"></a><span class="co"># Sigma_within</span></span>
-<span id="cb293-2"><a href="ch13.html#cb293-2" tabindex="-1"></a>(Sigma_w <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(fitsat, <span class="st">&quot;sampstat&quot;</span>)<span class="sc">$</span>within<span class="sc">$</span>cov)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="ch13.html#cb6-1" tabindex="-1"></a><span class="co"># Sigma_within</span></span>
+<span id="cb6-2"><a href="ch13.html#cb6-2" tabindex="-1"></a>(Sigma_w <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(fitsat, <span class="st">&quot;sampstat&quot;</span>)<span class="sc">$</span>within<span class="sc">$</span>cov)</span></code></pre></div>
 <pre><code>##           galo  advice   feduc   meduc
 ## galo   143.572                        
 ## advice  12.802   1.730                
 ## feduc    6.935   0.767   4.425        
 ## meduc    5.901   0.704   2.265   3.764</code></pre>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="ch13.html#cb295-1" tabindex="-1"></a><span class="co"># Sigma_between</span></span>
-<span id="cb295-2"><a href="ch13.html#cb295-2" tabindex="-1"></a>(Sigma_b <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(fitsat, <span class="st">&quot;sampstat&quot;</span>)<span class="sc">$</span>school<span class="sc">$</span>cov)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="ch13.html#cb8-1" tabindex="-1"></a><span class="co"># Sigma_between</span></span>
+<span id="cb8-2"><a href="ch13.html#cb8-2" tabindex="-1"></a>(Sigma_b <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(fitsat, <span class="st">&quot;sampstat&quot;</span>)<span class="sc">$</span>school<span class="sc">$</span>cov)</span></code></pre></div>
 <pre><code>##          galo advice  feduc  meduc
 ## galo   26.464                     
 ## advice  2.607  0.289              
@@ -702,40 +703,40 @@ Figure 13.1: A two-level path diagram.
 <p>In <a href="ch13.html#script-13.2">Script 13.2</a>, we fit the two-level path model as depicted in Figure <a href="ch13.html#fig:fig13-1">13.1</a> to the data.</p>
 <div id="script-13.2" class="section level3 unnumbered hasAnchor">
 <h3>Script 13.2<a href="ch13.html#script-13.2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="ch13.html#cb297-1" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb297-2"><a href="ch13.html#cb297-2" tabindex="-1"></a><span class="st">         level: 1 </span></span>
-<span id="cb297-3"><a href="ch13.html#cb297-3" tabindex="-1"></a><span class="st">            advice ~ galo  </span></span>
-<span id="cb297-4"><a href="ch13.html#cb297-4" tabindex="-1"></a><span class="st">            galo ~ feduc + meduc</span></span>
-<span id="cb297-5"><a href="ch13.html#cb297-5" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb297-6"><a href="ch13.html#cb297-6" tabindex="-1"></a><span class="st">            # covariance and variances</span></span>
-<span id="cb297-7"><a href="ch13.html#cb297-7" tabindex="-1"></a><span class="st">            feduc ~~ meduc</span></span>
-<span id="cb297-8"><a href="ch13.html#cb297-8" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb297-9"><a href="ch13.html#cb297-9" tabindex="-1"></a><span class="st">            advice ~~ advice</span></span>
-<span id="cb297-10"><a href="ch13.html#cb297-10" tabindex="-1"></a><span class="st">            galo ~~ galo</span></span>
-<span id="cb297-11"><a href="ch13.html#cb297-11" tabindex="-1"></a><span class="st">            feduc ~~ feduc</span></span>
-<span id="cb297-12"><a href="ch13.html#cb297-12" tabindex="-1"></a><span class="st">            meduc ~~ meduc</span></span>
-<span id="cb297-13"><a href="ch13.html#cb297-13" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb297-14"><a href="ch13.html#cb297-14" tabindex="-1"></a><span class="st">        level: 2</span></span>
-<span id="cb297-15"><a href="ch13.html#cb297-15" tabindex="-1"></a><span class="st">            advice ~ galo  </span></span>
-<span id="cb297-16"><a href="ch13.html#cb297-16" tabindex="-1"></a><span class="st">            galo ~ feduc + meduc</span></span>
-<span id="cb297-17"><a href="ch13.html#cb297-17" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb297-18"><a href="ch13.html#cb297-18" tabindex="-1"></a><span class="st">            # covariance and variances</span></span>
-<span id="cb297-19"><a href="ch13.html#cb297-19" tabindex="-1"></a><span class="st">            feduc ~~ meduc</span></span>
-<span id="cb297-20"><a href="ch13.html#cb297-20" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb297-21"><a href="ch13.html#cb297-21" tabindex="-1"></a><span class="st">            advice ~~ advice</span></span>
-<span id="cb297-22"><a href="ch13.html#cb297-22" tabindex="-1"></a><span class="st">            galo ~~ galo</span></span>
-<span id="cb297-23"><a href="ch13.html#cb297-23" tabindex="-1"></a><span class="st">            feduc ~~ feduc</span></span>
-<span id="cb297-24"><a href="ch13.html#cb297-24" tabindex="-1"></a><span class="st">            meduc ~~ meduc</span></span>
-<span id="cb297-25"><a href="ch13.html#cb297-25" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb297-26"><a href="ch13.html#cb297-26" tabindex="-1"></a><span class="st">            galo ~ 1</span></span>
-<span id="cb297-27"><a href="ch13.html#cb297-27" tabindex="-1"></a><span class="st">            advice ~ 1</span></span>
-<span id="cb297-28"><a href="ch13.html#cb297-28" tabindex="-1"></a><span class="st">            feduc ~ 1</span></span>
-<span id="cb297-29"><a href="ch13.html#cb297-29" tabindex="-1"></a><span class="st">            meduc ~ 1</span></span>
-<span id="cb297-30"><a href="ch13.html#cb297-30" tabindex="-1"></a><span class="st">    &#39;</span></span>
-<span id="cb297-31"><a href="ch13.html#cb297-31" tabindex="-1"></a></span>
-<span id="cb297-32"><a href="ch13.html#cb297-32" tabindex="-1"></a>fitmod2 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(<span class="at">model =</span> model2, <span class="at">data =</span> data, <span class="at">cluster =</span> <span class="st">&quot;school&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="ch13.html#cb10-1" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb10-2"><a href="ch13.html#cb10-2" tabindex="-1"></a><span class="st">         level: 1 </span></span>
+<span id="cb10-3"><a href="ch13.html#cb10-3" tabindex="-1"></a><span class="st">            advice ~ galo  </span></span>
+<span id="cb10-4"><a href="ch13.html#cb10-4" tabindex="-1"></a><span class="st">            galo ~ feduc + meduc</span></span>
+<span id="cb10-5"><a href="ch13.html#cb10-5" tabindex="-1"></a><span class="st">            </span></span>
+<span id="cb10-6"><a href="ch13.html#cb10-6" tabindex="-1"></a><span class="st">            # covariance and variances</span></span>
+<span id="cb10-7"><a href="ch13.html#cb10-7" tabindex="-1"></a><span class="st">            feduc ~~ meduc</span></span>
+<span id="cb10-8"><a href="ch13.html#cb10-8" tabindex="-1"></a><span class="st">            </span></span>
+<span id="cb10-9"><a href="ch13.html#cb10-9" tabindex="-1"></a><span class="st">            advice ~~ advice</span></span>
+<span id="cb10-10"><a href="ch13.html#cb10-10" tabindex="-1"></a><span class="st">            galo ~~ galo</span></span>
+<span id="cb10-11"><a href="ch13.html#cb10-11" tabindex="-1"></a><span class="st">            feduc ~~ feduc</span></span>
+<span id="cb10-12"><a href="ch13.html#cb10-12" tabindex="-1"></a><span class="st">            meduc ~~ meduc</span></span>
+<span id="cb10-13"><a href="ch13.html#cb10-13" tabindex="-1"></a><span class="st">            </span></span>
+<span id="cb10-14"><a href="ch13.html#cb10-14" tabindex="-1"></a><span class="st">        level: 2</span></span>
+<span id="cb10-15"><a href="ch13.html#cb10-15" tabindex="-1"></a><span class="st">            advice ~ galo  </span></span>
+<span id="cb10-16"><a href="ch13.html#cb10-16" tabindex="-1"></a><span class="st">            galo ~ feduc + meduc</span></span>
+<span id="cb10-17"><a href="ch13.html#cb10-17" tabindex="-1"></a><span class="st">            </span></span>
+<span id="cb10-18"><a href="ch13.html#cb10-18" tabindex="-1"></a><span class="st">            # covariance and variances</span></span>
+<span id="cb10-19"><a href="ch13.html#cb10-19" tabindex="-1"></a><span class="st">            feduc ~~ meduc</span></span>
+<span id="cb10-20"><a href="ch13.html#cb10-20" tabindex="-1"></a><span class="st">            </span></span>
+<span id="cb10-21"><a href="ch13.html#cb10-21" tabindex="-1"></a><span class="st">            advice ~~ advice</span></span>
+<span id="cb10-22"><a href="ch13.html#cb10-22" tabindex="-1"></a><span class="st">            galo ~~ galo</span></span>
+<span id="cb10-23"><a href="ch13.html#cb10-23" tabindex="-1"></a><span class="st">            feduc ~~ feduc</span></span>
+<span id="cb10-24"><a href="ch13.html#cb10-24" tabindex="-1"></a><span class="st">            meduc ~~ meduc</span></span>
+<span id="cb10-25"><a href="ch13.html#cb10-25" tabindex="-1"></a><span class="st">            </span></span>
+<span id="cb10-26"><a href="ch13.html#cb10-26" tabindex="-1"></a><span class="st">            galo ~ 1</span></span>
+<span id="cb10-27"><a href="ch13.html#cb10-27" tabindex="-1"></a><span class="st">            advice ~ 1</span></span>
+<span id="cb10-28"><a href="ch13.html#cb10-28" tabindex="-1"></a><span class="st">            feduc ~ 1</span></span>
+<span id="cb10-29"><a href="ch13.html#cb10-29" tabindex="-1"></a><span class="st">            meduc ~ 1</span></span>
+<span id="cb10-30"><a href="ch13.html#cb10-30" tabindex="-1"></a><span class="st">    &#39;</span></span>
+<span id="cb10-31"><a href="ch13.html#cb10-31" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="ch13.html#cb10-32" tabindex="-1"></a>fitmod2 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(<span class="at">model =</span> model2, <span class="at">data =</span> data, <span class="at">cluster =</span> <span class="st">&quot;school&quot;</span>)</span></code></pre></div>
 <p>Note that this two-level path model has <span class="math inline">\(df=4\)</span>. In two-level models, the number of observed statistics are twice as much as in single level models because we count the information at both levels. At the within level there are 4*(4+1)/2 = 10 elements in the within-level covariance matrix, and at the between level there are also 10 elements in the between-level covariance matrix (and there are four observed means). In this example, the number of parameters to be estimated is also doubled in comparison with a single level model, because all <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\psi\)</span> parameters are estimated at the within as well as at the between-level. The number of parameters may also be different across levels, when a different model is fitted to the between level and to the within level. But in this model, we estimate three <span class="math inline">\(\beta\)</span> parameters and five <span class="math inline">\(\psi\)</span> parameters at each level, leading to <span class="math inline">\(df=2\)</span> per level. At the between-level there are also four intercepts (<span class="math inline">\(\alpha\)</span>) estimated based on four observed means, so the mean structure is saturated and does not add any <span class="math inline">\(df\)</span> to the model.</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="ch13.html#cb298-1" tabindex="-1"></a><span class="fu">summary</span>(fitmod2, <span class="at">fit.measures =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ch13.html#cb11-1" tabindex="-1"></a><span class="fu">summary</span>(fitmod2, <span class="at">fit.measures =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## lavaan 0.6.17.1883 ended normally after 105 iterations
 ## 
 ##   Estimator                                         ML
@@ -862,11 +863,11 @@ Figure 13.1: A two-level path diagram.
   &amp;= \beta_\text{W} \mathrm{y}_{ij} + (\beta_\text{B} - \beta_\text{W}) \mu_j
 \end{split} \end{equation}\]</span></p>
 <p>The equivalence of within- and between-level effects can be tested by comparing a model in which the effects are constrained to be equal to a model in which they are estimated freely. Alternatively, one could define the contextual effect as a new parameter by subtracting the two effects of interest, similar to how one defines specific indirect effects.</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="ch13.html#cb300-1" tabindex="-1"></a><span class="st">&#39; level: 1</span></span>
-<span id="cb300-2"><a href="ch13.html#cb300-2" tabindex="-1"></a><span class="st">    advice ~ b43.w*galo</span></span>
-<span id="cb300-3"><a href="ch13.html#cb300-3" tabindex="-1"></a><span class="st">  level: 2</span></span>
-<span id="cb300-4"><a href="ch13.html#cb300-4" tabindex="-1"></a><span class="st">    advice ~ b43.b*galo</span></span>
-<span id="cb300-5"><a href="ch13.html#cb300-5" tabindex="-1"></a><span class="st">b43.contextual := b43.b - b43.w   # obtain Wald z test of equivalence v. contextual effect&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ch13.html#cb13-1" tabindex="-1"></a><span class="st">&#39; level: 1</span></span>
+<span id="cb13-2"><a href="ch13.html#cb13-2" tabindex="-1"></a><span class="st">    advice ~ b43.w*galo</span></span>
+<span id="cb13-3"><a href="ch13.html#cb13-3" tabindex="-1"></a><span class="st">  level: 2</span></span>
+<span id="cb13-4"><a href="ch13.html#cb13-4" tabindex="-1"></a><span class="st">    advice ~ b43.b*galo</span></span>
+<span id="cb13-5"><a href="ch13.html#cb13-5" tabindex="-1"></a><span class="st">b43.contextual := b43.b - b43.w   # obtain Wald z test of equivalence v. contextual effect&#39;</span></span></code></pre></div>
 <p>In standard multilevel regression, one may also include random slopes in the model. This way one could test whether the effect of some variable on another variable varies across clusters. Random slopes are not yet a feature in <code>lavaan</code>’s multilevel SEM, although the wide-format approach might be feasible in samples with many small clusters (Barendse &amp; Rosseel, 2020).</p>
 </div>
 </div>

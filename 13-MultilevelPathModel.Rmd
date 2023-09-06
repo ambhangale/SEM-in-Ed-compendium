@@ -49,7 +49,7 @@ We will fit the two-level model that is depicted below.
 
 ```{r label="fig13-1", echo = FALSE, out.width = "90%", fig.align = "center", fig.cap="A two-level path diagram." }
 
-knitr::include_graphics("figure_multilevelpathmodel.jpg")
+knitr::include_graphics("images/Ch13_figure_multilevelpathmodel.jpg")
 
 ```
 
