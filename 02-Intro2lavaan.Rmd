@@ -1,5 +1,21 @@
 # Using `lavaan` to Run Regression and ANOVA as a SEM {#ch2}
 
+This chapter prepares the reader to learn about structural equation modeling (SEM) by reviewing the fundamentals of ordinary least-squares (OLS) regression in the general(ized) linear modeling (GLM) framework.  Some key take-home messages will  reinforce what was discussed about *covariance structure analysis* in the previous chapter:
+
+- Analyzing different data formats (raw vs. summary data) yields equivalent results (under conditions of normality and complete data).
+    - **Recall** from the previous chapter that maximum-likelihood estimation (MLE) in SEM chooses parameters that minimize discrepancies between observed and expected *summary statistics* rather than casewise observations.
+- Grouping variables can be represented as dummy, effects, or contrast codes, but there are some advantages of stratifying results by group.   This will be demonstrated using multigroup SEM and comparing results to the single-group approach.  
+- Point estimates from SEM will match GLM because OLS estimates are ML estimates when the distributional assumptions are met.
+    - independent, identically distributed (normal with homogeneous variance)
+- However, the *SE*s are typically smaller under ML with SEM than under OLS with GLM.  
+- Furthermore, different (but analogous) test statistics will be compared between GLM (*t* and *F* statistics) and SEM (*z* and $\chi^2$ statistics).
+- Model comparisons require fitting nested models to the same data, which in SEM means fitting them to the same summary statistics.
+
+<!-- TODO: 
+Frame the need to talk about MG-SEM because it allows for thinking more about CSA v. reproducing raw data 
+-->
+
+
 ## Prepare Data and Workspace
 
 ### Import Example Data
