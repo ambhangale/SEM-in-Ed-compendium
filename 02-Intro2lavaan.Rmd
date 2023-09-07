@@ -204,7 +204,7 @@ As with the estimated slope, the estimated intercept is identical between GLM an
 Comparing nested GLMs provides an $F$ statistic. Analogously, comparing nested SEMs provides a $\chi^2$ statistic, which is also follows from using asymptotic theory.  As the denominator *df* of the *F* statistic approaches $\infty$, the *F* statistic (multiplied by its numerator *df*) more closely follows a $\chi^2$ distribution with the same (numerator) *df*.
 
 However, an important caveat follows from the criterion used to find the "best" parameters in SEM.  Whereas GLM minimizes *casewise* residuals, SEM minimizes residuals of *summary statistics* (review [Types of Data Used in SEM](#ch1-1-1) for details).  In a GLM, it does not matter if we remove a predictor $x$ from a model because the only data we try to reproduce is the outcome $y$ (i.e., both nested models are fitted to the same data).  But in SEM, we are fitting models to reproduce the sample means $\bar{y}$ and covariance matrix $\mathbf{S}$, which include both `ATT`itude and the positive-`MOOD` dummy code:
-```{r sampstat}
+```{r sampstat ch2}
 lavInspect(fit.dummy, "sampstat") # observed sample statistics
 ```
 

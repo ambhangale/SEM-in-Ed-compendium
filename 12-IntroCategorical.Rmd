@@ -298,7 +298,7 @@ The upper and lower thresholds are $+/-\infty$ by definition, corresponding to 0
 With multiple ordinal variables, we can estimate the correlations between their associated LRVs by relying on the assumption that the LRVs are normally distributed (Olsson, 1979, 1982). These correlations are called *polychoric correlations* (Olsson, 1979), which are **bivariate** statistics (like the covariance matrix).  If the model also includes a continuous variable, its correlation with an ordinal variable's LRV is called the *polyserial correlation* (Olsson, 1982).  Special names for 2-category variables are *tetrachoric correlation* (between 2 binary variables) or *biserial correlation* (between a binary and continuous variable).  For example, the estimated covariance between cigarette use and intent to smoke in the model above is a polychoric correlation because each LRV's $SD$ was fixed to 1 in that unrestricted (saturated) model.
 
 The reason that the probit model is so popular in SEM is that the standard SEM matrices and interpretations still apply to normal data, except those normal variables are latent.  All we need to do is append the SEM with a threshold model in order to link these normal LRVs to their observed discrete counterparts.  The default saturated model in *lavaan* estimates all thresholds and polychoric (and polyserial, if applicable) correlations, along with means and (co)variances among any continuous variables.  This is used as input data when fitting any hypothesized model (even when fitting a regression model with $df=0$).  We can see the *estimated* sample statistics for the model above:
-```{r sampstat}
+```{r sampstat ch12}
 lavInspect(fit2, "sampstat")
 ```
 

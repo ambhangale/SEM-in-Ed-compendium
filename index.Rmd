@@ -19,7 +19,7 @@ new_session: yes
 
 # Preface {-}
 
-```{r setup, include=FALSE}
+```{r load packages for book, include=FALSE}
 library(lavaan)
 library(semTools)
 library(emmeans)
@@ -38,7 +38,7 @@ knitr::include_graphics("images/Ch9_Empirical_cycle.png")
 This compendium began as a collection of documents used a teaching materials, to supplement software-agnostic textbooks about structural equation modeling (SEM).  Materials were originally developed for a Univeristy of Amsterdam course (search [here](https://studiegids.uva.nl/) for a description of the course "structural equation modelling in educational research") taught by [Frans Oort](https://orcid.org/0000-0003-1823-7105) and [Suzanne Jak](https://orcid.org/0000-0002-2223-5594) using the [`OpenMx`](http://openmx.ssri.psu.edu/) package, and later adapted for the [`lavaan`](https://lavaan.ugent.be/) by Suzanne Jak, [Mathilde Verdam](https://orcid.org/0000-0002-2479-8817), and [Terrence D. Jorgensen](https://orcid.org/0000-0001-5111-6773). The latest version of the materials were compiled into the current compendium by Suzanne Jak and Terrence D. Jorgensen using [RMarkdown](https://rmarkdown.rstudio.com/), and assisted by [Lennert J. Groot](https://orcid.org/0000-0002-8711-6086) to compile the separate chapters into a [`bookdown`](https://bookdown.org/) project hosted on [GitHub](https://github.com/TDJorgensen/SEM-in-Ed-compendium).
 
 
-## Copyright
+## Copyright {-}
 
 Unless otherwise noted, this book is released under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/) also known as a CC BY-NC-SA 4.0 license. This means you are free to 
 
@@ -50,7 +50,7 @@ as long as any derivative materials are also distributed using a CC BY-NC-SA 4.0
 - Jak, S., \& Jorgensen, T. D. (2023). *A `lavaan` Compendium for Structural Equation Modeling in Educational Research*. 
 
 
-## Acknowledgments
+## Acknowledgments {-}
 
 We thank [Lennert J. Groot](https://orcid.org/0000-0002-8711-6086) for compiling the chapters into the initial bookdown project, now maintained by [Terrence D. Jorgensen](https://orcid.org/0000-0001-5111-6773).  This was facilitated by a Grassroots grant (project *Unstatic: Towards an adaptive online learning environment for statistics education*), funded by the University of Amsterdam in academic year 2021--2022.
 
