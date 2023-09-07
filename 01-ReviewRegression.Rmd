@@ -29,7 +29,7 @@ SEM is a multivariate method capable of partitioning means and variances of each
 
 
 
-### Types of Data Used in SEM
+### Types of Data Used in SEM {#ch1-1-1}
 
 SEM can be seen as a generalization of the GLM for multivariate data. But rather than merely allowing multiple predictors and multiple outcomes, any variable can operate **both** as a predictor and an outcome in the same model.  This allows us to model complex relationships among variables, including chains of causation (i.e., mediation). 
 
@@ -359,7 +359,7 @@ isSymmetric(S)
 This section is more technical than most remaining chapters will be.  The main goal of this section is to demonstrate how GLM parameters can be estimated using raw data and summary statistics, revealing how these approaches are equivalent. Familiarity with the basics of matrix algebra will continue to remain important throughout later chapters as well, not only because much of SEM is expressed in matrix notation, but because later chapters will demonstrate certain methods (e.g., standardizing an entire matrix of regression slopes) using matrix algebra.
 
 
-### Linear Regression Models
+### Linear Regression Models {#ch1-3-1}
 
 The GLM expresses an outcome $y$ as a linear combination (weighted sum) of predictors:
 
