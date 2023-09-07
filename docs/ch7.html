@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Identification | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
+  <meta name="description" content="7 Identification | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Identification | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="TDJorgensen/SEM-in-Ed-compendium" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Identification | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
+  
+  
+  
+
+<meta name="author" content="Suzanne Jak and Terrence D. Jorgensen" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ch6.html"/>
+<link rel="next" href="ch8.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i><b>0.1</b> Copyright</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i><b>0.2</b> Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="ch1.html"><a href="ch1.html"><i class="fa fa-check"></i><b>1</b> Regression as Mean- and Covariance-Structure Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="ch1.html"><a href="ch1.html#what-are-mean-and-covariance-structures"><i class="fa fa-check"></i><b>1.1</b> What Are Mean and Covariance <em>Structures</em>?</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="ch1.html"><a href="ch1.html#ch1-1-1"><i class="fa fa-check"></i><b>1.1.1</b> Types of Data Used in SEM</a></li>
+<li class="chapter" data-level="1.1.2" data-path="ch1.html"><a href="ch1.html#interpreting-covariance"><i class="fa fa-check"></i><b>1.1.2</b> Interpreting Covariance</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="ch1.html"><a href="ch1.html#importing-data-for-sem"><i class="fa fa-check"></i><b>1.2</b> Importing Data for SEM</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="ch1.html"><a href="ch1.html#installing-lavaan"><i class="fa fa-check"></i><b>1.2.1</b> Installing <code>lavaan</code></a></li>
+<li class="chapter" data-level="1.2.2" data-path="ch1.html"><a href="ch1.html#importing-raw-data"><i class="fa fa-check"></i><b>1.2.2</b> Importing Raw Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="ch1.html"><a href="ch1.html#calculate-summary-statistics-from-raw-data"><i class="fa fa-check"></i><b>1.2.3</b> Calculate Summary Statistics from Raw Data</a></li>
+<li class="chapter" data-level="1.2.4" data-path="ch1.html"><a href="ch1.html#importing-summary-data"><i class="fa fa-check"></i><b>1.2.4</b> Importing Summary Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="ch1.html"><a href="ch1.html#regression-using-matrix-algebra"><i class="fa fa-check"></i><b>1.3</b> Regression Using Matrix Algebra</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="ch1.html"><a href="ch1.html#ch1-3-1"><i class="fa fa-check"></i><b>1.3.1</b> Linear Regression Models</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ch1.html"><a href="ch1.html#intercepts-and-means"><i class="fa fa-check"></i><b>1.3.2</b> Intercepts and Means</a></li>
+<li class="chapter" data-level="1.3.3" data-path="ch1.html"><a href="ch1.html#categorical-predictors"><i class="fa fa-check"></i><b>1.3.3</b> Categorical Predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="ch1.html"><a href="ch1.html#summary"><i class="fa fa-check"></i><b>1.4</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="ch1.html"><a href="ch1.html#references"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="ch2.html"><a href="ch2.html"><i class="fa fa-check"></i><b>2</b> Using <code>lavaan</code> to Run Regression and ANOVA as a SEM</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="ch2.html"><a href="ch2.html#prepare-data-and-workspace"><i class="fa fa-check"></i><b>2.1</b> Prepare Data and Workspace</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="ch2.html"><a href="ch2.html#import-example-data"><i class="fa fa-check"></i><b>2.1.1</b> Import Example Data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="ch2.html"><a href="ch2.html#ch2-1-2"><i class="fa fa-check"></i><b>2.1.2</b> <code>lavaan</code> Syntax</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="ch2.html"><a href="ch2.html#comparing-2-group-means-in-glm-and-sem"><i class="fa fa-check"></i><b>2.2</b> Comparing 2 Group Means in GLM and SEM</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="ch2.html"><a href="ch2.html#the-glm-approach"><i class="fa fa-check"></i><b>2.2.1</b> The GLM Approach</a></li>
+<li class="chapter" data-level="2.2.2" data-path="ch2.html"><a href="ch2.html#the-sem-approach-single-group-sem"><i class="fa fa-check"></i><b>2.2.2</b> The SEM Approach (single-group SEM)</a></li>
+<li class="chapter" data-level="2.2.3" data-path="ch2.html"><a href="ch2.html#multigroup-sem-approach"><i class="fa fa-check"></i><b>2.2.3</b> Multigroup SEM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="ch2.html"><a href="ch2.html#fit-an-sem-to-summary-statistics"><i class="fa fa-check"></i><b>2.3</b> Fit an SEM to Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="ch2.html"><a href="ch2.html#advantages-of-analyzing-summary-statistics"><i class="fa fa-check"></i><b>2.3.1</b> Advantages of Analyzing Summary Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="ch2.html"><a href="ch2.html#moderation-in-sem"><i class="fa fa-check"></i><b>2.4</b> Moderation in SEM</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="ch2.html"><a href="ch2.html#moderation-by-groups-using-mg-sem"><i class="fa fa-check"></i><b>2.4.1</b> Moderation by Groups Using MG-SEM</a></li>
+<li class="chapter" data-level="2.4.2" data-path="ch2.html"><a href="ch2.html#the-emmeans-package"><i class="fa fa-check"></i><b>2.4.2</b> The <code>emmeans</code> Package</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="ch2.html"><a href="ch2.html#summary-1"><i class="fa fa-check"></i><b>2.5</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="ch2.html"><a href="ch2.html#references-1"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ch3.html"><a href="ch3.html"><i class="fa fa-check"></i><b>3</b> Path Models</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ch3.html"><a href="ch3.html#illustrative-example"><i class="fa fa-check"></i><b>3.1</b> Illustrative example</a></li>
+<li class="chapter" data-level="3.2" data-path="ch3.html"><a href="ch3.html#conceptual-explanation"><i class="fa fa-check"></i><b>3.2</b> Conceptual explanation</a></li>
+<li class="chapter" data-level="3.3" data-path="ch3.html"><a href="ch3.html#matrix-explanation"><i class="fa fa-check"></i><b>3.3</b> Matrix explanation</a></li>
+<li class="chapter" data-level="3.4" data-path="ch3.html"><a href="ch3.html#path-analysis-using-lavaan"><i class="fa fa-check"></i><b>3.4</b> Path analysis using lavaan</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="ch3.html"><a href="ch3.html#installing-lavaan-1"><i class="fa fa-check"></i><b>3.4.1</b> Installing lavaan</a></li>
+<li class="chapter" data-level="3.4.2" data-path="ch3.html"><a href="ch3.html#fitting-a-path-model"><i class="fa fa-check"></i><b>3.4.2</b> Fitting a path model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="ch3.html"><a href="ch3.html#syntax-shortcuts"><i class="fa fa-check"></i><b>3.4.3</b> Syntax shortcuts</a></li>
+<li class="chapter" data-level="3.4.4" data-path="ch3.html"><a href="ch3.html#extracting-results-from-lavaan-output-in-matrix-form"><i class="fa fa-check"></i><b>3.4.4</b> Extracting results from lavaan output in matrix form</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#references-2"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#appendix"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.08"><i class="fa fa-check"></i>Derivations of equation 3.08</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.09"><i class="fa fa-check"></i>Derivations of equation 3.09</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ch4.html"><a href="ch4.html"><i class="fa fa-check"></i><b>4</b> Standard Errors and Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ch4.html"><a href="ch4.html#standard-errors"><i class="fa fa-check"></i><b>4.1</b> Standard Errors</a></li>
+<li class="chapter" data-level="4.2" data-path="ch4.html"><a href="ch4.html#confidence-intervals"><i class="fa fa-check"></i><b>4.2</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="ch4.html"><a href="ch4.html#likelihood-based-confidence-intervals"><i class="fa fa-check"></i><b>4.2.1</b> Likelihood-based confidence intervals</a></li>
+<li class="chapter" data-level="4.2.2" data-path="ch4.html"><a href="ch4.html#bootstrapped-confidence-intervals"><i class="fa fa-check"></i><b>4.2.2</b> Bootstrapped confidence intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="ch4.html"><a href="ch4.html#obtaining-standard-errors-and-confidence-intervals-in-lavaan"><i class="fa fa-check"></i><b>4.3</b> Obtaining standard errors and confidence intervals in <code>lavaan</code></a></li>
+<li class="chapter" data-level="" data-path="ch4.html"><a href="ch4.html#references-3"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ch5.html"><a href="ch5.html"><i class="fa fa-check"></i><b>5</b> Direct, Indirect, and Total Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ch5.html"><a href="ch5.html#testing-significance-of-indirect-effects"><i class="fa fa-check"></i><b>5.1</b> Testing significance of indirect effects</a></li>
+<li class="chapter" data-level="5.2" data-path="ch5.html"><a href="ch5.html#higher-order-indirect-effects"><i class="fa fa-check"></i><b>5.2</b> Higher order indirect effects</a></li>
+<li class="chapter" data-level="5.3" data-path="ch5.html"><a href="ch5.html#using-matrix-algebra-to-calculate-total-total-indirect-and-specific-indirect-effects"><i class="fa fa-check"></i><b>5.3</b> Using matrix algebra to calculate total, total indirect and specific indirect effects</a></li>
+<li class="chapter" data-level="5.4" data-path="ch5.html"><a href="ch5.html#calculating-total-total-indirect-and-specific-indirect-effects-using-lavaan-output"><i class="fa fa-check"></i><b>5.4</b> Calculating total, total indirect and specific indirect effects using lavaan output</a></li>
+<li class="chapter" data-level="5.5" data-path="ch5.html"><a href="ch5.html#calculating-specific-indirect-effects-in-lavaan"><i class="fa fa-check"></i><b>5.5</b> Calculating specific indirect effects in lavaan</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ch6.html"><a href="ch6.html"><i class="fa fa-check"></i><b>6</b> Calculating Standardized Parameter Estimates</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ch6.html"><a href="ch6.html#standardized-regression-coefficients"><i class="fa fa-check"></i><b>6.1</b> Standardized regression coefficients</a></li>
+<li class="chapter" data-level="6.2" data-path="ch6.html"><a href="ch6.html#standardized-residual-factor-variances-and-covariances"><i class="fa fa-check"></i><b>6.2</b> Standardized residual factor variances and covariances</a></li>
+<li class="chapter" data-level="6.3" data-path="ch6.html"><a href="ch6.html#calculating-standardized-coefficients-in-r-using-lavaan-results"><i class="fa fa-check"></i><b>6.3</b> Calculating standardized coefficients in R using lavaan results</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch6.html"><a href="ch6.html#script-6.1"><i class="fa fa-check"></i>Script 6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="ch6.html"><a href="ch6.html#request-standardized-output-with-lavaan"><i class="fa fa-check"></i><b>6.4</b> Request standardized output with lavaan</a></li>
+<li class="chapter" data-level="6.5" data-path="ch6.html"><a href="ch6.html#standardizing-indirect-and-total-effects"><i class="fa fa-check"></i><b>6.5</b> Standardizing indirect and total effects</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch7.html"><a href="ch7.html"><i class="fa fa-check"></i><b>7</b> Identification</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ch7.html"><a href="ch7.html#assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i><b>7.1</b> Assessment of identification using the elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
+<li class="chapter" data-level="7.2" data-path="ch7.html"><a href="ch7.html#assessing-identification-through-heuristics-rules-of-thumb"><i class="fa fa-check"></i><b>7.2</b> Assessing identification through heuristics (rules of thumb)</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="ch7.html"><a href="ch7.html#the-recursive-rule"><i class="fa fa-check"></i><b>7.2.1</b> The recursive rule</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ch7.html"><a href="ch7.html#the-order-condition"><i class="fa fa-check"></i><b>7.2.2</b> The order condition</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ch7.html"><a href="ch7.html#the-rank-condition"><i class="fa fa-check"></i><b>7.2.3</b> The rank condition</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ch7.html"><a href="ch7.html#assessment-of-empirical-model-identification-using-lavaan"><i class="fa fa-check"></i><b>7.3</b> Assessment of empirical model identification using <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="ch7.html"><a href="ch7.html#script-7.1"><i class="fa fa-check"></i>Script 7.1</a></li>
+<li class="chapter" data-level="" data-path="ch7.html"><a href="ch7.html#script-7.2"><i class="fa fa-check"></i>Script 7.2</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch7.html"><a href="ch7.html#appendix-1"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch7.html"><a href="ch7.html#algebraic-assessment-of-identification-using-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i>Algebraic assessment of identification using elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ch8.html"><a href="ch8.html"><i class="fa fa-check"></i><b>8</b> Autoregression</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch8.html"><a href="ch8.html#script-8.1"><i class="fa fa-check"></i>Script 8.1</a></li>
+<li class="chapter" data-level="8.1" data-path="ch8.html"><a href="ch8.html#autoregression-models-with-predictors"><i class="fa fa-check"></i><b>8.1</b> Autoregression models with predictors</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch8.html"><a href="ch8.html#script-8.2"><i class="fa fa-check"></i>Script 8.2</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="ch8.html"><a href="ch8.html#cross-lagged-panel-models"><i class="fa fa-check"></i><b>8.2</b> Cross-lagged panel models</a></li>
+<li class="chapter" data-level="" data-path="ch8.html"><a href="ch8.html#references-4"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch9.html"><a href="ch9.html"><i class="fa fa-check"></i><b>9</b> Model Specification and Model Identification</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ch9.html"><a href="ch9.html#from-theory-to-model"><i class="fa fa-check"></i><b>9.1</b> From theory to model</a></li>
+<li class="chapter" data-level="9.2" data-path="ch9.html"><a href="ch9.html#model-parsimony"><i class="fa fa-check"></i><b>9.2</b> Model parsimony</a></li>
+<li class="chapter" data-level="9.3" data-path="ch9.html"><a href="ch9.html#a-priori-model-specification"><i class="fa fa-check"></i><b>9.3</b> A priori model specification</a></li>
+<li class="chapter" data-level="9.4" data-path="ch9.html"><a href="ch9.html#post-hoc-model-modification"><i class="fa fa-check"></i><b>9.4</b> Post hoc model modification</a></li>
+<li class="chapter" data-level="9.5" data-path="ch9.html"><a href="ch9.html#backward-and-forward-specification-searches"><i class="fa fa-check"></i><b>9.5</b> Backward and forward specification searches</a></li>
+<li class="chapter" data-level="9.6" data-path="ch9.html"><a href="ch9.html#correlation-residuals"><i class="fa fa-check"></i><b>9.6</b> Correlation residuals</a></li>
+<li class="chapter" data-level="9.7" data-path="ch9.html"><a href="ch9.html#modification-indices"><i class="fa fa-check"></i><b>9.7</b> Modification indices</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="ch9.html"><a href="ch9.html#script-9.0"><i class="fa fa-check"></i><b>9.7.1</b> Script 9.0</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="ch9.html"><a href="ch9.html#cross-validation"><i class="fa fa-check"></i><b>9.8</b> Cross-validation</a></li>
+<li class="chapter" data-level="9.9" data-path="ch9.html"><a href="ch9.html#calculating-correlation-residuals-in-lavaan"><i class="fa fa-check"></i><b>9.9</b> Calculating correlation residuals in <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="9.9.1" data-path="ch9.html"><a href="ch9.html#requesting-mis-and-sepcs-in-lavaan"><i class="fa fa-check"></i><b>9.9.1</b> Requesting MIs and (S)EPCs in <code>lavaan</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch9.html"><a href="ch9.html#references-5"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch10.html"><a href="ch10.html"><i class="fa fa-check"></i><b>10</b> Estimation</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ch10.html"><a href="ch10.html#improper-solutions"><i class="fa fa-check"></i><b>10.1</b> Improper Solutions</a></li>
+<li class="chapter" data-level="10.2" data-path="ch10.html"><a href="ch10.html#specifying-starting-values-in-lavaan"><i class="fa fa-check"></i><b>10.2</b> Specifying starting values in lavaan</a></li>
+<li class="chapter" data-level="10.3" data-path="ch10.html"><a href="ch10.html#alternative-estimators"><i class="fa fa-check"></i><b>10.3</b> Alternative estimators</a></li>
+<li class="chapter" data-level="10.4" data-path="ch10.html"><a href="ch10.html#robust-estimators"><i class="fa fa-check"></i><b>10.4</b> Robust estimators</a></li>
+<li class="chapter" data-level="10.5" data-path="ch10.html"><a href="ch10.html#requesting-alternative-and-robust-estimators-in-lavaan"><i class="fa fa-check"></i><b>10.5</b> Requesting alternative and robust estimators in lavaan</a></li>
+<li class="chapter" data-level="10.6" data-path="ch10.html"><a href="ch10.html#ch10-6"><i class="fa fa-check"></i><b>10.6</b> Alternative calculation of the ML discrepancy function when analysing raw data</a></li>
+<li class="chapter" data-level="10.7" data-path="ch10.html"><a href="ch10.html#ch10-7"><i class="fa fa-check"></i><b>10.7</b> Using FIML to analyse raw data with missing values in lavaan</a></li>
+<li class="chapter" data-level="" data-path="ch10.html"><a href="ch10.html#references-6"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ch11.html"><a href="ch11.html"><i class="fa fa-check"></i><b>11</b> Measures of Model Fit</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ch11.html"><a href="ch11.html#the-chi-squared-test-of-exact-fit"><i class="fa fa-check"></i><b>11.1</b> The chi-squared test of exact fit</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="ch11.html"><a href="ch11.html#alternative-basis-for-calculating-the-test-statistic-when-analysing-raw-data"><i class="fa fa-check"></i><b>11.1.1</b> Alternative basis for calculating the test statistic when analysing raw data</a></li>
+<li class="chapter" data-level="11.1.2" data-path="ch11.html"><a href="ch11.html#testing-exact-fit-vs.-describing-the-degree-of-approximate-fit"><i class="fa fa-check"></i><b>11.1.2</b> Testing exact fit vs. describing the degree of approximate fit</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="ch11.html"><a href="ch11.html#root-mean-square-error-of-approximation-rmsea"><i class="fa fa-check"></i><b>11.2</b> Root Mean Square Error of Approximation (RMSEA)</a></li>
+<li class="chapter" data-level="11.3" data-path="ch11.html"><a href="ch11.html#other-descriptive-fit-indices"><i class="fa fa-check"></i><b>11.3</b> Other descriptive fit indices</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="ch11.html"><a href="ch11.html#the-tuckerlewis-index-tli-and-the-comparative-fit-index-cfi"><i class="fa fa-check"></i><b>11.3.1</b> The Tucker–Lewis Index (TLI) and the Comparative Fit Index (CFI)</a></li>
+<li class="chapter" data-level="11.3.2" data-path="ch11.html"><a href="ch11.html#the-root-mean-square-residual-rmr-and-standardized-rmr-srmr"><i class="fa fa-check"></i><b>11.3.2</b> The Root Mean Square Residual (RMR) and Standardized RMR (SRMR)</a></li>
+<li class="chapter" data-level="11.3.3" data-path="ch11.html"><a href="ch11.html#information-criteria"><i class="fa fa-check"></i><b>11.3.3</b> Information Criteria</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="ch11.html"><a href="ch11.html#a-note-on-using-available-fit-indices"><i class="fa fa-check"></i><b>11.4</b> A note on using available fit indices</a></li>
+<li class="chapter" data-level="11.5" data-path="ch11.html"><a href="ch11.html#difference-in-model-fit"><i class="fa fa-check"></i><b>11.5</b> Difference in model fit</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#δχ2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> Δχ2 as a likelihood ratio test</a></li>
+<li class="chapter" data-level="11.5.2" data-path="ch11.html"><a href="ch11.html#describing-differences-in-fit"><i class="fa fa-check"></i><b>11.5.2</b> Describing differences in fit</a></li>
+<li class="chapter" data-level="11.5.3" data-path="ch11.html"><a href="ch11.html#testing-differences-in-fit-between-non-nested-models"><i class="fa fa-check"></i><b>11.5.3</b> Testing differences in fit between non-nested models</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="ch11.html"><a href="ch11.html#request-fit-measures-in-lavaan"><i class="fa fa-check"></i><b>11.6</b> Request fit measures in <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="ch11.html"><a href="ch11.html#compare-fit-of-lavaan-models"><i class="fa fa-check"></i><b>11.6.1</b> Compare fit of lavaan models</a></li>
+<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in lavaan when adjusting for non-normal data</a></li>
+<li class="chapter" data-level="11.6.3" data-path="ch11.html"><a href="ch11.html#test-statistic-adjusted-for-small-sample-size"><i class="fa fa-check"></i><b>11.6.3</b> Test statistic adjusted for small sample size</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch11.html"><a href="ch11.html#references-7"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ch12.html"><a href="ch12.html"><i class="fa fa-check"></i><b>12</b> Path Analysis with Categorical Outcomes</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="ch12.html"><a href="ch12.html#prepare-data-and-workspace-1"><i class="fa fa-check"></i><b>12.1</b> Prepare Data and Workspace</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="ch12.html"><a href="ch12.html#import-example-data-1"><i class="fa fa-check"></i><b>12.1.1</b> Import Example Data</a></li>
+<li class="chapter" data-level="12.1.2" data-path="ch12.html"><a href="ch12.html#summarize-data"><i class="fa fa-check"></i><b>12.1.2</b> Summarize Data</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="ch12.html"><a href="ch12.html#regression-models-for-binary-variables"><i class="fa fa-check"></i><b>12.2</b> Regression Models for Binary Variables</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="ch12.html"><a href="ch12.html#fit-a-logistic-regression-model"><i class="fa fa-check"></i><b>12.2.1</b> Fit a Logistic Regression Model</a></li>
+<li class="chapter" data-level="12.2.2" data-path="ch12.html"><a href="ch12.html#fit-a-probit-regression-model"><i class="fa fa-check"></i><b>12.2.2</b> Fit a Probit Regression Model</a></li>
+<li class="chapter" data-level="12.2.3" data-path="ch12.html"><a href="ch12.html#compare-models"><i class="fa fa-check"></i><b>12.2.3</b> Compare Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="ch12.html"><a href="ch12.html#latent-response-variable"><i class="fa fa-check"></i><b>12.3</b> Latent Response Variable</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="ch12.html"><a href="ch12.html#ordinal-outcomes"><i class="fa fa-check"></i><b>12.3.1</b> Ordinal Outcomes</a></li>
+<li class="chapter" data-level="12.3.2" data-path="ch12.html"><a href="ch12.html#estimating-thresholds"><i class="fa fa-check"></i><b>12.3.2</b> Estimating Thresholds</a></li>
+<li class="chapter" data-level="12.3.3" data-path="ch12.html"><a href="ch12.html#estimating-polychoric-correlations"><i class="fa fa-check"></i><b>12.3.3</b> Estimating Polychoric Correlations</a></li>
+<li class="chapter" data-level="12.3.4" data-path="ch12.html"><a href="ch12.html#estimating-an-sem-with-estimated-input"><i class="fa fa-check"></i><b>12.3.4</b> Estimating an SEM with Estimated Input</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="ch12.html"><a href="ch12.html#mediation-model-with-categorical-outcomes"><i class="fa fa-check"></i><b>12.4</b> Mediation Model with Categorical Outcomes</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="ch12.html"><a href="ch12.html#estimate-mediation-models"><i class="fa fa-check"></i><b>12.4.1</b> Estimate Mediation Models</a></li>
+<li class="chapter" data-level="12.4.2" data-path="ch12.html"><a href="ch12.html#interpreting-coefficients"><i class="fa fa-check"></i><b>12.4.2</b> Interpreting Coefficients</a></li>
+<li class="chapter" data-level="12.4.3" data-path="ch12.html"><a href="ch12.html#delta-vs.-theta-parameterizations"><i class="fa fa-check"></i><b>12.4.3</b> Delta vs. Theta Parameterizations</a></li>
+<li class="chapter" data-level="12.4.4" data-path="ch12.html"><a href="ch12.html#decomposing-total-effects"><i class="fa fa-check"></i><b>12.4.4</b> Decomposing Total Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch12.html"><a href="ch12.html#references-8"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ch13.html"><a href="ch13.html"><i class="fa fa-check"></i><b>13</b> Fitting Path Models with Multilevel Data</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="ch13.html"><a href="ch13.html#intraclass-correlation"><i class="fa fa-check"></i><b>13.1</b> Intraclass correlation</a></li>
+<li class="chapter" data-level="13.2" data-path="ch13.html"><a href="ch13.html#multilevel-structure-as-a-nuisance-correcting-for-the-dependency"><i class="fa fa-check"></i><b>13.2</b> Multilevel structure as a nuisance: Correcting for the dependency</a></li>
+<li class="chapter" data-level="13.3" data-path="ch13.html"><a href="ch13.html#two-level-path-models"><i class="fa fa-check"></i><b>13.3</b> Two-level path models</a></li>
+<li class="chapter" data-level="13.4" data-path="ch13.html"><a href="ch13.html#obtaining-iccs-and-estimates-of-sigma_textw-and-sigma_textb"><i class="fa fa-check"></i><b>13.4</b> Obtaining ICCs, and estimates of <span class="math inline">\(\Sigma_\text{W}\)</span> and <span class="math inline">\(\Sigma_\text{B}\)</span></a>
+<ul>
+<li class="chapter" data-level="" data-path="ch13.html"><a href="ch13.html#script-13.1"><i class="fa fa-check"></i>Script 13.1</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="ch13.html"><a href="ch13.html#fitting-a-two-level-path-model"><i class="fa fa-check"></i><b>13.5</b> Fitting a two-level path model</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch13.html"><a href="ch13.html#script-13.2"><i class="fa fa-check"></i>Script 13.2</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch13.html"><a href="ch13.html#references-9"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="ch14.html"><a href="ch14.html"><i class="fa fa-check"></i><b>14</b> Factor Models</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="ch14.html"><a href="ch14.html#empirical-example-of-a-factor-model"><i class="fa fa-check"></i><b>14.1</b> Empirical example of a factor model</a></li>
+<li class="chapter" data-level="14.2" data-path="ch14.html"><a href="ch14.html#conceptual-explanation-of-a-factor-model"><i class="fa fa-check"></i><b>14.2</b> Conceptual explanation of a factor model</a></li>
+<li class="chapter" data-level="14.3" data-path="ch14.html"><a href="ch14.html#symbolic-explanation-of-a-factor-model"><i class="fa fa-check"></i><b>14.3</b> Symbolic explanation of a factor model</a></li>
+<li class="chapter" data-level="14.4" data-path="ch14.html"><a href="ch14.html#identification-of-model-parameters-in-a-factor-model"><i class="fa fa-check"></i><b>14.4</b> Identification of model parameters in a factor model</a></li>
+<li class="chapter" data-level="14.5" data-path="ch14.html"><a href="ch14.html#fitting-a-factor-model-using-lavaan"><i class="fa fa-check"></i><b>14.5</b> Fitting a factor model using lavaan</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#script-14.1"><i class="fa fa-check"></i>Script 14.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#references-10"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#appendix-2"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#derivations-of-equation-14.13"><i class="fa fa-check"></i>Derivations of Equation 14.13</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="ch15.html"><a href="ch15.html"><i class="fa fa-check"></i><b>15</b> Standardized Parameter Estimates for the Factor Model</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="ch15.html"><a href="ch15.html#standardized-factor-loadings"><i class="fa fa-check"></i><b>15.1</b> Standardized factor loadings</a></li>
+<li class="chapter" data-level="15.2" data-path="ch15.html"><a href="ch15.html#standardized-common-factor-variances-and-covariances"><i class="fa fa-check"></i><b>15.2</b> Standardized common-factor variances and covariances</a></li>
+<li class="chapter" data-level="15.3" data-path="ch15.html"><a href="ch15.html#standardized-unique-factor-variances-and-covariances"><i class="fa fa-check"></i><b>15.3</b> Standardized unique-factor variances and covariances</a></li>
+<li class="chapter" data-level="15.4" data-path="ch15.html"><a href="ch15.html#structure-coefficients"><i class="fa fa-check"></i><b>15.4</b> Structure coefficients</a></li>
+<li class="chapter" data-level="15.5" data-path="ch15.html"><a href="ch15.html#ch15-5"><i class="fa fa-check"></i><b>15.5</b> Calculating standardized coefficients in lavaan</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch15.html"><a href="ch15.html#script-15.1"><i class="fa fa-check"></i>Script 15.1</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="ch15.html"><a href="ch15.html#request-standardized-output-with-lavaan-1"><i class="fa fa-check"></i><b>15.6</b> Request standardized output with lavaan</a></li>
+<li class="chapter" data-level="" data-path="ch15.html"><a href="ch15.html#references-11"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="ch16.html"><a href="ch16.html"><i class="fa fa-check"></i><b>16</b> The Empirical Check for Identification</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="ch16.html"><a href="ch16.html#empirical-check-of-model-a"><i class="fa fa-check"></i><b>16.1</b> Empirical check of Model A</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch16.html"><a href="ch16.html#script-16.1"><i class="fa fa-check"></i>Script 16.1</a></li>
+<li class="chapter" data-level="" data-path="ch16.html"><a href="ch16.html#script-16.2"><i class="fa fa-check"></i>Script 16.2</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch16.html"><a href="ch16.html#references-12"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="ch17.html"><a href="ch17.html"><i class="fa fa-check"></i><b>17</b> Second Order Factor Models</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch17.html"><a href="ch17.html#script-17.1"><i class="fa fa-check"></i>Script 17.1</a></li>
+<li class="chapter" data-level="" data-path="ch17.html"><a href="ch17.html#getting-the-parameter-estimates-in-matrix-form"><i class="fa fa-check"></i>Getting the parameter estimates in matrix form</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch17.html"><a href="ch17.html#script-17.2"><i class="fa fa-check"></i>Script 17.2</a></li>
+</ul></li>
+<li class="chapter" data-level="17.1" data-path="ch17.html"><a href="ch17.html#standardized-parameter-estimates-for-the-higher-order-part-of-the-model"><i class="fa fa-check"></i><b>17.1</b> Standardized parameter estimates for the higher-order part of the model</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch17.html"><a href="ch17.html#script-17.3"><i class="fa fa-check"></i>Script 17.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="ch18.html"><a href="ch18.html"><i class="fa fa-check"></i><b>18</b> Structural Regression Models</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch18.html"><a href="ch18.html#script-18.1"><i class="fa fa-check"></i>Script 18.1</a></li>
+<li class="chapter" data-level="" data-path="ch18.html"><a href="ch18.html#script-18.2"><i class="fa fa-check"></i>Script 18.2</a></li>
+<li class="chapter" data-level="18.1" data-path="ch18.html"><a href="ch18.html#standardized-parameter-estimates-for-the-structural-part-of-the-model"><i class="fa fa-check"></i><b>18.1</b> Standardized parameter estimates for the structural part of the model</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch18.html"><a href="ch18.html#script-18.3"><i class="fa fa-check"></i>Script 18.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="ch19.html"><a href="ch19.html"><i class="fa fa-check"></i><b>19</b> Second-order Correlation Residuals</a></li>
+<li class="chapter" data-level="20" data-path="ch20.html"><a href="ch20.html"><i class="fa fa-check"></i><b>20</b> Factors with single indicators</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch20.html"><a href="ch20.html#script-20.1"><i class="fa fa-check"></i>Script 20.1</a></li>
+<li class="chapter" data-level="" data-path="ch20.html"><a href="ch20.html#script-20.2"><i class="fa fa-check"></i>Script 20.2</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="ch21.html"><a href="ch21.html"><i class="fa fa-check"></i><b>21</b> Mean structures</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="ch21.html"><a href="ch21.html#mean-structure-of-a-factor-model"><i class="fa fa-check"></i><b>21.1</b> Mean structure of a factor model</a></li>
+<li class="chapter" data-level="21.2" data-path="ch21.html"><a href="ch21.html#mean-structure-of-a-path-model"><i class="fa fa-check"></i><b>21.2</b> Mean structure of a path model</a></li>
+<li class="chapter" data-level="21.3" data-path="ch21.html"><a href="ch21.html#mean-structure-of-a-factor-model-in-lavaan"><i class="fa fa-check"></i><b>21.3</b> Mean structure of a factor model in <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#script-21.1"><i class="fa fa-check"></i>Script 21.1</a></li>
+</ul></li>
+<li class="chapter" data-level="21.4" data-path="ch21.html"><a href="ch21.html#mean-structure-of-a-path-model-1"><i class="fa fa-check"></i><b>21.4</b> Mean structure of a path model</a></li>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#appendix-3"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#derivation-of-equation-21.20"><i class="fa fa-check"></i>Derivation of Equation 21.20</a></li>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#derivation-of-equation-21.27"><i class="fa fa-check"></i>Derivation of Equation 21.27</a></li>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#derivation-of-equation-21.28"><i class="fa fa-check"></i>Derivation of Equation 21.28</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="ch22.html"><a href="ch22.html"><i class="fa fa-check"></i><b>22</b> Multigroup Models</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="ch22.html"><a href="ch22.html#measurement-invariance"><i class="fa fa-check"></i><b>22.1</b> Measurement invariance</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.1"><i class="fa fa-check"></i>Script 22.1</a></li>
+</ul></li>
+<li class="chapter" data-level="22.2" data-path="ch22.html"><a href="ch22.html#across-group-equality-constraints"><i class="fa fa-check"></i><b>22.2</b> Across group equality constraints</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.2"><i class="fa fa-check"></i>Script 22.2</a></li>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.3"><i class="fa fa-check"></i>Script 22.3</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="ch22.html"><a href="ch22.html#standardized-estimates-for-a-multigroup-model"><i class="fa fa-check"></i><b>22.3</b> Standardized estimates for a multigroup model</a></li>
+<li class="chapter" data-level="22.4" data-path="ch22.html"><a href="ch22.html#lavaan-shortcuts"><i class="fa fa-check"></i><b>22.4</b> <code>lavaan</code> shortcuts</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.4"><i class="fa fa-check"></i>Script 22.4</a></li>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.5"><i class="fa fa-check"></i>Script 22.5</a></li>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.6"><i class="fa fa-check"></i>Script 22.6</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="ch23.html"><a href="ch23.html"><i class="fa fa-check"></i><b>23</b> Calculating Mean Residuals</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch23.html"><a href="ch23.html#script-23.1"><i class="fa fa-check"></i>Script 23.1</a></li>
+<li class="chapter" data-level="" data-path="ch23.html"><a href="ch23.html#script-22.2-1"><i class="fa fa-check"></i>Script 22.2</a></li>
+<li class="chapter" data-level="" data-path="ch23.html"><a href="ch23.html#script-23.3"><i class="fa fa-check"></i>Script 23.3</a></li>
+<li class="chapter" data-level="" data-path="ch23.html"><a href="ch23.html#references-13"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="ch24.html"><a href="ch24.html"><i class="fa fa-check"></i><b>24</b> Modification Indices and EPC’s for Equality Constraints</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="ch24.html"><a href="ch24.html#modification-index-for-simultaneously-freeing-a-set-of-parameters"><i class="fa fa-check"></i><b>24.1</b> Modification index for simultaneously freeing a set of parameters</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch24.html"><a href="ch24.html#script-24.1"><i class="fa fa-check"></i>Script 24.1</a></li>
+</ul></li>
+<li class="chapter" data-level="24.2" data-path="ch24.html"><a href="ch24.html#modification-indices-for-releasing-equality-constraints"><i class="fa fa-check"></i><b>24.2</b> Modification indices for releasing equality constraints</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch24.html"><a href="ch24.html#script-24.3"><i class="fa fa-check"></i>Script 24.3</a></li>
+</ul></li>
+<li class="chapter" data-level="24.3" data-path="ch24.html"><a href="ch24.html#epc-interest"><i class="fa fa-check"></i><b>24.3</b> EPC-interest</a></li>
+<li class="chapter" data-level="" data-path="ch24.html"><a href="ch24.html#references-14"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="ch25.html"><a href="ch25.html"><i class="fa fa-check"></i><b>25</b> MIMIC (and RFA) models</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="ch25.html"><a href="ch25.html#illustration-testing-uniform-bias-in-a-mimic-model"><i class="fa fa-check"></i><b>25.1</b> Illustration testing uniform bias in a MIMIC model</a></li>
+<li class="chapter" data-level="25.2" data-path="ch25.html"><a href="ch25.html#evaluating-non-uniform-measurement-bias"><i class="fa fa-check"></i><b>25.2</b> Evaluating non-uniform measurement bias</a></li>
+<li class="chapter" data-level="25.3" data-path="ch25.html"><a href="ch25.html#connection-with-measurement-invariance-testing-in-multigroup-models"><i class="fa fa-check"></i><b>25.3</b> Connection with measurement invariance testing in multigroup models</a></li>
+<li class="chapter" data-level="25.4" data-path="ch25.html"><a href="ch25.html#rfa-models"><i class="fa fa-check"></i><b>25.4</b> RFA-models</a></li>
+<li class="chapter" data-level="" data-path="ch25.html"><a href="ch25.html#references-15"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="ch26.html"><a href="ch26.html"><i class="fa fa-check"></i><b>26</b> Longitudinal Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="ch26.html"><a href="ch26.html#step-1-a-longitudinal-factor-model-with-configural-invariance"><i class="fa fa-check"></i><b>26.1</b> Step 1: A longitudinal factor model with configural invariance</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.1"><i class="fa fa-check"></i>Script 26.1</a></li>
+</ul></li>
+<li class="chapter" data-level="26.2" data-path="ch26.html"><a href="ch26.html#step-2-a-longitudinal-model-with-weak-factorial-invariance."><i class="fa fa-check"></i><b>26.2</b> Step 2: A longitudinal model with weak factorial invariance.</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.2"><i class="fa fa-check"></i>Script 26.2</a></li>
+</ul></li>
+<li class="chapter" data-level="26.3" data-path="ch26.html"><a href="ch26.html#step-3-longitudinal-model-with-strong-factorial-invariance"><i class="fa fa-check"></i><b>26.3</b> Step 3: Longitudinal model with strong factorial invariance</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.3"><i class="fa fa-check"></i>Script 26.3</a></li>
+</ul></li>
+<li class="chapter" data-level="26.4" data-path="ch26.html"><a href="ch26.html#step-4-a-model-with-strict-factorial-invariance"><i class="fa fa-check"></i><b>26.4</b> Step 4: A model with strict factorial invariance</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.4"><i class="fa fa-check"></i>Script 26.4</a></li>
+</ul></li>
+<li class="chapter" data-level="26.5" data-path="ch26.html"><a href="ch26.html#standardized-estimates-for-a-longitudinal-factor-model-with-means"><i class="fa fa-check"></i><b>26.5</b> Standardized estimates for a (longitudinal) factor model with means</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.5"><i class="fa fa-check"></i>Script 26.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#references-16"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="ch27.html"><a href="ch27.html"><i class="fa fa-check"></i><b>27</b> Latent Growth Curve Models</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ch27.html"><a href="ch27.html#prepare-data-and-workspace-2"><i class="fa fa-check"></i><b>27.1</b> Prepare Data and Workspace</a></li>
+<li class="chapter" data-level="27.2" data-path="ch27.html"><a href="ch27.html#random-intercept-model"><i class="fa fa-check"></i><b>27.2</b> Random Intercept Model</a>
+<ul>
+<li class="chapter" data-level="27.2.1" data-path="ch27.html"><a href="ch27.html#specification-and-estimation"><i class="fa fa-check"></i><b>27.2.1</b> Specification and Estimation</a></li>
+<li class="chapter" data-level="27.2.2" data-path="ch27.html"><a href="ch27.html#interpret-results"><i class="fa fa-check"></i><b>27.2.2</b> Interpret Results</a></li>
+</ul></li>
+<li class="chapter" data-level="27.3" data-path="ch27.html"><a href="ch27.html#linear-growth-model"><i class="fa fa-check"></i><b>27.3</b> Linear Growth Model</a>
+<ul>
+<li class="chapter" data-level="27.3.1" data-path="ch27.html"><a href="ch27.html#model-fit-and-comparison"><i class="fa fa-check"></i><b>27.3.1</b> Model Fit and Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="27.4" data-path="ch27.html"><a href="ch27.html#unrestricted-growth-models"><i class="fa fa-check"></i><b>27.4</b> Unrestricted Growth Models</a>
+<ul>
+<li class="chapter" data-level="27.4.1" data-path="ch27.html"><a href="ch27.html#latent-basis-curve"><i class="fa fa-check"></i><b>27.4.1</b> Latent Basis Curve</a></li>
+<li class="chapter" data-level="27.4.2" data-path="ch27.html"><a href="ch27.html#saturated-growth-model"><i class="fa fa-check"></i><b>27.4.2</b> Saturated Growth Model</a></li>
+</ul></li>
+<li class="chapter" data-level="27.5" data-path="ch27.html"><a href="ch27.html#explaining-growth-factors"><i class="fa fa-check"></i><b>27.5</b> Explaining Growth Factors</a>
+<ul>
+<li class="chapter" data-level="27.5.1" data-path="ch27.html"><a href="ch27.html#time-invariant-level-2-predictors"><i class="fa fa-check"></i><b>27.5.1</b> Time-Invariant (Level-2) Predictors</a></li>
+<li class="chapter" data-level="27.5.2" data-path="ch27.html"><a href="ch27.html#time-varying-level-1-predictors"><i class="fa fa-check"></i><b>27.5.2</b> Time-Varying (Level-1) Predictors</a></li>
+<li class="chapter" data-level="27.5.3" data-path="ch27.html"><a href="ch27.html#parallel-growth-curves"><i class="fa fa-check"></i><b>27.5.3</b> Parallel Growth Curves</a></li>
+</ul></li>
+<li class="chapter" data-level="27.6" data-path="ch27.html"><a href="ch27.html#latent-indicators-of-growth-factors"><i class="fa fa-check"></i><b>27.6</b> Latent Indicators of Growth Factors</a>
+<ul>
+<li class="chapter" data-level="27.6.1" data-path="ch27.html"><a href="ch27.html#common-factors"><i class="fa fa-check"></i><b>27.6.1</b> Common Factors</a></li>
+<li class="chapter" data-level="27.6.2" data-path="ch27.html"><a href="ch27.html#discrete-indicators"><i class="fa fa-check"></i><b>27.6.2</b> Discrete Indicators</a></li>
+</ul></li>
+<li class="chapter" data-level="27.7" data-path="ch27.html"><a href="ch27.html#multigroup-growth-models"><i class="fa fa-check"></i><b>27.7</b> Multigroup Growth Models</a></li>
+<li class="chapter" data-level="" data-path="ch27.html"><a href="ch27.html#references-17"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="ch28.html"><a href="ch28.html"><i class="fa fa-check"></i><b>28</b> Analysis of categorical outcomes</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="ch28.html"><a href="ch28.html#factor-analysis-using-categorical-indicators"><i class="fa fa-check"></i><b>28.1</b> Factor analysis using categorical indicators</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#script-28.1"><i class="fa fa-check"></i>Script 28.1</a></li>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#script-28.2"><i class="fa fa-check"></i>Script 28.2</a></li>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#script-28.3"><i class="fa fa-check"></i>Script 28.3</a></li>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#script-28.4"><i class="fa fa-check"></i>Script 28.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#references-and-further-reading"><i class="fa fa-check"></i>References and further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="ch29.html"><a href="ch29.html"><i class="fa fa-check"></i><b>29</b> Fitting CFA models with multilevel data</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="ch29.html"><a href="ch29.html#intraclass-correlations-of-observed-variables"><i class="fa fa-check"></i><b>29.1</b> Intraclass correlations of observed variables</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch29.html"><a href="ch29.html#script-29.1"><i class="fa fa-check"></i>Script 29.1</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="ch29.html"><a href="ch29.html#multilevel-structure-as-a-nuisance-correcting-for-the-dependency-1"><i class="fa fa-check"></i><b>29.2</b> Multilevel structure as a nuisance: Correcting for the dependency</a></li>
+<li class="chapter" data-level="29.3" data-path="ch29.html"><a href="ch29.html#two-level-factor-models"><i class="fa fa-check"></i><b>29.3</b> Two-level factor models</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch29.html"><a href="ch29.html#script-29.2"><i class="fa fa-check"></i>Script 29.2</a></li>
+</ul></li>
+<li class="chapter" data-level="29.4" data-path="ch29.html"><a href="ch29.html#intraclass-correlations-of-common-factors"><i class="fa fa-check"></i><b>29.4</b> Intraclass correlations of common factors</a></li>
+<li class="chapter" data-level="29.5" data-path="ch29.html"><a href="ch29.html#climate-and-contextual-between-level-latent-variables"><i class="fa fa-check"></i><b>29.5</b> Climate and contextual between-level latent variables</a></li>
+<li class="chapter" data-level="29.6" data-path="ch29.html"><a href="ch29.html#full-sem-with-multilevel-data"><i class="fa fa-check"></i><b>29.6</b> Full SEM with multilevel data</a></li>
+<li class="chapter" data-level="" data-path="ch29.html"><a href="ch29.html#references-18"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A <code>lavaan</code> Compendium for Structural Equation Modeling in Educational Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ch7" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Identification<a href="ch7.html#ch7" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The problem of identification considers the issue of whether there is enough “known” information to obtain unique estimates of the model that is specified (i.e., the “unknown” information). In structural equation modeling, the known pieces of information are the sample variances and covariances of the observed variables, and the unknown pieces of information are the model parameters. When the model is “under identified”, this means that there is not enough known information to yield unique parameter estimates. When there are just as many knowns as unknowns, the model is “just identified”. However, usually we are interested in so called “over identified” models, where there are more knowns than unknowns. Identification is an important but rather difficult topic of structural equation modeling, and there are many different ways to evaluate the identification status of a model.</p>
+<p>The first, and easiest way to evaluate whether a model might be identified is to evaluate whether the number of model parameters to be estimated is equal to or smaller than the number of nonredundant elements in the observed covariance matrix:</p>
+<span class="math display" id="eq:7-01">\[\begin{equation}
+q \le (p(p+1)) ½,
+\tag{7.1}
+\end{equation}\]</span>
+<p>where <span class="math inline">\(p\)</span> is the number of observed variables, and <span class="math inline">\(q\)</span> is the number of free parameters in the model. This is a general rule that can be applied to all structural equation models. However, it is a ‘necessary but not sufficient’ condition for identification. This means that models that have a negative number of degrees of freedom are surely under identified. Models that have at least zero degrees of freedom might be identified. Evaluation of Equation <a href="ch7.html#eq:7-01">(7.1)</a> for our illustrative example of child anxiety yields a total of 10 knowns (i.e., <span class="math inline">\(p = 4\)</span>), and 8 unknowns (i.e., <span class="math inline">\(\beta_{31}\)</span>, <span class="math inline">\(\beta_{32}\)</span>, <span class="math inline">\(\beta_{43}\)</span>, <span class="math inline">\(\psi_{11}\)</span>, <span class="math inline">\(\psi_{22}\)</span>, <span class="math inline">\(\psi_{33}\)</span>, <span class="math inline">\(\psi_{44}\)</span> and <span class="math inline">\(\psi_{21}\)</span>). The difference between the number or nonredundant elements in the covariance matrix and the number of free parameters in the model are the ‘degrees of freedom’. The model of our example thus has 2 degrees of freedom.</p>
+<p>There are different approaches to further assess whether a model is identified. In this chapter we will first discuss the symbolic or theoretical identification of model parameters. In addition, we will explain some rules of thumb that can be applied in order to facilitate the evaluation of model identification. We only discuss identification of path models, identification of factor models will be discussed in a later chapter.</p>
+<p>Some conditions related to identification are sufficient, which means that if the condition holds, the model is surely identified (at least theoretically), but there may be other identified models for which the condition does not hold. Other conditions are necessary, which means that if the condition holds, the model might be identified. If a necessary condition doesn’t hold, the model is surely not identified.</p>
+<div id="assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Assessment of identification using the elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span><a href="ch7.html#assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A model is identified only when all unknown parameters of the model are identified. Identification of model parameters can be demonstrated by showing that the unknown parameters are functions of known parameters, i.e., that we can give a description of the free parameters in the model in terms of population variances and covariances (<span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span>). The population variances and covariances are known-to-be-identified (i.e., known information) because the observed sample variances and covariances (<span class="math inline">\(\mathbf\Sigma_{\text{sample}}\)</span>) are direct estimates of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span>. Therefore, if an unknown parameter can be written as a function of one or more elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span>, then that parameter is identified.</p>
+<p>As an example, we take <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span> from Equation <a href="ch3.html#eq:3-10">(3.10)</a>. Here, the elements of the covariance matrix are written as a function of model parameters. In order to evaluate the identification status of a parameter, we need to write the equation the other way around, so that the model parameter is a function of population variances and covariances. If each unknown model parameter can be written as a function of known parameters, then the model of Equation <a href="ch3.html#eq:3-10">(3.10)</a> is identified. For example, the first three elements of the model implied covariance matrix are a function of single model parameters <span class="math inline">\(ψ_{11}\)</span>, <span class="math inline">\(ψ_{22}\)</span>, and <span class="math inline">\(ψ_{21}\)</span>. These parameters can therefore be represented by the population variances <span class="math inline">\(\sigma_{11}\)</span>, <span class="math inline">\(\sigma_{22}\)</span>, and covariance <span class="math inline">\(\sigma_{21}\)</span>:</p>
+<p><span class="math display" id="eq:7-02">\[\begin{equation}
+\psi_{11} = \sigma_{11}
+\tag{7.2}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:7-03">\[\begin{equation}
+\psi_{22} = \sigma_{22}
+\tag{7.3}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:7-04">\[\begin{equation}
+\psi_{21} = \sigma_{21}
+\tag{7.4}
+\end{equation}\]</span></p>
+<p>These equations thus have the same number of “knowns” as “unknowns’, which leads to a unique expression for each model parameter. The parameters <span class="math inline">\(ψ_{11}\)</span>, <span class="math inline">\(ψ_{22}\)</span>, and <span class="math inline">\(ψ_{21}\)</span> are thus identified.</p>
+<p>The equations for the population covariances <span class="math inline">\(\sigma_{31}\)</span> and <span class="math inline">\(\sigma_{32}\)</span> are:</p>
+<p><span class="math display" id="eq:7-05">\[\begin{equation}
+\sigma_{31} = \beta_{31}\psi_{11} + \beta_{32}\psi_{21}
+\tag{7.5}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:7-06">\[\begin{equation}
+\sigma_{32} = \beta_{31}\psi_{32} + \beta_{32}\psi_{22}
+\tag{7.6}
+\end{equation}\]</span></p>
+<p>Given Equations <a href="ch7.html#eq:7-02">(7.2)</a> – <a href="ch7.html#eq:7-04">(7.4)</a>, both equations have two unknowns, <span class="math inline">\(\beta_{31}\)</span> and <span class="math inline">\(\beta_{32}\)</span>. Because both equations share the same two unknowns, we can rewrite the equations such that the model parameters <span class="math inline">\(\beta_{31}\)</span> and <span class="math inline">\(\beta_{32}\)</span> are on the left side of the equations and use this information to yield unique functions for each model parameter in terms population parameters. First, we rewrite Equations <a href="ch7.html#eq:7-05">(7.5)</a> and <a href="ch7.html#eq:7-06">(7.6)</a>:</p>
+<p><span class="math display" id="eq:7-07">\[\begin{equation}
+\beta_{31} = \frac{\sigma_{31}-\beta_{32}\psi_{21}}{\psi_{11}}
+\tag{7.7}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:7-08">\[\begin{equation}
+\beta_{32} = \frac{\sigma_{32}-\beta_{31}\psi_{21}}{\psi_{22}}
+\tag{7.8}
+\end{equation}\]</span></p>
+<p>Substituting Equation <a href="ch7.html#eq:7-08">(7.8)</a> into Equation <a href="ch7.html#eq:7-07">(7.7)</a> gives an equation with only one unknown:</p>
+<p><span class="math display" id="eq:7-09">\[\begin{equation}
+\beta_{31} = \frac{\sigma_{31}-\frac{\sigma_{32}-\beta_{31}\psi_{21}}{\psi_{22}}\psi_{21}}{\psi_{11}}
+\tag{7.9}
+\end{equation}\]</span></p>
+<p>Rewriting gives (for intermediate steps, see this chapters <a href="ch7.html#appendix-1">Appendix</a>:</p>
+<p><span class="math display" id="eq:7-10">\[\begin{equation}
+\beta_{31} = \frac{\sigma_{31}\psi_{22}-\sigma_{32}\psi_{21}}{\psi_{11}\psi_{22}-{\psi_{21}}^2}
+\tag{7.10}
+\end{equation}\]</span></p>
+<p>The expression for <span class="math inline">\(β_{31}\)</span> contains the already known to be identified parameters <span class="math inline">\(ψ_{11}\)</span>, <span class="math inline">\(ψ_{22}\)</span>, and <span class="math inline">\(ψ_{21}\)</span>. Substituting Equations <a href="ch7.html#eq:7-02">(7.2)</a>, <a href="ch7.html#eq:7-02">(7.2)</a> and <a href="ch7.html#eq:7-04">(7.4)</a> into Equation <a href="ch7.html#eq:7-10">(7.10)</a> gives:</p>
+<p><span class="math display" id="eq:7-11">\[\begin{equation}
+\beta_{31} = \frac{\sigma_{31}\sigma_{22}-\sigma_{32}\sigma_{21}}{\sigma_{11}\sigma_{22}-{\sigma_{21}}^2}
+\tag{7.11}
+\end{equation}\]</span></p>
+<p>This shows that the parameter <span class="math inline">\(β_{31}\)</span> can be written as a function of population variances and covariances, and thus <span class="math inline">\(β_{31}\)</span> is identified.</p>
+<p>Similarly, substituting Equation <a href="ch7.html#eq:7-07">(7.7)</a> into <a href="ch7.html#eq:7-08">(7.8)</a> and rewriting gives:</p>
+<p><span class="math display" id="eq:7-12">\[\begin{equation}
+\beta_{32} = \frac{\sigma_{32}\psi_{22}-\sigma_{31}\psi_{21}}{\psi_{11}\psi_{22}-{\psi_{21}}^2}
+\tag{7.12}
+\end{equation}\]</span></p>
+<p>and substituting Equations <a href="ch7.html#eq:7-02">(7.2)</a>, <a href="ch7.html#eq:7-03">(7.3)</a> and <a href="ch7.html#eq:7-04">(7.4)</a> into Equation <a href="ch7.html#eq:7-12">(7.12)</a> gives:</p>
+<p><span class="math display" id="eq:7-13">\[\begin{equation}
+\beta_{32} = \frac{\sigma_{32}\sigma_{22}-\sigma_{31}\sigma_{21}}{\sigma_{11}\sigma_{22}-{\sigma_{21}}^2}
+\tag{7.13}
+\end{equation}\]</span></p>
+<p>Therefore, using the equations for the population covariances <span class="math inline">\(\sigma_{31}\)</span> and <span class="math inline">\(\sigma_{32}\)</span>, both <span class="math inline">\(\beta_{31}\)</span> and <span class="math inline">\(\beta_{32}\)</span> are identified.</p>
+<p>The <span class="math inline">\(\sigma_{33}\)</span>, <span class="math inline">\(\sigma_{41}\)</span> and <span class="math inline">\(\sigma_{44}\)</span> equations then have just a single unknown each (<span class="math inline">\(\psi_{33}\)</span>, <span class="math inline">\(\beta_{43}\)</span> and <span class="math inline">\(\psi_{44}\)</span>) which indicates that these model parameters are also identified. In this chapters <a href="ch7.html#appendix-1">Appendix I</a> we demonstrate that the unknown parameters <span class="math inline">\(\psi_{33}\)</span>, <span class="math inline">\(\beta_{43}\)</span> and <span class="math inline">\(\psi_{44}\)</span> can indeed be written as a function of known parameters.</p>
+<p>All model parameters of Equation <a href="ch3.html#eq:3-10">(3.10)</a> are identified and therefore the model of Equation <a href="ch3.html#eq:3-10">(3.10)</a> is identified. Moreover, we did not use the <span class="math inline">\(\sigma_{42}\)</span> and <span class="math inline">\(\sigma_{43}\)</span> equations yet, which shows that the model given by Equation <a href="ch3.html#eq:3-10">(3.10)</a> is over-identified. Specifically, we have two more nonredundant elements in the population covariance matrix than the number of unknown model parameters (i.e., the model has two degrees of freedom). The equations for <span class="math inline">\(\sigma_{41}\)</span>,<span class="math inline">\(\sigma_{42}\)</span> and <span class="math inline">\(\sigma_{43}\)</span> can all be used to express <span class="math inline">\(\beta_{43}\)</span> in terms of population variances and covariances. To illustrate this over identification of <span class="math inline">\(\beta_{43}\)</span> these different equations are given in the <a href="ch7.html#appendix-1">Appendix</a>.</p>
+<p>The expression of model parameters in terms of population variances and covariances can be used to arrive at a theoretical assessment of identification. However, a model that is theoretically identified might not necessarily be empirically identified. The theoretical identification of model parameter rests on the assumption that for each population parameter there is at least one estimate in terms of sample parameters. However, this assumption might be violated when some of the observed variables in the model exhibit very large or very small correlations. For example, when the sample covariance between two variables is zero, then the equations for the unknown parameters might involve division by zero, which is not possible. Therefore, researchers should always be aware of identification problems, even if the model is theoretically identified.</p>
+</div>
+<div id="assessing-identification-through-heuristics-rules-of-thumb" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Assessing identification through heuristics (rules of thumb)<a href="ch7.html#assessing-identification-through-heuristics-rules-of-thumb" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Because the symbolic assessment of identification quickly becomes very complex as the model grows, researchers have developed a number of rules of thumb to assess identification. The most well-known rules of thumb for path models are the “Recursive Rule”, the “Order Condition”, and the “Rank Condition”. These rules are explained in detail on pages 98-104 of Bollen (1988), but below we give a brief description of each of these rules.</p>
+<div id="the-recursive-rule" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> The recursive rule<a href="ch7.html#the-recursive-rule" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The recursive rule is a ‘sufficient, but not necessary condition’ for model identification. The rule entails that all recursive models are identified. Recursive models contain only unidirectional causal effects and have uncorrelated residual factors of endogenous variables. This means that there are no feedback-loops in the model. Because the recursive rule is a sufficient rule, it is possible that the model is still identified even though not all causal effects are unidirectional or there exist correlations between the residual factors of the endogenous variables.</p>
+</div>
+<div id="the-order-condition" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> The order condition<a href="ch7.html#the-order-condition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For identification of nonrecursive models we need additional rules. Where the previous rules apply the model as a whole, the order condition (and the rank condition) apply to the separate equations of the endogenous variables in the model (i.e., Equations <a href="ch3.html#eq:3-03">(3.3)</a> and <a href="ch3.html#eq:3-04">(3.4)</a> from our illustrative example). Each equation has to meet the condition for the model to be identified. One other difference with the previous conditions, is that for the order and rank conditions it is assumed that all residual covariances between the residual factors of endogenous variables are free to be estimated. The advantage of this assumption is that when all the equations of a model meet the rank and order conditions, than all the elements in <span class="math inline">\(\mathbf\Psi\)</span> that correspond to the residual factors of endogenous variables are identified. However, usually we know that some of these elements of <span class="math inline">\(\mathbf\Psi\)</span> are restricted to zero, and such restrictions may help in the identification of model parameters. This knowledge is not taken into account with the rank and order conditions.</p>
+<p>The order condition entails that for each equation of an endogenous variable, the number of endogenous variables excluded from the equation needs to be at least one less than the total number of endogenous variables (<span class="math inline">\(g – 1\)</span>). The order condition is a necessary but not sufficient condition. In order to evaluate the order condition, one can calculate matrix <span class="math inline">\(\mathbf{C}\)</span>, which is <span class="math inline">\((\mathbf{I} – \mathbf{B}_g | -\mathbf{B}_x)\)</span>. <span class="math inline">\(\mathbf{B}_g\)</span> refers to the part of the <span class="math inline">\(\mathbf{B}\)</span> matrix that contains the regression coefficients between the endogenous variables, and <span class="math inline">\(\mathbf{B}_x\)</span> refers to the part of the <span class="math inline">\(\mathbf{B}\)</span> matrix that contains the regression coefficient between the exogenous and endogenous variables. For example, the <span class="math inline">\(\mathbf{C}\)</span> matrix for our illustrative example of the development of child anxiety is:</p>
+<p><span class="math display">\[
+\mathbf{C} =
+\begin{bmatrix}
+1&amp;0&amp; -\beta_{31} &amp; -\beta_{32}\\
+-\beta_{43} &amp; 1 &amp; 0&amp;0
+\end{bmatrix}
+\]</span></p>
+<p>In order to evaluate the order condition, we need to count the number of zero elements for each row. If a row has more zeros than <span class="math inline">\(g – 1\)</span>, then the associated equation meets the order condition. In our example, the row corresponding to the equation for <span class="math inline">\(\mathrm{y}_3\)</span> (parental overcontrol) has one zero, and the row corresponding to the equation for variable <span class="math inline">\(\mathrm{y}_4\)</span> (child anxiety) has two zeros. Our model contains a total of two endogenous variables, i.e. <span class="math inline">\(g – 1 = 1\)</span>. Thus, the equations are identified. The order condition is a necessary but not sufficient condition, which means that even when each equation meets the condition it does not guarantee identification of the model.</p>
+</div>
+<div id="the-rank-condition" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> The rank condition<a href="ch7.html#the-rank-condition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The rank condition is a necessary and sufficient condition, indicating that if each equation meets the criteria than the model is identified. If the equations do not meet the condition, than the model is surely not identified. To evaluate the rank condition we again look at the <span class="math inline">\(\mathbf{C}\)</span> matrix, but now delete all columns of <span class="math inline">\(\mathbf{C}\)</span> that do not have zeros in the row of the equation of interest. Using the remaining columns to form a new matrix, <span class="math inline">\(\mathbf{C}_i\)</span>, we know that equation <span class="math inline">\(i\)</span> is identified when the rank of <span class="math inline">\(\mathbf{C}_i\)</span> equals <span class="math inline">\(g – 1\)</span>. When we calculate the <span class="math inline">\(\mathbf{C}_3\)</span> matrix for the equation that refers to the <span class="math inline">\(\mathrm{y}_3\)</span> variable from our illustrative example, we get:</p>
+<p><span class="math display">\[
+\mathbf{C}_3 =
+\begin{bmatrix}
+0\\
+1
+\end{bmatrix}.
+\]</span></p>
+<p>The rank of a matrix or vector is the number of independent rows (or columns). A row is independent when it contains nonzero elements, and is linearly independent from other rows in the matrix (e.g., when a row is the sum of two other rows of the same matrix, it is not linearly independent from the other rows). For <span class="math inline">\(\mathbf{C}_3\)</span> the rank is 1. Therefore, the equation for parental overcontrol is identified. The <span class="math inline">\(\mathbf{C}_4\)</span> matrix of our illustrative example is:</p>
+<p><span class="math display">\[
+\mathbf{C}_4 =
+\begin{bmatrix}
+-\beta_{31}&amp;-\beta_{32}\\
+0&amp;0
+\end{bmatrix}.
+\]</span></p>
+<p>The rank of this matrix is also 1 and thus this equation is also identified.</p>
+</div>
+</div>
+<div id="assessment-of-empirical-model-identification-using-lavaan" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Assessment of empirical model identification using <code>lavaan</code><a href="ch7.html#assessment-of-empirical-model-identification-using-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The methods for assessment of identification as described above are all methods that cannot be readily evaluated with a computer program such as <code>lavaan</code>. One method that can be evaluated with software is the so-called “empirical check”, where the model of interest is fitted to the (user defined) population covariance matrix of the specified model. When the ‘empirical’ solution is equal to the model in the population, the model may be identified. When the parameter estimates of the empirical solution are different from the parameters specified in the population, the model is surely not identified (i.e., the condition is necessary but not sufficient).
+The empirical check has two steps.</p>
+<p>Step 1: Calculate a model implied covariance matrix for the model of interest.</p>
+<p>Step 2: Fit the model to the model implied covariance matrix from Step 1.</p>
+<p>If the parameter estimates you obtain in Step 2 are identical to the parameter values you chose in Step 1, the model may be identified. If you obtain different parameter estimates in Step 2, your model is surely not identified.</p>
+<p>Below, we will show two examples of the empirical check. In <a href="ch7.html#script-7.1">Script 7.1</a> we will check identification of the path model depicted in Figure <a href="ch7.html#fig:fig7-1">7.1</a>. First we will check identification if we add a covariance between the residual factors of <span class="math inline">\(\mathrm{y}_3\)</span> and <span class="math inline">\(\mathrm{y}_4\)</span> (Model 1), and subsequently we will check identification when we additionally add a reciprocal effect from <span class="math inline">\(\mathrm{y}_4\)</span> to <span class="math inline">\(\mathrm{y}_3\)</span> (Model 2).</p>
+<div id="script-7.1" class="section level3 unnumbered hasAnchor">
+<h3>Script 7.1<a href="ch7.html#script-7.1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="ch7.html#cb197-1" tabindex="-1"></a><span class="do">## STEP 1: calculate the model implied covariance matrix</span></span>
+<span id="cb197-2"><a href="ch7.html#cb197-2" tabindex="-1"></a></span>
+<span id="cb197-3"><a href="ch7.html#cb197-3" tabindex="-1"></a>BETA <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb197-4"><a href="ch7.html#cb197-4" tabindex="-1"></a>            <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb197-5"><a href="ch7.html#cb197-5" tabindex="-1"></a>             .<span class="dv">5</span>,.<span class="dv">5</span>, <span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb197-6"><a href="ch7.html#cb197-6" tabindex="-1"></a>            <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">0</span>),</span>
+<span id="cb197-7"><a href="ch7.html#cb197-7" tabindex="-1"></a>            <span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb197-8"><a href="ch7.html#cb197-8" tabindex="-1"></a></span>
+<span id="cb197-9"><a href="ch7.html#cb197-9" tabindex="-1"></a>PSI <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(  <span class="dv">1</span>,.<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb197-10"><a href="ch7.html#cb197-10" tabindex="-1"></a>             .<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb197-11"><a href="ch7.html#cb197-11" tabindex="-1"></a>              <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">8</span>,.<span class="dv">5</span>,</span>
+<span id="cb197-12"><a href="ch7.html#cb197-12" tabindex="-1"></a>              <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">5</span>,.<span class="dv">7</span>),</span>
+<span id="cb197-13"><a href="ch7.html#cb197-13" tabindex="-1"></a>              <span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb197-14"><a href="ch7.html#cb197-14" tabindex="-1"></a></span>
+<span id="cb197-15"><a href="ch7.html#cb197-15" tabindex="-1"></a>IDEN <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">4</span>)</span>
+<span id="cb197-16"><a href="ch7.html#cb197-16" tabindex="-1"></a></span>
+<span id="cb197-17"><a href="ch7.html#cb197-17" tabindex="-1"></a>SIGMA <span class="ot">&lt;-</span> <span class="fu">solve</span>(IDEN<span class="sc">-</span>BETA) <span class="sc">%*%</span> PSI <span class="sc">%*%</span> <span class="fu">t</span>(<span class="fu">solve</span>(IDEN<span class="sc">-</span>BETA))</span>
+<span id="cb197-18"><a href="ch7.html#cb197-18" tabindex="-1"></a></span>
+<span id="cb197-19"><a href="ch7.html#cb197-19" tabindex="-1"></a>obsnames <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;y1&quot;</span>,<span class="st">&quot;y2&quot;</span>,<span class="st">&quot;y3&quot;</span>,<span class="st">&quot;y4&quot;</span>)</span>
+<span id="cb197-20"><a href="ch7.html#cb197-20" tabindex="-1"></a><span class="fu">dimnames</span>(SIGMA) <span class="ot">&lt;-</span> <span class="fu">list</span>(obsnames,obsnames)</span></code></pre></div>
+<div class="figure" style="text-align: left"><span style="display:block;" id="fig:fig7-1"></span>
+<img src="images/Ch7_Path_model_Identification.png" alt="Path model for which identification is assessed in the situation when effects $ψ_{43}$ (Model 1) and both $ψ_{43}$ and $ß_{34}$ (Model 2) are added." width="100%" />
+<p class="caption">
+Figure 7.1: Path model for which identification is assessed in the situation when effects <span class="math inline">\(ψ_{43}\)</span> (Model 1) and both <span class="math inline">\(ψ_{43}\)</span> and <span class="math inline">\(ß_{34}\)</span> (Model 2) are added.
+</p>
+</div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="ch7.html#cb198-1" tabindex="-1"></a><span class="do">## STEP 2: fit model to the covariance matrix from step 1</span></span>
+<span id="cb198-2"><a href="ch7.html#cb198-2" tabindex="-1"></a></span>
+<span id="cb198-3"><a href="ch7.html#cb198-3" tabindex="-1"></a>EmpiricalCheck <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb198-4"><a href="ch7.html#cb198-4" tabindex="-1"></a><span class="st">            # regressions</span></span>
+<span id="cb198-5"><a href="ch7.html#cb198-5" tabindex="-1"></a><span class="st">            y4 ~ b43*y3</span></span>
+<span id="cb198-6"><a href="ch7.html#cb198-6" tabindex="-1"></a><span class="st">            y3 ~ b32*y2 + b31*y1</span></span>
+<span id="cb198-7"><a href="ch7.html#cb198-7" tabindex="-1"></a></span>
+<span id="cb198-8"><a href="ch7.html#cb198-8" tabindex="-1"></a><span class="st">            # residual (co)variances</span></span>
+<span id="cb198-9"><a href="ch7.html#cb198-9" tabindex="-1"></a><span class="st">            y1 ~~ p11*y1</span></span>
+<span id="cb198-10"><a href="ch7.html#cb198-10" tabindex="-1"></a><span class="st">            y2 ~~ p22*y2</span></span>
+<span id="cb198-11"><a href="ch7.html#cb198-11" tabindex="-1"></a><span class="st">            y3 ~~ p33*y3</span></span>
+<span id="cb198-12"><a href="ch7.html#cb198-12" tabindex="-1"></a><span class="st">            y4 ~~ p44*y4</span></span>
+<span id="cb198-13"><a href="ch7.html#cb198-13" tabindex="-1"></a><span class="st">            y3 ~~ p43*y4</span></span>
+<span id="cb198-14"><a href="ch7.html#cb198-14" tabindex="-1"></a></span>
+<span id="cb198-15"><a href="ch7.html#cb198-15" tabindex="-1"></a><span class="st">            # covariance exogenous variables</span></span>
+<span id="cb198-16"><a href="ch7.html#cb198-16" tabindex="-1"></a><span class="st">            y1 ~~ p21*y2</span></span>
+<span id="cb198-17"><a href="ch7.html#cb198-17" tabindex="-1"></a><span class="st">            &#39;</span></span>
+<span id="cb198-18"><a href="ch7.html#cb198-18" tabindex="-1"></a></span>
+<span id="cb198-19"><a href="ch7.html#cb198-19" tabindex="-1"></a>EmpiricalCheckOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(EmpiricalCheck, <span class="at">sample.cov=</span>SIGMA,</span>
+<span id="cb198-20"><a href="ch7.html#cb198-20" tabindex="-1"></a>                     <span class="at">sample.nobs=</span><span class="dv">100</span>, <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>,</span>
+<span id="cb198-21"><a href="ch7.html#cb198-21" tabindex="-1"></a>                     <span class="at">fixed.x=</span><span class="cn">FALSE</span>)</span>
+<span id="cb198-22"><a href="ch7.html#cb198-22" tabindex="-1"></a></span>
+<span id="cb198-23"><a href="ch7.html#cb198-23" tabindex="-1"></a><span class="fu">summary</span>(EmpiricalCheckOut)</span></code></pre></div>
+<pre><code>## lavaan 0.6.17.1884 ended normally after 20 iterations
+## 
+##   Estimator                                         ML
+##   Optimization method                           NLMINB
+##   Number of model parameters                         9
+## 
+##   Number of observations                           100
+## 
+## Model Test User Model:
+##                                                       
+##   Test statistic                                 0.000
+##   Degrees of freedom                                 1
+##   P-value (Chi-square)                           1.000
+## 
+## Parameter Estimates:
+## 
+##   Standard errors                             Standard
+##   Information                                 Expected
+##   Information saturated (h1) model          Structured
+## 
+## Regressions:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##   y4 ~                                                
+##     y3       (b43)    0.500    0.097    5.150    0.000
+##   y3 ~                                                
+##     y2       (b32)    0.500    0.085    5.906    0.000
+##     y1       (b31)    0.500    0.085    5.906    0.000
+## 
+## Covariances:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##  .y4 ~~                                               
+##    .y3       (p43)    0.500    0.119    4.194    0.000
+##   y2 ~~                                               
+##     y1       (p21)    0.500    0.112    4.450    0.000
+## 
+## Variances:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##     y1       (p11)    1.000    0.142    7.036    0.000
+##     y2       (p22)    1.000    0.142    7.036    0.000
+##    .y3       (p33)    0.800    0.114    7.036    0.000
+##    .y4       (p44)    0.700    0.139    5.035    0.000</code></pre>
+<p>When you run the script for Model 1, you will notice that the parameter estimates are exactly equal to our chosen values from Step 1. Thus, this indicates that the model may be identified. As this empirical check is a necessary requirement for identification, but not sufficient, we are not completely sure that the model is truly identified.</p>
+<p>In the <a href="ch7.html#script-7.2">next script</a> we show the empirical check of Model 2, where we also add the effect from <span class="math inline">\(\mathrm{y}_4\)</span> to <span class="math inline">\(\mathrm{y}_3\)</span>.</p>
+</div>
+<div id="script-7.2" class="section level3 unnumbered hasAnchor">
+<h3>Script 7.2<a href="ch7.html#script-7.2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="ch7.html#cb200-1" tabindex="-1"></a><span class="do">## STEP 1: calculate the model implied covariance matrix</span></span>
+<span id="cb200-2"><a href="ch7.html#cb200-2" tabindex="-1"></a></span>
+<span id="cb200-3"><a href="ch7.html#cb200-3" tabindex="-1"></a>BETA <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb200-4"><a href="ch7.html#cb200-4" tabindex="-1"></a>             <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb200-5"><a href="ch7.html#cb200-5" tabindex="-1"></a>            .<span class="dv">5</span>,.<span class="dv">5</span>, <span class="dv">0</span>,.<span class="dv">5</span>,</span>
+<span id="cb200-6"><a href="ch7.html#cb200-6" tabindex="-1"></a>             <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">5</span>, <span class="dv">0</span>),</span>
+<span id="cb200-7"><a href="ch7.html#cb200-7" tabindex="-1"></a>             <span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb200-8"><a href="ch7.html#cb200-8" tabindex="-1"></a></span>
+<span id="cb200-9"><a href="ch7.html#cb200-9" tabindex="-1"></a>PSI <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>( <span class="dv">1</span>,.<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb200-10"><a href="ch7.html#cb200-10" tabindex="-1"></a>            .<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb200-11"><a href="ch7.html#cb200-11" tabindex="-1"></a>             <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">8</span>,.<span class="dv">5</span>,</span>
+<span id="cb200-12"><a href="ch7.html#cb200-12" tabindex="-1"></a>             <span class="dv">0</span>, <span class="dv">0</span>,.<span class="dv">5</span>,.<span class="dv">7</span>),</span>
+<span id="cb200-13"><a href="ch7.html#cb200-13" tabindex="-1"></a>             <span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb200-14"><a href="ch7.html#cb200-14" tabindex="-1"></a></span>
+<span id="cb200-15"><a href="ch7.html#cb200-15" tabindex="-1"></a>IDEN <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">4</span>)</span>
+<span id="cb200-16"><a href="ch7.html#cb200-16" tabindex="-1"></a>SIGMA <span class="ot">&lt;-</span> <span class="fu">solve</span>(IDEN<span class="sc">-</span>BETA) <span class="sc">%*%</span> PSI <span class="sc">%*%</span> <span class="fu">t</span>(<span class="fu">solve</span>(IDEN<span class="sc">-</span>BETA))</span>
+<span id="cb200-17"><a href="ch7.html#cb200-17" tabindex="-1"></a></span>
+<span id="cb200-18"><a href="ch7.html#cb200-18" tabindex="-1"></a>obsnames <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;y1&quot;</span>,<span class="st">&quot;y2&quot;</span>,<span class="st">&quot;y3&quot;</span>,<span class="st">&quot;y4&quot;</span>)</span>
+<span id="cb200-19"><a href="ch7.html#cb200-19" tabindex="-1"></a><span class="fu">dimnames</span>(SIGMA) <span class="ot">&lt;-</span> <span class="fu">list</span>(obsnames,obsnames)</span>
+<span id="cb200-20"><a href="ch7.html#cb200-20" tabindex="-1"></a></span>
+<span id="cb200-21"><a href="ch7.html#cb200-21" tabindex="-1"></a></span>
+<span id="cb200-22"><a href="ch7.html#cb200-22" tabindex="-1"></a><span class="do">## STEP 2: fit model to the covariance matrix from step 1</span></span>
+<span id="cb200-23"><a href="ch7.html#cb200-23" tabindex="-1"></a></span>
+<span id="cb200-24"><a href="ch7.html#cb200-24" tabindex="-1"></a>EmpiricalCheck <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb200-25"><a href="ch7.html#cb200-25" tabindex="-1"></a><span class="st">            # regressions</span></span>
+<span id="cb200-26"><a href="ch7.html#cb200-26" tabindex="-1"></a><span class="st">            y4 ~ b43*y3</span></span>
+<span id="cb200-27"><a href="ch7.html#cb200-27" tabindex="-1"></a><span class="st">            y3 ~ b32*y2 + b31*y1 + b34*y4</span></span>
+<span id="cb200-28"><a href="ch7.html#cb200-28" tabindex="-1"></a></span>
+<span id="cb200-29"><a href="ch7.html#cb200-29" tabindex="-1"></a><span class="st">            # residual (co)variances</span></span>
+<span id="cb200-30"><a href="ch7.html#cb200-30" tabindex="-1"></a><span class="st">            y1 ~~ p11*y1</span></span>
+<span id="cb200-31"><a href="ch7.html#cb200-31" tabindex="-1"></a><span class="st">            y2 ~~ p22*y2</span></span>
+<span id="cb200-32"><a href="ch7.html#cb200-32" tabindex="-1"></a><span class="st">            y3 ~~ p33*y3</span></span>
+<span id="cb200-33"><a href="ch7.html#cb200-33" tabindex="-1"></a><span class="st">            y4 ~~ p44*y4</span></span>
+<span id="cb200-34"><a href="ch7.html#cb200-34" tabindex="-1"></a><span class="st">            y3 ~~ p43*y4</span></span>
+<span id="cb200-35"><a href="ch7.html#cb200-35" tabindex="-1"></a></span>
+<span id="cb200-36"><a href="ch7.html#cb200-36" tabindex="-1"></a><span class="st">            # covariance exogenous variables</span></span>
+<span id="cb200-37"><a href="ch7.html#cb200-37" tabindex="-1"></a><span class="st">            y1 ~~ p21*y2</span></span>
+<span id="cb200-38"><a href="ch7.html#cb200-38" tabindex="-1"></a><span class="st">            &#39;</span></span>
+<span id="cb200-39"><a href="ch7.html#cb200-39" tabindex="-1"></a></span>
+<span id="cb200-40"><a href="ch7.html#cb200-40" tabindex="-1"></a>EmpiricalCheckOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(EmpiricalCheck, <span class="at">sample.cov=</span>SIGMA,</span>
+<span id="cb200-41"><a href="ch7.html#cb200-41" tabindex="-1"></a>                     <span class="at">sample.nobs=</span><span class="dv">100</span>, <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>,</span>
+<span id="cb200-42"><a href="ch7.html#cb200-42" tabindex="-1"></a>                     <span class="at">fixed.x=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Warning in lav_model_vcov(lavmodel = lavmodel, lavsamplestats = lavsamplestats, : lavaan WARNING:
+##     Could not compute standard errors! The information matrix could
+##     not be inverted. This may be a symptom that the model is not
+##     identified.</code></pre>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="ch7.html#cb202-1" tabindex="-1"></a><span class="fu">summary</span>(EmpiricalCheckOut)</span></code></pre></div>
+<pre><code>## lavaan 0.6.17.1884 ended normally after 21 iterations
+## 
+##   Estimator                                         ML
+##   Optimization method                           NLMINB
+##   Number of model parameters                        10
+## 
+##   Number of observations                           100
+## 
+## Model Test User Model:
+##                                                       
+##   Test statistic                                 0.000
+##   Degrees of freedom                                 0
+## 
+## Parameter Estimates:
+## 
+##   Standard errors                             Standard
+##   Information                                 Expected
+##   Information saturated (h1) model          Structured
+## 
+## Regressions:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##   y4 ~                                                
+##     y3       (b43)    0.500 NA                        
+##   y3 ~                                                
+##     y2       (b32)    0.383 NA                        
+##     y1       (b31)    0.383 NA                        
+##     y4       (b34)    0.850 NA                        
+## 
+## Covariances:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##  .y4 ~~                                               
+##    .y3       (p43)    0.056 NA                        
+##   y2 ~~                                               
+##     y1       (p21)    0.500 NA                        
+## 
+## Variances:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)
+##     y1       (p11)    1.000 NA                        
+##     y2       (p22)    1.000 NA                        
+##    .y3       (p33)    0.265 NA                        
+##    .y4       (p44)    0.700 NA</code></pre>
+<p>The output for the empirical check of Model 2 does not lead to the same parameter estimates as we used in Step 1. Therefore, we can be sure that this model is not identified.</p>
+</div>
+</div>
+<div id="appendix-1" class="section level2 unnumbered hasAnchor">
+<h2>Appendix<a href="ch7.html#appendix-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="algebraic-assessment-of-identification-using-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel" class="section level3 unnumbered hasAnchor">
+<h3>Algebraic assessment of identification using elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span><a href="ch7.html#algebraic-assessment-of-identification-using-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display" id="eq:7-09">\[\begin{equation}
+\beta_{31} = \frac{\sigma_{31}-\frac{\sigma_{32}-\beta_{31}\psi_{21}}{\psi_{22}}\psi_{21}}{\psi_{11}}
+\tag{7.9}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{align}
+\beta_{31}\psi_{11} &amp; = \sigma_{31}-\frac{\sigma_{32}\beta_{31}\psi_{21}}{\psi_{22}}\psi_{21} \ \ \ \ \ \ \ \ \ \ \ \ (7.09a)\\ \\
+\beta_{31}\psi_{11}\psi_{22} &amp; = \sigma_{31}\psi_{22} - (\sigma_{32}-\beta_{31} \psi_{21})\psi_{21} \ \ \ \ \ \ \ \ (7.09b)\\ \\
+\beta_{31}\psi_{11}\psi_{22} &amp; = \sigma_{31}\psi_{22} - \sigma_{32}\psi_{21} + \beta_{31}\psi^2_{22} \ \ \ \ \ \ \ \ (7.09c)\\ \\
+\beta_{31}\psi_{11}\psi_{22} - \beta_{31}\psi^2_{21} &amp; = \sigma_{31}\psi_{22} - \sigma_{32}\psi_{21} \ \ \ \ \ \ \ \ \ \ \ \ (7.09d)\\ \\
+\beta_{31}(\psi_{11}\psi_{22} -\psi^2_{21}) &amp; = \sigma_{31}\psi_{22} - \sigma_{32}\psi_{21} \ \ \ \ \ \ \ \ \ \ \ \ (7.09e)
+\end{align}\]</span></p>
+<p><span class="math display" id="eq:7-10">\[\begin{equation}
+\beta_{31} = \frac{\sigma_{31}\psi_{22}-\sigma_{32}\psi_{21}}{\psi_{11}\psi_{22}-{\psi_{21}}^2}
+\tag{7.10}
+\end{equation}\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+\sigma_{33} = \dots \ \ \Longleftrightarrow \ \ \psi_{33} = \dots \ \ \ \ \ \ \ \ \ \ (7.13)
+\end{align}
+\]</span>
+Substituting Equations <a href="ch7.html#eq:7-02">(7.2)</a>, <a href="ch7.html#eq:7-03">(7.3)</a>, <a href="ch7.html#eq:7-04">(7.4)</a>, <a href="ch7.html#eq:7-11">(7.11)</a> and <a href="ch7.html#eq:7-13">(7.13)</a> into Equation <a href="ch7.html#eq:7-13">(7.13)</a> gives:</p>
+<p><span class="math display" id="eq:7-14">\[\begin{equation}
+\sigma_{33} = \frac{\sigma_{11}\sigma_{22}\sigma_{33}-2\sigma_{21}\sigma_{31}\sigma_{32}-\sigma_{11}\sigma^2_{32}-\sigma_{22}\sigma^2_{31}\sigma_{33}\sigma^2_{21}}{\sigma_{11}\sigma_{22}\sigma^2_{21}}
+\tag{7.14}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:7-15">\[\begin{equation}
+\sigma_{41} = \dots 🡘 \beta_{43} = \frac{\sigma_{41}}{\beta_{31}\psi{11} + \beta_{32}\psi_{21}}
+\tag{7.15}
+\end{equation}\]</span></p>
+<p>Substituting Equations <a href="ch7.html#eq:7-02">(7.2)</a>, <a href="ch7.html#eq:7-04">(7.4)</a>, <a href="ch7.html#eq:7-11">(7.11)</a> and <a href="ch7.html#eq:7-13">(7.13)</a> into Equation <a href="ch7.html#eq:7-15">(7.15)</a> gives:</p>
+<p><span class="math display" id="eq:7-16">\[\begin{equation}
+\beta_{43} = \frac{\sigma_{41}}{\sigma_{31}}
+\tag{7.16}
+\end{equation}\]</span></p>
+<p>Although, to identify <span class="math inline">\(\beta_{43}\)</span>, we can also use:</p>
+<p><span class="math display" id="eq:7-17">\[\begin{equation}
+\sigma_{42} \Longleftrightarrow \beta_{43} = \frac{\sigma_{42}}{\beta_{31}\psi_{21} + \beta_{32}\psi_{22}}
+\tag{7.17}
+\end{equation}\]</span></p>
+<p>Substituting Equations <a href="ch7.html#eq:7-02">(7.2)</a>, <a href="ch7.html#eq:7-03">(7.3)</a>, <a href="ch7.html#eq:7-11">(7.11)</a> and <a href="ch7.html#eq:7-12">(7.12)</a> into Equation <a href="ch7.html#eq:7-17">(7.17)</a> gives:</p>
+<p><span class="math display" id="eq:7-18">\[\begin{equation}
+\beta_{43} = \frac{\sigma_{42}}{\sigma_{31}}
+\tag{7.18}
+\end{equation}\]</span></p>
+<p>So, now we already have two identifications of <span class="math inline">\(\beta_{43}\)</span>, and we can also use:</p>
+<p><span class="math display">\[
+\sigma_{43} = \dots \ \ \Longleftrightarrow \ \ \beta_{43} = \dots \ \ \ ,
+\]</span></p>
+<p>yielding:</p>
+<p><span class="math display" id="eq:7-19">\[\begin{equation}
+\beta_{43} = \frac{\sigma_{43}}{\sigma_{33}}
+\tag{7.19}
+\end{equation}\]</span></p>
+<p>Equations <a href="ch7.html#eq:7-16">(7.16)</a>, <a href="ch7.html#eq:7-17">(7.17)</a> and <a href="ch7.html#eq:7-19">(7.19)</a> show three identifications of <span class="math inline">\(\beta_{43}\)</span>.</p>
+<p><span class="math inline">\(\sigma_{44}\)</span> identifies <span class="math inline">\(\psi_{44}\)</span>, through:</p>
+<p><span class="math display">\[
+\sigma_{44} = \dots \ \ \Longleftrightarrow \ \ \psi_{44} = \dots \ ,
+\]</span></p>
+<p>and substitution:</p>
+<p><span class="math display" id="eq:7-20">\[\begin{equation}
+\psi_{44} = \sigma_{44} - \sigma_{33}\beta^2_{43}
+\tag{7.20}
+\end{equation}\]</span></p>
+<p>Which is identified after substituting either Equation <a href="ch7.html#eq:7-16">(7.16)</a>, <a href="ch7.html#eq:7-18">(7.18)</a> or <a href="ch7.html#eq:7-19">(7.19)</a>.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ch6.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ch8.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

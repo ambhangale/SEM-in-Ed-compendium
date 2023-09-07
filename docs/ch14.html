@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>14 Factor Models | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
+  <meta name="description" content="14 Factor Models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="14 Factor Models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="TDJorgensen/SEM-in-Ed-compendium" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="14 Factor Models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
+  
+  
+  
+
+<meta name="author" content="Suzanne Jak and Terrence D. Jorgensen" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ch13.html"/>
+<link rel="next" href="ch15.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#copyright"><i class="fa fa-check"></i><b>0.1</b> Copyright</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i><b>0.2</b> Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="ch1.html"><a href="ch1.html"><i class="fa fa-check"></i><b>1</b> Regression as Mean- and Covariance-Structure Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="ch1.html"><a href="ch1.html#what-are-mean-and-covariance-structures"><i class="fa fa-check"></i><b>1.1</b> What Are Mean and Covariance <em>Structures</em>?</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="ch1.html"><a href="ch1.html#ch1-1-1"><i class="fa fa-check"></i><b>1.1.1</b> Types of Data Used in SEM</a></li>
+<li class="chapter" data-level="1.1.2" data-path="ch1.html"><a href="ch1.html#interpreting-covariance"><i class="fa fa-check"></i><b>1.1.2</b> Interpreting Covariance</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="ch1.html"><a href="ch1.html#importing-data-for-sem"><i class="fa fa-check"></i><b>1.2</b> Importing Data for SEM</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="ch1.html"><a href="ch1.html#installing-lavaan"><i class="fa fa-check"></i><b>1.2.1</b> Installing <code>lavaan</code></a></li>
+<li class="chapter" data-level="1.2.2" data-path="ch1.html"><a href="ch1.html#importing-raw-data"><i class="fa fa-check"></i><b>1.2.2</b> Importing Raw Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="ch1.html"><a href="ch1.html#calculate-summary-statistics-from-raw-data"><i class="fa fa-check"></i><b>1.2.3</b> Calculate Summary Statistics from Raw Data</a></li>
+<li class="chapter" data-level="1.2.4" data-path="ch1.html"><a href="ch1.html#importing-summary-data"><i class="fa fa-check"></i><b>1.2.4</b> Importing Summary Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="ch1.html"><a href="ch1.html#regression-using-matrix-algebra"><i class="fa fa-check"></i><b>1.3</b> Regression Using Matrix Algebra</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="ch1.html"><a href="ch1.html#ch1-3-1"><i class="fa fa-check"></i><b>1.3.1</b> Linear Regression Models</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ch1.html"><a href="ch1.html#intercepts-and-means"><i class="fa fa-check"></i><b>1.3.2</b> Intercepts and Means</a></li>
+<li class="chapter" data-level="1.3.3" data-path="ch1.html"><a href="ch1.html#categorical-predictors"><i class="fa fa-check"></i><b>1.3.3</b> Categorical Predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="ch1.html"><a href="ch1.html#summary"><i class="fa fa-check"></i><b>1.4</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="ch1.html"><a href="ch1.html#references"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="ch2.html"><a href="ch2.html"><i class="fa fa-check"></i><b>2</b> Using <code>lavaan</code> to Run Regression and ANOVA as a SEM</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="ch2.html"><a href="ch2.html#prepare-data-and-workspace"><i class="fa fa-check"></i><b>2.1</b> Prepare Data and Workspace</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="ch2.html"><a href="ch2.html#import-example-data"><i class="fa fa-check"></i><b>2.1.1</b> Import Example Data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="ch2.html"><a href="ch2.html#ch2-1-2"><i class="fa fa-check"></i><b>2.1.2</b> <code>lavaan</code> Syntax</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="ch2.html"><a href="ch2.html#comparing-2-group-means-in-glm-and-sem"><i class="fa fa-check"></i><b>2.2</b> Comparing 2 Group Means in GLM and SEM</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="ch2.html"><a href="ch2.html#the-glm-approach"><i class="fa fa-check"></i><b>2.2.1</b> The GLM Approach</a></li>
+<li class="chapter" data-level="2.2.2" data-path="ch2.html"><a href="ch2.html#the-sem-approach-single-group-sem"><i class="fa fa-check"></i><b>2.2.2</b> The SEM Approach (single-group SEM)</a></li>
+<li class="chapter" data-level="2.2.3" data-path="ch2.html"><a href="ch2.html#multigroup-sem-approach"><i class="fa fa-check"></i><b>2.2.3</b> Multigroup SEM Approach</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="ch2.html"><a href="ch2.html#fit-an-sem-to-summary-statistics"><i class="fa fa-check"></i><b>2.3</b> Fit an SEM to Summary Statistics</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="ch2.html"><a href="ch2.html#advantages-of-analyzing-summary-statistics"><i class="fa fa-check"></i><b>2.3.1</b> Advantages of Analyzing Summary Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="ch2.html"><a href="ch2.html#moderation-in-sem"><i class="fa fa-check"></i><b>2.4</b> Moderation in SEM</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="ch2.html"><a href="ch2.html#moderation-by-groups-using-mg-sem"><i class="fa fa-check"></i><b>2.4.1</b> Moderation by Groups Using MG-SEM</a></li>
+<li class="chapter" data-level="2.4.2" data-path="ch2.html"><a href="ch2.html#the-emmeans-package"><i class="fa fa-check"></i><b>2.4.2</b> The <code>emmeans</code> Package</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="ch2.html"><a href="ch2.html#summary-1"><i class="fa fa-check"></i><b>2.5</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="ch2.html"><a href="ch2.html#references-1"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ch3.html"><a href="ch3.html"><i class="fa fa-check"></i><b>3</b> Path Models</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ch3.html"><a href="ch3.html#illustrative-example"><i class="fa fa-check"></i><b>3.1</b> Illustrative example</a></li>
+<li class="chapter" data-level="3.2" data-path="ch3.html"><a href="ch3.html#conceptual-explanation"><i class="fa fa-check"></i><b>3.2</b> Conceptual explanation</a></li>
+<li class="chapter" data-level="3.3" data-path="ch3.html"><a href="ch3.html#matrix-explanation"><i class="fa fa-check"></i><b>3.3</b> Matrix explanation</a></li>
+<li class="chapter" data-level="3.4" data-path="ch3.html"><a href="ch3.html#path-analysis-using-lavaan"><i class="fa fa-check"></i><b>3.4</b> Path analysis using lavaan</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="ch3.html"><a href="ch3.html#installing-lavaan-1"><i class="fa fa-check"></i><b>3.4.1</b> Installing lavaan</a></li>
+<li class="chapter" data-level="3.4.2" data-path="ch3.html"><a href="ch3.html#fitting-a-path-model"><i class="fa fa-check"></i><b>3.4.2</b> Fitting a path model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="ch3.html"><a href="ch3.html#syntax-shortcuts"><i class="fa fa-check"></i><b>3.4.3</b> Syntax shortcuts</a></li>
+<li class="chapter" data-level="3.4.4" data-path="ch3.html"><a href="ch3.html#extracting-results-from-lavaan-output-in-matrix-form"><i class="fa fa-check"></i><b>3.4.4</b> Extracting results from lavaan output in matrix form</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#references-2"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#appendix"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.08"><i class="fa fa-check"></i>Derivations of equation 3.08</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.09"><i class="fa fa-check"></i>Derivations of equation 3.09</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ch4.html"><a href="ch4.html"><i class="fa fa-check"></i><b>4</b> Standard Errors and Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ch4.html"><a href="ch4.html#standard-errors"><i class="fa fa-check"></i><b>4.1</b> Standard Errors</a></li>
+<li class="chapter" data-level="4.2" data-path="ch4.html"><a href="ch4.html#confidence-intervals"><i class="fa fa-check"></i><b>4.2</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="ch4.html"><a href="ch4.html#likelihood-based-confidence-intervals"><i class="fa fa-check"></i><b>4.2.1</b> Likelihood-based confidence intervals</a></li>
+<li class="chapter" data-level="4.2.2" data-path="ch4.html"><a href="ch4.html#bootstrapped-confidence-intervals"><i class="fa fa-check"></i><b>4.2.2</b> Bootstrapped confidence intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="ch4.html"><a href="ch4.html#obtaining-standard-errors-and-confidence-intervals-in-lavaan"><i class="fa fa-check"></i><b>4.3</b> Obtaining standard errors and confidence intervals in <code>lavaan</code></a></li>
+<li class="chapter" data-level="" data-path="ch4.html"><a href="ch4.html#references-3"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ch5.html"><a href="ch5.html"><i class="fa fa-check"></i><b>5</b> Direct, Indirect, and Total Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ch5.html"><a href="ch5.html#testing-significance-of-indirect-effects"><i class="fa fa-check"></i><b>5.1</b> Testing significance of indirect effects</a></li>
+<li class="chapter" data-level="5.2" data-path="ch5.html"><a href="ch5.html#higher-order-indirect-effects"><i class="fa fa-check"></i><b>5.2</b> Higher order indirect effects</a></li>
+<li class="chapter" data-level="5.3" data-path="ch5.html"><a href="ch5.html#using-matrix-algebra-to-calculate-total-total-indirect-and-specific-indirect-effects"><i class="fa fa-check"></i><b>5.3</b> Using matrix algebra to calculate total, total indirect and specific indirect effects</a></li>
+<li class="chapter" data-level="5.4" data-path="ch5.html"><a href="ch5.html#calculating-total-total-indirect-and-specific-indirect-effects-using-lavaan-output"><i class="fa fa-check"></i><b>5.4</b> Calculating total, total indirect and specific indirect effects using lavaan output</a></li>
+<li class="chapter" data-level="5.5" data-path="ch5.html"><a href="ch5.html#calculating-specific-indirect-effects-in-lavaan"><i class="fa fa-check"></i><b>5.5</b> Calculating specific indirect effects in lavaan</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ch6.html"><a href="ch6.html"><i class="fa fa-check"></i><b>6</b> Calculating Standardized Parameter Estimates</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ch6.html"><a href="ch6.html#standardized-regression-coefficients"><i class="fa fa-check"></i><b>6.1</b> Standardized regression coefficients</a></li>
+<li class="chapter" data-level="6.2" data-path="ch6.html"><a href="ch6.html#standardized-residual-factor-variances-and-covariances"><i class="fa fa-check"></i><b>6.2</b> Standardized residual factor variances and covariances</a></li>
+<li class="chapter" data-level="6.3" data-path="ch6.html"><a href="ch6.html#calculating-standardized-coefficients-in-r-using-lavaan-results"><i class="fa fa-check"></i><b>6.3</b> Calculating standardized coefficients in R using lavaan results</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch6.html"><a href="ch6.html#script-6.1"><i class="fa fa-check"></i>Script 6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="ch6.html"><a href="ch6.html#request-standardized-output-with-lavaan"><i class="fa fa-check"></i><b>6.4</b> Request standardized output with lavaan</a></li>
+<li class="chapter" data-level="6.5" data-path="ch6.html"><a href="ch6.html#standardizing-indirect-and-total-effects"><i class="fa fa-check"></i><b>6.5</b> Standardizing indirect and total effects</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch7.html"><a href="ch7.html"><i class="fa fa-check"></i><b>7</b> Identification</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ch7.html"><a href="ch7.html#assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i><b>7.1</b> Assessment of identification using the elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
+<li class="chapter" data-level="7.2" data-path="ch7.html"><a href="ch7.html#assessing-identification-through-heuristics-rules-of-thumb"><i class="fa fa-check"></i><b>7.2</b> Assessing identification through heuristics (rules of thumb)</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="ch7.html"><a href="ch7.html#the-recursive-rule"><i class="fa fa-check"></i><b>7.2.1</b> The recursive rule</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ch7.html"><a href="ch7.html#the-order-condition"><i class="fa fa-check"></i><b>7.2.2</b> The order condition</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ch7.html"><a href="ch7.html#the-rank-condition"><i class="fa fa-check"></i><b>7.2.3</b> The rank condition</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ch7.html"><a href="ch7.html#assessment-of-empirical-model-identification-using-lavaan"><i class="fa fa-check"></i><b>7.3</b> Assessment of empirical model identification using <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="ch7.html"><a href="ch7.html#script-7.1"><i class="fa fa-check"></i>Script 7.1</a></li>
+<li class="chapter" data-level="" data-path="ch7.html"><a href="ch7.html#script-7.2"><i class="fa fa-check"></i>Script 7.2</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch7.html"><a href="ch7.html#appendix-1"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch7.html"><a href="ch7.html#algebraic-assessment-of-identification-using-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i>Algebraic assessment of identification using elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ch8.html"><a href="ch8.html"><i class="fa fa-check"></i><b>8</b> Autoregression</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch8.html"><a href="ch8.html#script-8.1"><i class="fa fa-check"></i>Script 8.1</a></li>
+<li class="chapter" data-level="8.1" data-path="ch8.html"><a href="ch8.html#autoregression-models-with-predictors"><i class="fa fa-check"></i><b>8.1</b> Autoregression models with predictors</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch8.html"><a href="ch8.html#script-8.2"><i class="fa fa-check"></i>Script 8.2</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="ch8.html"><a href="ch8.html#cross-lagged-panel-models"><i class="fa fa-check"></i><b>8.2</b> Cross-lagged panel models</a></li>
+<li class="chapter" data-level="" data-path="ch8.html"><a href="ch8.html#references-4"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch9.html"><a href="ch9.html"><i class="fa fa-check"></i><b>9</b> Model Specification and Model Identification</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ch9.html"><a href="ch9.html#from-theory-to-model"><i class="fa fa-check"></i><b>9.1</b> From theory to model</a></li>
+<li class="chapter" data-level="9.2" data-path="ch9.html"><a href="ch9.html#model-parsimony"><i class="fa fa-check"></i><b>9.2</b> Model parsimony</a></li>
+<li class="chapter" data-level="9.3" data-path="ch9.html"><a href="ch9.html#a-priori-model-specification"><i class="fa fa-check"></i><b>9.3</b> A priori model specification</a></li>
+<li class="chapter" data-level="9.4" data-path="ch9.html"><a href="ch9.html#post-hoc-model-modification"><i class="fa fa-check"></i><b>9.4</b> Post hoc model modification</a></li>
+<li class="chapter" data-level="9.5" data-path="ch9.html"><a href="ch9.html#backward-and-forward-specification-searches"><i class="fa fa-check"></i><b>9.5</b> Backward and forward specification searches</a></li>
+<li class="chapter" data-level="9.6" data-path="ch9.html"><a href="ch9.html#correlation-residuals"><i class="fa fa-check"></i><b>9.6</b> Correlation residuals</a></li>
+<li class="chapter" data-level="9.7" data-path="ch9.html"><a href="ch9.html#modification-indices"><i class="fa fa-check"></i><b>9.7</b> Modification indices</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="ch9.html"><a href="ch9.html#script-9.0"><i class="fa fa-check"></i><b>9.7.1</b> Script 9.0</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="ch9.html"><a href="ch9.html#cross-validation"><i class="fa fa-check"></i><b>9.8</b> Cross-validation</a></li>
+<li class="chapter" data-level="9.9" data-path="ch9.html"><a href="ch9.html#calculating-correlation-residuals-in-lavaan"><i class="fa fa-check"></i><b>9.9</b> Calculating correlation residuals in <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="9.9.1" data-path="ch9.html"><a href="ch9.html#requesting-mis-and-sepcs-in-lavaan"><i class="fa fa-check"></i><b>9.9.1</b> Requesting MIs and (S)EPCs in <code>lavaan</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch9.html"><a href="ch9.html#references-5"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch10.html"><a href="ch10.html"><i class="fa fa-check"></i><b>10</b> Estimation</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ch10.html"><a href="ch10.html#improper-solutions"><i class="fa fa-check"></i><b>10.1</b> Improper Solutions</a></li>
+<li class="chapter" data-level="10.2" data-path="ch10.html"><a href="ch10.html#specifying-starting-values-in-lavaan"><i class="fa fa-check"></i><b>10.2</b> Specifying starting values in lavaan</a></li>
+<li class="chapter" data-level="10.3" data-path="ch10.html"><a href="ch10.html#alternative-estimators"><i class="fa fa-check"></i><b>10.3</b> Alternative estimators</a></li>
+<li class="chapter" data-level="10.4" data-path="ch10.html"><a href="ch10.html#robust-estimators"><i class="fa fa-check"></i><b>10.4</b> Robust estimators</a></li>
+<li class="chapter" data-level="10.5" data-path="ch10.html"><a href="ch10.html#requesting-alternative-and-robust-estimators-in-lavaan"><i class="fa fa-check"></i><b>10.5</b> Requesting alternative and robust estimators in lavaan</a></li>
+<li class="chapter" data-level="10.6" data-path="ch10.html"><a href="ch10.html#ch10-6"><i class="fa fa-check"></i><b>10.6</b> Alternative calculation of the ML discrepancy function when analysing raw data</a></li>
+<li class="chapter" data-level="10.7" data-path="ch10.html"><a href="ch10.html#ch10-7"><i class="fa fa-check"></i><b>10.7</b> Using FIML to analyse raw data with missing values in lavaan</a></li>
+<li class="chapter" data-level="" data-path="ch10.html"><a href="ch10.html#references-6"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ch11.html"><a href="ch11.html"><i class="fa fa-check"></i><b>11</b> Measures of Model Fit</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ch11.html"><a href="ch11.html#the-chi-squared-test-of-exact-fit"><i class="fa fa-check"></i><b>11.1</b> The chi-squared test of exact fit</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="ch11.html"><a href="ch11.html#alternative-basis-for-calculating-the-test-statistic-when-analysing-raw-data"><i class="fa fa-check"></i><b>11.1.1</b> Alternative basis for calculating the test statistic when analysing raw data</a></li>
+<li class="chapter" data-level="11.1.2" data-path="ch11.html"><a href="ch11.html#testing-exact-fit-vs.-describing-the-degree-of-approximate-fit"><i class="fa fa-check"></i><b>11.1.2</b> Testing exact fit vs. describing the degree of approximate fit</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="ch11.html"><a href="ch11.html#root-mean-square-error-of-approximation-rmsea"><i class="fa fa-check"></i><b>11.2</b> Root Mean Square Error of Approximation (RMSEA)</a></li>
+<li class="chapter" data-level="11.3" data-path="ch11.html"><a href="ch11.html#other-descriptive-fit-indices"><i class="fa fa-check"></i><b>11.3</b> Other descriptive fit indices</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="ch11.html"><a href="ch11.html#the-tuckerlewis-index-tli-and-the-comparative-fit-index-cfi"><i class="fa fa-check"></i><b>11.3.1</b> The Tucker–Lewis Index (TLI) and the Comparative Fit Index (CFI)</a></li>
+<li class="chapter" data-level="11.3.2" data-path="ch11.html"><a href="ch11.html#the-root-mean-square-residual-rmr-and-standardized-rmr-srmr"><i class="fa fa-check"></i><b>11.3.2</b> The Root Mean Square Residual (RMR) and Standardized RMR (SRMR)</a></li>
+<li class="chapter" data-level="11.3.3" data-path="ch11.html"><a href="ch11.html#information-criteria"><i class="fa fa-check"></i><b>11.3.3</b> Information Criteria</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="ch11.html"><a href="ch11.html#a-note-on-using-available-fit-indices"><i class="fa fa-check"></i><b>11.4</b> A note on using available fit indices</a></li>
+<li class="chapter" data-level="11.5" data-path="ch11.html"><a href="ch11.html#difference-in-model-fit"><i class="fa fa-check"></i><b>11.5</b> Difference in model fit</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#δχ2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> Δχ2 as a likelihood ratio test</a></li>
+<li class="chapter" data-level="11.5.2" data-path="ch11.html"><a href="ch11.html#describing-differences-in-fit"><i class="fa fa-check"></i><b>11.5.2</b> Describing differences in fit</a></li>
+<li class="chapter" data-level="11.5.3" data-path="ch11.html"><a href="ch11.html#testing-differences-in-fit-between-non-nested-models"><i class="fa fa-check"></i><b>11.5.3</b> Testing differences in fit between non-nested models</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="ch11.html"><a href="ch11.html#request-fit-measures-in-lavaan"><i class="fa fa-check"></i><b>11.6</b> Request fit measures in <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="ch11.html"><a href="ch11.html#compare-fit-of-lavaan-models"><i class="fa fa-check"></i><b>11.6.1</b> Compare fit of lavaan models</a></li>
+<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in lavaan when adjusting for non-normal data</a></li>
+<li class="chapter" data-level="11.6.3" data-path="ch11.html"><a href="ch11.html#test-statistic-adjusted-for-small-sample-size"><i class="fa fa-check"></i><b>11.6.3</b> Test statistic adjusted for small sample size</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch11.html"><a href="ch11.html#references-7"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ch12.html"><a href="ch12.html"><i class="fa fa-check"></i><b>12</b> Path Analysis with Categorical Outcomes</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="ch12.html"><a href="ch12.html#prepare-data-and-workspace-1"><i class="fa fa-check"></i><b>12.1</b> Prepare Data and Workspace</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="ch12.html"><a href="ch12.html#import-example-data-1"><i class="fa fa-check"></i><b>12.1.1</b> Import Example Data</a></li>
+<li class="chapter" data-level="12.1.2" data-path="ch12.html"><a href="ch12.html#summarize-data"><i class="fa fa-check"></i><b>12.1.2</b> Summarize Data</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="ch12.html"><a href="ch12.html#regression-models-for-binary-variables"><i class="fa fa-check"></i><b>12.2</b> Regression Models for Binary Variables</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="ch12.html"><a href="ch12.html#fit-a-logistic-regression-model"><i class="fa fa-check"></i><b>12.2.1</b> Fit a Logistic Regression Model</a></li>
+<li class="chapter" data-level="12.2.2" data-path="ch12.html"><a href="ch12.html#fit-a-probit-regression-model"><i class="fa fa-check"></i><b>12.2.2</b> Fit a Probit Regression Model</a></li>
+<li class="chapter" data-level="12.2.3" data-path="ch12.html"><a href="ch12.html#compare-models"><i class="fa fa-check"></i><b>12.2.3</b> Compare Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="ch12.html"><a href="ch12.html#latent-response-variable"><i class="fa fa-check"></i><b>12.3</b> Latent Response Variable</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="ch12.html"><a href="ch12.html#ordinal-outcomes"><i class="fa fa-check"></i><b>12.3.1</b> Ordinal Outcomes</a></li>
+<li class="chapter" data-level="12.3.2" data-path="ch12.html"><a href="ch12.html#estimating-thresholds"><i class="fa fa-check"></i><b>12.3.2</b> Estimating Thresholds</a></li>
+<li class="chapter" data-level="12.3.3" data-path="ch12.html"><a href="ch12.html#estimating-polychoric-correlations"><i class="fa fa-check"></i><b>12.3.3</b> Estimating Polychoric Correlations</a></li>
+<li class="chapter" data-level="12.3.4" data-path="ch12.html"><a href="ch12.html#estimating-an-sem-with-estimated-input"><i class="fa fa-check"></i><b>12.3.4</b> Estimating an SEM with Estimated Input</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="ch12.html"><a href="ch12.html#mediation-model-with-categorical-outcomes"><i class="fa fa-check"></i><b>12.4</b> Mediation Model with Categorical Outcomes</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="ch12.html"><a href="ch12.html#estimate-mediation-models"><i class="fa fa-check"></i><b>12.4.1</b> Estimate Mediation Models</a></li>
+<li class="chapter" data-level="12.4.2" data-path="ch12.html"><a href="ch12.html#interpreting-coefficients"><i class="fa fa-check"></i><b>12.4.2</b> Interpreting Coefficients</a></li>
+<li class="chapter" data-level="12.4.3" data-path="ch12.html"><a href="ch12.html#delta-vs.-theta-parameterizations"><i class="fa fa-check"></i><b>12.4.3</b> Delta vs. Theta Parameterizations</a></li>
+<li class="chapter" data-level="12.4.4" data-path="ch12.html"><a href="ch12.html#decomposing-total-effects"><i class="fa fa-check"></i><b>12.4.4</b> Decomposing Total Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch12.html"><a href="ch12.html#references-8"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ch13.html"><a href="ch13.html"><i class="fa fa-check"></i><b>13</b> Fitting Path Models with Multilevel Data</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="ch13.html"><a href="ch13.html#intraclass-correlation"><i class="fa fa-check"></i><b>13.1</b> Intraclass correlation</a></li>
+<li class="chapter" data-level="13.2" data-path="ch13.html"><a href="ch13.html#multilevel-structure-as-a-nuisance-correcting-for-the-dependency"><i class="fa fa-check"></i><b>13.2</b> Multilevel structure as a nuisance: Correcting for the dependency</a></li>
+<li class="chapter" data-level="13.3" data-path="ch13.html"><a href="ch13.html#two-level-path-models"><i class="fa fa-check"></i><b>13.3</b> Two-level path models</a></li>
+<li class="chapter" data-level="13.4" data-path="ch13.html"><a href="ch13.html#obtaining-iccs-and-estimates-of-sigma_textw-and-sigma_textb"><i class="fa fa-check"></i><b>13.4</b> Obtaining ICCs, and estimates of <span class="math inline">\(\Sigma_\text{W}\)</span> and <span class="math inline">\(\Sigma_\text{B}\)</span></a>
+<ul>
+<li class="chapter" data-level="" data-path="ch13.html"><a href="ch13.html#script-13.1"><i class="fa fa-check"></i>Script 13.1</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="ch13.html"><a href="ch13.html#fitting-a-two-level-path-model"><i class="fa fa-check"></i><b>13.5</b> Fitting a two-level path model</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch13.html"><a href="ch13.html#script-13.2"><i class="fa fa-check"></i>Script 13.2</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch13.html"><a href="ch13.html#references-9"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="ch14.html"><a href="ch14.html"><i class="fa fa-check"></i><b>14</b> Factor Models</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="ch14.html"><a href="ch14.html#empirical-example-of-a-factor-model"><i class="fa fa-check"></i><b>14.1</b> Empirical example of a factor model</a></li>
+<li class="chapter" data-level="14.2" data-path="ch14.html"><a href="ch14.html#conceptual-explanation-of-a-factor-model"><i class="fa fa-check"></i><b>14.2</b> Conceptual explanation of a factor model</a></li>
+<li class="chapter" data-level="14.3" data-path="ch14.html"><a href="ch14.html#symbolic-explanation-of-a-factor-model"><i class="fa fa-check"></i><b>14.3</b> Symbolic explanation of a factor model</a></li>
+<li class="chapter" data-level="14.4" data-path="ch14.html"><a href="ch14.html#identification-of-model-parameters-in-a-factor-model"><i class="fa fa-check"></i><b>14.4</b> Identification of model parameters in a factor model</a></li>
+<li class="chapter" data-level="14.5" data-path="ch14.html"><a href="ch14.html#fitting-a-factor-model-using-lavaan"><i class="fa fa-check"></i><b>14.5</b> Fitting a factor model using lavaan</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#script-14.1"><i class="fa fa-check"></i>Script 14.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#references-10"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#appendix-2"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch14.html"><a href="ch14.html#derivations-of-equation-14.13"><i class="fa fa-check"></i>Derivations of Equation 14.13</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="ch15.html"><a href="ch15.html"><i class="fa fa-check"></i><b>15</b> Standardized Parameter Estimates for the Factor Model</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="ch15.html"><a href="ch15.html#standardized-factor-loadings"><i class="fa fa-check"></i><b>15.1</b> Standardized factor loadings</a></li>
+<li class="chapter" data-level="15.2" data-path="ch15.html"><a href="ch15.html#standardized-common-factor-variances-and-covariances"><i class="fa fa-check"></i><b>15.2</b> Standardized common-factor variances and covariances</a></li>
+<li class="chapter" data-level="15.3" data-path="ch15.html"><a href="ch15.html#standardized-unique-factor-variances-and-covariances"><i class="fa fa-check"></i><b>15.3</b> Standardized unique-factor variances and covariances</a></li>
+<li class="chapter" data-level="15.4" data-path="ch15.html"><a href="ch15.html#structure-coefficients"><i class="fa fa-check"></i><b>15.4</b> Structure coefficients</a></li>
+<li class="chapter" data-level="15.5" data-path="ch15.html"><a href="ch15.html#ch15-5"><i class="fa fa-check"></i><b>15.5</b> Calculating standardized coefficients in lavaan</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch15.html"><a href="ch15.html#script-15.1"><i class="fa fa-check"></i>Script 15.1</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="ch15.html"><a href="ch15.html#request-standardized-output-with-lavaan-1"><i class="fa fa-check"></i><b>15.6</b> Request standardized output with lavaan</a></li>
+<li class="chapter" data-level="" data-path="ch15.html"><a href="ch15.html#references-11"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="ch16.html"><a href="ch16.html"><i class="fa fa-check"></i><b>16</b> The Empirical Check for Identification</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="ch16.html"><a href="ch16.html#empirical-check-of-model-a"><i class="fa fa-check"></i><b>16.1</b> Empirical check of Model A</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch16.html"><a href="ch16.html#script-16.1"><i class="fa fa-check"></i>Script 16.1</a></li>
+<li class="chapter" data-level="" data-path="ch16.html"><a href="ch16.html#script-16.2"><i class="fa fa-check"></i>Script 16.2</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch16.html"><a href="ch16.html#references-12"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="ch17.html"><a href="ch17.html"><i class="fa fa-check"></i><b>17</b> Second Order Factor Models</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch17.html"><a href="ch17.html#script-17.1"><i class="fa fa-check"></i>Script 17.1</a></li>
+<li class="chapter" data-level="" data-path="ch17.html"><a href="ch17.html#getting-the-parameter-estimates-in-matrix-form"><i class="fa fa-check"></i>Getting the parameter estimates in matrix form</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch17.html"><a href="ch17.html#script-17.2"><i class="fa fa-check"></i>Script 17.2</a></li>
+</ul></li>
+<li class="chapter" data-level="17.1" data-path="ch17.html"><a href="ch17.html#standardized-parameter-estimates-for-the-higher-order-part-of-the-model"><i class="fa fa-check"></i><b>17.1</b> Standardized parameter estimates for the higher-order part of the model</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch17.html"><a href="ch17.html#script-17.3"><i class="fa fa-check"></i>Script 17.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="ch18.html"><a href="ch18.html"><i class="fa fa-check"></i><b>18</b> Structural Regression Models</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch18.html"><a href="ch18.html#script-18.1"><i class="fa fa-check"></i>Script 18.1</a></li>
+<li class="chapter" data-level="" data-path="ch18.html"><a href="ch18.html#script-18.2"><i class="fa fa-check"></i>Script 18.2</a></li>
+<li class="chapter" data-level="18.1" data-path="ch18.html"><a href="ch18.html#standardized-parameter-estimates-for-the-structural-part-of-the-model"><i class="fa fa-check"></i><b>18.1</b> Standardized parameter estimates for the structural part of the model</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch18.html"><a href="ch18.html#script-18.3"><i class="fa fa-check"></i>Script 18.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="ch19.html"><a href="ch19.html"><i class="fa fa-check"></i><b>19</b> Second-order Correlation Residuals</a></li>
+<li class="chapter" data-level="20" data-path="ch20.html"><a href="ch20.html"><i class="fa fa-check"></i><b>20</b> Factors with single indicators</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch20.html"><a href="ch20.html#script-20.1"><i class="fa fa-check"></i>Script 20.1</a></li>
+<li class="chapter" data-level="" data-path="ch20.html"><a href="ch20.html#script-20.2"><i class="fa fa-check"></i>Script 20.2</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="ch21.html"><a href="ch21.html"><i class="fa fa-check"></i><b>21</b> Mean structures</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="ch21.html"><a href="ch21.html#mean-structure-of-a-factor-model"><i class="fa fa-check"></i><b>21.1</b> Mean structure of a factor model</a></li>
+<li class="chapter" data-level="21.2" data-path="ch21.html"><a href="ch21.html#mean-structure-of-a-path-model"><i class="fa fa-check"></i><b>21.2</b> Mean structure of a path model</a></li>
+<li class="chapter" data-level="21.3" data-path="ch21.html"><a href="ch21.html#mean-structure-of-a-factor-model-in-lavaan"><i class="fa fa-check"></i><b>21.3</b> Mean structure of a factor model in <code>lavaan</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#script-21.1"><i class="fa fa-check"></i>Script 21.1</a></li>
+</ul></li>
+<li class="chapter" data-level="21.4" data-path="ch21.html"><a href="ch21.html#mean-structure-of-a-path-model-1"><i class="fa fa-check"></i><b>21.4</b> Mean structure of a path model</a></li>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#appendix-3"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#derivation-of-equation-21.20"><i class="fa fa-check"></i>Derivation of Equation 21.20</a></li>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#derivation-of-equation-21.27"><i class="fa fa-check"></i>Derivation of Equation 21.27</a></li>
+<li class="chapter" data-level="" data-path="ch21.html"><a href="ch21.html#derivation-of-equation-21.28"><i class="fa fa-check"></i>Derivation of Equation 21.28</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="ch22.html"><a href="ch22.html"><i class="fa fa-check"></i><b>22</b> Multigroup Models</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="ch22.html"><a href="ch22.html#measurement-invariance"><i class="fa fa-check"></i><b>22.1</b> Measurement invariance</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.1"><i class="fa fa-check"></i>Script 22.1</a></li>
+</ul></li>
+<li class="chapter" data-level="22.2" data-path="ch22.html"><a href="ch22.html#across-group-equality-constraints"><i class="fa fa-check"></i><b>22.2</b> Across group equality constraints</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.2"><i class="fa fa-check"></i>Script 22.2</a></li>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.3"><i class="fa fa-check"></i>Script 22.3</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="ch22.html"><a href="ch22.html#standardized-estimates-for-a-multigroup-model"><i class="fa fa-check"></i><b>22.3</b> Standardized estimates for a multigroup model</a></li>
+<li class="chapter" data-level="22.4" data-path="ch22.html"><a href="ch22.html#lavaan-shortcuts"><i class="fa fa-check"></i><b>22.4</b> <code>lavaan</code> shortcuts</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.4"><i class="fa fa-check"></i>Script 22.4</a></li>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.5"><i class="fa fa-check"></i>Script 22.5</a></li>
+<li class="chapter" data-level="" data-path="ch22.html"><a href="ch22.html#script-22.6"><i class="fa fa-check"></i>Script 22.6</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="ch23.html"><a href="ch23.html"><i class="fa fa-check"></i><b>23</b> Calculating Mean Residuals</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch23.html"><a href="ch23.html#script-23.1"><i class="fa fa-check"></i>Script 23.1</a></li>
+<li class="chapter" data-level="" data-path="ch23.html"><a href="ch23.html#script-22.2-1"><i class="fa fa-check"></i>Script 22.2</a></li>
+<li class="chapter" data-level="" data-path="ch23.html"><a href="ch23.html#script-23.3"><i class="fa fa-check"></i>Script 23.3</a></li>
+<li class="chapter" data-level="" data-path="ch23.html"><a href="ch23.html#references-13"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="ch24.html"><a href="ch24.html"><i class="fa fa-check"></i><b>24</b> Modification Indices and EPC’s for Equality Constraints</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="ch24.html"><a href="ch24.html#modification-index-for-simultaneously-freeing-a-set-of-parameters"><i class="fa fa-check"></i><b>24.1</b> Modification index for simultaneously freeing a set of parameters</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch24.html"><a href="ch24.html#script-24.1"><i class="fa fa-check"></i>Script 24.1</a></li>
+</ul></li>
+<li class="chapter" data-level="24.2" data-path="ch24.html"><a href="ch24.html#modification-indices-for-releasing-equality-constraints"><i class="fa fa-check"></i><b>24.2</b> Modification indices for releasing equality constraints</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch24.html"><a href="ch24.html#script-24.3"><i class="fa fa-check"></i>Script 24.3</a></li>
+</ul></li>
+<li class="chapter" data-level="24.3" data-path="ch24.html"><a href="ch24.html#epc-interest"><i class="fa fa-check"></i><b>24.3</b> EPC-interest</a></li>
+<li class="chapter" data-level="" data-path="ch24.html"><a href="ch24.html#references-14"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="ch25.html"><a href="ch25.html"><i class="fa fa-check"></i><b>25</b> MIMIC (and RFA) models</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="ch25.html"><a href="ch25.html#illustration-testing-uniform-bias-in-a-mimic-model"><i class="fa fa-check"></i><b>25.1</b> Illustration testing uniform bias in a MIMIC model</a></li>
+<li class="chapter" data-level="25.2" data-path="ch25.html"><a href="ch25.html#evaluating-non-uniform-measurement-bias"><i class="fa fa-check"></i><b>25.2</b> Evaluating non-uniform measurement bias</a></li>
+<li class="chapter" data-level="25.3" data-path="ch25.html"><a href="ch25.html#connection-with-measurement-invariance-testing-in-multigroup-models"><i class="fa fa-check"></i><b>25.3</b> Connection with measurement invariance testing in multigroup models</a></li>
+<li class="chapter" data-level="25.4" data-path="ch25.html"><a href="ch25.html#rfa-models"><i class="fa fa-check"></i><b>25.4</b> RFA-models</a></li>
+<li class="chapter" data-level="" data-path="ch25.html"><a href="ch25.html#references-15"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="ch26.html"><a href="ch26.html"><i class="fa fa-check"></i><b>26</b> Longitudinal Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="ch26.html"><a href="ch26.html#step-1-a-longitudinal-factor-model-with-configural-invariance"><i class="fa fa-check"></i><b>26.1</b> Step 1: A longitudinal factor model with configural invariance</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.1"><i class="fa fa-check"></i>Script 26.1</a></li>
+</ul></li>
+<li class="chapter" data-level="26.2" data-path="ch26.html"><a href="ch26.html#step-2-a-longitudinal-model-with-weak-factorial-invariance."><i class="fa fa-check"></i><b>26.2</b> Step 2: A longitudinal model with weak factorial invariance.</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.2"><i class="fa fa-check"></i>Script 26.2</a></li>
+</ul></li>
+<li class="chapter" data-level="26.3" data-path="ch26.html"><a href="ch26.html#step-3-longitudinal-model-with-strong-factorial-invariance"><i class="fa fa-check"></i><b>26.3</b> Step 3: Longitudinal model with strong factorial invariance</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.3"><i class="fa fa-check"></i>Script 26.3</a></li>
+</ul></li>
+<li class="chapter" data-level="26.4" data-path="ch26.html"><a href="ch26.html#step-4-a-model-with-strict-factorial-invariance"><i class="fa fa-check"></i><b>26.4</b> Step 4: A model with strict factorial invariance</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.4"><i class="fa fa-check"></i>Script 26.4</a></li>
+</ul></li>
+<li class="chapter" data-level="26.5" data-path="ch26.html"><a href="ch26.html#standardized-estimates-for-a-longitudinal-factor-model-with-means"><i class="fa fa-check"></i><b>26.5</b> Standardized estimates for a (longitudinal) factor model with means</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#script-26.5"><i class="fa fa-check"></i>Script 26.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch26.html"><a href="ch26.html#references-16"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="ch27.html"><a href="ch27.html"><i class="fa fa-check"></i><b>27</b> Latent Growth Curve Models</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="ch27.html"><a href="ch27.html#prepare-data-and-workspace-2"><i class="fa fa-check"></i><b>27.1</b> Prepare Data and Workspace</a></li>
+<li class="chapter" data-level="27.2" data-path="ch27.html"><a href="ch27.html#random-intercept-model"><i class="fa fa-check"></i><b>27.2</b> Random Intercept Model</a>
+<ul>
+<li class="chapter" data-level="27.2.1" data-path="ch27.html"><a href="ch27.html#specification-and-estimation"><i class="fa fa-check"></i><b>27.2.1</b> Specification and Estimation</a></li>
+<li class="chapter" data-level="27.2.2" data-path="ch27.html"><a href="ch27.html#interpret-results"><i class="fa fa-check"></i><b>27.2.2</b> Interpret Results</a></li>
+</ul></li>
+<li class="chapter" data-level="27.3" data-path="ch27.html"><a href="ch27.html#linear-growth-model"><i class="fa fa-check"></i><b>27.3</b> Linear Growth Model</a>
+<ul>
+<li class="chapter" data-level="27.3.1" data-path="ch27.html"><a href="ch27.html#model-fit-and-comparison"><i class="fa fa-check"></i><b>27.3.1</b> Model Fit and Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="27.4" data-path="ch27.html"><a href="ch27.html#unrestricted-growth-models"><i class="fa fa-check"></i><b>27.4</b> Unrestricted Growth Models</a>
+<ul>
+<li class="chapter" data-level="27.4.1" data-path="ch27.html"><a href="ch27.html#latent-basis-curve"><i class="fa fa-check"></i><b>27.4.1</b> Latent Basis Curve</a></li>
+<li class="chapter" data-level="27.4.2" data-path="ch27.html"><a href="ch27.html#saturated-growth-model"><i class="fa fa-check"></i><b>27.4.2</b> Saturated Growth Model</a></li>
+</ul></li>
+<li class="chapter" data-level="27.5" data-path="ch27.html"><a href="ch27.html#explaining-growth-factors"><i class="fa fa-check"></i><b>27.5</b> Explaining Growth Factors</a>
+<ul>
+<li class="chapter" data-level="27.5.1" data-path="ch27.html"><a href="ch27.html#time-invariant-level-2-predictors"><i class="fa fa-check"></i><b>27.5.1</b> Time-Invariant (Level-2) Predictors</a></li>
+<li class="chapter" data-level="27.5.2" data-path="ch27.html"><a href="ch27.html#time-varying-level-1-predictors"><i class="fa fa-check"></i><b>27.5.2</b> Time-Varying (Level-1) Predictors</a></li>
+<li class="chapter" data-level="27.5.3" data-path="ch27.html"><a href="ch27.html#parallel-growth-curves"><i class="fa fa-check"></i><b>27.5.3</b> Parallel Growth Curves</a></li>
+</ul></li>
+<li class="chapter" data-level="27.6" data-path="ch27.html"><a href="ch27.html#latent-indicators-of-growth-factors"><i class="fa fa-check"></i><b>27.6</b> Latent Indicators of Growth Factors</a>
+<ul>
+<li class="chapter" data-level="27.6.1" data-path="ch27.html"><a href="ch27.html#common-factors"><i class="fa fa-check"></i><b>27.6.1</b> Common Factors</a></li>
+<li class="chapter" data-level="27.6.2" data-path="ch27.html"><a href="ch27.html#discrete-indicators"><i class="fa fa-check"></i><b>27.6.2</b> Discrete Indicators</a></li>
+</ul></li>
+<li class="chapter" data-level="27.7" data-path="ch27.html"><a href="ch27.html#multigroup-growth-models"><i class="fa fa-check"></i><b>27.7</b> Multigroup Growth Models</a></li>
+<li class="chapter" data-level="" data-path="ch27.html"><a href="ch27.html#references-17"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="ch28.html"><a href="ch28.html"><i class="fa fa-check"></i><b>28</b> Analysis of categorical outcomes</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="ch28.html"><a href="ch28.html#factor-analysis-using-categorical-indicators"><i class="fa fa-check"></i><b>28.1</b> Factor analysis using categorical indicators</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#script-28.1"><i class="fa fa-check"></i>Script 28.1</a></li>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#script-28.2"><i class="fa fa-check"></i>Script 28.2</a></li>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#script-28.3"><i class="fa fa-check"></i>Script 28.3</a></li>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#script-28.4"><i class="fa fa-check"></i>Script 28.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ch28.html"><a href="ch28.html#references-and-further-reading"><i class="fa fa-check"></i>References and further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="ch29.html"><a href="ch29.html"><i class="fa fa-check"></i><b>29</b> Fitting CFA models with multilevel data</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="ch29.html"><a href="ch29.html#intraclass-correlations-of-observed-variables"><i class="fa fa-check"></i><b>29.1</b> Intraclass correlations of observed variables</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch29.html"><a href="ch29.html#script-29.1"><i class="fa fa-check"></i>Script 29.1</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="ch29.html"><a href="ch29.html#multilevel-structure-as-a-nuisance-correcting-for-the-dependency-1"><i class="fa fa-check"></i><b>29.2</b> Multilevel structure as a nuisance: Correcting for the dependency</a></li>
+<li class="chapter" data-level="29.3" data-path="ch29.html"><a href="ch29.html#two-level-factor-models"><i class="fa fa-check"></i><b>29.3</b> Two-level factor models</a>
+<ul>
+<li class="chapter" data-level="" data-path="ch29.html"><a href="ch29.html#script-29.2"><i class="fa fa-check"></i>Script 29.2</a></li>
+</ul></li>
+<li class="chapter" data-level="29.4" data-path="ch29.html"><a href="ch29.html#intraclass-correlations-of-common-factors"><i class="fa fa-check"></i><b>29.4</b> Intraclass correlations of common factors</a></li>
+<li class="chapter" data-level="29.5" data-path="ch29.html"><a href="ch29.html#climate-and-contextual-between-level-latent-variables"><i class="fa fa-check"></i><b>29.5</b> Climate and contextual between-level latent variables</a></li>
+<li class="chapter" data-level="29.6" data-path="ch29.html"><a href="ch29.html#full-sem-with-multilevel-data"><i class="fa fa-check"></i><b>29.6</b> Full SEM with multilevel data</a></li>
+<li class="chapter" data-level="" data-path="ch29.html"><a href="ch29.html#references-18"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A <code>lavaan</code> Compendium for Structural Equation Modeling in Educational Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ch14" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">14</span> Factor Models<a href="ch14.html#ch14" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Factor analysis is the second family of statistical analyses within the structural equation modeling (SEM) framework. Factor analysis is used to describe the dependencies between a set of observed variables, by using a limited number of so-called underlying or common factors. These common factors are not directly observed (i.e., they are latent factors) and represent everything that the associated observed variables have in common. In this chapter we first introduce an empirical example that will be used to explain factor models in this and subsequent chapters, then we give a general explanation of the factor model—both conceptually and through symbols, and explain how to fit the factor model using <code>lavaan</code>.</p>
+<div id="empirical-example-of-a-factor-model" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> Empirical example of a factor model<a href="ch14.html#empirical-example-of-a-factor-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The School Attitudes Questionnaire (SAQ) of Smits &amp; Vorst (1982) is a Dutch questionnaire that measures three components of educational attitudes: motivation for school tasks, satisfaction with school life, and self-confidence about ones scholastic capabilities. Each component is measured with three scales:</p>
+<p>-<strong>Motivation</strong> (for school tasks) is measured by: learning orientation, concentration on school work, and homework attitude;</p>
+<p>-<strong>Satisfaction</strong> (with school life) is measured by: fun at school, acceptance by classmates, and relationship with teacher;</p>
+<p>-<strong>Self-confidence</strong> (about ones scholastic capabilities) is measured by: self-expression, self-efficacy, and social skills.</p>
+</div>
+<div id="conceptual-explanation-of-a-factor-model" class="section level2 hasAnchor" number="14.2">
+<h2><span class="header-section-number">14.2</span> Conceptual explanation of a factor model<a href="ch14.html#conceptual-explanation-of-a-factor-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Figure <a href="ch14.html#fig:fig14-1">14.1</a> is a graphical display of the factor model of the SAQ. The nine squares represent the nine observed scale scores of the questionnaire: learning orientation (LO), concentration on school work (CO), homework attitude (HM), fun at school (FU), acceptance by classmates (AC), relationship with teacher (TE), self-expression (SE), self-efficacy (SF), and social skills (SK). In the context of factor models the observed variables are often referred to as indicator variables. The circles at the top are the common factors Motivation, Satisfaction and Self-confidence. The common factors are represented by circles to reflect the fact that they are latent factors, i.e., they are not directly observed. The relationships between the latent factors and the observed variables are represented by one-sided arrows (→) and are called factor loadings. In our example, the common factors Motivation, Satisfaction, and Self-confidence are each measured by three observed indicators. For example, Motivation is measured by the observed indicators LO, CO, and HM, as represented by the direct effects of the common factor on these three variables. There are no arrows pointing from the common factor Motivation to the other observed indicator variables. The common factor Motivation therefore represent everything that the associated observed indicator variables LO, CO, and HM have in common. Likewise, the common factor Satisfaction represents everything that the variables FU, AC, and TE have in common. The model that is represented in Figure 1 defines the measurement structure of the model (i.e., the relationships between the common factors and indicator variables) and is therefore called a measurement model. The underlying common factors in the measurement model are allowed to correlate, which is reflected by the double headed arrows (↔︎) between the common factors. The factor model thus provides a description of the relationships between the observed indicator variables using a limited number of underlying common factors.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig14-1"></span>
+<img src="images/Ch14_factor_model.png" alt="Factor model of the School Attitudes Questionnaire" width="80%" />
+<p class="caption">
+Figure 14.1: Factor model of the School Attitudes Questionnaire
+</p>
+</div>
+<p>The circles <span class="math inline">\(ε_{LO}\)</span> through <span class="math inline">\(ε_{SK}\)</span> at the bottom of Figure <a href="ch14.html#fig:fig14-1">14.1</a> are so-called residual factors. Just as with path analysis, residual factors in factor analysis are unobserved, latent factors that represent all factors that fall outside the model but may influence the states of the corresponding observed indicator variables. In the context of factor analysis, these residual factors can be considered ‘container variables’ that represent everything that is specific to the associated observed indicator variable (as opposed to everything that the observed indicator variables have in common, as represented by the common factors). The residual factors also reflect measurement error. The variance of a residual factor therefore partly consists of variance due to random error fluctuations (i.e., measurement error; unsystematic variance) and partly of specific variable variance (i.e., due to unmeasured causes; systematic variance). The directional effects from the residual factors to the corresponding observed indicator variables are accompanied by the scaling constant ‘1’ for reasons of identification (which is explained in more detail in section 14.4).</p>
+</div>
+<div id="symbolic-explanation-of-a-factor-model" class="section level2 hasAnchor" number="14.3">
+<h2><span class="header-section-number">14.3</span> Symbolic explanation of a factor model<a href="ch14.html#symbolic-explanation-of-a-factor-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Figure <a href="ch14.html#fig:fig14-2">14.2</a> is again a graphical representation of the factor model of the SAQ, but now also includes the Greek symbols that are associated with the common factors (‘<span class="math inline">\(ξ\)</span>’, or ‘ksi’) and the directional effects between the common factors and observed indicator variables (‘<span class="math inline">\(λ\)</span>’, or ‘lambda’). Using these symbols, the relationships between the observed indicator variables and the underlying common factor as presented in Figure 2 can be given by the following equations:</p>
+<p><span class="math display" id="eq:14-9" id="eq:14-8" id="eq:14-7" id="eq:14-6" id="eq:14-5" id="eq:14-4" id="eq:14-3" id="eq:14-2" id="eq:14-1">\[\begin{align}
+\mathrm{x}_1 = \lambda_{11}\xi_1+\varepsilon_1, \tag{14.1} \\
+\mathrm{x}_2 = \lambda_{21}\xi_1+\varepsilon_2, \tag{14.2} \\
+\mathrm{x}_3 = \lambda_{31}\xi_1+\varepsilon_3, \tag{14.3} \\
+\mathrm{x}_4 = \lambda_{42}\xi_2+\varepsilon_4, \tag{14.4} \\
+\mathrm{x}_5 = \lambda_{52}\xi_2+\varepsilon_5, \tag{14.5} \\
+\mathrm{x}_6 = \lambda_{62}\xi_2+\varepsilon_6, \tag{14.6} \\
+\mathrm{x}_7 = \lambda_{73}\xi_3+\varepsilon_7, \tag{14.7} \\
+\mathrm{x}_8 = \lambda_{83}\xi_3+\varepsilon_8, \tag{14.8} \\
+\mathrm{x}_9 = \lambda_{93}\xi_3+\varepsilon_9, \tag{14.9}
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(\mathrm{x}_1\)</span> through <span class="math inline">\(\mathrm{x}_9\)</span> are the nine observed indicator variables, <span class="math inline">\(\xi_1\)</span>, <span class="math inline">\(\xi_2\)</span> and <span class="math inline">\(\xi_3\)</span> are the common factors Motivation, Satisfaction, and Self-Confidence respectively, and <span class="math inline">\(\varepsilon_1\)</span> through <span class="math inline">\(\varepsilon_9\)</span> are the residual factors of the associated <span class="math inline">\(\mathrm{x}_1\)</span> through <span class="math inline">\(\mathrm{x}_9\)</span>. Parameters <span class="math inline">\(\lambda_{11}\)</span> through <span class="math inline">\(\lambda_{93}\)</span> are factor loadings. Using the equations, we can again see that each of the observed variables is only affected by one of the common factors. Note also that each of the observed variables is affected by its associated residual factor.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig14-2"></span>
+<img src="images/Ch14_factor_model_lambdas.png" alt="Factor Model of the School Attitudes Quetsionnaire" width="80%" />
+<p class="caption">
+Figure 14.2: Factor Model of the School Attitudes Quetsionnaire
+</p>
+</div>
+<p>Instead of writing down the equation for each observed variable, the equations for the observed variables x1 through x9 can also be written in matrix form:</p>
+<span class="math display" id="eq:14-10">\[\begin{equation}
+\mathbf{x} = \mathbf\Lambda \mathbf\xi + \mathbf{\varepsilon},
+\tag{14.10}
+\end{equation}\]</span>
+<p>where <span class="math inline">\(\mathbf{x}\)</span> is a vector of all observed variables, <span class="math inline">\(\mathbf\xi\)</span> is a vector of all common factors, <span class="math inline">\(\mathbf\varepsilon\)</span> is a vector of all residual factors, and <span class="math inline">\(\mathbf\Lambda\)</span> is a matrix of factor loadings.
+<span class="math display">\[
+\mathbf{x}=
+\begin{bmatrix}
+x_1\\x_2\\x_3\\x_4\\x_5\\x_6\\x_7\\x_8\\x_9
+\end{bmatrix},
+\mathbf\xi =
+\begin{bmatrix}
+\xi_1\\\xi_2\\\xi_3
+\end{bmatrix},
+\mathbf\varepsilon =
+\begin{bmatrix}
+\varepsilon_1\\\varepsilon_2\\\varepsilon_3\\\varepsilon_4\\\varepsilon_5\\\varepsilon_6\\\varepsilon_7\\\varepsilon_8\\\varepsilon_9
+\end{bmatrix}, \text{and }
+\mathbf\Lambda =
+\begin{bmatrix}
+\lambda_{11}&amp;0&amp;0\\\lambda_{21}&amp;0&amp;0\\\lambda_{31}&amp;0&amp;0\\0&amp;\lambda_{42}&amp;0\\0&amp;\lambda_{52}&amp;0\\0&amp;\lambda_{62}&amp;0\\0&amp;0&amp;\lambda_{73}\\0&amp;0&amp;\lambda_{83}\\0&amp;0&amp;\lambda_{93}
+\end{bmatrix}.
+\]</span></p>
+<p>Matrix <span class="math inline">\(\mathbf\Lambda\)</span> contains nine nonzero elements: <span class="math inline">\(\lambda_{11}\)</span> through <span class="math inline">\(\lambda_{93}\)</span>. Like the regression slopes in the Beta matrix (<span class="math inline">\(\mathbf{B}\)</span>), rows represent the outcomes (here, indicators) and columns represent the predictors (here, common factors). So the factor loading <span class="math inline">\(\lambda_{ij}\)</span> represents the regression of variable <span class="math inline">\(i\)</span> on common factor <span class="math inline">\(j\)</span>. When the factor model is specified such that variable <span class="math inline">\(i\)</span> does not load on common factor <span class="math inline">\(j\)</span>, then that specific element <span class="math inline">\(\lambda_{ij}\)</span> is fixed to zero. Specifically, the pattern of matrix <span class="math inline">\(\mathbf\Lambda\)</span> specifies the measurement structure of the factor model. In our example, <span class="math inline">\(\mathbf\Lambda\)</span> contains many elements that are fixed to zero because each indicator variable loads only on one of three common factors. Such a pattern of factor loadings is sometimes referred to as ‘simple structure’.</p>
+<p>Substituting these matrices into Equation <a href="ch14.html#eq:14-10">(14.10)</a> gives:</p>
+<span class="math display" id="eq:14-11">\[\begin{equation}
+\begin{bmatrix}
+x_1\\x_2\\x_3\\x_4\\x_5\\x_6\\x_7\\x_8\\x_9
+\end{bmatrix}=\begin{bmatrix}
+\lambda_{11} &amp; 0 &amp; 0 \\ \lambda_{21} &amp; 0 &amp; 0 \\ \lambda_{31} &amp; 0 &amp; 0 \\ 0 &amp; \lambda_{42} &amp; 0 \\ 0 &amp; \lambda_{52} &amp; 0 \\ 0 &amp; \lambda_{62} &amp; 0 \\ 0 &amp; 0 &amp; \lambda_{73} \\ 0 &amp; 0 &amp; \lambda_{83} \\ 0 &amp; 0 &amp; \lambda_{93}  
+\end{bmatrix}\begin{bmatrix}\xi_1\\\xi_2\\\xi_3
+\end{bmatrix}+\begin{bmatrix}\varepsilon_1\\\varepsilon_2\\\varepsilon_3\\\varepsilon_4\\\varepsilon_5\\\varepsilon_6\\\varepsilon_7\\\varepsilon_8\\\varepsilon_9
+\end{bmatrix}
+\tag{14.11}
+\end{equation}\]</span>
+<p>and evaluation gives:</p>
+<span class="math display" id="eq:14-12">\[\begin{equation}
+\begin{bmatrix}
+x_1\\x_2\\x_3\\x_4\\x_5\\x_6\\x_7\\x_8\\x_9
+\end{bmatrix} =
+\begin{bmatrix}
+\lambda_{11}\xi_1+\varepsilon_1\\
+\lambda_{21}\xi_1+\varepsilon_2\\
+\lambda_{31}\xi_1+\varepsilon_3\\
+\lambda_{42}\xi_2+\varepsilon_4\\
+\lambda_{52}\xi_2+\varepsilon_5\\
+\lambda_{62}\xi_2+\varepsilon_6\\
+\lambda_{73}\xi_3+\varepsilon_7\\
+\lambda_{83}\xi_3+\varepsilon_8\\
+\lambda_{93}\xi_3+\varepsilon_9
+\end{bmatrix}.
+\tag{14.12}
+\end{equation}\]</span>
+<p>Here, we can see that the equations for variables <span class="math inline">\(\mathrm{x}_1\)</span> through <span class="math inline">\(\mathrm{x}_9\)</span> are the same as separate Equations <a href="ch14.html#eq:14-1">(14.1)</a> through <a href="ch14.html#eq:14-9">(14.9)</a>.</p>
+<p>We now have an expression for the scores on the observed indicator variables. However, in standard SEM we do not model the observed scores directly, but rather the variances and covariances of the observed scores. Therefore, we need to find an expression for the model-implied covariance matrix. Using Equation <a href="ch14.html#eq:14-10">(14.10)</a> and some covariance algebra, we obtain the expression for the variances and covariances of <span class="math inline">\(\mathbf{x}\)</span>, called <span class="math inline">\(\mathbf\Sigma_{\text{model}} = \text{COV}(\mathbf{x},\mathbf{x})\)</span>:</p>
+<span class="math display" id="eq:14-13">\[\begin{equation}
+\mathbf\Sigma_{\text{model}} = \mathbf\Lambda \mathbf\Phi \mathbf\Lambda^\text{T} + \mathbf\Theta,
+\tag{14.13}
+\end{equation}\]</span>
+<p>where the variances and covariances of the common factors are represented by <span class="math inline">\(\text{COV}(\mathbf\xi,\mathbf\xi) = \mathbf\Phi\)</span>, and the variances and covariances of the residual factors represented by <span class="math inline">\(\text{COV}(\mathbf\varepsilon,\mathbf\varepsilon) = \mathbf\Theta\)</span>. The matrix <span class="math inline">\(\mathbf\Lambda\)</span> contains the common factor loadings, and <span class="math inline">\(\mathbf\Lambda^\text{T}\)</span> denotes the transpose of the matrix <span class="math inline">\(\mathbf\Lambda\)</span>. Derivations of Equation <a href="ch14.html#eq:14-13">(14.13)</a> are given in the <a href="ch14.html#derivations-of-equation-14.13">Appendix</a> at the end of this chapter.</p>
+<p>Matrix <span class="math inline">\(\mathbf\Phi\)</span> is a symmetric matrix and contains the variances and covariances of the common factors <span class="math inline">\(\mathbfξ\)</span>. For the model given in Equation <a href="ch14.html#eq:14-12">(14.12)</a>, matrix <span class="math inline">\(\mathbf\Phi\)</span> is:</p>
+<span class="math display" id="eq:14-14">\[\begin{equation}
+\mathbf\Phi =
+\begin{bmatrix}
+\phi_{11}\\\phi_{21}&amp;\phi_{22}\\\phi_{31}&amp;\phi_{32}&amp;\phi_{33}\\
+\end{bmatrix},
+\tag{14.14}
+\end{equation}\]</span>
+<p>where the diagonal elements <span class="math inline">\(φ_{11}\)</span>, <span class="math inline">\(φ_{22}\)</span>, <span class="math inline">\(φ_{33}\)</span> represent the variances of common factors <span class="math inline">\(ξ_1\)</span>, <span class="math inline">\(ξ_2\)</span>, and <span class="math inline">\(ξ_3\)</span>, respectively, and the off-diagonal elements represent the covariances between the common factors, e.g., the element <span class="math inline">\(φ_{21}\)</span> represents the covariance between common factors <span class="math inline">\(ξ_1\)</span> and <span class="math inline">\(ξ_2\)</span>.</p>
+<p>Matrix <span class="math inline">\(\mathbf\Theta\)</span> is a symmetric matrix and contains the variances and covariances of the residual factors. It is often assumed that the residual factors do not covary with each other, so that matrix <span class="math inline">\(\mathbf\Theta\)</span> is a diagonal matrix with residual variances only. However, in some applications covariances between (some) residual factors are allowed, which are then specified by nonzero off-diagonal elements of matrix <span class="math inline">\(\mathbf\Theta\)</span>. The <span class="math inline">\(\mathbf\Theta\)</span> matrix for our illustrative example from the Figure <a href="ch14.html#fig:fig14-2">14.2</a> model is:</p>
+<span class="math display" id="eq:14-15">\[\begin{equation}
+\mathbf\Theta =
+\begin{bmatrix}
+\theta_{11}\\
+0&amp;\theta_{22}\\
+0&amp;0&amp;\theta_{33}\\
+0&amp;0&amp;0&amp;\theta_{44}\\
+0&amp;0&amp;0&amp;0&amp;\theta_{55}\\
+0&amp;0&amp;0&amp;0&amp;0&amp;\theta_{66}\\
+0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;\theta_{77}\\
+0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;\theta_{88}\\
+0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;\theta_{99}
+\end{bmatrix},
+\tag{14.15}
+\end{equation}\]</span>
+<p>where <span class="math inline">\(θ_{11}\)</span> through <span class="math inline">\(θ_{99}\)</span> represent the variances of the residual factors of <span class="math inline">\(\mathrm{x}_1\)</span> through <span class="math inline">\(\mathrm{x}_9\)</span>. These residual variances represent the variance of the associated indicator variable that is not represented by the underlying common factors. They can be interpreted as variance that is unexplained by the model.</p>
+<p>In Figure 3, the <span class="math inline">\(\mathbf\Phi\)</span> and <span class="math inline">\(\mathbf\Theta\)</span> parameters representing common factor variances and covariances and residual factor variances and covariances are added to the graphical display.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig14-3"></span>
+<img src="images/Ch14_SAQ_3.png" alt="Factor model of the School Attitudes Questionnaire including common factor and residual factor (co)variance parameters" width="80%" />
+<p class="caption">
+Figure 14.3: Factor model of the School Attitudes Questionnaire including common factor and residual factor (co)variance parameters
+</p>
+</div>
+<p>Now that we have found the general expression for the variances and covariances as a function of model parameters of a factor model, we can evaluate Equation <a href="ch14.html#eq:14-13">(14.13)</a> of our illustrative example. Substitution of the <span class="math inline">\(\mathbf\Lambda\)</span>, <span class="math inline">\(\mathbf\Phi\)</span>, and <span class="math inline">\(\mathbf\Theta\)</span> of our example yields:</p>
+<p><span class="math inline">\(\mathbf\Sigma_{\text{model}} = \mathbf\Lambda \mathbf\Phi \mathbf\Lambda^\text{T} + \mathbf\Theta\)</span>, where:</p>
+<p><span class="math display">\[
+\mathbf\Lambda \mathbf\Phi \mathbf\Lambda^\text{T} = \begin{bmatrix}
+\lambda_{11}&amp;0&amp;0\\\lambda_{21}&amp;0&amp;0\\\lambda_{31}&amp;0&amp;0\\0&amp;\lambda_{42}&amp;0\\0&amp;\lambda_{52}&amp;0\\0&amp;\lambda_{62}&amp;0\\0&amp;0&amp;\lambda_{73}\\0&amp;0&amp;\lambda_{83}\\0&amp;0&amp;\lambda_{93}
+\end{bmatrix} \begin{bmatrix}
+\phi_{11}\\\phi_{21}&amp;\phi_{22}\\\phi_{31}&amp;\phi_{32}&amp;\phi_{33}
+\end{bmatrix} \begin{bmatrix}
+\lambda_{11}&amp;\lambda_{21}&amp;\lambda_{31}&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;\lambda_{42}&amp;\lambda_{52}&amp;\lambda_{62}&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;\lambda_{73}&amp;\lambda_{83}&amp;\lambda_{93}
+\end{bmatrix}
+\]</span></p>
+<p>and thus <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span> is given by:</p>
+<span class="math display" id="eq:14-16">\[\begin{equation}
+\mathbf\Sigma_{\text{model}} =
+\begin{bmatrix}
+
+\lambda^2_{11} \varphi_{11} +\theta_{11} \\
+
+\lambda_{11}\lambda_{21}\varphi_{11} &amp; \lambda^2_{21}\varphi_{11}+\theta_{22} \\
+
+\lambda_{11}\lambda_{31}\varphi_{11} &amp; \lambda_{21}\lambda_{31}\varphi_{11} &amp; \lambda^2_{31}\varphi_{11}+\theta_{33}\\
+
+\lambda_{11}\lambda_{42} \varphi_{21} &amp;  \lambda_{21}\lambda_{42}\varphi_{21} &amp; \lambda_{31}\lambda_{42}\varphi_{21} &amp; \lambda^2_{42}\varphi_{22}+\theta_{44}\\
+
+\lambda_{11}\lambda_{52} \varphi_{21} &amp;  \lambda_{21}\lambda_{52} \varphi_{21} &amp; \lambda_{31}\lambda_{52}\varphi_{21} &amp; \lambda_{42}\lambda_{52}\varphi_{22} &amp; \lambda^2_{52}\varphi_{22}+\theta_{55}\\
+
+\lambda_{11}\lambda_{62}\varphi_{21} &amp;  \lambda_{21}\lambda_{62} \varphi_{21} &amp; \lambda_{31}\lambda_{62}\varphi_{21} &amp; \lambda_{42}\lambda_{62}\varphi_{22} &amp; \lambda_{52}\lambda_{62}\varphi_{22} &amp; \lambda^2_{62}\varphi_{22}+\theta_{66}\\
+
+\lambda_{11}\lambda_{73}\varphi_{31} &amp;  \lambda_{21}\lambda_{73}\varphi_{31} &amp; \lambda_{31}\lambda_{73}\varphi_{31} &amp; \lambda_{42}\lambda_{73}\varphi_{32} &amp; \lambda_{52}\lambda_{73}\varphi_{32} &amp;\lambda_{62}\lambda_{73}\varphi_{32} &amp; \lambda^2_{73} \varphi_{33}+\theta_{77}\\
+
+\lambda_{11}\lambda_{83} \varphi_{31} &amp; \lambda_{21}\lambda_{83}\varphi_{31}  &amp;\lambda_{31}\lambda_{83}\varphi_{31} &amp; \lambda_{42}\lambda_{83}\varphi_{32} &amp; \lambda_{52}\lambda_{83}\varphi_{32} &amp; \lambda_{62}\lambda_{83}\varphi_{32} &amp; \lambda_{72}\lambda_{83}\varphi_{32} &amp; \lambda^2_{83}\varphi_{33}+\theta_{88}\\
+
+\lambda_{11}\lambda_{93} \varphi_{31} &amp;  \lambda_{21}\lambda_{93} \varphi_{31} &amp; \lambda_{31}\lambda_{93}\varphi_{31} &amp; \lambda_{42}\lambda_{93}\varphi_{32} &amp; \lambda_{52}\lambda_{93}\varphi_{32} &amp; \lambda_{62}\lambda_{93}\varphi_{32} &amp; \lambda_{73}\lambda_{93}\varphi_{32} &amp; \lambda_{83}\lambda_{93}\varphi_{32} &amp; \lambda^2_{93}\varphi_{33}+\theta_{99}
+
+\end{bmatrix}
+\tag{14.16}
+\end{equation}\]</span>
+<p>We can thus evaluate whether the factor model gives a good description of the linear dependencies between the observed variables by evaluating <span class="math inline">\(\mathbf\Sigma_{population} = \mathbf\Sigma_{model}\)</span>, where <span class="math inline">\(\mathbf\Sigma_{population}\)</span> is given by:</p>
+<span class="math display" id="eq:14-17">\[\begin{equation}
+\mathbf\Sigma_{population}=
+\begin{bmatrix}
+\sigma_{11} \\
+\sigma_{21} &amp; \sigma_{22} \\
+\sigma_{31} &amp; \sigma_{32} &amp; \sigma_{33} \\
+\sigma_{41} &amp; \sigma_{42} &amp; \sigma_{43} &amp; \sigma_{44} \\
+\sigma_{51} &amp; \sigma_{52} &amp; \sigma_{53} &amp; \sigma_{54} &amp; \sigma_{55} \\
+\sigma_{61} &amp; \sigma_{62} &amp; \sigma_{63} &amp; \sigma_{64} &amp; \sigma_{65} &amp; \sigma_{66} \\
+\sigma_{71} &amp; \sigma_{72} &amp; \sigma_{73} &amp; \sigma_{74} &amp; \sigma_{75} &amp; \sigma_{76} &amp; \sigma_{77} \\
+\sigma_{81} &amp; \sigma_{82} &amp; \sigma_{83} &amp; \sigma_{84} &amp; \sigma_{85} &amp; \sigma_{86} &amp; \sigma_{87} &amp; \sigma_{88} \\
+\sigma_{91} &amp; \sigma_{92} &amp; \sigma_{93} &amp; \sigma_{94} &amp; \sigma_{95} &amp; \sigma_{96} &amp; \sigma_{97} &amp; \sigma_{98} &amp; \sigma_{99}
+\end{bmatrix}.
+\tag{14.17}
+\end{equation}\]</span>
+</div>
+<div id="identification-of-model-parameters-in-a-factor-model" class="section level2 hasAnchor" number="14.4">
+<h2><span class="header-section-number">14.4</span> Identification of model parameters in a factor model<a href="ch14.html#identification-of-model-parameters-in-a-factor-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The population variances (<span class="math inline">\(\sigma_{ii}\)</span>), and covariances (<span class="math inline">\(\sigma_{ij}\)</span>) that feature in Equation <a href="ch14.html#eq:14-17">(14.17)</a> can be estimated with sample variances (<span class="math inline">\(s_{ii}\)</span>), and covariances (<span class="math inline">\(s_{ij}\)</span>). Similar to the identification of path models, the factor model is identified if it is possible to uniquely express each of the model parameters that feature in Equation <a href="ch14.html#eq:14-16">(14.16)</a> as functions of the variances and covariances of Equation <a href="ch14.html#eq:14-17">(14.17)</a>. However, the identification of latent factors requires additional restrictions. Because latent factors are unobserved variables, we do not know the scales of measurements of these variables. Because the scales of the common factors are not defined, it is not possible to estimate both the variance and factor loading of a latent factor. To give scales to the latent factors, one can either fix the factor variance or one of the factor loadings at a nonzero value. The identification of residual factors—which also appear in path models—is usually done by using a scaling constant ‘1’ for the associated residual factor loading (i.e., the direct effect of the residual factor on the associated observed variable). These restrictions are applied by default by most computer programs.</p>
+<p>For the identification of common factors, the researcher can chose between the two types of identification restrictions: through restriction of common-factor variances or through restriction of factor loadings. For example, to identify the common factors from our illustrative example, one can fix either the factor variances at a nonzero value (e.g., <span class="math inline">\(\varphi_{11} = 1, \varphi_{22} = 1, \varphi_{33} = 1\)</span>) or one factor loading for each factor (e.g., <span class="math inline">\(\lambda_{11} = 1, \lambda_{22} = 1\)</span>, and <span class="math inline">\(\lambda_{33} = 1\)</span>. As the scaling constant is usually ‘1’, these two types of identification constraints are referred to as: the ‘unit variance identification constraint’ (UVI constraint) and the ‘unit loading identification constraint’ (ULI constraint). The UVI method is also referred to as the ‘fixed-factor’ method, and the ULI method is referred to as the ‘marker-variable’ or ‘reference-variable’ method. A third method is related to ULI, but instead of constraining a single loading to 1, all loadings are estimated under the constraint that the mean of the loadings is 1—this is called the ‘effects-coding’ method.</p>
+<p>Traditionally, we would choose a “marker” or “reference” variable that is thought to best represent the latent construct (i.e., the perfect indicator, <em>if</em> it did not have measurement error), and we would fix the loading of that indicator to 1 (ULI constraint). The logic behind ULI was that fixing the factor loading to 1 implied a 1-unit increase in the reference indicator (on average) for each 1-unit increase in the common factor. Thus, the common factor was often said to “be on the same scale” as the reference indicator. However, that would only be true if the reference indicator had no measurement error (implying its residual variance could be fixed to zero). Holding the reliability of an indicator (i.e., the proportion of its variance that is common-factor variance ) constant, the more measurement error the indicator has, the greater its estimated residual variance and the lower its estimated factor loading would be. So when the reference indicator does have measurement error (which we assume implicitly, otherwise we wouldn’t need a common-factor model for the latent construct), the ULI method sets the scale of the common factor to the scale of <em>the common-factor component</em> of the reference indicator, not to its total (i.e., its observed) scale (Steiger, 2002).</p>
+<p>So although the ULI method has been most popular in SEM for decades, its popularity is based on a misconception. Latent variables have no implicit scale because they are unobserved by definition, and no statistical trick can give them a meaningful scale. Units of standard deviation are familiar because we often use standardized effect sizes in other contexts (e.g., Cohen’s <em>d</em> is a standardized mean difference, a correlation is a standardized simple regression slope). Standardized estimates are available regardless of the scaling constraint, so the UVI / fixed-factor method is not necessarily any better—both methods lead to identical model fit, and the estimated factor loadings are proportionally equivalent relative to the factor variance, whether it is fixed to 1 or set using the common-factor component of an indicator. However, the <span class="math inline">\(SE\)</span>s of the factor loadings are sensitive to the different identification methods (Gonzalez &amp; Griffin, 2001), so Wald <span class="math inline">\(z\)</span> tests of significance for factor loadings are affected. This may only lead to different conclusions about the null hypothesis that <span class="math inline">\(λ_{ij} = 0\)</span> when indicators have much more measurement error than common-factor variance, or when <span class="math inline">\(N\)</span> is quite low. However, it is troubling to think that an estimated <span class="math inline">\(SE\)</span> depends on an arbitrary scaling constraint. The UVI / fixed-factor method may be preferable if only because the specified factor variance is arbitrary anyway, and ULI seems to imply that one of the factor loadings is a known quantity.</p>
+<p>The effects-coding method of identification has the benefit of estimating the factor variance without specifying a single variable as the ideal reference indicator. Instead of fixing one loading to 1, it estimates all loadings under the constraint that the average loading (per construct) is 1, or equivalently, that the factor loadings sum to the number of indicators (<span class="math inline">\(N_i\)</span>). This is equivalent to constraining one loading to be <span class="math inline">\(N_i\)</span> minus the remaining factor loadings. Thus, the indicator with the “average” amount of common-factor variance would have a factor loading of 1, and loadings above 1 belong to the indicators that have more common-factor variance than average (among the indicators used in the analysis).</p>
+<p>Although effects coding was originally conceived as a “non-arbitrary” method of scaling the latent construct (Little, Slegers, &amp; Card, 2006), that was based on the same misconception as believing the ULI sets the latent construct’s scale identical to the reference indicator’s scale. However, the effects-coding method is advantageous in scenarios when fixing the latent variance is suboptimal. For example, we can only scale the <em>residual</em> variance of an endogenous common factor, rather than the total variance, and fixing a residual variance to 1 may be intuitively unappealing (although it is as arbitrary as fixing the total variance).</p>
+<p>When a factor has fewer than three indicators, these scaling methods are not sufficient for identification. We devote a later chapter to single-indicator constructs, which can be used to model the effects of observed variables (e.g., sex or age) on latent common factors<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>. However, constructs with only two indicators have a complicated status. With only two indicators, there are three observed pieces of information: two variances and a single covariance, which represents the shared (common) variance between the indicators. That is not enough to identify the five pieces of information we could estimate (two residual variances, one factor variance, and two factor loadings), so we need to fix two pieces of information instead of just one. Using the ULI orientation is intuitively appealing in this situation, because when you fix <em>both</em> factor loadings to 1, the estimated common-factor variance is the observed covariance (i.e., the observed common variance). The UVI orientation would be to fix the factor variance to 1, but we still need another constraint for just-identification, which we can achieve by constraining the estimated factor loadings to equality (i.e., estimate one loading, but set both the loadings to that one value). Effects coding is not possible with only two indicators.</p>
+<p>To make the situation more complicated, you can estimate a two-indicator factor with only one constraint, but only when the factor has a nonzero covariance with another factor in the model. The covariances of the two indicators with other indicators in the other factor will be enough to empirically identify the factor loading(s) and/or factor variance of the two-indicator factor—but <em>only</em> if the factor covariance is substantial. If the factor covariance is close to zero, the model will still be empirically underidentified. It is therefore preferable to ensure identification, ideally by fixing both factor loadings to 1 so that the freely estimated factor variance represents what it literally is: the covariance between the indicators.</p>
+</div>
+<div id="fitting-a-factor-model-using-lavaan" class="section level2 hasAnchor" number="14.5">
+<h2><span class="header-section-number">14.5</span> Fitting a factor model using lavaan<a href="ch14.html#fitting-a-factor-model-using-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The lavaan script for fitting a factor model resembles the script for fitting a path model. We again use equations to specify the model, but we now use the “<code>=~</code>” operator to define the common factors. Whereas the “<code>~</code>” operator specifies regression paths that point from predictor(s) on the right-hand side to outcome(s) on the left-hand side, the “<code>=~</code>” operator specifies regression paths (called factor loadings) that point from the predictor (common factor) on the left-hand side to the outcomes (indicators) on the right-hand side. <a href="ch14.html#script-14.1">Script 14.1</a> fits the three-factor model from Figure <a href="ch14.html#fig:fig14-3">14.3</a> to the covariance matrix from observed scores of the SAQ that was administered to 915 school pupils.</p>
+<div id="script-14.1" class="section level3 unnumbered hasAnchor">
+<h3>Script 14.1<a href="ch14.html#script-14.1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<pre><code>## observed covariance matrix
+obsnames &lt;- c(&quot;learning&quot;,&quot;concentration&quot;,&quot;homework&quot;,&quot;fun&quot;,
+            &quot;acceptance&quot;,&quot;teacher&quot;,&quot;selfexpr&quot;,&quot;selfeff&quot;,&quot;socialskill&quot;)
+values &lt;- c(30.6301,
+            26.9452, 56.8918,
+            24.1473, 31.6878, 53.2488,
+            16.3770, 18.4153, 16.8599, 27.9758,
+             7.8174,  9.6851, 12.0114, 12.8765, 47.0970,
+            13.6902, 16.9232, 12.9326, 17.2880, 12.3672, 29.0119,
+            15.3122, 24.2849, 21.4935, 12.9621, 13.9909, 11.6333, 59.5343,
+            13.4457, 21.8158, 18.8545,  7.3931, 12.2333,  7.1434, 29.7953, 49.2213,
+             6.6074, 12.7343, 12.5768,  6.4065, 13.4258,  6.1429, 26.0849, 23.6253, 40.0922)
+
+saqcov &lt;- getCov(values, names = obsnames)
+
+## specify model
+saqmodel &lt;- &#39;
+    # define latent common factors
+    Motivation =~ L11*learning + L21*concentration + L31*homework
+    Satisfaction =~ L42*fun + L52*acceptance + L62*teacher
+    SelfConfidence =~ L73*selfexpr + L83*selfeff + L93*socialskill
+
+    # indicator residual variances (or use &quot;auto.var = TRUE&quot;) 
+    learning ~~ TH11*learning
+    concentration ~~ TH22*concentration
+    homework ~~ TH33*homework
+    fun ~~ TH44*fun
+    acceptance ~~ TH55*acceptance
+    teacher ~~ TH66*teacher
+    selfexpr ~~ TH77*selfexpr
+    selfeff ~~ TH88*selfeff
+    socialskill ~~ TH99*socialskill
+
+    # common factor variances (or use &quot;auto.var = TRUE&quot;)
+      Motivation ~~ F11*Motivation
+      Satisfaction ~~ F22*Satisfaction
+      SelfConfidence ~~ F33*SelfConfidence
+    # factor covariances (or use &quot;auto.cov.lv.x = TRUE&quot;)
+    Motivation ~~ F21*Satisfaction
+    Motivation ~~ F31*SelfConfidence
+    Satisfaction ~~ F32*SelfConfidence
+
+    # OPTIONAL: manually specify scaling constraints
+    # UVI / fixed-factor method (or use &quot;std.lv = TRUE&quot;)
+        # F11 == 1
+        # F22 == 1
+        # F33 == 1
+    # ULI / marker-variable / reference-variable method
+      # (or use &quot;auto.fix.first = TRUE&quot;)
+        # L11 == 1
+        # L42 == 1
+        # L73 == 1
+    # effects-coding method (MUST specify in syntax)
+      # NOTE: 3 different ways yield the same solution
+    (L11 + L21 + L31) / 3 == 1 # mean(Lambda) = 1
+    L42 + L52 + L62 == 3       # sum(Lambda) = number of indicators
+    L73 == 3 – L83 – L93       # 1 lambda = difference between the sum and remaining loadings
+    &#39;
+## fit model
+saqmodelOut &lt;- lavaan(saqmodel, sample.cov = saqcov, 
+                      sample.nobs = 915, likelihood = &quot;wishart&quot;)
+## results
+summary(saqmodelOut, fit = TRUE, standardized = TRUE, rsquare = TRUE)
+## parameter matrices
+lavInspect(saqmodelOut, &quot;est&quot;)</code></pre>
+<p>The first part of the script, where the observed covariance matrix is created, is not different from when fitting a path model. Differences are present in the model specification, where we need to define the common factors and additional parameters that are specific to the factor model.</p>
+<p>First, we define common factors by specify their factor loadings (<span class="math inline">\(λ_{ij}\)</span>, the regression paths pointing from a common factor to an observed indicator in Figure <a href="ch14.html#fig:fig14-3">14.3</a>.</p>
+<pre><code>saqmodel &lt;- &#39;
+    # define latent common factors
+    Motivation =~ L11*learning + L21*concentration + L31*homework
+    Satisfaction =~ L42*fun + L52*acceptance + L62*teacher
+    SelfConfidence =~ L73*selfexpr + L83*selfeff + L93*socialskill
+</code></pre>
+<p>The operator (“<code>=~</code>”) defines the common factor, where the name on the left-hand side of the operator is the common factor. As far as the software is concerned, it is only an arbitrary label, so you can choose any name you want, but it should <em>not</em> be a variable name that exists in the input data. The names on the right-hand side of the operator are the observed variables that are its reflective indicators, and whose names <em>must</em> appear in the input data. Note that (just as with the path model) the residual error term is not explicitly included in the formula. These equations therefore refer to the pattern of factor loadings (<span class="math inline">\(\mathbfΛ\)</span>).</p>
+<p>We use labels for the estimates of the factor loadings, where the label refers to the position of the regression coefficient in the <span class="math inline">\(\mathbfΛ\)</span> matrix. For example, the factor loadings of the observed indicators of Motivation are positioned in the first column, rows one, two and three, and therefore we use the labels “<code>L11</code>”, “<code>L21</code>”, and “<code>L31</code>”:</p>
+<pre><code>Motivation =~ L11*learning + L21*concentration + L31*homework</code></pre>
+<p>The residual errors are specified in the same way as they are with the path model, using the double tildes (<code>~~</code>) to represent two-headed arrows. These are the residual terms that are represented in the theta matrix (<span class="math inline">\(\mathbfΘ\)</span>). As there are no covariances between residual factors specified in our model, this matrix is diagonal. That is, the diagonal elements of the symmetric <span class="math inline">\(\mathbfΘ\)</span> are the indicators’ residual variances, and all residual covariances are fixed to zero. We use labels “<code>TH11</code>” through “<code>TH99</code>” to represent the 1st-row/1st-column element through the 9th-row/9th-column element.</p>
+<pre><code>    # indicator residual variances (or use &quot;auto.var = TRUE&quot;) 
+    learning ~~ TH11*learning
+    concentration ~~ TH22*concentration
+    homework ~~ TH33*homework
+    fun ~~ TH44*fun
+    acceptance ~~ TH55*acceptance
+    teacher ~~ TH66*teacher
+    selfexpr ~~ TH77*selfexpr
+    selfeff ~~ TH88*selfeff
+    socialskill ~~ TH99*socialskill</code></pre>
+<p>Note, however, that this syntax can be left out if you use an additional <code>lavaan</code> argument to automatically (<code>auto.</code>) estimate the variance (<code>var</code>):</p>
+<pre><code>saqmodelOut &lt;- lavaan(saqmodel, sample.cov = saqcov, 
+                      sample.nobs = 915, likelihood = &quot;wishart&quot;,
+                      auto.var = TRUE)</code></pre>
+<p>Next, we need to specify the variances and covariances between the common factors (<span class="math inline">\(\mathbfΦ\)</span>)<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>. We use labels “<code>F11</code>” to “<code>F33</code>” for the variances, and the covariances are labeled with “<code>F21</code>”, “<code>F31</code>” and “<code>F32</code>”.</p>
+<pre><code>    # common factor variances (or use &quot;auto.var = TRUE&quot;)
+      Motivation ~~ F11*Motivation
+      Satisfaction ~~ F22*Satisfaction
+      SelfConfidence ~~ F33*SelfConfidence
+    # factor covariances (or use &quot;auto.cov.lv.x = TRUE&quot;)
+    Motivation ~~ F21*Satisfaction
+    Motivation ~~ F31*SelfConfidence
+    Satisfaction ~~ F32*SelfConfidence</code></pre>
+<p>Similar to residual variances, common-factor variances can be omitted from the model syntax if you use the argument “<code>auto.var = TRUE</code>”. Likewise, you can omit common-factor covariances from the model syntax if you use the argument “<code>auto.cov.lv.x = TRUE</code>”.</p>
+<p>Now we have specified all parameters of our factor model that are free to be estimated. However, although our model has positive degrees of freedom, it is still not identified. We must fix either the factor variances at a nonzero value or constrain at least one factor loading for each factor to give the factors a scale. <a href="ch14.html#script-14.1">Script 14.1</a> shows three ways to specify within the model syntax the scaling constraints necessary to identify the model. First we demonstrate the UVI (fixed-factor) constraint:</p>
+<pre><code>    # UVI / fixed-factor method (or use &quot;std.lv = TRUE&quot;)
+    F11 == 1
+    F22 == 1
+    F33 == 1</code></pre>
+<p>Note that the “<code>==</code>” operator (translated: “is equal to”) can only have constants on the left- and right-hand sides. These can be explicit constants (e.g., “1”) or parameter labels (e.g., “F11”), but variables can never be part of an equality constraint<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>. Also note that you are not required to specify this constraint explicitly in the model syntax. Instead, you can tell lavaan to standardize (<code>std.</code>) each latent variable (<code>lv</code>):</p>
+<pre><code>saqmodelOut &lt;- lavaan(saqmodel, sample.cov = saqcov, 
+                      sample.nobs = 915, likelihood = &quot;wishart&quot;,
+                      std.lv = TRUE)</code></pre>
+<p>The alternative method to give scales to the common factors would be to fix one of the factor loadings of each common factor. Because software is ignorant of which variable might be preferred as a reference indicator, the default is typically to use the “first” indicator per factor as a reference indicator; however, if no indicator stands out as the ideal indicator, then there is little justification for use the ULI constraint. The ULI method can be specified explicitly in the model syntax:</p>
+<pre><code>    # ULI / marker-variable / reference variable method
+      # (or use &quot;auto.fix.first = TRUE&quot;)
+        # L11 == 1
+        # L42 == 1
+        # L73 == 1</code></pre>
+<p>Or, as noted in the syntax comment, you can omit constraints from the syntax by telling <code>lavaan</code> you want to automatically (<code>auto.</code>) fix the first loading to 1:</p>
+<pre><code>saqmodelOut &lt;- lavaan(saqmodel, sample.cov = saqcov, 
+                      sample.nobs = 915, likelihood = &quot;wishart&quot;,
+                      auto.fix.first = TRUE)</code></pre>
+<p>When there is not an ideal indicator to use as the reference variable, but the research wants to estimate factor variances, the effects-coding method can be used.</p>
+<pre><code>    # effects-coding method (MUST specify in syntax)
+      # NOTE: 3 different ways yield the same solution
+    (L11 + L21 + L31) / 3 == 1 # mean(Λ) = 1
+    L42 + L52 + L62 == 3       # sum(Λ) = number of indicators
+    L73 == 3 – L83 – L93       # 1 λ = difference between the
+                                 # sum and remaining loadings</code></pre>
+<p>Note the three equivalent ways of specifying the necessary constraint, each of which is demonstrated using a different factor’s indicators. Note also that effects coding does not have an argument in <code>lavaan</code>, so it must be specified in model syntax using parameter labels (which would not be required when using the <code>auto.fix.first</code> or <code>std.lv</code> arguments).</p>
+<p>Finally, we run the model with the <code>lavaan</code> function. The arguments are the model syntax (<code>saqmodel</code>), the covariance matrix as input data (<code>saqcov</code>), and the sample size (<span class="math inline">\(N = 915\)</span>). We still use Wishart likelihood when we fit our model only to the sample covariance matrix, but unlike with path models, we no longer need to set the argument <code>fixed.x = FALSE</code> because all observed variables are endogenous .</p>
+<pre><code>## run model
+saqmodelOut &lt;- lavaan(saqmodel, sample.cov = saqcov, 
+                      sample.nobs = 915, likelihood = &quot;wishart&quot;)</code></pre>
+<p>There is a dedicated “wrapper” function (i.e., a function that calls <code>lavaan()</code> with specific defaults turned on) called <code>cfa()</code>. Specifically, <code>cfa()</code> calls <code>lavaan()</code> with the arguments <code>auto.fix.first</code>, <code>auto.var</code>, and <code>auto.cov.lv.x</code> set to <code>TRUE.</code> To use UVI instead of ULI, you can implicitly set <code>auto.fix.first</code> back to FALSE by setting <code>std.lv = TRUE</code>. Effects coding, however, requires calling <code>lavaan()</code> directly. <a href="#script-14.2">Script 14.2</a> yields the same results as <a href="ch14.html#script-14.1">Script 14.1</a> (specifically, using the UVI constraint) but with many fewer lines of syntax.
+### Script 14.2 {-}</p>
+<pre><code>## observed covariance matrix
+obsnames &lt;- c(&quot;learning&quot;,&quot;concentration&quot;,&quot;homework&quot;,&quot;fun&quot;,
+            &quot;acceptance&quot;,&quot;teacher&quot;,&quot;selfexpr&quot;,&quot;selfeff&quot;,&quot;socialskill&quot;)
+values &lt;- c(30.6301,
+            26.9452, 56.8918,
+            24.1473, 31.6878, 53.2488,
+            16.3770, 18.4153, 16.8599, 27.9758,
+             7.8174,  9.6851, 12.0114, 12.8765, 47.0970,
+            13.6902, 16.9232, 12.9326, 17.2880, 12.3672, 29.0119,
+            15.3122, 24.2849, 21.4935, 12.9621, 13.9909, 11.6333, 59.5343,
+            13.4457, 21.8158, 18.8545,  7.3931, 12.2333,  7.1434, 29.7953, 49.2213,
+             6.6074, 12.7343, 12.5768,  6.4065, 13.4258,  6.1429, 26.0849, 23.6253, 40.0922)
+
+saqcov &lt;- getCov(values, names = obsnames)
+
+## specify model
+saqmodel &lt;- &#39;# define latent common factors
+    Motivation =~ learning + concentration + homework
+    Satisfaction =~ fun + acceptance + teacher
+    SelfConfidence =~ selfexpr + selfeff + socialskill
+    &#39;
+## run model
+saqmodelOut &lt;- cfa(saqmodel, sample.cov = saqcov, sample.nobs = 915,
+                   std.lv = TRUE, likelihood = &quot;wishart&quot;)
+## output
+summary(saqmodelOut, fit = TRUE, standardized = TRUE, rsquare = TRUE)
+## parameter matrices
+lavInspect(saqmodelOut, &quot;est&quot;)</code></pre>
+<p>We request results of the analysis along with the standardized solution, model fit measures, and R2 for the indicators (i.e., proportion of variance explained by factors):</p>
+<pre><code>## output
+summary(saqmodelOut, standardized = TRUE, fit = TRUE, rsquare = TRUE)</code></pre>
+<p>The <code>lavaan</code> <code>summary()</code> output is split into several parts, with information about model fit appearing first (which can also be found in the <code>fitMeasures()</code> output). The remaining sections can all be found in the <code>parameterEstimates()</code> output. “Latent Variables” contains the results of the regression equations (i.e., factor loadings), “Covariances” contains the parameter estimates of the common-factor covariances, and “Variances” contains the variances of the common factors and residual variances of the observed indicators. The bottom section contains the estimated <span class="math inline">\(R^2\)</span> for each endogenous variable (i.e., indicators). The standardized solution is discussed in more detail in the following chapter.</p>
+<p>To obtain the parameter estimates in matrix format (<span class="math inline">\(\mathbfΛ\)</span>, <span class="math inline">\(\mathbfΦ\)</span>, and <span class="math inline">\(\mathbfΘ\)</span>), use the <code>lavInspect()</code> function. Note, however, that <code>lavaan</code> refers to <span class="math inline">\(\mathbfΦ\)</span> as <span class="math inline">\(\mathbfΨ\)</span> (“Psi”).</p>
+<pre><code>lavInspect(saqmodelOut, &quot;est&quot;)</code></pre>
+<p>When we introduced path model notation in Chapter 3, we used Psi to represent the matrix of exogenous (co)variances and endogenous residual (co)variances. After we introduce the full SEM, which combines a path model with a factor model, <code>lavaan</code>’s use of <span class="math inline">\(\mathbfΨ\)</span> instead of <span class="math inline">\(\mathbfΦ\)</span> will make more sense. For now, think of them as arbitrary labels—either way, we are talking about the covariance matrix of latent variables. The use of Φ implies the latent variables are exogenous, and the use of Ψ implies at least one latent variable may be endogenous, but the formulas work the same either way.</p>
+</div>
+</div>
+<div id="references-10" class="section level2 unnumbered hasAnchor">
+<h2>References<a href="ch14.html#references-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Gonzalez, R., &amp; Griffin, D. (2001). Testing parameters in structural equation modeling: Every “one” matters. <em>Psychological Methods, 6</em>(3), 258–269. <a href="doi:10.1037//1082-989X.6.3.258" class="uri">doi:10.1037//1082-989X.6.3.258</a></p>
+<p>Little, T. D., Slegers, D. W., &amp; Card, N. A. (2006). A non-arbitrary method of identifying and scaling latent variables in SEM and MACS models. <em>Structural Equation Modeling, 13</em>(1), 59–72. <a href="doi:10.1207/s15328007sem1301_3" class="uri">doi:10.1207/s15328007sem1301_3</a></p>
+<p>Smits, J. A., &amp; Vorst, H. C. M. (1982). <em>Schoolvragenlijst voor basisonderwijs en voortgezet onderwijs (SVL)</em>. Handleiding voor gebruikers. Nijmegen: Berkhout Nijmegen.</p>
+<p>Steiger, J. H. (2002). When constraints interact: A caution about reference variables, identification constraints, and scale dependencies in structural equation modeling. <em>Psychological Methods, 7</em>(2), 210–227. <a href="doi:10.1037//1082-989X.7.2.210" class="uri">doi:10.1037//1082-989X.7.2.210</a></p>
+</div>
+<div id="appendix-2" class="section level2 unnumbered hasAnchor">
+<h2>Appendix<a href="ch14.html#appendix-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="derivations-of-equation-14.13" class="section level3 unnumbered hasAnchor">
+<h3>Derivations of Equation 14.13<a href="ch14.html#derivations-of-equation-14.13" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[
+\mathbf\Sigma = \text{COV}(\mathbf{x},\mathbf{x}) \Leftrightarrow
+\]</span>
+(substitute Equation <a href="ch14.html#eq:14-13">(14.13)</a></p>
+<p><span class="math display">\[
+\mathbf\Sigma = \text{COV}(\mathbf\Lambda \mathbf\xi + \mathbf\varepsilon, \mathbf\Lambda \mathbf\xi + \mathbf\varepsilon) \Leftrightarrow
+\]</span></p>
+<p>(decompose)</p>
+<p><span class="math display">\[
+\mathbf\Sigma = \text{COV}(\mathbf\Lambda \mathbf\xi,\mathbf\Lambda \mathbf\xi) +
+\text{COV}(\mathbf\Lambda \mathbf\xi,\mathbf\varepsilon)+
+\text{COV}(\mathbf\varepsilon,\mathbf\Lambda \mathbf\xi)+
+\text{COV}(\mathbf\varepsilon,\mathbf\varepsilon) \Leftrightarrow
+\]</span></p>
+<p>(residual factors are assumed not to covary with the common factors, <span class="math inline">\(COV(\mathbf\xi,\mathbf\varepsilon) = 0.\)</span>)</p>
+<p><span class="math display">\[
+\mathbf\Sigma = \text{COV}(\mathbf\Lambda \mathbf\xi,\mathbf\Lambda \mathbf\xi) + 0 + 0 + \text{COV}(\mathbf\varepsilon,\mathbf\varepsilon) \Leftrightarrow
+\]</span>
+(place constants outside brackets).</p>
+<p><span class="math display">\[
+\mathbf\Sigma = \mathbf\Lambda \text{COV}(\mathbf\xi,\mathbf\xi)\mathbf\Lambda^{\text{T}} +\text{COV}(\mathbf\varepsilon,\mathbf\varepsilon)\Leftrightarrow
+\]</span></p>
+<p>(variances and covariances of <span class="math inline">\(\mathbf\xi\)</span> and <span class="math inline">\(\mathbf\varepsilon\)</span> are denoted <span class="math inline">\(\mathbf\Phi\)</span> and <span class="math inline">\(\mathbf\Theta\)</span>)</p>
+<p><span class="math display">\[
+\mathbf\Sigma = \mathbf\Lambda \mathbf\Phi \mathbf\Lambda^\text{T} + \mathbf\Theta
+\]</span></p>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="18">
+<li id="fn18"><p>This is necessary because the SEM matrices of regression coefficients only allow for effects of latent factors on observed variables (Λ) or of latent variables on latent variables (B). In path models, we actually treat all observed variables as single-indicator constructs, allowing us to use B.<a href="ch14.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>The Greek letter “Phi” can be pronounced like “fee” (typical in U.S. English) or like it rhymes with “eye” (typical in U.K. English). The Greeks pronounce <span class="math inline">\(Φ\)</span> as “fee,” but they also pronounce <span class="math inline">\(χ\)</span> as “key” and <span class="math inline">\(π\)</span> as “pee.” Unless you are actually speaking Greek, you are not required to conform to these conventions. By analogy, English, Germans, French, and Dutch (among others) all have very different pronunciations for the same letters of the alphabet (for example, E, I, H, J, R, V, W, U, and Z can differ quite a lot from language to language).<a href="ch14.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>Functions of parameters can also be specified (e.g., “<code>F11 == log(F22)</code>” or “<code>sqrt(L11) == abs(L42)</code>”). Inequality constraints can also be specified, which will not fix a parameter but will constrain the range of values it could be. This is most commonly used to constrain variances to be positive (e.g., “<code>F11 &gt; 0</code>”); however, such constrained estimation is not preferred because it can have unintended consequences (e.g., hides model misspecification, forces other parameter estimates to be biased, the model fit statistic is no longer distributed as a simple <span class="math inline">\(χ^2\)</span> random variable under <span class="math inline">\(\text{H}_0\)</span>).<a href="ch14.html#fnref20" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ch13.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ch15.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
