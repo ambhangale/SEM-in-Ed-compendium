@@ -24,18 +24,19 @@ We will use data from a tutorial published on the [Social Change Lab's web site]
 
 ```{r import raw data, message=FALSE}
 dat <- foreign::read.spss("demoData/MODMED.sav", to.data.frame = TRUE)[c(2, 3, 5, 7)]
+## print first and last 3 rows
+dat[c(1:3, 98:100), ]
+```
+
+Recall from [Chapter 1](#ch1) that SEM can equivalently be fitted to summary statistics rather than raw data.  This chapter will demonstrate this both approaches.
+```{r import summary data ch02}
 ## Save summary statistics
 M <- colMeans(dat)
 S <- cov(dat)
 N <- nrow(dat)
 ```
 
-Recall from [Chapter 1](#ch1) that:
-
-- SEM can equivalently be fitted to summary statistics rather than raw data
-- It is possible to fit a "multigroup SEM" to obtain parameter estimates separately per group
-
-This chapter will show how to fit a multigroup SEM to raw data as well as to summary statistics.  For the latter, we require group-specific summary statistics, which [Chapter 1](#ch1) discussed how to obtain:
+Also recall that it is possible to fit a "multigroup SEM" to obtain parameter estimates separately per group.  This chapter will also demonstrate how to fit a multigroup SEM to raw data as well as to summary statistics.  For the latter, we require group-specific summary statistics, which [Chapter 1](#ch1) discussed how to obtain. Here, we use slightly more efficient syntax to obtain lists of group-specific summary statistics, although the more sophisticated `sapply()` function makes the syntax less immediately intuitive to read.
 
 ```{r import summary data}
 ## Create factor from effects-coded conditions
@@ -46,40 +47,77 @@ CC <- c("ATT","NFC","POS")   # when group = "mood.f"
 gM <- sapply(c("neutral","positive"), simplify = FALSE, 
              FUN = function(g) colMeans(dat[dat$mood.f == g, CC]) )
 gS <- sapply(c("neutral","positive"), simplify = FALSE,
-             FUN = function(g) cov(dat[dat$mood.f == g, CC]) )
+             FUN = function(g) cov(     dat[dat$mood.f == g, CC]) )
 gN <- table(dat$mood.f)
 ```
 
 
-### Load `lavaan` into Workspace
+### `lavaan` Syntax
 
+Notice from the section-header that `lavaan` should always be lower-case. It is a portmanteau of \textbf{la}tent \textbf{va}riable \textbf{an}alysis, similar to \textbf{AN}alysis \textbf{O}f \textbf{VA}riance (ANOVA).
+
+Load `lavaan` into your workspace.
 ```{r load lavaan-02, message=FALSE}
 library(lavaan)
 ```
 
-
-
-## Multiple Regression in SEM
-
-### `lavaan` Syntax
-
-The standard syntax for regression is a formula object.  To regress `ATT`itude on `MOOD` condition, `N`eed `F`or `C`ognition, and `POS`itive thoughts:
+The standard syntax for regression in R is a `formula` object.  To regress `ATT`itude on `MOOD` condition, `N`eed `F`or `C`ognition (`NFC`), and `POS`itive thoughts:
 
 ```{r formula, eval=FALSE}
 ATT ~ MOOD + NFC + POS
 ```
 
-SEM is a multivariate modeling framework
+SEM is a multivariate modeling framework, so a `formula` object does not allow for sufficient complexity.
 
-- There can be many outcome variables, each with its own formula
-- Outcomes can also predict other outcomes
-- There can be unobserved (latent) variables
+- There can be many outcome variables, each with its own formula (i.e., different predictors)
+    - Multivariate GLMs (e.g., MANOVA) require the same predictors for all outcomes
+    - e.g., `cbind(ATT, POS) ~ MOOD + NFC`
+- Outcomes can even predict other outcomes, which GLM does not allow
+    - Another name for an SEM is a *simultaneous equations model*.
 
-So `lavaan` requires collecting these *simultaneous equations* in a `character` vector, even when there is only one outcome
+Later chapters will introduce additional complexity that `formula` objects do not allow for:
+
+- Residual variances can be specified explicitly using a "double tilde" operator  (`~~`), which allows specifying equality constraints on variance estimates.
+- There can be unobserved (latent) variables, which require a special operator (`=~`) to define in `lavaan` syntax.
+- Details about these and other operators can be found in the **Details** section of the `?model.syntax` help page, and the website also has a [syntax tutorial](https://lavaan.ugent.be/tutorial/index.html) for various short topics.  Details about syntax features we will use in this chapter are summarized in the table below.
+
+
+| **Operator** | **Purpose** | **Example** |
+|:--|:------------|:--------------|
+| `~`  | Estimate regression slope(s) | `'outcome ~ predictor'` |
+| `~1` | Estimate intercept(s) | `'outcome ~ 1'` |
+| `value*`  | Fix (number) or free (missing value) parameters | `'posttest ~ 1*pretest + NA*x1'` |
+| `string*`  | Label parameters | `'y ~ myLabel*x'` |
+| `+`  | Additional parameters or operators | `'y ~ NA*x1 + beta2*x2'` |
+| `c()`  | Operators for multiple groups | `'y ~ c(NA, 1)*x1 + c(beta1, beta2)*x2'` |
+| `:=`  | Define a function of parameters | `'slopeRatio := beta1 / beta2'` |
+
+
+`lavaan` requires collecting all of these model parameters in a `character` vector, even when there is only one outcome.
 
 ```{r character, eval=FALSE}
 ' ATT ~ MOOD + NFC + POS '
 ```
+
+
+Note how the syntax above looks exactly like the `formula` we would pass to `lm()`, except that it is within quotation marks.  `lavaan`'s model syntax is flexible enough that we can equivalently specify each parameter on a different line, which can be useful in larger models or to make `#comments` in syntax.
+
+```{r character2, eval=FALSE}
+' ATT ~ 1     # intercept
+  ATT ~ MOOD  # slopes
+  ATT ~ NFC
+  ATT ~ POS '
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
