@@ -394,11 +394,8 @@ PE[PE$op == "~~" & PE$lhs == PE$rhs, ]
 The [`emmeans`](https://CRAN.R-project.org/package=emmeans) package greatly simplifies conducting complex pairwise comparisons on `lm()` output (also `glm()` or `lmer()`, etc.), both controlling for covariates and stratifying across moderators to probe interactions, with many options to adjust for multiple testing.
 Rather than defining new parameters in model syntax, the same tools in `emmeans` are made available for `lavaan` results by the [`semTools`](https://CRAN.R-project.org/package=semTools) package.
 
-```{r install semTools, eval=FALSE}
+```{r install emmeans+semTools, eval=FALSE}
 install.packages(c("emmeans","semTools"))
-```
-
-```{r load emmeans+semTools}
 library(emmeans)  # load first, so semTools knows what to do with it
 library(semTools)
 ```
@@ -415,7 +412,7 @@ rbind(probe1, adjust = "sidak")  # Sidak-adjusted p values
 ```
 
 The functionality is also available for multigroup SEMs, in which case the grouping variable is automatically treated as another predictor that can be specified in the `specs=` argument.  Note that the grouping variable will be the name we passed to the `group=` argument when we fitted the MG-SEM (i.e., the factor variable `mood.f` rather than the dummy-coded integer variable `pos.mood`).  When using `emmeans()` on a multigroup `lavaan` object, the argument `nesting=NULL` must be specified.
-```{r emmeans 2 groups}
+```{r emmeans 2 groups, warning=FALSE}
 em2 <- emmeans(mg.het,
                specs = ~ mood.f | NFC, # focal predictor | moderator
                lavaan.DV = "POS",      # name of outcome
