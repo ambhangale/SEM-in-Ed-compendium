@@ -156,8 +156,6 @@ fig:fig28-1
 fig:fig28-2
 fig:fig28-3
 fig:fig29-1
-copyright
-acknowledgments
 ch1
 what-are-mean-and-covariance-structures
 ch1-1-1
