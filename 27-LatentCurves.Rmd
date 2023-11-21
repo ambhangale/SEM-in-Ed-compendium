@@ -353,7 +353,7 @@ fitMeasures(fit.lin, c("cfi","tli"), baseline.model = fit.null)
 
 ## Unrestricted Growth Models
 
-```{r try other vices, eval=FALSE}
+```{r try other vices, echo=FALSE, eval=FALSE}
 mod.thc <- ' ## loadings
     Init.Status =~ 1*thc1 + 1*thc2 + 1*thc3 + 1*thc4
     Rate.Change =~          1*thc2 + 2*thc3 + 3*thc4
@@ -373,7 +373,6 @@ mod.cig <- ' ## loadings
 fit.cig <- lavaan(mod.cig, sample.cov = duncanCOV, sample.mean = duncanM,
                   sample.nobs = N, int.lv.free = TRUE, auto.var = TRUE)
 summary(fit.cig, std = TRUE)
-
 ```
 
 Although linear growth appears sufficient to explain these data, this will not always be the case.  When a linear-growth model does not fit well, standardized residuals from `lavResiduals()` can reveal which summary statistics the model fails to reproduce closely.  Large residuals for indicator means imply the mean structure is too restrictive, in which case an exploratory growth model can help to reveal how much more complex the latent trajectory is.  
@@ -551,7 +550,7 @@ In this section, we show how to fit a saturated LGCM by using polynomial contras
 
 - *Note*: In fact, a limitation of wide-format approaches for longitudinal data (LGCM and repeated-measures ANOVA) is that time must be treated discretely.  In long-format approaches (e.g., MLM), predictors like time can be represented continuously, capturing more detail about individual differences in measurement schedules, thus providing more information about true developmental trajectories.
 
-A polynomial is the power to which a variable is raised.  For example, a linear effect is merely the first power ($x^1=x$), but a quadratic effect is the second power ($x^2$) and a cubic effect is the third power ($x^3$), etc.  Any number raised to the zero power is 1 ($x^0=1$), which is the constant used to estimate the intercept.  Thus, even linear models are a polynomial model, but only up to the first power.  When we measure a variable on $t=1, \dots, T$ occasions, we can estimate up to the $T-1$ power, for the same reason that differences between $g=1, \dots, G$ groups can be represented by $G-1$ dummy codes.  Our example has $T=4$ occasions, so we can estimate up to power 3; another way to think of it is that we **do** estimate $T=4$ polynomial effects, but we begin with 0 (the intercept) rather than 1 (the linear slope).  Note that a saturated LGCM could simply use the same loadings for the latent intercept and linear slope, then a quadratic (and cubic) factor can have loadings that are the squared (and cubed) values of the linear-slope's loadings; however, we can avoid possible (multi)collinearity of growth factors by specifying orthogonal contrast codes instead (Voelkle & McKnight, 2012).
+A polynomial is the power to which a variable is raised.  For example, a linear effect is merely the first power ($x^1=x$), but a quadratic effect is the second power ($x^2$) and a cubic effect is the third power ($x^3$), etc.  Any number raised to the zero power is 1 ($x^0=1$), which is the constant used to estimate the intercept.  Thus, even linear models are a polynomial model, but only up to the first power.  When we measure a variable on $t=1, \dots, T$ occasions, we can estimate up to the $T-1$ power, for the same reason that differences between $g=1, \dots, G$ groups can be represented by $G-1$ dummy codes.  Our example has $T=4$ occasions, so we can estimate up to power 3; another way to think of it is that we **do** estimate $T=4$ polynomial effects, but we begin with a power of 0 ($\text{Time}^0$, so multiply the latent intercept by $\text{Time}^0 = 1$) followed by a power of 1 (i.e., multiply the linear slope by $\text{Time}^1 = \text{Time}$), then power of 2, and so on.  Note that a saturated LGCM could simply use the same loadings for the latent intercept and linear slope, then a quadratic (and cubic) factor can have loadings that are the squared (and cubed) values of the linear-slope's loadings; however, we can avoid possible (multi)collinearity of growth factors by specifying orthogonal contrast codes instead (Voelkle & McKnight, 2012).
 
 Polynomial contrast codes can be obtained in R using the `contr.poly()` function, whose first argument is the number of occasions ($T=4$):
 ```{r poly contrasts}
@@ -562,7 +561,7 @@ If we have unequally spaced measurements (e.g., measured at ages 7, 9, 12, and 1
 
 Rather than fixing loadings of the latent intercept to 1, we can specify a "**center**cept" (Wainer, 2000) as $\frac{1}{\sqrt{T}}$ ($\frac{1}{2}$).  The advantage of specifying the latent "level" (rather than initial status) in this way is that its variance ($\psi_{1,1}$) captures individual differences in grand means, not merely individual differences at a particular occasion or in the middle of all occasions (Voelkle & McKnight, 2012, p. 26). 
 
-Finally, because there is a growth factor for each occasion, the entire covariance structure can be reproduced in the latent space (factor (co)variances).  Thus, we must fix indicators' residual variances to zero, as depicted in Figure \@ref(fig:fig27-4).
+Finally, because there are as many growth factors as occasions, the entire covariance structure can be reproduced in the latent space (factor (co)variances).  Thus, we must fix indicators' residual variances to zero, as depicted in Figure \@ref(fig:fig27-4).
 
 ```{r, engine='tikz',fig.ext='svg', label="fig27-4", echo = FALSE, fig.cap="Saturated growth model for alcohol-use data from Duncan and Duncan (1996)." }
 
