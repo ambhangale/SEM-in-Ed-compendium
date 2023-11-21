@@ -36,6 +36,7 @@ myData <- do.call(rbind, lapply(1:nrow(dd), function(RR) {
 
 The resulting `data.frame` looks like this:
 ```{r head data, echo=FALSE}
+set.seed(123)
 myData[sample(nrow(myData), size = 5), ]
 ```
 
