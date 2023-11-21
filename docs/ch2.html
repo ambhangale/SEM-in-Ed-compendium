@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Using lavaan to Run Regression and ANOVA as a SEM | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="2 Using lavaan to Run Regression and ANOVA as a SEM | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Using lavaan to Run Regression and ANOVA as a SEM | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -880,10 +880,10 @@ There are multiple model-fitting functions in the <code>lavaan</code> package:</
 ## 1.981</code></pre>
 <p>Thus, we would not be fitting both nested SEMs to (all of) the same data. The <code>anova()</code> method would warn us about this if we tried it:</p>
 <div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="ch2.html#cb111-1" tabindex="-1"></a><span class="fu">anova</span>(fit.int, fit.dummy)</span></code></pre></div>
-<pre><code>## Warning in lavTestLRT(object = object, ..., model.names = NAMES): lavaan WARNING:
-## some models are based on a different set of observed variables</code></pre>
-<pre><code>## Warning in lavTestLRT(object = object, ..., model.names = NAMES): lavaan WARNING:
-## some models have the same degrees of freedom</code></pre>
+<pre><code>## Warning in lavTestLRT(object = object, ..., model.names = NAMES): lavaan WARNING: some models
+## are based on a different set of observed variables</code></pre>
+<pre><code>## Warning in lavTestLRT(object = object, ..., model.names = NAMES): lavaan WARNING: some models
+## have the same degrees of freedom</code></pre>
 <pre><code>## 
 ## Chi-Squared Difference Test
 ## 

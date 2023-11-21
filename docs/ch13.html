@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13 Fitting Path Models with Multilevel Data | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="13 Fitting Path Models with Multilevel Data | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13 Fitting Path Models with Multilevel Data | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -729,7 +729,7 @@ Figure 13.1: A two-level path diagram.
 <span id="cb296-32"><a href="ch13.html#cb296-32" tabindex="-1"></a>fitmod2 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(<span class="at">model =</span> model2, <span class="at">data =</span> data, <span class="at">cluster =</span> <span class="st">&quot;school&quot;</span>)</span></code></pre></div>
 <p>Note that this two-level path model has <span class="math inline">\(df=4\)</span>. In two-level models, the number of observed statistics are twice as much as in single level models because we count the information at both levels. At the within level there are 4*(4+1)/2 = 10 elements in the within-level covariance matrix, and at the between level there are also 10 elements in the between-level covariance matrix (and there are four observed means). In this example, the number of parameters to be estimated is also doubled in comparison with a single level model, because all <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\psi\)</span> parameters are estimated at the within as well as at the between-level. The number of parameters may also be different across levels, when a different model is fitted to the between level and to the within level. But in this model, we estimate three <span class="math inline">\(\beta\)</span> parameters and five <span class="math inline">\(\psi\)</span> parameters at each level, leading to <span class="math inline">\(df=2\)</span> per level. At the between-level there are also four intercepts (<span class="math inline">\(\alpha\)</span>) estimated based on four observed means, so the mean structure is saturated and does not add any <span class="math inline">\(df\)</span> to the model.</p>
 <div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="ch13.html#cb297-1" tabindex="-1"></a><span class="fu">summary</span>(fitmod2, <span class="at">fit.measures =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.17.1884 ended normally after 105 iterations
+<pre><code>## lavaan 0.6.17.1902 ended normally after 105 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB

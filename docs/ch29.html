@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>29 Fitting CFA models with multilevel data | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="29 Fitting CFA models with multilevel data | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="29 Fitting CFA models with multilevel data | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -618,11 +618,11 @@ In the example of teacher-student conflict, a person’s within-component of an 
 <p>Intraclass correlations (ICCs) indicate what proportion of a variable’s total variance exists at Level 2. <a href="ch29.html#script-29.1">Script 29.1</a> shows how to obtain the ICCs of the conflict items using <code>lavaan.</code>the file <code>"conflict.dat"</code> contains the item scores of the students (multilevel models require the analysis of raw data).</p>
 <div id="script-29.1" class="section level3 unnumbered hasAnchor">
 <h3>Script 29.1<a href="ch29.html#script-29.1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="ch29.html#cb484-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
-<span id="cb484-2"><a href="ch29.html#cb484-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;demoData/conflict.dat&quot;</span>)</span>
-<span id="cb484-3"><a href="ch29.html#cb484-3" tabindex="-1"></a><span class="fu">names</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;teacher&quot;</span>,<span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>))</span>
-<span id="cb484-4"><a href="ch29.html#cb484-4" tabindex="-1"></a></span>
-<span id="cb484-5"><a href="ch29.html#cb484-5" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="ch29.html#cb483-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
+<span id="cb483-2"><a href="ch29.html#cb483-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;demoData/conflict.dat&quot;</span>)</span>
+<span id="cb483-3"><a href="ch29.html#cb483-3" tabindex="-1"></a><span class="fu">names</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;teacher&quot;</span>,<span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>))</span>
+<span id="cb483-4"><a href="ch29.html#cb483-4" tabindex="-1"></a></span>
+<span id="cb483-5"><a href="ch29.html#cb483-5" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
 <pre><code>##   teacher v1 v2 v3 v4 v5 v6
 ## 1      41  1  1  1  1  1  1
 ## 2      41  1  4  1  1  1  5
@@ -630,41 +630,41 @@ In the example of teacher-student conflict, a person’s within-component of an 
 ## 4      41  1  1  1  1  1  4
 ## 5      41  1  1  2  1  1  1
 ## 6      41  1  1  1  1  1  1</code></pre>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="ch29.html#cb486-1" tabindex="-1"></a>modelsat <span class="ot">&lt;-</span>  <span class="st">&#39;</span></span>
-<span id="cb486-2"><a href="ch29.html#cb486-2" tabindex="-1"></a><span class="st">level: 1</span></span>
-<span id="cb486-3"><a href="ch29.html#cb486-3" tabindex="-1"></a><span class="st">v1 ~~  v2 + v3 + v4 + v5 + v6</span></span>
-<span id="cb486-4"><a href="ch29.html#cb486-4" tabindex="-1"></a><span class="st">v2 ~~  v3 + v4 + v5 + v6</span></span>
-<span id="cb486-5"><a href="ch29.html#cb486-5" tabindex="-1"></a><span class="st">v3 ~~  v4 + v5 + v6 </span></span>
-<span id="cb486-6"><a href="ch29.html#cb486-6" tabindex="-1"></a><span class="st">v4 ~~  v5 + v6</span></span>
-<span id="cb486-7"><a href="ch29.html#cb486-7" tabindex="-1"></a><span class="st">v5 ~~  v6</span></span>
-<span id="cb486-8"><a href="ch29.html#cb486-8" tabindex="-1"></a></span>
-<span id="cb486-9"><a href="ch29.html#cb486-9" tabindex="-1"></a><span class="st">level: 2</span></span>
-<span id="cb486-10"><a href="ch29.html#cb486-10" tabindex="-1"></a><span class="st">v1 ~~  v2 + v3 + v4 + v5 + v6</span></span>
-<span id="cb486-11"><a href="ch29.html#cb486-11" tabindex="-1"></a><span class="st">v2 ~~  v3 + v4 + v5 + v6</span></span>
-<span id="cb486-12"><a href="ch29.html#cb486-12" tabindex="-1"></a><span class="st">v3 ~~  v4 + v5 + v6 </span></span>
-<span id="cb486-13"><a href="ch29.html#cb486-13" tabindex="-1"></a><span class="st">v4 ~~  v5 + v6</span></span>
-<span id="cb486-14"><a href="ch29.html#cb486-14" tabindex="-1"></a><span class="st">v5 ~~  v6</span></span>
-<span id="cb486-15"><a href="ch29.html#cb486-15" tabindex="-1"></a></span>
-<span id="cb486-16"><a href="ch29.html#cb486-16" tabindex="-1"></a><span class="st">v1 ~ 1</span></span>
-<span id="cb486-17"><a href="ch29.html#cb486-17" tabindex="-1"></a><span class="st">v2 ~ 1</span></span>
-<span id="cb486-18"><a href="ch29.html#cb486-18" tabindex="-1"></a><span class="st">v3 ~ 1</span></span>
-<span id="cb486-19"><a href="ch29.html#cb486-19" tabindex="-1"></a><span class="st">v4 ~ 1</span></span>
-<span id="cb486-20"><a href="ch29.html#cb486-20" tabindex="-1"></a><span class="st">v5 ~ 1</span></span>
-<span id="cb486-21"><a href="ch29.html#cb486-21" tabindex="-1"></a><span class="st">v6 ~ 1</span></span>
-<span id="cb486-22"><a href="ch29.html#cb486-22" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb486-23"><a href="ch29.html#cb486-23" tabindex="-1"></a></span>
-<span id="cb486-24"><a href="ch29.html#cb486-24" tabindex="-1"></a>fitsat <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(modelsat, <span class="at">data =</span> data, <span class="at">cluster =</span> <span class="st">&quot;teacher&quot;</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb486-25"><a href="ch29.html#cb486-25" tabindex="-1"></a></span>
-<span id="cb486-26"><a href="ch29.html#cb486-26" tabindex="-1"></a><span class="co"># extract covariance matrices to calculate ICCs manually</span></span>
-<span id="cb486-27"><a href="ch29.html#cb486-27" tabindex="-1"></a>Sigma_w <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(fitsat, <span class="st">&quot;sampstat&quot;</span>)<span class="sc">$</span>within<span class="sc">$</span>cov</span>
-<span id="cb486-28"><a href="ch29.html#cb486-28" tabindex="-1"></a>Sigma_b <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(fitsat, <span class="st">&quot;sampstat&quot;</span>)<span class="sc">$</span>teacher<span class="sc">$</span>cov</span>
-<span id="cb486-29"><a href="ch29.html#cb486-29" tabindex="-1"></a></span>
-<span id="cb486-30"><a href="ch29.html#cb486-30" tabindex="-1"></a>ICC <span class="ot">&lt;-</span> <span class="fu">diag</span>(Sigma_b<span class="sc">/</span>(Sigma_b <span class="sc">+</span> Sigma_w))</span>
-<span id="cb486-31"><a href="ch29.html#cb486-31" tabindex="-1"></a><span class="fu">round</span>(ICC,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="ch29.html#cb485-1" tabindex="-1"></a>modelsat <span class="ot">&lt;-</span>  <span class="st">&#39;</span></span>
+<span id="cb485-2"><a href="ch29.html#cb485-2" tabindex="-1"></a><span class="st">level: 1</span></span>
+<span id="cb485-3"><a href="ch29.html#cb485-3" tabindex="-1"></a><span class="st">v1 ~~  v2 + v3 + v4 + v5 + v6</span></span>
+<span id="cb485-4"><a href="ch29.html#cb485-4" tabindex="-1"></a><span class="st">v2 ~~  v3 + v4 + v5 + v6</span></span>
+<span id="cb485-5"><a href="ch29.html#cb485-5" tabindex="-1"></a><span class="st">v3 ~~  v4 + v5 + v6 </span></span>
+<span id="cb485-6"><a href="ch29.html#cb485-6" tabindex="-1"></a><span class="st">v4 ~~  v5 + v6</span></span>
+<span id="cb485-7"><a href="ch29.html#cb485-7" tabindex="-1"></a><span class="st">v5 ~~  v6</span></span>
+<span id="cb485-8"><a href="ch29.html#cb485-8" tabindex="-1"></a></span>
+<span id="cb485-9"><a href="ch29.html#cb485-9" tabindex="-1"></a><span class="st">level: 2</span></span>
+<span id="cb485-10"><a href="ch29.html#cb485-10" tabindex="-1"></a><span class="st">v1 ~~  v2 + v3 + v4 + v5 + v6</span></span>
+<span id="cb485-11"><a href="ch29.html#cb485-11" tabindex="-1"></a><span class="st">v2 ~~  v3 + v4 + v5 + v6</span></span>
+<span id="cb485-12"><a href="ch29.html#cb485-12" tabindex="-1"></a><span class="st">v3 ~~  v4 + v5 + v6 </span></span>
+<span id="cb485-13"><a href="ch29.html#cb485-13" tabindex="-1"></a><span class="st">v4 ~~  v5 + v6</span></span>
+<span id="cb485-14"><a href="ch29.html#cb485-14" tabindex="-1"></a><span class="st">v5 ~~  v6</span></span>
+<span id="cb485-15"><a href="ch29.html#cb485-15" tabindex="-1"></a></span>
+<span id="cb485-16"><a href="ch29.html#cb485-16" tabindex="-1"></a><span class="st">v1 ~ 1</span></span>
+<span id="cb485-17"><a href="ch29.html#cb485-17" tabindex="-1"></a><span class="st">v2 ~ 1</span></span>
+<span id="cb485-18"><a href="ch29.html#cb485-18" tabindex="-1"></a><span class="st">v3 ~ 1</span></span>
+<span id="cb485-19"><a href="ch29.html#cb485-19" tabindex="-1"></a><span class="st">v4 ~ 1</span></span>
+<span id="cb485-20"><a href="ch29.html#cb485-20" tabindex="-1"></a><span class="st">v5 ~ 1</span></span>
+<span id="cb485-21"><a href="ch29.html#cb485-21" tabindex="-1"></a><span class="st">v6 ~ 1</span></span>
+<span id="cb485-22"><a href="ch29.html#cb485-22" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb485-23"><a href="ch29.html#cb485-23" tabindex="-1"></a></span>
+<span id="cb485-24"><a href="ch29.html#cb485-24" tabindex="-1"></a>fitsat <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(modelsat, <span class="at">data =</span> data, <span class="at">cluster =</span> <span class="st">&quot;teacher&quot;</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb485-25"><a href="ch29.html#cb485-25" tabindex="-1"></a></span>
+<span id="cb485-26"><a href="ch29.html#cb485-26" tabindex="-1"></a><span class="co"># extract covariance matrices to calculate ICCs manually</span></span>
+<span id="cb485-27"><a href="ch29.html#cb485-27" tabindex="-1"></a>Sigma_w <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(fitsat, <span class="st">&quot;sampstat&quot;</span>)<span class="sc">$</span>within<span class="sc">$</span>cov</span>
+<span id="cb485-28"><a href="ch29.html#cb485-28" tabindex="-1"></a>Sigma_b <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(fitsat, <span class="st">&quot;sampstat&quot;</span>)<span class="sc">$</span>teacher<span class="sc">$</span>cov</span>
+<span id="cb485-29"><a href="ch29.html#cb485-29" tabindex="-1"></a></span>
+<span id="cb485-30"><a href="ch29.html#cb485-30" tabindex="-1"></a>ICC <span class="ot">&lt;-</span> <span class="fu">diag</span>(Sigma_b<span class="sc">/</span>(Sigma_b <span class="sc">+</span> Sigma_w))</span>
+<span id="cb485-31"><a href="ch29.html#cb485-31" tabindex="-1"></a><span class="fu">round</span>(ICC,<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##    v1    v2    v3    v4    v5    v6 
 ## 0.072 0.072 0.042 0.044 0.046 0.232</code></pre>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="ch29.html#cb488-1" tabindex="-1"></a><span class="co"># or extract ICCs directly</span></span>
-<span id="cb488-2"><a href="ch29.html#cb488-2" tabindex="-1"></a><span class="fu">lavInspect</span>(fitsat,<span class="st">&quot;icc&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="ch29.html#cb487-1" tabindex="-1"></a><span class="co"># or extract ICCs directly</span></span>
+<span id="cb487-2"><a href="ch29.html#cb487-2" tabindex="-1"></a><span class="fu">lavInspect</span>(fitsat,<span class="st">&quot;icc&quot;</span>)</span></code></pre></div>
 <pre><code>##    v1    v2    v3    v4    v5    v6 
 ## 0.072 0.072 0.042 0.044 0.046 0.232</code></pre>
 </div>
@@ -703,52 +703,52 @@ Figure 29.1: A two-level factor model on six conflict items.
 <p>The factor loadings are constrained to be equal across levels by providing the same labels to the parameters across levels. Because these equality constraints already provide a scale to the between-level common factor, the factor variance at the between level is freely estimated, while the factor variance at the within level is fixed at one (this could also be specified the other way around). In this model the residual variances at the between level are freely estimated.</p>
 <div id="script-29.2" class="section level3 unnumbered hasAnchor">
 <h3>Script 29.2<a href="ch29.html#script-29.2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="ch29.html#cb490-1" tabindex="-1"></a><span class="co"># Fit two-level factor model with equal factor loadings across levels</span></span>
-<span id="cb490-2"><a href="ch29.html#cb490-2" tabindex="-1"></a></span>
-<span id="cb490-3"><a href="ch29.html#cb490-3" tabindex="-1"></a>model1 <span class="ot">&lt;-</span>  <span class="st">&#39;</span></span>
-<span id="cb490-4"><a href="ch29.html#cb490-4" tabindex="-1"></a><span class="st">  level: 1</span></span>
-<span id="cb490-5"><a href="ch29.html#cb490-5" tabindex="-1"></a><span class="st">  # factor loadings</span></span>
-<span id="cb490-6"><a href="ch29.html#cb490-6" tabindex="-1"></a><span class="st">  conflict =~ L11*v1 + L21*v2 + L31*v3 + L41*v4 + L51*v5 + L61*v6</span></span>
-<span id="cb490-7"><a href="ch29.html#cb490-7" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb490-8"><a href="ch29.html#cb490-8" tabindex="-1"></a><span class="st">  # factor variance fixed at 1</span></span>
-<span id="cb490-9"><a href="ch29.html#cb490-9" tabindex="-1"></a><span class="st">  conflict ~~ 1*conflict</span></span>
-<span id="cb490-10"><a href="ch29.html#cb490-10" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb490-11"><a href="ch29.html#cb490-11" tabindex="-1"></a><span class="st">  # residual variances</span></span>
-<span id="cb490-12"><a href="ch29.html#cb490-12" tabindex="-1"></a><span class="st">  v1 ~~ v1</span></span>
-<span id="cb490-13"><a href="ch29.html#cb490-13" tabindex="-1"></a><span class="st">  v2 ~~ v2</span></span>
-<span id="cb490-14"><a href="ch29.html#cb490-14" tabindex="-1"></a><span class="st">  v3 ~~ v3</span></span>
-<span id="cb490-15"><a href="ch29.html#cb490-15" tabindex="-1"></a><span class="st">  v4 ~~ v4</span></span>
-<span id="cb490-16"><a href="ch29.html#cb490-16" tabindex="-1"></a><span class="st">  v5 ~~ v5</span></span>
-<span id="cb490-17"><a href="ch29.html#cb490-17" tabindex="-1"></a><span class="st">  v6 ~~ v6</span></span>
-<span id="cb490-18"><a href="ch29.html#cb490-18" tabindex="-1"></a></span>
-<span id="cb490-19"><a href="ch29.html#cb490-19" tabindex="-1"></a><span class="st">level: 2</span></span>
-<span id="cb490-20"><a href="ch29.html#cb490-20" tabindex="-1"></a><span class="st">  # factor loadings</span></span>
-<span id="cb490-21"><a href="ch29.html#cb490-21" tabindex="-1"></a><span class="st">  conflict =~ L11*v1 + L21*v2 + L31*v3 + L41*v4 + L51*v5 + L61*v6</span></span>
-<span id="cb490-22"><a href="ch29.html#cb490-22" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb490-23"><a href="ch29.html#cb490-23" tabindex="-1"></a><span class="st">  # factor variance free</span></span>
-<span id="cb490-24"><a href="ch29.html#cb490-24" tabindex="-1"></a><span class="st">  conflict ~~ phi_b*conflict</span></span>
-<span id="cb490-25"><a href="ch29.html#cb490-25" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb490-26"><a href="ch29.html#cb490-26" tabindex="-1"></a><span class="st">  # residual variances</span></span>
-<span id="cb490-27"><a href="ch29.html#cb490-27" tabindex="-1"></a><span class="st">  v1 ~~ th1*v1</span></span>
-<span id="cb490-28"><a href="ch29.html#cb490-28" tabindex="-1"></a><span class="st">  v2 ~~ th2*v2</span></span>
-<span id="cb490-29"><a href="ch29.html#cb490-29" tabindex="-1"></a><span class="st">  v3 ~~ th3*v3</span></span>
-<span id="cb490-30"><a href="ch29.html#cb490-30" tabindex="-1"></a><span class="st">  v4 ~~ th4*v4</span></span>
-<span id="cb490-31"><a href="ch29.html#cb490-31" tabindex="-1"></a><span class="st">  v5 ~~ th5*v5</span></span>
-<span id="cb490-32"><a href="ch29.html#cb490-32" tabindex="-1"></a><span class="st">  v6 ~~ th6*v6</span></span>
-<span id="cb490-33"><a href="ch29.html#cb490-33" tabindex="-1"></a></span>
-<span id="cb490-34"><a href="ch29.html#cb490-34" tabindex="-1"></a><span class="st">  # intercepts</span></span>
-<span id="cb490-35"><a href="ch29.html#cb490-35" tabindex="-1"></a><span class="st">  v1 ~ 1</span></span>
-<span id="cb490-36"><a href="ch29.html#cb490-36" tabindex="-1"></a><span class="st">  v2 ~ 1</span></span>
-<span id="cb490-37"><a href="ch29.html#cb490-37" tabindex="-1"></a><span class="st">  v3 ~ 1</span></span>
-<span id="cb490-38"><a href="ch29.html#cb490-38" tabindex="-1"></a><span class="st">  v4 ~ 1</span></span>
-<span id="cb490-39"><a href="ch29.html#cb490-39" tabindex="-1"></a><span class="st">  v5 ~ 1</span></span>
-<span id="cb490-40"><a href="ch29.html#cb490-40" tabindex="-1"></a><span class="st">  v6 ~ 1</span></span>
-<span id="cb490-41"><a href="ch29.html#cb490-41" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb490-42"><a href="ch29.html#cb490-42" tabindex="-1"></a></span>
-<span id="cb490-43"><a href="ch29.html#cb490-43" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(model1, <span class="at">data =</span> data, <span class="at">cluster =</span> <span class="st">&quot;teacher&quot;</span>)</span>
-<span id="cb490-44"><a href="ch29.html#cb490-44" tabindex="-1"></a></span>
-<span id="cb490-45"><a href="ch29.html#cb490-45" tabindex="-1"></a><span class="fu">summary</span>(fit1, <span class="at">fit =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.17.1884 ended normally after 59 iterations
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="ch29.html#cb489-1" tabindex="-1"></a><span class="co"># Fit two-level factor model with equal factor loadings across levels</span></span>
+<span id="cb489-2"><a href="ch29.html#cb489-2" tabindex="-1"></a></span>
+<span id="cb489-3"><a href="ch29.html#cb489-3" tabindex="-1"></a>model1 <span class="ot">&lt;-</span>  <span class="st">&#39;</span></span>
+<span id="cb489-4"><a href="ch29.html#cb489-4" tabindex="-1"></a><span class="st">  level: 1</span></span>
+<span id="cb489-5"><a href="ch29.html#cb489-5" tabindex="-1"></a><span class="st">  # factor loadings</span></span>
+<span id="cb489-6"><a href="ch29.html#cb489-6" tabindex="-1"></a><span class="st">  conflict =~ L11*v1 + L21*v2 + L31*v3 + L41*v4 + L51*v5 + L61*v6</span></span>
+<span id="cb489-7"><a href="ch29.html#cb489-7" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb489-8"><a href="ch29.html#cb489-8" tabindex="-1"></a><span class="st">  # factor variance fixed at 1</span></span>
+<span id="cb489-9"><a href="ch29.html#cb489-9" tabindex="-1"></a><span class="st">  conflict ~~ 1*conflict</span></span>
+<span id="cb489-10"><a href="ch29.html#cb489-10" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb489-11"><a href="ch29.html#cb489-11" tabindex="-1"></a><span class="st">  # residual variances</span></span>
+<span id="cb489-12"><a href="ch29.html#cb489-12" tabindex="-1"></a><span class="st">  v1 ~~ v1</span></span>
+<span id="cb489-13"><a href="ch29.html#cb489-13" tabindex="-1"></a><span class="st">  v2 ~~ v2</span></span>
+<span id="cb489-14"><a href="ch29.html#cb489-14" tabindex="-1"></a><span class="st">  v3 ~~ v3</span></span>
+<span id="cb489-15"><a href="ch29.html#cb489-15" tabindex="-1"></a><span class="st">  v4 ~~ v4</span></span>
+<span id="cb489-16"><a href="ch29.html#cb489-16" tabindex="-1"></a><span class="st">  v5 ~~ v5</span></span>
+<span id="cb489-17"><a href="ch29.html#cb489-17" tabindex="-1"></a><span class="st">  v6 ~~ v6</span></span>
+<span id="cb489-18"><a href="ch29.html#cb489-18" tabindex="-1"></a></span>
+<span id="cb489-19"><a href="ch29.html#cb489-19" tabindex="-1"></a><span class="st">level: 2</span></span>
+<span id="cb489-20"><a href="ch29.html#cb489-20" tabindex="-1"></a><span class="st">  # factor loadings</span></span>
+<span id="cb489-21"><a href="ch29.html#cb489-21" tabindex="-1"></a><span class="st">  conflict =~ L11*v1 + L21*v2 + L31*v3 + L41*v4 + L51*v5 + L61*v6</span></span>
+<span id="cb489-22"><a href="ch29.html#cb489-22" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb489-23"><a href="ch29.html#cb489-23" tabindex="-1"></a><span class="st">  # factor variance free</span></span>
+<span id="cb489-24"><a href="ch29.html#cb489-24" tabindex="-1"></a><span class="st">  conflict ~~ phi_b*conflict</span></span>
+<span id="cb489-25"><a href="ch29.html#cb489-25" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb489-26"><a href="ch29.html#cb489-26" tabindex="-1"></a><span class="st">  # residual variances</span></span>
+<span id="cb489-27"><a href="ch29.html#cb489-27" tabindex="-1"></a><span class="st">  v1 ~~ th1*v1</span></span>
+<span id="cb489-28"><a href="ch29.html#cb489-28" tabindex="-1"></a><span class="st">  v2 ~~ th2*v2</span></span>
+<span id="cb489-29"><a href="ch29.html#cb489-29" tabindex="-1"></a><span class="st">  v3 ~~ th3*v3</span></span>
+<span id="cb489-30"><a href="ch29.html#cb489-30" tabindex="-1"></a><span class="st">  v4 ~~ th4*v4</span></span>
+<span id="cb489-31"><a href="ch29.html#cb489-31" tabindex="-1"></a><span class="st">  v5 ~~ th5*v5</span></span>
+<span id="cb489-32"><a href="ch29.html#cb489-32" tabindex="-1"></a><span class="st">  v6 ~~ th6*v6</span></span>
+<span id="cb489-33"><a href="ch29.html#cb489-33" tabindex="-1"></a></span>
+<span id="cb489-34"><a href="ch29.html#cb489-34" tabindex="-1"></a><span class="st">  # intercepts</span></span>
+<span id="cb489-35"><a href="ch29.html#cb489-35" tabindex="-1"></a><span class="st">  v1 ~ 1</span></span>
+<span id="cb489-36"><a href="ch29.html#cb489-36" tabindex="-1"></a><span class="st">  v2 ~ 1</span></span>
+<span id="cb489-37"><a href="ch29.html#cb489-37" tabindex="-1"></a><span class="st">  v3 ~ 1</span></span>
+<span id="cb489-38"><a href="ch29.html#cb489-38" tabindex="-1"></a><span class="st">  v4 ~ 1</span></span>
+<span id="cb489-39"><a href="ch29.html#cb489-39" tabindex="-1"></a><span class="st">  v5 ~ 1</span></span>
+<span id="cb489-40"><a href="ch29.html#cb489-40" tabindex="-1"></a><span class="st">  v6 ~ 1</span></span>
+<span id="cb489-41"><a href="ch29.html#cb489-41" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb489-42"><a href="ch29.html#cb489-42" tabindex="-1"></a></span>
+<span id="cb489-43"><a href="ch29.html#cb489-43" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(model1, <span class="at">data =</span> data, <span class="at">cluster =</span> <span class="st">&quot;teacher&quot;</span>)</span>
+<span id="cb489-44"><a href="ch29.html#cb489-44" tabindex="-1"></a></span>
+<span id="cb489-45"><a href="ch29.html#cb489-45" tabindex="-1"></a><span class="fu">summary</span>(fit1, <span class="at">fit =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## lavaan 0.6.17.1902 ended normally after 59 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -869,17 +869,17 @@ Figure 29.1: A two-level factor model on six conflict items.
 ##    .v5       (th5)    0.001    0.006    0.108    0.914
 ##    .v6       (th6)    0.110    0.032    3.460    0.001</code></pre>
 <p>The overall fit of this model is acceptable. Next, we evaluate whether the residual variances at the between level can be constrained to zero, which would represent strong factorial invariance across clusters.</p>
-<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="ch29.html#cb492-1" tabindex="-1"></a>fixtheta <span class="ot">&lt;-</span> </span>
-<span id="cb492-2"><a href="ch29.html#cb492-2" tabindex="-1"></a><span class="st">&#39;th1 == 0</span></span>
-<span id="cb492-3"><a href="ch29.html#cb492-3" tabindex="-1"></a><span class="st"> th2 == 0</span></span>
-<span id="cb492-4"><a href="ch29.html#cb492-4" tabindex="-1"></a><span class="st"> th3 == 0</span></span>
-<span id="cb492-5"><a href="ch29.html#cb492-5" tabindex="-1"></a><span class="st"> th4 == 0</span></span>
-<span id="cb492-6"><a href="ch29.html#cb492-6" tabindex="-1"></a><span class="st"> th5 == 0</span></span>
-<span id="cb492-7"><a href="ch29.html#cb492-7" tabindex="-1"></a><span class="st"> th6 == 0&#39;</span></span>
-<span id="cb492-8"><a href="ch29.html#cb492-8" tabindex="-1"></a></span>
-<span id="cb492-9"><a href="ch29.html#cb492-9" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(<span class="fu">c</span>(model1,fixtheta), <span class="at">data =</span> data, <span class="at">cluster =</span> <span class="st">&quot;teacher&quot;</span>)</span>
-<span id="cb492-10"><a href="ch29.html#cb492-10" tabindex="-1"></a></span>
-<span id="cb492-11"><a href="ch29.html#cb492-11" tabindex="-1"></a><span class="fu">anova</span>(fit1,fit2)</span></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="ch29.html#cb491-1" tabindex="-1"></a>fixtheta <span class="ot">&lt;-</span> </span>
+<span id="cb491-2"><a href="ch29.html#cb491-2" tabindex="-1"></a><span class="st">&#39;th1 == 0</span></span>
+<span id="cb491-3"><a href="ch29.html#cb491-3" tabindex="-1"></a><span class="st"> th2 == 0</span></span>
+<span id="cb491-4"><a href="ch29.html#cb491-4" tabindex="-1"></a><span class="st"> th3 == 0</span></span>
+<span id="cb491-5"><a href="ch29.html#cb491-5" tabindex="-1"></a><span class="st"> th4 == 0</span></span>
+<span id="cb491-6"><a href="ch29.html#cb491-6" tabindex="-1"></a><span class="st"> th5 == 0</span></span>
+<span id="cb491-7"><a href="ch29.html#cb491-7" tabindex="-1"></a><span class="st"> th6 == 0&#39;</span></span>
+<span id="cb491-8"><a href="ch29.html#cb491-8" tabindex="-1"></a></span>
+<span id="cb491-9"><a href="ch29.html#cb491-9" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(<span class="fu">c</span>(model1,fixtheta), <span class="at">data =</span> data, <span class="at">cluster =</span> <span class="st">&quot;teacher&quot;</span>)</span>
+<span id="cb491-10"><a href="ch29.html#cb491-10" tabindex="-1"></a></span>
+<span id="cb491-11"><a href="ch29.html#cb491-11" tabindex="-1"></a><span class="fu">anova</span>(fit1,fit2)</span></code></pre></div>
 <pre><code>## 
 ## Chi-Squared Difference Test
 ## 

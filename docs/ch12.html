@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12 Path Analysis with Categorical Outcomes | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="12 Path Analysis with Categorical Outcomes | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12 Path Analysis with Categorical Outcomes | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -627,11 +627,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">12.1.2</span> Summarize Data<a href="ch12.html#summarize-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The resulting <code>data.frame</code> looks like this:</p>
 <pre><code>##     intention intervention ciguse
-## 380         0            1      0
-## 105         2            0      0
-## 471         0            1      0
-## 600         0            1      0
-## 799         0            0      0</code></pre>
+## 415         0            1      0
+## 463         0            1      0
+## 179         1            0      1
+## 526         0            1      0
+## 195         1            0      0</code></pre>
 <p>The marginal frequencies for each variable are:</p>
 <div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="ch12.html#cb239-1" tabindex="-1"></a><span class="do">## table for each variable</span></span>
 <span id="cb239-2"><a href="ch12.html#cb239-2" tabindex="-1"></a><span class="fu">lapply</span>(myData, table)</span></code></pre></div>
@@ -963,7 +963,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <span id="cb269-7"><a href="ch12.html#cb269-7" tabindex="-1"></a><span class="st">&#39;</span></span>
 <span id="cb269-8"><a href="ch12.html#cb269-8" tabindex="-1"></a>fit.part <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.part, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb269-9"><a href="ch12.html#cb269-9" tabindex="-1"></a><span class="fu">summary</span>(fit.part, <span class="at">standardized =</span> <span class="cn">TRUE</span>, <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.17.1884 ended normally after 13 iterations
+<pre><code>## lavaan 0.6.17.1902 ended normally after 13 iterations
 ## 
 ##   Estimator                                       DWLS
 ##   Optimization method                           NLMINB
@@ -1120,7 +1120,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <span id="cb285-15"><a href="ch12.html#cb285-15" tabindex="-1"></a><span class="st">&#39;</span></span>
 <span id="cb285-16"><a href="ch12.html#cb285-16" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.Imai, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="fu">c</span>(<span class="st">&quot;ciguse&quot;</span>,<span class="st">&quot;intention&quot;</span>))</span>
 <span id="cb285-17"><a href="ch12.html#cb285-17" tabindex="-1"></a><span class="fu">summary</span>(fit, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.17.1884 ended normally after 13 iterations
+<pre><code>## lavaan 0.6.17.1902 ended normally after 13 iterations
 ## 
 ##   Estimator                                       DWLS
 ##   Optimization method                           NLMINB
