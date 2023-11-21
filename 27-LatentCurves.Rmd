@@ -495,7 +495,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 ```
 
 The script below specifies the model depicted in the left panel of Figure \@ref(fig:fig27-3).
-```{r basis12, echo=-1}
+```{r basis12}
 mod.basis12 <- ' ## loadings
     Init.Status =~ 1*alc1 + 1*alc2 +  1*alc3 +  1*alc4
     Rate.Change =~          1*alc2 + NA*alc3 + NA*alc4
@@ -520,7 +520,7 @@ lavTestLRT(fit.lin, fit.basis12) # or anova(fit.lin, fit.basis12)
 We cannot reject the null hypothesis that linearity is sufficiently complex.
 
 Another example of a latent basis curve fixes the first and *last* loadings to 0 and 1, respectively, with similar implications for interpretation.  The script below specifies the model depicted in the right panel of Figure \@ref(fig:fig27-3).
-```{r basis14, echo=-1}
+```{r basis14}
 mod.basis14 <- ' ## loadings
     Init.Status =~ 1*alc1 +  1*alc2 +  1*alc3 + 1*alc4
     Rate.Change =~          NA*alc2 + NA*alc3 + 1*alc4
@@ -646,8 +646,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick},
 ```
 
 The script below specifies the model in Figure \@ref(fig:fig27-4), fits the model, and prints the estimated latent means for interpretation.
-```{r sat mod, echo=-1}
-#TODO: add figure
+```{r sat mod}
 mod.sat <- ' ## loadings
     Level  =~    .5*alc1 +    .5*alc2 +    .5*alc3 +   .5*alc4
     Linear =~ -.671*alc1 + -.224*alc2 +  .224*alc3 + .671*alc4
