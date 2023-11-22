@@ -546,7 +546,7 @@ A latent basis model is flexible in terms of the factor loadings, which are some
 
 A saturated model fits perfectly by definition, although the perfect fit is arbitrary because all information from summary statistics was used to estimate parameters to reproduce those summary statistics (i.e., $df=0$).  However, because we are in hypothesis-generating *exploratory mode*, testing a hypothesis of fit is not necessarily a priority.  
 
-In this section, we show how to fit a saturated LGCM by using polynomial contrast codes to specify the loadings (Voelkle & McKnight, 2012).  In the GLM or MLM, polynomial contrast codes can be used to represent a predictor that is an ordinal grouping variable, which is often a continuous variable that is merely measured in discrete units.  In our example, time is measured only in whole years, discounting differences in days or months.
+In this section, we show how to fit a saturated LGCM by using polynomial contrast codes to specify the loadings (Voelkle & McKnight, 2012).  This can be advantageous in situations where the standard coding of time leads to converges problems (read about a real-world problem [here](https://groups.google.com/g/lavaan/c/HsREJETX0pQ/m/zBHseERTBgAJ)).  In the GLM or MLM, polynomial contrast codes can be used to represent a predictor that is an ordinal grouping variable, which is often a continuous variable that is merely measured in discrete units.  In our example, time is measured only in whole years, discounting differences in days or months.
 
 - *Note*: In fact, a limitation of wide-format approaches for longitudinal data (LGCM and repeated-measures ANOVA) is that time must be treated discretely.  In long-format approaches (e.g., MLM), predictors like time can be represented continuously, capturing more detail about individual differences in measurement schedules, thus providing more information about true developmental trajectories.
 
@@ -1269,7 +1269,7 @@ Singer, J. D., & Willett, J. B. (2003). *Applied longitudinal data analysis: Mod
 
 Skrondal, A., & Rabe-Hesketh, S. (2004). *Generalized latent variable modeling: Multilevel, longitudinal, and structural equation models*. Chapman and Hall/CRC. <https://doi.org/10.1201/9780203489437>
 
-Voelkle, M. C., & McKnight, P. E. (2012). One size fits all? A Monte-Carlo simulation on the relationship between repeated measures (M)ANOVA and latent curve modeling. *Methodology, 8*(1), 23--–38. <https://doi.org/10.1027/1614-2241/a000044>
+Voelkle, M. C., & McKnight, P. E. (2012). One size fits all? A Monte-Carlo simulation on the relationship between repeated measures (M)ANOVA and latent curve modeling. *Methodology, 8*(1), 23--38. <https://doi.org/10.1027/1614-2241/a000044>
 
 Wainer, H. (2000). The centercept: An estimable and meaningful
 regression parameter. *Psychological Science, 11*(5), 434--436. <https://doi.org/10.1111/1467-9280.00284>
