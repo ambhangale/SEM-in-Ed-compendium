@@ -121,7 +121,7 @@ Browne and Cudeck (1992) proposed the ‘test of close fit’ where it is tested
 The only distinction between tests of close vs. not-close fit is which one you use as the null hypothesis. Recall that one very useful interpretation of a CI is that it is a range of null hypothesized values that could not be rejected using the sample data.  In our example from [chapter 7](#ch7), the partial mediation model has exact fit ($χ^2$ and $\text{RMSEA} = 0$), but the 90% CI ranges from 0–.259, so we could not reject a null hypothesis of exact fit ($\text{RMSEA} = 0$), of close fit ($\text{RMSEA} ≤ .05$), a null hypothesis of approximate fit ($\text{RMSEA} ≤ .08$), a null hypothesis of mediocre fit ($\text{RMSEA} ≤ .10$), or a null hypothesis of poor fit ($\text{RMSEA} > .10$).  Because no possible null hypothesis could be rejected (i.e., no theory could be falsified), the RMSEA in this example is effectively useless (i.e., it is uninformative in any practical sense). As Kenny et al. (2015) indicated, this is to be expected whenever $N$ or $df$ are small.
 
 ## Other descriptive fit indices
-Below, we give a short description of other popular descriptive fit indices. We limit our discussion to the fit indices that are provided by `lavaan`’s `summary()` output (which are also the indices provided by M*plus*), although many additional indices are available from l`avaan`’s `fitMeasures()` function, as well as the `moreFitIndices()` function in the `semTools` package. The information on the different fit indices is kept as concise as possible, but more detailed overviews of these (and other) fit indices can be found in other sources (e.g., Bollen, 1989; Schermelleh-Engel, Moosbrugger, & Müller, 2003; West, Taylor, & Wu, 2012).
+Below, we give a short description of other popular descriptive fit indices. We limit our discussion to the fit indices that are provided by `lavaan`’s `summary()` output (which are also the indices provided by M*plus*), although many additional indices are available from `lavaan`’s `fitMeasures()` function, as well as the `moreFitIndices()` function in the `semTools` package. The information on the different fit indices is kept as concise as possible, but more detailed overviews of these (and other) fit indices can be found in other sources (e.g., Bollen, 1989; Schermelleh-Engel, Moosbrugger, & Müller, 2003; West, Taylor, & Wu, 2012).
 
 ### The Tucker–Lewis Index (TLI) and the Comparative Fit Index (CFI)
 The Tucker–Lewis Index (TLI; Tucker & Lewis, 1973) and the Comparative Fit Index (CFI; Bentler, 1990) are so-called incremental fit indices (also called relative or comparative fit indices). Incremental fit indices compare the fit of the model of interest with a baseline or null model. Tucker and Lewis (1973) original developed TLI as a sort of reliability coefficient for extracting the correct number of factors in exploratory factor analysis.  However, Bentler and Bonett (1980) developed a framework for different types of incremental fit indices and illuminated their particular advantage in comparing models, which we will discuss later in this chapter.
@@ -238,7 +238,7 @@ with df for the difference equal to the difference in df for the two models:
 \end{equation}
 ```
 
-hus, testing the difference in model fit can be tested comparing Δχ2 to a χ2 distribution with Δdf, which is called the χ2 difference test. If Δχ2 is significant, the null hypothesis of equal fit for both models is rejected, so the less restrictive Model B should be retained. But if Δχ2 is not significant, the fit of the restricted model (Model A) is not significantly worse than the fit of the unrestricted model (Model B), so the null hypothesis of equal fit cannot be rejected. On the parsimony principle (Occam’s razor), we should favour the more restrictive (i.e., simpler) Model A.
+Thus, testing the difference in model fit can be tested comparing $Δχ2$ to a $χ2$ distribution with $Δdf$, which is called the $χ2$ difference test. If $Δχ2$ is significant, the null hypothesis of equal fit for both models is rejected, so the less restrictive Model B should be retained. But if $Δχ2$ is not significant, the fit of the restricted model (Model A) is not significantly worse than the fit of the unrestricted model (Model B), so the null hypothesis of equal fit cannot be rejected. On the parsimony principle (Occam’s razor), we should favour the more restrictive (i.e., simpler) Model A.
 
 In our illustrative example of child anxiety, the difference in model fit between the full mediation model (Model A) and the partial mediation model (Model B) is:
 $$
@@ -250,7 +250,7 @@ $$
 
 The associated $p$ value is .008, indicating that the difference in model fit is significant at $α = .05$. The fit of the full mediation model is significantly worse than the fit of the partial mediation model, so we would favour the latter model.
 
-Likewise, a single target model’s $χ2^$ statistic can be thought of as a $Δχ^2$ statistic using equations \@ref(eq:11-16) and \@ref(eq:11-17), where Model B is replaced with the saturated Model S. In our illustrative example of child anxiety the overall $χ^2$ is then obtained by:
+Likewise, a single target model’s $χ^2$ statistic can be thought of as a $Δχ^2$ statistic using equations \@ref(eq:11-16) and \@ref(eq:11-17), where Model B is replaced with the saturated Model S. In our illustrative example of child anxiety the overall $χ^2$ is then obtained by:
 $$
 Δχ^2=χ_A^2-χ_S^2=χ_A^2-0=7.429 – 0 = 7.429 , 	
 $$
@@ -258,8 +258,8 @@ $$
 \text{with} \hspace{2mm} Δdf=df_A-df_S=df_A-0=2-0=2 .
 $$
 
-### Δχ2 as a likelihood ratio test
-Recall from equation 11.03 that a model’s χ2 statistic is the LRT from equation 9.06, treating the target model as Model A and the saturated model as Model B.  The Δχ2 test is also a log-likelihood ratio, so equation 11.15 could equivalently be calculated using equation 11.03.  The reason the two equations yield the same result is that each model’s χ2 statistic is calculated using the same saturated model’s log-likelihood (ℓS), so they cancel out. Labelling the saturated model as Model S instead of B in equation 11.03, the LRT for two nested hypothetical Models A (in \color{green}{green}) and B (in \color{blue}{blue}) could be calculated using each of their LRT statistics:
+### $Δχ2$ as a likelihood ratio test
+Recall from equation 11.03 that a model’s χ2 statistic is the LRT from equation 9.06, treating the target model as Model A and the saturated model as Model B.  The $Δχ^2$ test is also a log-likelihood ratio, so equation 11.15 could equivalently be calculated using equation 11.03.  The reason the two equations yield the same result is that each model’s $χ2$ statistic is calculated using the same saturated model’s log-likelihood ($ℓS_$), so they cancel out. Labelling the saturated model as Model S instead of B in equation 11.03, the LRT for two nested hypothetical Models A (in \color{green}{green}) and B (in \color{blue}{blue}) could be calculated using each of their LRT statistics:
 
 \begin{align*}
 \Delta\chi^2 & =  \color{green}{[-2\ell_A-(-2\ell_S )]}-\color{blue}{[-2\ell_B-(-2\ell_S )]} \\
