@@ -34,12 +34,12 @@ The calculation of standardized regression coefficients can be done for the comp
 
 ```{=tex}
 \begin{equation}
-\hat{\mathbf{B}}^* = diag(\hat{\Sigma})^{-\frac{1}{2}} \hat{\mathbf{B}} \hspace{1mm} diag(\hat{\Sigma})^\frac{1}{2}
+\hat{\mathbf{B}}^* = \text{diag}(\hat{\mathbf\Sigma})^{-\frac{1}{2}} \hat{\mathbf{B}} \hspace{1mm} \text{diag}(\hat{\mathbf\Sigma})^\frac{1}{2}
 (\#eq:6-02)
 \end{equation}
 ```
 
-In this expression, Σ ̂model is the matrix containing the model-implied variances and covariances. As an alternative, the sample matrix of (co)variances could be used. Often, the sample variances and the model-implied variances are equal. However, in some situations the constraints imposed on the model can cause differences between the model-implied and sample variances. For reasons of consistency, we will always use the variances as implied by the model.
+In this expression, $\hat\mathbf\Sigma_{\text{model}}$ is the matrix containing the model-implied variances and covariances. As an alternative, the sample matrix of (co)variances could be used. Often, the sample variances and the model-implied variances are equal. However, in some situations the constraints imposed on the model can cause differences between the model-implied and sample variances. For reasons of consistency, we will always use the variances as implied by the model.
 
 In our example, the matrix of standardized regression coefficients is:
 
@@ -84,7 +84,7 @@ The matrix expression for standardized variances and covariances in the $\hat{Ψ
 
 ```{=tex}
 \begin{equation}
-\hat{\mathbf\Psi}^* = diag(\hat{\Sigma}_{model})^{-\frac{1}{2}} \hat{Ψ} \hspace{1mm} diag(\hat{\Sigma}_{model})^\frac{1}{2}
+\hat{\mathbf\Psi}^* = \text{diag}(\hat{\mathbf\Sigma}_{\text{model}})^{-\frac{1}{2}} \hat{Ψ} \hspace{1mm} \text{diag}(\hat{\mathbf\Sigma}_{\text{model}})^\frac{1}{2}
 (\#eq:6-04)
 \end{equation}
 ```
@@ -111,7 +111,7 @@ The standardized variances of the residual factors can be interpreted as the pro
 
 ## Calculating standardized coefficients in R using lavaan results
 
-There are several ways to obtain standardized parameter estimates from a path model. Here, we will show how to manually calculate standardized parameter estimates from the estimated ($\hat{\mathbf{B}}$ $\hat{\mathbf\Psi}$) and model-implied ($\hat{\Sigma}$) matrices. 
+There are several ways to obtain standardized parameter estimates from a path model. Here, we will show how to manually calculate standardized parameter estimates from the estimated ($\hat{\mathbf{B}}$ $\hat{\mathbf\Psi}$) and model-implied ($\hat{\mathbf\Sigma}$) matrices. 
 
 [Script 6.1](#script-6.1) shows the syntax that standardizes the $\hat{\mathbf{B}}$ and $\hat{\mathbf{\Psi}}$matrices ($\hat{\mathbf{B}}^*$ and $\hat{\mathbf{\Psi}}^*$) from the output of the Affrunti & Woodruff-Borden model that was saved in the object `AWmodelOut`.
 
@@ -142,7 +142,7 @@ BETA <- Estimates$beta[obsnames, obsnames]
 PSI <- Estimates$psi[obsnames, obsnames]
 ```
 
-We also need the model-implied covariance matrix, $\hatΣ$ model, which we can calculate with the parameter estimates, using $\hat{\mathbf\Sigma}_{\text{model}} = (\mathbf{I}-\hat{\mathbf{B}})^{-1} \hat{\mathbf\Psi}[(\mathbf{I}-\hat{\mathbf{B}})^{-1}]^\mathbf{T}$. We already extracted the parameter estimates for the $\hat{\mathbf{B}}$ and $\hat{\mathbf{\Psi}}$ matrices (into the objects `BETA` and `PSI`), so now we create an identity matrix `IDEN` with dimensions 4 × 4 and then calculate $\hatΣ_{model}$ using:
+We also need the model-implied covariance matrix, $\hatΣ$ model, which we can calculate with the parameter estimates, using $\hat{\mathbf\Sigma}_{\text{model}} = (\mathbf{I}-\hat{\mathbf{B}})^{-1} \hat{\mathbf\Psi}[(\mathbf{I}-\hat{\mathbf{B}})^{-1}]^\mathbf{T}$. We already extracted the parameter estimates for the $\hat{\mathbf{B}}$ and $\hat{\mathbf{\Psi}}$ matrices (into the objects `BETA` and `PSI`), so now we create an identity matrix `IDEN` with dimensions 4 × 4 and then calculate $\hat\mathbf\Sigma_{\text{model}}$ using:
 
 ```{r}
 SIGMA <- solve(IDEN - BETA) %*% PSI %*% t(solve(IDEN - BETA))
@@ -166,7 +166,7 @@ The $\hat{\mathbf{B}}$ matrix is standardized by pre-multiplying $\hat{\mathbf{B
 BETAstar <- solve(SD) %*% BETA %*% SD
 ```
 
-The matrix $\hat{\Sigma}$ is standardized by pre- and post-multiplying $\hat{\Sigma}$ with a diagonal matrix with the inverse of the standard deviations. 
+The matrix $\hat{\mathbf\Sigma}$ is standardized by pre- and post-multiplying $\hat{\mathbf\Sigma}$ with a diagonal matrix with the inverse of the standard deviations. 
 
 ```{r}
 PSIstar <- solve(SD) %*% PSI %*% solve(SD)
@@ -181,7 +181,7 @@ dimnames(BETAstar) <- list(obsnames, obsnames)
 dimnames(PSIstar) <- list(obsnames, obsnames)
 ```
 
-To view the standardized $\hat{\mathbf{B}}^*$  and $\hat{\Sigma}^*$ matrices, type: 
+To view the standardized $\hat{\mathbf{B}}^*$  and $\hat{\mathbf\Sigma}^*$ matrices, type: 
 
 ```{r}
 BETAstar
