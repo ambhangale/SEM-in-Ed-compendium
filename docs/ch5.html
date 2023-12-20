@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Direct, Indirect, and Total Effects | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="5 Direct, Indirect, and Total Effects | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Direct, Indirect, and Total Effects | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -204,8 +204,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#references-2"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#appendix"><i class="fa fa-check"></i>Appendix</a>
 <ul>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.08"><i class="fa fa-check"></i>Derivations of equation 3.08</a></li>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.09"><i class="fa fa-check"></i>Derivations of equation 3.09</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-refeq3-08"><i class="fa fa-check"></i>Derivations of Equation @ref(eq:3-08)</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-refeq3-09"><i class="fa fa-check"></i>Derivations of Equation @ref(eq:3-09)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch4.html"><a href="ch4.html"><i class="fa fa-check"></i><b>4</b> Standard Errors and Confidence Intervals</a>
@@ -314,14 +314,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.4" data-path="ch11.html"><a href="ch11.html#a-note-on-using-available-fit-indices"><i class="fa fa-check"></i><b>11.4</b> A note on using available fit indices</a></li>
 <li class="chapter" data-level="11.5" data-path="ch11.html"><a href="ch11.html#difference-in-model-fit"><i class="fa fa-check"></i><b>11.5</b> Difference in model fit</a>
 <ul>
-<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#δχ2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> Δχ2 as a likelihood ratio test</a></li>
+<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#deltachi2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> <span class="math inline">\(\Delta\chi^2\)</span> as a likelihood ratio test</a></li>
 <li class="chapter" data-level="11.5.2" data-path="ch11.html"><a href="ch11.html#describing-differences-in-fit"><i class="fa fa-check"></i><b>11.5.2</b> Describing differences in fit</a></li>
 <li class="chapter" data-level="11.5.3" data-path="ch11.html"><a href="ch11.html#testing-differences-in-fit-between-non-nested-models"><i class="fa fa-check"></i><b>11.5.3</b> Testing differences in fit between non-nested models</a></li>
 </ul></li>
 <li class="chapter" data-level="11.6" data-path="ch11.html"><a href="ch11.html#request-fit-measures-in-lavaan"><i class="fa fa-check"></i><b>11.6</b> Request fit measures in <code>lavaan</code></a>
 <ul>
 <li class="chapter" data-level="11.6.1" data-path="ch11.html"><a href="ch11.html#compare-fit-of-lavaan-models"><i class="fa fa-check"></i><b>11.6.1</b> Compare fit of lavaan models</a></li>
-<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in lavaan when adjusting for non-normal data</a></li>
+<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in <code>lavaan</code> when adjusting for non-normal data</a></li>
 <li class="chapter" data-level="11.6.3" data-path="ch11.html"><a href="ch11.html#test-statistic-adjusted-for-small-sample-size"><i class="fa fa-check"></i><b>11.6.3</b> Test statistic adjusted for small sample size</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ch11.html"><a href="ch11.html#references-7"><i class="fa fa-check"></i>References</a></li>
@@ -621,7 +621,7 @@ Figure 5.2: Partial Mediation Model.
 SE_{ab} = \sqrt{b^2SE^2_a + a^2SE^2_b}
 \tag{5.1}
 \end{equation}\]</span></p>
-<p>When the sample size is large, the ratio <span class="math inline">\(ab\)</span> / <span class="math inline">\(SEab\)</span> can be used as the <span class="math inline">\(z\)</span> test of the unstandardized indirect effect. This is called the Sobel-test (Sobel, 1982). With small samples, if the raw data is available, it is preferred to bootstrap confidence intervals around indirect effects (Preacher &amp; Hayes, 2008). If raw data is not available, bootstrapping is not an option. In this case one could use likelihood based confidence intervals (Cheung, 2008). Likelihood based confidence intervals are not available in <code>lavaan</code>. <code>lavaan</code> will provide standard errors based on the delta-method. Table 1 gives an overview of the direct, indirect and total effects of PA and PP on CA. In our example, none of the indirect effects are significant.</p>
+<p>When the sample size is large, the ratio <span class="math inline">\(ab / SE_{ab}\)</span> can be used as the <span class="math inline">\(z\)</span> test of the unstandardized indirect effect. This is called the Sobel-test (Sobel, 1982). With small samples, if the raw data is available, it is preferred to bootstrap confidence intervals around indirect effects (Preacher &amp; Hayes, 2008). If raw data is not available, bootstrapping is not an option. In this case one could use likelihood based confidence intervals (Cheung, 2008). Likelihood based confidence intervals are not available in <code>lavaan</code>. <code>lavaan</code> will provide standard errors based on the delta-method. Table 1 gives an overview of the direct, indirect and total effects of PA and PP on CA. In our example, none of the indirect effects are significant.</p>
 <p>Table 1. <em>Direct, total indirect and total effects on Child Anxiety with standard errors, z-values and p-values and standardized values for the model from Figure 2.</em></p>
 <table>
 <colgroup>
@@ -934,7 +934,7 @@ Figure 5.3: The hypothesized model of Affrunti and Woodruff-Borden (2014).
 </div>
 <div id="calculating-total-total-indirect-and-specific-indirect-effects-using-lavaan-output" class="section level2 hasAnchor" number="5.4">
 <h2><span class="header-section-number">5.4</span> Calculating total, total indirect and specific indirect effects using lavaan output<a href="ch5.html#calculating-total-total-indirect-and-specific-indirect-effects-using-lavaan-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We will use the output of the anxiety model to compute a matrix that contains the total effects (<span class="math inline">\(\mathbf{T}\)</span>), a matrix that contains the total indirect effects (<span class="math inline">\(\mathbf{U}\)</span>) and illustrate the calculation of a specific indirect effects (“I1”).</p>
+<p>We will use the output of the anxiety model to compute a matrix that contains the total effects (<span class="math inline">\(\mathbf{T}\)</span>), a matrix that contains the total indirect effects (<span class="math inline">\(\mathbf{U}\)</span>) and illustrate the calculation of a specific indirect effects (<code>I1</code>).</p>
 <p>In recursive models, matrix <span class="math inline">\(\mathbf{T}\)</span> is calculated by addition of matrix B with multiplications of matrix <span class="math inline">\(\mathbf{B}\)</span>, as often as the number of variables minus one. So, if there are 4 observed variables, the expression for <span class="math inline">\(\mathbf{T}\)</span> stops after <span class="math inline">\(\mathbf{B}\)</span> is multiplied with itself 3 times. <span class="math inline">\(\mathbf{T}\)</span> contains the total effects.</p>
 <div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="ch5.html#cb167-1" tabindex="-1"></a>Estimates <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(AWmodelOut, <span class="st">&quot;est&quot;</span>)</span>
 <span id="cb167-2"><a href="ch5.html#cb167-2" tabindex="-1"></a>B <span class="ot">&lt;-</span> Estimates<span class="sc">$</span>beta[obsnames, obsnames] </span>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 Regression as Mean- and Covariance-Structure Analysis | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="1 Regression as Mean- and Covariance-Structure Analysis | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 Regression as Mean- and Covariance-Structure Analysis | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -204,8 +204,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#references-2"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#appendix"><i class="fa fa-check"></i>Appendix</a>
 <ul>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.08"><i class="fa fa-check"></i>Derivations of equation 3.08</a></li>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.09"><i class="fa fa-check"></i>Derivations of equation 3.09</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-refeq3-08"><i class="fa fa-check"></i>Derivations of Equation @ref(eq:3-08)</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-refeq3-09"><i class="fa fa-check"></i>Derivations of Equation @ref(eq:3-09)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch4.html"><a href="ch4.html"><i class="fa fa-check"></i><b>4</b> Standard Errors and Confidence Intervals</a>
@@ -314,14 +314,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.4" data-path="ch11.html"><a href="ch11.html#a-note-on-using-available-fit-indices"><i class="fa fa-check"></i><b>11.4</b> A note on using available fit indices</a></li>
 <li class="chapter" data-level="11.5" data-path="ch11.html"><a href="ch11.html#difference-in-model-fit"><i class="fa fa-check"></i><b>11.5</b> Difference in model fit</a>
 <ul>
-<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#δχ2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> Δχ2 as a likelihood ratio test</a></li>
+<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#deltachi2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> <span class="math inline">\(\Delta\chi^2\)</span> as a likelihood ratio test</a></li>
 <li class="chapter" data-level="11.5.2" data-path="ch11.html"><a href="ch11.html#describing-differences-in-fit"><i class="fa fa-check"></i><b>11.5.2</b> Describing differences in fit</a></li>
 <li class="chapter" data-level="11.5.3" data-path="ch11.html"><a href="ch11.html#testing-differences-in-fit-between-non-nested-models"><i class="fa fa-check"></i><b>11.5.3</b> Testing differences in fit between non-nested models</a></li>
 </ul></li>
 <li class="chapter" data-level="11.6" data-path="ch11.html"><a href="ch11.html#request-fit-measures-in-lavaan"><i class="fa fa-check"></i><b>11.6</b> Request fit measures in <code>lavaan</code></a>
 <ul>
 <li class="chapter" data-level="11.6.1" data-path="ch11.html"><a href="ch11.html#compare-fit-of-lavaan-models"><i class="fa fa-check"></i><b>11.6.1</b> Compare fit of lavaan models</a></li>
-<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in lavaan when adjusting for non-normal data</a></li>
+<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in <code>lavaan</code> when adjusting for non-normal data</a></li>
 <li class="chapter" data-level="11.6.3" data-path="ch11.html"><a href="ch11.html#test-statistic-adjusted-for-small-sample-size"><i class="fa fa-check"></i><b>11.6.3</b> Test statistic adjusted for small sample size</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ch11.html"><a href="ch11.html#references-7"><i class="fa fa-check"></i>References</a></li>
@@ -837,8 +837,8 @@ Recall that a standardized simple regression slope (<span class="math inline">\(
 <span id="cb31-3"><a href="ch1.html#cb31-3" tabindex="-1"></a>              <span class="fl">4.355</span>,  <span class="fl">0.795</span>, <span class="fl">69.263</span>,  <span class="fl">87.914</span>,</span>
 <span id="cb31-4"><a href="ch1.html#cb31-4" tabindex="-1"></a>              <span class="fl">6.841</span>,  <span class="fl">2.599</span>, <span class="fl">87.914</span>, <span class="fl">282.060</span>)</span>
 <span id="cb31-5"><a href="ch1.html#cb31-5" tabindex="-1"></a>covVals</span></code></pre></div>
-<pre><code>##  [1]   1.010  -0.032   4.355   6.841  -0.032   1.973   0.795   2.599   4.355   0.795  69.263
-## [12]  87.914   6.841   2.599  87.914 282.060</code></pre>
+<pre><code>##  [1]   1.010  -0.032   4.355   6.841  -0.032   1.973   0.795   2.599   4.355   0.795
+## [11]  69.263  87.914   6.841   2.599  87.914 282.060</code></pre>
 <p>If these values were saved as plain text, we could also read the data from a file using the <code>scan()</code> function, which returns a vector that contains the stored values in the file <code>"values.txt"</code>.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="ch1.html#cb33-1" tabindex="-1"></a>covVals <span class="ot">&lt;-</span> <span class="fu">scan</span>(<span class="st">&quot;values.txt&quot;</span>)</span></code></pre></div>
 <p>Either way, we can place these values from the full covariance matrix into a matrix using the <code>matrix()</code> function, specifying how many rows and columns there are:</p>

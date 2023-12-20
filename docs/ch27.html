@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>27 Latent Growth Curve Models | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="27 Latent Growth Curve Models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="27 Latent Growth Curve Models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -204,8 +204,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#references-2"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#appendix"><i class="fa fa-check"></i>Appendix</a>
 <ul>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.08"><i class="fa fa-check"></i>Derivations of equation 3.08</a></li>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.09"><i class="fa fa-check"></i>Derivations of equation 3.09</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-refeq3-08"><i class="fa fa-check"></i>Derivations of Equation @ref(eq:3-08)</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-refeq3-09"><i class="fa fa-check"></i>Derivations of Equation @ref(eq:3-09)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch4.html"><a href="ch4.html"><i class="fa fa-check"></i><b>4</b> Standard Errors and Confidence Intervals</a>
@@ -314,14 +314,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.4" data-path="ch11.html"><a href="ch11.html#a-note-on-using-available-fit-indices"><i class="fa fa-check"></i><b>11.4</b> A note on using available fit indices</a></li>
 <li class="chapter" data-level="11.5" data-path="ch11.html"><a href="ch11.html#difference-in-model-fit"><i class="fa fa-check"></i><b>11.5</b> Difference in model fit</a>
 <ul>
-<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#δχ2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> Δχ2 as a likelihood ratio test</a></li>
+<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#deltachi2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> <span class="math inline">\(\Delta\chi^2\)</span> as a likelihood ratio test</a></li>
 <li class="chapter" data-level="11.5.2" data-path="ch11.html"><a href="ch11.html#describing-differences-in-fit"><i class="fa fa-check"></i><b>11.5.2</b> Describing differences in fit</a></li>
 <li class="chapter" data-level="11.5.3" data-path="ch11.html"><a href="ch11.html#testing-differences-in-fit-between-non-nested-models"><i class="fa fa-check"></i><b>11.5.3</b> Testing differences in fit between non-nested models</a></li>
 </ul></li>
 <li class="chapter" data-level="11.6" data-path="ch11.html"><a href="ch11.html#request-fit-measures-in-lavaan"><i class="fa fa-check"></i><b>11.6</b> Request fit measures in <code>lavaan</code></a>
 <ul>
 <li class="chapter" data-level="11.6.1" data-path="ch11.html"><a href="ch11.html#compare-fit-of-lavaan-models"><i class="fa fa-check"></i><b>11.6.1</b> Compare fit of lavaan models</a></li>
-<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in lavaan when adjusting for non-normal data</a></li>
+<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in <code>lavaan</code> when adjusting for non-normal data</a></li>
 <li class="chapter" data-level="11.6.3" data-path="ch11.html"><a href="ch11.html#test-statistic-adjusted-for-small-sample-size"><i class="fa fa-check"></i><b>11.6.3</b> Test statistic adjusted for small sample size</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ch11.html"><a href="ch11.html#references-7"><i class="fa fa-check"></i>References</a></li>
@@ -785,7 +785,7 @@ Figure 27.2: Linear growth model for alcohol-use data from Duncan and Duncan (19
 <span id="cb431-7"><a href="ch27.html#cb431-7" tabindex="-1"></a>fit.lin <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.lin, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
 <span id="cb431-8"><a href="ch27.html#cb431-8" tabindex="-1"></a>                  <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb431-9"><a href="ch27.html#cb431-9" tabindex="-1"></a><span class="fu">summary</span>(fit.lin, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.17.1902 ended normally after 27 iterations
+<pre><code>## lavaan 0.6.17.1961 ended normally after 27 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -824,10 +824,6 @@ Figure 27.2: Linear growth model for alcohol-use data from Duncan and Duncan (19
 ## 
 ## Intercepts:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
-##    .alc1              0.000                               0.000    0.000
-##    .alc2              0.000                               0.000    0.000
-##    .alc3              0.000                               0.000    0.000
-##    .alc4              0.000                               0.000    0.000
 ##     Init.Status       2.291    0.054   42.558    0.000    2.739    2.739
 ##     Rate.Change       0.220    0.018   12.342    0.000    1.128    1.128
 ## 
@@ -1126,7 +1122,7 @@ Figure 27.5: Linear growth model for alcohol-use data from Duncan and Duncan (19
 <span id="cb454-10"><a href="ch27.html#cb454-10" tabindex="-1"></a>fit.pred2 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.pred2, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
 <span id="cb454-11"><a href="ch27.html#cb454-11" tabindex="-1"></a>                    <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb454-12"><a href="ch27.html#cb454-12" tabindex="-1"></a><span class="fu">summary</span>(fit.pred2, <span class="at">std =</span> <span class="cn">TRUE</span>, <span class="at">rsq =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.17.1902 ended normally after 43 iterations
+<pre><code>## lavaan 0.6.17.1961 ended normally after 43 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -1174,10 +1170,6 @@ Figure 27.5: Linear growth model for alcohol-use data from Duncan and Duncan (19
 ## 
 ## Intercepts:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
-##    .alc1              0.000                               0.000    0.000
-##    .alc2              0.000                               0.000    0.000
-##    .alc3              0.000                               0.000    0.000
-##    .alc4              0.000                               0.000    0.000
 ##    .Init.Status      -1.774    0.399   -4.447    0.000   -2.108   -2.108
 ##    .Rate.Change       0.703    0.156    4.505    0.000    3.462    3.462
 ## 
@@ -1248,7 +1240,7 @@ Figure 27.6: Linear growth model for alcohol-use data from Duncan and Duncan (19
 <span id="cb456-14"><a href="ch27.html#cb456-14" tabindex="-1"></a>                    <span class="do">## constrain cigarette-use&#39;s effect to equality over time</span></span>
 <span id="cb456-15"><a href="ch27.html#cb456-15" tabindex="-1"></a>                    <span class="at">constraints =</span> <span class="fu">c</span>(<span class="st">&quot;b1 == b2&quot;</span>, <span class="st">&quot;b1 == b3&quot;</span>, <span class="st">&quot;b1 == b4&quot;</span>))</span>
 <span id="cb456-16"><a href="ch27.html#cb456-16" tabindex="-1"></a><span class="fu">summary</span>(fit.pred1, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.17.1902 ended normally after 28 iterations
+<pre><code>## lavaan 0.6.17.1961 ended normally after 28 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -1299,10 +1291,6 @@ Figure 27.6: Linear growth model for alcohol-use data from Duncan and Duncan (19
 ## 
 ## Intercepts:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
-##    .alc1              0.000                               0.000    0.000
-##    .alc2              0.000                               0.000    0.000
-##    .alc3              0.000                               0.000    0.000
-##    .alc4              0.000                               0.000    0.000
 ##     Init.Status       1.814    0.062   29.228    0.000    2.671    2.671
 ##     Rate.Change       0.165    0.018    9.286    0.000    0.893    0.893
 ## 

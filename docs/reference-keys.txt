@@ -265,7 +265,7 @@ the-root-mean-square-residual-rmr-and-standardized-rmr-srmr
 information-criteria
 a-note-on-using-available-fit-indices
 difference-in-model-fit
-δχ2-as-a-likelihood-ratio-test
+deltachi2-as-a-likelihood-ratio-test
 describing-differences-in-fit
 testing-differences-in-fit-between-non-nested-models
 request-fit-measures-in-lavaan

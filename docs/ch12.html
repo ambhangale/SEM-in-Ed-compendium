@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12 Path Analysis with Categorical Outcomes | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="12 Path Analysis with Categorical Outcomes | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12 Path Analysis with Categorical Outcomes | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -204,8 +204,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#references-2"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#appendix"><i class="fa fa-check"></i>Appendix</a>
 <ul>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.08"><i class="fa fa-check"></i>Derivations of equation 3.08</a></li>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.09"><i class="fa fa-check"></i>Derivations of equation 3.09</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-refeq3-08"><i class="fa fa-check"></i>Derivations of Equation @ref(eq:3-08)</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-refeq3-09"><i class="fa fa-check"></i>Derivations of Equation @ref(eq:3-09)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch4.html"><a href="ch4.html"><i class="fa fa-check"></i><b>4</b> Standard Errors and Confidence Intervals</a>
@@ -314,14 +314,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.4" data-path="ch11.html"><a href="ch11.html#a-note-on-using-available-fit-indices"><i class="fa fa-check"></i><b>11.4</b> A note on using available fit indices</a></li>
 <li class="chapter" data-level="11.5" data-path="ch11.html"><a href="ch11.html#difference-in-model-fit"><i class="fa fa-check"></i><b>11.5</b> Difference in model fit</a>
 <ul>
-<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#δχ2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> Δχ2 as a likelihood ratio test</a></li>
+<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#deltachi2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> <span class="math inline">\(\Delta\chi^2\)</span> as a likelihood ratio test</a></li>
 <li class="chapter" data-level="11.5.2" data-path="ch11.html"><a href="ch11.html#describing-differences-in-fit"><i class="fa fa-check"></i><b>11.5.2</b> Describing differences in fit</a></li>
 <li class="chapter" data-level="11.5.3" data-path="ch11.html"><a href="ch11.html#testing-differences-in-fit-between-non-nested-models"><i class="fa fa-check"></i><b>11.5.3</b> Testing differences in fit between non-nested models</a></li>
 </ul></li>
 <li class="chapter" data-level="11.6" data-path="ch11.html"><a href="ch11.html#request-fit-measures-in-lavaan"><i class="fa fa-check"></i><b>11.6</b> Request fit measures in <code>lavaan</code></a>
 <ul>
 <li class="chapter" data-level="11.6.1" data-path="ch11.html"><a href="ch11.html#compare-fit-of-lavaan-models"><i class="fa fa-check"></i><b>11.6.1</b> Compare fit of lavaan models</a></li>
-<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in lavaan when adjusting for non-normal data</a></li>
+<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in <code>lavaan</code> when adjusting for non-normal data</a></li>
 <li class="chapter" data-level="11.6.3" data-path="ch11.html"><a href="ch11.html#test-statistic-adjusted-for-small-sample-size"><i class="fa fa-check"></i><b>11.6.3</b> Test statistic adjusted for small sample size</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ch11.html"><a href="ch11.html#references-7"><i class="fa fa-check"></i>References</a></li>
@@ -769,23 +769,16 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <pre><code>## 
 ## Parameter Estimates:
 ## 
+##   Parameterization                                               Delta
 ##   Standard errors                                           Robust.sem
 ##   Information                                                 Expected
 ##   Information saturated (h1) model                        Unstructured
-## 
-## Intercepts:
-##                        Estimate      Std.Err      z-value      P(&gt;|z|)
-##     ciguse            0.0000000                                       
 ## 
 ## Thresholds:
 ##                        Estimate      Std.Err      z-value      P(&gt;|z|)
 ##     ciguse|t1         0.9132499    0.0498031   18.3372246    0.0000000
 ## 
 ## Variances:
-##                        Estimate      Std.Err      z-value      P(&gt;|z|)
-##     ciguse            1.0000000                                       
-## 
-## Scales y*:
 ##                        Estimate      Std.Err      z-value      P(&gt;|z|)
 ##     ciguse            1.0000000</code></pre>
 <p>Binary variables have only 1 threshold that splits a normal distribution into 2 categories. Notice that it is arbitrary whether the intercept (mean) or threshold is fixed to 0.</p>
@@ -806,6 +799,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <pre><code>## 
 ## Parameter Estimates:
 ## 
+##   Parameterization                               Delta
 ##   Standard errors                           Robust.sem
 ##   Information                                 Expected
 ##   Information saturated (h1) model        Unstructured
@@ -815,11 +809,6 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 ##   ciguse ~~                                                             
 ##     intention         0.637    0.041   15.496    0.000    0.637    0.637
 ## 
-## Intercepts:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
-##     ciguse            0.000                               0.000    0.000
-##     intention         0.000                               0.000    0.000
-## 
 ## Thresholds:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
 ##     ciguse|t1         0.913    0.050   18.337    0.000    0.913    0.913
@@ -828,11 +817,6 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 ##     intention|t3      1.506    0.066   22.867    0.000    1.506    1.506
 ## 
 ## Variances:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
-##     ciguse            1.000                               1.000    1.000
-##     intention         1.000                               1.000    1.000
-## 
-## Scales y*:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
 ##     ciguse            1.000                               1.000    1.000
 ##     intention         1.000                               1.000    1.000</code></pre>
@@ -963,7 +947,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <span id="cb269-7"><a href="ch12.html#cb269-7" tabindex="-1"></a><span class="st">&#39;</span></span>
 <span id="cb269-8"><a href="ch12.html#cb269-8" tabindex="-1"></a>fit.part <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.part, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb269-9"><a href="ch12.html#cb269-9" tabindex="-1"></a><span class="fu">summary</span>(fit.part, <span class="at">standardized =</span> <span class="cn">TRUE</span>, <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.17.1902 ended normally after 13 iterations
+<pre><code>## lavaan 0.6.17.1961 ended normally after 13 iterations
 ## 
 ##   Estimator                                       DWLS
 ##   Optimization method                           NLMINB
@@ -978,6 +962,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 ## 
 ## Parameter Estimates:
 ## 
+##   Parameterization                               Delta
 ##   Standard errors                           Robust.sem
 ##   Information                                 Expected
 ##   Information saturated (h1) model        Unstructured
@@ -990,11 +975,6 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 ##     intrvntn (b31)   -0.130    0.093   -1.402    0.161   -0.130   -0.064
 ##     intentin (b32)    0.631    0.042   15.105    0.000    0.631    0.629
 ## 
-## Intercepts:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
-##    .intention         0.000                               0.000    0.000
-##    .ciguse            0.000                               0.000    0.000
-## 
 ## Thresholds:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
 ##     intention|t1      0.525    0.067    7.844    0.000    0.525    0.521
@@ -1006,11 +986,6 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
 ##    .intention         1.000                               1.000    0.985
 ##    .ciguse            0.602                               0.602    0.591
-## 
-## Scales y*:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
-##     intention         1.000                               1.000    1.000
-##     ciguse            1.000                               1.000    1.000
 ## 
 ## R-Square:
 ##                    Estimate
@@ -1120,7 +1095,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <span id="cb285-15"><a href="ch12.html#cb285-15" tabindex="-1"></a><span class="st">&#39;</span></span>
 <span id="cb285-16"><a href="ch12.html#cb285-16" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.Imai, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="fu">c</span>(<span class="st">&quot;ciguse&quot;</span>,<span class="st">&quot;intention&quot;</span>))</span>
 <span id="cb285-17"><a href="ch12.html#cb285-17" tabindex="-1"></a><span class="fu">summary</span>(fit, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.17.1902 ended normally after 13 iterations
+<pre><code>## lavaan 0.6.17.1961 ended normally after 13 iterations
 ## 
 ##   Estimator                                       DWLS
 ##   Optimization method                           NLMINB
@@ -1135,6 +1110,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 ## 
 ## Parameter Estimates:
 ## 
+##   Parameterization                               Delta
 ##   Standard errors                           Robust.sem
 ##   Information                                 Expected
 ##   Information saturated (h1) model        Unstructured
@@ -1147,11 +1123,6 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 ##   intention ~                                                           
 ##     interventn (a)   -0.246    0.089   -2.758    0.006   -0.246   -0.121
 ## 
-## Intercepts:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
-##    .ciguse            0.000                               0.000    0.000
-##    .intention         0.000                               0.000    0.000
-## 
 ## Thresholds:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
 ##     ciguse|t1 (b0)    0.760    0.072   10.491    0.000    0.760    0.752
@@ -1163,11 +1134,6 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
 ##    .ciguse            0.602                               0.602    0.591
 ##    .intention         1.000                               1.000    0.985
-## 
-## Scales y*:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
-##     ciguse            1.000                               1.000    1.000
-##     intention         1.000                               1.000    1.000
 ## 
 ## Defined Parameters:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all

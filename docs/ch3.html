@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Path Models | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="3 Path Models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Path Models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -204,8 +204,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#references-2"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#appendix"><i class="fa fa-check"></i>Appendix</a>
 <ul>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.08"><i class="fa fa-check"></i>Derivations of equation 3.08</a></li>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.09"><i class="fa fa-check"></i>Derivations of equation 3.09</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-refeq3-08"><i class="fa fa-check"></i>Derivations of Equation @ref(eq:3-08)</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-refeq3-09"><i class="fa fa-check"></i>Derivations of Equation @ref(eq:3-09)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch4.html"><a href="ch4.html"><i class="fa fa-check"></i><b>4</b> Standard Errors and Confidence Intervals</a>
@@ -314,14 +314,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.4" data-path="ch11.html"><a href="ch11.html#a-note-on-using-available-fit-indices"><i class="fa fa-check"></i><b>11.4</b> A note on using available fit indices</a></li>
 <li class="chapter" data-level="11.5" data-path="ch11.html"><a href="ch11.html#difference-in-model-fit"><i class="fa fa-check"></i><b>11.5</b> Difference in model fit</a>
 <ul>
-<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#δχ2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> Δχ2 as a likelihood ratio test</a></li>
+<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#deltachi2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> <span class="math inline">\(\Delta\chi^2\)</span> as a likelihood ratio test</a></li>
 <li class="chapter" data-level="11.5.2" data-path="ch11.html"><a href="ch11.html#describing-differences-in-fit"><i class="fa fa-check"></i><b>11.5.2</b> Describing differences in fit</a></li>
 <li class="chapter" data-level="11.5.3" data-path="ch11.html"><a href="ch11.html#testing-differences-in-fit-between-non-nested-models"><i class="fa fa-check"></i><b>11.5.3</b> Testing differences in fit between non-nested models</a></li>
 </ul></li>
 <li class="chapter" data-level="11.6" data-path="ch11.html"><a href="ch11.html#request-fit-measures-in-lavaan"><i class="fa fa-check"></i><b>11.6</b> Request fit measures in <code>lavaan</code></a>
 <ul>
 <li class="chapter" data-level="11.6.1" data-path="ch11.html"><a href="ch11.html#compare-fit-of-lavaan-models"><i class="fa fa-check"></i><b>11.6.1</b> Compare fit of lavaan models</a></li>
-<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in lavaan when adjusting for non-normal data</a></li>
+<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in <code>lavaan</code> when adjusting for non-normal data</a></li>
 <li class="chapter" data-level="11.6.3" data-path="ch11.html"><a href="ch11.html#test-statistic-adjusted-for-small-sample-size"><i class="fa fa-check"></i><b>11.6.3</b> Test statistic adjusted for small sample size</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ch11.html"><a href="ch11.html#references-7"><i class="fa fa-check"></i>References</a></li>
@@ -623,7 +623,7 @@ Figure 3.1: A simple path diagram of the development of child anxiety.
 <h2><span class="header-section-number">3.3</span> Matrix explanation<a href="ch3.html#matrix-explanation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In general, the aim of path analysis is to describe the dependencies between a set of observed variables, based on some theory. In order to do this, we try to define a theoretically sensible path model that can accurately describe the variances and covariances of the observed variables in the population and formulate the following hypothesis:</p>
 <p><span class="math inline">\(\mathbf{\Sigma}_{\text{population}} = \mathbf{\Sigma}_{\text{model}}\)</span>,</p>
-<p>where <span class="math inline">\(\mathbf{\Sigma}_{\text{population}}\)</span> is the matrix of population variances and covariances of the observed variables, and <span class="math inline">\(\mathbf{\Sigma}_{model}\)</span> is the matrix of variances and covariances of the observed variables as implied by the path model. The population variances and covariances are unknown, as data are usually only collected in a sample that was drawn from the population. Therefore, we estimate the population variances and covariances based on the sample variances and covariances:</p>
+<p>where <span class="math inline">\(\mathbf{\Sigma}_{\text{population}}\)</span> is the matrix of population variances and covariances of the observed variables, and <span class="math inline">\(\mathbf{\Sigma}_{\text{model}}\)</span> is the matrix of variances and covariances of the observed variables as implied by the path model. The population variances and covariances are unknown, as data are usually only collected in a sample that was drawn from the population. Therefore, we estimate the population variances and covariances based on the sample variances and covariances:</p>
 <p><span class="math inline">\(\mathbf{\Sigma}_{\text{population}} \approx \mathbf{\hat\Sigma}_{\text{population}}\)</span> , where <span class="math inline">\(\mathbf{\hat\Sigma}_{\text{population}} = \mathbf{\Sigma}_{\text{sample}}\)</span>.</p>
 <p>As a covariance matrix is a symmetric matrix, usually the upper triangle of the matrix is not provided:</p>
 <p><span class="math display">\[
@@ -690,7 +690,7 @@ Figure 3.2: Path diagram of the development of child anxiety including all path 
 \mathrm{y}_4 = \beta_{43} \mathrm{y}_3 + \zeta_4
 \tag{3.4}
 \end{equation}\]</span></p>
-<p>Here, we can see that exogenous variables <span class="math inline">\(\mathrm{y}_1\)</span> and <span class="math inline">\(\mathrm{y}_2\)</span> are only affected by factors that fall outside the model (<span class="math inline">\(\zeta_1\)</span> and <span class="math inline">\(\zeta_2\)</span>), whereas endogenous variable <span class="math inline">\(\mathrm{y}_3\)</span> and <span class="math inline">\(\mathrm{y}_4\)</span> are affected also by the other variables in the model. Note that the effects of the residual factors are left out of these Equations because they are constrained to ‘1’ (i.e., we could write <span class="math inline">\(\mathrm{y}_1\)</span> = (direct effect)<span class="math inline">\(\zeta_1\)</span>, where (direct effect) = 1, which thus simplifies to <span class="math inline">\(\mathrm{y}_1\)</span> = <span class="math inline">\(\zeta_1\)</span>).</p>
+<p>Here, we can see that exogenous variables <span class="math inline">\(\mathrm{y}_1\)</span> and <span class="math inline">\(\mathrm{y}_2\)</span> are only affected by factors that fall outside the model (<span class="math inline">\(\zeta_1\)</span> and <span class="math inline">\(\zeta_2\)</span>), whereas endogenous variable <span class="math inline">\(\mathrm{y}_3\)</span> and <span class="math inline">\(\mathrm{y}_4\)</span> are affected also by the other variables in the model. Note that the effects of the residual factors are left out of these Equations because they are constrained to ‘1’ (i.e., we could write <span class="math inline">\(\mathrm{y}_1 = (\text{direct effect})\zeta_1\)</span>, where (direct effect) = 1, which thus simplifies to <span class="math inline">\(\mathrm{y}_1\)</span> = <span class="math inline">\(\zeta_1\)</span>).</p>
 <p>Instead of writing down the equation for each observed variable, the equations for the observed variables <span class="math inline">\(\mathrm{y}_1\)</span>, <span class="math inline">\(\mathrm{y}_2\)</span>, <span class="math inline">\(\mathrm{y}_3\)</span>, and <span class="math inline">\(\mathrm{y}_4\)</span> can also be written in matrix form:</p>
 <p><span class="math display" id="eq:3-05">\[\begin{equation}
 \mathbf{y} = \mathbf{B} \mathbf{y} + \boldsymbol{\zeta}
@@ -769,19 +769,19 @@ Figure 3.2: Path diagram of the development of child anxiety including all path 
 \tag{3.7}
 \end{equation}\]</span></p>
 <p>Here, we can see that the equations for variables <span class="math inline">\(\mathrm{y}_1\)</span>, <span class="math inline">\(\mathrm{y}_2\)</span>, <span class="math inline">\(\mathrm{y}_3\)</span>, and <span class="math inline">\(\mathrm{y}_4\)</span> are the same as separate Equations <a href="ch3.html#eq:3-01">(3.1)</a> through <a href="ch3.html#eq:3-04">(3.4)</a>.</p>
-<p>The path model as described by Equation 3.07 is used to describe the relationships between the observed variables. In order to find the model for the variances and covariances of the observed variables, we have to re-write Equation <a href="ch3.html#eq:3-05">(3.5)</a> as a function of model parameters:</p>
+<p>The path model as described by Equation <a href="ch3.html#eq:3-07">(3.7)</a> is used to describe the relationships between the observed variables. In order to find the model for the variances and covariances of the observed variables, we have to re-write Equation <a href="ch3.html#eq:3-05">(3.5)</a> as a function of model parameters:</p>
 <p><span class="math display">\[\mathrm{y} = \mathbf{B} \mathrm{y} + \zeta \Leftrightarrow\]</span>
 <span class="math display" id="eq:3-08">\[\begin{equation}
 \mathrm{y} = (\mathbf{I} - \mathbf{B})^{-1} \zeta
 \tag{3.8}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(\mathbf{I}\)</span> is an identity matrix that needs to be introduced to come to the end result, and <span class="math inline">\((\mathbf{I} - \mathbf{B})^{-1}\)</span> denotes the inverse of the matrix <span class="math inline">\((\mathbf{I} - \mathbf{B})\)</span>. Derivations of Equation <a href="ch3.html#eq:3-08">(3.8)</a> are given in this chapters <a href="ch3.html#derivations-of-equation-3.08">Appendix</a>.</p>
+<p>where <span class="math inline">\(\mathbf{I}\)</span> is an identity matrix that needs to be introduced to come to the end result, and <span class="math inline">\((\mathbf{I} - \mathbf{B})^{-1}\)</span> denotes the inverse of the matrix <span class="math inline">\((\mathbf{I} - \mathbf{B})\)</span>. Derivations of Equation <a href="ch3.html#eq:3-08">(3.8)</a> are given in this chapters <a href="#derivations-of-equation-3.08">Appendix</a>.</p>
 <p>We now have an expression for the scores on the variables. However, in standard SEM, we do not model the observed scores directly, but the variances and covariance of the observed scores. Therefore, we need to find an expression for the model implied covariance matrix. Using Equation 3.08 and some covariance algebra, we obtain the expression for the variances and covariances of <span class="math inline">\(\mathrm{y}\)</span>, called <span class="math inline">\(\mathbf{\Sigma}_{\text{model}}\)</span> = COV<span class="math inline">\((\mathbf{y},\mathbf{y})\)</span>:</p>
 <p><span class="math display" id="eq:3-09">\[\begin{equation}
 \mathbf{\Sigma}_{\text{model}} = (\mathbf{I} - \mathbf{B})^{-1} \boldsymbol{\Psi} (\mathbf{I} - \mathbf{B})^{-1\mathrm{T}}
 \tag{3.9}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(\boldsymbol{\Psi}\)</span> is written for COV(<span class="math inline">\(\boldsymbol\zeta\)</span>,<span class="math inline">\(\boldsymbol\zeta\)</span>), and <span class="math inline">\((\mathbf{I} - \mathbf{B})^{-1\mathrm{T}}\)</span> denotes the transpose of the matrix <span class="math inline">\((\mathbf{I} - \mathbf{B})^{-1}\)</span>. Derivations of Equation <a href="ch3.html#eq:3-09">(3.9)</a> are given this chapters <a href="ch3.html#derivations-of-equation-3.09">Appendix</a>.</p>
+<p>where <span class="math inline">\(\boldsymbol{\Psi}\)</span> is written for COV(<span class="math inline">\(\boldsymbol\zeta\)</span>,<span class="math inline">\(\boldsymbol\zeta\)</span>), and <span class="math inline">\((\mathbf{I} - \mathbf{B})^{-1\mathrm{T}}\)</span> denotes the transpose of the matrix <span class="math inline">\((\mathbf{I} - \mathbf{B})^{-1}\)</span>. Derivations of Equation <a href="ch3.html#eq:3-09">(3.9)</a> are given this chapters <a href="#derivations-of-equation-3.09">Appendix</a>.</p>
 <p>The symmetric matrix <span class="math inline">\(\boldsymbol{\Psi}\)</span> contains the variances and the covariances of the residual factors <span class="math inline">\(\boldsymbol\zeta\)</span>. For the model given in Equation <a href="ch3.html#eq:3-07">(3.7)</a>, matrix <span class="math inline">\(\boldsymbol{\Psi}\)</span> is</p>
 <p><span class="math display">\[
 \boldsymbol{\Psi} =
@@ -996,7 +996,7 @@ Figure 3.2: Path diagram of the development of child anxiety including all path 
 <p>The output is stored in <code>AWmodelOut</code>, and we can inspect the result using the <code>summary()</code> function:</p>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="ch3.html#cb152-1" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut)</span></code></pre></div>
 <p>This will show you some fit results of the model and give you the parameter estimates and their associated standard errors. The model has 2 degrees of freedom, and the chi-square value is 7.333. The summary of the output is given below:</p>
-<pre><code>## lavaan 0.6.17.1902 ended normally after 28 iterations
+<pre><code>## lavaan 0.6.17.1961 ended normally after 28 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -1039,7 +1039,7 @@ Figure 3.2: Path diagram of the development of child anxiety including all path 
 <p>Especially when parameters are labeled, <code>lavaan</code> will have to shorten some of the longer variable names (only in the printed output, not internally!), so that the output conforms to a certain format. You may also notice that some variances are preceded by a period (<code>.</code>). This indicates that it is a residual variance for an endogenous variable, rather than a variance for an exogenous variable. If you run models with residual correlations between endogenous variables, those residual covariances will also use the (<code>.</code>) prefix.</p>
 <p>You can also request to see <span class="math inline">\(R^2\)</span> for each endogenous variable:</p>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="ch3.html#cb154-1" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut, <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.17.1902 ended normally after 28 iterations
+<pre><code>## lavaan 0.6.17.1961 ended normally after 28 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -1132,8 +1132,8 @@ Figure 3.2: Path diagram of the development of child anxiety including all path 
 </div>
 <div id="appendix" class="section level2 unnumbered hasAnchor">
 <h2>Appendix<a href="ch3.html#appendix" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="derivations-of-equation-3.08" class="section level3 unnumbered hasAnchor">
-<h3>Derivations of equation 3.08<a href="ch3.html#derivations-of-equation-3.08" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="derivations-of-equation-refeq3-08" class="section level3 unnumbered hasAnchor">
+<h3>Derivations of Equation <a href="ch3.html#eq:3-08">(3.8)</a><a href="ch3.html#derivations-of-equation-refeq3-08" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><span class="math inline">\(\mathbf{y} = \mathbf{B} \mathbf{y} + \boldsymbol{\zeta} \Leftrightarrow\)</span></p>
 <p><span class="math inline">\(\mathbf{y} - \mathbf{B} \mathbf{y} = \boldsymbol{\zeta} \Leftrightarrow\)</span></p>
 <p><span class="math inline">\(\mathbf{I} \mathbf{y} - \mathbf{B} \mathbf{y} = \boldsymbol{\zeta} \Leftrightarrow\)</span></p>
@@ -1142,8 +1142,8 @@ Figure 3.2: Path diagram of the development of child anxiety including all path 
 <p><span class="math inline">\((\mathbf{I} - \mathbf{B})^{-1} (\mathbf{I} - \mathbf{B}) \mathbf{y} = (\mathbf{I} - \mathbf{B})^{-1} \boldsymbol{\zeta} \Leftrightarrow\)</span></p>
 <p><span class="math inline">\(\mathbf{y} = (\mathbf{I} - \mathbf{B})^{-1} \zeta\)</span></p>
 </div>
-<div id="derivations-of-equation-3.09" class="section level3 unnumbered hasAnchor">
-<h3>Derivations of equation 3.09<a href="ch3.html#derivations-of-equation-3.09" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="derivations-of-equation-refeq3-09" class="section level3 unnumbered hasAnchor">
+<h3>Derivations of Equation <a href="ch3.html#eq:3-09">(3.9)</a><a href="ch3.html#derivations-of-equation-refeq3-09" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><span class="math inline">\(\mathbf{\Sigma} = \mathrm{COV}(\mathbf{y},\mathbf{y}) \Leftrightarrow\)</span></p>
 <p>(substitute Equation 3.08)</p>
 <p><span class="math inline">\(\mathbf{\Sigma} = \mathrm{COV}( ( \mathbf{I} - \mathbf{B})^{-1} \boldsymbol{\zeta}, (\mathbf{I} - \mathbf{B})^{-1} \boldsymbol{\zeta}) \Leftrightarrow\)</span></p>

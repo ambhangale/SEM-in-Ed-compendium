@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Calculating Standardized Parameter Estimates | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="6 Calculating Standardized Parameter Estimates | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Calculating Standardized Parameter Estimates | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -204,8 +204,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#references-2"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#appendix"><i class="fa fa-check"></i>Appendix</a>
 <ul>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.08"><i class="fa fa-check"></i>Derivations of equation 3.08</a></li>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-3.09"><i class="fa fa-check"></i>Derivations of equation 3.09</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-refeq3-08"><i class="fa fa-check"></i>Derivations of Equation @ref(eq:3-08)</a></li>
+<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#derivations-of-equation-refeq3-09"><i class="fa fa-check"></i>Derivations of Equation @ref(eq:3-09)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="ch4.html"><a href="ch4.html"><i class="fa fa-check"></i><b>4</b> Standard Errors and Confidence Intervals</a>
@@ -314,14 +314,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.4" data-path="ch11.html"><a href="ch11.html#a-note-on-using-available-fit-indices"><i class="fa fa-check"></i><b>11.4</b> A note on using available fit indices</a></li>
 <li class="chapter" data-level="11.5" data-path="ch11.html"><a href="ch11.html#difference-in-model-fit"><i class="fa fa-check"></i><b>11.5</b> Difference in model fit</a>
 <ul>
-<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#δχ2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> Δχ2 as a likelihood ratio test</a></li>
+<li class="chapter" data-level="11.5.1" data-path="ch11.html"><a href="ch11.html#deltachi2-as-a-likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.1</b> <span class="math inline">\(\Delta\chi^2\)</span> as a likelihood ratio test</a></li>
 <li class="chapter" data-level="11.5.2" data-path="ch11.html"><a href="ch11.html#describing-differences-in-fit"><i class="fa fa-check"></i><b>11.5.2</b> Describing differences in fit</a></li>
 <li class="chapter" data-level="11.5.3" data-path="ch11.html"><a href="ch11.html#testing-differences-in-fit-between-non-nested-models"><i class="fa fa-check"></i><b>11.5.3</b> Testing differences in fit between non-nested models</a></li>
 </ul></li>
 <li class="chapter" data-level="11.6" data-path="ch11.html"><a href="ch11.html#request-fit-measures-in-lavaan"><i class="fa fa-check"></i><b>11.6</b> Request fit measures in <code>lavaan</code></a>
 <ul>
 <li class="chapter" data-level="11.6.1" data-path="ch11.html"><a href="ch11.html#compare-fit-of-lavaan-models"><i class="fa fa-check"></i><b>11.6.1</b> Compare fit of lavaan models</a></li>
-<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in lavaan when adjusting for non-normal data</a></li>
+<li class="chapter" data-level="11.6.2" data-path="ch11.html"><a href="ch11.html#fit-measures-in-lavaan-when-adjusting-for-non-normal-data"><i class="fa fa-check"></i><b>11.6.2</b> Fit measures in <code>lavaan</code> when adjusting for non-normal data</a></li>
 <li class="chapter" data-level="11.6.3" data-path="ch11.html"><a href="ch11.html#test-statistic-adjusted-for-small-sample-size"><i class="fa fa-check"></i><b>11.6.3</b> Test statistic adjusted for small sample size</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ch11.html"><a href="ch11.html#references-7"><i class="fa fa-check"></i>References</a></li>
@@ -620,10 +620,10 @@ Thus, controlling for the other variables in the model, a 1-SD increase in paren
 <p>In addition, standardized regression coefficients can be used to interpret the size of the effect (in terms of effect size <span class="math inline">\(r\)</span>), where values between .10–.30 indicate small effects, values between .30–.50 indicate intermediate effect, and values larger than .50 indicate strong effects (Bollen, 1988). In our example both effects can be considered small.</p>
 <p>The calculation of standardized regression coefficients can be done for the complete matrix of estimated regression coefficients that are represented in matrix <span class="math inline">\(\hat{\mathbf{B}}\)</span>. The matrix expression for the standardized <span class="math inline">\(\hat{\mathbf{B}}\)</span> matrix, <span class="math inline">\(\hat{\mathbf{B}}^*\)</span>, is the following:</p>
 <span class="math display" id="eq:6-02">\[\begin{equation}
-\hat{\mathbf{B}}^* = diag(\hat{\Sigma})^{-\frac{1}{2}} \hat{\mathbf{B}} \hspace{1mm} diag(\hat{\Sigma})^\frac{1}{2}
+\hat{\mathbf{B}}^* = \text{diag}(\hat{\mathbf\Sigma})^{-\frac{1}{2}} \hat{\mathbf{B}} \hspace{1mm} \text{diag}(\hat{\mathbf\Sigma})^\frac{1}{2}
 \tag{6.2}
 \end{equation}\]</span>
-<p>In this expression, Σ ̂model is the matrix containing the model-implied variances and covariances. As an alternative, the sample matrix of (co)variances could be used. Often, the sample variances and the model-implied variances are equal. However, in some situations the constraints imposed on the model can cause differences between the model-implied and sample variances. For reasons of consistency, we will always use the variances as implied by the model.</p>
+<p>In this expression, <span class="math inline">\(\hat\mathbf\Sigma_{\text{model}}\)</span> is the matrix containing the model-implied variances and covariances. As an alternative, the sample matrix of (co)variances could be used. Often, the sample variances and the model-implied variances are equal. However, in some situations the constraints imposed on the model can cause differences between the model-implied and sample variances. For reasons of consistency, we will always use the variances as implied by the model.</p>
 <p>In our example, the matrix of standardized regression coefficients is:</p>
 <p><span class="math display">\[
 \hat{\mathbf{B}}^* =
@@ -656,7 +656,7 @@ COR_{21} = \frac{COV_{21}}{\hat{\sigma}_1 \hat{\sigma}_2} = \frac{53.36}{\sqrt{9
 <p>Like standardized regression slopes, correlation coefficients can be interpreted as effect size <span class="math inline">\(r\)</span> (Bollen, 1988). Thus, in our illustrative example there is an intermediate correlation between the two exogenous variables.</p>
 <p>The matrix expression for standardized variances and covariances in the <span class="math inline">\(\hat{Ψ}\)</span> matrix is:</p>
 <span class="math display" id="eq:6-04">\[\begin{equation}
-\hat{\mathbf\Psi}^* = diag(\hat{\Sigma}_{model})^{-\frac{1}{2}} \hat{Ψ} \hspace{1mm} diag(\hat{\Sigma}_{model})^\frac{1}{2}
+\hat{\mathbf\Psi}^* = \text{diag}(\hat{\mathbf\Sigma}_{\text{model}})^{-\frac{1}{2}} \hat{Ψ} \hspace{1mm} \text{diag}(\hat{\mathbf\Sigma}_{\text{model}})^\frac{1}{2}
 \tag{6.4}
 \end{equation}\]</span>
 <p>In our example, the matrix of standardized residual variances and covariances is:</p>
@@ -679,7 +679,7 @@ COR_{21} = \frac{COV_{21}}{\hat{\sigma}_1 \hat{\sigma}_2} = \frac{53.36}{\sqrt{9
 </div>
 <div id="calculating-standardized-coefficients-in-r-using-lavaan-results" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Calculating standardized coefficients in R using lavaan results<a href="ch6.html#calculating-standardized-coefficients-in-r-using-lavaan-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are several ways to obtain standardized parameter estimates from a path model. Here, we will show how to manually calculate standardized parameter estimates from the estimated (<span class="math inline">\(\hat{\mathbf{B}}\)</span> <span class="math inline">\(\hat{\mathbf\Psi}\)</span>) and model-implied (<span class="math inline">\(\hat{\Sigma}\)</span>) matrices.</p>
+<p>There are several ways to obtain standardized parameter estimates from a path model. Here, we will show how to manually calculate standardized parameter estimates from the estimated (<span class="math inline">\(\hat{\mathbf{B}}\)</span> <span class="math inline">\(\hat{\mathbf\Psi}\)</span>) and model-implied (<span class="math inline">\(\hat{\mathbf\Sigma}\)</span>) matrices.</p>
 <p><a href="ch6.html#script-6.1">Script 6.1</a> shows the syntax that standardizes the <span class="math inline">\(\hat{\mathbf{B}}\)</span> and <span class="math inline">\(\hat{\mathbf{\Psi}}\)</span>matrices (<span class="math inline">\(\hat{\mathbf{B}}^*\)</span> and <span class="math inline">\(\hat{\mathbf{\Psi}}^*\)</span>) from the output of the Affrunti &amp; Woodruff-Borden model that was saved in the object <code>AWmodelOut</code>.</p>
 <div id="script-6.1" class="section level3 unnumbered hasAnchor">
 <h3>Script 6.1<a href="ch6.html#script-6.1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -702,7 +702,7 @@ COR_{21} = \frac{COV_{21}}{\hat{\sigma}_1 \hat{\sigma}_2} = \frac{53.36}{\sqrt{9
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="ch6.html#cb180-1" tabindex="-1"></a>Estimates <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(AWmodelOut, <span class="st">&quot;est&quot;</span>)</span>
 <span id="cb180-2"><a href="ch6.html#cb180-2" tabindex="-1"></a>BETA <span class="ot">&lt;-</span> Estimates<span class="sc">$</span>beta[obsnames, obsnames]</span>
 <span id="cb180-3"><a href="ch6.html#cb180-3" tabindex="-1"></a>PSI <span class="ot">&lt;-</span> Estimates<span class="sc">$</span>psi[obsnames, obsnames]</span></code></pre></div>
-<p>We also need the model-implied covariance matrix, <span class="math inline">\(\hatΣ\)</span> model, which we can calculate with the parameter estimates, using <span class="math inline">\(\hat{\mathbf\Sigma}_{\text{model}} = (\mathbf{I}-\hat{\mathbf{B}})^{-1} \hat{\mathbf\Psi}[(\mathbf{I}-\hat{\mathbf{B}})^{-1}]^\mathbf{T}\)</span>. We already extracted the parameter estimates for the <span class="math inline">\(\hat{\mathbf{B}}\)</span> and <span class="math inline">\(\hat{\mathbf{\Psi}}\)</span> matrices (into the objects <code>BETA</code> and <code>PSI</code>), so now we create an identity matrix <code>IDEN</code> with dimensions 4 × 4 and then calculate <span class="math inline">\(\hatΣ_{model}\)</span> using:</p>
+<p>We also need the model-implied covariance matrix, <span class="math inline">\(\hatΣ\)</span> model, which we can calculate with the parameter estimates, using <span class="math inline">\(\hat{\mathbf\Sigma}_{\text{model}} = (\mathbf{I}-\hat{\mathbf{B}})^{-1} \hat{\mathbf\Psi}[(\mathbf{I}-\hat{\mathbf{B}})^{-1}]^\mathbf{T}\)</span>. We already extracted the parameter estimates for the <span class="math inline">\(\hat{\mathbf{B}}\)</span> and <span class="math inline">\(\hat{\mathbf{\Psi}}\)</span> matrices (into the objects <code>BETA</code> and <code>PSI</code>), so now we create an identity matrix <code>IDEN</code> with dimensions 4 × 4 and then calculate <span class="math inline">\(\hat\mathbf\Sigma_{\text{model}}\)</span> using:</p>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="ch6.html#cb181-1" tabindex="-1"></a>SIGMA <span class="ot">&lt;-</span> <span class="fu">solve</span>(IDEN <span class="sc">-</span> BETA) <span class="sc">%*%</span> PSI <span class="sc">%*%</span> <span class="fu">t</span>(<span class="fu">solve</span>(IDEN <span class="sc">-</span> BETA))</span></code></pre></div>
 <p>Note, however, that you can also request the model-implied covariance matrix directly from <code>lavaan</code>:</p>
 <div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="ch6.html#cb182-1" tabindex="-1"></a>SIGMA <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(AWmodelOut, <span class="st">&quot;cov.ov&quot;</span>)[obsnames, obsnames]</span></code></pre></div>
@@ -710,13 +710,13 @@ COR_{21} = \frac{COV_{21}}{\hat{\sigma}_1 \hat{\sigma}_2} = \frac{53.36}{\sqrt{9
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="ch6.html#cb183-1" tabindex="-1"></a>SD <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="fu">sqrt</span>(<span class="fu">diag</span>(SIGMA)))</span></code></pre></div>
 <p>The <span class="math inline">\(\hat{\mathbf{B}}\)</span> matrix is standardized by pre-multiplying <span class="math inline">\(\hat{\mathbf{B}}\)</span> with a diagonal matrix with the inverse of the <span class="math inline">\(SD\)</span>s, and post-multiplying it with a diagonal matrix with the <span class="math inline">\(SD\)</span>s:</p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="ch6.html#cb184-1" tabindex="-1"></a>BETAstar <span class="ot">&lt;-</span> <span class="fu">solve</span>(SD) <span class="sc">%*%</span> BETA <span class="sc">%*%</span> SD</span></code></pre></div>
-<p>The matrix <span class="math inline">\(\hat{\Sigma}\)</span> is standardized by pre- and post-multiplying <span class="math inline">\(\hat{\Sigma}\)</span> with a diagonal matrix with the inverse of the standard deviations.</p>
+<p>The matrix <span class="math inline">\(\hat{\mathbf\Sigma}\)</span> is standardized by pre- and post-multiplying <span class="math inline">\(\hat{\mathbf\Sigma}\)</span> with a diagonal matrix with the inverse of the standard deviations.</p>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="ch6.html#cb185-1" tabindex="-1"></a>PSIstar <span class="ot">&lt;-</span> <span class="fu">solve</span>(SD) <span class="sc">%*%</span> PSI <span class="sc">%*%</span> <span class="fu">solve</span>(SD)</span></code></pre></div>
 <p>The standardized variances and covariances (correlations) are collected in the object <code>PSIstar.</code> The standardized direct effects are in the object <code>BETAstar.</code></p>
 <p>The same labels that were given to the matrices with unstandardized estimates, can also be used for the standardized parameter estimates:</p>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="ch6.html#cb186-1" tabindex="-1"></a><span class="fu">dimnames</span>(BETAstar) <span class="ot">&lt;-</span> <span class="fu">list</span>(obsnames, obsnames)</span>
 <span id="cb186-2"><a href="ch6.html#cb186-2" tabindex="-1"></a><span class="fu">dimnames</span>(PSIstar) <span class="ot">&lt;-</span> <span class="fu">list</span>(obsnames, obsnames)</span></code></pre></div>
-<p>To view the standardized <span class="math inline">\(\hat{\mathbf{B}}^*\)</span> and <span class="math inline">\(\hat{\Sigma}^*\)</span> matrices, type:</p>
+<p>To view the standardized <span class="math inline">\(\hat{\mathbf{B}}^*\)</span> and <span class="math inline">\(\hat{\mathbf\Sigma}^*\)</span> matrices, type:</p>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="ch6.html#cb187-1" tabindex="-1"></a>BETAstar</span></code></pre></div>
 <pre><code>##             parent_anx perfect overcontrol child_anx
 ## parent_anx   0.0000000 0.00000   0.0000000         0
@@ -764,7 +764,7 @@ COR_{21} = \frac{COV_{21}}{\hat{\sigma}_1 \hat{\sigma}_2} = \frac{53.36}{\sqrt{9
 ## perfect        0.0      0  0.000  0.000</code></pre>
 <p>You can also request standardized estimates when you use the <code>summary()</code> or <code>parameterEstimates()</code> functions with the argument <code>standardized = TRUE</code>:</p>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="ch6.html#cb193-1" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.17.1902 ended normally after 28 iterations
+<pre><code>## lavaan 0.6.17.1961 ended normally after 28 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -804,24 +804,24 @@ COR_{21} = \frac{COV_{21}}{\hat{\sigma}_1 \hat{\sigma}_2} = \frac{53.36}{\sqrt{9
 ##    .ovrcntrl (p33)  114.157   18.519    6.164    0.000  114.157    0.877
 ##    .child_nx (p44)    6.880    1.116    6.164    0.000    6.880    0.910</code></pre>
 <div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="ch6.html#cb195-1" tabindex="-1"></a><span class="fu">parameterEstimates</span>(AWmodelOut, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>##           lhs op         rhs label     est     se     z pvalue ci.lower ci.upper  std.lv std.all
-## 1 overcontrol  ~  parent_anx   b31   0.187  0.140 1.341  0.180   -0.087    0.461   0.187   0.157
-## 2 overcontrol  ~     perfect   b32   0.210  0.096 2.194  0.028    0.022    0.399   0.210   0.257
-## 3   child_anx  ~ overcontrol   b43   0.072  0.026 2.741  0.006    0.021    0.124   0.072   0.300
-## 4  parent_anx ~~  parent_anx   p11  91.580 14.856 6.164  0.000   62.462  120.698  91.580   1.000
-## 5     perfect ~~     perfect   p22 194.320 31.523 6.164  0.000  132.536  256.104 194.320   1.000
-## 6 overcontrol ~~ overcontrol   p33 114.157 18.519 6.164  0.000   77.861  150.453 114.157   0.877
-## 7   child_anx ~~   child_anx   p44   6.880  1.116 6.164  0.000    4.692    9.067   6.880   0.910
-## 8  parent_anx ~~     perfect   p21  53.360 16.481 3.238  0.001   21.058   85.662  53.360   0.400
-##   std.nox
-## 1   0.157
-## 2   0.257
-## 3   0.300
-## 4   1.000
-## 5   1.000
-## 6   0.877
-## 7   0.910
-## 8   0.400</code></pre>
+<pre><code>##           lhs op         rhs label     est     se     z pvalue ci.lower ci.upper
+## 1 overcontrol  ~  parent_anx   b31   0.187  0.140 1.341  0.180   -0.087    0.461
+## 2 overcontrol  ~     perfect   b32   0.210  0.096 2.194  0.028    0.022    0.399
+## 3   child_anx  ~ overcontrol   b43   0.072  0.026 2.741  0.006    0.021    0.124
+## 4  parent_anx ~~  parent_anx   p11  91.580 14.856 6.164  0.000   62.462  120.698
+## 5     perfect ~~     perfect   p22 194.320 31.523 6.164  0.000  132.536  256.104
+## 6 overcontrol ~~ overcontrol   p33 114.157 18.519 6.164  0.000   77.861  150.453
+## 7   child_anx ~~   child_anx   p44   6.880  1.116 6.164  0.000    4.692    9.067
+## 8  parent_anx ~~     perfect   p21  53.360 16.481 3.238  0.001   21.058   85.662
+##    std.lv std.all std.nox
+## 1   0.187   0.157   0.157
+## 2   0.210   0.257   0.257
+## 3   0.072   0.300   0.300
+## 4  91.580   1.000   1.000
+## 5 194.320   1.000   1.000
+## 6 114.157   0.877   0.877
+## 7   6.880   0.910   0.910
+## 8  53.360   0.400   0.400</code></pre>
 <p>This will add two columns to the output, the column <code>std.lv</code> gives standardized parameters when only the exogenous variables are standardized, and the column <code>std.all</code> gives standardized parameters when both exogenous and endogenous variables are standardized. The latter one will give equivalent output as calculated above.</p>
 <p>You can also request standardized estimates using the <code>standardizedSolution()</code> function, which also provides <span class="math inline">\(SE\)</span>s for the standardized estimates themselves. However, we recommend only testing the unstandardized estimates for making inferences about population parameters (e.g., null-hypothesis significance tests), and using standardized estimates only as a standardized measure of effect size.</p>
 </div>
