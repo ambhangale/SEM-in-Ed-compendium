@@ -32,7 +32,7 @@ In general, the aim of path analysis is to describe the dependencies between a s
 
 $\mathbf{\Sigma}_{\text{population}} = \mathbf{\Sigma}_{\text{model}}$,
 
-where $\mathbf{\Sigma}_{\text{population}}$ is the matrix of population variances and covariances of the observed variables, and $\mathbf{\Sigma}_{model}$ is the matrix of variances and covariances of the observed variables as implied by the path model. The population variances and covariances are unknown, as data are usually only collected in a sample that was drawn from the population. Therefore, we estimate the population variances and covariances based on the sample variances and covariances:
+where $\mathbf{\Sigma}_{\text{population}}$ is the matrix of population variances and covariances of the observed variables, and $\mathbf{\Sigma}_{\text{model}}$ is the matrix of variances and covariances of the observed variables as implied by the path model. The population variances and covariances are unknown, as data are usually only collected in a sample that was drawn from the population. Therefore, we estimate the population variances and covariances based on the sample variances and covariances:
 
 $\mathbf{\Sigma}_{\text{population}} \approx \mathbf{\hat\Sigma}_{\text{population}}$ , where $\mathbf{\hat\Sigma}_{\text{population}} = \mathbf{\Sigma}_{\text{sample}}$.
 
@@ -117,7 +117,7 @@ Using the symbols described above, the relations between the variables can be re
 (\#eq:3-04)
 \end{equation}
 
-Here, we can see that exogenous variables $\mathrm{y}_1$ and $\mathrm{y}_2$ are only affected by factors that fall outside the model ($\zeta_1$ and $\zeta_2$), whereas endogenous variable $\mathrm{y}_3$ and $\mathrm{y}_4$ are affected also by the other variables in the model. Note that the effects of the residual factors are left out of these Equations because they are constrained to '1' (i.e., we could write $\mathrm{y}_1$ = (direct effect)$\zeta_1$, where (direct effect) = 1, which thus simplifies to $\mathrm{y}_1$ = $\zeta_1$).
+Here, we can see that exogenous variables $\mathrm{y}_1$ and $\mathrm{y}_2$ are only affected by factors that fall outside the model ($\zeta_1$ and $\zeta_2$), whereas endogenous variable $\mathrm{y}_3$ and $\mathrm{y}_4$ are affected also by the other variables in the model. Note that the effects of the residual factors are left out of these Equations because they are constrained to '1' (i.e., we could write $\mathrm{y}_1 = (\text{direct effect})\zeta_1$, where (direct effect) = 1, which thus simplifies to $\mathrm{y}_1$ = $\zeta_1$).
 
 Instead of writing down the equation for each observed variable, the equations for the observed variables $\mathrm{y}_1$, $\mathrm{y}_2$, $\mathrm{y}_3$, and $\mathrm{y}_4$ can also be written in matrix form:
 
@@ -207,7 +207,7 @@ which yields:
 
 Here, we can see that the equations for variables $\mathrm{y}_1$, $\mathrm{y}_2$, $\mathrm{y}_3$, and $\mathrm{y}_4$ are the same as separate Equations \@ref(eq:3-01) through \@ref(eq:3-04).
 
-The path model as described by Equation 3.07 is used to describe the relationships between the observed variables. In order to find the model for the variances and covariances of the observed variables, we have to re-write Equation \@ref(eq:3-05) as a function of model parameters:
+The path model as described by Equation \@ref(eq:3-07) is used to describe the relationships between the observed variables. In order to find the model for the variances and covariances of the observed variables, we have to re-write Equation \@ref(eq:3-05) as a function of model parameters:
 
 $$\mathrm{y} = \mathbf{B} \mathrm{y} + \zeta \Leftrightarrow$$
 \begin{equation}
@@ -630,7 +630,7 @@ Here, we can see that the variance of the residual factor of parent anxiety ($\p
 Rosseel, Y. (2012). lavaan: An R package for structural equation modeling. *Journal of Statistical Software, 48*(2), 1-36.
 
 ## Appendix {-}
-### Derivations of equation 3.08 {-}
+### Derivations of Equation \@ref(eq:3-08) {-}
 
 $\mathbf{y} = \mathbf{B} \mathbf{y} + \boldsymbol{\zeta} \Leftrightarrow$
 
@@ -646,7 +646,7 @@ $(\mathbf{I} - \mathbf{B})^{-1} (\mathbf{I} - \mathbf{B}) \mathbf{y} = (\mathbf{
 
 $\mathbf{y} = (\mathbf{I} - \mathbf{B})^{-1} \zeta$
 
-### Derivations of equation 3.09 {-}
+### Derivations of Equation \@ref(eq:3-09) {-}
 
 $\mathbf{\Sigma} = \mathrm{COV}(\mathbf{y},\mathbf{y}) \Leftrightarrow$
 
