@@ -289,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10" data-path="ch10.html"><a href="ch10.html"><i class="fa fa-check"></i><b>10</b> Estimation</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="ch10.html"><a href="ch10.html#improper-solutions"><i class="fa fa-check"></i><b>10.1</b> Improper Solutions</a></li>
-<li class="chapter" data-level="10.2" data-path="ch10.html"><a href="ch10.html#specifying-starting-values-in-lavaan"><i class="fa fa-check"></i><b>10.2</b> Specifying starting values in lavaan</a></li>
+<li class="chapter" data-level="10.2" data-path="ch10.html"><a href="ch10.html#specifying-starting-values-in-lavaan"><i class="fa fa-check"></i><b>10.2</b> Specifying starting values in <code>lavaan</code></a></li>
 <li class="chapter" data-level="10.3" data-path="ch10.html"><a href="ch10.html#alternative-estimators"><i class="fa fa-check"></i><b>10.3</b> Alternative estimators</a></li>
 <li class="chapter" data-level="10.4" data-path="ch10.html"><a href="ch10.html#robust-estimators"><i class="fa fa-check"></i><b>10.4</b> Robust estimators</a></li>
 <li class="chapter" data-level="10.5" data-path="ch10.html"><a href="ch10.html#requesting-alternative-and-robust-estimators-in-lavaan"><i class="fa fa-check"></i><b>10.5</b> Requesting alternative and robust estimators in lavaan</a></li>
@@ -837,8 +837,8 @@ Recall that a standardized simple regression slope (<span class="math inline">\(
 <span id="cb31-3"><a href="ch1.html#cb31-3" tabindex="-1"></a>              <span class="fl">4.355</span>,  <span class="fl">0.795</span>, <span class="fl">69.263</span>,  <span class="fl">87.914</span>,</span>
 <span id="cb31-4"><a href="ch1.html#cb31-4" tabindex="-1"></a>              <span class="fl">6.841</span>,  <span class="fl">2.599</span>, <span class="fl">87.914</span>, <span class="fl">282.060</span>)</span>
 <span id="cb31-5"><a href="ch1.html#cb31-5" tabindex="-1"></a>covVals</span></code></pre></div>
-<pre><code>##  [1]   1.010  -0.032   4.355   6.841  -0.032   1.973   0.795   2.599   4.355   0.795
-## [11]  69.263  87.914   6.841   2.599  87.914 282.060</code></pre>
+<pre><code>##  [1]   1.010  -0.032   4.355   6.841  -0.032   1.973   0.795   2.599   4.355   0.795  69.263
+## [12]  87.914   6.841   2.599  87.914 282.060</code></pre>
 <p>If these values were saved as plain text, we could also read the data from a file using the <code>scan()</code> function, which returns a vector that contains the stored values in the file <code>"values.txt"</code>.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="ch1.html#cb33-1" tabindex="-1"></a>covVals <span class="ot">&lt;-</span> <span class="fu">scan</span>(<span class="st">&quot;values.txt&quot;</span>)</span></code></pre></div>
 <p>Either way, we can place these values from the full covariance matrix into a matrix using the <code>matrix()</code> function, specifying how many rows and columns there are:</p>

@@ -3,7 +3,6 @@ TODO:
 
 - remove fixed.x=FALSE wherever irrelevant (e.g., Script 21.1)
 
-
 # Grassroots project 25.4.22
 
 ## 1.4.4
