@@ -47,7 +47,7 @@ The equations for the population covariances $\sigma_{31}$ and $\sigma_{32}$ are
 \end{equation}
 
 \begin{equation}
-\sigma_{32} = \beta_{31}\psi_{32} + \beta_{32}\psi_{22}
+\sigma_{32} =  \beta_{32}\psi_{22} + \beta_{31}\psi_{21}
 (\#eq:7-06)
 \end{equation}
 
@@ -288,7 +288,7 @@ The output for the empirical check of Model 2 does not lead to the same paramete
 \begin{align}
 \beta_{31}\psi_{11} & = \sigma_{31}-\frac{\sigma_{32}\beta_{31}\psi_{21}}{\psi_{22}}\psi_{21} \ \ \ \ \ \ \ \ \ \ \ \ (7.09a)\\ \\
 \beta_{31}\psi_{11}\psi_{22} & = \sigma_{31}\psi_{22} - (\sigma_{32}-\beta_{31} \psi_{21})\psi_{21} \ \ \ \ \ \ \ \ (7.09b)\\ \\
-\beta_{31}\psi_{11}\psi_{22} & = \sigma_{31}\psi_{22} - \sigma_{32}\psi_{21} + \beta_{31}\psi^2_{22} \ \ \ \ \ \ \ \ (7.09c)\\ \\
+\beta_{31}\psi_{11}\psi_{22} & = \sigma_{31}\psi_{22} - \sigma_{32}\psi_{21} + \beta_{31}\psi^2_{21} \ \ \ \ \ \ \ \ (7.09c)\\ \\
 \beta_{31}\psi_{11}\psi_{22} - \beta_{31}\psi^2_{21} & = \sigma_{31}\psi_{22} - \sigma_{32}\psi_{21} \ \ \ \ \ \ \ \ \ \ \ \ (7.09d)\\ \\
 \beta_{31}(\psi_{11}\psi_{22} -\psi^2_{21}) & = \sigma_{31}\psi_{22} - \sigma_{32}\psi_{21} \ \ \ \ \ \ \ \ \ \ \ \ (7.09e)
 \end{align}
