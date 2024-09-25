@@ -39,7 +39,7 @@ The calculation of standardized regression coefficients can be done for the comp
 \end{equation}
 ```
 
-In this expression, $\hat\mathbf\Sigma_{\text{model}}$ is the matrix containing the model-implied variances and covariances. As an alternative, the sample matrix of (co)variances could be used. Often, the sample variances and the model-implied variances are equal. However, in some situations the constraints imposed on the model can cause differences between the model-implied and sample variances. For reasons of consistency, we will always use the variances as implied by the model.
+In this expression, $\hat{\mathbf\Sigma}_{\text{model}}$ is the matrix containing the model-implied variances and covariances. As an alternative, the sample matrix of (co)variances could be used. Often, the sample variances and the model-implied variances are equal. However, in some situations the constraints imposed on the model can cause differences between the model-implied and sample variances. For reasons of consistency, we will always use the variances as implied by the model.
 
 In our example, the matrix of standardized regression coefficients is:
 
@@ -142,7 +142,7 @@ BETA <- Estimates$beta[obsnames, obsnames]
 PSI <- Estimates$psi[obsnames, obsnames]
 ```
 
-We also need the model-implied covariance matrix, $\hatΣ$ model, which we can calculate with the parameter estimates, using $\hat{\mathbf\Sigma}_{\text{model}} = (\mathbf{I}-\hat{\mathbf{B}})^{-1} \hat{\mathbf\Psi}[(\mathbf{I}-\hat{\mathbf{B}})^{-1}]^\mathbf{T}$. We already extracted the parameter estimates for the $\hat{\mathbf{B}}$ and $\hat{\mathbf{\Psi}}$ matrices (into the objects `BETA` and `PSI`), so now we create an identity matrix `IDEN` with dimensions 4 × 4 and then calculate $\hat\mathbf\Sigma_{\text{model}}$ using:
+We also need the model-implied covariance matrix, $\hatΣ$ model, which we can calculate with the parameter estimates, using $\hat{\mathbf\Sigma}_{\text{model}} = (\mathbf{I}-\hat{\mathbf{B}})^{-1} \hat{\mathbf\Psi}[(\mathbf{I}-\hat{\mathbf{B}})^{-1}]^\mathbf{T}$. We already extracted the parameter estimates for the $\hat{\mathbf{B}}$ and $\hat{\mathbf{\Psi}}$ matrices (into the objects `BETA` and `PSI`), so now we create an identity matrix `IDEN` with dimensions 4 × 4 and then calculate $\hat{\mathbf\Sigma}_{\text{model}}$ using:
 
 ```{r}
 SIGMA <- solve(IDEN - BETA) %*% PSI %*% t(solve(IDEN - BETA))
