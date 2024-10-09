@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>25 MIMIC (and RFA) models | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="25 MIMIC (and RFA) models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="25 MIMIC (and RFA) models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -55,7 +55,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -241,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="ch7.html"><a href="ch7.html"><i class="fa fa-check"></i><b>7</b> Identification</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="ch7.html"><a href="ch7.html#assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i><b>7.1</b> Assessment of identification using the elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
-<li class="chapter" data-level="7.2" data-path="ch7.html"><a href="ch7.html#assessing-identification-through-heuristics-rules-of-thumb"><i class="fa fa-check"></i><b>7.2</b> Assessing identification through heuristics (rules of thumb)</a>
+<li class="chapter" data-level="7.2" data-path="ch7.html"><a href="ch7.html#assessing-identification-through-heuristics"><i class="fa fa-check"></i><b>7.2</b> Assessing identification through heuristics</a>
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="ch7.html"><a href="ch7.html#the-recursive-rule"><i class="fa fa-check"></i><b>7.2.1</b> The recursive rule</a></li>
 <li class="chapter" data-level="7.2.2" data-path="ch7.html"><a href="ch7.html#the-order-condition"><i class="fa fa-check"></i><b>7.2.2</b> The order condition</a></li>
@@ -673,7 +673,7 @@ Figure 25.2: A MIMIC model.
 <span id="cb403-16"><a href="ch25.html#cb403-16" tabindex="-1"></a>factormodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(model1, <span class="at">data =</span> humordat)</span>
 <span id="cb403-17"><a href="ch25.html#cb403-17" tabindex="-1"></a></span>
 <span id="cb403-18"><a href="ch25.html#cb403-18" tabindex="-1"></a><span class="fu">summary</span>(factormodelOut, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.18.1970 ended normally after 22 iterations
+<pre><code>## lavaan 0.6-19 ended normally after 22 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -734,7 +734,7 @@ Figure 25.2: A MIMIC model.
 <span id="cb405-26"><a href="ch25.html#cb405-26" tabindex="-1"></a></span>
 <span id="cb405-27"><a href="ch25.html#cb405-27" tabindex="-1"></a><span class="do">## results</span></span>
 <span id="cb405-28"><a href="ch25.html#cb405-28" tabindex="-1"></a><span class="fu">summary</span>(MIMICgenderageOut)</span></code></pre></div>
-<pre><code>## lavaan 0.6.18.1970 ended normally after 30 iterations
+<pre><code>## lavaan 0.6-19 ended normally after 30 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -813,7 +813,7 @@ Figure 25.2: A MIMIC model.
 <span id="cb411-5"><a href="ch25.html#cb411-5" tabindex="-1"></a>MIMICgenderage2Out <span class="ot">&lt;-</span> <span class="fu">update</span>(MIMICgenderageOut, <span class="at">model =</span> MIMIC_genderage2)</span>
 <span id="cb411-6"><a href="ch25.html#cb411-6" tabindex="-1"></a></span>
 <span id="cb411-7"><a href="ch25.html#cb411-7" tabindex="-1"></a><span class="fu">summary</span>(MIMICgenderage2Out, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.18.1970 ended normally after 35 iterations
+<pre><code>## lavaan 0.6-19 ended normally after 35 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB

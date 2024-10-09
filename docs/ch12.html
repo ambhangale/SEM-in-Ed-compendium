@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12 Path Analysis with Categorical Outcomes | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="12 Path Analysis with Categorical Outcomes | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12 Path Analysis with Categorical Outcomes | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -55,7 +55,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -241,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="ch7.html"><a href="ch7.html"><i class="fa fa-check"></i><b>7</b> Identification</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="ch7.html"><a href="ch7.html#assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i><b>7.1</b> Assessment of identification using the elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
-<li class="chapter" data-level="7.2" data-path="ch7.html"><a href="ch7.html#assessing-identification-through-heuristics-rules-of-thumb"><i class="fa fa-check"></i><b>7.2</b> Assessing identification through heuristics (rules of thumb)</a>
+<li class="chapter" data-level="7.2" data-path="ch7.html"><a href="ch7.html#assessing-identification-through-heuristics"><i class="fa fa-check"></i><b>7.2</b> Assessing identification through heuristics</a>
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="ch7.html"><a href="ch7.html#the-recursive-rule"><i class="fa fa-check"></i><b>7.2.1</b> The recursive rule</a></li>
 <li class="chapter" data-level="7.2.2" data-path="ch7.html"><a href="ch7.html#the-order-condition"><i class="fa fa-check"></i><b>7.2.2</b> The order condition</a></li>
@@ -609,7 +609,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We will use example data provided on the <a href="http://www.statmodel.com">M<em>plus</em>} website}</a> for a technical report (Muthén, 2011, p. 24). The example data can be downloaded onto your computer from the report’s <a href="http://www.statmodel.com/examples/penn.shtml#extendSEM">supplementary materials</a>, or you can provide the URL directly to <code>read.table(file=)</code>, as shown below. Note that the data are in summary format (i.e., a table with frequencies for each combination of categories for the 3 variables). The <code>read.table()</code> output is therefore transformed into a standard <code>data.frame</code> with 1 row per subject.</p>
 <div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="ch12.html#cb237-1" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">&quot;http://www.statmodel.com/examples/shortform/4cat%20m.dat&quot;</span>,</span>
 <span id="cb237-2"><a href="ch12.html#cb237-2" tabindex="-1"></a>                 <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;intention&quot;</span>, <span class="st">&quot;intervention&quot;</span>, <span class="st">&quot;ciguse&quot;</span>, <span class="st">&quot;w&quot;</span>))</span>
-<span id="cb237-3"><a href="ch12.html#cb237-3" tabindex="-1"></a>dd<span class="sc">$</span>intention <span class="ot">&lt;-</span> dd<span class="sc">$</span>intention <span class="sc">-</span> 1L <span class="co"># make the lowest category 0, not 1</span></span>
+<span id="cb237-3"><a href="ch12.html#cb237-3" tabindex="-1"></a>dd<span class="sc">$</span>intention <span class="ot">&lt;-</span> dd<span class="sc">$</span>intention <span class="sc">-</span> <span class="dv">1</span><span class="dt">L</span> <span class="co"># make the lowest category 0, not 1</span></span>
 <span id="cb237-4"><a href="ch12.html#cb237-4" tabindex="-1"></a><span class="do">## transform frequency table to casewise data</span></span>
 <span id="cb237-5"><a href="ch12.html#cb237-5" tabindex="-1"></a>myData <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dd), <span class="cf">function</span>(RR) {</span>
 <span id="cb237-6"><a href="ch12.html#cb237-6" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="fu">rep</span>(<span class="dv">1</span>, dd<span class="sc">$</span>w[RR]) <span class="sc">%*%</span> <span class="fu">as.matrix</span>(dd[RR, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]))</span>
@@ -947,7 +947,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <span id="cb269-7"><a href="ch12.html#cb269-7" tabindex="-1"></a><span class="st">&#39;</span></span>
 <span id="cb269-8"><a href="ch12.html#cb269-8" tabindex="-1"></a>fit.part <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.part, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb269-9"><a href="ch12.html#cb269-9" tabindex="-1"></a><span class="fu">summary</span>(fit.part, <span class="at">standardized =</span> <span class="cn">TRUE</span>, <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.18.1970 ended normally after 13 iterations
+<pre><code>## lavaan 0.6-19 ended normally after 13 iterations
 ## 
 ##   Estimator                                       DWLS
 ##   Optimization method                           NLMINB
@@ -1014,11 +1014,10 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <pre><code>## 
 ## Scaled Chi-Squared Difference Test (method = &quot;satorra.2000&quot;)
 ## 
-## lavaan NOTE:
-##     The &quot;Chisq&quot; column contains standard test statistics, not the
-##     robust test that should be reported per model. A robust difference
-##     test is a function of two standard (not robust) statistics.
-##  
+## lavaan-&gt;lavTestLRT():  
+##    lavaan NOTE: The &quot;Chisq&quot; column contains standard test statistics, not the robust 
+##    test that should be reported per model. A robust difference test is a function of 
+##    two standard (not robust) statistics.
 ##          Df AIC BIC  Chisq Chisq diff Df diff Pr(&gt;Chisq)
 ## fit.part  0         0.0000                              
 ## fit.full  1         1.2648     1.9567       1     0.1619</code></pre>
@@ -1095,7 +1094,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <span id="cb285-15"><a href="ch12.html#cb285-15" tabindex="-1"></a><span class="st">&#39;</span></span>
 <span id="cb285-16"><a href="ch12.html#cb285-16" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.Imai, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="fu">c</span>(<span class="st">&quot;ciguse&quot;</span>,<span class="st">&quot;intention&quot;</span>))</span>
 <span id="cb285-17"><a href="ch12.html#cb285-17" tabindex="-1"></a><span class="fu">summary</span>(fit, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6.18.1970 ended normally after 13 iterations
+<pre><code>## lavaan 0.6-19 ended normally after 13 iterations
 ## 
 ##   Estimator                                       DWLS
 ##   Optimization method                           NLMINB

@@ -90,7 +90,6 @@ eq:14-13
 eq:14-14
 eq:14-15
 fig:fig14-3
-eq:14-16
 eq:14-17
 eq:15-01
 eq:15-02
@@ -226,7 +225,7 @@ request-standardized-output-with-lavaan
 standardizing-indirect-and-total-effects
 ch7
 assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel
-assessing-identification-through-heuristics-rules-of-thumb
+assessing-identification-through-heuristics
 the-recursive-rule
 the-order-condition
 the-rank-condition

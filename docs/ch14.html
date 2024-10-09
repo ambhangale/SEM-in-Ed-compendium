@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14 Factor Models | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="14 Factor Models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14 Factor Models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -55,7 +55,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -241,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="ch7.html"><a href="ch7.html"><i class="fa fa-check"></i><b>7</b> Identification</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="ch7.html"><a href="ch7.html#assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i><b>7.1</b> Assessment of identification using the elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
-<li class="chapter" data-level="7.2" data-path="ch7.html"><a href="ch7.html#assessing-identification-through-heuristics-rules-of-thumb"><i class="fa fa-check"></i><b>7.2</b> Assessing identification through heuristics (rules of thumb)</a>
+<li class="chapter" data-level="7.2" data-path="ch7.html"><a href="ch7.html#assessing-identification-through-heuristics"><i class="fa fa-check"></i><b>7.2</b> Assessing identification through heuristics</a>
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="ch7.html"><a href="ch7.html#the-recursive-rule"><i class="fa fa-check"></i><b>7.2.1</b> The recursive rule</a></li>
 <li class="chapter" data-level="7.2.2" data-path="ch7.html"><a href="ch7.html#the-order-condition"><i class="fa fa-check"></i><b>7.2.2</b> The order condition</a></li>
@@ -745,34 +745,9 @@ Figure 14.3: Factor model of the School Attitudes Questionnaire including common
 \end{bmatrix}
 \]</span></p>
 <p>and thus <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span> is given by:</p>
-<span class="math display" id="eq:14-16">\[\begin{equation}
-\mathbf\Sigma_{\text{model}} =
-\begin{bmatrix}
-
-\lambda^2_{11} \varphi_{11} +\theta_{11} \\
-
-\lambda_{11}\lambda_{21}\varphi_{11} &amp; \lambda^2_{21}\varphi_{11}+\theta_{22} \\
-
-\lambda_{11}\lambda_{31}\varphi_{11} &amp; \lambda_{21}\lambda_{31}\varphi_{11} &amp; \lambda^2_{31}\varphi_{11}+\theta_{33}\\
-
-\lambda_{11}\lambda_{42} \varphi_{21} &amp;  \lambda_{21}\lambda_{42}\varphi_{21} &amp; \lambda_{31}\lambda_{42}\varphi_{21} &amp; \lambda^2_{42}\varphi_{22}+\theta_{44}\\
-
-\lambda_{11}\lambda_{52} \varphi_{21} &amp;  \lambda_{21}\lambda_{52} \varphi_{21} &amp; \lambda_{31}\lambda_{52}\varphi_{21} &amp; \lambda_{42}\lambda_{52}\varphi_{22} &amp; \lambda^2_{52}\varphi_{22}+\theta_{55}\\
-
-\lambda_{11}\lambda_{62}\varphi_{21} &amp;  \lambda_{21}\lambda_{62} \varphi_{21} &amp; \lambda_{31}\lambda_{62}\varphi_{21} &amp; \lambda_{42}\lambda_{62}\varphi_{22} &amp; \lambda_{52}\lambda_{62}\varphi_{22} &amp; \lambda^2_{62}\varphi_{22}+\theta_{66}\\
-
-\lambda_{11}\lambda_{73}\varphi_{31} &amp;  \lambda_{21}\lambda_{73}\varphi_{31} &amp; \lambda_{31}\lambda_{73}\varphi_{31} &amp; \lambda_{42}\lambda_{73}\varphi_{32} &amp; \lambda_{52}\lambda_{73}\varphi_{32} &amp;\lambda_{62}\lambda_{73}\varphi_{32} &amp; \lambda^2_{73} \varphi_{33}+\theta_{77}\\
-
-\lambda_{11}\lambda_{83} \varphi_{31} &amp; \lambda_{21}\lambda_{83}\varphi_{31}  &amp;\lambda_{31}\lambda_{83}\varphi_{31} &amp; \lambda_{42}\lambda_{83}\varphi_{32} &amp; \lambda_{52}\lambda_{83}\varphi_{32} &amp; \lambda_{62}\lambda_{83}\varphi_{32} &amp; \lambda_{72}\lambda_{83}\varphi_{32} &amp; \lambda^2_{83}\varphi_{33}+\theta_{88}\\
-
-\lambda_{11}\lambda_{93} \varphi_{31} &amp;  \lambda_{21}\lambda_{93} \varphi_{31} &amp; \lambda_{31}\lambda_{93}\varphi_{31} &amp; \lambda_{42}\lambda_{93}\varphi_{32} &amp; \lambda_{52}\lambda_{93}\varphi_{32} &amp; \lambda_{62}\lambda_{93}\varphi_{32} &amp; \lambda_{73}\lambda_{93}\varphi_{32} &amp; \lambda_{83}\lambda_{93}\varphi_{32} &amp; \lambda^2_{93}\varphi_{33}+\theta_{99}
-
-\end{bmatrix}
-\tag{14.16}
-\end{equation}\]</span>
-<p>We can thus evaluate whether the factor model gives a good description of the linear dependencies between the observed variables by evaluating <span class="math inline">\(\mathbf\Sigma_{population} = \mathbf\Sigma_{model}\)</span>, where <span class="math inline">\(\mathbf\Sigma_{population}\)</span> is given by:</p>
+<p>We can thus evaluate whether the factor model gives a good description of the linear dependencies between the observed variables by evaluating <span class="math inline">\(\mathbf\Sigma_\text{population} = \mathbf\Sigma_\text{model}\)</span>, where <span class="math inline">\(\mathbf\Sigma_\text{population}\)</span> is given by:</p>
 <span class="math display" id="eq:14-17">\[\begin{equation}
-\mathbf\Sigma_{population}=
+\mathbf\Sigma_\text{population}=
 \begin{bmatrix}
 \sigma_{11} \\
 \sigma_{21} &amp; \sigma_{22} \\
@@ -784,12 +759,12 @@ Figure 14.3: Factor model of the School Attitudes Questionnaire including common
 \sigma_{81} &amp; \sigma_{82} &amp; \sigma_{83} &amp; \sigma_{84} &amp; \sigma_{85} &amp; \sigma_{86} &amp; \sigma_{87} &amp; \sigma_{88} \\
 \sigma_{91} &amp; \sigma_{92} &amp; \sigma_{93} &amp; \sigma_{94} &amp; \sigma_{95} &amp; \sigma_{96} &amp; \sigma_{97} &amp; \sigma_{98} &amp; \sigma_{99}
 \end{bmatrix}.
-\tag{14.17}
+\tag{14.16}
 \end{equation}\]</span>
 </div>
 <div id="identification-of-model-parameters-in-a-factor-model" class="section level2 hasAnchor" number="14.4">
 <h2><span class="header-section-number">14.4</span> Identification of model parameters in a factor model<a href="ch14.html#identification-of-model-parameters-in-a-factor-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The population variances (<span class="math inline">\(\sigma_{ii}\)</span>), and covariances (<span class="math inline">\(\sigma_{ij}\)</span>) that feature in Equation <a href="ch14.html#eq:14-17">(14.17)</a> can be estimated with sample variances (<span class="math inline">\(s_{ii}\)</span>), and covariances (<span class="math inline">\(s_{ij}\)</span>). Similar to the identification of path models, the factor model is identified if it is possible to uniquely express each of the model parameters that feature in Equation <a href="ch14.html#eq:14-16">(14.16)</a> as functions of the variances and covariances of Equation <a href="ch14.html#eq:14-17">(14.17)</a>. However, the identification of latent factors requires additional restrictions. Because latent factors are unobserved variables, we do not know the scales of measurements of these variables. Because the scales of the common factors are not defined, it is not possible to estimate both the variance and factor loading of a latent factor. To give scales to the latent factors, one can either fix the factor variance or one of the factor loadings at a nonzero value. The identification of residual factors—which also appear in path models—is usually done by using a scaling constant ‘1’ for the associated residual factor loading (i.e., the direct effect of the residual factor on the associated observed variable). These restrictions are applied by default by most computer programs.</p>
+<p>The population variances (<span class="math inline">\(\sigma_{ii}\)</span>), and covariances (<span class="math inline">\(\sigma_{ij}\)</span>) that feature in Equation <a href="ch14.html#eq:14-17">(14.16)</a> can be estimated with sample variances (<span class="math inline">\(s_{ii}\)</span>), and covariances (<span class="math inline">\(s_{ij}\)</span>). Similar to the identification of path models, the factor model is identified if it is possible to uniquely express each of the model parameters that feature in Equation <a href="#eq:14-16">(<strong>??</strong>)</a> as functions of the variances and covariances of Equation <a href="ch14.html#eq:14-17">(14.16)</a>. However, the identification of latent factors requires additional restrictions. Because latent factors are unobserved variables, we do not know the scales of measurements of these variables. Because the scales of the common factors are not defined, it is not possible to estimate both the variance and factor loading of a latent factor. To give scales to the latent factors, one can either fix the factor variance or one of the factor loadings at a nonzero value. The identification of residual factors—which also appear in path models—is usually done by using a scaling constant ‘1’ for the associated residual factor loading (i.e., the direct effect of the residual factor on the associated observed variable). These restrictions are applied by default by most computer programs.</p>
 <p>For the identification of common factors, the researcher can chose between the two types of identification restrictions: through restriction of common-factor variances or through restriction of factor loadings. For example, to identify the common factors from our illustrative example, one can fix either the factor variances at a nonzero value (e.g., <span class="math inline">\(\varphi_{11} = 1, \varphi_{22} = 1, \varphi_{33} = 1\)</span>) or one factor loading for each factor (e.g., <span class="math inline">\(\lambda_{11} = 1, \lambda_{22} = 1\)</span>, and <span class="math inline">\(\lambda_{33} = 1\)</span>. As the scaling constant is usually ‘1’, these two types of identification constraints are referred to as: the ‘unit variance identification constraint’ (UVI constraint) and the ‘unit loading identification constraint’ (ULI constraint). The UVI method is also referred to as the ‘fixed-factor’ method, and the ULI method is referred to as the ‘marker-variable’ or ‘reference-variable’ method. A third method is related to ULI, but instead of constraining a single loading to 1, all loadings are estimated under the constraint that the mean of the loadings is 1—this is called the ‘effects-coding’ method.</p>
 <p>Traditionally, we would choose a “marker” or “reference” variable that is thought to best represent the latent construct (i.e., the perfect indicator, <em>if</em> it did not have measurement error), and we would fix the loading of that indicator to 1 (ULI constraint). The logic behind ULI was that fixing the factor loading to 1 implied a 1-unit increase in the reference indicator (on average) for each 1-unit increase in the common factor. Thus, the common factor was often said to “be on the same scale” as the reference indicator. However, that would only be true if the reference indicator had no measurement error (implying its residual variance could be fixed to zero). Holding the reliability of an indicator (i.e., the proportion of its variance that is common-factor variance ) constant, the more measurement error the indicator has, the greater its estimated residual variance and the lower its estimated factor loading would be. So when the reference indicator does have measurement error (which we assume implicitly, otherwise we wouldn’t need a common-factor model for the latent construct), the ULI method sets the scale of the common factor to the scale of <em>the common-factor component</em> of the reference indicator, not to its total (i.e., its observed) scale (Steiger, 2002).</p>
 <p>So although the ULI method has been most popular in SEM for decades, its popularity is based on a misconception. Latent variables have no implicit scale because they are unobserved by definition, and no statistical trick can give them a meaningful scale. Units of standard deviation are familiar because we often use standardized effect sizes in other contexts (e.g., Cohen’s <em>d</em> is a standardized mean difference, a correlation is a standardized simple regression slope). Standardized estimates are available regardless of the scaling constraint, so the UVI / fixed-factor method is not necessarily any better—both methods lead to identical model fit, and the estimated factor loadings are proportionally equivalent relative to the factor variance, whether it is fixed to 1 or set using the common-factor component of an indicator. However, the <span class="math inline">\(SE\)</span>s of the factor loadings are sensitive to the different identification methods (Gonzalez &amp; Griffin, 2001), so Wald <span class="math inline">\(z\)</span> tests of significance for factor loadings are affected. This may only lead to different conclusions about the null hypothesis that <span class="math inline">\(λ_{ij} = 0\)</span> when indicators have much more measurement error than common-factor variance, or when <span class="math inline">\(N\)</span> is quite low. However, it is troubling to think that an estimated <span class="math inline">\(SE\)</span> depends on an arbitrary scaling constraint. The UVI / fixed-factor method may be preferable if only because the specified factor variance is arbitrary anyway, and ULI seems to imply that one of the factor loadings is a known quantity.</p>

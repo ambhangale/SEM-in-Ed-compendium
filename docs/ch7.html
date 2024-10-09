@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7 Identification | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="7 Identification | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 Identification | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -55,7 +55,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -241,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="ch7.html"><a href="ch7.html"><i class="fa fa-check"></i><b>7</b> Identification</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="ch7.html"><a href="ch7.html#assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel"><i class="fa fa-check"></i><b>7.1</b> Assessment of identification using the elements of <span class="math inline">\(\mathbf\Sigma_{\text{population}}\)</span> and <span class="math inline">\(\mathbf\Sigma_{\text{model}}\)</span></a></li>
-<li class="chapter" data-level="7.2" data-path="ch7.html"><a href="ch7.html#assessing-identification-through-heuristics-rules-of-thumb"><i class="fa fa-check"></i><b>7.2</b> Assessing identification through heuristics (rules of thumb)</a>
+<li class="chapter" data-level="7.2" data-path="ch7.html"><a href="ch7.html#assessing-identification-through-heuristics"><i class="fa fa-check"></i><b>7.2</b> Assessing identification through heuristics</a>
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="ch7.html"><a href="ch7.html#the-recursive-rule"><i class="fa fa-check"></i><b>7.2.1</b> The recursive rule</a></li>
 <li class="chapter" data-level="7.2.2" data-path="ch7.html"><a href="ch7.html#the-order-condition"><i class="fa fa-check"></i><b>7.2.2</b> The order condition</a></li>
@@ -599,13 +599,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="ch7" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">7</span> Identification<a href="ch7.html#ch7" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The problem of identification considers the issue of whether there is enough “known” information to obtain unique estimates of the model that is specified (i.e., the “unknown” information). In structural equation modeling, the known pieces of information are the sample variances and covariances of the observed variables, and the unknown pieces of information are the model parameters. When the model is “under identified”, this means that there is not enough known information to yield unique parameter estimates. When there are just as many knowns as unknowns, the model is “just identified”. However, usually we are interested in so called “over identified” models, where there are more knowns than unknowns. Identification is an important but rather difficult topic of structural equation modeling, and there are many different ways to evaluate the identification status of a model.</p>
+<p>The problem of identification considers the issue of whether there is enough “known” information to obtain unique estimates of the model that is specified (i.e., the “unknown” information). In structural equation modeling, the known pieces of information are the sample variances and covariances of the observed variables, and the unknown pieces of information are the model parameters. When the model is “underidentified”, this means that there is not enough known information to yield unique parameter estimates. When there are just as many knowns as unknowns, the model is “just identified”. However, usually we are interested in so called “overidentified” models, where there are more knowns than unknowns. Identification is an important but rather difficult topic of structural equation modeling, and there are many different ways to evaluate the identification status of a model.</p>
 <p>The first, and easiest way to evaluate whether a model might be identified is to evaluate whether the number of model parameters to be estimated is equal to or smaller than the number of nonredundant elements in the observed covariance matrix:</p>
 <span class="math display" id="eq:7-01">\[\begin{equation}
 q \le (p(p+1)) ½,
 \tag{7.1}
 \end{equation}\]</span>
-<p>where <span class="math inline">\(p\)</span> is the number of observed variables, and <span class="math inline">\(q\)</span> is the number of free parameters in the model. This is a general rule that can be applied to all structural equation models. However, it is a ‘necessary but not sufficient’ condition for identification. This means that models that have a negative number of degrees of freedom are surely under identified. Models that have at least zero degrees of freedom might be identified. Evaluation of Equation <a href="ch7.html#eq:7-01">(7.1)</a> for our illustrative example of child anxiety yields a total of 10 knowns (i.e., <span class="math inline">\(p = 4\)</span>), and 8 unknowns (i.e., <span class="math inline">\(\beta_{31}\)</span>, <span class="math inline">\(\beta_{32}\)</span>, <span class="math inline">\(\beta_{43}\)</span>, <span class="math inline">\(\psi_{11}\)</span>, <span class="math inline">\(\psi_{22}\)</span>, <span class="math inline">\(\psi_{33}\)</span>, <span class="math inline">\(\psi_{44}\)</span> and <span class="math inline">\(\psi_{21}\)</span>). The difference between the number or nonredundant elements in the covariance matrix and the number of free parameters in the model are the ‘degrees of freedom’. The model of our example thus has 2 degrees of freedom.</p>
+<p>where <span class="math inline">\(p\)</span> is the number of observed variables, and <span class="math inline">\(q\)</span> is the number of free parameters in the model. This is a general rule that can be applied to all structural equation models. However, it is a ‘necessary but not sufficient’ condition for identification. This means that models that have a negative number of degrees of freedom are surely not identified. Models that have at least zero degrees of freedom might be identified. Evaluation of Equation <a href="ch7.html#eq:7-01">(7.1)</a> for our illustrative example of child anxiety yields a total of 10 knowns (i.e., <span class="math inline">\(p = 4\)</span>), and 8 unknowns (i.e., <span class="math inline">\(\beta_{31}\)</span>, <span class="math inline">\(\beta_{32}\)</span>, <span class="math inline">\(\beta_{43}\)</span>, <span class="math inline">\(\psi_{11}\)</span>, <span class="math inline">\(\psi_{22}\)</span>, <span class="math inline">\(\psi_{33}\)</span>, <span class="math inline">\(\psi_{44}\)</span> and <span class="math inline">\(\psi_{21}\)</span>). The difference between the number or nonredundant elements in the covariance matrix and the number of free parameters in the model are the ‘degrees of freedom’. The model of our example thus has 2 degrees of freedom.</p>
 <p>There are different approaches to further assess whether a model is identified. In this chapter we will first discuss the symbolic or theoretical identification of model parameters. In addition, we will explain some rules of thumb that can be applied in order to facilitate the evaluation of model identification. We only discuss identification of path models, identification of factor models will be discussed in a later chapter.</p>
 <p>Some conditions related to identification are sufficient, which means that if the condition holds, the model is surely identified (at least theoretically), but there may be other identified models for which the condition does not hold. Other conditions are necessary, which means that if the condition holds, the model might be identified. If a necessary condition doesn’t hold, the model is surely not identified.</p>
 <div id="assessment-of-identification-using-the-elements-of-mathbfsigma_textpopulation-and-mathbfsigma_textmodel" class="section level2 hasAnchor" number="7.1">
@@ -631,7 +631,7 @@ q \le (p(p+1)) ½,
 \tag{7.5}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:7-06">\[\begin{equation}
-\sigma_{32} = \beta_{31}\psi_{32} + \beta_{32}\psi_{22}
+\sigma_{32} =  \beta_{32}\psi_{22} + \beta_{31}\psi_{21}
 \tag{7.6}
 \end{equation}\]</span></p>
 <p>Given Equations <a href="ch7.html#eq:7-02">(7.2)</a> – <a href="ch7.html#eq:7-04">(7.4)</a>, both equations have two unknowns, <span class="math inline">\(\beta_{31}\)</span> and <span class="math inline">\(\beta_{32}\)</span>. Because both equations share the same two unknowns, we can rewrite the equations such that the model parameters <span class="math inline">\(\beta_{31}\)</span> and <span class="math inline">\(\beta_{32}\)</span> are on the left side of the equations and use this information to yield unique functions for each model parameter in terms population parameters. First, we rewrite Equations <a href="ch7.html#eq:7-05">(7.5)</a> and <a href="ch7.html#eq:7-06">(7.6)</a>:</p>
@@ -674,8 +674,8 @@ q \le (p(p+1)) ½,
 <p>All model parameters of Equation <a href="ch3.html#eq:3-10">(3.10)</a> are identified and therefore the model of Equation <a href="ch3.html#eq:3-10">(3.10)</a> is identified. Moreover, we did not use the <span class="math inline">\(\sigma_{42}\)</span> and <span class="math inline">\(\sigma_{43}\)</span> equations yet, which shows that the model given by Equation <a href="ch3.html#eq:3-10">(3.10)</a> is over-identified. Specifically, we have two more nonredundant elements in the population covariance matrix than the number of unknown model parameters (i.e., the model has two degrees of freedom). The equations for <span class="math inline">\(\sigma_{41}\)</span>,<span class="math inline">\(\sigma_{42}\)</span> and <span class="math inline">\(\sigma_{43}\)</span> can all be used to express <span class="math inline">\(\beta_{43}\)</span> in terms of population variances and covariances. To illustrate this over identification of <span class="math inline">\(\beta_{43}\)</span> these different equations are given in the <a href="ch7.html#appendix-1">Appendix</a>.</p>
 <p>The expression of model parameters in terms of population variances and covariances can be used to arrive at a theoretical assessment of identification. However, a model that is theoretically identified might not necessarily be empirically identified. The theoretical identification of model parameter rests on the assumption that for each population parameter there is at least one estimate in terms of sample parameters. However, this assumption might be violated when some of the observed variables in the model exhibit very large or very small correlations. For example, when the sample covariance between two variables is zero, then the equations for the unknown parameters might involve division by zero, which is not possible. Therefore, researchers should always be aware of identification problems, even if the model is theoretically identified.</p>
 </div>
-<div id="assessing-identification-through-heuristics-rules-of-thumb" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> Assessing identification through heuristics (rules of thumb)<a href="ch7.html#assessing-identification-through-heuristics-rules-of-thumb" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="assessing-identification-through-heuristics" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Assessing identification through heuristics<a href="ch7.html#assessing-identification-through-heuristics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Because the symbolic assessment of identification quickly becomes very complex as the model grows, researchers have developed a number of rules of thumb to assess identification. The most well-known rules of thumb for path models are the “Recursive Rule”, the “Order Condition”, and the “Rank Condition”. These rules are explained in detail on pages 98-104 of Bollen (1988), but below we give a brief description of each of these rules.</p>
 <div id="the-recursive-rule" class="section level3 hasAnchor" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> The recursive rule<a href="ch7.html#the-recursive-rule" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -684,7 +684,7 @@ q \le (p(p+1)) ½,
 <div id="the-order-condition" class="section level3 hasAnchor" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> The order condition<a href="ch7.html#the-order-condition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For identification of nonrecursive models we need additional rules. Where the previous rules apply the model as a whole, the order condition (and the rank condition) apply to the separate equations of the endogenous variables in the model (i.e., Equations <a href="ch3.html#eq:3-03">(3.3)</a> and <a href="ch3.html#eq:3-04">(3.4)</a> from our illustrative example). Each equation has to meet the condition for the model to be identified. One other difference with the previous conditions, is that for the order and rank conditions it is assumed that all residual covariances between the residual factors of endogenous variables are free to be estimated. The advantage of this assumption is that when all the equations of a model meet the rank and order conditions, than all the elements in <span class="math inline">\(\mathbf\Psi\)</span> that correspond to the residual factors of endogenous variables are identified. However, usually we know that some of these elements of <span class="math inline">\(\mathbf\Psi\)</span> are restricted to zero, and such restrictions may help in the identification of model parameters. This knowledge is not taken into account with the rank and order conditions.</p>
-<p>The order condition entails that for each equation of an endogenous variable, the number of endogenous variables excluded from the equation needs to be at least one less than the total number of endogenous variables (<span class="math inline">\(g – 1\)</span>). The order condition is a necessary but not sufficient condition. In order to evaluate the order condition, one can calculate matrix <span class="math inline">\(\mathbf{C}\)</span>, which is <span class="math inline">\((\mathbf{I} – \mathbf{B}_g | -\mathbf{B}_x)\)</span>. <span class="math inline">\(\mathbf{B}_g\)</span> refers to the part of the <span class="math inline">\(\mathbf{B}\)</span> matrix that contains the regression coefficients between the endogenous variables, and <span class="math inline">\(\mathbf{B}_x\)</span> refers to the part of the <span class="math inline">\(\mathbf{B}\)</span> matrix that contains the regression coefficient between the exogenous and endogenous variables. For example, the <span class="math inline">\(\mathbf{C}\)</span> matrix for our illustrative example of the development of child anxiety is:</p>
+<p>The order condition entails that for each equation of an endogenous variable, the number of endogenous variables excluded from the equation needs to be at least one less than the total number of endogenous variables (<span class="math inline">\(g – 1\)</span>). The order condition is a necessary but not sufficient condition. In order to evaluate the order condition, one can calculate matrix <span class="math inline">\(\mathbf{C}\)</span>, which is <span class="math inline">\((\mathbf{I} – \mathbf{B}_g | -\mathbf{B}_x)\)</span>. <span class="math inline">\(\mathbf{B}_g\)</span> refers to the part of the <span class="math inline">\(\mathbf{B}\)</span> matrix that contains the regression coefficients between the endogenous variables, and <span class="math inline">\(\mathbf{B}_x\)</span> refers to the part of the <span class="math inline">\(\mathbf{B}\)</span> matrix that contains the regression coefficients between the exogenous and endogenous variables. For example, the <span class="math inline">\(\mathbf{C}\)</span> matrix for our illustrative example of the development of child anxiety is:</p>
 <p><span class="math display">\[
 \mathbf{C} =
 \begin{bmatrix}
@@ -692,7 +692,7 @@ q \le (p(p+1)) ½,
 -\beta_{43} &amp; 1 &amp; 0&amp;0
 \end{bmatrix}
 \]</span></p>
-<p>In order to evaluate the order condition, we need to count the number of zero elements for each row. If a row has more zeros than <span class="math inline">\(g – 1\)</span>, then the associated equation meets the order condition. In our example, the row corresponding to the equation for <span class="math inline">\(\mathrm{y}_3\)</span> (parental overcontrol) has one zero, and the row corresponding to the equation for variable <span class="math inline">\(\mathrm{y}_4\)</span> (child anxiety) has two zeros. Our model contains a total of two endogenous variables, i.e. <span class="math inline">\(g – 1 = 1\)</span>. Thus, the equations are identified. The order condition is a necessary but not sufficient condition, which means that even when each equation meets the condition it does not guarantee identification of the model.</p>
+<p>In order to evaluate the order condition, we need to count the number of zero elements for each row. If a row has more zeros than <span class="math inline">\(g – 1\)</span>, then the associated equation meets the order condition. In our example, the row corresponding to the equation for <span class="math inline">\(\mathrm{y}_3\)</span> (parental overcontrol) has one zero, and the row corresponding to the equation for variable <span class="math inline">\(\mathrm{y}_4\)</span> (child anxiety) has two zeros. Our model contains a total of two endogenous variables, i.e. <span class="math inline">\(g  – 1 = 1\)</span>. Thus, the equations are identified. The order condition is a necessary but not sufficient condition, which means that even when each equation meets the condition it does not guarantee identification of the model.</p>
 </div>
 <div id="the-rank-condition" class="section level3 hasAnchor" number="7.2.3">
 <h3><span class="header-section-number">7.2.3</span> The rank condition<a href="ch7.html#the-rank-condition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -774,7 +774,7 @@ Figure 7.1: Path model for which identification is assessed in the situation whe
 <span id="cb198-21"><a href="ch7.html#cb198-21" tabindex="-1"></a>                     <span class="at">fixed.x=</span><span class="cn">FALSE</span>)</span>
 <span id="cb198-22"><a href="ch7.html#cb198-22" tabindex="-1"></a></span>
 <span id="cb198-23"><a href="ch7.html#cb198-23" tabindex="-1"></a><span class="fu">summary</span>(EmpiricalCheckOut)</span></code></pre></div>
-<pre><code>## lavaan 0.6.18.1970 ended normally after 20 iterations
+<pre><code>## lavaan 0.6-19 ended normally after 20 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -862,12 +862,11 @@ Figure 7.1: Path model for which identification is assessed in the situation whe
 <span id="cb200-40"><a href="ch7.html#cb200-40" tabindex="-1"></a>EmpiricalCheckOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(EmpiricalCheck, <span class="at">sample.cov=</span>SIGMA,</span>
 <span id="cb200-41"><a href="ch7.html#cb200-41" tabindex="-1"></a>                     <span class="at">sample.nobs=</span><span class="dv">100</span>, <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>,</span>
 <span id="cb200-42"><a href="ch7.html#cb200-42" tabindex="-1"></a>                     <span class="at">fixed.x=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## Warning in lav_model_vcov(lavmodel = lavmodel, lavsamplestats = lavsamplestats, : lavaan WARNING:
-##     Could not compute standard errors! The information matrix could
-##     not be inverted. This may be a symptom that the model is not
-##     identified.</code></pre>
+<pre><code>## Warning: lavaan-&gt;lav_model_vcov():  
+##    Could not compute standard errors! The information matrix could not be inverted. 
+##    This may be a symptom that the model is not identified.</code></pre>
 <div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="ch7.html#cb202-1" tabindex="-1"></a><span class="fu">summary</span>(EmpiricalCheckOut)</span></code></pre></div>
-<pre><code>## lavaan 0.6.18.1970 ended normally after 21 iterations
+<pre><code>## lavaan 0.6-19 ended normally after 21 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -922,7 +921,7 @@ Figure 7.1: Path model for which identification is assessed in the situation whe
 <p><span class="math display">\[\begin{align}
 \beta_{31}\psi_{11} &amp; = \sigma_{31}-\frac{\sigma_{32}\beta_{31}\psi_{21}}{\psi_{22}}\psi_{21} \ \ \ \ \ \ \ \ \ \ \ \ (7.09a)\\ \\
 \beta_{31}\psi_{11}\psi_{22} &amp; = \sigma_{31}\psi_{22} - (\sigma_{32}-\beta_{31} \psi_{21})\psi_{21} \ \ \ \ \ \ \ \ (7.09b)\\ \\
-\beta_{31}\psi_{11}\psi_{22} &amp; = \sigma_{31}\psi_{22} - \sigma_{32}\psi_{21} + \beta_{31}\psi^2_{22} \ \ \ \ \ \ \ \ (7.09c)\\ \\
+\beta_{31}\psi_{11}\psi_{22} &amp; = \sigma_{31}\psi_{22} - \sigma_{32}\psi_{21} + \beta_{31}\psi^2_{21} \ \ \ \ \ \ \ \ (7.09c)\\ \\
 \beta_{31}\psi_{11}\psi_{22} - \beta_{31}\psi^2_{21} &amp; = \sigma_{31}\psi_{22} - \sigma_{32}\psi_{21} \ \ \ \ \ \ \ \ \ \ \ \ (7.09d)\\ \\
 \beta_{31}(\psi_{11}\psi_{22} -\psi^2_{21}) &amp; = \sigma_{31}\psi_{22} - \sigma_{32}\psi_{21} \ \ \ \ \ \ \ \ \ \ \ \ (7.09e)
 \end{align}\]</span></p>
