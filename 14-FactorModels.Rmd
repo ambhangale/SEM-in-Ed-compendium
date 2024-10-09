@@ -183,9 +183,9 @@ $$
 
 and thus $\mathbf\Sigma_{\text{model}}$ is given by:
 
-```{=tex}
 \footnotesize
 
+```{=tex}
 \begin{equation}
 \mathbf\Sigma_{\text{model}} =
 \begin{bmatrix}
@@ -211,9 +211,9 @@ and thus $\mathbf\Sigma_{\text{model}}$ is given by:
 \end{bmatrix}
 (\#eq:14-16)
 \end{equation}
+```
 
 \normalsize
-```
 
 We can thus evaluate whether the factor model gives a good description of the linear dependencies between the observed variables by evaluating $\mathbf\Sigma_\text{population} = \mathbf\Sigma_\text{model}$, where  $\mathbf\Sigma_\text{population}$ is given by:
 
