@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Path Models | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="3 Path Models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Path Models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -65,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -926,9 +926,9 @@ Figure 3.2: Path diagram of the development of child anxiety including all path 
 <div id="installing-lavaan-1" class="section level3 hasAnchor" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Installing lavaan<a href="ch3.html#installing-lavaan-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The software that we will use to run our structural equation modeling analyses is lavaan (Rosseel, 2012), which is free open-source software that is available as a package in R. To install the <code>lavaan</code> package you can type the following command in the R console:</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="ch3.html#cb144-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;lavaan&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="ch3.html#cb146-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;lavaan&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>This will open a window where you have to select a CRAN mirror (select <code>"[your country], [closest city]"</code>) and will install the package <code>lavaan</code>, including all the packages that it is dependent upon. You only need to install the package once (on a specific computer), to add the package to the R library. Once the package is installed, you can activate all the functionalities that are available in the package by using the command:</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="ch3.html#cb145-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="ch3.html#cb147-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span></code></pre></div>
 <p>Every time you start R you need to use this command to activate the <code>lavaan</code> package into the current R workspace. Therefore, it is advisable to start every script with this command.</p>
 </div>
 <div id="fitting-a-path-model" class="section level3 hasAnchor" number="3.4.2">
@@ -936,67 +936,67 @@ Figure 3.2: Path diagram of the development of child anxiety including all path 
 <p><a href="ch3.html#script-3.1">Script 3.1</a> fits the path model of Figure <a href="ch3.html#fig:fig3-2">3.2</a> to the covariance matrix that is given in Affrunti and Woodruff-Borden (2014). All commands will be explained below.</p>
 <div id="script-3.1" class="section level4 unnumbered hasAnchor">
 <h4>Script 3.1<a href="ch3.html#script-3.1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="ch3.html#cb146-1" tabindex="-1"></a><span class="co"># names observed variables</span></span>
-<span id="cb146-2"><a href="ch3.html#cb146-2" tabindex="-1"></a>obsnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;parent_anx&quot;</span>, <span class="st">&quot;perfect&quot;</span>, <span class="st">&quot;overcontrol&quot;</span>, <span class="st">&quot;child_anx&quot;</span>) </span>
-<span id="cb146-3"><a href="ch3.html#cb146-3" tabindex="-1"></a></span>
-<span id="cb146-4"><a href="ch3.html#cb146-4" tabindex="-1"></a></span>
-<span id="cb146-5"><a href="ch3.html#cb146-5" tabindex="-1"></a><span class="co"># covariance matrix as given by Affrunti and Woodruff-Borden (2014)</span></span>
-<span id="cb146-6"><a href="ch3.html#cb146-6" tabindex="-1"></a>AWcov <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="fl">91.58</span>,  <span class="fl">53.36</span>,  <span class="fl">28.39</span>, <span class="fl">9.21</span>,</span>
-<span id="cb146-7"><a href="ch3.html#cb146-7" tabindex="-1"></a>                         <span class="fl">53.36</span>, <span class="fl">194.32</span>,  <span class="fl">50.90</span>, <span class="fl">4.98</span>,</span>
-<span id="cb146-8"><a href="ch3.html#cb146-8" tabindex="-1"></a>                         <span class="fl">28.39</span>,  <span class="fl">50.90</span>, <span class="fl">130.19</span>, <span class="fl">9.41</span>,</span>
-<span id="cb146-9"><a href="ch3.html#cb146-9" tabindex="-1"></a>                          <span class="fl">9.21</span>,   <span class="fl">4.98</span>,   <span class="fl">9.41</span>, <span class="fl">7.56</span>),</span>
-<span id="cb146-10"><a href="ch3.html#cb146-10" tabindex="-1"></a>                  <span class="at">nrow =</span> <span class="dv">4</span>,</span>
-<span id="cb146-11"><a href="ch3.html#cb146-11" tabindex="-1"></a>                  <span class="at">ncol =</span> <span class="dv">4</span>,</span>
-<span id="cb146-12"><a href="ch3.html#cb146-12" tabindex="-1"></a>                  <span class="at">dimnames =</span> <span class="fu">list</span>(obsnames,obsnames))</span>
-<span id="cb146-13"><a href="ch3.html#cb146-13" tabindex="-1"></a></span>
-<span id="cb146-14"><a href="ch3.html#cb146-14" tabindex="-1"></a><span class="co"># specify the path model</span></span>
-<span id="cb146-15"><a href="ch3.html#cb146-15" tabindex="-1"></a>AWmodel <span class="ot">&lt;-</span> <span class="st">&#39;# regression equations</span></span>
-<span id="cb146-16"><a href="ch3.html#cb146-16" tabindex="-1"></a><span class="st">            overcontrol ~ b31*parent_anx + b32*perfect</span></span>
-<span id="cb146-17"><a href="ch3.html#cb146-17" tabindex="-1"></a><span class="st">            child_anx ~ b43*overcontrol</span></span>
-<span id="cb146-18"><a href="ch3.html#cb146-18" tabindex="-1"></a><span class="st">            # (residual) variance</span></span>
-<span id="cb146-19"><a href="ch3.html#cb146-19" tabindex="-1"></a><span class="st">            parent_anx ~~ p11*parent_anx</span></span>
-<span id="cb146-20"><a href="ch3.html#cb146-20" tabindex="-1"></a><span class="st">            perfect ~~ p22*perfect</span></span>
-<span id="cb146-21"><a href="ch3.html#cb146-21" tabindex="-1"></a><span class="st">            overcontrol ~~ p33*overcontrol</span></span>
-<span id="cb146-22"><a href="ch3.html#cb146-22" tabindex="-1"></a><span class="st">            child_anx ~~ p44*child_anx</span></span>
-<span id="cb146-23"><a href="ch3.html#cb146-23" tabindex="-1"></a><span class="st">            # covariance exogenous variables</span></span>
-<span id="cb146-24"><a href="ch3.html#cb146-24" tabindex="-1"></a><span class="st">            parent_anx ~~ p21*perfect</span></span>
-<span id="cb146-25"><a href="ch3.html#cb146-25" tabindex="-1"></a><span class="st">            &#39;</span></span>
-<span id="cb146-26"><a href="ch3.html#cb146-26" tabindex="-1"></a></span>
-<span id="cb146-27"><a href="ch3.html#cb146-27" tabindex="-1"></a><span class="co"># build the model</span></span>
-<span id="cb146-28"><a href="ch3.html#cb146-28" tabindex="-1"></a>AWmodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>( <span class="at">model =</span> AWmodel, </span>
-<span id="cb146-29"><a href="ch3.html#cb146-29" tabindex="-1"></a>                      <span class="at">sample.cov =</span> AWcov, <span class="at">sample.nobs =</span> <span class="dv">77</span>, </span>
-<span id="cb146-30"><a href="ch3.html#cb146-30" tabindex="-1"></a>                       <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>, <span class="at">fixed.x =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="ch3.html#cb148-1" tabindex="-1"></a><span class="co"># names observed variables</span></span>
+<span id="cb148-2"><a href="ch3.html#cb148-2" tabindex="-1"></a>obsnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;parent_anx&quot;</span>, <span class="st">&quot;perfect&quot;</span>, <span class="st">&quot;overcontrol&quot;</span>, <span class="st">&quot;child_anx&quot;</span>) </span>
+<span id="cb148-3"><a href="ch3.html#cb148-3" tabindex="-1"></a></span>
+<span id="cb148-4"><a href="ch3.html#cb148-4" tabindex="-1"></a></span>
+<span id="cb148-5"><a href="ch3.html#cb148-5" tabindex="-1"></a><span class="co"># covariance matrix as given by Affrunti and Woodruff-Borden (2014)</span></span>
+<span id="cb148-6"><a href="ch3.html#cb148-6" tabindex="-1"></a>AWcov <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="fl">91.58</span>,  <span class="fl">53.36</span>,  <span class="fl">28.39</span>, <span class="fl">9.21</span>,</span>
+<span id="cb148-7"><a href="ch3.html#cb148-7" tabindex="-1"></a>                         <span class="fl">53.36</span>, <span class="fl">194.32</span>,  <span class="fl">50.90</span>, <span class="fl">4.98</span>,</span>
+<span id="cb148-8"><a href="ch3.html#cb148-8" tabindex="-1"></a>                         <span class="fl">28.39</span>,  <span class="fl">50.90</span>, <span class="fl">130.19</span>, <span class="fl">9.41</span>,</span>
+<span id="cb148-9"><a href="ch3.html#cb148-9" tabindex="-1"></a>                          <span class="fl">9.21</span>,   <span class="fl">4.98</span>,   <span class="fl">9.41</span>, <span class="fl">7.56</span>),</span>
+<span id="cb148-10"><a href="ch3.html#cb148-10" tabindex="-1"></a>                  <span class="at">nrow =</span> <span class="dv">4</span>,</span>
+<span id="cb148-11"><a href="ch3.html#cb148-11" tabindex="-1"></a>                  <span class="at">ncol =</span> <span class="dv">4</span>,</span>
+<span id="cb148-12"><a href="ch3.html#cb148-12" tabindex="-1"></a>                  <span class="at">dimnames =</span> <span class="fu">list</span>(obsnames,obsnames))</span>
+<span id="cb148-13"><a href="ch3.html#cb148-13" tabindex="-1"></a></span>
+<span id="cb148-14"><a href="ch3.html#cb148-14" tabindex="-1"></a><span class="co"># specify the path model</span></span>
+<span id="cb148-15"><a href="ch3.html#cb148-15" tabindex="-1"></a>AWmodel <span class="ot">&lt;-</span> <span class="st">&#39;# regression equations</span></span>
+<span id="cb148-16"><a href="ch3.html#cb148-16" tabindex="-1"></a><span class="st">            overcontrol ~ b31*parent_anx + b32*perfect</span></span>
+<span id="cb148-17"><a href="ch3.html#cb148-17" tabindex="-1"></a><span class="st">            child_anx ~ b43*overcontrol</span></span>
+<span id="cb148-18"><a href="ch3.html#cb148-18" tabindex="-1"></a><span class="st">            # (residual) variance</span></span>
+<span id="cb148-19"><a href="ch3.html#cb148-19" tabindex="-1"></a><span class="st">            parent_anx ~~ p11*parent_anx</span></span>
+<span id="cb148-20"><a href="ch3.html#cb148-20" tabindex="-1"></a><span class="st">            perfect ~~ p22*perfect</span></span>
+<span id="cb148-21"><a href="ch3.html#cb148-21" tabindex="-1"></a><span class="st">            overcontrol ~~ p33*overcontrol</span></span>
+<span id="cb148-22"><a href="ch3.html#cb148-22" tabindex="-1"></a><span class="st">            child_anx ~~ p44*child_anx</span></span>
+<span id="cb148-23"><a href="ch3.html#cb148-23" tabindex="-1"></a><span class="st">            # covariance exogenous variables</span></span>
+<span id="cb148-24"><a href="ch3.html#cb148-24" tabindex="-1"></a><span class="st">            parent_anx ~~ p21*perfect</span></span>
+<span id="cb148-25"><a href="ch3.html#cb148-25" tabindex="-1"></a><span class="st">            &#39;</span></span>
+<span id="cb148-26"><a href="ch3.html#cb148-26" tabindex="-1"></a></span>
+<span id="cb148-27"><a href="ch3.html#cb148-27" tabindex="-1"></a><span class="co"># build the model</span></span>
+<span id="cb148-28"><a href="ch3.html#cb148-28" tabindex="-1"></a>AWmodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>( <span class="at">model =</span> AWmodel, </span>
+<span id="cb148-29"><a href="ch3.html#cb148-29" tabindex="-1"></a>                      <span class="at">sample.cov =</span> AWcov, <span class="at">sample.nobs =</span> <span class="dv">77</span>, </span>
+<span id="cb148-30"><a href="ch3.html#cb148-30" tabindex="-1"></a>                       <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>, <span class="at">fixed.x =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>We start by defining the observed covariance matrix and the names of the associated observed variables. It is required to provide these names with the input matrix. First we created the object <code>obsnames</code> that contains the names of the variables. Note that the order of the variables corresponds to the labels <span class="math inline">\(\mathrm{y}_1\)</span> to <span class="math inline">\(\mathrm{y}_4\)</span> in Figure <a href="ch3.html#fig:fig3-2">3.2</a>.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="ch3.html#cb147-1" tabindex="-1"></a>obsnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;parent_anx&quot;</span>, <span class="st">&quot;perfect&quot;</span>, <span class="st">&quot;overcontrol&quot;</span>, <span class="st">&quot;child_anx&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="ch3.html#cb149-1" tabindex="-1"></a>obsnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;parent_anx&quot;</span>, <span class="st">&quot;perfect&quot;</span>, <span class="st">&quot;overcontrol&quot;</span>, <span class="st">&quot;child_anx&quot;</span>) </span></code></pre></div>
 <p>The names are given as a list with two elements, one vector of row names and one vector of column names. As a covariance matrix is a symmetric matrix, row and column names are the same, and we can use the command <code>list(obsnames, obsnames)</code> to provide the labels for the observed covariance matrix.</p>
 <p>The observed covariance matrix is stored in the object <code>AWcov</code>, by creating a matrix with the values of the elements, number of rows, number of columns, and the name vectors of the two dimensions.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="ch3.html#cb148-1" tabindex="-1"></a>AWcov <span class="ot">=</span> <span class="fu">matrix</span>(...)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="ch3.html#cb150-1" tabindex="-1"></a>AWcov <span class="ot">=</span> <span class="fu">matrix</span>(...)</span></code></pre></div>
 <p>To check whether you successfully specified the observed covariance matrix, check the results by typing <code>AWcov</code> in the R console. And check, for example, whether the matrix is indeed symmetrical by typing <code>AWcov == t(AWcov)</code> or <code>isSymmetric(AWcov)</code>.</p>
 <p>The next step is to specify the model that has to be fitted to the observed data. We create the object <code>AWmodel</code> where the model specifications are given, encapsulated by single quotes. We need to specify all free parameters that need to be estimated: regression coefficients and (residual) variances and covariances. The structural part of the model is specified using regression equations:</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="ch3.html#cb149-1" tabindex="-1"></a>AWmodel <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb149-2"><a href="ch3.html#cb149-2" tabindex="-1"></a><span class="st">            # regression equations</span></span>
-<span id="cb149-3"><a href="ch3.html#cb149-3" tabindex="-1"></a><span class="st">            overcontrol ~ b31*parent_anx + b32*perfect</span></span>
-<span id="cb149-4"><a href="ch3.html#cb149-4" tabindex="-1"></a><span class="st">            child_anx ~ b43*overcontrol </span></span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="ch3.html#cb151-1" tabindex="-1"></a>AWmodel <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb151-2"><a href="ch3.html#cb151-2" tabindex="-1"></a><span class="st">            # regression equations</span></span>
+<span id="cb151-3"><a href="ch3.html#cb151-3" tabindex="-1"></a><span class="st">            overcontrol ~ b31*parent_anx + b32*perfect</span></span>
+<span id="cb151-4"><a href="ch3.html#cb151-4" tabindex="-1"></a><span class="st">            child_anx ~ b43*overcontrol </span></span></code></pre></div>
 <p>The tilde sign, “~”, is the regression operator. On the left hand of this operator we have the dependent variable, and on the right hand side of this operator we have the independent variables, separated by the “+” operator. The regression coefficients are named after their position in the <span class="math inline">\(\mathbf{B}\)</span> matrix. For example, the regression of overcontrol on parent anxiety is labeled with “<code>b31</code>”, which corresponds to the position of the estimate of the regression coefficient (<span class="math inline">\(\beta_{31}\)</span>) in the <span class="math inline">\(\mathbf{B}\)</span> matrix. As such, the names “<code>b31</code>”, “<code>b32</code>”, “<code>b43</code>” are chosen to represent <span class="math inline">\(\beta_{31}\)</span>, <span class="math inline">\(\beta_{32}\)</span>, and<span class="math inline">\(\beta_{43}\)</span>.</p>
 <p>The residual terms are not explicitly included in the formulas. These formulas therefore only specify the structural part of the model.</p>
 <p>The (residual) variances are specified using double tilde’s (“<span class="math inline">\(\sim \sim\)</span>”), where the same variable name is given both left and right of this operator. Covariances are specified similarly. The estimates of the (co)variances can be named by providing a label before the variable name that is to the right from the “<span class="math inline">\(\sim \sim\)</span>” operator. Here, we used the names “<code>p11</code>” to “<code>p44</code>” and “<code>p21</code>” to refer to the position of the parameter estimates in the <span class="math inline">\(\boldsymbol{\Psi}\)</span> matrix.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="ch3.html#cb150-1" tabindex="-1"></a>            <span class="co"># (residual) variance</span></span>
-<span id="cb150-2"><a href="ch3.html#cb150-2" tabindex="-1"></a>            parent_anx <span class="sc">~</span><span class="er">~</span> p11<span class="sc">*</span>parent_anx</span>
-<span id="cb150-3"><a href="ch3.html#cb150-3" tabindex="-1"></a>            perfect <span class="sc">~</span><span class="er">~</span> p22<span class="sc">*</span>perfect</span>
-<span id="cb150-4"><a href="ch3.html#cb150-4" tabindex="-1"></a>            overcontrol <span class="sc">~</span><span class="er">~</span> p33<span class="sc">*</span>overcontrol</span>
-<span id="cb150-5"><a href="ch3.html#cb150-5" tabindex="-1"></a>            child_anx <span class="sc">~</span><span class="er">~</span> p44<span class="sc">*</span>child_anx</span>
-<span id="cb150-6"><a href="ch3.html#cb150-6" tabindex="-1"></a>            <span class="co"># covariance exogenous variables</span></span>
-<span id="cb150-7"><a href="ch3.html#cb150-7" tabindex="-1"></a>            parent_anx <span class="sc">~</span><span class="er">~</span> p21<span class="sc">*</span>perfect</span>
-<span id="cb150-8"><a href="ch3.html#cb150-8" tabindex="-1"></a>            <span class="st">&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="ch3.html#cb152-1" tabindex="-1"></a>            <span class="co"># (residual) variance</span></span>
+<span id="cb152-2"><a href="ch3.html#cb152-2" tabindex="-1"></a>            parent_anx <span class="sc">~</span><span class="er">~</span> p11<span class="sc">*</span>parent_anx</span>
+<span id="cb152-3"><a href="ch3.html#cb152-3" tabindex="-1"></a>            perfect <span class="sc">~</span><span class="er">~</span> p22<span class="sc">*</span>perfect</span>
+<span id="cb152-4"><a href="ch3.html#cb152-4" tabindex="-1"></a>            overcontrol <span class="sc">~</span><span class="er">~</span> p33<span class="sc">*</span>overcontrol</span>
+<span id="cb152-5"><a href="ch3.html#cb152-5" tabindex="-1"></a>            child_anx <span class="sc">~</span><span class="er">~</span> p44<span class="sc">*</span>child_anx</span>
+<span id="cb152-6"><a href="ch3.html#cb152-6" tabindex="-1"></a>            <span class="co"># covariance exogenous variables</span></span>
+<span id="cb152-7"><a href="ch3.html#cb152-7" tabindex="-1"></a>            parent_anx <span class="sc">~</span><span class="er">~</span> p21<span class="sc">*</span>perfect</span>
+<span id="cb152-8"><a href="ch3.html#cb152-8" tabindex="-1"></a>            <span class="st">&#39;</span></span></code></pre></div>
 <p>When all separate elements of the model are created, we can fit (“run”) the model using the <code>lavaan()</code> function and storing the output in <code>AWmodelOut</code>:</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="ch3.html#cb151-1" tabindex="-1"></a>AWmodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>( <span class="at">model =</span> AWmodel, </span>
-<span id="cb151-2"><a href="ch3.html#cb151-2" tabindex="-1"></a>                      <span class="at">sample.cov =</span> AWcov, <span class="at">sample.nobs =</span> <span class="dv">77</span>, </span>
-<span id="cb151-3"><a href="ch3.html#cb151-3" tabindex="-1"></a>                      <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>, <span class="at">fixed.x =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="ch3.html#cb153-1" tabindex="-1"></a>AWmodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>( <span class="at">model =</span> AWmodel, </span>
+<span id="cb153-2"><a href="ch3.html#cb153-2" tabindex="-1"></a>                      <span class="at">sample.cov =</span> AWcov, <span class="at">sample.nobs =</span> <span class="dv">77</span>, </span>
+<span id="cb153-3"><a href="ch3.html#cb153-3" tabindex="-1"></a>                      <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>, <span class="at">fixed.x =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>The <code>lavaan()</code> function takes as arguments the specified model (<code>model = AWmodel</code>), the specified covariance matrix (<code>sample.cov = AWcov</code>), and the total number of observations (<code>sample.nobs = 77</code>). The final two arguments are used to turn off two default settings of lavaan. That is, we use Wishart likelihood (<code>likelihood = "wishart"</code>) because we are only analyzing covariance structure (when we add mean structure later in the semester, we will use “<code>normal</code>” likelihood). We also specify that we want to freely estimate (<code>fixed.x = FALSE</code>) rather than fix the (co)variances of the exogenous variables to their sample values.</p>
 <p>The output is stored in <code>AWmodelOut</code>, and we can inspect the result using the <code>summary()</code> function:</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="ch3.html#cb152-1" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="ch3.html#cb154-1" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut)</span></code></pre></div>
 <p>This will show you some fit results of the model and give you the parameter estimates and their associated standard errors. The model has 2 degrees of freedom, and the chi-square value is 7.333. The summary of the output is given below:</p>
-<pre><code>## lavaan 0.6-19 ended normally after 28 iterations
+<pre><code>## lavaan 0.6-20.2217 ended normally after 28 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -1038,8 +1038,8 @@ Figure 3.2: Path diagram of the development of child anxiety including all path 
 <p>Here we see the result for the regression coefficients <span class="math inline">\(\beta_{31}\)</span>, <span class="math inline">\(\beta_{32}\)</span>, and <span class="math inline">\(\beta_{43}\)</span>. <code>lavaan</code> also provides the associated standard error of the estimate (0.140, for <span class="math inline">\(\beta_{31}\)</span>). This gives an indication of the precision of the parameter estimate and can be used to judge whether the parameter estimate differs significantly from zero (see also <a href="ch5.html#ch5">Chapter 5</a>).</p>
 <p>Especially when parameters are labeled, <code>lavaan</code> will have to shorten some of the longer variable names (only in the printed output, not internally!), so that the output conforms to a certain format. You may also notice that some variances are preceded by a period (<code>.</code>). This indicates that it is a residual variance for an endogenous variable, rather than a variance for an exogenous variable. If you run models with residual correlations between endogenous variables, those residual covariances will also use the (<code>.</code>) prefix.</p>
 <p>You can also request to see <span class="math inline">\(R^2\)</span> for each endogenous variable:</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="ch3.html#cb154-1" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut, <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6-19 ended normally after 28 iterations
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="ch3.html#cb156-1" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut, <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## lavaan 0.6-20.2217 ended normally after 28 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -1088,28 +1088,28 @@ Figure 3.2: Path diagram of the development of child anxiety including all path 
 <div id="syntax-shortcuts" class="section level3 hasAnchor" number="3.4.3">
 <h3><span class="header-section-number">3.4.3</span> Syntax shortcuts<a href="ch3.html#syntax-shortcuts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><a href="ch3.html#script-3.1">Script 3.1</a> specifies every single nonzero parameter depicted in the path model of Figure <a href="ch3.html#fig:fig3-2">3.2</a>. In relatively small models, and for users who are learning SEM, it may be safe to specify each parameter explicitly in the syntax. In larger models, this can become quite cumbersome, increase the chance of making an error, and make the model syntax more difficult to read (e.g., to find mistakes). Some parameters can be specified automatically in the <code>lavaan()</code> call. For example, setting the option <code>auto.var = TRUE</code> will tell <code>lavaan</code> to freely estimate all (residual) variances of variables included in the model syntax, and the option <code>fixed.x = FALSE</code> already tells <code>lavaan</code> to freely estimate covariances among exogenous variables. Thus, adding these options to the <code>lavaan()</code> call means that the model syntax requires only the specification of regression parameters, which is quite easy to read:</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="ch3.html#cb156-1" tabindex="-1"></a><span class="do">## shorter model specification</span></span>
-<span id="cb156-2"><a href="ch3.html#cb156-2" tabindex="-1"></a>AWmodel <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb156-3"><a href="ch3.html#cb156-3" tabindex="-1"></a><span class="st">            # regression equations</span></span>
-<span id="cb156-4"><a href="ch3.html#cb156-4" tabindex="-1"></a><span class="st">            overcontrol ~ b31*parent_anx + b32*perfect</span></span>
-<span id="cb156-5"><a href="ch3.html#cb156-5" tabindex="-1"></a><span class="st">            child_anx ~ b43*overcontrol</span></span>
-<span id="cb156-6"><a href="ch3.html#cb156-6" tabindex="-1"></a><span class="st">            &#39;</span></span>
-<span id="cb156-7"><a href="ch3.html#cb156-7" tabindex="-1"></a><span class="do">## free all (residual) variances using auto.var = TRUE</span></span>
-<span id="cb156-8"><a href="ch3.html#cb156-8" tabindex="-1"></a>AWmodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>( <span class="at">model =</span> AWmodel, <span class="at">auto.var =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb156-9"><a href="ch3.html#cb156-9" tabindex="-1"></a>                      <span class="at">sample.cov =</span> AWcov, <span class="at">sample.nobs =</span> <span class="dv">77</span>, </span>
-<span id="cb156-10"><a href="ch3.html#cb156-10" tabindex="-1"></a>                      <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>, <span class="at">fixed.x =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="ch3.html#cb158-1" tabindex="-1"></a><span class="do">## shorter model specification</span></span>
+<span id="cb158-2"><a href="ch3.html#cb158-2" tabindex="-1"></a>AWmodel <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb158-3"><a href="ch3.html#cb158-3" tabindex="-1"></a><span class="st">            # regression equations</span></span>
+<span id="cb158-4"><a href="ch3.html#cb158-4" tabindex="-1"></a><span class="st">            overcontrol ~ b31*parent_anx + b32*perfect</span></span>
+<span id="cb158-5"><a href="ch3.html#cb158-5" tabindex="-1"></a><span class="st">            child_anx ~ b43*overcontrol</span></span>
+<span id="cb158-6"><a href="ch3.html#cb158-6" tabindex="-1"></a><span class="st">            &#39;</span></span>
+<span id="cb158-7"><a href="ch3.html#cb158-7" tabindex="-1"></a><span class="do">## free all (residual) variances using auto.var = TRUE</span></span>
+<span id="cb158-8"><a href="ch3.html#cb158-8" tabindex="-1"></a>AWmodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>( <span class="at">model =</span> AWmodel, <span class="at">auto.var =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb158-9"><a href="ch3.html#cb158-9" tabindex="-1"></a>                      <span class="at">sample.cov =</span> AWcov, <span class="at">sample.nobs =</span> <span class="dv">77</span>, </span>
+<span id="cb158-10"><a href="ch3.html#cb158-10" tabindex="-1"></a>                      <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>, <span class="at">fixed.x =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>In fact, the <code>auto.var = TRUE</code> option is set by default in <code>lavaan</code>’s shortcut function, <code>sem()</code>, which sets several other default options that are typically desired in a path analysis (or structural regression among latent variables, which you will learn about later).</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="ch3.html#cb157-1" tabindex="-1"></a>AWmodelOut <span class="ot">&lt;-</span> <span class="fu">sem</span>( <span class="at">model =</span> AWmodel,</span>
-<span id="cb157-2"><a href="ch3.html#cb157-2" tabindex="-1"></a>                   <span class="at">sample.cov =</span> AWcov, <span class="at">sample.nobs =</span> <span class="dv">77</span>, </span>
-<span id="cb157-3"><a href="ch3.html#cb157-3" tabindex="-1"></a>                   <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>, <span class="at">fixed.x =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="ch3.html#cb159-1" tabindex="-1"></a>AWmodelOut <span class="ot">&lt;-</span> <span class="fu">sem</span>( <span class="at">model =</span> AWmodel,</span>
+<span id="cb159-2"><a href="ch3.html#cb159-2" tabindex="-1"></a>                   <span class="at">sample.cov =</span> AWcov, <span class="at">sample.nobs =</span> <span class="dv">77</span>, </span>
+<span id="cb159-3"><a href="ch3.html#cb159-3" tabindex="-1"></a>                   <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>, <span class="at">fixed.x =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
 <div id="extracting-results-from-lavaan-output-in-matrix-form" class="section level3 hasAnchor" number="3.4.4">
 <h3><span class="header-section-number">3.4.4</span> Extracting results from lavaan output in matrix form<a href="ch3.html#extracting-results-from-lavaan-output-in-matrix-form" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To be able to inspect the parameter estimates of a path model in matrix form (namely the <span class="math inline">\(\mathbf{B}\)</span> and <span class="math inline">\(\boldsymbol{\Psi}\)</span> matrices), you can use the <code>lavInspect()</code> function, which can be used to extract many kinds of information about the fitted <code>lavaan</code> model (see a complete list on the help page: <code>?lavInspect</code>).</p>
 <p>The <code>lavInspect()</code> function takes two arguments: (1) the <code>lavaan</code> “object” (in this case, <code>AWmodelOut</code>) and (2) a character string naming what specific information you want to inspect (in this case, the estimated coefficients: “<code>coef</code>”). SEM involves more than just the <span class="math inline">\(\mathbf{B}\)</span> and <span class="math inline">\(\boldsymbol{\Psi}\)</span> matrices, and the output will always include them even if they are empty (e.g., full of zeros, or an identity matrix). The following code can be used to store the <span class="math inline">\(\mathbf{B}\)</span> and <span class="math inline">\(\boldsymbol{\Psi}\)</span> matrices in the objects “<code>BETA</code>” and “<code>PSI</code>” to control what is displayed.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="ch3.html#cb158-1" tabindex="-1"></a>Estimates <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(AWmodelOut, <span class="st">&quot;est&quot;</span>)</span>
-<span id="cb158-2"><a href="ch3.html#cb158-2" tabindex="-1"></a>BETA <span class="ot">&lt;-</span> Estimates<span class="sc">$</span>beta[obsnames, obsnames] </span>
-<span id="cb158-3"><a href="ch3.html#cb158-3" tabindex="-1"></a>PSI <span class="ot">&lt;-</span> Estimates<span class="sc">$</span>psi[obsnames, obsnames] </span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="ch3.html#cb160-1" tabindex="-1"></a>Estimates <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(AWmodelOut, <span class="st">&quot;est&quot;</span>)</span>
+<span id="cb160-2"><a href="ch3.html#cb160-2" tabindex="-1"></a>BETA <span class="ot">&lt;-</span> Estimates<span class="sc">$</span>beta[obsnames, obsnames] </span>
+<span id="cb160-3"><a href="ch3.html#cb160-3" tabindex="-1"></a>PSI <span class="ot">&lt;-</span> Estimates<span class="sc">$</span>psi[obsnames, obsnames] </span></code></pre></div>
 <p>The resulting <code>BETA</code> and <code>PSI</code> matrices are shown below. Because <code>lavaan</code> ignores the order of the variables in the input covariance matrix, its matrices correspond to variables in the order that they appeared in the model syntax. The order is arbitrary, but to make them easier to read (e.g., to compare this output to the matrices described in the previous sections of this chapter), the above syntax used the square-bracket operators to specify that the order of [rows, columns] should be the same order as our input matrix.</p>
 <pre><code>## [1] &quot;BETA&quot;</code></pre>
 <pre><code>##             parent_anx  perfect overcontrol child_anx
