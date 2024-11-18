@@ -14,7 +14,7 @@ library(lavaan)
 
 ### Import Example Data
 
-We will use example data provided on the [M*plus*} website}](http://www.statmodel.com) for a technical report (Muthén, 2011, p. 24).  The example data can be downloaded onto your computer from the report's [supplementary materials](http://www.statmodel.com/examples/penn.shtml#extendSEM), or you can provide the URL directly to `read.table(file=)`, as shown below.  Note that the data are in summary format (i.e., a table with frequencies for each combination of categories for the 3 variables).  The `read.table()` output is therefore transformed into a standard `data.frame` with 1 row per subject.
+We will use example data reported by MacKinnon et al. ([2007](https://doi.org/10.1177/1740774507083434)), which are available to download from the [M*plus*} website}](http://www.statmodel.com) as [supplementary materials](http://www.statmodel.com/examples/penn.shtml#extendSEM) for a technical report (Muthén, [2011](http://www.statmodel.com/download/causalmediation.pdf), p. 24).  The example data can be downloaded directly from the URL using `read.table(file=)`, as shown below.  Note that the data are in summary format (i.e., a table with frequencies for each combination of categories for the 3 variables).  The `read.table()` output is therefore transformed into a standard `data.frame` with 1 row per subject.
 
 ```{r import data-12}
 dd <- read.table(file = "http://www.statmodel.com/examples/shortform/4cat%20m.dat",
@@ -362,8 +362,12 @@ Pairwise deletion is available with any (diagonally or un)weighted least-squares
 
 ## Mediation Model with Categorical Outcomes
 
-Consider the mediation model depicted below.  The dashed line is the direct effect of treatment on smoking behavior, given the intent to smoke.
+Consider the mediation model depicted in Figure \@ref(fig:fig12-1) below.  The dashed line is the direct effect of treatment on smoking behavior, given the intent to smoke.
 
+
+```{r label="fig12-1", echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', fig.cap="Mediation model for smoking-intervention data from Duncan and Duncan (1996)."}
+
+\usetikzlibrary{shapes}
 
 \begin{tikzpicture}[
 latent/.style={draw, circle, thick, minimum size=5mm, inner sep=0pt, align=center, execute at begin node=\setlength{\baselineskip}{1.2em}},
@@ -381,6 +385,7 @@ mean/.style={regular polygon, regular polygon sides=3, draw, thick, inner sep=0.
 \draw[->, thick, dashed] (x) to node [above] {$\beta_{31}$} (y);
 
 \end{tikzpicture}
+```
 
 
 Because SEM treats an exogenous binary predictor as numeric (like dummy-coded predictors in standard OLS regression models), these $p=3$ variables include $p_c=1$ "continuous" predictor (`intervention`) and $p_d=2$ discrete outcomes.  These contribute $p^* = \frac{p(p-1)}{2} = 3$ "observed" covariances:
