@@ -18,6 +18,7 @@ Rstudio then proceeds to Merge and Knit (or Knit and Merge, depending on the con
 - TikZ and/or latex chunks
     - R chunk with {engine='tikz', fig.path='images/tikz/'}
     - see Ch 12 & 27 examples
+    - Save standard R plots to fig.path='images/R/'
 - headings structure
 - chunk labels
 - 

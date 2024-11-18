@@ -203,7 +203,7 @@ Binary variables have only 1 threshold that splits a normal distribution into 2 
 
 In either case, the threshold is the same distance from the LRV's mean, as depicted in Figure \@ref(fig:fig12-1) below.
 
-```{r plot binary, echo=FALSE, label="fig12-1", fig.cap="One threshold divides a normal distribution into two categories."}
+```{r plot binary, echo=FALSE, label="fig12-1", fig.cap="One threshold divides a normal distribution into two categories.", fig.path='images/R/'}
 opar <- par(mfrow = 1:2, mar = c(4, 1, 1, 1))
 
 ## Fixed intercept, estimated threshold
@@ -264,7 +264,7 @@ The LRV for `intention` can be interpreted as the degree to which someone intend
 
 Figure \@ref(fig:fig12-2) below visualizes the "classification rules" above.
 
-```{r plot poly, echo=FALSE, label="fig12-2", fig.cap="Three thresholds divide a normal distribution into four categories."}
+```{r plot poly, echo=FALSE, label="fig12-2", fig.cap="Three thresholds divide a normal distribution into four categories.", fig.path='images/R/'}
 opar <- par(mfrow = c(1,1), mar = c(4, 1, 1, 1))
 
 ## Fixed intercept, estimated threshold
