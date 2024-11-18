@@ -72,6 +72,8 @@ eq:11-17
 fig:fig11-3
 eq:11-18
 fig:fig12-1
+fig:fig12-2
+fig:fig12-3
 fig:fig13-1
 fig:fig14-1
 eq:14-1

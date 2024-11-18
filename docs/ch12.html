@@ -786,8 +786,13 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <li>In the output of <code>glm()</code> the threshold was fixed at zero and intercept was estimated to be <span class="math inline">\(-0.913\)</span>.</li>
 <li>In the output of <code>lavaan</code> the intercept is fixed at zero and the threshold was estimated to be <span class="math inline">\(+0.913\)</span>.</li>
 </ul>
-<p>In either case, the threshold is the same distance from the LRV’s mean, as depicted in the figure below.</p>
-<p><img src="_main_files/figure-html/plot%20binary-1.png" width="672" /></p>
+<p>In either case, the threshold is the same distance from the LRV’s mean, as depicted in Figure <a href="ch12.html#fig:fig12-1">12.1</a> below.</p>
+<div class="figure"><span style="display:block;" id="fig:fig12-1"></span>
+<img src="_main_files/figure-html/fig12-1-1.png" alt="One threshold divides a normal distribution into two categories." width="672" />
+<p class="caption">
+Figure 12.1: One threshold divides a normal distribution into two categories.
+</p>
+</div>
 <p>Notice that the distributions are identical. Only the <span class="math inline">\(x\)</span>-axis differs, reflecting the change in (arbitrary) identification constraint.</p>
 <div id="ordinal-outcomes" class="section level3 hasAnchor" number="12.3.1">
 <h3><span class="header-section-number">12.3.1</span> Ordinal Outcomes<a href="ch12.html#ordinal-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -830,8 +835,13 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <li>Subjects must exceed <span class="math inline">\(\hat\tau_2=\)</span> 1.101 <span class="math inline">\(SD\)</span> above the mean before they begin indicating “probably”.</li>
 <li>Only those whose latent intent exceeds <span class="math inline">\(\hat\tau_3=\)</span> 1.506 <span class="math inline">\(SD\)</span>s above the mean do they respond firmly “yes”.</li>
 </ol>
-<p>The plot below visualizes the “classification rules” above.</p>
-<p><img src="_main_files/figure-html/plot%20poly-1.png" width="672" /></p>
+<p>Figure <a href="ch12.html#fig:fig12-2">12.2</a> below visualizes the “classification rules” above.</p>
+<div class="figure"><span style="display:block;" id="fig:fig12-2"></span>
+<img src="_main_files/figure-html/fig12-2-1.png" alt="Three thresholds divide a normal distribution into four categories." width="672" />
+<p class="caption">
+Figure 12.2: Three thresholds divide a normal distribution into four categories.
+</p>
+</div>
 </div>
 <div id="estimating-thresholds" class="section level3 hasAnchor" number="12.3.2">
 <h3><span class="header-section-number">12.3.2</span> Estimating Thresholds<a href="ch12.html#estimating-thresholds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -914,11 +924,11 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 </div>
 <div id="mediation-model-with-categorical-outcomes" class="section level2 hasAnchor" number="12.4">
 <h2><span class="header-section-number">12.4</span> Mediation Model with Categorical Outcomes<a href="ch12.html#mediation-model-with-categorical-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Consider the mediation model depicted in Figure <a href="ch12.html#fig:fig12-1">12.1</a> below. The dashed line is the direct effect of treatment on smoking behavior, given the intent to smoke.</p>
-<div class="figure"><span style="display:block;" id="fig:fig12-1"></span>
-<img src="_main_files/figure-html/fig12-1-1.png" alt="Mediation model for smoking-intervention data from Duncan and Duncan (1996)." width="672" />
+<p>Consider the mediation model depicted in Figure <a href="ch12.html#fig:fig12-3">12.3</a> below. The dashed line is the direct effect of treatment on smoking behavior, given the intent to smoke.</p>
+<div class="figure"><span style="display:block;" id="fig:fig12-3"></span>
+<img src="_main_files/figure-html/fig12-3-1.png" alt="Mediation model for smoking-intervention data from Duncan and Duncan (1996)." width="672" />
 <p class="caption">
-Figure 12.1: Mediation model for smoking-intervention data from Duncan and Duncan (1996).
+Figure 12.3: Mediation model for smoking-intervention data from Duncan and Duncan (1996).
 </p>
 </div>
 <p>Because SEM treats an exogenous binary predictor as numeric (like dummy-coded predictors in standard OLS regression models), these <span class="math inline">\(p=3\)</span> variables include <span class="math inline">\(p_c=1\)</span> “continuous” predictor (<code>intervention</code>) and <span class="math inline">\(p_d=2\)</span> discrete outcomes. These contribute <span class="math inline">\(p^* = \frac{p(p-1)}{2} = 3\)</span> “observed” covariances:</p>

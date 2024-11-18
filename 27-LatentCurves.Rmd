@@ -2,7 +2,7 @@
 
 ```{r setup-27, include=FALSE}
 #knitr::opts_chunk$set(echo = TRUE)
-FigNumber <- 1L # initialize Figure number for automatic ordering
+#FigNumber <- 1L # initialize Figure number for automatic ordering
 ```
 
 In structural equation modeling (SEM), multiple indicators of a construct can be modeled using exploratory/confirmatory factor analysis (E/CFA).  A latent common factor (or common cause) is posited as being the source of shared variance among the observed indicators, and the measurement models for multiple common factors can be embedded within a larger SEM.

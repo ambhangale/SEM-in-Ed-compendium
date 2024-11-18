@@ -2,7 +2,7 @@
 
 ```{r setup-12, include=FALSE}
 #knitr::opts_chunk$set(echo = TRUE)
-FigNumber <- 1L # initialize Figure number for automatic ordering
+#FigNumber <- 1L # initialize Figure number for automatic ordering
 ```
 
 Structural equation modeling is a technique designed for continuous variables. In practice, variables are often not continuous but categorical, such as variables scored on *discrete* Likert scales (i.e., ordinal data) or correct/incorrect responses on test items (i.e., binary data).  If endogenous variables in a path model (or in any SEM) are categorical, the SEM-method to deal with the categorical variables is to assume that there exists a latent (unobserved) continuous variable that underlies the observed categorical variable. The underlying variable is called a *latent response variable* (LRV). Categorical SEM fits the model to the LRVs instead of to the categorical variables. The observed categorical scores can be linked to the LRV using so-called *thresholds* that represent the value on the LRV beyond which individuals who score higher would get an observed categorical score in the higher category. For example, for a test item that asks 'How many degrees of freedom does this path model have?', the students could give the incorrect (scored 0) or the correct (scored 1) answer. The LRV here represents the *ability* (LRV) to calculate $df$ for this path model on a continuous scale. Students whose ability is high enough would give the correct response; otherwise, the response would be incorrect.  The threshold would reflect the minimum required ability to indicate the correct response. Fitting path models to categorical data thus involves linking the LRV to the observed categorical variables.  
@@ -201,9 +201,9 @@ Binary variables have only 1 threshold that splits a normal distribution into 2 
 - In the output of `glm()` the threshold was fixed at zero and intercept was estimated to be $-0.913$. 
 - In the output of `lavaan` the intercept is fixed at zero and the threshold was estimated to be $+0.913$.  
 
-In either case, the threshold is the same distance from the LRV's mean, as depicted in the figure below.
+In either case, the threshold is the same distance from the LRV's mean, as depicted in Figure \@ref(fig:fig12-1) below.
 
-```{r plot binary, echo=FALSE}
+```{r plot binary, echo=FALSE, label="fig12-1", fig.cap="One threshold divides a normal distribution into two categories."}
 opar <- par(mfrow = 1:2, mar = c(4, 1, 1, 1))
 
 ## Fixed intercept, estimated threshold
@@ -262,9 +262,9 @@ The LRV for `intention` can be interpreted as the degree to which someone intend
 2. Subjects must exceed $\hat\tau_2=$ `r round(coef(fit2)[4], 3)` $SD$ above the mean before they begin indicating "probably".
 3. Only those whose latent intent exceeds $\hat\tau_3=$ `r round(coef(fit2)[5], 3)` $SD$s above the mean do they respond firmly "yes".
 
-The plot below visualizes the "classification rules" above.
+Figure \@ref(fig:fig12-2) below visualizes the "classification rules" above.
 
-```{r plot poly, echo=FALSE}
+```{r plot poly, echo=FALSE, label="fig12-2", fig.cap="Three thresholds divide a normal distribution into four categories."}
 opar <- par(mfrow = c(1,1), mar = c(4, 1, 1, 1))
 
 ## Fixed intercept, estimated threshold
@@ -283,6 +283,7 @@ text(x = c(coef(fit2)[3], coef(fit2)[3], coef(fit2)[5], coef(fit2)[5]),
 
 par(opar)
 ```
+
 
 ### Estimating Thresholds
 
@@ -367,10 +368,10 @@ Pairwise deletion is available with any (diagonally or un)weighted least-squares
 
 ## Mediation Model with Categorical Outcomes
 
-Consider the mediation model depicted in Figure \@ref(fig:fig12-1) below.  The dashed line is the direct effect of treatment on smoking behavior, given the intent to smoke.
+Consider the mediation model depicted in Figure \@ref(fig:fig12-3) below.  The dashed line is the direct effect of treatment on smoking behavior, given the intent to smoke.
 
 
-```{r echo = FALSE, label="fig12-1", engine='tikz', fig.ext='png', fig.cap="Mediation model for smoking-intervention data from Duncan and Duncan (1996)."}
+```{r echo=FALSE, label="fig12-3", engine='tikz', fig.ext='png', fig.cap="Mediation model for smoking-intervention data from Duncan and Duncan (1996)."}
 
 \usetikzlibrary{shapes}
 
