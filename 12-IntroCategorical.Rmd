@@ -371,7 +371,7 @@ Pairwise deletion is available with any (diagonally or un)weighted least-squares
 Consider the mediation model depicted in Figure \@ref(fig:fig12-3) below.  The dashed line is the direct effect of treatment on smoking behavior, given the intent to smoke.
 
 
-```{r echo=FALSE, label="fig12-3", engine='tikz', fig.ext='png', fig.cap="Mediation model for smoking-intervention data from Duncan and Duncan (1996)."}
+```{r echo=FALSE, label="fig12-3", engine='tikz', fig.ext='png', fig.cap="Mediation model for smoking-intervention data from Duncan and Duncan (1996).", fig.path='images/tikz/'}
 
 \usetikzlibrary{shapes}
 

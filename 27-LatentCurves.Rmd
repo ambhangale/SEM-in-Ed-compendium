@@ -112,7 +112,7 @@ $$\mathbf{\eta}_i=\beta_{0,i} \ \ , \ \ \alpha=\gamma_0 \ \ , \ \ \zeta_i=u_i   
 
 Note that the factor-loading matrix is merely a vector of ones, filling the role of the constant in a regression model.  That is, a vector of ones is treated as a predictor, and its "slope" is the regression model's intercept.  The role of factor loadings in a LGCM is counter-intuitive because in most SEMs, we think of them as slopes.  Instead, the loadings of a growth factor instead map onto observed variables in a multilevel regression, and random coefficients ($\beta_{0,i}$) are represented by the latent variables (growth factors: $\mathbf{\eta}_i$).  
 
-```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-1", fig.cap="Random intercept model for alcohol-use data from Duncan and Duncan (1996)."}
+```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-1", fig.cap="Random intercept model for alcohol-use data from Duncan and Duncan (1996).", fig.path='images/tikz/'}
 
 \usetikzlibrary{shapes}
 
@@ -242,7 +242,7 @@ $$\mathbf{X}_i \Longleftrightarrow \mathbf{\Lambda} = \begin{bmatrix} 1 & -3 \\ 
 
 Using this alternative coding scheme, the mean rate-of-change would remain the same, but the mean of the latent intercept would instead be interpreted as the average status at the *end* of the study (*final* status, rather than *initial* status).  However, we will proceed by coding 0 for the first occasion so that the latent intercept represents initial status.
 
-```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-2", fig.cap="Linear growth model for alcohol-use data from Duncan and Duncan (1996)." }
+```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-2", fig.cap="Linear growth model for alcohol-use data from Duncan and Duncan (1996).", fig.path='images/tikz/'}
 
 \usetikzlibrary{shapes}
 
@@ -390,7 +390,7 @@ There are a couple of options for exploratory LGCMs, described below.
 
 The most popular is the *latent basis curve*, which resembles the linear model but only fixes 2 loadings for the rate-of-change factor, freeing the others to capture non-specific change patterns.  For example, fixing the first 2 loadings to 0 and 1, respectively, sets the (average) amount of change between the first 2 occasions as a baseline.  This is depicted in the path diagram below (left panel).
 
-```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-3", fig.cap="Latent basis models for alcohol-use data from Duncan and Duncan (1996)."}
+```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-3", fig.cap="Latent basis models for alcohol-use data from Duncan and Duncan (1996).", fig.path='images/tikz/'}
 
 \usetikzlibrary{shapes}
 
@@ -565,7 +565,7 @@ Rather than fixing loadings of the latent intercept to 1, we can specify a "**ce
 
 Finally, because there are as many growth factors as occasions, the entire covariance structure can be reproduced in the latent space (factor (co)variances).  Thus, we must fix indicators' residual variances to zero, as depicted in Figure \@ref(fig:fig27-4).
 
-```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-4", fig.cap="Saturated growth model for alcohol-use data from Duncan and Duncan (1996)." }
+```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-4", fig.cap="Saturated growth model for alcohol-use data from Duncan and Duncan (1996).", fig.path='images/tikz/'}
 
 \usetikzlibrary{shapes}
 
@@ -766,7 +766,7 @@ Level-2 predictors vary between subjects, so they can explain between-subject di
 
 The path diagram below depicts age and peer influence as observed variables that predict growth factors, conforming to how `?lavaan::model.syntax` works.  In the background, `lavaan` internally represents observed predictors as single-indicator factors.  Thus, age and peer influence are assigned $\eta_3$ and $\eta_4$, respectively, in the path diagram below. 
 
-```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-5", fig.align = "center", fig.cap="Linear growth model for alcohol-use data from Duncan and Duncan (1996) with subject-level predictors of growth factors." }
+```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-5", fig.align = "center", fig.cap="Linear growth model for alcohol-use data from Duncan and Duncan (1996) with subject-level predictors of growth factors.", fig.path='images/tikz/'}
 
 \usetikzlibrary{shapes}
 
@@ -878,7 +878,7 @@ Notice that Eq. \@ref(eq:27-10) only includes a fixed (not random) effect of cig
 The path diagram below depicts both alcohol and cigarette use as observed variables, with the latter predicting the former.  However, `lavaan`'s internal LISREL representation does not have a parameter matrix for regressions among observed variables (M*plus* does, and the RAM representation used by the `OpenMx` package only has a single matrix with all slopes among observed and latent variables). So internally, `lavaan` "promotes" alcohol and cigarette use variables to latent variables corresponding to their single indicators.  However, to keep the path diagram readable, this is overlooked and the slopes are labeled simply as $\beta$s.
 
 
-```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-6", fig.align = "center", fig.cap="Linear growth model for alcohol-use data from Duncan and Duncan (1996), controlling for cigarette-use data." }
+```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-6", fig.align = "center", fig.cap="Linear growth model for alcohol-use data from Duncan and Duncan (1996), controlling for cigarette-use data.", fig.path='images/tikz/'}
 
 \usetikzlibrary{shapes}
 
@@ -1036,7 +1036,7 @@ The path diagram in Figure \@ref(fig:fig27-7) illustrates a "curve of factors" m
 
 In practice, measurement invariance should be tested first, as shown in [Chapter 26](#ch26). Although some authors have advocated testing longitudinal invariance with the LGCM in place (), we recommend using a CFA to test invariance because it places no restrictions on the latent mean or covariance structures.  Any misfit due to invalid structural constraints (e.g., linear growth when true growth is nonlinear) would inflate Type I error rates for tests of invariance.  Note also that if one identifies common factors by fixing a reference (or average) indicator's loading to 1 and intercept to 0, common-factor means and variances would be freely estimated even without invariance constraints in place.  However, the LGCM would not truly model change in a common factor, but rather change in the reference indicator.  Measurement invariance is a prerequisite to drawing valid inferences about structural differences/changes in a construct.
 
-```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-7", fig.align = "center", fig.cap="Curve-of-factors model for substance-use data from Duncan and Duncan (1996)." }
+```{r echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', label="fig27-7", fig.align = "center", fig.cap="Curve-of-factors model for substance-use data from Duncan and Duncan (1996).", fig.path='images/tikz/'}
 
 \usetikzlibrary{shapes,fit}
 

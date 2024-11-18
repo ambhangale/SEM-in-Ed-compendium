@@ -16,6 +16,8 @@ Rstudio then proceeds to Merge and Knit (or Knit and Merge, depending on the con
 
 - YAML headers
 - TikZ and/or latex chunks
+    - R chunk with {engine='tikz', fig.path='images/tikz/'}
+    - see Ch 12 & 27 examples
 - headings structure
 - chunk labels
 - 
