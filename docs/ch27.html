@@ -684,7 +684,7 @@ u_i \sim \mathcal{N}(0, \tau_0) \ \ \ , \ \ \ \varepsilon_{i,t} \sim \mathcal{N}
 <p><span class="math display">\[\mathbf{\eta}_i=\beta_{0,i} \ \ , \ \ \alpha=\gamma_0 \ \ , \ \ \zeta_i=u_i    \ \ , \ \ \varepsilon_i=\varepsilon_i \ \ , \ \ \Lambda=\mathbf{1}\]</span></p>
 <p>Note that the factor-loading matrix is merely a vector of ones, filling the role of the constant in a regression model. That is, a vector of ones is treated as a predictor, and its “slope” is the regression model’s intercept. The role of factor loadings in a LGCM is counter-intuitive because in most SEMs, we think of them as slopes. Instead, the loadings of a growth factor instead map onto observed variables in a multilevel regression, and random coefficients (<span class="math inline">\(\beta_{0,i}\)</span>) are represented by the latent variables (growth factors: <span class="math inline">\(\mathbf{\eta}_i\)</span>).</p>
 <div class="figure"><span style="display:block;" id="fig:fig27-1"></span>
-<img src="_main_files/figure-html/fig27-1-1.svg" alt="Random intercept model for alcohol-use data from Duncan and Duncan (1996)." width="672" />
+<img src="_main_files/figure-html/fig27-1-1.png" alt="Random intercept model for alcohol-use data from Duncan and Duncan (1996)." width="672" />
 <p class="caption">
 Figure 27.1: Random intercept model for alcohol-use data from Duncan and Duncan (1996).
 </p>
@@ -771,7 +771,7 @@ Figure 27.1: Random intercept model for alcohol-use data from Duncan and Duncan 
 <p><span class="math display">\[\mathbf{X}_i \Longleftrightarrow \mathbf{\Lambda} = \begin{bmatrix} 1 &amp; -3 \\ 1 &amp; -2 \\ 1 &amp; -1 \\ 1 &amp; 0\end{bmatrix}\]</span></p>
 <p>Using this alternative coding scheme, the mean rate-of-change would remain the same, but the mean of the latent intercept would instead be interpreted as the average status at the <em>end</em> of the study (<em>final</em> status, rather than <em>initial</em> status). However, we will proceed by coding 0 for the first occasion so that the latent intercept represents initial status.</p>
 <div class="figure"><span style="display:block;" id="fig:fig27-2"></span>
-<img src="_main_files/figure-html/fig27-2-1.svg" alt="Linear growth model for alcohol-use data from Duncan and Duncan (1996)." width="672" />
+<img src="_main_files/figure-html/fig27-2-1.png" alt="Linear growth model for alcohol-use data from Duncan and Duncan (1996)." width="672" />
 <p class="caption">
 Figure 27.2: Linear growth model for alcohol-use data from Duncan and Duncan (1996).
 </p>
@@ -785,7 +785,7 @@ Figure 27.2: Linear growth model for alcohol-use data from Duncan and Duncan (19
 <span id="cb433-7"><a href="ch27.html#cb433-7" tabindex="-1"></a>fit.lin <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.lin, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
 <span id="cb433-8"><a href="ch27.html#cb433-8" tabindex="-1"></a>                  <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb433-9"><a href="ch27.html#cb433-9" tabindex="-1"></a><span class="fu">summary</span>(fit.lin, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6-20.2217 ended normally after 27 iterations
+<pre><code>## lavaan 0.6-20.2229 ended normally after 27 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -902,7 +902,7 @@ Figure 27.2: Linear growth model for alcohol-use data from Duncan and Duncan (19
 <h3><span class="header-section-number">27.4.1</span> Latent Basis Curve<a href="ch27.html#latent-basis-curve" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The most popular is the <em>latent basis curve</em>, which resembles the linear model but only fixes 2 loadings for the rate-of-change factor, freeing the others to capture non-specific change patterns. For example, fixing the first 2 loadings to 0 and 1, respectively, sets the (average) amount of change between the first 2 occasions as a baseline. This is depicted in the path diagram below (left panel).</p>
 <div class="figure"><span style="display:block;" id="fig:fig27-3"></span>
-<img src="_main_files/figure-html/fig27-3-1.svg" alt="Latent basis models for alcohol-use data from Duncan and Duncan (1996)." width="672" />
+<img src="_main_files/figure-html/fig27-3-1.png" alt="Latent basis models for alcohol-use data from Duncan and Duncan (1996)." width="672" />
 <p class="caption">
 Figure 27.3: Latent basis models for alcohol-use data from Duncan and Duncan (1996).
 </p>
@@ -976,7 +976,7 @@ Each estimated loading tells us how much (average) change occurred at that occas
 <p>Rather than fixing loadings of the latent intercept to 1, we can specify a “<strong>center</strong>cept” (Wainer, 2000) as <span class="math inline">\(\frac{1}{\sqrt{T}}\)</span> (<span class="math inline">\(\frac{1}{2}\)</span>). The advantage of specifying the latent “level” (rather than initial status) in this way is that its variance (<span class="math inline">\(\psi_{1,1}\)</span>) captures individual differences in grand means, not merely individual differences at a particular occasion or in the middle of all occasions (Voelkle &amp; McKnight, 2012, p. 26).</p>
 <p>Finally, because there are as many growth factors as occasions, the entire covariance structure can be reproduced in the latent space (factor (co)variances). Thus, we must fix indicators’ residual variances to zero, as depicted in Figure <a href="ch27.html#fig:fig27-4">27.4</a>.</p>
 <div class="figure"><span style="display:block;" id="fig:fig27-4"></span>
-<img src="_main_files/figure-html/fig27-4-1.svg" alt="Saturated growth model for alcohol-use data from Duncan and Duncan (1996)." width="672" />
+<img src="_main_files/figure-html/fig27-4-1.png" alt="Saturated growth model for alcohol-use data from Duncan and Duncan (1996)." width="672" />
 <p class="caption">
 Figure 27.4: Saturated growth model for alcohol-use data from Duncan and Duncan (1996).
 </p>
@@ -1104,7 +1104,7 @@ Y_i &amp;= \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i1} X_{i2} + \
 \end{align}\]</span></p>
 <p>The path diagram below depicts age and peer influence as observed variables that predict growth factors, conforming to how <code>?lavaan::model.syntax</code> works. In the background, <code>lavaan</code> internally represents observed predictors as single-indicator factors. Thus, age and peer influence are assigned <span class="math inline">\(\eta_3\)</span> and <span class="math inline">\(\eta_4\)</span>, respectively, in the path diagram below.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig27-5"></span>
-<img src="_main_files/figure-html/fig27-5-1.svg" alt="Linear growth model for alcohol-use data from Duncan and Duncan (1996) with subject-level predictors of growth factors." width="672" />
+<img src="_main_files/figure-html/fig27-5-1.png" alt="Linear growth model for alcohol-use data from Duncan and Duncan (1996) with subject-level predictors of growth factors." width="672" />
 <p class="caption">
 Figure 27.5: Linear growth model for alcohol-use data from Duncan and Duncan (1996) with subject-level predictors of growth factors.
 </p>
@@ -1122,7 +1122,7 @@ Figure 27.5: Linear growth model for alcohol-use data from Duncan and Duncan (19
 <span id="cb456-10"><a href="ch27.html#cb456-10" tabindex="-1"></a>fit.pred2 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.pred2, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
 <span id="cb456-11"><a href="ch27.html#cb456-11" tabindex="-1"></a>                    <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb456-12"><a href="ch27.html#cb456-12" tabindex="-1"></a><span class="fu">summary</span>(fit.pred2, <span class="at">std =</span> <span class="cn">TRUE</span>, <span class="at">rsq =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6-20.2217 ended normally after 43 iterations
+<pre><code>## lavaan 0.6-20.2229 ended normally after 43 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -1218,7 +1218,7 @@ Figure 27.5: Linear growth model for alcohol-use data from Duncan and Duncan (19
 <p>Notice that Eq. <a href="ch27.html#eq:27-10">(27.10)</a> only includes a fixed (not random) effect of cigarette use. The possibility of including a random effect for both Time and cigarette use is one of the ways in which MLM is more flexible than SEM. Notice also that Eq. <a href="ch27.html#eq:27-10">(27.10)</a> includes a Time <span class="math inline">\(\times\)</span> cigarette-use interaction effect (<span class="math inline">\(\beta_3\)</span>). This is how moderation is represented in a regression model, but moderation of Time by a Level-1 variable in LGCM is quite different, involving more than one parameter.</p>
 <p>The path diagram below depicts both alcohol and cigarette use as observed variables, with the latter predicting the former. However, <code>lavaan</code>’s internal LISREL representation does not have a parameter matrix for regressions among observed variables (M<em>plus</em> does, and the RAM representation used by the <code>OpenMx</code> package only has a single matrix with all slopes among observed and latent variables). So internally, <code>lavaan</code> “promotes” alcohol and cigarette use variables to latent variables corresponding to their single indicators. However, to keep the path diagram readable, this is overlooked and the slopes are labeled simply as <span class="math inline">\(\beta\)</span>s.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig27-6"></span>
-<img src="_main_files/figure-html/fig27-6-1.svg" alt="Linear growth model for alcohol-use data from Duncan and Duncan (1996), controlling for cigarette-use data." width="672" />
+<img src="_main_files/figure-html/fig27-6-1.png" alt="Linear growth model for alcohol-use data from Duncan and Duncan (1996), controlling for cigarette-use data." width="672" />
 <p class="caption">
 Figure 27.6: Linear growth model for alcohol-use data from Duncan and Duncan (1996), controlling for cigarette-use data.
 </p>
@@ -1240,7 +1240,7 @@ Figure 27.6: Linear growth model for alcohol-use data from Duncan and Duncan (19
 <span id="cb458-14"><a href="ch27.html#cb458-14" tabindex="-1"></a>                    <span class="do">## constrain cigarette-use&#39;s effect to equality over time</span></span>
 <span id="cb458-15"><a href="ch27.html#cb458-15" tabindex="-1"></a>                    <span class="at">constraints =</span> <span class="fu">c</span>(<span class="st">&quot;b1 == b2&quot;</span>, <span class="st">&quot;b1 == b3&quot;</span>, <span class="st">&quot;b1 == b4&quot;</span>))</span>
 <span id="cb458-16"><a href="ch27.html#cb458-16" tabindex="-1"></a><span class="fu">summary</span>(fit.pred1, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6-20.2217 ended normally after 28 iterations
+<pre><code>## lavaan 0.6-20.2229 ended normally after 28 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -1410,7 +1410,7 @@ Figure 27.6: Linear growth model for alcohol-use data from Duncan and Duncan (19
 <p>The path diagram in Figure <a href="ch27.html#fig:fig27-7">27.7</a> illustrates a “curve of factors” model, in which growth factors explain growth among repeated measures of a common factor “substance use”. This common factor represents adolescents’ propensity for engaging in risk substance-use behaviors, indicated by their use of <code>alc</code>ohol, <code>cig</code>arettes, and cannabis (<code>thc</code>). The left panel of Figure 7 illustrates only one occasion’s measurement model, with longitudinal scalar-invariance constraints in place (i.e., the same <span class="math inline">\(\lambda\)</span>s and <span class="math inline">\(\nu\)</span>s are constant across occasions). The left panel also shows that each common-factor intercept is fixed to <span class="math inline">\(\alpha=0\)</span> because those means are structured by the (higher-order) LGCM. The gray arrow directed from the left to right panels indicates that this measurement model applies to each latent indicator of growth. The right panel depicts the (higher-order) LGCM itself. Because only one measurement model for substance use is depicted, Figure 7 is missing the residual covariances that should be estimated for each substance-use indicator across time (i.e., <code>alc1</code>’s residuals are correlated with <code>alc2</code>’s, <code>alc3</code>’s, and <code>alc4</code>’s residuals; same for cigarettes and cannabis).</p>
 <p>In practice, measurement invariance should be tested first, as shown in <a href="ch26.html#ch26">Chapter 26</a>. Although some authors have advocated testing longitudinal invariance with the LGCM in place (), we recommend using a CFA to test invariance because it places no restrictions on the latent mean or covariance structures. Any misfit due to invalid structural constraints (e.g., linear growth when true growth is nonlinear) would inflate Type I error rates for tests of invariance. Note also that if one identifies common factors by fixing a reference (or average) indicator’s loading to 1 and intercept to 0, common-factor means and variances would be freely estimated even without invariance constraints in place. However, the LGCM would not truly model change in a common factor, but rather change in the reference indicator. Measurement invariance is a prerequisite to drawing valid inferences about structural differences/changes in a construct.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig27-7"></span>
-<img src="_main_files/figure-html/fig27-7-1.svg" alt="Curve-of-factors model for substance-use data from Duncan and Duncan (1996)." width="672" />
+<img src="_main_files/figure-html/fig27-7-1.png" alt="Curve-of-factors model for substance-use data from Duncan and Duncan (1996)." width="672" />
 <p class="caption">
 Figure 27.7: Curve-of-factors model for substance-use data from Duncan and Duncan (1996).
 </p>

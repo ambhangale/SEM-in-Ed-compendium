@@ -606,7 +606,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="ch12.html#cb238-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span></code></pre></div>
 <div id="import-example-data-1" class="section level3 hasAnchor" number="12.1.1">
 <h3><span class="header-section-number">12.1.1</span> Import Example Data<a href="ch12.html#import-example-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We will use example data provided on the <a href="http://www.statmodel.com">M<em>plus</em>} website}</a> for a technical report (Muthén, 2011, p. 24). The example data can be downloaded onto your computer from the report’s <a href="http://www.statmodel.com/examples/penn.shtml#extendSEM">supplementary materials</a>, or you can provide the URL directly to <code>read.table(file=)</code>, as shown below. Note that the data are in summary format (i.e., a table with frequencies for each combination of categories for the 3 variables). The <code>read.table()</code> output is therefore transformed into a standard <code>data.frame</code> with 1 row per subject.</p>
+<p>We will use example data reported by MacKinnon et al. (<a href="https://doi.org/10.1177/1740774507083434">2007</a>), which are available to download from the <a href="http://www.statmodel.com">M<em>plus</em>} website}</a> as <a href="http://www.statmodel.com/examples/penn.shtml#extendSEM">supplementary materials</a> for a technical report (Muthén, <a href="http://www.statmodel.com/download/causalmediation.pdf">2011</a>, p. 24). The example data can be downloaded directly from the URL using <code>read.table(file=)</code>, as shown below. Note that the data are in summary format (i.e., a table with frequencies for each combination of categories for the 3 variables). The <code>read.table()</code> output is therefore transformed into a standard <code>data.frame</code> with 1 row per subject.</p>
 <div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="ch12.html#cb239-1" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">&quot;http://www.statmodel.com/examples/shortform/4cat%20m.dat&quot;</span>,</span>
 <span id="cb239-2"><a href="ch12.html#cb239-2" tabindex="-1"></a>                 <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;intention&quot;</span>, <span class="st">&quot;intervention&quot;</span>, <span class="st">&quot;ciguse&quot;</span>, <span class="st">&quot;w&quot;</span>))</span>
 <span id="cb239-3"><a href="ch12.html#cb239-3" tabindex="-1"></a>dd<span class="sc">$</span>intention <span class="ot">&lt;-</span> dd<span class="sc">$</span>intention <span class="sc">-</span> <span class="dv">1</span><span class="dt">L</span> <span class="co"># make the lowest category 0, not 1</span></span>
@@ -914,7 +914,13 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 </div>
 <div id="mediation-model-with-categorical-outcomes" class="section level2 hasAnchor" number="12.4">
 <h2><span class="header-section-number">12.4</span> Mediation Model with Categorical Outcomes<a href="ch12.html#mediation-model-with-categorical-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Consider the mediation model depicted below. The dashed line is the direct effect of treatment on smoking behavior, given the intent to smoke.</p>
+<p>Consider the mediation model depicted in Figure <a href="ch12.html#fig:fig12-1">12.1</a> below. The dashed line is the direct effect of treatment on smoking behavior, given the intent to smoke.</p>
+<div class="figure"><span style="display:block;" id="fig:fig12-1"></span>
+<img src="_main_files/figure-html/fig12-1-1.png" alt="Mediation model for smoking-intervention data from Duncan and Duncan (1996)." width="672" />
+<p class="caption">
+Figure 12.1: Mediation model for smoking-intervention data from Duncan and Duncan (1996).
+</p>
+</div>
 <p>Because SEM treats an exogenous binary predictor as numeric (like dummy-coded predictors in standard OLS regression models), these <span class="math inline">\(p=3\)</span> variables include <span class="math inline">\(p_c=1\)</span> “continuous” predictor (<code>intervention</code>) and <span class="math inline">\(p_d=2\)</span> discrete outcomes. These contribute <span class="math inline">\(p^* = \frac{p(p-1)}{2} = 3\)</span> “observed” covariances:</p>
 <ul>
 <li>The polyserial correlations of <code>intervention</code> with <code>ciguse</code> and <code>intention</code></li>
@@ -947,7 +953,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <span id="cb271-7"><a href="ch12.html#cb271-7" tabindex="-1"></a><span class="st">&#39;</span></span>
 <span id="cb271-8"><a href="ch12.html#cb271-8" tabindex="-1"></a>fit.part <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.part, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb271-9"><a href="ch12.html#cb271-9" tabindex="-1"></a><span class="fu">summary</span>(fit.part, <span class="at">standardized =</span> <span class="cn">TRUE</span>, <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6-20.2217 ended normally after 13 iterations
+<pre><code>## lavaan 0.6-20.2229 ended normally after 13 iterations
 ## 
 ##   Estimator                                       DWLS
 ##   Optimization method                           NLMINB
@@ -1094,7 +1100,7 @@ where the indicator function <span class="math inline">\(I()\)</span> assigns 1 
 <span id="cb287-15"><a href="ch12.html#cb287-15" tabindex="-1"></a><span class="st">&#39;</span></span>
 <span id="cb287-16"><a href="ch12.html#cb287-16" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(mod.Imai, <span class="at">data =</span> myData, <span class="at">ordered =</span> <span class="fu">c</span>(<span class="st">&quot;ciguse&quot;</span>,<span class="st">&quot;intention&quot;</span>))</span>
 <span id="cb287-17"><a href="ch12.html#cb287-17" tabindex="-1"></a><span class="fu">summary</span>(fit, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6-20.2217 ended normally after 13 iterations
+<pre><code>## lavaan 0.6-20.2229 ended normally after 13 iterations
 ## 
 ##   Estimator                                       DWLS
 ##   Optimization method                           NLMINB

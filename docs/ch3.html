@@ -996,7 +996,7 @@ Figure 3.2: Path diagram of the development of child anxiety including all path 
 <p>The output is stored in <code>AWmodelOut</code>, and we can inspect the result using the <code>summary()</code> function:</p>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="ch3.html#cb154-1" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut)</span></code></pre></div>
 <p>This will show you some fit results of the model and give you the parameter estimates and their associated standard errors. The model has 2 degrees of freedom, and the chi-square value is 7.333. The summary of the output is given below:</p>
-<pre><code>## lavaan 0.6-20.2217 ended normally after 28 iterations
+<pre><code>## lavaan 0.6-20.2229 ended normally after 28 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -1039,7 +1039,7 @@ Figure 3.2: Path diagram of the development of child anxiety including all path 
 <p>Especially when parameters are labeled, <code>lavaan</code> will have to shorten some of the longer variable names (only in the printed output, not internally!), so that the output conforms to a certain format. You may also notice that some variances are preceded by a period (<code>.</code>). This indicates that it is a residual variance for an endogenous variable, rather than a variance for an exogenous variable. If you run models with residual correlations between endogenous variables, those residual covariances will also use the (<code>.</code>) prefix.</p>
 <p>You can also request to see <span class="math inline">\(R^2\)</span> for each endogenous variable:</p>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="ch3.html#cb156-1" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut, <span class="at">rsquare =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6-20.2217 ended normally after 28 iterations
+<pre><code>## lavaan 0.6-20.2229 ended normally after 28 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB

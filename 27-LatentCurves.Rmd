@@ -1,7 +1,7 @@
 # Latent Growth Curve Models {#ch27}
 
 ```{r setup-27, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+#knitr::opts_chunk$set(echo = TRUE)
 FigNumber <- 1L # initialize Figure number for automatic ordering
 ```
 

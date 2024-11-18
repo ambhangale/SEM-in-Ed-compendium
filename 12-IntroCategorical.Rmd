@@ -1,5 +1,10 @@
 # Path Analysis with Categorical Outcomes {#ch12}
 
+```{r setup-12, include=FALSE}
+#knitr::opts_chunk$set(echo = TRUE)
+FigNumber <- 1L # initialize Figure number for automatic ordering
+```
+
 Structural equation modeling is a technique designed for continuous variables. In practice, variables are often not continuous but categorical, such as variables scored on *discrete* Likert scales (i.e., ordinal data) or correct/incorrect responses on test items (i.e., binary data).  If endogenous variables in a path model (or in any SEM) are categorical, the SEM-method to deal with the categorical variables is to assume that there exists a latent (unobserved) continuous variable that underlies the observed categorical variable. The underlying variable is called a *latent response variable* (LRV). Categorical SEM fits the model to the LRVs instead of to the categorical variables. The observed categorical scores can be linked to the LRV using so-called *thresholds* that represent the value on the LRV beyond which individuals who score higher would get an observed categorical score in the higher category. For example, for a test item that asks 'How many degrees of freedom does this path model have?', the students could give the incorrect (scored 0) or the correct (scored 1) answer. The LRV here represents the *ability* (LRV) to calculate $df$ for this path model on a continuous scale. Students whose ability is high enough would give the correct response; otherwise, the response would be incorrect.  The threshold would reflect the minimum required ability to indicate the correct response. Fitting path models to categorical data thus involves linking the LRV to the observed categorical variables.  
 
 In this chapter we first import example data, then we show how one can use probit and logit link functions in a generalized linear model (GLM). Next, we discuss the concept of the LRV for one ordinal variable, for multiple ordinal variables, and then we illustrate fitting a path model to ordinal variables.  
@@ -365,7 +370,7 @@ Pairwise deletion is available with any (diagonally or un)weighted least-squares
 Consider the mediation model depicted in Figure \@ref(fig:fig12-1) below.  The dashed line is the direct effect of treatment on smoking behavior, given the intent to smoke.
 
 
-```{r label="fig12-1", echo = FALSE, engine='tikz', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', fig.cap="Mediation model for smoking-intervention data from Duncan and Duncan (1996)."}
+```{r echo = FALSE, label="fig12-1", engine='tikz', fig.ext='png', fig.cap="Mediation model for smoking-intervention data from Duncan and Duncan (1996)."}
 
 \usetikzlibrary{shapes}
 
