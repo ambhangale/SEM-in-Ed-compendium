@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>25 MIMIC (and RFA) models | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="25 MIMIC (and RFA) models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="25 MIMIC (and RFA) models | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -625,29 +625,29 @@ Figure 25.2: A MIMIC model.
 <li>Q13. I laugh and joke a lot with my closest friends.</li>
 <li>Q21. I enjoy making people laugh.</li>
 </ul>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="ch25.html#cb395-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
-<span id="cb395-2"><a href="ch25.html#cb395-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;demoData/dataHSQ.csv&quot;</span>)</span>
-<span id="cb395-3"><a href="ch25.html#cb395-3" tabindex="-1"></a></span>
-<span id="cb395-4"><a href="ch25.html#cb395-4" tabindex="-1"></a>subdat <span class="ot">&lt;-</span> data[,<span class="fu">c</span>(<span class="st">&quot;Q5&quot;</span>,<span class="st">&quot;Q13&quot;</span>,<span class="st">&quot;Q21&quot;</span>,<span class="st">&quot;age&quot;</span>,<span class="st">&quot;gender&quot;</span>)]</span>
-<span id="cb395-5"><a href="ch25.html#cb395-5" tabindex="-1"></a></span>
-<span id="cb395-6"><a href="ch25.html#cb395-6" tabindex="-1"></a>subdat <span class="ot">&lt;-</span> subdat[subdat<span class="sc">$</span>gender<span class="sc">%in%</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),]</span>
-<span id="cb395-7"><a href="ch25.html#cb395-7" tabindex="-1"></a>subdat <span class="ot">&lt;-</span> subdat[subdat<span class="sc">$</span>age<span class="sc">&lt;</span><span class="dv">100</span>,]</span>
-<span id="cb395-8"><a href="ch25.html#cb395-8" tabindex="-1"></a>subdat <span class="ot">&lt;-</span> subdat[<span class="fu">rowSums</span>(subdat[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]<span class="sc">&gt;</span><span class="dv">0</span>)<span class="sc">==</span><span class="dv">3</span>,]</span>
-<span id="cb395-9"><a href="ch25.html#cb395-9" tabindex="-1"></a></span>
-<span id="cb395-10"><a href="ch25.html#cb395-10" tabindex="-1"></a>humordat <span class="ot">&lt;-</span> subdat</span>
-<span id="cb395-11"><a href="ch25.html#cb395-11" tabindex="-1"></a></span>
-<span id="cb395-12"><a href="ch25.html#cb395-12" tabindex="-1"></a><span class="co"># descriptives of age and gender</span></span>
-<span id="cb395-13"><a href="ch25.html#cb395-13" tabindex="-1"></a><span class="fu">min</span>(humordat<span class="sc">$</span>age)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="ch25.html#cb393-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
+<span id="cb393-2"><a href="ch25.html#cb393-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;demoData/dataHSQ.csv&quot;</span>)</span>
+<span id="cb393-3"><a href="ch25.html#cb393-3" tabindex="-1"></a></span>
+<span id="cb393-4"><a href="ch25.html#cb393-4" tabindex="-1"></a>subdat <span class="ot">&lt;-</span> data[,<span class="fu">c</span>(<span class="st">&quot;Q5&quot;</span>,<span class="st">&quot;Q13&quot;</span>,<span class="st">&quot;Q21&quot;</span>,<span class="st">&quot;age&quot;</span>,<span class="st">&quot;gender&quot;</span>)]</span>
+<span id="cb393-5"><a href="ch25.html#cb393-5" tabindex="-1"></a></span>
+<span id="cb393-6"><a href="ch25.html#cb393-6" tabindex="-1"></a>subdat <span class="ot">&lt;-</span> subdat[subdat<span class="sc">$</span>gender<span class="sc">%in%</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),]</span>
+<span id="cb393-7"><a href="ch25.html#cb393-7" tabindex="-1"></a>subdat <span class="ot">&lt;-</span> subdat[subdat<span class="sc">$</span>age<span class="sc">&lt;</span><span class="dv">100</span>,]</span>
+<span id="cb393-8"><a href="ch25.html#cb393-8" tabindex="-1"></a>subdat <span class="ot">&lt;-</span> subdat[<span class="fu">rowSums</span>(subdat[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]<span class="sc">&gt;</span><span class="dv">0</span>)<span class="sc">==</span><span class="dv">3</span>,]</span>
+<span id="cb393-9"><a href="ch25.html#cb393-9" tabindex="-1"></a></span>
+<span id="cb393-10"><a href="ch25.html#cb393-10" tabindex="-1"></a>humordat <span class="ot">&lt;-</span> subdat</span>
+<span id="cb393-11"><a href="ch25.html#cb393-11" tabindex="-1"></a></span>
+<span id="cb393-12"><a href="ch25.html#cb393-12" tabindex="-1"></a><span class="co"># descriptives of age and gender</span></span>
+<span id="cb393-13"><a href="ch25.html#cb393-13" tabindex="-1"></a><span class="fu">min</span>(humordat<span class="sc">$</span>age)</span></code></pre></div>
 <pre><code>## [1] 14</code></pre>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="ch25.html#cb397-1" tabindex="-1"></a><span class="fu">max</span>(humordat<span class="sc">$</span>age)</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="ch25.html#cb395-1" tabindex="-1"></a><span class="fu">max</span>(humordat<span class="sc">$</span>age)</span></code></pre></div>
 <pre><code>## [1] 70</code></pre>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="ch25.html#cb399-1" tabindex="-1"></a><span class="fu">median</span>(humordat<span class="sc">$</span>age)</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="ch25.html#cb397-1" tabindex="-1"></a><span class="fu">median</span>(humordat<span class="sc">$</span>age)</span></code></pre></div>
 <pre><code>## [1] 22</code></pre>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="ch25.html#cb401-1" tabindex="-1"></a><span class="fu">table</span>(humordat<span class="sc">$</span>gender)</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="ch25.html#cb399-1" tabindex="-1"></a><span class="fu">table</span>(humordat<span class="sc">$</span>gender)</span></code></pre></div>
 <pre><code>## 
 ##   1   2 
 ## 574 471</code></pre>
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="ch25.html#cb403-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(humordat),<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="ch25.html#cb401-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(humordat),<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##            Q5    Q13    Q21    age gender
 ## Q5      1.000  0.373  0.458  0.054 -0.072
 ## Q13     0.373  1.000  0.465 -0.089 -0.017
@@ -655,25 +655,25 @@ Figure 25.2: A MIMIC model.
 ## age     0.054 -0.089  0.028  1.000 -0.039
 ## gender -0.072 -0.017 -0.011 -0.039  1.000</code></pre>
 <p>The first step when testing evaluating measurement bias with respect to some covariates with a MIMIC model would be to evaluate the factor structure without the covariates. In our example data, there are only three indicators for the construct, so the one-factor model is saturated and its fit cannot be tested.</p>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="ch25.html#cb405-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
-<span id="cb405-2"><a href="ch25.html#cb405-2" tabindex="-1"></a></span>
-<span id="cb405-3"><a href="ch25.html#cb405-3" tabindex="-1"></a><span class="co"># factor model without covariates</span></span>
-<span id="cb405-4"><a href="ch25.html#cb405-4" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb405-5"><a href="ch25.html#cb405-5" tabindex="-1"></a><span class="st">    # define common factor</span></span>
-<span id="cb405-6"><a href="ch25.html#cb405-6" tabindex="-1"></a><span class="st">    humor =~ 1*Q5 + l21*Q13 + l31*Q21</span></span>
-<span id="cb405-7"><a href="ch25.html#cb405-7" tabindex="-1"></a><span class="st">    </span></span>
-<span id="cb405-8"><a href="ch25.html#cb405-8" tabindex="-1"></a><span class="st">    # indicator residual variances </span></span>
-<span id="cb405-9"><a href="ch25.html#cb405-9" tabindex="-1"></a><span class="st">    Q5  ~~ th11*Q5</span></span>
-<span id="cb405-10"><a href="ch25.html#cb405-10" tabindex="-1"></a><span class="st">    Q13 ~~ th22*Q13</span></span>
-<span id="cb405-11"><a href="ch25.html#cb405-11" tabindex="-1"></a><span class="st">    Q21 ~~ th33*Q21</span></span>
-<span id="cb405-12"><a href="ch25.html#cb405-12" tabindex="-1"></a></span>
-<span id="cb405-13"><a href="ch25.html#cb405-13" tabindex="-1"></a><span class="st">    # common factor variance (fixed)</span></span>
-<span id="cb405-14"><a href="ch25.html#cb405-14" tabindex="-1"></a><span class="st">  humor ~~ humor&#39;</span></span>
-<span id="cb405-15"><a href="ch25.html#cb405-15" tabindex="-1"></a></span>
-<span id="cb405-16"><a href="ch25.html#cb405-16" tabindex="-1"></a>factormodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(model1, <span class="at">data =</span> humordat)</span>
-<span id="cb405-17"><a href="ch25.html#cb405-17" tabindex="-1"></a></span>
-<span id="cb405-18"><a href="ch25.html#cb405-18" tabindex="-1"></a><span class="fu">summary</span>(factormodelOut, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6-20.2229 ended normally after 22 iterations
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="ch25.html#cb403-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
+<span id="cb403-2"><a href="ch25.html#cb403-2" tabindex="-1"></a></span>
+<span id="cb403-3"><a href="ch25.html#cb403-3" tabindex="-1"></a><span class="co"># factor model without covariates</span></span>
+<span id="cb403-4"><a href="ch25.html#cb403-4" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb403-5"><a href="ch25.html#cb403-5" tabindex="-1"></a><span class="st">    # define common factor</span></span>
+<span id="cb403-6"><a href="ch25.html#cb403-6" tabindex="-1"></a><span class="st">    humor =~ 1*Q5 + l21*Q13 + l31*Q21</span></span>
+<span id="cb403-7"><a href="ch25.html#cb403-7" tabindex="-1"></a><span class="st">    </span></span>
+<span id="cb403-8"><a href="ch25.html#cb403-8" tabindex="-1"></a><span class="st">    # indicator residual variances </span></span>
+<span id="cb403-9"><a href="ch25.html#cb403-9" tabindex="-1"></a><span class="st">    Q5  ~~ th11*Q5</span></span>
+<span id="cb403-10"><a href="ch25.html#cb403-10" tabindex="-1"></a><span class="st">    Q13 ~~ th22*Q13</span></span>
+<span id="cb403-11"><a href="ch25.html#cb403-11" tabindex="-1"></a><span class="st">    Q21 ~~ th33*Q21</span></span>
+<span id="cb403-12"><a href="ch25.html#cb403-12" tabindex="-1"></a></span>
+<span id="cb403-13"><a href="ch25.html#cb403-13" tabindex="-1"></a><span class="st">    # common factor variance (fixed)</span></span>
+<span id="cb403-14"><a href="ch25.html#cb403-14" tabindex="-1"></a><span class="st">  humor ~~ humor&#39;</span></span>
+<span id="cb403-15"><a href="ch25.html#cb403-15" tabindex="-1"></a></span>
+<span id="cb403-16"><a href="ch25.html#cb403-16" tabindex="-1"></a>factormodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(model1, <span class="at">data =</span> humordat)</span>
+<span id="cb403-17"><a href="ch25.html#cb403-17" tabindex="-1"></a></span>
+<span id="cb403-18"><a href="ch25.html#cb403-18" tabindex="-1"></a><span class="fu">summary</span>(factormodelOut, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## lavaan 0.6-19 ended normally after 22 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -706,35 +706,35 @@ Figure 25.2: A MIMIC model.
 ##    .Q21     (th33)    0.314    0.033    9.556    0.000    0.314    0.429
 ##     humor             0.395    0.046    8.571    0.000    1.000    1.000</code></pre>
 <p>Next, we add the variables Age and Gender to the model. The latent variable is regressed on both variables, and Age and Gender are correlated.</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="ch25.html#cb407-1" tabindex="-1"></a><span class="co"># MIMIC model with dummy Gender and continuous Age as covariate</span></span>
-<span id="cb407-2"><a href="ch25.html#cb407-2" tabindex="-1"></a></span>
-<span id="cb407-3"><a href="ch25.html#cb407-3" tabindex="-1"></a>MIMIC_genderage <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb407-4"><a href="ch25.html#cb407-4" tabindex="-1"></a><span class="st">    # define latent common factor</span></span>
-<span id="cb407-5"><a href="ch25.html#cb407-5" tabindex="-1"></a><span class="st">    humor =~ 1*Q5 + l21*Q13 + l31*Q21</span></span>
-<span id="cb407-6"><a href="ch25.html#cb407-6" tabindex="-1"></a></span>
-<span id="cb407-7"><a href="ch25.html#cb407-7" tabindex="-1"></a><span class="st">    # indicator residual variances </span></span>
-<span id="cb407-8"><a href="ch25.html#cb407-8" tabindex="-1"></a><span class="st">    Q5 ~~ th11*Q5</span></span>
-<span id="cb407-9"><a href="ch25.html#cb407-9" tabindex="-1"></a><span class="st">    Q13 ~~ th22*Q13</span></span>
-<span id="cb407-10"><a href="ch25.html#cb407-10" tabindex="-1"></a><span class="st">    Q21 ~~ th33*Q21</span></span>
-<span id="cb407-11"><a href="ch25.html#cb407-11" tabindex="-1"></a></span>
-<span id="cb407-12"><a href="ch25.html#cb407-12" tabindex="-1"></a><span class="st">    # common factor variance </span></span>
-<span id="cb407-13"><a href="ch25.html#cb407-13" tabindex="-1"></a><span class="st">  humor ~~ humor</span></span>
-<span id="cb407-14"><a href="ch25.html#cb407-14" tabindex="-1"></a><span class="st">  gender ~~ gender</span></span>
-<span id="cb407-15"><a href="ch25.html#cb407-15" tabindex="-1"></a><span class="st">  age ~~ age</span></span>
-<span id="cb407-16"><a href="ch25.html#cb407-16" tabindex="-1"></a></span>
-<span id="cb407-17"><a href="ch25.html#cb407-17" tabindex="-1"></a><span class="st">  # correlate gender age </span></span>
-<span id="cb407-18"><a href="ch25.html#cb407-18" tabindex="-1"></a><span class="st">  gender ~~ age</span></span>
-<span id="cb407-19"><a href="ch25.html#cb407-19" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb407-20"><a href="ch25.html#cb407-20" tabindex="-1"></a><span class="st">  # regress humor on age and gender</span></span>
-<span id="cb407-21"><a href="ch25.html#cb407-21" tabindex="-1"></a><span class="st">  humor ~ b_age*age + b_gender*gender&#39;</span></span>
-<span id="cb407-22"><a href="ch25.html#cb407-22" tabindex="-1"></a></span>
-<span id="cb407-23"><a href="ch25.html#cb407-23" tabindex="-1"></a></span>
-<span id="cb407-24"><a href="ch25.html#cb407-24" tabindex="-1"></a><span class="do">## fit model</span></span>
-<span id="cb407-25"><a href="ch25.html#cb407-25" tabindex="-1"></a>MIMICgenderageOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(MIMIC_genderage, <span class="at">data =</span> humordat)</span>
-<span id="cb407-26"><a href="ch25.html#cb407-26" tabindex="-1"></a></span>
-<span id="cb407-27"><a href="ch25.html#cb407-27" tabindex="-1"></a><span class="do">## results</span></span>
-<span id="cb407-28"><a href="ch25.html#cb407-28" tabindex="-1"></a><span class="fu">summary</span>(MIMICgenderageOut)</span></code></pre></div>
-<pre><code>## lavaan 0.6-20.2229 ended normally after 30 iterations
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="ch25.html#cb405-1" tabindex="-1"></a><span class="co"># MIMIC model with dummy Gender and continuous Age as covariate</span></span>
+<span id="cb405-2"><a href="ch25.html#cb405-2" tabindex="-1"></a></span>
+<span id="cb405-3"><a href="ch25.html#cb405-3" tabindex="-1"></a>MIMIC_genderage <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb405-4"><a href="ch25.html#cb405-4" tabindex="-1"></a><span class="st">    # define latent common factor</span></span>
+<span id="cb405-5"><a href="ch25.html#cb405-5" tabindex="-1"></a><span class="st">    humor =~ 1*Q5 + l21*Q13 + l31*Q21</span></span>
+<span id="cb405-6"><a href="ch25.html#cb405-6" tabindex="-1"></a></span>
+<span id="cb405-7"><a href="ch25.html#cb405-7" tabindex="-1"></a><span class="st">    # indicator residual variances </span></span>
+<span id="cb405-8"><a href="ch25.html#cb405-8" tabindex="-1"></a><span class="st">    Q5 ~~ th11*Q5</span></span>
+<span id="cb405-9"><a href="ch25.html#cb405-9" tabindex="-1"></a><span class="st">    Q13 ~~ th22*Q13</span></span>
+<span id="cb405-10"><a href="ch25.html#cb405-10" tabindex="-1"></a><span class="st">    Q21 ~~ th33*Q21</span></span>
+<span id="cb405-11"><a href="ch25.html#cb405-11" tabindex="-1"></a></span>
+<span id="cb405-12"><a href="ch25.html#cb405-12" tabindex="-1"></a><span class="st">    # common factor variance </span></span>
+<span id="cb405-13"><a href="ch25.html#cb405-13" tabindex="-1"></a><span class="st">  humor ~~ humor</span></span>
+<span id="cb405-14"><a href="ch25.html#cb405-14" tabindex="-1"></a><span class="st">  gender ~~ gender</span></span>
+<span id="cb405-15"><a href="ch25.html#cb405-15" tabindex="-1"></a><span class="st">  age ~~ age</span></span>
+<span id="cb405-16"><a href="ch25.html#cb405-16" tabindex="-1"></a></span>
+<span id="cb405-17"><a href="ch25.html#cb405-17" tabindex="-1"></a><span class="st">  # correlate gender age </span></span>
+<span id="cb405-18"><a href="ch25.html#cb405-18" tabindex="-1"></a><span class="st">  gender ~~ age</span></span>
+<span id="cb405-19"><a href="ch25.html#cb405-19" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb405-20"><a href="ch25.html#cb405-20" tabindex="-1"></a><span class="st">  # regress humor on age and gender</span></span>
+<span id="cb405-21"><a href="ch25.html#cb405-21" tabindex="-1"></a><span class="st">  humor ~ b_age*age + b_gender*gender&#39;</span></span>
+<span id="cb405-22"><a href="ch25.html#cb405-22" tabindex="-1"></a></span>
+<span id="cb405-23"><a href="ch25.html#cb405-23" tabindex="-1"></a></span>
+<span id="cb405-24"><a href="ch25.html#cb405-24" tabindex="-1"></a><span class="do">## fit model</span></span>
+<span id="cb405-25"><a href="ch25.html#cb405-25" tabindex="-1"></a>MIMICgenderageOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(MIMIC_genderage, <span class="at">data =</span> humordat)</span>
+<span id="cb405-26"><a href="ch25.html#cb405-26" tabindex="-1"></a></span>
+<span id="cb405-27"><a href="ch25.html#cb405-27" tabindex="-1"></a><span class="do">## results</span></span>
+<span id="cb405-28"><a href="ch25.html#cb405-28" tabindex="-1"></a><span class="fu">summary</span>(MIMICgenderageOut)</span></code></pre></div>
+<pre><code>## lavaan 0.6-19 ended normally after 30 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -781,8 +781,8 @@ Figure 25.2: A MIMIC model.
 ##     gender            0.248    0.011   22.858    0.000
 ##     age             121.282    5.306   22.858    0.000</code></pre>
 <p>In order to evaluate whether there are relatively large unmodeled dependencies across Gender or Age and the indicators of humor, you can evaluate correlation residuals.</p>
-<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="ch25.html#cb409-1" tabindex="-1"></a><span class="co"># look at correlation residuals</span></span>
-<span id="cb409-2"><a href="ch25.html#cb409-2" tabindex="-1"></a><span class="fu">resid</span>(MIMICgenderageOut, <span class="at">type =</span> <span class="st">&quot;cor&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="ch25.html#cb407-1" tabindex="-1"></a><span class="co"># look at correlation residuals</span></span>
+<span id="cb407-2"><a href="ch25.html#cb407-2" tabindex="-1"></a><span class="fu">resid</span>(MIMICgenderageOut, <span class="at">type =</span> <span class="st">&quot;cor&quot;</span>)</span></code></pre></div>
 <pre><code>## $type
 ## [1] &quot;cor.bollen&quot;
 ## 
@@ -793,8 +793,8 @@ Figure 25.2: A MIMIC model.
 ## Q21     0.000  0.001  0.000              
 ## age     0.051 -0.092  0.024  0.000       
 ## gender -0.047  0.009  0.021  0.000  0.000</code></pre>
-<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="ch25.html#cb411-1" tabindex="-1"></a><span class="co"># look at modification indices</span></span>
-<span id="cb411-2"><a href="ch25.html#cb411-2" tabindex="-1"></a><span class="fu">modificationIndices</span>(MIMICgenderageOut, <span class="at">sort. =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="ch25.html#cb409-1" tabindex="-1"></a><span class="co"># look at modification indices</span></span>
+<span id="cb409-2"><a href="ch25.html#cb409-2" tabindex="-1"></a><span class="fu">modificationIndices</span>(MIMICgenderageOut, <span class="at">sort. =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##    lhs op    rhs     mi    epc sepc.lv sepc.all sepc.nox
 ## 18 Q13 ~~    age 18.749 -1.138  -1.138   -0.154   -0.154
 ## 17 Q13 ~~    Q21  5.516  0.872   0.872    2.308    2.308
@@ -806,14 +806,14 @@ Figure 25.2: A MIMIC model.
 ## 14  Q5 ~~    Q21  0.596 -0.341  -0.341   -0.737   -0.737
 ## 19 Q13 ~~ gender  0.066  0.003   0.003    0.009    0.009</code></pre>
 <p>The largest correlation residual is found between Age and Q13. The modification indices show that adding a direct effect of Age on Q13 is expected to lead to a drop in the model’s chi-square statistic of around 18.75, and that the standardized expected parameter change is -.15, which could be interpreted as substantial. Therefore, we added the direct effect of Age on Q13 to the model, representing uniform measurement bias with respect to age in the item Q13.</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="ch25.html#cb413-1" tabindex="-1"></a><span class="co"># add direct effect of age on Q13</span></span>
-<span id="cb413-2"><a href="ch25.html#cb413-2" tabindex="-1"></a></span>
-<span id="cb413-3"><a href="ch25.html#cb413-3" tabindex="-1"></a>MIMIC_genderage2 <span class="ot">&lt;-</span> <span class="fu">c</span>(MIMIC_genderage, <span class="st">&#39; Q13 ~ age &#39;</span>)</span>
-<span id="cb413-4"><a href="ch25.html#cb413-4" tabindex="-1"></a><span class="co"># fit the new model by &quot;updating&quot; the original model</span></span>
-<span id="cb413-5"><a href="ch25.html#cb413-5" tabindex="-1"></a>MIMICgenderage2Out <span class="ot">&lt;-</span> <span class="fu">update</span>(MIMICgenderageOut, <span class="at">model =</span> MIMIC_genderage2)</span>
-<span id="cb413-6"><a href="ch25.html#cb413-6" tabindex="-1"></a></span>
-<span id="cb413-7"><a href="ch25.html#cb413-7" tabindex="-1"></a><span class="fu">summary</span>(MIMICgenderage2Out, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## lavaan 0.6-20.2229 ended normally after 35 iterations
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="ch25.html#cb411-1" tabindex="-1"></a><span class="co"># add direct effect of age on Q13</span></span>
+<span id="cb411-2"><a href="ch25.html#cb411-2" tabindex="-1"></a></span>
+<span id="cb411-3"><a href="ch25.html#cb411-3" tabindex="-1"></a>MIMIC_genderage2 <span class="ot">&lt;-</span> <span class="fu">c</span>(MIMIC_genderage, <span class="st">&#39; Q13 ~ age &#39;</span>)</span>
+<span id="cb411-4"><a href="ch25.html#cb411-4" tabindex="-1"></a><span class="co"># fit the new model by &quot;updating&quot; the original model</span></span>
+<span id="cb411-5"><a href="ch25.html#cb411-5" tabindex="-1"></a>MIMICgenderage2Out <span class="ot">&lt;-</span> <span class="fu">update</span>(MIMICgenderageOut, <span class="at">model =</span> MIMIC_genderage2)</span>
+<span id="cb411-6"><a href="ch25.html#cb411-6" tabindex="-1"></a></span>
+<span id="cb411-7"><a href="ch25.html#cb411-7" tabindex="-1"></a><span class="fu">summary</span>(MIMICgenderage2Out, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## lavaan 0.6-19 ended normally after 35 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -861,8 +861,8 @@ Figure 25.2: A MIMIC model.
 ##    .humor             0.402    0.046    8.720    0.000    0.995    0.995
 ##     gender            0.248    0.011   22.858    0.000    0.248    1.000
 ##     age             121.282    5.306   22.858    0.000  121.282    1.000</code></pre>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="ch25.html#cb415-1" tabindex="-1"></a><span class="co"># look at correlation residuals again</span></span>
-<span id="cb415-2"><a href="ch25.html#cb415-2" tabindex="-1"></a><span class="fu">resid</span>(MIMICgenderage2Out, <span class="at">type =</span> <span class="st">&quot;cor&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="ch25.html#cb413-1" tabindex="-1"></a><span class="co"># look at correlation residuals again</span></span>
+<span id="cb413-2"><a href="ch25.html#cb413-2" tabindex="-1"></a><span class="fu">resid</span>(MIMICgenderage2Out, <span class="at">type =</span> <span class="st">&quot;cor&quot;</span>)</span></code></pre></div>
 <pre><code>## $type
 ## [1] &quot;cor.bollen&quot;
 ## 
@@ -873,8 +873,8 @@ Figure 25.2: A MIMIC model.
 ## Q21     0.000  0.003  0.000              
 ## age     0.021  0.000 -0.012  0.000       
 ## gender -0.045  0.006  0.022  0.000  0.000</code></pre>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="ch25.html#cb417-1" tabindex="-1"></a><span class="co"># look at modification indices</span></span>
-<span id="cb417-2"><a href="ch25.html#cb417-2" tabindex="-1"></a><span class="fu">modificationIndices</span>(MIMICgenderage2Out, <span class="at">sort. =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="ch25.html#cb415-1" tabindex="-1"></a><span class="co"># look at modification indices</span></span>
+<span id="cb415-2"><a href="ch25.html#cb415-2" tabindex="-1"></a><span class="fu">modificationIndices</span>(MIMICgenderage2Out, <span class="at">sort. =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##       lhs op    rhs    mi    epc sepc.lv sepc.all sepc.nox
 ## 18    Q13 ~~    Q21 4.588  0.506   0.506    1.344    1.344
 ## 17     Q5 ~~ gender 4.295 -0.030  -0.030   -0.074   -0.074

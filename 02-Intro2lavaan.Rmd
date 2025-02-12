@@ -54,7 +54,7 @@ gN <- table(dat$mood.f)
 
 ### `lavaan` Syntax {#ch2-1-2}
 
-Notice from the section-header that `lavaan` should always be lower-case. It is a portmanteau of \textbf{la}tent \textbf{va}riable \textbf{an}alysis, similar to \textbf{AN}alysis \textbf{O}f \textbf{VA}riance (ANOVA).
+Notice from the section-header that `lavaan` should always be lower-case. It is a portmanteau of **la**tent **va**riable **an**alysis, similar to **AN**alysis **O**f **VA**riance (ANOVA).
 
 Load `lavaan` into your workspace.
 ```{r load lavaan-02, message=FALSE}

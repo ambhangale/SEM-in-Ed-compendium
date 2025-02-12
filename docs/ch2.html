@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Using lavaan to Run Regression and ANOVA as a SEM | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="2 Using lavaan to Run Regression and ANOVA as a SEM | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Using lavaan to Run Regression and ANOVA as a SEM | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -653,7 +653,7 @@ Frame the need to talk about MG-SEM because it allows for thinking more about CS
 </div>
 <div id="ch2-1-2" class="section level3 hasAnchor" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> <code>lavaan</code> Syntax<a href="ch2.html#ch2-1-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Notice from the section-header that <code>lavaan</code> should always be lower-case. It is a portmanteau of tent riable alysis, similar to alysis f riance (ANOVA).</p>
+<p>Notice from the section-header that <code>lavaan</code> should always be lower-case. It is a portmanteau of <strong>la</strong>tent <strong>va</strong>riable <strong>an</strong>alysis, similar to <strong>AN</strong>alysis <strong>O</strong>f <strong>VA</strong>riance (ANOVA).</p>
 <p>Load <code>lavaan</code> into your workspace.</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="ch2.html#cb91-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span></code></pre></div>
 <p>The standard syntax for regression in R is a <code>formula</code> object. To regress <code>ATT</code>itude on <code>MOOD</code> condition, <code>N</code>eed <code>F</code>or <code>C</code>ognition (<code>NFC</code>), and <code>POS</code>itive thoughts:</p>
@@ -1190,18 +1190,9 @@ Rather than defining new parameters in model syntax, the same tools in <code>emm
 <span id="cb140-2"><a href="ch2.html#cb140-2" tabindex="-1"></a>               <span class="at">specs =</span> <span class="sc">~</span> pos.mood <span class="sc">|</span> NFC, <span class="co"># focal predictor | moderator</span></span>
 <span id="cb140-3"><a href="ch2.html#cb140-3" tabindex="-1"></a>               <span class="at">lavaan.DV =</span> <span class="st">&quot;POS&quot;</span>,        <span class="co"># name of outcome</span></span>
 <span id="cb140-4"><a href="ch2.html#cb140-4" tabindex="-1"></a>               <span class="do">## probe at the M +/- 1 SD of the moderator</span></span>
-<span id="cb140-5"><a href="ch2.html#cb140-5" tabindex="-1"></a>               <span class="at">at =</span> <span class="fu">list</span>(<span class="at">NFC =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.4</span>, <span class="dv">0</span>, <span class="fl">1.4</span>)))</span></code></pre></div>
-<pre><code>## Warning: lavaan-&gt;lavPredict():  
-##    fitted model does not contain regular (i.e., measured) latent variables; the matrix of 
-##    factor scores may contain no columns
-## Warning: lavaan-&gt;lavPredict():  
-##    fitted model does not contain regular (i.e., measured) latent variables; the matrix of 
-##    factor scores may contain no columns
-## Warning: lavaan-&gt;lavPredict():  
-##    fitted model does not contain regular (i.e., measured) latent variables; the matrix of 
-##    factor scores may contain no columns</code></pre>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="ch2.html#cb142-1" tabindex="-1"></a>probe1 <span class="ot">&lt;-</span> <span class="fu">pairs</span>(em1, <span class="at">rev =</span> <span class="cn">TRUE</span>) <span class="co"># so group &quot;1&quot; minus group &quot;0&quot;</span></span>
-<span id="cb142-2"><a href="ch2.html#cb142-2" tabindex="-1"></a><span class="fu">rbind</span>(probe1, <span class="at">adjust =</span> <span class="st">&quot;sidak&quot;</span>)  <span class="co"># Sidak-adjusted p values</span></span></code></pre></div>
+<span id="cb140-5"><a href="ch2.html#cb140-5" tabindex="-1"></a>               <span class="at">at =</span> <span class="fu">list</span>(<span class="at">NFC =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.4</span>, <span class="dv">0</span>, <span class="fl">1.4</span>)))</span>
+<span id="cb140-6"><a href="ch2.html#cb140-6" tabindex="-1"></a>probe1 <span class="ot">&lt;-</span> <span class="fu">pairs</span>(em1, <span class="at">rev =</span> <span class="cn">TRUE</span>) <span class="co"># so group &quot;1&quot; minus group &quot;0&quot;</span></span>
+<span id="cb140-7"><a href="ch2.html#cb140-7" tabindex="-1"></a><span class="fu">rbind</span>(probe1, <span class="at">adjust =</span> <span class="st">&quot;sidak&quot;</span>)  <span class="co"># Sidak-adjusted p values</span></span></code></pre></div>
 <pre><code>##  NFC  contrast              estimate   SE  df z.ratio p.value
 ##  -1.4 pos.mood1 - pos.mood0     5.15 1.96 Inf   2.635  0.0250
 ##  0    pos.mood1 - pos.mood0     8.67 1.37 Inf   6.348  &lt;.0001
@@ -1209,14 +1200,14 @@ Rather than defining new parameters in model syntax, the same tools in <code>emm
 ## 
 ## P value adjustment: sidak method for 3 tests</code></pre>
 <p>The functionality is also available for multigroup SEMs, in which case the grouping variable is automatically treated as another predictor that can be specified in the <code>specs=</code> argument. Note that the grouping variable will be the name we passed to the <code>group=</code> argument when we fitted the MG-SEM (i.e., the factor variable <code>mood.f</code> rather than the dummy-coded integer variable <code>pos.mood</code>). When using <code>emmeans()</code> on a multigroup <code>lavaan</code> object, the argument <code>nesting=NULL</code> must be specified.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="ch2.html#cb144-1" tabindex="-1"></a>em2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mg.het,</span>
-<span id="cb144-2"><a href="ch2.html#cb144-2" tabindex="-1"></a>               <span class="at">specs =</span> <span class="sc">~</span> mood.f <span class="sc">|</span> NFC, <span class="co"># focal predictor | moderator</span></span>
-<span id="cb144-3"><a href="ch2.html#cb144-3" tabindex="-1"></a>               <span class="at">lavaan.DV =</span> <span class="st">&quot;POS&quot;</span>,      <span class="co"># name of outcome</span></span>
-<span id="cb144-4"><a href="ch2.html#cb144-4" tabindex="-1"></a>               <span class="at">nesting =</span> <span class="cn">NULL</span>,         <span class="co"># necessary for MG-SEMs</span></span>
-<span id="cb144-5"><a href="ch2.html#cb144-5" tabindex="-1"></a>               <span class="do">## probe at the M +/- 1 SD of the moderator</span></span>
-<span id="cb144-6"><a href="ch2.html#cb144-6" tabindex="-1"></a>               <span class="at">at =</span> <span class="fu">list</span>(<span class="at">NFC =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.4</span>, <span class="dv">0</span>, <span class="fl">1.4</span>)))</span>
-<span id="cb144-7"><a href="ch2.html#cb144-7" tabindex="-1"></a>probe2 <span class="ot">&lt;-</span> <span class="fu">pairs</span>(em2, <span class="at">rev =</span> <span class="cn">TRUE</span>) <span class="co"># so group &quot;1&quot; minus group &quot;0&quot;</span></span>
-<span id="cb144-8"><a href="ch2.html#cb144-8" tabindex="-1"></a><span class="fu">rbind</span>(probe2, <span class="at">adjust =</span> <span class="st">&quot;sidak&quot;</span>)  <span class="co"># Sidak-adjusted p values</span></span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="ch2.html#cb142-1" tabindex="-1"></a>em2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mg.het,</span>
+<span id="cb142-2"><a href="ch2.html#cb142-2" tabindex="-1"></a>               <span class="at">specs =</span> <span class="sc">~</span> mood.f <span class="sc">|</span> NFC, <span class="co"># focal predictor | moderator</span></span>
+<span id="cb142-3"><a href="ch2.html#cb142-3" tabindex="-1"></a>               <span class="at">lavaan.DV =</span> <span class="st">&quot;POS&quot;</span>,      <span class="co"># name of outcome</span></span>
+<span id="cb142-4"><a href="ch2.html#cb142-4" tabindex="-1"></a>               <span class="at">nesting =</span> <span class="cn">NULL</span>,         <span class="co"># necessary for MG-SEMs</span></span>
+<span id="cb142-5"><a href="ch2.html#cb142-5" tabindex="-1"></a>               <span class="do">## probe at the M +/- 1 SD of the moderator</span></span>
+<span id="cb142-6"><a href="ch2.html#cb142-6" tabindex="-1"></a>               <span class="at">at =</span> <span class="fu">list</span>(<span class="at">NFC =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.4</span>, <span class="dv">0</span>, <span class="fl">1.4</span>)))</span>
+<span id="cb142-7"><a href="ch2.html#cb142-7" tabindex="-1"></a>probe2 <span class="ot">&lt;-</span> <span class="fu">pairs</span>(em2, <span class="at">rev =</span> <span class="cn">TRUE</span>) <span class="co"># so group &quot;1&quot; minus group &quot;0&quot;</span></span>
+<span id="cb142-8"><a href="ch2.html#cb142-8" tabindex="-1"></a><span class="fu">rbind</span>(probe2, <span class="at">adjust =</span> <span class="st">&quot;sidak&quot;</span>)  <span class="co"># Sidak-adjusted p values</span></span></code></pre></div>
 <pre><code>##  NFC  contrast           estimate   SE  df z.ratio p.value
 ##  -1.4 positive - neutral     5.15 1.96 Inf   2.633  0.0251
 ##  0    positive - neutral     8.67 1.37 Inf   6.348  &lt;.0001

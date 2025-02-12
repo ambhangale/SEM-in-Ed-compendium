@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 Autoregression | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="8 Autoregression | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 Autoregression | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -610,46 +610,46 @@ Figure 8.1: Simple autoregression model.
 <p><a href="ch8.html#script-8.1">Script 8.1</a> fits this model to the data of Duncan and Duncan (1996).</p>
 <div id="script-8.1" class="section level3 unnumbered hasAnchor">
 <h3>Script 8.1<a href="ch8.html#script-8.1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="ch8.html#cb206-1" tabindex="-1"></a><span class="do">## observed data</span></span>
-<span id="cb206-2"><a href="ch8.html#cb206-2" tabindex="-1"></a>obsnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;year1&quot;</span>,<span class="st">&quot;year2&quot;</span>,<span class="st">&quot;year3&quot;</span>,<span class="st">&quot;year4&quot;</span>,<span class="st">&quot;gender&quot;</span>,<span class="st">&quot;famstat&quot;</span>)</span>
-<span id="cb206-3"><a href="ch8.html#cb206-3" tabindex="-1"></a></span>
-<span id="cb206-4"><a href="ch8.html#cb206-4" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.000</span>,</span>
-<span id="cb206-5"><a href="ch8.html#cb206-5" tabindex="-1"></a>     .<span class="dv">640</span>, <span class="fl">1.000</span>,</span>
-<span id="cb206-6"><a href="ch8.html#cb206-6" tabindex="-1"></a>     .<span class="dv">586</span>,  .<span class="dv">670</span>, <span class="fl">1.000</span>,</span>
-<span id="cb206-7"><a href="ch8.html#cb206-7" tabindex="-1"></a>     .<span class="dv">454</span>,  .<span class="dv">566</span>,   .<span class="dv">621</span>, <span class="fl">1.000</span>,</span>
-<span id="cb206-8"><a href="ch8.html#cb206-8" tabindex="-1"></a>     .<span class="dv">001</span>,  .<span class="dv">038</span>,   .<span class="dv">118</span>,   .<span class="dv">091</span>, <span class="fl">1.000</span>,</span>
-<span id="cb206-9"><a href="ch8.html#cb206-9" tabindex="-1"></a>     <span class="sc">-</span>.<span class="dv">214</span>, <span class="sc">-</span>.<span class="dv">149</span>, <span class="sc">-</span>.<span class="dv">135</span>, <span class="sc">-</span>.<span class="dv">163</span>, <span class="sc">-</span>.<span class="dv">025</span>, <span class="fl">1.000</span>)</span>
-<span id="cb206-10"><a href="ch8.html#cb206-10" tabindex="-1"></a></span>
-<span id="cb206-11"><a href="ch8.html#cb206-11" tabindex="-1"></a>SD <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.002</span>,.<span class="dv">960</span>,.<span class="dv">912</span>,.<span class="dv">920</span>,.<span class="dv">504</span>,.<span class="dv">498</span>) </span>
-<span id="cb206-12"><a href="ch8.html#cb206-12" tabindex="-1"></a></span>
-<span id="cb206-13"><a href="ch8.html#cb206-13" tabindex="-1"></a>duncancov <span class="ot">&lt;-</span> <span class="fu">getCov</span>(<span class="at">x=</span>values, <span class="at">names =</span> obsnames, <span class="at">sds =</span> SD)</span>
-<span id="cb206-14"><a href="ch8.html#cb206-14" tabindex="-1"></a></span>
-<span id="cb206-15"><a href="ch8.html#cb206-15" tabindex="-1"></a><span class="fu">names</span>(duncanmeans) <span class="ot">&lt;-</span> obsnames</span>
-<span id="cb206-16"><a href="ch8.html#cb206-16" tabindex="-1"></a></span>
-<span id="cb206-17"><a href="ch8.html#cb206-17" tabindex="-1"></a><span class="do">## define model</span></span>
-<span id="cb206-18"><a href="ch8.html#cb206-18" tabindex="-1"></a>duncanmodel <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb206-19"><a href="ch8.html#cb206-19" tabindex="-1"></a><span class="st">            # COVARIANCES</span></span>
-<span id="cb206-20"><a href="ch8.html#cb206-20" tabindex="-1"></a><span class="st">            # regression equations</span></span>
-<span id="cb206-21"><a href="ch8.html#cb206-21" tabindex="-1"></a><span class="st">            year4 ~ b43*year3</span></span>
-<span id="cb206-22"><a href="ch8.html#cb206-22" tabindex="-1"></a><span class="st">            year3 ~ b32*year2</span></span>
-<span id="cb206-23"><a href="ch8.html#cb206-23" tabindex="-1"></a><span class="st">            year2 ~ b21*year1</span></span>
-<span id="cb206-24"><a href="ch8.html#cb206-24" tabindex="-1"></a></span>
-<span id="cb206-25"><a href="ch8.html#cb206-25" tabindex="-1"></a><span class="st">            # residual variances</span></span>
-<span id="cb206-26"><a href="ch8.html#cb206-26" tabindex="-1"></a><span class="st">            year4 ~~ p44*year4</span></span>
-<span id="cb206-27"><a href="ch8.html#cb206-27" tabindex="-1"></a><span class="st">            year3 ~~ p33*year3</span></span>
-<span id="cb206-28"><a href="ch8.html#cb206-28" tabindex="-1"></a><span class="st">            year2 ~~ p22*year2</span></span>
-<span id="cb206-29"><a href="ch8.html#cb206-29" tabindex="-1"></a></span>
-<span id="cb206-30"><a href="ch8.html#cb206-30" tabindex="-1"></a><span class="st">            # variance exogenous variable</span></span>
-<span id="cb206-31"><a href="ch8.html#cb206-31" tabindex="-1"></a><span class="st">            year1 ~~ p11*year1</span></span>
-<span id="cb206-32"><a href="ch8.html#cb206-32" tabindex="-1"></a><span class="st">              &#39;</span></span>
-<span id="cb206-33"><a href="ch8.html#cb206-33" tabindex="-1"></a></span>
-<span id="cb206-34"><a href="ch8.html#cb206-34" tabindex="-1"></a><span class="do">## run model</span></span>
-<span id="cb206-35"><a href="ch8.html#cb206-35" tabindex="-1"></a>duncanmodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(duncanmodel, <span class="at">sample.cov=</span>duncancov,</span>
-<span id="cb206-36"><a href="ch8.html#cb206-36" tabindex="-1"></a>                  <span class="at">sample.nobs=</span><span class="dv">321</span>,</span>
-<span id="cb206-37"><a href="ch8.html#cb206-37" tabindex="-1"></a>            <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>, <span class="at">fixed.x=</span><span class="cn">FALSE</span>)  </span>
-<span id="cb206-38"><a href="ch8.html#cb206-38" tabindex="-1"></a></span>
-<span id="cb206-39"><a href="ch8.html#cb206-39" tabindex="-1"></a><span class="do">## output</span></span>
-<span id="cb206-40"><a href="ch8.html#cb206-40" tabindex="-1"></a><span class="fu">summary</span>(duncanmodelOut, <span class="at">fit =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="ch8.html#cb204-1" tabindex="-1"></a><span class="do">## observed data</span></span>
+<span id="cb204-2"><a href="ch8.html#cb204-2" tabindex="-1"></a>obsnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;year1&quot;</span>,<span class="st">&quot;year2&quot;</span>,<span class="st">&quot;year3&quot;</span>,<span class="st">&quot;year4&quot;</span>,<span class="st">&quot;gender&quot;</span>,<span class="st">&quot;famstat&quot;</span>)</span>
+<span id="cb204-3"><a href="ch8.html#cb204-3" tabindex="-1"></a></span>
+<span id="cb204-4"><a href="ch8.html#cb204-4" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.000</span>,</span>
+<span id="cb204-5"><a href="ch8.html#cb204-5" tabindex="-1"></a>     .<span class="dv">640</span>, <span class="fl">1.000</span>,</span>
+<span id="cb204-6"><a href="ch8.html#cb204-6" tabindex="-1"></a>     .<span class="dv">586</span>,  .<span class="dv">670</span>, <span class="fl">1.000</span>,</span>
+<span id="cb204-7"><a href="ch8.html#cb204-7" tabindex="-1"></a>     .<span class="dv">454</span>,  .<span class="dv">566</span>,   .<span class="dv">621</span>, <span class="fl">1.000</span>,</span>
+<span id="cb204-8"><a href="ch8.html#cb204-8" tabindex="-1"></a>     .<span class="dv">001</span>,  .<span class="dv">038</span>,   .<span class="dv">118</span>,   .<span class="dv">091</span>, <span class="fl">1.000</span>,</span>
+<span id="cb204-9"><a href="ch8.html#cb204-9" tabindex="-1"></a>     <span class="sc">-</span>.<span class="dv">214</span>, <span class="sc">-</span>.<span class="dv">149</span>, <span class="sc">-</span>.<span class="dv">135</span>, <span class="sc">-</span>.<span class="dv">163</span>, <span class="sc">-</span>.<span class="dv">025</span>, <span class="fl">1.000</span>)</span>
+<span id="cb204-10"><a href="ch8.html#cb204-10" tabindex="-1"></a></span>
+<span id="cb204-11"><a href="ch8.html#cb204-11" tabindex="-1"></a>SD <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.002</span>,.<span class="dv">960</span>,.<span class="dv">912</span>,.<span class="dv">920</span>,.<span class="dv">504</span>,.<span class="dv">498</span>) </span>
+<span id="cb204-12"><a href="ch8.html#cb204-12" tabindex="-1"></a></span>
+<span id="cb204-13"><a href="ch8.html#cb204-13" tabindex="-1"></a>duncancov <span class="ot">&lt;-</span> <span class="fu">getCov</span>(<span class="at">x=</span>values, <span class="at">names =</span> obsnames, <span class="at">sds =</span> SD)</span>
+<span id="cb204-14"><a href="ch8.html#cb204-14" tabindex="-1"></a></span>
+<span id="cb204-15"><a href="ch8.html#cb204-15" tabindex="-1"></a><span class="fu">names</span>(duncanmeans) <span class="ot">&lt;-</span> obsnames</span>
+<span id="cb204-16"><a href="ch8.html#cb204-16" tabindex="-1"></a></span>
+<span id="cb204-17"><a href="ch8.html#cb204-17" tabindex="-1"></a><span class="do">## define model</span></span>
+<span id="cb204-18"><a href="ch8.html#cb204-18" tabindex="-1"></a>duncanmodel <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb204-19"><a href="ch8.html#cb204-19" tabindex="-1"></a><span class="st">            # COVARIANCES</span></span>
+<span id="cb204-20"><a href="ch8.html#cb204-20" tabindex="-1"></a><span class="st">            # regression equations</span></span>
+<span id="cb204-21"><a href="ch8.html#cb204-21" tabindex="-1"></a><span class="st">            year4 ~ b43*year3</span></span>
+<span id="cb204-22"><a href="ch8.html#cb204-22" tabindex="-1"></a><span class="st">            year3 ~ b32*year2</span></span>
+<span id="cb204-23"><a href="ch8.html#cb204-23" tabindex="-1"></a><span class="st">            year2 ~ b21*year1</span></span>
+<span id="cb204-24"><a href="ch8.html#cb204-24" tabindex="-1"></a></span>
+<span id="cb204-25"><a href="ch8.html#cb204-25" tabindex="-1"></a><span class="st">            # residual variances</span></span>
+<span id="cb204-26"><a href="ch8.html#cb204-26" tabindex="-1"></a><span class="st">            year4 ~~ p44*year4</span></span>
+<span id="cb204-27"><a href="ch8.html#cb204-27" tabindex="-1"></a><span class="st">            year3 ~~ p33*year3</span></span>
+<span id="cb204-28"><a href="ch8.html#cb204-28" tabindex="-1"></a><span class="st">            year2 ~~ p22*year2</span></span>
+<span id="cb204-29"><a href="ch8.html#cb204-29" tabindex="-1"></a></span>
+<span id="cb204-30"><a href="ch8.html#cb204-30" tabindex="-1"></a><span class="st">            # variance exogenous variable</span></span>
+<span id="cb204-31"><a href="ch8.html#cb204-31" tabindex="-1"></a><span class="st">            year1 ~~ p11*year1</span></span>
+<span id="cb204-32"><a href="ch8.html#cb204-32" tabindex="-1"></a><span class="st">              &#39;</span></span>
+<span id="cb204-33"><a href="ch8.html#cb204-33" tabindex="-1"></a></span>
+<span id="cb204-34"><a href="ch8.html#cb204-34" tabindex="-1"></a><span class="do">## run model</span></span>
+<span id="cb204-35"><a href="ch8.html#cb204-35" tabindex="-1"></a>duncanmodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(duncanmodel, <span class="at">sample.cov=</span>duncancov,</span>
+<span id="cb204-36"><a href="ch8.html#cb204-36" tabindex="-1"></a>                  <span class="at">sample.nobs=</span><span class="dv">321</span>,</span>
+<span id="cb204-37"><a href="ch8.html#cb204-37" tabindex="-1"></a>            <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>, <span class="at">fixed.x=</span><span class="cn">FALSE</span>)  </span>
+<span id="cb204-38"><a href="ch8.html#cb204-38" tabindex="-1"></a></span>
+<span id="cb204-39"><a href="ch8.html#cb204-39" tabindex="-1"></a><span class="do">## output</span></span>
+<span id="cb204-40"><a href="ch8.html#cb204-40" tabindex="-1"></a><span class="fu">summary</span>(duncanmodelOut, <span class="at">fit =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>The autoregression model is actually a simple path model. For the covariance structure we define the direct effects between the observed variables (matrix <span class="math inline">\(\mathbf{B}\)</span>) and the (residual) variances (matrix <span class="math inline">\(\mathbf{\Psi}\)</span>).</p>
 <p>If an autoregressive model doesn’t explain the correlations between measurements well enough, one could add ‘second order autoregressive effects’. In Figure <a href="ch8.html#fig:fig8-1">8.1</a> this would be a direct effect of Year 1 on Year 3, and a direct effect of Year 2 on Year 4.</p>
 <p>A common practice in autoregression models is to constrain the autoregression effects (i.e., the direct effects between the measurements) to be equal. This is done by providing equal labels for these effects in the <span class="math inline">\(\mathbf{B}\)</span> matrix:</p>
@@ -672,33 +672,33 @@ Figure 8.2: Simple autoregression model, including predictor variables.
 </div>
 <div id="script-8.2" class="section level3 unnumbered hasAnchor">
 <h3>Script 8.2<a href="ch8.html#script-8.2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="ch8.html#cb208-1" tabindex="-1"></a><span class="do">## define model</span></span>
-<span id="cb208-2"><a href="ch8.html#cb208-2" tabindex="-1"></a>duncanmodel <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
-<span id="cb208-3"><a href="ch8.html#cb208-3" tabindex="-1"></a><span class="st">            # COVARIANCES</span></span>
-<span id="cb208-4"><a href="ch8.html#cb208-4" tabindex="-1"></a><span class="st">            # regression equations</span></span>
-<span id="cb208-5"><a href="ch8.html#cb208-5" tabindex="-1"></a><span class="st">            year4 ~ b43*year3 + b42*year2</span></span>
-<span id="cb208-6"><a href="ch8.html#cb208-6" tabindex="-1"></a><span class="st">            year3 ~ b32*year2 + b31*year1</span></span>
-<span id="cb208-7"><a href="ch8.html#cb208-7" tabindex="-1"></a><span class="st">            year2 ~ b21*year1</span></span>
-<span id="cb208-8"><a href="ch8.html#cb208-8" tabindex="-1"></a><span class="st">            year1 ~ b15*gender + b16*famstat</span></span>
-<span id="cb208-9"><a href="ch8.html#cb208-9" tabindex="-1"></a></span>
-<span id="cb208-10"><a href="ch8.html#cb208-10" tabindex="-1"></a><span class="st">            # residual variances</span></span>
-<span id="cb208-11"><a href="ch8.html#cb208-11" tabindex="-1"></a><span class="st">            year4 ~~ p44*year4</span></span>
-<span id="cb208-12"><a href="ch8.html#cb208-12" tabindex="-1"></a><span class="st">            year3 ~~ p33*year3</span></span>
-<span id="cb208-13"><a href="ch8.html#cb208-13" tabindex="-1"></a><span class="st">            year2 ~~ p22*year2</span></span>
-<span id="cb208-14"><a href="ch8.html#cb208-14" tabindex="-1"></a><span class="st">            year1 ~~ p11*year1</span></span>
-<span id="cb208-15"><a href="ch8.html#cb208-15" tabindex="-1"></a></span>
-<span id="cb208-16"><a href="ch8.html#cb208-16" tabindex="-1"></a><span class="st">            # (co)variance exogenous variable</span></span>
-<span id="cb208-17"><a href="ch8.html#cb208-17" tabindex="-1"></a><span class="st">            gender ~~ p55*gender</span></span>
-<span id="cb208-18"><a href="ch8.html#cb208-18" tabindex="-1"></a><span class="st">            famstat ~~ p66*famstat</span></span>
-<span id="cb208-19"><a href="ch8.html#cb208-19" tabindex="-1"></a><span class="st">            gender ~~ p65*famstat&#39;</span></span>
-<span id="cb208-20"><a href="ch8.html#cb208-20" tabindex="-1"></a></span>
-<span id="cb208-21"><a href="ch8.html#cb208-21" tabindex="-1"></a><span class="do">## run model</span></span>
-<span id="cb208-22"><a href="ch8.html#cb208-22" tabindex="-1"></a>duncanmodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(duncanmodel, <span class="at">sample.cov=</span>duncancov,</span>
-<span id="cb208-23"><a href="ch8.html#cb208-23" tabindex="-1"></a>                  <span class="at">sample.nobs=</span><span class="dv">321</span>,</span>
-<span id="cb208-24"><a href="ch8.html#cb208-24" tabindex="-1"></a>            <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>, <span class="at">fixed.x=</span><span class="cn">FALSE</span>)  </span>
-<span id="cb208-25"><a href="ch8.html#cb208-25" tabindex="-1"></a></span>
-<span id="cb208-26"><a href="ch8.html#cb208-26" tabindex="-1"></a><span class="do">## output</span></span>
-<span id="cb208-27"><a href="ch8.html#cb208-27" tabindex="-1"></a><span class="fu">summary</span>(duncanmodelOut, <span class="at">fit =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="ch8.html#cb206-1" tabindex="-1"></a><span class="do">## define model</span></span>
+<span id="cb206-2"><a href="ch8.html#cb206-2" tabindex="-1"></a>duncanmodel <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb206-3"><a href="ch8.html#cb206-3" tabindex="-1"></a><span class="st">            # COVARIANCES</span></span>
+<span id="cb206-4"><a href="ch8.html#cb206-4" tabindex="-1"></a><span class="st">            # regression equations</span></span>
+<span id="cb206-5"><a href="ch8.html#cb206-5" tabindex="-1"></a><span class="st">            year4 ~ b43*year3 + b42*year2</span></span>
+<span id="cb206-6"><a href="ch8.html#cb206-6" tabindex="-1"></a><span class="st">            year3 ~ b32*year2 + b31*year1</span></span>
+<span id="cb206-7"><a href="ch8.html#cb206-7" tabindex="-1"></a><span class="st">            year2 ~ b21*year1</span></span>
+<span id="cb206-8"><a href="ch8.html#cb206-8" tabindex="-1"></a><span class="st">            year1 ~ b15*gender + b16*famstat</span></span>
+<span id="cb206-9"><a href="ch8.html#cb206-9" tabindex="-1"></a></span>
+<span id="cb206-10"><a href="ch8.html#cb206-10" tabindex="-1"></a><span class="st">            # residual variances</span></span>
+<span id="cb206-11"><a href="ch8.html#cb206-11" tabindex="-1"></a><span class="st">            year4 ~~ p44*year4</span></span>
+<span id="cb206-12"><a href="ch8.html#cb206-12" tabindex="-1"></a><span class="st">            year3 ~~ p33*year3</span></span>
+<span id="cb206-13"><a href="ch8.html#cb206-13" tabindex="-1"></a><span class="st">            year2 ~~ p22*year2</span></span>
+<span id="cb206-14"><a href="ch8.html#cb206-14" tabindex="-1"></a><span class="st">            year1 ~~ p11*year1</span></span>
+<span id="cb206-15"><a href="ch8.html#cb206-15" tabindex="-1"></a></span>
+<span id="cb206-16"><a href="ch8.html#cb206-16" tabindex="-1"></a><span class="st">            # (co)variance exogenous variable</span></span>
+<span id="cb206-17"><a href="ch8.html#cb206-17" tabindex="-1"></a><span class="st">            gender ~~ p55*gender</span></span>
+<span id="cb206-18"><a href="ch8.html#cb206-18" tabindex="-1"></a><span class="st">            famstat ~~ p66*famstat</span></span>
+<span id="cb206-19"><a href="ch8.html#cb206-19" tabindex="-1"></a><span class="st">            gender ~~ p65*famstat&#39;</span></span>
+<span id="cb206-20"><a href="ch8.html#cb206-20" tabindex="-1"></a></span>
+<span id="cb206-21"><a href="ch8.html#cb206-21" tabindex="-1"></a><span class="do">## run model</span></span>
+<span id="cb206-22"><a href="ch8.html#cb206-22" tabindex="-1"></a>duncanmodelOut <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(duncanmodel, <span class="at">sample.cov=</span>duncancov,</span>
+<span id="cb206-23"><a href="ch8.html#cb206-23" tabindex="-1"></a>                  <span class="at">sample.nobs=</span><span class="dv">321</span>,</span>
+<span id="cb206-24"><a href="ch8.html#cb206-24" tabindex="-1"></a>            <span class="at">likelihood =</span> <span class="st">&quot;wishart&quot;</span>, <span class="at">fixed.x=</span><span class="cn">FALSE</span>)  </span>
+<span id="cb206-25"><a href="ch8.html#cb206-25" tabindex="-1"></a></span>
+<span id="cb206-26"><a href="ch8.html#cb206-26" tabindex="-1"></a><span class="do">## output</span></span>
+<span id="cb206-27"><a href="ch8.html#cb206-27" tabindex="-1"></a><span class="fu">summary</span>(duncanmodelOut, <span class="at">fit =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>If the fit of a model where only the first measurement is regressed on the predictors is not satisfactory, one might consider adding direct effects of the predictors on later measurements as well. The conceptual difference between those two models would be their theoretical interpretation. In the example above, the predictors only affect later outcomes indirectly, so this model represents the hypothesis that any sex or family differences that existed at Time 1 do not change over time. A model with additional direct effects of predictors on later outcomes would represent the hypothesis that group differences change over time. The <span class="math inline">\(\Delta\chi^2\)</span> statistic allows you test the null hypothesis of no change in sex or family differences over time by comparing nested models with and without those additional effects.</p>
 </div>
 </div>
