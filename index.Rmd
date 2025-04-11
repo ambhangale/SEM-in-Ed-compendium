@@ -41,12 +41,12 @@ This compendium began as a collection of documents used a teaching materials, to
 
 ## Copyright {-}
 
-Unless otherwise noted, this book is released under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/) also known as a CC BY-NC-SA 4.0 license. This means you are free to 
+Unless otherwise noted, this book is released under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/) also known as a CC BY-SA 4.0 license. This means you are free to 
 
-- **Share** (copy and redistribute) the material in any medium or format
-- **Adapt** (remix, transform, and build upon) the material
+- **Share** (copy and redistribute) the material in any medium or format for any purpose, even commercially
+- **Adapt** (remix, transform, and build upon) the material for any purpose, even commercially
 
-as long as any derivative materials are also distributed using a CC BY-NC-SA 4.0 license. Under this license, anyone who redistributes this textbook can do so for free **on the condition** they properly attribute the book as follows:
+as long as any derivative materials are also distributed using a CC BY-SA 4.0 license. Under this license, anyone who redistributes this textbook can do so for free **on the condition** they properly attribute the book as follows:
 
 - Jak, S., \& Jorgensen, T. D. (2023). *A `lavaan` Compendium for Structural Equation Modeling in Educational Research*. <https://tdjorgensen.github.io/SEM-in-Ed-compendium/>
 
