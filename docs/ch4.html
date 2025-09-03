@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Standard Errors and Confidence Intervals | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="4 Standard Errors and Confidence Intervals | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Standard Errors and Confidence Intervals | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -700,7 +700,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="obtaining-standard-errors-and-confidence-intervals-in-lavaan" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Obtaining standard errors and confidence intervals in <code>lavaan</code><a href="ch4.html#obtaining-standard-errors-and-confidence-intervals-in-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the standard summary output of <code>lavaan</code>, the <span class="math inline">\(SE\)</span>s of parameter estimates are given in the column after the parameter estimates, and the ratios of the parameter estimates over their <span class="math inline">\(SE\)</span>’s (Wald <span class="math inline">\(z\)</span> value) is given in the next column. To request confidence intervals from the summary, use the argument <code>ci = TRUE</code>. The regression parameter output look like this:</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="ch4.html#cb163-1" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut, <span class="at">ci =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="ch4.html#cb165-1" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut, <span class="at">ci =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ## Regressions:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper
@@ -710,7 +710,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   child_anx ~                                                           
 ##     ovrcntrl (b43)    0.072    0.026    2.741    0.006    0.021    0.124</code></pre>
 <p>One can also obtain this information from the <code>parameterEstimates()</code> function, which provides more flexibility. For example, we can ask for any width of the interval (although 99%, 95% and 90% are most common), and we can specify particular types of bootstrap CIs. The format is similar to the <code>summary()</code> output, but it is a data.frame, so the parameters are indicated by the left-hand side (<code>lhs</code>), operator (<code>op</code>), and right-hand side (<code>rhs</code>) of the equation used to specify a parameter in <code>lavaan</code> model syntax. For example, to calculate a 90% CI:</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="ch4.html#cb165-1" tabindex="-1"></a><span class="fu">parameterEstimates</span>(AWmodelOut, <span class="at">level =</span> .<span class="dv">90</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="ch4.html#cb167-1" tabindex="-1"></a><span class="fu">parameterEstimates</span>(AWmodelOut, <span class="at">level =</span> .<span class="dv">90</span>)</span></code></pre></div>
 <pre><code>##           lhs op         rhs label     est     se     z pvalue ci.lower ci.upper
 ## 1 overcontrol  ~  parent_anx   b31   0.187  0.140 1.341  0.180   -0.042    0.417
 ## 2 overcontrol  ~     perfect   b32   0.210  0.096 2.194  0.028    0.053    0.368
