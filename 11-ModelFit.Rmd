@@ -167,7 +167,7 @@ RMR (Jöreskog & Sörbom, 1981) and SRMR (Bentler, 1995) are overall badness-of-
 
 ```{=tex}
 \begin{equation}
-\text{RMR} = \sqrt{\frac{\mathbf{\Sigma}^p_{i=1}\mathbf{\Sigma}^i_{j=1}(s_{ij}-\hat\sigma_{ij})^2}{p(p+1)/2}}
+\text{RMR} = \sqrt{\frac{\sum_{i=1}^p \sum_{j=1}^i (s_{ij}-\hat\sigma_{ij})^2}{p(p+1)/2}}
 (\#eq:11-11)
 \end{equation}
 ```
@@ -176,7 +176,7 @@ RMR is defined as the square-root of the mean of the squared fitted residuals. I
 
 ```{=tex}
 \begin{equation}
-\text{SRMR} = \sqrt{\frac{\mathbf{\Sigma}^p_{i=1}\mathbf{\Sigma}^i_{j=1}(s_{ij}-\hat\sigma_{ij})/(s_{ii}-s{jj})^2}{p(p+1)/2}}
+\text{SRMR} = \sqrt{\frac{\sum_{i=1}^p \sum_{j=1}^i \frac{(s_{ij}-\hat\sigma_{ij})^2}{s_{ii} s_{jj}}}{p(p+1)/2}}
 (\#eq:-)
 \end{equation}
 ```

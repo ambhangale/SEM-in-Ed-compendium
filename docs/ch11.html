@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11 Measures of Model Fit | A lavaan Compendium for Structural Equation Modeling in Educational Research</title>
   <meta name="description" content="11 Measures of Model Fit | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
-  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11 Measures of Model Fit | A lavaan Compendium for Structural Equation Modeling in Educational Research" />
   <meta property="og:type" content="book" />
@@ -708,12 +708,12 @@ Figure 11.2: Continuum between poor and perfect fit.
 <h3><span class="header-section-number">11.3.2</span> The Root Mean Square Residual (RMR) and Standardized RMR (SRMR)<a href="ch11.html#the-root-mean-square-residual-rmr-and-standardized-rmr-srmr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>RMR (Jöreskog &amp; Sörbom, 1981) and SRMR (Bentler, 1995) are overall badness-of-fit measures that are based on the fitted residuals (i.e., difference between model-implied and sample covariance matrices).</p>
 <span class="math display" id="eq:11-11">\[\begin{equation}
-\text{RMR} = \sqrt{\frac{\mathbf{\Sigma}^p_{i=1}\mathbf{\Sigma}^i_{j=1}(s_{ij}-\hat\sigma_{ij})^2}{p(p+1)/2}}
+\text{RMR} = \sqrt{\frac{\sum_{i=1}^p \sum_{j=1}^i (s_{ij}-\hat\sigma_{ij})^2}{p(p+1)/2}}
 \tag{11.11}
 \end{equation}\]</span>
 <p>RMR is defined as the square-root of the mean of the squared fitted residuals. In principle, RMR values close to zero suggest a good fit. But as the elements of <span class="math inline">\(\mathbf{S}\)</span> and <span class="math inline">\(\mathbf\Sigma\)</span> are scale dependent, the fitted residuals are scale dependent, too, which implies that RMR depends on the sizes of the variances and covariances of the observed variables. In other words, without taking the scales of the variables into account, it is virtually impossible to say whether a given RMR value indicates good or bad fit. To overcome this problem, the standardized RMR was been introduced, where the residuals <span class="math inline">\(s_{ij}\)</span> and <span class="math inline">\(\hat\sigma_{ij}\)</span> are standardized using the standard deviations of the observed variables <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> from the sample covariance matrix<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>.</p>
 <span class="math display" id="eq:-">\[\begin{equation}
-\text{SRMR} = \sqrt{\frac{\mathbf{\Sigma}^p_{i=1}\mathbf{\Sigma}^i_{j=1}(s_{ij}-\hat\sigma_{ij})/(s_{ii}-s{jj})^2}{p(p+1)/2}}
+\text{SRMR} = \sqrt{\frac{\sum_{i=1}^p \sum_{j=1}^i \frac{(s_{ij}-\hat\sigma_{ij})^2}{s_{ii} s_{jj}}}{p(p+1)/2}}
 \tag{11.12}
 \end{equation}\]</span>
 <p>SRMR continues to be popular despite its limitations. Interpreting SRMR is complicated by the fact that its expected value varies with sample size, but as a rule of thumb SRMR values lower than .05 are taken as indicative of good fit, and SRMR lower than .10 may be interpreted as acceptable fit. However, we do not recommend paying attention to SRMR as a global measure of overall model fit; rather, we recommend paying attention to individual correlation residuals, as described in chapter 8 on model modification. In that example, the average correlation residual was <span class="math inline">\(\text{SRMR} = .087\)</span>, which would indicate acceptable (but not good) global fit. However, most of the correlation residuals were zero, so the average (SRMR) masked the fact that the largest correlation residual (.272) was unacceptably large, indicating a severe local source of model misspecification.</p>
