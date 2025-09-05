@@ -1192,11 +1192,11 @@ Rather than defining new parameters in model syntax, the same tools in <code>emm
 <span id="cb140-4"><a href="ch2.html#cb140-4" tabindex="-1"></a>               <span class="do">## probe at the M +/- 1 SD of the moderator</span></span>
 <span id="cb140-5"><a href="ch2.html#cb140-5" tabindex="-1"></a>               <span class="at">at =</span> <span class="fu">list</span>(<span class="at">NFC =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.4</span>, <span class="dv">0</span>, <span class="fl">1.4</span>)))</span></code></pre></div>
 <pre><code>## Warning: lavaan-&gt;lavPredict():  
-##    fitted model does not contain regular (i.e., measured) latent variables; the 
-##    matrix of factor scores may contain no columns
+##    fitted model does not contain regular (i.e., measured) latent variables; 
+##    the matrix of factor scores may contain no columns
 ## Warning: lavaan-&gt;lavPredict():  
-##    fitted model does not contain regular (i.e., measured) latent variables; the 
-##    matrix of factor scores may contain no columns</code></pre>
+##    fitted model does not contain regular (i.e., measured) latent variables; 
+##    the matrix of factor scores may contain no columns</code></pre>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="ch2.html#cb142-1" tabindex="-1"></a>probe1 <span class="ot">&lt;-</span> <span class="fu">pairs</span>(em1, <span class="at">rev =</span> <span class="cn">TRUE</span>) <span class="co"># so group &quot;1&quot; minus group &quot;0&quot;</span></span>
 <span id="cb142-2"><a href="ch2.html#cb142-2" tabindex="-1"></a><span class="fu">rbind</span>(probe1, <span class="at">adjust =</span> <span class="st">&quot;sidak&quot;</span>)  <span class="co"># Sidak-adjusted p values</span></span></code></pre></div>
 <pre><code>##  NFC  contrast              estimate   SE  df z.ratio p.value
