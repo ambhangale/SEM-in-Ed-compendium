@@ -982,24 +982,24 @@ Figure 5.3: The hypothesized model of Affrunti and Woodruff-Borden (2014).
 <span id="cb178-18"><a href="ch5.html#cb178-18" tabindex="-1"></a><span class="st">total_ind_PA := I1_PA</span></span>
 <span id="cb178-19"><a href="ch5.html#cb178-19" tabindex="-1"></a><span class="st">total_PA := total_ind_PA + b41</span></span>
 <span id="cb178-20"><a href="ch5.html#cb178-20" tabindex="-1"></a></span>
-<span id="cb178-21"><a href="ch5.html#cb178-21" tabindex="-1"></a><span class="st"># specific, total indirect and total effects of PE on CA</span></span>
-<span id="cb178-22"><a href="ch5.html#cb178-22" tabindex="-1"></a><span class="st">I1_PE := b32*b43</span></span>
-<span id="cb178-23"><a href="ch5.html#cb178-23" tabindex="-1"></a><span class="st">total_ind_PE := I1_PE</span></span>
-<span id="cb178-24"><a href="ch5.html#cb178-24" tabindex="-1"></a><span class="st">total_PE := total_ind_PE + b42</span></span>
+<span id="cb178-21"><a href="ch5.html#cb178-21" tabindex="-1"></a><span class="st"># specific, total indirect and total effects of PP on CA</span></span>
+<span id="cb178-22"><a href="ch5.html#cb178-22" tabindex="-1"></a><span class="st">I1_PP := b32*b43</span></span>
+<span id="cb178-23"><a href="ch5.html#cb178-23" tabindex="-1"></a><span class="st">total_ind_PP := I1_PP</span></span>
+<span id="cb178-24"><a href="ch5.html#cb178-24" tabindex="-1"></a><span class="st">total_PP := total_ind_PP + b42</span></span>
 <span id="cb178-25"><a href="ch5.html#cb178-25" tabindex="-1"></a><span class="st">&#39;</span></span></code></pre></div>
-<p>We can define new variables that are a function of free parameter estimates by using the operator “<code>:=</code>”. We name the indirect effect of PA on CA <code>I1_PA</code>. If there would have been more mediators than Overcontrol, we could name other indirect effects <code>I2_PA</code>, <code>I3_PA</code> etc. The total indirect effect is calculated by summing the specific indirect effects. In this example there is just one specific indirect effect, so the total indirect effect is equal to the specific indirect effect. We used similar code for the indirect, total indirect and total effect of PE on CA.</p>
+<p>We can define new parameters that are a function of other labeled parameters by using the operator “<code>:=</code>”. We name the indirect effect of PA on CA <code>I1_PA</code>. If there would have been more mediators than Overcontrol, we could name other indirect effects <code>I2_PA</code>, <code>I3_PA</code> etc. The total indirect effect is calculated by summing the specific indirect effects. In this example there is just one specific indirect effect, so the total indirect effect is equal to the specific indirect effect. We used similar code for the indirect, total indirect and total effect of PP on CA.</p>
 <pre><code>    I1_PA := b31*b43
     total_ind_PA := I1_PA
     total_PA := total_ind_PA + b41</code></pre>
-<p>The summary output of <code>lavaan</code> will give the result of the calculations, including a standard error of the estimate (using the delta-method) and the associated <span class="math inline">\(z\)</span>-statistic. This provides a test of significance for the indirect ant total effects. When you request standardized output these are also given for the indirect effects. The results are added at the end of the output under <code>“Defined parameters”</code>:</p>
+<p>The summary output of <code>lavaan</code> will give the result of the calculations, including a standard error of the estimate (using the delta-method) and the associated <span class="math inline">\(z\)</span>-statistic. This provides a test of significance for the indirect ant total effects. When you request standardized output these are also given for the indirect effects. The results are added at the end of the output under <code>Defined parameters</code>:</p>
 <pre><code>Defined Parameters:
                    Estimate  Std.Err  z-value  P(&gt;|z|)
     I1_PA             0.011    0.010    1.140    0.254
     total_ind_PA      0.011    0.010    1.140    0.254
     total_PA          0.102    0.034    3.027    0.002
-    I1_PE             0.012    0.008    1.542    0.123
-    total_ind_PE      0.012    0.008    1.542    0.123
-    total_PE         -0.002    0.023   -0.102    0.918</code></pre>
+    I1_PP             0.012    0.008    1.542    0.123
+    total_ind_PP      0.012    0.008    1.542    0.123
+    total_PP         -0.002    0.023   -0.102    0.918</code></pre>
 
 </div>
 </div>

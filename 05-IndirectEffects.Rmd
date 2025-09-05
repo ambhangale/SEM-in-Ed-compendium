@@ -203,14 +203,14 @@ I1_PA := b31*b43
 total_ind_PA := I1_PA
 total_PA := total_ind_PA + b41
 
-# specific, total indirect and total effects of PE on CA
-I1_PE := b32*b43
-total_ind_PE := I1_PE
-total_PE := total_ind_PE + b42
+# specific, total indirect and total effects of PP on CA
+I1_PP := b32*b43
+total_ind_PP := I1_PP
+total_PP := total_ind_PP + b42
 '
 ```
 
-We can define new variables that are a function of free parameter estimates by using the operator "`:=`". We name the indirect effect of PA on CA `I1_PA`. If there would have been more mediators than Overcontrol, we could name other indirect effects `I2_PA`, `I3_PA` etc. The total indirect effect is calculated by summing the specific indirect effects. In this example there is just one specific indirect effect, so the total indirect effect is equal to the specific indirect effect. We used similar code for the indirect, total indirect and total effect of PE on CA.
+We can define new parameters that are a function of other labeled parameters by using the operator "`:=`". We name the indirect effect of PA on CA `I1_PA`. If there would have been more mediators than Overcontrol, we could name other indirect effects `I2_PA`, `I3_PA` etc. The total indirect effect is calculated by summing the specific indirect effects. In this example there is just one specific indirect effect, so the total indirect effect is equal to the specific indirect effect. We used similar code for the indirect, total indirect and total effect of PP on CA.
 
 ```
     I1_PA := b31*b43
@@ -218,7 +218,7 @@ We can define new variables that are a function of free parameter estimates by u
     total_PA := total_ind_PA + b41
 ```
 
-The summary output of `lavaan` will give the result of the calculations, including a standard error of the estimate (using the delta-method) and the associated $z$-statistic. This provides a test of significance for the indirect ant total effects. When you request standardized output these are also given for the indirect effects. The results are added at the end of the output under `“Defined parameters”`:
+The summary output of `lavaan` will give the result of the calculations, including a standard error of the estimate (using the delta-method) and the associated $z$-statistic. This provides a test of significance for the indirect ant total effects. When you request standardized output these are also given for the indirect effects. The results are added at the end of the output under `Defined parameters`:
 
 ```{r echo=F, eval=T}
 AWModelOut <- lavaan(model = AWmodel,
@@ -231,6 +231,6 @@ AWModelOut <- lavaan(model = AWmodel,
         I1_PA             0.011    0.010    1.140    0.254
         total_ind_PA      0.011    0.010    1.140    0.254
         total_PA          0.102    0.034    3.027    0.002
-        I1_PE             0.012    0.008    1.542    0.123
-        total_ind_PE      0.012    0.008    1.542    0.123
-        total_PE         -0.002    0.023   -0.102    0.918
+        I1_PP             0.012    0.008    1.542    0.123
+        total_ind_PP      0.012    0.008    1.542    0.123
+        total_PP         -0.002    0.023   -0.102    0.918

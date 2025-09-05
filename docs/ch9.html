@@ -755,10 +755,14 @@ Figure 9.1: Empirical Cycle.
 <p>The lavaan <a href="ch9.html#script-9.0">Script 9.0</a> below demonstrates how to make a minor model adjustment, such as adding a single parameter. Note that the model syntax does not need to be a single character string, but can be a vector of character strings, so we do not need to write out the whole model again. The new model can be fit to the data using all the same <code>lavaan()</code> arguments in Script 3.1, or we can use the <code>update()</code> function as a shortcut. Any specified arguments will replace the original model-fit arguments found in the object <code>AWmodelOut</code>. The first argument to <code>lavaan()</code> is called <code>model</code>), so we provide our new model syntax. All other (unspecified) arguments will be the same when the new model is fit, saving the results in the object <code>AWmodel2Out</code>.</p>
 <div id="script-9.0" class="section level3 hasAnchor" number="9.7.1">
 <h3><span class="header-section-number">9.7.1</span> Script 9.0<a href="ch9.html#script-9.0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<pre><code># add a direct effect of Parent Anxiety on Child Anxiety to the path model
-AWmodel2 &lt;- c(AWmodel, &#39; child_anx ~ b41* parent_anx &#39;)
-# fit the new model by &quot;updating&quot; the original model
-AWmodel2Out &lt;- update(AWmodelOut, model = AWmodel2)</code></pre>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="ch9.html#cb209-1" tabindex="-1"></a><span class="co"># add a direct effect of Parent Anxiety on Child Anxiety to the path model</span></span>
+<span id="cb209-2"><a href="ch9.html#cb209-2" tabindex="-1"></a>AWmodel2 <span class="ot">&lt;-</span> <span class="fu">c</span>(AWmodel, <span class="st">&#39; child_anx ~ b41* parent_anx &#39;</span>)</span>
+<span id="cb209-3"><a href="ch9.html#cb209-3" tabindex="-1"></a><span class="co"># fit the new model by &quot;updating&quot; the original model</span></span>
+<span id="cb209-4"><a href="ch9.html#cb209-4" tabindex="-1"></a>AWmodel2Out <span class="ot">&lt;-</span> <span class="fu">update</span>(AWmodelOut, <span class="at">model =</span> AWmodel2)</span></code></pre></div>
+<pre><code>## Warning: lavaan-&gt;ldw_parse_model_string():  
+##    modifier label specified multiple times, overwritten at line 25, pos 14
+##  child_anx ~ b41* parent_anx 
+##              ^</code></pre>
 <p>In our illustrative example of child anxiety, the partial mediation model (where the regression of child anxiety on parent anxiety is added to the model) yields the following test result: <span class="math inline">\(χ^2(1) = 0.397\)</span>, <span class="math inline">\(p = .53\)</span>. Thus, the <span class="math inline">\(χ^2\)</span> value is no longer significant (at <span class="math inline">\(α = .05\)</span>), so the null hypothesis of exact fit cannot be rejected. This gives support to the notion that the model gives a true description of reality. However, one could question the parsimony of this model with a single degree of freedom. The size of the direct effect in standardized metric is estimated to be .292, which is substantial. Note that the actual value matches the SEPC in Table 2 to the third decimal place. Expected and actual estimated values will not always correspond so perfectly, but they will typically be very close.</p>
 </div>
 </div>
@@ -769,57 +773,93 @@ AWmodel2Out &lt;- update(AWmodelOut, model = AWmodel2)</code></pre>
 <div id="calculating-correlation-residuals-in-lavaan" class="section level2 hasAnchor" number="9.9">
 <h2><span class="header-section-number">9.9</span> Calculating correlation residuals in <code>lavaan</code><a href="ch9.html#calculating-correlation-residuals-in-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <code>residual()</code> function (or <code>resid()</code> for short) provides covariance residuals by default, but you can request correlation residuals with an additional argument:</p>
-<pre><code>resid(AWmodelOut, type = &quot;cor&quot;)
-## the default standardization method is Bollen&#39;s (1989) formula
-resid(AWmodelOut, type = &quot;cor.bollen&quot;)
-## optionally, arrange rows &amp; columns to match input order
-resid(AWmodelOut, type = &quot;cor&quot;)$cor[obsnames, obsnames]
-</code></pre>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="ch9.html#cb211-1" tabindex="-1"></a><span class="fu">resid</span>(AWmodelOut, <span class="at">type =</span> <span class="st">&quot;cor&quot;</span>)</span></code></pre></div>
+<pre><code>## $type
+## [1] &quot;cor.bollen&quot;
+## 
+## $cov
+##             ovrcnt chld_n prnt_n perfct
+## overcontrol  0.000                     
+## child_anx    0.000  0.000              
+## parent_anx   0.000  0.272  0.000       
+## perfect      0.000  0.034  0.000  0.000</code></pre>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="ch9.html#cb213-1" tabindex="-1"></a><span class="do">## the default standardization method is Bollen&#39;s (1989) formula</span></span>
+<span id="cb213-2"><a href="ch9.html#cb213-2" tabindex="-1"></a><span class="fu">resid</span>(AWmodelOut, <span class="at">type =</span> <span class="st">&quot;cor.bollen&quot;</span>)</span></code></pre></div>
+<pre><code>## $type
+## [1] &quot;cor.bollen&quot;
+## 
+## $cov
+##             ovrcnt chld_n prnt_n perfct
+## overcontrol  0.000                     
+## child_anx    0.000  0.000              
+## parent_anx   0.000  0.272  0.000       
+## perfect      0.000  0.034  0.000  0.000</code></pre>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="ch9.html#cb215-1" tabindex="-1"></a><span class="do">## optionally, arrange rows &amp; columns to match input order</span></span>
+<span id="cb215-2"><a href="ch9.html#cb215-2" tabindex="-1"></a><span class="fu">resid</span>(AWmodelOut, <span class="at">type =</span> <span class="st">&quot;cor&quot;</span>)<span class="sc">$</span>cor[obsnames, obsnames]</span></code></pre></div>
+<pre><code>## NULL</code></pre>
 <p>First, we created two objects that contain the sample (<code>ssam</code>) and model-implied (<code>smod</code>) covariance matrices. Although the sample covariance matrix is available as the object <code>AWcov</code> that was used as input data, this would not be the case if raw data were analysed. And although we could calculate the sample covariance matrix for complete data using the <code>cov()</code> function, when there are missing data, covariance and correlation residuals must be calculated using the estimated covariance matrix (also called the EM matrix) that is obtained by fitting the saturated model to the partially observed data. Thus, the most error-free way to extract this information from <code>lavaan</code> is to use the <code>lavInspect()</code> function to extract the sample statistics, or “sampstat” for short. Likewise, the model-implied covariance matrix can be extracted by requesting <code>“cov.ov”</code> (i.e., the model-implied covariance between observed variables).</p>
-<pre><code># extract the sample covariance matrix
-ssam &lt;- lavInspect(AWmodelOut, &quot;sampstat&quot;)$cov[obsnames, obsnames]
-# extract the model-implied covariance matrix
-smod &lt;- lavInspect(AWmodelOut, &quot;cov.ov&quot;)[obsnames, obsnames]</code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="ch9.html#cb217-1" tabindex="-1"></a><span class="co"># extract the sample covariance matrix</span></span>
+<span id="cb217-2"><a href="ch9.html#cb217-2" tabindex="-1"></a>ssam <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(AWmodelOut, <span class="st">&quot;sampstat&quot;</span>)<span class="sc">$</span>cov</span>
+<span id="cb217-3"><a href="ch9.html#cb217-3" tabindex="-1"></a><span class="co"># extract the model-implied covariance matrix</span></span>
+<span id="cb217-4"><a href="ch9.html#cb217-4" tabindex="-1"></a>smod <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(AWmodelOut, <span class="st">&quot;cov.ov&quot;</span>)</span></code></pre></div>
 <p>These matrices need to be standardized. This is done with the R function <code>cov2cor()</code>, which transforms a covariance matrix to a correlation matrix. The model-implied correlation matrix is then subtracted from the observed correlation matrix, and we print the result rounded to the third decimal place:</p>
-<pre><code>corres &lt;- cov2cor(ssam) - cov2cor(smod)
-round(corres, 3)</code></pre>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="ch9.html#cb218-1" tabindex="-1"></a>corres <span class="ot">&lt;-</span> <span class="fu">cov2cor</span>(ssam) <span class="sc">-</span> <span class="fu">cov2cor</span>(smod)</span>
+<span id="cb218-2"><a href="ch9.html#cb218-2" tabindex="-1"></a><span class="fu">round</span>(corres, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##             ovrcnt chld_n prnt_n perfct
+## overcontrol  0.000                     
+## child_anx    0.000  0.000              
+## parent_anx   0.000  0.272  0.000       
+## perfect      0.000  0.034  0.000  0.000</code></pre>
 <p>The last two lines are optional, but may help you find the large (&gt; .10) and largest residuals, respectively, indicated by cells saying <code>TRUE</code>.</p>
-<pre><code>abs(corres) &gt;= .10  
-abs(corres) == max(abs(corres))</code></pre>
-<p>The matrix of correlation residuals for the AW-model is given below.</p>
-<pre><code>            parent_anx perfect overcontrol child_anx
-parent_anx       0.000   0.000       0.000     0.272
-perfect          0.000   0.000       0.001     0.034
-overcontrol      0.000   0.001       0.000     0.001
-child_anx        0.272   0.034       0.001     0.000</code></pre>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="ch9.html#cb220-1" tabindex="-1"></a><span class="fu">abs</span>(corres) <span class="sc">&gt;=</span> .<span class="dv">10</span>  </span></code></pre></div>
+<pre><code>##             overcontrol child_anx parent_anx perfect
+## overcontrol       FALSE     FALSE      FALSE   FALSE
+## child_anx         FALSE     FALSE       TRUE   FALSE
+## parent_anx        FALSE      TRUE      FALSE   FALSE
+## perfect           FALSE     FALSE      FALSE   FALSE</code></pre>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="ch9.html#cb222-1" tabindex="-1"></a><span class="fu">abs</span>(corres) <span class="sc">==</span> <span class="fu">max</span>(<span class="fu">abs</span>(corres))</span></code></pre></div>
+<pre><code>##             overcontrol child_anx parent_anx perfect
+## overcontrol       FALSE     FALSE      FALSE   FALSE
+## child_anx         FALSE     FALSE       TRUE   FALSE
+## parent_anx        FALSE      TRUE      FALSE   FALSE
+## perfect           FALSE     FALSE      FALSE   FALSE</code></pre>
 <p>Note that there is also a slightly different formula available, which is implemented in Bentler’s (1995) EQS software. Rather than standardizing each matrix with respect to their own <span class="math inline">\(SD\)</span>s, then subtracting them, Bentler proposed subtracting the unstandardized covariance matrices, then standardizing the differences with respect to the observed-variable <span class="math inline">\(SD\)</span>s only. Script 8.2 shows how to request these correlation residuals from <code>lavaan</code>, as well as how the procedure to calculate them differs.</p>
-<pre><code>### Script 9.2 ### 
-
-## request Bentler&#39;s (1995) formula
-round(resid(AWmodelOut, type = &quot;cor.bentler&quot;)$cor[obsnames, obsnames], 3)
-
-## MANUAL PROCEDURE:
-## calculate covariance residuals
-covres &lt;- ssam - smod
-## standardize covariance residuals to make correlation residuals
-SDs &lt;- diag(sqrt(diag(ssam)))
-corres &lt;- solve(SDs) %*% covres %*% solve(SDs)
-dimnames(corres) &lt;- list(obsnames, obsnames)
-round(corres, 3)</code></pre>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="ch9.html#cb224-1" tabindex="-1"></a><span class="do">### Script 9.2 </span><span class="al">###</span><span class="do"> </span></span>
+<span id="cb224-2"><a href="ch9.html#cb224-2" tabindex="-1"></a></span>
+<span id="cb224-3"><a href="ch9.html#cb224-3" tabindex="-1"></a><span class="do">## request Bentler&#39;s (1995) formula</span></span>
+<span id="cb224-4"><a href="ch9.html#cb224-4" tabindex="-1"></a><span class="fu">resid</span>(AWmodelOut, <span class="at">type =</span> <span class="st">&quot;cor.bentler&quot;</span>)<span class="sc">$</span>cov</span></code></pre></div>
+<pre><code>##             ovrcnt chld_n prnt_n perfct
+## overcontrol  0.000                     
+## child_anx    0.000  0.000              
+## parent_anx   0.000  0.272  0.000       
+## perfect      0.000  0.034  0.000  0.000</code></pre>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="ch9.html#cb226-1" tabindex="-1"></a><span class="do">## MANUAL PROCEDURE:</span></span>
+<span id="cb226-2"><a href="ch9.html#cb226-2" tabindex="-1"></a><span class="do">## calculate covariance residuals</span></span>
+<span id="cb226-3"><a href="ch9.html#cb226-3" tabindex="-1"></a>covres <span class="ot">&lt;-</span> ssam <span class="sc">-</span> smod</span>
+<span id="cb226-4"><a href="ch9.html#cb226-4" tabindex="-1"></a><span class="do">## standardize covariance residuals to make correlation residuals</span></span>
+<span id="cb226-5"><a href="ch9.html#cb226-5" tabindex="-1"></a>SDs <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="fu">sqrt</span>(<span class="fu">diag</span>(ssam)))</span>
+<span id="cb226-6"><a href="ch9.html#cb226-6" tabindex="-1"></a><span class="fu">dimnames</span>(SDs) <span class="ot">&lt;-</span> <span class="fu">dimnames</span>(covres)</span>
+<span id="cb226-7"><a href="ch9.html#cb226-7" tabindex="-1"></a>corres <span class="ot">&lt;-</span> <span class="fu">solve</span>(SDs) <span class="sc">%*%</span> covres <span class="sc">%*%</span> <span class="fu">solve</span>(SDs)</span>
+<span id="cb226-8"><a href="ch9.html#cb226-8" tabindex="-1"></a><span class="fu">round</span>(corres, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##             overcontrol child_anx parent_anx perfect
+## overcontrol           0     0.000      0.000   0.000
+## child_anx             0     0.000      0.272   0.034
+## parent_anx            0     0.272      0.000   0.000
+## perfect               0     0.034      0.000   0.000</code></pre>
 <p>n this case, you will not notice any difference between the two procedures. The reason is that when no constraints are placed on the (residual) variance estimates, the estimated values will be chosen such that the model-implied total variance will exactly reproduce the observed total variance. In such situations, there is no practical difference between the two formulae.</p>
 <p>In situations where the variances are constrained (see, for example, later chapters on strict measurement invariance), the two formulae will diverge, and neither is “right” or “wrong” because they are both standardized, but with respect to different criteria. Because Bollen’s (1989) formula standardizes the observed and model-implied matrices first, the diagonals will always be 1 by definition, so diagonal elements of the correlation-residual matrix will always be <span class="math inline">\(1 – 1 = 0\)</span>. Bentler’s (1995) formula, on the other hand, might be more helpful to identify invalid constraints on (residual) variances because the differences between observed and model-implied variances are calculated first, then standardized with respect to how large the “true” observed variances are.</p>
 <div id="requesting-mis-and-sepcs-in-lavaan" class="section level3 hasAnchor" number="9.9.1">
 <h3><span class="header-section-number">9.9.1</span> Requesting MIs and (S)EPCs in <code>lavaan</code><a href="ch9.html#requesting-mis-and-sepcs-in-lavaan" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In <code>lavaan</code>, MIs and EPCs can be inspected using the <code>modificationIndices()</code> function. This function returns a data frame with the complete list of model parameters that are fixed to a specific value (i.e., not for equality constraints), and prints each associated MI and (standardized and unstandardized) EPC. Using the following commands, the data frame is sorted with the highest MIs printed first. Also, we can specify a minimum value (i.e., a critical value, crit) to display only MIs that might be considered significant. Here, we define it as a <span class="math inline">\(1-df\)</span> <span class="math inline">\(χ^2\)</span> value corresponding to <span class="math inline">\(α = .05\)</span>:</p>
-<pre><code>crit &lt;- qchisq(.05, df = 1, lower.tail = FALSE)
-modificationIndices(AWmodelOut, sort. = TRUE, minimum.value = crit)</code></pre>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="ch9.html#cb228-1" tabindex="-1"></a>crit <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(.<span class="dv">05</span>, <span class="at">df =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb228-2"><a href="ch9.html#cb228-2" tabindex="-1"></a><span class="fu">modificationIndices</span>(AWmodelOut, <span class="at">sort. =</span> <span class="cn">TRUE</span>, <span class="at">minimum.value =</span> crit)</span></code></pre></div>
 <p>The output for all nonzero MIs from the model are given below.</p>
 <pre><code>          lhs op        rhs    mi   epc sepc.lv sepc.all sepc.nox
 12  child_anx ~~ parent_anx 6.871 6.945   6.945    0.264    0.264
 18 parent_anx  ~  child_anx 6.871 1.009   1.009    0.290    0.290
 15  child_anx  ~ parent_anx 6.716 0.084   0.084    0.292    0.292</code></pre>
 <p>You can also request that MIs be printed at the bottom of the <code>summary()</code> output, but you have no options to sort or subset them:</p>
-<pre><code>summary(AWmodelOut, modindices = TRUE)</code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="ch9.html#cb230-1" tabindex="-1"></a><span class="fu">summary</span>(AWmodelOut, <span class="at">modindices =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="references-5" class="section level2 unnumbered hasAnchor">

@@ -609,7 +609,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div id="prepare-data-and-workspace-2" class="section level2 hasAnchor" number="27.1">
 <h2><span class="header-section-number">27.1</span> Prepare Data and Workspace<a href="ch27.html#prepare-data-and-workspace-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="ch27.html#cb426-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="ch27.html#cb438-1" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span></code></pre></div>
 <p>For illustration, we will use summary statistics reported by Duncan and Duncan (1996, pp. 329–330). <code>alc</code>ohol, <code>cig</code>arette, and cannabis use (<code>thc</code>) were each measured annually for 4 years using a 5-point scale:</p>
 <ol style="list-style-type: decimal">
 <li>never used</li>
@@ -624,33 +624,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>peer</code> encouragement, measured by summing 3 items (<code>alc</code>, <code>cig</code>, <code>thc</code>) using a 5-point Likert scale indicating how much their best friend encouraged use of that substance</li>
 </ul>
 <p>The following summary statistics were observed for the <span class="math inline">\(N=321\)</span> adolescents who provided complete data in all 4 years.</p>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="ch27.html#cb427-1" tabindex="-1"></a><span class="do">## variable names</span></span>
-<span id="cb427-2"><a href="ch27.html#cb427-2" tabindex="-1"></a>vn <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">&quot;alc&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">paste0</span>(<span class="st">&quot;cig&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">paste0</span>(<span class="st">&quot;thc&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),<span class="st">&quot;age&quot;</span>,<span class="st">&quot;peer&quot;</span>)</span>
-<span id="cb427-3"><a href="ch27.html#cb427-3" tabindex="-1"></a><span class="do">## mean vector</span></span>
-<span id="cb427-4"><a href="ch27.html#cb427-4" tabindex="-1"></a>duncanM <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="fl">2.271</span>, <span class="fl">2.560</span>, <span class="fl">2.694</span>, <span class="fl">2.965</span>,    <span class="fl">1.847</span>, <span class="fl">2.043</span>, <span class="fl">2.227</span>, <span class="fl">2.510</span>,</span>
-<span id="cb427-5"><a href="ch27.html#cb427-5" tabindex="-1"></a>                      <span class="fl">1.510</span>, <span class="fl">1.672</span>, <span class="fl">1.828</span>, <span class="fl">1.947</span>,   <span class="fl">13.108</span>, <span class="fl">6.193</span>), <span class="at">nm =</span> vn)</span>
-<span id="cb427-6"><a href="ch27.html#cb427-6" tabindex="-1"></a><span class="do">## they reported variances (squared SDs)</span></span>
-<span id="cb427-7"><a href="ch27.html#cb427-7" tabindex="-1"></a>sqSDs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.004</span>,  .<span class="dv">922</span>,  .<span class="dv">832</span>,  .<span class="dv">846</span>,    <span class="fl">1.305</span>, <span class="fl">1.536</span>, <span class="fl">1.645</span>, <span class="fl">1.888</span>,</span>
-<span id="cb427-8"><a href="ch27.html#cb427-8" tabindex="-1"></a>            .<span class="dv">807</span>,  .<span class="dv">896</span>, <span class="fl">1.074</span>, <span class="fl">1.125</span>,    <span class="fl">2.216</span>, <span class="fl">8.844</span>)</span>
-<span id="cb427-9"><a href="ch27.html#cb427-9" tabindex="-1"></a><span class="do">## correlation matrix (lower triangle)</span></span>
-<span id="cb427-10"><a href="ch27.html#cb427-10" tabindex="-1"></a>tri <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.000</span>,</span>
-<span id="cb427-11"><a href="ch27.html#cb427-11" tabindex="-1"></a>          .<span class="dv">640</span>, <span class="fl">1.000</span>,</span>
-<span id="cb427-12"><a href="ch27.html#cb427-12" tabindex="-1"></a>          .<span class="dv">586</span>,  .<span class="dv">670</span>, <span class="fl">1.000</span>,</span>
-<span id="cb427-13"><a href="ch27.html#cb427-13" tabindex="-1"></a>          .<span class="dv">454</span>,  .<span class="dv">566</span>,  .<span class="dv">621</span>, <span class="fl">1.000</span>,</span>
-<span id="cb427-14"><a href="ch27.html#cb427-14" tabindex="-1"></a>          .<span class="dv">568</span>,  .<span class="dv">451</span>,  .<span class="dv">390</span>,  .<span class="dv">357</span>, <span class="fl">1.000</span>,</span>
-<span id="cb427-15"><a href="ch27.html#cb427-15" tabindex="-1"></a>          .<span class="dv">531</span>,  .<span class="dv">449</span>,  .<span class="dv">360</span>,  .<span class="dv">360</span>,  .<span class="dv">850</span>, <span class="fl">1.000</span>,</span>
-<span id="cb427-16"><a href="ch27.html#cb427-16" tabindex="-1"></a>          .<span class="dv">494</span>,  .<span class="dv">449</span>,  .<span class="dv">380</span>,  .<span class="dv">425</span>,  .<span class="dv">783</span>,  .<span class="dv">815</span>, <span class="fl">1.000</span>,</span>
-<span id="cb427-17"><a href="ch27.html#cb427-17" tabindex="-1"></a>          .<span class="dv">387</span>,  .<span class="dv">393</span>,  .<span class="dv">344</span>,  .<span class="dv">473</span>,  .<span class="dv">617</span>,  .<span class="dv">702</span>,  .<span class="dv">779</span>, <span class="fl">1.000</span>,</span>
-<span id="cb427-18"><a href="ch27.html#cb427-18" tabindex="-1"></a>          .<span class="dv">602</span>,  .<span class="dv">431</span>,  .<span class="dv">408</span>,  .<span class="dv">346</span>,  .<span class="dv">706</span>,  .<span class="dv">648</span>,  .<span class="dv">576</span>,  .<span class="dv">543</span>, <span class="fl">1.000</span>,</span>
-<span id="cb427-19"><a href="ch27.html#cb427-19" tabindex="-1"></a>          .<span class="dv">522</span>,  .<span class="dv">460</span>,  .<span class="dv">394</span>,  .<span class="dv">403</span>,  .<span class="dv">644</span>,  .<span class="dv">689</span>,  .<span class="dv">687</span>,  .<span class="dv">535</span>,  .<span class="dv">759</span>, <span class="fl">1.000</span>,</span>
-<span id="cb427-20"><a href="ch27.html#cb427-20" tabindex="-1"></a>          .<span class="dv">499</span>,  .<span class="dv">461</span>,  .<span class="dv">440</span>,  .<span class="dv">472</span>,  .<span class="dv">542</span>,  .<span class="dv">592</span>,  .<span class="dv">676</span>,  .<span class="dv">566</span>,  .<span class="dv">671</span>,  .<span class="dv">790</span>, <span class="fl">1.000</span>,</span>
-<span id="cb427-21"><a href="ch27.html#cb427-21" tabindex="-1"></a>          .<span class="dv">398</span>,  .<span class="dv">385</span>,  .<span class="dv">358</span>,  .<span class="dv">472</span>,  .<span class="dv">452</span>,  .<span class="dv">522</span>,  .<span class="dv">594</span>,  .<span class="dv">644</span>,  .<span class="dv">533</span>,  .<span class="dv">642</span>,  .<span class="dv">793</span>, <span class="fl">1.000</span>,</span>
-<span id="cb427-22"><a href="ch27.html#cb427-22" tabindex="-1"></a>          .<span class="dv">497</span>,  .<span class="dv">370</span>,  .<span class="dv">429</span>,  .<span class="dv">326</span>,  .<span class="dv">418</span>,  .<span class="dv">409</span>,  .<span class="dv">337</span>,  .<span class="dv">205</span>,  .<span class="dv">456</span>,  .<span class="dv">413</span>,  .<span class="dv">345</span>,  .<span class="dv">248</span>, <span class="fl">1.000</span>,</span>
-<span id="cb427-23"><a href="ch27.html#cb427-23" tabindex="-1"></a>          .<span class="dv">336</span>,  .<span class="dv">398</span>,  .<span class="dv">300</span>,  .<span class="dv">276</span>,  .<span class="dv">397</span>,  .<span class="dv">433</span>,  .<span class="dv">386</span>,  .<span class="dv">318</span>,  .<span class="dv">388</span>,  .<span class="dv">522</span>,  .<span class="dv">421</span>,  .<span class="dv">342</span>,  .<span class="dv">273</span>, <span class="dv">1</span>)</span>
-<span id="cb427-24"><a href="ch27.html#cb427-24" tabindex="-1"></a><span class="do">## scale tri to make covariance matrix</span></span>
-<span id="cb427-25"><a href="ch27.html#cb427-25" tabindex="-1"></a>duncanCOV <span class="ot">&lt;-</span> <span class="fu">getCov</span>(<span class="at">x =</span> tri, <span class="at">sds =</span> <span class="fu">sqrt</span>(sqSDs), <span class="at">names =</span> vn)</span>
-<span id="cb427-26"><a href="ch27.html#cb427-26" tabindex="-1"></a><span class="do">## sample size</span></span>
-<span id="cb427-27"><a href="ch27.html#cb427-27" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">321</span></span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="ch27.html#cb439-1" tabindex="-1"></a><span class="do">## variable names</span></span>
+<span id="cb439-2"><a href="ch27.html#cb439-2" tabindex="-1"></a>vn <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">&quot;alc&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">paste0</span>(<span class="st">&quot;cig&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">paste0</span>(<span class="st">&quot;thc&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),<span class="st">&quot;age&quot;</span>,<span class="st">&quot;peer&quot;</span>)</span>
+<span id="cb439-3"><a href="ch27.html#cb439-3" tabindex="-1"></a><span class="do">## mean vector</span></span>
+<span id="cb439-4"><a href="ch27.html#cb439-4" tabindex="-1"></a>duncanM <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="fl">2.271</span>, <span class="fl">2.560</span>, <span class="fl">2.694</span>, <span class="fl">2.965</span>,    <span class="fl">1.847</span>, <span class="fl">2.043</span>, <span class="fl">2.227</span>, <span class="fl">2.510</span>,</span>
+<span id="cb439-5"><a href="ch27.html#cb439-5" tabindex="-1"></a>                      <span class="fl">1.510</span>, <span class="fl">1.672</span>, <span class="fl">1.828</span>, <span class="fl">1.947</span>,   <span class="fl">13.108</span>, <span class="fl">6.193</span>), <span class="at">nm =</span> vn)</span>
+<span id="cb439-6"><a href="ch27.html#cb439-6" tabindex="-1"></a><span class="do">## they reported variances (squared SDs)</span></span>
+<span id="cb439-7"><a href="ch27.html#cb439-7" tabindex="-1"></a>sqSDs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.004</span>,  .<span class="dv">922</span>,  .<span class="dv">832</span>,  .<span class="dv">846</span>,    <span class="fl">1.305</span>, <span class="fl">1.536</span>, <span class="fl">1.645</span>, <span class="fl">1.888</span>,</span>
+<span id="cb439-8"><a href="ch27.html#cb439-8" tabindex="-1"></a>            .<span class="dv">807</span>,  .<span class="dv">896</span>, <span class="fl">1.074</span>, <span class="fl">1.125</span>,    <span class="fl">2.216</span>, <span class="fl">8.844</span>)</span>
+<span id="cb439-9"><a href="ch27.html#cb439-9" tabindex="-1"></a><span class="do">## correlation matrix (lower triangle)</span></span>
+<span id="cb439-10"><a href="ch27.html#cb439-10" tabindex="-1"></a>tri <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.000</span>,</span>
+<span id="cb439-11"><a href="ch27.html#cb439-11" tabindex="-1"></a>          .<span class="dv">640</span>, <span class="fl">1.000</span>,</span>
+<span id="cb439-12"><a href="ch27.html#cb439-12" tabindex="-1"></a>          .<span class="dv">586</span>,  .<span class="dv">670</span>, <span class="fl">1.000</span>,</span>
+<span id="cb439-13"><a href="ch27.html#cb439-13" tabindex="-1"></a>          .<span class="dv">454</span>,  .<span class="dv">566</span>,  .<span class="dv">621</span>, <span class="fl">1.000</span>,</span>
+<span id="cb439-14"><a href="ch27.html#cb439-14" tabindex="-1"></a>          .<span class="dv">568</span>,  .<span class="dv">451</span>,  .<span class="dv">390</span>,  .<span class="dv">357</span>, <span class="fl">1.000</span>,</span>
+<span id="cb439-15"><a href="ch27.html#cb439-15" tabindex="-1"></a>          .<span class="dv">531</span>,  .<span class="dv">449</span>,  .<span class="dv">360</span>,  .<span class="dv">360</span>,  .<span class="dv">850</span>, <span class="fl">1.000</span>,</span>
+<span id="cb439-16"><a href="ch27.html#cb439-16" tabindex="-1"></a>          .<span class="dv">494</span>,  .<span class="dv">449</span>,  .<span class="dv">380</span>,  .<span class="dv">425</span>,  .<span class="dv">783</span>,  .<span class="dv">815</span>, <span class="fl">1.000</span>,</span>
+<span id="cb439-17"><a href="ch27.html#cb439-17" tabindex="-1"></a>          .<span class="dv">387</span>,  .<span class="dv">393</span>,  .<span class="dv">344</span>,  .<span class="dv">473</span>,  .<span class="dv">617</span>,  .<span class="dv">702</span>,  .<span class="dv">779</span>, <span class="fl">1.000</span>,</span>
+<span id="cb439-18"><a href="ch27.html#cb439-18" tabindex="-1"></a>          .<span class="dv">602</span>,  .<span class="dv">431</span>,  .<span class="dv">408</span>,  .<span class="dv">346</span>,  .<span class="dv">706</span>,  .<span class="dv">648</span>,  .<span class="dv">576</span>,  .<span class="dv">543</span>, <span class="fl">1.000</span>,</span>
+<span id="cb439-19"><a href="ch27.html#cb439-19" tabindex="-1"></a>          .<span class="dv">522</span>,  .<span class="dv">460</span>,  .<span class="dv">394</span>,  .<span class="dv">403</span>,  .<span class="dv">644</span>,  .<span class="dv">689</span>,  .<span class="dv">687</span>,  .<span class="dv">535</span>,  .<span class="dv">759</span>, <span class="fl">1.000</span>,</span>
+<span id="cb439-20"><a href="ch27.html#cb439-20" tabindex="-1"></a>          .<span class="dv">499</span>,  .<span class="dv">461</span>,  .<span class="dv">440</span>,  .<span class="dv">472</span>,  .<span class="dv">542</span>,  .<span class="dv">592</span>,  .<span class="dv">676</span>,  .<span class="dv">566</span>,  .<span class="dv">671</span>,  .<span class="dv">790</span>, <span class="fl">1.000</span>,</span>
+<span id="cb439-21"><a href="ch27.html#cb439-21" tabindex="-1"></a>          .<span class="dv">398</span>,  .<span class="dv">385</span>,  .<span class="dv">358</span>,  .<span class="dv">472</span>,  .<span class="dv">452</span>,  .<span class="dv">522</span>,  .<span class="dv">594</span>,  .<span class="dv">644</span>,  .<span class="dv">533</span>,  .<span class="dv">642</span>,  .<span class="dv">793</span>, <span class="fl">1.000</span>,</span>
+<span id="cb439-22"><a href="ch27.html#cb439-22" tabindex="-1"></a>          .<span class="dv">497</span>,  .<span class="dv">370</span>,  .<span class="dv">429</span>,  .<span class="dv">326</span>,  .<span class="dv">418</span>,  .<span class="dv">409</span>,  .<span class="dv">337</span>,  .<span class="dv">205</span>,  .<span class="dv">456</span>,  .<span class="dv">413</span>,  .<span class="dv">345</span>,  .<span class="dv">248</span>, <span class="fl">1.000</span>,</span>
+<span id="cb439-23"><a href="ch27.html#cb439-23" tabindex="-1"></a>          .<span class="dv">336</span>,  .<span class="dv">398</span>,  .<span class="dv">300</span>,  .<span class="dv">276</span>,  .<span class="dv">397</span>,  .<span class="dv">433</span>,  .<span class="dv">386</span>,  .<span class="dv">318</span>,  .<span class="dv">388</span>,  .<span class="dv">522</span>,  .<span class="dv">421</span>,  .<span class="dv">342</span>,  .<span class="dv">273</span>, <span class="dv">1</span>)</span>
+<span id="cb439-24"><a href="ch27.html#cb439-24" tabindex="-1"></a><span class="do">## scale tri to make covariance matrix</span></span>
+<span id="cb439-25"><a href="ch27.html#cb439-25" tabindex="-1"></a>duncanCOV <span class="ot">&lt;-</span> <span class="fu">getCov</span>(<span class="at">x =</span> tri, <span class="at">sds =</span> <span class="fu">sqrt</span>(sqSDs), <span class="at">names =</span> vn)</span>
+<span id="cb439-26"><a href="ch27.html#cb439-26" tabindex="-1"></a><span class="do">## sample size</span></span>
+<span id="cb439-27"><a href="ch27.html#cb439-27" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">321</span></span></code></pre></div>
 </div>
 <div id="random-intercept-model" class="section level2 hasAnchor" number="27.2">
 <h2><span class="header-section-number">27.2</span> Random Intercept Model<a href="ch27.html#random-intercept-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -695,19 +695,19 @@ Figure 27.1: Random intercept model for alcohol-use data from Duncan and Duncan 
 <div id="specification-and-estimation" class="section level3 hasAnchor" number="27.2.1">
 <h3><span class="header-section-number">27.2.1</span> Specification and Estimation<a href="ch27.html#specification-and-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The following <code>lavaan</code> model syntax specifies the model from Figure <a href="ch27.html#fig:fig27-1">27.1</a>.</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="ch27.html#cb428-1" tabindex="-1"></a>mod.ri <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings for random intercept</span></span>
-<span id="cb428-2"><a href="ch27.html#cb428-2" tabindex="-1"></a><span class="st">    INTERCEPT =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4</span></span>
-<span id="cb428-3"><a href="ch27.html#cb428-3" tabindex="-1"></a><span class="st">  ## residual variances</span></span>
-<span id="cb428-4"><a href="ch27.html#cb428-4" tabindex="-1"></a><span class="st">    alc1 ~~ alc1</span></span>
-<span id="cb428-5"><a href="ch27.html#cb428-5" tabindex="-1"></a><span class="st">    alc2 ~~ alc2</span></span>
-<span id="cb428-6"><a href="ch27.html#cb428-6" tabindex="-1"></a><span class="st">    alc3 ~~ alc3</span></span>
-<span id="cb428-7"><a href="ch27.html#cb428-7" tabindex="-1"></a><span class="st">    alc4 ~~ alc4</span></span>
-<span id="cb428-8"><a href="ch27.html#cb428-8" tabindex="-1"></a><span class="st">  ## latent mean and variance</span></span>
-<span id="cb428-9"><a href="ch27.html#cb428-9" tabindex="-1"></a><span class="st">    INTERCEPT ~ 1</span></span>
-<span id="cb428-10"><a href="ch27.html#cb428-10" tabindex="-1"></a><span class="st">    INTERCEPT ~~ INTERCEPT</span></span>
-<span id="cb428-11"><a href="ch27.html#cb428-11" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb428-12"><a href="ch27.html#cb428-12" tabindex="-1"></a>fit.ri <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.ri, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
-<span id="cb428-13"><a href="ch27.html#cb428-13" tabindex="-1"></a>                 <span class="at">sample.nobs =</span> N)</span></code></pre></div>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="ch27.html#cb440-1" tabindex="-1"></a>mod.ri <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings for random intercept</span></span>
+<span id="cb440-2"><a href="ch27.html#cb440-2" tabindex="-1"></a><span class="st">    INTERCEPT =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4</span></span>
+<span id="cb440-3"><a href="ch27.html#cb440-3" tabindex="-1"></a><span class="st">  ## residual variances</span></span>
+<span id="cb440-4"><a href="ch27.html#cb440-4" tabindex="-1"></a><span class="st">    alc1 ~~ alc1</span></span>
+<span id="cb440-5"><a href="ch27.html#cb440-5" tabindex="-1"></a><span class="st">    alc2 ~~ alc2</span></span>
+<span id="cb440-6"><a href="ch27.html#cb440-6" tabindex="-1"></a><span class="st">    alc3 ~~ alc3</span></span>
+<span id="cb440-7"><a href="ch27.html#cb440-7" tabindex="-1"></a><span class="st">    alc4 ~~ alc4</span></span>
+<span id="cb440-8"><a href="ch27.html#cb440-8" tabindex="-1"></a><span class="st">  ## latent mean and variance</span></span>
+<span id="cb440-9"><a href="ch27.html#cb440-9" tabindex="-1"></a><span class="st">    INTERCEPT ~ 1</span></span>
+<span id="cb440-10"><a href="ch27.html#cb440-10" tabindex="-1"></a><span class="st">    INTERCEPT ~~ INTERCEPT</span></span>
+<span id="cb440-11"><a href="ch27.html#cb440-11" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb440-12"><a href="ch27.html#cb440-12" tabindex="-1"></a>fit.ri <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.ri, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
+<span id="cb440-13"><a href="ch27.html#cb440-13" tabindex="-1"></a>                 <span class="at">sample.nobs =</span> N)</span></code></pre></div>
 <p>The <code>lavaan</code> package has a dedicated <code>growth()</code> package, with default <code>lavOptions()</code> that make sense for a LGCM:</p>
 <ul>
 <li><code>int.ov.free = FALSE</code> leaves indicator intercepts fixed to zero</li>
@@ -716,18 +716,18 @@ Figure 27.1: Random intercept model for alcohol-use data from Duncan and Duncan 
 <li><code>auto.cov.lv.x = TRUE</code> freely estimates covariances among exogenous latent variables</li>
 </ul>
 <p>So a shorter syntax could simply specify the factor loadings for the growth factor(s):</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="ch27.html#cb429-1" tabindex="-1"></a>mod.ri <span class="ot">&lt;-</span> <span class="st">&#39; INTERCEPT =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4 &#39;</span></span>
-<span id="cb429-2"><a href="ch27.html#cb429-2" tabindex="-1"></a>fit.ri <span class="ot">&lt;-</span> <span class="fu">growth</span>(mod.ri, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
-<span id="cb429-3"><a href="ch27.html#cb429-3" tabindex="-1"></a>                 <span class="at">sample.nobs =</span> N)</span></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="ch27.html#cb441-1" tabindex="-1"></a>mod.ri <span class="ot">&lt;-</span> <span class="st">&#39; INTERCEPT =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4 &#39;</span></span>
+<span id="cb441-2"><a href="ch27.html#cb441-2" tabindex="-1"></a>fit.ri <span class="ot">&lt;-</span> <span class="fu">growth</span>(mod.ri, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
+<span id="cb441-3"><a href="ch27.html#cb441-3" tabindex="-1"></a>                 <span class="at">sample.nobs =</span> N)</span></code></pre></div>
 <p>However, as LGCMs become more complex (e.g., latent indicators of growth), this set of <code>lavOptions()</code> becomes problematic. Thus, we advise and demonstrate using the basic <code>lavaan()</code> function, either with fully specified model syntax or by explicitly setting <code>lavOptions()</code> that make sense. For example:</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="ch27.html#cb430-1" tabindex="-1"></a>mod.ri <span class="ot">&lt;-</span> <span class="st">&#39; INTERCEPT =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4 &#39;</span></span>
-<span id="cb430-2"><a href="ch27.html#cb430-2" tabindex="-1"></a>fit.ri <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.ri, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
-<span id="cb430-3"><a href="ch27.html#cb430-3" tabindex="-1"></a>                 <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="ch27.html#cb442-1" tabindex="-1"></a>mod.ri <span class="ot">&lt;-</span> <span class="st">&#39; INTERCEPT =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4 &#39;</span></span>
+<span id="cb442-2"><a href="ch27.html#cb442-2" tabindex="-1"></a>fit.ri <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.ri, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
+<span id="cb442-3"><a href="ch27.html#cb442-3" tabindex="-1"></a>                 <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="interpret-results" class="section level3 hasAnchor" number="27.2.2">
 <h3><span class="header-section-number">27.2.2</span> Interpret Results<a href="ch27.html#interpret-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The results in the <code>summary()</code> output indicate that the grand mean alcohol use in this sample is 2.638, which is between “previous but not current use” and “&lt; 4 times per month” on the 1–5 scale.</p>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="ch27.html#cb431-1" tabindex="-1"></a><span class="fu">parameterEstimates</span>(fit.ri, <span class="at">output =</span> <span class="st">&quot;pretty&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="ch27.html#cb443-1" tabindex="-1"></a><span class="fu">parameterEstimates</span>(fit.ri, <span class="at">output =</span> <span class="st">&quot;pretty&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## Latent Variables:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper
@@ -776,15 +776,15 @@ Figure 27.1: Random intercept model for alcohol-use data from Duncan and Duncan 
 Figure 27.2: Linear growth model for alcohol-use data from Duncan and Duncan (1996).
 </p>
 </div>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="ch27.html#cb433-1" tabindex="-1"></a>mod.lin <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings</span></span>
-<span id="cb433-2"><a href="ch27.html#cb433-2" tabindex="-1"></a><span class="st">    Init.Status =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4</span></span>
-<span id="cb433-3"><a href="ch27.html#cb433-3" tabindex="-1"></a><span class="st">    Rate.Change =~          1*alc2 + 2*alc3 + 3*alc4</span></span>
-<span id="cb433-4"><a href="ch27.html#cb433-4" tabindex="-1"></a><span class="st">  ## factor covariance</span></span>
-<span id="cb433-5"><a href="ch27.html#cb433-5" tabindex="-1"></a><span class="st">    Init.Status ~~ Rate.Change</span></span>
-<span id="cb433-6"><a href="ch27.html#cb433-6" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb433-7"><a href="ch27.html#cb433-7" tabindex="-1"></a>fit.lin <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.lin, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
-<span id="cb433-8"><a href="ch27.html#cb433-8" tabindex="-1"></a>                  <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb433-9"><a href="ch27.html#cb433-9" tabindex="-1"></a><span class="fu">summary</span>(fit.lin, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="ch27.html#cb445-1" tabindex="-1"></a>mod.lin <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings</span></span>
+<span id="cb445-2"><a href="ch27.html#cb445-2" tabindex="-1"></a><span class="st">    Init.Status =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4</span></span>
+<span id="cb445-3"><a href="ch27.html#cb445-3" tabindex="-1"></a><span class="st">    Rate.Change =~          1*alc2 + 2*alc3 + 3*alc4</span></span>
+<span id="cb445-4"><a href="ch27.html#cb445-4" tabindex="-1"></a><span class="st">  ## factor covariance</span></span>
+<span id="cb445-5"><a href="ch27.html#cb445-5" tabindex="-1"></a><span class="st">    Init.Status ~~ Rate.Change</span></span>
+<span id="cb445-6"><a href="ch27.html#cb445-6" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb445-7"><a href="ch27.html#cb445-7" tabindex="-1"></a>fit.lin <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.lin, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
+<span id="cb445-8"><a href="ch27.html#cb445-8" tabindex="-1"></a>                  <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb445-9"><a href="ch27.html#cb445-9" tabindex="-1"></a><span class="fu">summary</span>(fit.lin, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## lavaan 0.6-20.2318 ended normally after 27 iterations
 ## 
 ##   Estimator                                         ML
@@ -839,7 +839,7 @@ Figure 27.2: Linear growth model for alcohol-use data from Duncan and Duncan (19
 <div id="model-fit-and-comparison" class="section level3 hasAnchor" number="27.3.1">
 <h3><span class="header-section-number">27.3.1</span> Model Fit and Comparison<a href="ch27.html#model-fit-and-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The model-fit test statistic in the <code>summary()</code> output does not provide any evidence against the <span class="math inline">\(\text{H}_0\)</span> that linear change is sufficiently complex to describe the data, <span class="math inline">\(\chi^2(5)=8.174, p=.147\)</span>. Linear change is the simplest functional form of change, and significant latent mean, <span class="math inline">\(z=12.342, p&lt;.001\)</span>, indicates that the model cannot be made simpler by omitting linear change. We can verify this by testing whether the random-intercept model statistically differs from the linear growth model in which it is nested. Because the linear-growth loadings are all fixed values, the random-intercept model can be seen as a linear-growth model in which the latent rate of change has a mean and variance of zero (in which case it cannot covary with another factor).</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="ch27.html#cb435-1" tabindex="-1"></a><span class="fu">lavTestLRT</span>(fit.ri, fit.lin) <span class="co"># or anova(fit.ri, fit.lin)</span></span></code></pre></div>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="ch27.html#cb447-1" tabindex="-1"></a><span class="fu">lavTestLRT</span>(fit.ri, fit.lin) <span class="co"># or anova(fit.ri, fit.lin)</span></span></code></pre></div>
 <pre><code>## 
 ## Chi-Squared Difference Test
 ## 
@@ -855,18 +855,18 @@ Figure 27.2: Linear growth model for alcohol-use data from Duncan and Duncan (19
 <li>means and variances are freely estimated</li>
 </ul>
 <p>But this model is not nested within all competing LGCMs Even the linear-growth model places more constraints on the mean structure than the standard independence model, and it also constrains the model-implied variances. Thus, Widamin and Thompson (2003) recommended a more constrained null/baseline model in which all means (and all variances) of repeatedly measured variables are constrained to equality (representing no change in those values).</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="ch27.html#cb437-1" tabindex="-1"></a>mod.null <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="fu">paste0</span>(<span class="st">&quot;alc&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">collapse =</span> <span class="st">&quot; + &quot;</span>), <span class="st">&quot;~ m*1&quot;</span>),</span>
-<span id="cb437-2"><a href="ch27.html#cb437-2" tabindex="-1"></a>              <span class="fu">paste0</span>(<span class="st">&quot;alc&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="st">&quot; ~~ v*alc&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
-<span id="cb437-3"><a href="ch27.html#cb437-3" tabindex="-1"></a><span class="fu">cat</span>(mod.null, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>) <span class="co"># print model syntax to see what the code above does</span></span></code></pre></div>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="ch27.html#cb449-1" tabindex="-1"></a>mod.null <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="fu">paste0</span>(<span class="st">&quot;alc&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">collapse =</span> <span class="st">&quot; + &quot;</span>), <span class="st">&quot;~ m*1&quot;</span>),</span>
+<span id="cb449-2"><a href="ch27.html#cb449-2" tabindex="-1"></a>              <span class="fu">paste0</span>(<span class="st">&quot;alc&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="st">&quot; ~~ v*alc&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
+<span id="cb449-3"><a href="ch27.html#cb449-3" tabindex="-1"></a><span class="fu">cat</span>(mod.null, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>) <span class="co"># print model syntax to see what the code above does</span></span></code></pre></div>
 <pre><code>## alc1 + alc2 + alc3 + alc4 ~ m*1
 ## alc1 ~~ v*alc1
 ## alc2 ~~ v*alc2
 ## alc3 ~~ v*alc3
 ## alc4 ~~ v*alc4</code></pre>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="ch27.html#cb439-1" tabindex="-1"></a>fit.null <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.null, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
-<span id="cb439-2"><a href="ch27.html#cb439-2" tabindex="-1"></a>                   <span class="at">sample.nobs =</span> N)</span></code></pre></div>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="ch27.html#cb451-1" tabindex="-1"></a>fit.null <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.null, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
+<span id="cb451-2"><a href="ch27.html#cb451-2" tabindex="-1"></a>                   <span class="at">sample.nobs =</span> N)</span></code></pre></div>
 <p>This model is nested within the LGCMs.</p>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="ch27.html#cb440-1" tabindex="-1"></a>semTools<span class="sc">::</span><span class="fu">net</span>(fit.null, fit.ri, fit.lin)</span></code></pre></div>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="ch27.html#cb452-1" tabindex="-1"></a>semTools<span class="sc">::</span><span class="fu">net</span>(fit.null, fit.ri, fit.lin)</span></code></pre></div>
 <pre><code>## 
 ##         If cell [R, C] is TRUE, the model in row R is nested within column C.
 ## 
@@ -887,7 +887,7 @@ Figure 27.2: Linear growth model for alcohol-use data from Duncan and Duncan (19
 ## fit.ri (df = 8)    TRUE                   
 ## fit.null (df = 12) TRUE    TRUE</code></pre>
 <p>Thus, it can be used to calculate incremental fit indices, which requires using the <code>fitMeasures()</code> function rather than merely <code>summary(..., fit = TRUE)</code>.</p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="ch27.html#cb442-1" tabindex="-1"></a><span class="fu">fitMeasures</span>(fit.lin, <span class="fu">c</span>(<span class="st">&quot;cfi&quot;</span>,<span class="st">&quot;tli&quot;</span>), <span class="at">baseline.model =</span> fit.null)</span></code></pre></div>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="ch27.html#cb454-1" tabindex="-1"></a><span class="fu">fitMeasures</span>(fit.lin, <span class="fu">c</span>(<span class="st">&quot;cfi&quot;</span>,<span class="st">&quot;tli&quot;</span>), <span class="at">baseline.model =</span> fit.null)</span></code></pre></div>
 <pre><code>##   cfi   tli 
 ## 0.995 0.988</code></pre>
 </div>
@@ -908,15 +908,15 @@ Figure 27.3: Latent basis models for alcohol-use data from Duncan and Duncan (19
 </p>
 </div>
 <p>The script below specifies the model depicted in the left panel of Figure <a href="ch27.html#fig:fig27-3">27.3</a>.</p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="ch27.html#cb444-1" tabindex="-1"></a>mod.basis12 <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings</span></span>
-<span id="cb444-2"><a href="ch27.html#cb444-2" tabindex="-1"></a><span class="st">    Init.Status =~ 1*alc1 + 1*alc2 +  1*alc3 +  1*alc4</span></span>
-<span id="cb444-3"><a href="ch27.html#cb444-3" tabindex="-1"></a><span class="st">    Rate.Change =~          1*alc2 + NA*alc3 + NA*alc4</span></span>
-<span id="cb444-4"><a href="ch27.html#cb444-4" tabindex="-1"></a><span class="st">  ## factor covariance</span></span>
-<span id="cb444-5"><a href="ch27.html#cb444-5" tabindex="-1"></a><span class="st">    Init.Status ~~ Rate.Change</span></span>
-<span id="cb444-6"><a href="ch27.html#cb444-6" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb444-7"><a href="ch27.html#cb444-7" tabindex="-1"></a>fit.basis12 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.basis12, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
-<span id="cb444-8"><a href="ch27.html#cb444-8" tabindex="-1"></a>                      <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb444-9"><a href="ch27.html#cb444-9" tabindex="-1"></a><span class="fu">coef</span>(fit.basis12)[<span class="fu">paste0</span>(<span class="st">&quot;Rate.Change=~alc&quot;</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="ch27.html#cb456-1" tabindex="-1"></a>mod.basis12 <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings</span></span>
+<span id="cb456-2"><a href="ch27.html#cb456-2" tabindex="-1"></a><span class="st">    Init.Status =~ 1*alc1 + 1*alc2 +  1*alc3 +  1*alc4</span></span>
+<span id="cb456-3"><a href="ch27.html#cb456-3" tabindex="-1"></a><span class="st">    Rate.Change =~          1*alc2 + NA*alc3 + NA*alc4</span></span>
+<span id="cb456-4"><a href="ch27.html#cb456-4" tabindex="-1"></a><span class="st">  ## factor covariance</span></span>
+<span id="cb456-5"><a href="ch27.html#cb456-5" tabindex="-1"></a><span class="st">    Init.Status ~~ Rate.Change</span></span>
+<span id="cb456-6"><a href="ch27.html#cb456-6" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb456-7"><a href="ch27.html#cb456-7" tabindex="-1"></a>fit.basis12 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.basis12, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
+<span id="cb456-8"><a href="ch27.html#cb456-8" tabindex="-1"></a>                      <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb456-9"><a href="ch27.html#cb456-9" tabindex="-1"></a><span class="fu">coef</span>(fit.basis12)[<span class="fu">paste0</span>(<span class="st">&quot;Rate.Change=~alc&quot;</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>)]</span></code></pre></div>
 <pre><code>## Rate.Change=~alc3 Rate.Change=~alc4 
 ##          1.502240          2.466024</code></pre>
 <p>The two fixed loadings determine the interpretation of the latent mean <span class="math inline">\(\alpha_2\)</span>, which is no longer a constant rate of change but rather the amount of <strong>change that occurred between the reference occasions</strong>.
@@ -926,7 +926,7 @@ Each estimated loading tells us how much (average) change occurred at that occas
 <li>There is a (nearly) 1-unit increase in the loadings from <code>alc3</code> to <code>alc4</code>, indicating that about as much change occurred between those occasions as between the first 2 occasions.</li>
 </ul>
 <p>This model estimates the average rate of change to be (<span class="math inline">\(0.281\)</span>), the unrestricted change pattern during this 4-year span appears to be an increase of <span class="math inline">\(0.281\)</span> units, then <span class="math inline">\(0.1405\)</span> units, then <span class="math inline">\(0.281\)</span> units again. To test whether this deviation from linearity can be accounted for by mere sampling error, we can conduct a nested model comparison:</p>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="ch27.html#cb446-1" tabindex="-1"></a><span class="fu">lavTestLRT</span>(fit.lin, fit.basis12) <span class="co"># or anova(fit.lin, fit.basis12)</span></span></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="ch27.html#cb458-1" tabindex="-1"></a><span class="fu">lavTestLRT</span>(fit.lin, fit.basis12) <span class="co"># or anova(fit.lin, fit.basis12)</span></span></code></pre></div>
 <pre><code>## 
 ## Chi-Squared Difference Test
 ## 
@@ -937,15 +937,15 @@ Each estimated loading tells us how much (average) change occurred at that occas
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>We cannot reject the null hypothesis that linearity is sufficiently complex.</p>
 <p>Another example of a latent basis curve fixes the first and <em>last</em> loadings to 0 and 1, respectively, with similar implications for interpretation. The script below specifies the model depicted in the right panel of Figure <a href="ch27.html#fig:fig27-3">27.3</a>.</p>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="ch27.html#cb448-1" tabindex="-1"></a>mod.basis14 <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings</span></span>
-<span id="cb448-2"><a href="ch27.html#cb448-2" tabindex="-1"></a><span class="st">    Init.Status =~ 1*alc1 +  1*alc2 +  1*alc3 + 1*alc4</span></span>
-<span id="cb448-3"><a href="ch27.html#cb448-3" tabindex="-1"></a><span class="st">    Rate.Change =~          NA*alc2 + NA*alc3 + 1*alc4</span></span>
-<span id="cb448-4"><a href="ch27.html#cb448-4" tabindex="-1"></a><span class="st">  ## factor covariance</span></span>
-<span id="cb448-5"><a href="ch27.html#cb448-5" tabindex="-1"></a><span class="st">    Init.Status ~~ Rate.Change</span></span>
-<span id="cb448-6"><a href="ch27.html#cb448-6" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb448-7"><a href="ch27.html#cb448-7" tabindex="-1"></a>fit.basis14 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.basis14, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
-<span id="cb448-8"><a href="ch27.html#cb448-8" tabindex="-1"></a>                      <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb448-9"><a href="ch27.html#cb448-9" tabindex="-1"></a><span class="fu">coef</span>(fit.basis14)[<span class="fu">paste0</span>(<span class="st">&quot;Rate.Change=~alc&quot;</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="ch27.html#cb460-1" tabindex="-1"></a>mod.basis14 <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings</span></span>
+<span id="cb460-2"><a href="ch27.html#cb460-2" tabindex="-1"></a><span class="st">    Init.Status =~ 1*alc1 +  1*alc2 +  1*alc3 + 1*alc4</span></span>
+<span id="cb460-3"><a href="ch27.html#cb460-3" tabindex="-1"></a><span class="st">    Rate.Change =~          NA*alc2 + NA*alc3 + 1*alc4</span></span>
+<span id="cb460-4"><a href="ch27.html#cb460-4" tabindex="-1"></a><span class="st">  ## factor covariance</span></span>
+<span id="cb460-5"><a href="ch27.html#cb460-5" tabindex="-1"></a><span class="st">    Init.Status ~~ Rate.Change</span></span>
+<span id="cb460-6"><a href="ch27.html#cb460-6" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb460-7"><a href="ch27.html#cb460-7" tabindex="-1"></a>fit.basis14 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.basis14, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
+<span id="cb460-8"><a href="ch27.html#cb460-8" tabindex="-1"></a>                      <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb460-9"><a href="ch27.html#cb460-9" tabindex="-1"></a><span class="fu">coef</span>(fit.basis14)[<span class="fu">paste0</span>(<span class="st">&quot;Rate.Change=~alc&quot;</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)]</span></code></pre></div>
 <pre><code>## Rate.Change=~alc2 Rate.Change=~alc3 
 ##         0.4055110         0.6091749</code></pre>
 <p>Here, the baseline amount of change is set by comparing the first and last occasions. Again, if change were <em>perfectly</em> linear, we would expect the estimated loadings to increase by a constant amount, but we see a similar pattern as the first basis model above.</p>
@@ -966,7 +966,7 @@ Each estimated loading tells us how much (average) change occurred at that occas
 </ul>
 <p>A polynomial is the power to which a variable is raised. For example, a linear effect is merely the first power (<span class="math inline">\(x^1=x\)</span>), but a quadratic effect is the second power (<span class="math inline">\(x^2\)</span>) and a cubic effect is the third power (<span class="math inline">\(x^3\)</span>), etc. Any number raised to the zero power is 1 (<span class="math inline">\(x^0=1\)</span>), which is the constant used to estimate the intercept. Thus, even linear models are a polynomial model, but only up to the first power. When we measure a variable on <span class="math inline">\(t=1, \dots, T\)</span> occasions, we can estimate up to the <span class="math inline">\(T-1\)</span> power, for the same reason that differences between <span class="math inline">\(g=1, \dots, G\)</span> groups can be represented by <span class="math inline">\(G-1\)</span> dummy codes. Our example has <span class="math inline">\(T=4\)</span> occasions, so we can estimate up to power 3; another way to think of it is that we <strong>do</strong> estimate <span class="math inline">\(T=4\)</span> polynomial effects, but we begin with a power of 0 (<span class="math inline">\(\text{Time}^0\)</span>, so multiply the latent intercept by <span class="math inline">\(\text{Time}^0 = 1\)</span>) followed by a power of 1 (i.e., multiply the linear slope by <span class="math inline">\(\text{Time}^1 = \text{Time}\)</span>), then power of 2, and so on. Note that a saturated LGCM could simply use the same loadings for the latent intercept and linear slope, then a quadratic (and cubic) factor can have loadings that are the squared (and cubed) values of the linear-slope’s loadings; however, we can avoid possible (multi)collinearity of growth factors by specifying orthogonal contrast codes instead (Voelkle &amp; McKnight, 2012).</p>
 <p>Polynomial contrast codes can be obtained in R using the <code>contr.poly()</code> function, whose first argument is the number of occasions (<span class="math inline">\(T=4\)</span>):</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="ch27.html#cb450-1" tabindex="-1"></a><span class="fu">contr.poly</span>(<span class="dv">4</span>) <span class="co"># .L = linear, .Q = quadratic, .C = cubic</span></span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="ch27.html#cb462-1" tabindex="-1"></a><span class="fu">contr.poly</span>(<span class="dv">4</span>) <span class="co"># .L = linear, .Q = quadratic, .C = cubic</span></span></code></pre></div>
 <pre><code>##              .L   .Q         .C
 ## [1,] -0.6708204  0.5 -0.2236068
 ## [2,] -0.2236068 -0.5  0.6708204
@@ -982,22 +982,22 @@ Figure 27.4: Saturated growth model for alcohol-use data from Duncan and Duncan 
 </p>
 </div>
 <p>The script below specifies the model in Figure <a href="ch27.html#fig:fig27-4">27.4</a>, fits the model, and prints the estimated latent means for interpretation.</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="ch27.html#cb452-1" tabindex="-1"></a>mod.sat <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings</span></span>
-<span id="cb452-2"><a href="ch27.html#cb452-2" tabindex="-1"></a><span class="st">    Level  =~    .5*alc1 +    .5*alc2 +    .5*alc3 +   .5*alc4</span></span>
-<span id="cb452-3"><a href="ch27.html#cb452-3" tabindex="-1"></a><span class="st">    Linear =~ -.671*alc1 + -.224*alc2 +  .224*alc3 + .671*alc4</span></span>
-<span id="cb452-4"><a href="ch27.html#cb452-4" tabindex="-1"></a><span class="st">    Quad   =~    .5*alc1 +   -.5*alc2 +   -.5*alc3 +   .5*alc4</span></span>
-<span id="cb452-5"><a href="ch27.html#cb452-5" tabindex="-1"></a><span class="st">    Cubic  =~ -.224*alc1 +  .671*alc2 + -.671*alc3 + .224*alc4</span></span>
-<span id="cb452-6"><a href="ch27.html#cb452-6" tabindex="-1"></a><span class="st">  ## residual variances</span></span>
-<span id="cb452-7"><a href="ch27.html#cb452-7" tabindex="-1"></a><span class="st">    alc1 ~~ 0*alc1</span></span>
-<span id="cb452-8"><a href="ch27.html#cb452-8" tabindex="-1"></a><span class="st">    alc2 ~~ 0*alc2</span></span>
-<span id="cb452-9"><a href="ch27.html#cb452-9" tabindex="-1"></a><span class="st">    alc3 ~~ 0*alc3</span></span>
-<span id="cb452-10"><a href="ch27.html#cb452-10" tabindex="-1"></a><span class="st">    alc4 ~~ 0*alc4</span></span>
-<span id="cb452-11"><a href="ch27.html#cb452-11" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb452-12"><a href="ch27.html#cb452-12" tabindex="-1"></a>fit.sat <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.sat, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
-<span id="cb452-13"><a href="ch27.html#cb452-13" tabindex="-1"></a>                  <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb452-14"><a href="ch27.html#cb452-14" tabindex="-1"></a>                  <span class="at">auto.cov.lv.x =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb452-15"><a href="ch27.html#cb452-15" tabindex="-1"></a>PE.sat <span class="ot">&lt;-</span> <span class="fu">parameterEstimates</span>(fit.sat, <span class="at">output =</span> <span class="st">&quot;pretty&quot;</span>)</span>
-<span id="cb452-16"><a href="ch27.html#cb452-16" tabindex="-1"></a>PE.sat[PE.sat<span class="sc">$</span>op <span class="sc">==</span> <span class="st">&quot;~1&quot;</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="ch27.html#cb464-1" tabindex="-1"></a>mod.sat <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings</span></span>
+<span id="cb464-2"><a href="ch27.html#cb464-2" tabindex="-1"></a><span class="st">    Level  =~    .5*alc1 +    .5*alc2 +    .5*alc3 +   .5*alc4</span></span>
+<span id="cb464-3"><a href="ch27.html#cb464-3" tabindex="-1"></a><span class="st">    Linear =~ -.671*alc1 + -.224*alc2 +  .224*alc3 + .671*alc4</span></span>
+<span id="cb464-4"><a href="ch27.html#cb464-4" tabindex="-1"></a><span class="st">    Quad   =~    .5*alc1 +   -.5*alc2 +   -.5*alc3 +   .5*alc4</span></span>
+<span id="cb464-5"><a href="ch27.html#cb464-5" tabindex="-1"></a><span class="st">    Cubic  =~ -.224*alc1 +  .671*alc2 + -.671*alc3 + .224*alc4</span></span>
+<span id="cb464-6"><a href="ch27.html#cb464-6" tabindex="-1"></a><span class="st">  ## residual variances</span></span>
+<span id="cb464-7"><a href="ch27.html#cb464-7" tabindex="-1"></a><span class="st">    alc1 ~~ 0*alc1</span></span>
+<span id="cb464-8"><a href="ch27.html#cb464-8" tabindex="-1"></a><span class="st">    alc2 ~~ 0*alc2</span></span>
+<span id="cb464-9"><a href="ch27.html#cb464-9" tabindex="-1"></a><span class="st">    alc3 ~~ 0*alc3</span></span>
+<span id="cb464-10"><a href="ch27.html#cb464-10" tabindex="-1"></a><span class="st">    alc4 ~~ 0*alc4</span></span>
+<span id="cb464-11"><a href="ch27.html#cb464-11" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb464-12"><a href="ch27.html#cb464-12" tabindex="-1"></a>fit.sat <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.sat, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
+<span id="cb464-13"><a href="ch27.html#cb464-13" tabindex="-1"></a>                  <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb464-14"><a href="ch27.html#cb464-14" tabindex="-1"></a>                  <span class="at">auto.cov.lv.x =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb464-15"><a href="ch27.html#cb464-15" tabindex="-1"></a>PE.sat <span class="ot">&lt;-</span> <span class="fu">parameterEstimates</span>(fit.sat, <span class="at">output =</span> <span class="st">&quot;pretty&quot;</span>)</span>
+<span id="cb464-16"><a href="ch27.html#cb464-16" tabindex="-1"></a>PE.sat[PE.sat<span class="sc">$</span>op <span class="sc">==</span> <span class="st">&quot;~1&quot;</span>, ]</span></code></pre></div>
 <pre><code>## 
 ## Intercepts:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper
@@ -1010,7 +1010,7 @@ Figure 27.4: Saturated growth model for alcohol-use data from Duncan and Duncan 
 ##     Quad             -0.009    0.031   -0.287    0.774   -0.071    0.053
 ##     Cubic             0.065    0.030    2.216    0.027    0.008    0.123</code></pre>
 <p>The latent quadratic trend is not significant, but the cubic one is. A quadratic curve (i.e., a parabola) can only change directions once (i.e., from increasing to decreasing, or from decreasing to increasing). A cubic curve can change directions twice (and a 4th-order curve can change direction 3 times, etc.). This result is consistent with what we observed with the latent basis model, when the increase was steeper, then less steep, then steeper again. Unfortunately, we have no way to test whether this developmental trajectory truly follows a cubic (3rd-order) trend using only <span class="math inline">\(3+1=4\)</span> occasions—recall that <span class="math inline">\(df=0\)</span>. If we were to generate a hypothesis about nonlinear change, it would need to be confirmed with new data gather from a design with more measurement occasions. But in this case, also recall that we could not reject the <span class="math inline">\(H_0\)</span> of linear change because the linear model does not fit significantly worse than a saturated model (such as the one above).</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="ch27.html#cb454-1" tabindex="-1"></a><span class="fu">fitMeasures</span>(fit.lin, <span class="fu">c</span>(<span class="st">&quot;chisq&quot;</span>,<span class="st">&quot;df&quot;</span>,<span class="st">&quot;pvalue&quot;</span>), <span class="at">output =</span> <span class="st">&quot;pretty&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="ch27.html#cb466-1" tabindex="-1"></a><span class="fu">fitMeasures</span>(fit.lin, <span class="fu">c</span>(<span class="st">&quot;chisq&quot;</span>,<span class="st">&quot;df&quot;</span>,<span class="st">&quot;pvalue&quot;</span>), <span class="at">output =</span> <span class="st">&quot;pretty&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## Model Test User Model:
 ## 
@@ -1110,18 +1110,18 @@ Figure 27.5: Linear growth model for alcohol-use data from Duncan and Duncan (19
 </p>
 </div>
 <p>The LGCM script below specifies a measurement model for the growth factors (Eq. <a href="ch27.html#eq:27-4">(27.4)</a>) and a structural model that includes both predictors of initial status (Eq. <a href="ch27.html#eq:27-5">(27.5)</a>) and rate of change (Eq. <a href="ch27.html#eq:27-6">(27.6)</a>). We will consider the combined model in Eqs. <a href="ch27.html#eq:27-7">(27.7)</a>–<a href="ch27.html#eq:27-9">(27.9)</a> further when we interpret the structural model.</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="ch27.html#cb456-1" tabindex="-1"></a>mod.pred2 <span class="ot">&lt;-</span> <span class="st">&#39; ##### MEASUREMENT MODEL</span></span>
-<span id="cb456-2"><a href="ch27.html#cb456-2" tabindex="-1"></a><span class="st">    Init.Status =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4</span></span>
-<span id="cb456-3"><a href="ch27.html#cb456-3" tabindex="-1"></a><span class="st">    Rate.Change =~          1*alc2 + 2*alc3 + 3*alc4</span></span>
-<span id="cb456-4"><a href="ch27.html#cb456-4" tabindex="-1"></a><span class="st">##### STRUCTURAL MODEL</span></span>
-<span id="cb456-5"><a href="ch27.html#cb456-5" tabindex="-1"></a><span class="st">  ## Level-2 predictors of growth trajectories</span></span>
-<span id="cb456-6"><a href="ch27.html#cb456-6" tabindex="-1"></a><span class="st">    Init.Status + Rate.Change ~ age + peer</span></span>
-<span id="cb456-7"><a href="ch27.html#cb456-7" tabindex="-1"></a><span class="st">  ## factor (residual) covariance</span></span>
-<span id="cb456-8"><a href="ch27.html#cb456-8" tabindex="-1"></a><span class="st">    Init.Status ~~ Rate.Change</span></span>
-<span id="cb456-9"><a href="ch27.html#cb456-9" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb456-10"><a href="ch27.html#cb456-10" tabindex="-1"></a>fit.pred2 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.pred2, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
-<span id="cb456-11"><a href="ch27.html#cb456-11" tabindex="-1"></a>                    <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb456-12"><a href="ch27.html#cb456-12" tabindex="-1"></a><span class="fu">summary</span>(fit.pred2, <span class="at">std =</span> <span class="cn">TRUE</span>, <span class="at">rsq =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="ch27.html#cb468-1" tabindex="-1"></a>mod.pred2 <span class="ot">&lt;-</span> <span class="st">&#39; ##### MEASUREMENT MODEL</span></span>
+<span id="cb468-2"><a href="ch27.html#cb468-2" tabindex="-1"></a><span class="st">    Init.Status =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4</span></span>
+<span id="cb468-3"><a href="ch27.html#cb468-3" tabindex="-1"></a><span class="st">    Rate.Change =~          1*alc2 + 2*alc3 + 3*alc4</span></span>
+<span id="cb468-4"><a href="ch27.html#cb468-4" tabindex="-1"></a><span class="st">##### STRUCTURAL MODEL</span></span>
+<span id="cb468-5"><a href="ch27.html#cb468-5" tabindex="-1"></a><span class="st">  ## Level-2 predictors of growth trajectories</span></span>
+<span id="cb468-6"><a href="ch27.html#cb468-6" tabindex="-1"></a><span class="st">    Init.Status + Rate.Change ~ age + peer</span></span>
+<span id="cb468-7"><a href="ch27.html#cb468-7" tabindex="-1"></a><span class="st">  ## factor (residual) covariance</span></span>
+<span id="cb468-8"><a href="ch27.html#cb468-8" tabindex="-1"></a><span class="st">    Init.Status ~~ Rate.Change</span></span>
+<span id="cb468-9"><a href="ch27.html#cb468-9" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb468-10"><a href="ch27.html#cb468-10" tabindex="-1"></a>fit.pred2 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.pred2, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
+<span id="cb468-11"><a href="ch27.html#cb468-11" tabindex="-1"></a>                    <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb468-12"><a href="ch27.html#cb468-12" tabindex="-1"></a><span class="fu">summary</span>(fit.pred2, <span class="at">std =</span> <span class="cn">TRUE</span>, <span class="at">rsq =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## lavaan 0.6-20.2318 ended normally after 43 iterations
 ## 
 ##   Estimator                                         ML
@@ -1224,22 +1224,22 @@ Figure 27.6: Linear growth model for alcohol-use data from Duncan and Duncan (19
 </p>
 </div>
 <p>The LGCM script below specifies a measurement model for the growth factors, but also regresses each indicator on the level-1 covariate at the same occasion. The latter parameters are labeled so that we can apply equality <code>constraints=</code> in the <code>lavaan()</code> call, to exclude moderation between Time and cigarette use.</p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="ch27.html#cb458-1" tabindex="-1"></a>mod.pred1 <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings</span></span>
-<span id="cb458-2"><a href="ch27.html#cb458-2" tabindex="-1"></a><span class="st">    Init.Status =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4</span></span>
-<span id="cb458-3"><a href="ch27.html#cb458-3" tabindex="-1"></a><span class="st">    Rate.Change =~          1*alc2 + 2*alc3 + 3*alc4</span></span>
-<span id="cb458-4"><a href="ch27.html#cb458-4" tabindex="-1"></a><span class="st">  ## factor covariance</span></span>
-<span id="cb458-5"><a href="ch27.html#cb458-5" tabindex="-1"></a><span class="st">    Init.Status ~~ Rate.Change</span></span>
-<span id="cb458-6"><a href="ch27.html#cb458-6" tabindex="-1"></a><span class="st">  ## Level-1 covariates</span></span>
-<span id="cb458-7"><a href="ch27.html#cb458-7" tabindex="-1"></a><span class="st">    alc1 ~ b1*cig1</span></span>
-<span id="cb458-8"><a href="ch27.html#cb458-8" tabindex="-1"></a><span class="st">    alc2 ~ b2*cig2</span></span>
-<span id="cb458-9"><a href="ch27.html#cb458-9" tabindex="-1"></a><span class="st">    alc3 ~ b3*cig3</span></span>
-<span id="cb458-10"><a href="ch27.html#cb458-10" tabindex="-1"></a><span class="st">    alc4 ~ b4*cig4</span></span>
-<span id="cb458-11"><a href="ch27.html#cb458-11" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb458-12"><a href="ch27.html#cb458-12" tabindex="-1"></a>fit.pred1 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.pred1, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
-<span id="cb458-13"><a href="ch27.html#cb458-13" tabindex="-1"></a>                    <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb458-14"><a href="ch27.html#cb458-14" tabindex="-1"></a>                    <span class="do">## constrain cigarette-use&#39;s effect to equality over time</span></span>
-<span id="cb458-15"><a href="ch27.html#cb458-15" tabindex="-1"></a>                    <span class="at">constraints =</span> <span class="fu">c</span>(<span class="st">&quot;b1 == b2&quot;</span>, <span class="st">&quot;b1 == b3&quot;</span>, <span class="st">&quot;b1 == b4&quot;</span>))</span>
-<span id="cb458-16"><a href="ch27.html#cb458-16" tabindex="-1"></a><span class="fu">summary</span>(fit.pred1, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="ch27.html#cb470-1" tabindex="-1"></a>mod.pred1 <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings</span></span>
+<span id="cb470-2"><a href="ch27.html#cb470-2" tabindex="-1"></a><span class="st">    Init.Status =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4</span></span>
+<span id="cb470-3"><a href="ch27.html#cb470-3" tabindex="-1"></a><span class="st">    Rate.Change =~          1*alc2 + 2*alc3 + 3*alc4</span></span>
+<span id="cb470-4"><a href="ch27.html#cb470-4" tabindex="-1"></a><span class="st">  ## factor covariance</span></span>
+<span id="cb470-5"><a href="ch27.html#cb470-5" tabindex="-1"></a><span class="st">    Init.Status ~~ Rate.Change</span></span>
+<span id="cb470-6"><a href="ch27.html#cb470-6" tabindex="-1"></a><span class="st">  ## Level-1 covariates</span></span>
+<span id="cb470-7"><a href="ch27.html#cb470-7" tabindex="-1"></a><span class="st">    alc1 ~ b1*cig1</span></span>
+<span id="cb470-8"><a href="ch27.html#cb470-8" tabindex="-1"></a><span class="st">    alc2 ~ b2*cig2</span></span>
+<span id="cb470-9"><a href="ch27.html#cb470-9" tabindex="-1"></a><span class="st">    alc3 ~ b3*cig3</span></span>
+<span id="cb470-10"><a href="ch27.html#cb470-10" tabindex="-1"></a><span class="st">    alc4 ~ b4*cig4</span></span>
+<span id="cb470-11"><a href="ch27.html#cb470-11" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb470-12"><a href="ch27.html#cb470-12" tabindex="-1"></a>fit.pred1 <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.pred1, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
+<span id="cb470-13"><a href="ch27.html#cb470-13" tabindex="-1"></a>                    <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb470-14"><a href="ch27.html#cb470-14" tabindex="-1"></a>                    <span class="do">## constrain cigarette-use&#39;s effect to equality over time</span></span>
+<span id="cb470-15"><a href="ch27.html#cb470-15" tabindex="-1"></a>                    <span class="at">constraints =</span> <span class="fu">c</span>(<span class="st">&quot;b1 == b2&quot;</span>, <span class="st">&quot;b1 == b3&quot;</span>, <span class="st">&quot;b1 == b4&quot;</span>))</span>
+<span id="cb470-16"><a href="ch27.html#cb470-16" tabindex="-1"></a><span class="fu">summary</span>(fit.pred1, <span class="at">std =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## lavaan 0.6-20.2318 ended normally after 28 iterations
 ## 
 ##   Estimator                                         ML
@@ -1304,9 +1304,9 @@ Figure 27.6: Linear growth model for alcohol-use data from Duncan and Duncan (19
 ##     Rate.Change       0.034    0.010    3.462    0.001    1.000    1.000</code></pre>
 <p>We reject the <span class="math inline">\(H_0\)</span> of perfect model fit, <span class="math inline">\(\chi^2(20)=86.677, p&lt;.001\)</span>, and there are many large standardized residuals (<code>lavResiduals(fit.pred1)</code> output not shown). This is not surprising given how constrained this model is. Cigarette-use is not only constrained to have a constant effect across time, but the effects only occur within an occasion. There are many theoretically motivated reasons to improve the model—for example, one might expect that smoking leads to <em>later</em> alcohol consumption. We could add lagged effects (e.g., <code>alc2 ~ cig1</code>) to improve model fit, which combines features of cross-lagged panel models and LGCMs. In fact, there have also been attempts to merge autoregressive and latent-growth models (e.g., the autoregressive latent-trajectory (ALT) model; Bollen &amp; Curran, 2004).</p>
 <p>We will not explore these complexities here, but we will briefly discuss the importance of the equality-constrained slopes on the interpretation of Time’s average effect (i.e., the rate-of-change mean). The script below releases the constraints, which significantly improves model fit.</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="ch27.html#cb460-1" tabindex="-1"></a>fit.tc <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.pred1, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
-<span id="cb460-2"><a href="ch27.html#cb460-2" tabindex="-1"></a>                 <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb460-3"><a href="ch27.html#cb460-3" tabindex="-1"></a><span class="fu">lavTestLRT</span>(fit.pred1, fit.tc)</span></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="ch27.html#cb472-1" tabindex="-1"></a>fit.tc <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.pred1, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
+<span id="cb472-2"><a href="ch27.html#cb472-2" tabindex="-1"></a>                 <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb472-3"><a href="ch27.html#cb472-3" tabindex="-1"></a><span class="fu">lavTestLRT</span>(fit.pred1, fit.tc)</span></code></pre></div>
 <pre><code>## 
 ## Chi-Squared Difference Test
 ## 
@@ -1333,9 +1333,9 @@ Figure 27.6: Linear growth model for alcohol-use data from Duncan and Duncan (19
 ##     Init.Status       1.626    0.078   20.852    0.000    2.500    2.500
 ##     Rate.Change       0.276    0.034    8.171    0.000    1.573    1.573</code></pre>
 <p>How does one recenter variables without raw data? Well, the first step of calculating a (co)variance is to subtract the mean, so the covariance matrix does not change. And we know exactly how recentering the variables would affect the mean vector: simply subtract the same value from each mean that would have been subtracted from the variable itself. For example, let’s probe the simple effect of Time when <span class="math inline">\(\text{CigUse}\)</span> is in the middle of the scale (3).</p>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="ch27.html#cb463-1" tabindex="-1"></a>duncM3 <span class="ot">&lt;-</span> duncanM <span class="co"># copy, then center cig1-cig4</span></span>
-<span id="cb463-2"><a href="ch27.html#cb463-2" tabindex="-1"></a>duncM3[<span class="fu">paste0</span>(<span class="st">&quot;cig&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)] <span class="ot">&lt;-</span> duncM3[<span class="fu">paste0</span>(<span class="st">&quot;cig&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)] <span class="sc">-</span> <span class="dv">3</span></span>
-<span id="cb463-3"><a href="ch27.html#cb463-3" tabindex="-1"></a>fit.tc3 <span class="ot">&lt;-</span> <span class="fu">update</span>(fit.tc, <span class="at">sample.mean =</span> duncM3) <span class="co"># refit model with centered means</span></span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="ch27.html#cb475-1" tabindex="-1"></a>duncM3 <span class="ot">&lt;-</span> duncanM <span class="co"># copy, then center cig1-cig4</span></span>
+<span id="cb475-2"><a href="ch27.html#cb475-2" tabindex="-1"></a>duncM3[<span class="fu">paste0</span>(<span class="st">&quot;cig&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)] <span class="ot">&lt;-</span> duncM3[<span class="fu">paste0</span>(<span class="st">&quot;cig&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)] <span class="sc">-</span> <span class="dv">3</span></span>
+<span id="cb475-3"><a href="ch27.html#cb475-3" tabindex="-1"></a>fit.tc3 <span class="ot">&lt;-</span> <span class="fu">update</span>(fit.tc, <span class="at">sample.mean =</span> duncM3) <span class="co"># refit model with centered means</span></span></code></pre></div>
 <pre><code>## 
 ## Regressions:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
@@ -1357,16 +1357,16 @@ Figure 27.6: Linear growth model for alcohol-use data from Duncan and Duncan (19
 <div id="parallel-growth-curves" class="section level3 hasAnchor" number="27.5.3">
 <h3><span class="header-section-number">27.5.3</span> Parallel Growth Curves<a href="ch27.html#parallel-growth-curves" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In LGCM, time-varying covariates must be measured in parallel with the outcome itself (i.e., at all the same occasions). An alternative to controlling for them is to simultaneously model their own developmental trajectory. In such models, we can explore how the development of different variables relate to each other. The script below specifies linear growth factors for both alcohol and cigarette use.</p>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="ch27.html#cb465-1" tabindex="-1"></a>mod.par <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings for alcohol use</span></span>
-<span id="cb465-2"><a href="ch27.html#cb465-2" tabindex="-1"></a><span class="st">    Init.Alc =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4</span></span>
-<span id="cb465-3"><a href="ch27.html#cb465-3" tabindex="-1"></a><span class="st">    Lin.Alc  =~          1*alc2 + 2*alc3 + 3*alc4</span></span>
-<span id="cb465-4"><a href="ch27.html#cb465-4" tabindex="-1"></a><span class="st">  ## loadings for cigarette use</span></span>
-<span id="cb465-5"><a href="ch27.html#cb465-5" tabindex="-1"></a><span class="st">    Init.Cig =~ 1*cig1 + 1*cig2 + 1*cig3 + 1*cig4</span></span>
-<span id="cb465-6"><a href="ch27.html#cb465-6" tabindex="-1"></a><span class="st">    Lin.Cig  =~          1*cig2 + 2*cig3 + 3*cig4</span></span>
-<span id="cb465-7"><a href="ch27.html#cb465-7" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb465-8"><a href="ch27.html#cb465-8" tabindex="-1"></a>fit.par <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.par, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
-<span id="cb465-9"><a href="ch27.html#cb465-9" tabindex="-1"></a>                  <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb465-10"><a href="ch27.html#cb465-10" tabindex="-1"></a>                  <span class="at">auto.cov.lv.x =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="ch27.html#cb477-1" tabindex="-1"></a>mod.par <span class="ot">&lt;-</span> <span class="st">&#39; ## loadings for alcohol use</span></span>
+<span id="cb477-2"><a href="ch27.html#cb477-2" tabindex="-1"></a><span class="st">    Init.Alc =~ 1*alc1 + 1*alc2 + 1*alc3 + 1*alc4</span></span>
+<span id="cb477-3"><a href="ch27.html#cb477-3" tabindex="-1"></a><span class="st">    Lin.Alc  =~          1*alc2 + 2*alc3 + 3*alc4</span></span>
+<span id="cb477-4"><a href="ch27.html#cb477-4" tabindex="-1"></a><span class="st">  ## loadings for cigarette use</span></span>
+<span id="cb477-5"><a href="ch27.html#cb477-5" tabindex="-1"></a><span class="st">    Init.Cig =~ 1*cig1 + 1*cig2 + 1*cig3 + 1*cig4</span></span>
+<span id="cb477-6"><a href="ch27.html#cb477-6" tabindex="-1"></a><span class="st">    Lin.Cig  =~          1*cig2 + 2*cig3 + 3*cig4</span></span>
+<span id="cb477-7"><a href="ch27.html#cb477-7" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb477-8"><a href="ch27.html#cb477-8" tabindex="-1"></a>fit.par <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.par, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
+<span id="cb477-9"><a href="ch27.html#cb477-9" tabindex="-1"></a>                  <span class="at">sample.nobs =</span> N, <span class="at">int.lv.free =</span> <span class="cn">TRUE</span>, <span class="at">auto.var =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb477-10"><a href="ch27.html#cb477-10" tabindex="-1"></a>                  <span class="at">auto.cov.lv.x =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ## Covariances:
 ##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
@@ -1410,50 +1410,50 @@ Figure 27.7: Curve-of-factors model for substance-use data from Duncan and Dunca
 </p>
 </div>
 <p>The script below specifies the curve-of-factors model depicted in Figure <a href="ch27.html#fig:fig27-7">27.7</a>.</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="ch27.html#cb467-1" tabindex="-1"></a>mod.cof <span class="ot">&lt;-</span> <span class="st">&#39; ##### MEASUREMENT MODEL (3 indicators)</span></span>
-<span id="cb467-2"><a href="ch27.html#cb467-2" tabindex="-1"></a><span class="st">  ## equal loadings across 4 occasions</span></span>
-<span id="cb467-3"><a href="ch27.html#cb467-3" tabindex="-1"></a><span class="st">    SubUse1 =~ L1*alc1 + L2*cig1 + L3*thc1</span></span>
-<span id="cb467-4"><a href="ch27.html#cb467-4" tabindex="-1"></a><span class="st">    SubUse2 =~ L1*alc2 + L2*cig2 + L3*thc2</span></span>
-<span id="cb467-5"><a href="ch27.html#cb467-5" tabindex="-1"></a><span class="st">    SubUse3 =~ L1*alc3 + L2*cig3 + L3*thc3</span></span>
-<span id="cb467-6"><a href="ch27.html#cb467-6" tabindex="-1"></a><span class="st">    SubUse4 =~ L1*alc4 + L2*cig4 + L3*thc4</span></span>
-<span id="cb467-7"><a href="ch27.html#cb467-7" tabindex="-1"></a><span class="st">  ## equal intercepts across 4 occasions</span></span>
-<span id="cb467-8"><a href="ch27.html#cb467-8" tabindex="-1"></a><span class="st">    alc1 + alc2 + alc3 + alc4 ~ nu1*1</span></span>
-<span id="cb467-9"><a href="ch27.html#cb467-9" tabindex="-1"></a><span class="st">    cig1 + cig2 + cig3 + cig4 ~ nu2*1</span></span>
-<span id="cb467-10"><a href="ch27.html#cb467-10" tabindex="-1"></a><span class="st">    thc1 + thc2 + thc3 + thc4 ~ nu3*1</span></span>
-<span id="cb467-11"><a href="ch27.html#cb467-11" tabindex="-1"></a><span class="st">  ## residual (co)variances across 4 occasions</span></span>
-<span id="cb467-12"><a href="ch27.html#cb467-12" tabindex="-1"></a><span class="st">    alc1 ~~ alc1 + alc2 + alc3 + alc4</span></span>
-<span id="cb467-13"><a href="ch27.html#cb467-13" tabindex="-1"></a><span class="st">    alc2 ~~ alc2 + alc3 + alc4</span></span>
-<span id="cb467-14"><a href="ch27.html#cb467-14" tabindex="-1"></a><span class="st">    alc3 ~~ alc3 + alc4</span></span>
-<span id="cb467-15"><a href="ch27.html#cb467-15" tabindex="-1"></a><span class="st">    alc4 ~~ alc4</span></span>
-<span id="cb467-16"><a href="ch27.html#cb467-16" tabindex="-1"></a><span class="st">    cig1 ~~ cig1 + cig2 + cig3 + cig4</span></span>
-<span id="cb467-17"><a href="ch27.html#cb467-17" tabindex="-1"></a><span class="st">    cig2 ~~ cig2 + cig3 + cig4</span></span>
-<span id="cb467-18"><a href="ch27.html#cb467-18" tabindex="-1"></a><span class="st">    cig3 ~~ cig3 + cig4</span></span>
-<span id="cb467-19"><a href="ch27.html#cb467-19" tabindex="-1"></a><span class="st">    cig4 ~~ cig4</span></span>
-<span id="cb467-20"><a href="ch27.html#cb467-20" tabindex="-1"></a><span class="st">    thc1 ~~ thc1 + thc2 + thc3 + thc4</span></span>
-<span id="cb467-21"><a href="ch27.html#cb467-21" tabindex="-1"></a><span class="st">    thc2 ~~ thc2 + thc3 + thc4</span></span>
-<span id="cb467-22"><a href="ch27.html#cb467-22" tabindex="-1"></a><span class="st">    thc3 ~~ thc3 + thc4</span></span>
-<span id="cb467-23"><a href="ch27.html#cb467-23" tabindex="-1"></a><span class="st">    thc4 ~~ thc4</span></span>
-<span id="cb467-24"><a href="ch27.html#cb467-24" tabindex="-1"></a><span class="st">## STRUCTURAL MODEL (higher-order LGCM)</span></span>
-<span id="cb467-25"><a href="ch27.html#cb467-25" tabindex="-1"></a><span class="st">  ## loadings for growth factors</span></span>
-<span id="cb467-26"><a href="ch27.html#cb467-26" tabindex="-1"></a><span class="st">    Init.Status =~ 1*SubUse1 + 1*SubUse2 + 1*SubUse3 + 1*SubUse4</span></span>
-<span id="cb467-27"><a href="ch27.html#cb467-27" tabindex="-1"></a><span class="st">    Rate.Change =~             1*SubUse2 + 2*SubUse3 + 3*SubUse4</span></span>
-<span id="cb467-28"><a href="ch27.html#cb467-28" tabindex="-1"></a><span class="st">  ## growth-factor means and (co)variances</span></span>
-<span id="cb467-29"><a href="ch27.html#cb467-29" tabindex="-1"></a><span class="st">    Init.Status ~ 0*1  # fixed to 0 for identification</span></span>
-<span id="cb467-30"><a href="ch27.html#cb467-30" tabindex="-1"></a><span class="st">    Rate.Change ~ 1</span></span>
-<span id="cb467-31"><a href="ch27.html#cb467-31" tabindex="-1"></a><span class="st">  ## growth-factor means and (co)variances</span></span>
-<span id="cb467-32"><a href="ch27.html#cb467-32" tabindex="-1"></a><span class="st">    Init.Status ~~ Init.Status + Rate.Change</span></span>
-<span id="cb467-33"><a href="ch27.html#cb467-33" tabindex="-1"></a><span class="st">    Rate.Change ~~ Rate.Change</span></span>
-<span id="cb467-34"><a href="ch27.html#cb467-34" tabindex="-1"></a><span class="st">  ## residual variances of growth indicators</span></span>
-<span id="cb467-35"><a href="ch27.html#cb467-35" tabindex="-1"></a><span class="st">    SubUse1 ~~ psi1*SubUse1</span></span>
-<span id="cb467-36"><a href="ch27.html#cb467-36" tabindex="-1"></a><span class="st">    SubUse2 ~~   NA*SubUse2</span></span>
-<span id="cb467-37"><a href="ch27.html#cb467-37" tabindex="-1"></a><span class="st">    SubUse3 ~~   NA*SubUse3</span></span>
-<span id="cb467-38"><a href="ch27.html#cb467-38" tabindex="-1"></a><span class="st">    SubUse4 ~~   NA*SubUse4</span></span>
-<span id="cb467-39"><a href="ch27.html#cb467-39" tabindex="-1"></a><span class="st">&#39;</span></span>
-<span id="cb467-40"><a href="ch27.html#cb467-40" tabindex="-1"></a>fit.cof <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.cof, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
-<span id="cb467-41"><a href="ch27.html#cb467-41" tabindex="-1"></a>                  <span class="do">## identify the model by constraining the first loading</span></span>
-<span id="cb467-42"><a href="ch27.html#cb467-42" tabindex="-1"></a>                  <span class="at">sample.nobs =</span> N, <span class="at">constraints =</span> <span class="st">&quot;L1 == 1&quot;</span>)</span>
-<span id="cb467-43"><a href="ch27.html#cb467-43" tabindex="-1"></a><span class="do">## Alternatively, use effects-coding:      constraints = &quot;L1 == 3 - L2 - L3&quot;</span></span>
-<span id="cb467-44"><a href="ch27.html#cb467-44" tabindex="-1"></a><span class="do">## or fix first factor&#39;s variance using:   std.lv = TRUE or constraints = &quot;psi1 == 1&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="ch27.html#cb479-1" tabindex="-1"></a>mod.cof <span class="ot">&lt;-</span> <span class="st">&#39; ##### MEASUREMENT MODEL (3 indicators)</span></span>
+<span id="cb479-2"><a href="ch27.html#cb479-2" tabindex="-1"></a><span class="st">  ## equal loadings across 4 occasions</span></span>
+<span id="cb479-3"><a href="ch27.html#cb479-3" tabindex="-1"></a><span class="st">    SubUse1 =~ L1*alc1 + L2*cig1 + L3*thc1</span></span>
+<span id="cb479-4"><a href="ch27.html#cb479-4" tabindex="-1"></a><span class="st">    SubUse2 =~ L1*alc2 + L2*cig2 + L3*thc2</span></span>
+<span id="cb479-5"><a href="ch27.html#cb479-5" tabindex="-1"></a><span class="st">    SubUse3 =~ L1*alc3 + L2*cig3 + L3*thc3</span></span>
+<span id="cb479-6"><a href="ch27.html#cb479-6" tabindex="-1"></a><span class="st">    SubUse4 =~ L1*alc4 + L2*cig4 + L3*thc4</span></span>
+<span id="cb479-7"><a href="ch27.html#cb479-7" tabindex="-1"></a><span class="st">  ## equal intercepts across 4 occasions</span></span>
+<span id="cb479-8"><a href="ch27.html#cb479-8" tabindex="-1"></a><span class="st">    alc1 + alc2 + alc3 + alc4 ~ nu1*1</span></span>
+<span id="cb479-9"><a href="ch27.html#cb479-9" tabindex="-1"></a><span class="st">    cig1 + cig2 + cig3 + cig4 ~ nu2*1</span></span>
+<span id="cb479-10"><a href="ch27.html#cb479-10" tabindex="-1"></a><span class="st">    thc1 + thc2 + thc3 + thc4 ~ nu3*1</span></span>
+<span id="cb479-11"><a href="ch27.html#cb479-11" tabindex="-1"></a><span class="st">  ## residual (co)variances across 4 occasions</span></span>
+<span id="cb479-12"><a href="ch27.html#cb479-12" tabindex="-1"></a><span class="st">    alc1 ~~ alc1 + alc2 + alc3 + alc4</span></span>
+<span id="cb479-13"><a href="ch27.html#cb479-13" tabindex="-1"></a><span class="st">    alc2 ~~ alc2 + alc3 + alc4</span></span>
+<span id="cb479-14"><a href="ch27.html#cb479-14" tabindex="-1"></a><span class="st">    alc3 ~~ alc3 + alc4</span></span>
+<span id="cb479-15"><a href="ch27.html#cb479-15" tabindex="-1"></a><span class="st">    alc4 ~~ alc4</span></span>
+<span id="cb479-16"><a href="ch27.html#cb479-16" tabindex="-1"></a><span class="st">    cig1 ~~ cig1 + cig2 + cig3 + cig4</span></span>
+<span id="cb479-17"><a href="ch27.html#cb479-17" tabindex="-1"></a><span class="st">    cig2 ~~ cig2 + cig3 + cig4</span></span>
+<span id="cb479-18"><a href="ch27.html#cb479-18" tabindex="-1"></a><span class="st">    cig3 ~~ cig3 + cig4</span></span>
+<span id="cb479-19"><a href="ch27.html#cb479-19" tabindex="-1"></a><span class="st">    cig4 ~~ cig4</span></span>
+<span id="cb479-20"><a href="ch27.html#cb479-20" tabindex="-1"></a><span class="st">    thc1 ~~ thc1 + thc2 + thc3 + thc4</span></span>
+<span id="cb479-21"><a href="ch27.html#cb479-21" tabindex="-1"></a><span class="st">    thc2 ~~ thc2 + thc3 + thc4</span></span>
+<span id="cb479-22"><a href="ch27.html#cb479-22" tabindex="-1"></a><span class="st">    thc3 ~~ thc3 + thc4</span></span>
+<span id="cb479-23"><a href="ch27.html#cb479-23" tabindex="-1"></a><span class="st">    thc4 ~~ thc4</span></span>
+<span id="cb479-24"><a href="ch27.html#cb479-24" tabindex="-1"></a><span class="st">## STRUCTURAL MODEL (higher-order LGCM)</span></span>
+<span id="cb479-25"><a href="ch27.html#cb479-25" tabindex="-1"></a><span class="st">  ## loadings for growth factors</span></span>
+<span id="cb479-26"><a href="ch27.html#cb479-26" tabindex="-1"></a><span class="st">    Init.Status =~ 1*SubUse1 + 1*SubUse2 + 1*SubUse3 + 1*SubUse4</span></span>
+<span id="cb479-27"><a href="ch27.html#cb479-27" tabindex="-1"></a><span class="st">    Rate.Change =~             1*SubUse2 + 2*SubUse3 + 3*SubUse4</span></span>
+<span id="cb479-28"><a href="ch27.html#cb479-28" tabindex="-1"></a><span class="st">  ## growth-factor means and (co)variances</span></span>
+<span id="cb479-29"><a href="ch27.html#cb479-29" tabindex="-1"></a><span class="st">    Init.Status ~ 0*1  # fixed to 0 for identification</span></span>
+<span id="cb479-30"><a href="ch27.html#cb479-30" tabindex="-1"></a><span class="st">    Rate.Change ~ 1</span></span>
+<span id="cb479-31"><a href="ch27.html#cb479-31" tabindex="-1"></a><span class="st">  ## growth-factor means and (co)variances</span></span>
+<span id="cb479-32"><a href="ch27.html#cb479-32" tabindex="-1"></a><span class="st">    Init.Status ~~ Init.Status + Rate.Change</span></span>
+<span id="cb479-33"><a href="ch27.html#cb479-33" tabindex="-1"></a><span class="st">    Rate.Change ~~ Rate.Change</span></span>
+<span id="cb479-34"><a href="ch27.html#cb479-34" tabindex="-1"></a><span class="st">  ## residual variances of growth indicators</span></span>
+<span id="cb479-35"><a href="ch27.html#cb479-35" tabindex="-1"></a><span class="st">    SubUse1 ~~ psi1*SubUse1</span></span>
+<span id="cb479-36"><a href="ch27.html#cb479-36" tabindex="-1"></a><span class="st">    SubUse2 ~~   NA*SubUse2</span></span>
+<span id="cb479-37"><a href="ch27.html#cb479-37" tabindex="-1"></a><span class="st">    SubUse3 ~~   NA*SubUse3</span></span>
+<span id="cb479-38"><a href="ch27.html#cb479-38" tabindex="-1"></a><span class="st">    SubUse4 ~~   NA*SubUse4</span></span>
+<span id="cb479-39"><a href="ch27.html#cb479-39" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb479-40"><a href="ch27.html#cb479-40" tabindex="-1"></a>fit.cof <span class="ot">&lt;-</span> <span class="fu">lavaan</span>(mod.cof, <span class="at">sample.cov =</span> duncanCOV, <span class="at">sample.mean =</span> duncanM,</span>
+<span id="cb479-41"><a href="ch27.html#cb479-41" tabindex="-1"></a>                  <span class="do">## identify the model by constraining the first loading</span></span>
+<span id="cb479-42"><a href="ch27.html#cb479-42" tabindex="-1"></a>                  <span class="at">sample.nobs =</span> N, <span class="at">constraints =</span> <span class="st">&quot;L1 == 1&quot;</span>)</span>
+<span id="cb479-43"><a href="ch27.html#cb479-43" tabindex="-1"></a><span class="do">## Alternatively, use effects-coding:      constraints = &quot;L1 == 3 - L2 - L3&quot;</span></span>
+<span id="cb479-44"><a href="ch27.html#cb479-44" tabindex="-1"></a><span class="do">## or fix first factor&#39;s variance using:   std.lv = TRUE or constraints = &quot;psi1 == 1&quot;</span></span></code></pre></div>
 <p>We do not present output because the conclusions are quite similar to the linear model for alcohol consumption in Section 3. The added benefit of this model is that we can see cigarette and cannabis use are stronger indicators (std. factor loadings approximately 0.8) of propensity for substance use than alcohol consumption (std. loadings 0.6–0.7). The benefit of modeling change in an error-free construct is only as valid as the CFA itself. The disadvantage of latent indicators is that each method of identification in the script above provides a different (arbitrary) scale on which to interpret the average rate of change. The standardized solution provides a scale-free estimate, but the units of <span class="math inline">\(SD\)</span> with which to interpret it are between-subject differences in rates of change, which is not necessarily a meaningful quantity to judge the size of the average rate of change.</p>
 </div>
 <div id="factor-of-curves" class="section level4 unnumbered hasAnchor">
@@ -1470,7 +1470,7 @@ Figure 27.7: Curve-of-factors model for substance-use data from Duncan and Dunca
 <span class="math display">\[\mathrm{y} = \textbf{I}(\mathrm{y}^* &gt; \tau),\]</span>
 where the indicator function <span class="math inline">\(\textbf{I}()\)</span> assigns 1 when its argument is <code>TRUE</code> and 0 when it is <code>FALSE</code>. The default behavior in <code>lavaan</code> is to identify the model by fixing each LRV’s intercept and variance to 0 and 1, respectively, enabling all thresholds to be estimated. However, it is statistically equivalent to fix a binary item’s threshold to zero and estimate its intercept. In fact, they will have the same absolute value but opposite sign.</p>
 <p>Because indicator means are fixed to zero anyway (so they can be reproduced by growth factors via factor loadings), one could <em>hypothetically</em> fix thresholds for binary indicators to zero in <code>lavaan</code> syntax in order to fit a a LGCM to it (Newsom, 2015, p. 185). For example, if we had raw example data whose substance-use indicators were binary, we could update <em>any</em> of the scripts above by adding something like this to the model syntax:</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="ch27.html#cb468-1" tabindex="-1"></a><span class="st">&#39; alc1 + alc2 + alc3 + alc4 | 0*t1&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="ch27.html#cb480-1" tabindex="-1"></a><span class="st">&#39; alc1 + alc2 + alc3 + alc4 | 0*t1&#39;</span></span></code></pre></div>
 <p>However, there is no way to <em>link</em> the LRV scales across time because there is only one threshold, whose <span class="math inline">\(df\)</span> is “traded” for the intercept (all of which are in turn traded for growth-factor means). Recall also from <a href="ch12.html#ch12">Chapter 12</a> that there are 2 common methods of identifying the LRV scale:</p>
 <ul>
 <li><code>parameterization = "delta"</code> (default) fixes the marginal/total variance of an LRV to 1</li>
@@ -1484,18 +1484,18 @@ where the indicator function <span class="math inline">\(\textbf{I}()\)</span> a
 <p><span class="math display">\[\mathrm{y}=c \ \ \ \text{ if } \ \ \ \tau_c &lt; \mathrm{y}^* \le \tau_{c+1}\]</span></p>
 <p>Because the normal distribution is unbounded, the first category “starts” at <span class="math inline">\(\tau_0 = -\infty\)</span>, and the last category “ends” at <span class="math inline">\(\tau_{C+1} = +\infty\)</span>.</p>
 <p>With only 3 categories, there is only enough information to trade the <span class="math inline">\(C=2\)</span> thresholds for the LRV intercept and variance, which is sufficient to link the response scales across occasions. So we can still only assume (not test) the assumption that thresholds do not change over time, but <em>threshold invariance</em> can be tested when items have <span class="math inline">\(\ge3\)</span> thresholds (Mehta et al., 2004). In our example data, substance use was measured with 5 categories, so each indicator would have <span class="math inline">\(C=4\)</span> thresholds, enabling us to test the assumption of threshold invariance (if we had access to the raw data). <a href="ch29.html#ch29">Chapter 29</a> will discuss threshold invariance in greater detail in the context of CFA with categorical indicators, but here it is sufficient to say that we can constrain thresholds across occasions in LGCM model syntax by using the same labels (below, <code>a</code>, <code>b</code>, <code>c</code>, and <code>d</code>) for equality-constrained parameters.</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="ch27.html#cb469-1" tabindex="-1"></a><span class="st">&#39; alc1 | a*t1 + b*t2 + c*t3 + d*t4</span></span>
-<span id="cb469-2"><a href="ch27.html#cb469-2" tabindex="-1"></a><span class="st">  alc2 | a*t1 + b*t2 + c*t3 + d*t4</span></span>
-<span id="cb469-3"><a href="ch27.html#cb469-3" tabindex="-1"></a><span class="st">  alc3 | a*t1 + b*t2 + c*t3 + d*t4</span></span>
-<span id="cb469-4"><a href="ch27.html#cb469-4" tabindex="-1"></a><span class="st">  alc4 | a*t1 + b*t2 + c*t3 + d*t4 &#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="ch27.html#cb481-1" tabindex="-1"></a><span class="st">&#39; alc1 | a*t1 + b*t2 + c*t3 + d*t4</span></span>
+<span id="cb481-2"><a href="ch27.html#cb481-2" tabindex="-1"></a><span class="st">  alc2 | a*t1 + b*t2 + c*t3 + d*t4</span></span>
+<span id="cb481-3"><a href="ch27.html#cb481-3" tabindex="-1"></a><span class="st">  alc3 | a*t1 + b*t2 + c*t3 + d*t4</span></span>
+<span id="cb481-4"><a href="ch27.html#cb481-4" tabindex="-1"></a><span class="st">  alc4 | a*t1 + b*t2 + c*t3 + d*t4 &#39;</span></span></code></pre></div>
 <p>Intercepts remain constrained to zero (the default setting) so that the LRV means can be modeled by the growth-factor means and loadings. However, we must free the variances in the model syntax as well. Similar to invariance with common factors, the first occasion’s variance remains fixed to 1. Using the default <code>parameterization = "delta"</code>, we must free the marginal variances on subsequent occasions, which is controlled by the “latent scale” parameters, whose operator resembles how we specify a (co)variance that includes an asterisk to indicate it refers to the LRV <span class="math inline">\(\mathrm{y}^*\)</span>.</p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="ch27.html#cb470-1" tabindex="-1"></a><span class="st">&#39; alc2 ~*~ NA*alc2</span></span>
-<span id="cb470-2"><a href="ch27.html#cb470-2" tabindex="-1"></a><span class="st">  alc3 ~*~ NA*alc3</span></span>
-<span id="cb470-3"><a href="ch27.html#cb470-3" tabindex="-1"></a><span class="st">  alc4 ~*~ NA*alc4 &#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="ch27.html#cb482-1" tabindex="-1"></a><span class="st">&#39; alc2 ~*~ NA*alc2</span></span>
+<span id="cb482-2"><a href="ch27.html#cb482-2" tabindex="-1"></a><span class="st">  alc3 ~*~ NA*alc3</span></span>
+<span id="cb482-3"><a href="ch27.html#cb482-3" tabindex="-1"></a><span class="st">  alc4 ~*~ NA*alc4 &#39;</span></span></code></pre></div>
 <p>Using <code>parameterization = "theta"</code>, we must instead free the residual variances on subsequent occasions.</p>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="ch27.html#cb471-1" tabindex="-1"></a><span class="st">&#39; alc2 ~~ NA*alc2</span></span>
-<span id="cb471-2"><a href="ch27.html#cb471-2" tabindex="-1"></a><span class="st">  alc3 ~~ NA*alc3</span></span>
-<span id="cb471-3"><a href="ch27.html#cb471-3" tabindex="-1"></a><span class="st">  alc4 ~~ NA*alc4 &#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="ch27.html#cb483-1" tabindex="-1"></a><span class="st">&#39; alc2 ~~ NA*alc2</span></span>
+<span id="cb483-2"><a href="ch27.html#cb483-2" tabindex="-1"></a><span class="st">  alc3 ~~ NA*alc3</span></span>
+<span id="cb483-3"><a href="ch27.html#cb483-3" tabindex="-1"></a><span class="st">  alc4 ~~ NA*alc4 &#39;</span></span></code></pre></div>
 <p>The estimated growth trajectories will still differ across parameterizations because the latent scales will differ. However, the latent scales are now linked across occasions, so changes in the LRV intercepts are no longer confounded with changes in the LRV scale. So the estimated growth trajectories will be <em>proportionally equivalent</em> across parameterizations (i.e., the standardized solutions will be equivalent).</p>
 </div>
 </div>

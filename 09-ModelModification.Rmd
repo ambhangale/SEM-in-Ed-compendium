@@ -59,7 +59,7 @@ Table 2. *Modification indices for the full mediation model of child anxiety.*
 The lavaan [Script 9.0](#script-9.0) below demonstrates how to make a minor model adjustment, such as adding a single parameter.  Note that the model syntax does not need to be a single character string, but can be a vector of character strings, so we do not need to write out the whole model again.  The new model can be fit to the data using all the same `lavaan()` arguments in Script 3.1, or we can use the `update()` function as a shortcut.  Any specified arguments will replace the original model-fit arguments found in the object `AWmodelOut`.  The first argument to `lavaan()` is called `model`), so we provide our new model syntax.  All other (unspecified) arguments will be the same when the new model is fit, saving the results in the object `AWmodel2Out`.
 
 ### Script 9.0 
-```
+```{r echo=TRUE, eval=TRUE}
 # add a direct effect of Parent Anxiety on Child Anxiety to the path model
 AWmodel2 <- c(AWmodel, ' child_anx ~ b41* parent_anx ')
 # fit the new model by "updating" the original model
@@ -75,63 +75,54 @@ When post hoc model modification is used, one is actually not testing hypotheses
 The `residual()` function (or `resid()` for short) provides covariance residuals by default, but you can request correlation residuals with an additional argument:
 
 
-```
+```{r echo=TRUE, eval=TRUE}
 resid(AWmodelOut, type = "cor")
 ## the default standardization method is Bollen's (1989) formula
 resid(AWmodelOut, type = "cor.bollen")
 ## optionally, arrange rows & columns to match input order
 resid(AWmodelOut, type = "cor")$cor[obsnames, obsnames]
-
 ```
 
 First, we created two objects that contain the sample (`ssam`) and model-implied (`smod`) covariance matrices. Although the sample covariance matrix is available as the object `AWcov` that was used as input data, this would not be the case if raw data were analysed. And although we could calculate the sample covariance matrix for complete data using the `cov()` function, when there are missing data, covariance and correlation residuals must be calculated using the estimated covariance matrix (also called the EM matrix) that is obtained by fitting the saturated model to the partially observed data.  Thus, the most error-free way to extract this information from `lavaan` is to use the `lavInspect()` function to extract the sample statistics, or “sampstat” for short.  Likewise, the model-implied covariance matrix can be extracted by requesting `“cov.ov”` (i.e., the model-implied covariance between observed variables). 
 
-```
+```{r echo=TRUE, eval=TRUE}
 # extract the sample covariance matrix
-ssam <- lavInspect(AWmodelOut, "sampstat")$cov[obsnames, obsnames]
+ssam <- lavInspect(AWmodelOut, "sampstat")$cov
 # extract the model-implied covariance matrix
-smod <- lavInspect(AWmodelOut, "cov.ov")[obsnames, obsnames]
+smod <- lavInspect(AWmodelOut, "cov.ov")
 ```
 
 These matrices need to be standardized. This is done with the R function `cov2cor()`, which transforms a covariance matrix to a correlation matrix. The model-implied correlation matrix is then subtracted from the observed correlation matrix, and we print the result rounded to the third decimal place:
 
-```
+```{r echo=TRUE, eval=TRUE}
 corres <- cov2cor(ssam) - cov2cor(smod)
 round(corres, 3)
 ```
 
 The last two lines are optional, but may help you find the large (> .10) and largest residuals, respectively, indicated by cells saying `TRUE`.
 
-```
+```{r echo=TRUE, eval=TRUE}
 abs(corres) >= .10	
 abs(corres) == max(abs(corres))
 ```
 
-The matrix of correlation residuals for the AW-model is given below.
 
-```
-            parent_anx perfect overcontrol child_anx
-parent_anx       0.000   0.000       0.000     0.272
-perfect          0.000   0.000       0.001     0.034
-overcontrol      0.000   0.001       0.000     0.001
-child_anx        0.272   0.034       0.001     0.000
-```
 
 Note that there is also a slightly different formula available, which is implemented in Bentler’s (1995) EQS software.  Rather than standardizing each matrix with respect to their own $SD$s, then subtracting them, Bentler proposed subtracting the unstandardized covariance matrices, then standardizing the differences with respect to the observed-variable $SD$s only.  Script 8.2 shows how to request these correlation residuals from `lavaan`, as well as how the procedure to calculate them differs.
 
-```
+```{r echo=TRUE, eval=TRUE}
 ### Script 9.2 ### 
 
 ## request Bentler's (1995) formula
-round(resid(AWmodelOut, type = "cor.bentler")$cor[obsnames, obsnames], 3)
+resid(AWmodelOut, type = "cor.bentler")$cov
 
 ## MANUAL PROCEDURE:
 ## calculate covariance residuals
 covres <- ssam - smod
 ## standardize covariance residuals to make correlation residuals
 SDs <- diag(sqrt(diag(ssam)))
+dimnames(SDs) <- dimnames(covres)
 corres <- solve(SDs) %*% covres %*% solve(SDs)
-dimnames(corres) <- list(obsnames, obsnames)
 round(corres, 3)
 ```
 
@@ -143,7 +134,7 @@ In situations where the variances are constrained (see, for example, later chapt
 ### Requesting MIs and (S)EPCs in `lavaan`
 In `lavaan`, MIs and EPCs can be inspected using the `modificationIndices()` function. This function returns a data frame with the complete list of model  parameters that are fixed to a specific value (i.e., not for equality constraints), and prints each associated MI and (standardized and unstandardized) EPC. Using the following commands, the data frame is sorted with the highest MIs printed first.  Also, we can specify a minimum value (i.e., a critical value, crit) to display only MIs that might be considered significant. Here, we define it as a $1-df$ $χ^2$ value corresponding to $α = .05$:
 
-```
+```{r echo=TRUE, eval=FALSE}
 crit <- qchisq(.05, df = 1, lower.tail = FALSE)
 modificationIndices(AWmodelOut, sort. = TRUE, minimum.value = crit)
 ```
@@ -158,7 +149,7 @@ The output for all nonzero MIs from the model are given below.
 
 You can also request that MIs be printed at the bottom of the `summary()` output, but you have no options to sort or subset them:
 
-```
+```{r echo=TRUE, eval=FALSE}
 summary(AWmodelOut, modindices = TRUE)
 ```
 
