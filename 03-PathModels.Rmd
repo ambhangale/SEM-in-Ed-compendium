@@ -382,7 +382,7 @@ Matrix $\hat{\boldsymbol{\Psi}}$ contains the estimated variances and covariance
 
 As the estimated model parameters of the psi-matrix provide information about the amount of variance that is unexplained by the model, we can also calculate the amount of variance that is explained by the model. The variance explained by the model is a result that is often reported in ordinary regression analysis as an indication of how well the model fits the data. Therefore, just as in regression analysis, it is informative to calculate the proportion of explained variance by using the estimated residual factor variance (i.e., the unexplained variance). In our example, the unexplained variance of the observed variable child anxiety is 6.88. We can calculate the proportion of explained variance of child anxiety using the following formula:
 
-$R^2 = \frac{\text{unexplained, residual variance}}{\text{total variance}}$.
+$R^2 = 1 - \frac{\text{unexplained, residual variance}}{\text{total variance}}$.
 
 In our example the proportion of explained variance of child anxiety is 0.09, indicating that only 9$\%$ of the variance of child anxiety is explained by the path model that was specified (see also [Chapter 5](#ch5) on standardized parameters).
 
