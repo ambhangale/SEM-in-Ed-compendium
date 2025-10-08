@@ -72,7 +72,7 @@ names(saqmeansgirl) <- obsnames
 
 ## specify the multigroup model, using fixed-factor constraints
 saqmod.config <- ' ## MODEL COVARIANCE STRUCTURE
-# regression equations
+# factor structure
   Motivation =~ learning + concentration + homework
   Satisfaction =~ fun + acceptance + teacher
   SelfConfidence =~ selfexpr + selfeff + socialskill
@@ -153,7 +153,7 @@ Strict measurement equivalence/invariance can also be tested by additionally con
 ```
 ## specify the multigroup model with metric equivalence constraints
 saqmod.metric <- ' ## MODEL COVARIANCE STRUCTURE
-# regression equations
+# factor structure
   Motivation =~ c(L1, L1)*learning + 
                 c(L2, L2)*concentration +
                 c(L3, L3)*homework
@@ -240,7 +240,7 @@ This will display the results of the $Δχ^2$ test (also AIC). In our example, t
 ```
 ## specify the multigroup model with scalar equivalence constraints
 saqmod.scalar <- ' ## MODEL COVARIANCE STRUCTURE
-# regression equations
+# factor structure
   Motivation =~ c(L1, L1)*learning + 
                 c(L2, L2)*concentration +
                 c(L3, L3)*homework
